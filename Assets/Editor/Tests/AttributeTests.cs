@@ -24,7 +24,7 @@ namespace UnityTest
         }
 
 		[Test]
-		public void AttrConstructor ()
+		public void AttrConstructor()
 		{
             Assert.IsNotNull(attribute);
             Assert.AreEqual(attribute.baseValue, attrBaseValue);

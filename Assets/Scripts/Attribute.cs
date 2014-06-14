@@ -60,7 +60,7 @@ public class Attr {
         }
     }
 
-    public Attr(string name_, float baseValue_) {
+    public Attr(string name_, float baseValue_ = 0) {
         name = name_;
         baseValue = baseValue_;
     }
