@@ -18,6 +18,27 @@ public class Office : MonoBehaviour {
         }
     }
 
+    public float happiness {
+        get {
+            float sum = 0f;
+            foreach (Character employee in employees) {
+                sum += employee.happiness.value;
+            }
+            return sum/employees.Count;
+        }
+    }
+
+    public float productivity {
+        get {
+            float sum = 0f;
+            foreach (Character employee in employees) {
+                sum += employee.productivity.value;
+            }
+            return sum/employees.Count;
+        }
+    }
+
+
     void Start() {
     }
 

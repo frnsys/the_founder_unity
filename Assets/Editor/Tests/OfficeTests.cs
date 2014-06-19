@@ -51,5 +51,47 @@ namespace UnityTest
             office.baseRent = 1000;
             Assert.AreEqual(office.rent, 1000);
 		}
+
+		[Test]
+		public void OfficeHappiness()
+		{
+            GameObject egO = new GameObject("TestEmployee");
+            egO.AddComponent<Character>();
+            Character employee = egO.GetComponent<Character>();
+            employee.happiness.baseValue = 100f;
+            office.employees.Add(employee);
+
+            GameObject egO_ = new GameObject("TestEmployee_");
+            egO_.AddComponent<Character>();
+            Character employee_ = egO_.GetComponent<Character>();
+            employee_.happiness.baseValue = 200f;
+            office.employees.Add(employee_);
+
+            Assert.AreEqual(office.happiness, 150f);
+
+            UnityEngine.Object.DestroyImmediate(egO);
+            UnityEngine.Object.DestroyImmediate(egO_);
+		}
+
+		[Test]
+		public void OfficeProductivity()
+		{
+            GameObject egO = new GameObject("TestEmployee");
+            egO.AddComponent<Character>();
+            Character employee = egO.GetComponent<Character>();
+            employee.productivity.baseValue = 100f;
+            office.employees.Add(employee);
+
+            GameObject egO_ = new GameObject("TestEmployee_");
+            egO_.AddComponent<Character>();
+            Character employee_ = egO_.GetComponent<Character>();
+            employee_.productivity.baseValue = 200f;
+            office.employees.Add(employee_);
+
+            Assert.AreEqual(office.productivity, 150f);
+
+            UnityEngine.Object.DestroyImmediate(egO);
+            UnityEngine.Object.DestroyImmediate(egO_);
+		}
     }
 }
