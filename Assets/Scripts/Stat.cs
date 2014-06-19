@@ -6,16 +6,16 @@ using System.Collections.Generic;
 public class Stat {
     public string name;
     public float baseValue = 0;
-    public StatModifierCollection modifiers = new StatModifierCollection();
+    public StatBuffCollection buffs = new StatBuffCollection();
 
     public float finalValue {
         get {
             float _finalValue = baseValue;
-            foreach (StatModifier mod in modifiers) {
-                if (mod.type == ModifierType.add) {
-                    _finalValue += mod.value;
+            foreach (StatBuff buff in buffs) {
+                if (buff.type == BuffType.add) {
+                    _finalValue += buff.value;
                 } else {
-                    _finalValue *= mod.value;
+                    _finalValue *= buff.value;
                 }
             }
             return _finalValue;

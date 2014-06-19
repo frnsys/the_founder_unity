@@ -8,7 +8,7 @@ namespace UnityTest
 	internal class StatTests
 	{
         private Stat stat = null;
-        private StatModifier mod = null;
+        private StatBuff buff = null;
 
         private float statbasevalue = 10f;
 
@@ -20,7 +20,7 @@ namespace UnityTest
         [TearDown]
         public void TearDown() {
             stat = null;
-            mod = null;
+            buff = null;
         }
 
 		[Test]
@@ -32,83 +32,83 @@ namespace UnityTest
 		}
 
         [Test]
-        public void StatModifierConstructor_WithoutDefaults()
+        public void StatBuffConstructor_WithoutDefaults()
         {
-            mod = new StatModifier("test stat", 20f, 5, ModifierType.multiply);
-            Assert.IsNotNull(mod);
-            Assert.AreEqual(mod.value, 20f);
-            Assert.AreEqual(mod.name, "test stat");
-            Assert.AreEqual(mod.duration, 5);
-            Assert.AreEqual(mod.type, ModifierType.multiply);
+            buff = new StatBuff("test stat", 20f, 5, BuffType.multiply);
+            Assert.IsNotNull(buff);
+            Assert.AreEqual(buff.value, 20f);
+            Assert.AreEqual(buff.name, "test stat");
+            Assert.AreEqual(buff.duration, 5);
+            Assert.AreEqual(buff.type, BuffType.multiply);
         }
 
         [Test]
-        public void StatModifierConstructor_WithDefaults()
+        public void StatBuffConstructor_WithDefaults()
         {
-            mod = new StatModifier("test stat", 20f);
-            Assert.IsNotNull(mod);
-            Assert.AreEqual(mod.value, 20f);
-            Assert.AreEqual(mod.name, "test stat");
-            Assert.AreEqual(mod.duration, 0);
+            buff = new StatBuff("test stat", 20f);
+            Assert.IsNotNull(buff);
+            Assert.AreEqual(buff.value, 20f);
+            Assert.AreEqual(buff.name, "test stat");
+            Assert.AreEqual(buff.duration, 0);
         }
 
         [Test]
-        public void FinalValue_WithoutModifiers()
+        public void FinalValue_Withoutbuffs()
         {
             Assert.AreEqual(stat.finalValue, statbasevalue);
         }
 
         [Test]
-        public void FinalValue_WithModifiers()
+        public void FinalValue_Withbuffs()
         {
-            mod = new StatModifier("test stat", 20f);
+            buff = new StatBuff("test stat", 20f);
             Assert.AreEqual(stat.finalValue, statbasevalue);
 
-            stat.modifiers.Add(mod);
+            stat.buffs.Add(buff);
             Assert.AreEqual(stat.finalValue, 30f);
         }
 
         [Test]
-        public void FinalValue_WithMultipleModifiers()
+        public void FinalValue_WithMultiplebuffs()
         {
-            mod = new StatModifier("test stat", 20f);
-            StatModifier mod2 = new StatModifier("test stat", 10f);
+            buff = new StatBuff("test stat", 20f);
+            StatBuff buff2 = new StatBuff("test stat", 10f);
 
-            stat.modifiers.Add(mod);
-            stat.modifiers.Add(mod2);
+            stat.buffs.Add(buff);
+            stat.buffs.Add(buff2);
             Assert.AreEqual(stat.finalValue, 40f);
         }
 
         [Test]
-        public void FinalValue_WithMultiplyingModifiers()
+        public void FinalValue_WithMultiplyingbuffs()
         {
             float multiple = 2f;
-            mod = new StatModifier("test stat", multiple, 0, ModifierType.multiply);
+            buff = new StatBuff("test stat", multiple, 0, BuffType.multiply);
             Assert.AreEqual(stat.finalValue, statbasevalue);
 
-            stat.modifiers.Add(mod);
+            stat.buffs.Add(buff);
             Assert.AreEqual(stat.finalValue, statbasevalue * multiple);
         }
 
         [Test]
-        public void FinalValue_WithModifierOrderOfOperations()
+        public void FinalValue_WithBuffOrderOfOperations()
         {
             float multiple = 2f;
-            mod = new StatModifier("test stat", multiple, 0, ModifierType.multiply);
-            StatModifier mod2 = new StatModifier("test stat", 20f, 0, ModifierType.add);
+            buff = new StatBuff("test stat", multiple, 0, BuffType.multiply);
+            StatBuff buff2 = new StatBuff("test stat", 20f, 0, BuffType.add);
 
-            // Adding the multiplication mod first,
+            // Adding the multiplication buff first,
             // but we expect the addition one to be calculated first.
-            stat.modifiers.Add(mod);
-            stat.modifiers.Add(mod2);
+            stat.buffs.Add(buff);
+            stat.buffs.Add(buff2);
             Assert.AreEqual(stat.finalValue, (20f + statbasevalue) * multiple);
         }
 
         [Test]
-        public void StatModifier_Temporary()
+        public void StatBuff_Temporary()
         {
-            mod = new StatModifier("test stat", 20f, 100);
-            stat.modifiers.Add(mod);
+            buff = new StatBuff("test stat", 20f, 100);
+            stat.buffs.Add(buff);
             Assert.AreEqual(stat.finalValue, 30f);
             System.Threading.Thread.Sleep(50);
             Assert.AreEqual(stat.finalValue, 30f);
