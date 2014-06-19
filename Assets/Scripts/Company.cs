@@ -20,16 +20,18 @@ public class Company : MonoBehaviour {
 
     public bool HireEmployee(Character employee, Office office) {
         if (offices.Contains(office)) {
-            List<Character> officeEmployees = employees.FindAll(i => i.office = office);
-            if (officeEmployees.Count < office.size) {
+            if (office.employees.Count < office.size) {
                 _employees.Add(employee);
+                office.employees.Add(employee);
                 return true;
             }
         }
         return false;
     }
     public void FireEmployee(Character employee) {
+        Office office = offices.Find(i => i.employees.Contains(employee));
         _employees.Remove(employee);
+        office.employees.Remove(employee);
     }
 
     public void Pay() {

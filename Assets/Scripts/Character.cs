@@ -13,7 +13,6 @@ public class Character : MonoBehaviour {
     public int xp = 0;
     private int nextLevelXp = 1000;
 
-    public Office office;
     public float salary;
 
     public Stat happiness = new Stat("Happiness");

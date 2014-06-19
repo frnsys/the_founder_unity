@@ -58,10 +58,12 @@ namespace UnityTest
             office.size = 1;
             Assert.IsTrue(company.HireEmployee(employee, office));
             Assert.AreEqual(company.employees.Count, 1);
+            Assert.AreEqual(office.employees.Count, 1);
 
             // Should remove the employee.
             company.FireEmployee(employee);
             Assert.AreEqual(company.employees.Count, 0);
+            Assert.AreEqual(office.employees.Count, 0);
 
             UnityEngine.Object.DestroyImmediate(egO);
             UnityEngine.Object.DestroyImmediate(ogO);
