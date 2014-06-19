@@ -8,17 +8,17 @@ public class Stat {
     public float baseValue = 0;
     public StatBuffCollection buffs = new StatBuffCollection();
 
-    public float finalValue {
+    public float value {
         get {
-            float _finalValue = baseValue;
+            float finalValue = baseValue;
             foreach (StatBuff buff in buffs) {
                 if (buff.type == BuffType.add) {
-                    _finalValue += buff.value;
+                    finalValue += buff.value;
                 } else {
-                    _finalValue *= buff.value;
+                    finalValue *= buff.value;
                 }
             }
-            return _finalValue;
+            return finalValue;
         }
     }
 

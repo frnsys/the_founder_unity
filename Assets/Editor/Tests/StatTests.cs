@@ -55,17 +55,17 @@ namespace UnityTest
         [Test]
         public void FinalValue_Withoutbuffs()
         {
-            Assert.AreEqual(stat.finalValue, statbasevalue);
+            Assert.AreEqual(stat.value, statbasevalue);
         }
 
         [Test]
         public void FinalValue_Withbuffs()
         {
             buff = new StatBuff("test stat", 20f);
-            Assert.AreEqual(stat.finalValue, statbasevalue);
+            Assert.AreEqual(stat.value, statbasevalue);
 
             stat.buffs.Add(buff);
-            Assert.AreEqual(stat.finalValue, 30f);
+            Assert.AreEqual(stat.value, 30f);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace UnityTest
 
             stat.buffs.Add(buff);
             stat.buffs.Add(buff2);
-            Assert.AreEqual(stat.finalValue, 40f);
+            Assert.AreEqual(stat.value, 40f);
         }
 
         [Test]
@@ -84,10 +84,10 @@ namespace UnityTest
         {
             float multiple = 2f;
             buff = new StatBuff("test stat", multiple, 0, BuffType.multiply);
-            Assert.AreEqual(stat.finalValue, statbasevalue);
+            Assert.AreEqual(stat.value, statbasevalue);
 
             stat.buffs.Add(buff);
-            Assert.AreEqual(stat.finalValue, statbasevalue * multiple);
+            Assert.AreEqual(stat.value, statbasevalue * multiple);
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace UnityTest
             // but we expect the addition one to be calculated first.
             stat.buffs.Add(buff);
             stat.buffs.Add(buff2);
-            Assert.AreEqual(stat.finalValue, (20f + statbasevalue) * multiple);
+            Assert.AreEqual(stat.value, (20f + statbasevalue) * multiple);
         }
 
         [Test]
@@ -109,11 +109,11 @@ namespace UnityTest
         {
             buff = new StatBuff("test stat", 20f, 100);
             stat.buffs.Add(buff);
-            Assert.AreEqual(stat.finalValue, 30f);
+            Assert.AreEqual(stat.value, 30f);
             System.Threading.Thread.Sleep(50);
-            Assert.AreEqual(stat.finalValue, 30f);
+            Assert.AreEqual(stat.value, 30f);
             System.Threading.Thread.Sleep(51);
-            Assert.AreEqual(stat.finalValue, statbasevalue);
+            Assert.AreEqual(stat.value, statbasevalue);
         }
     }
 }

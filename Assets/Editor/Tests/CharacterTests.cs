@@ -37,7 +37,7 @@ namespace UnityTest
 		{
             Assert.AreEqual(character.xp, 0);
             character.GainExperience();
-            Assert.AreEqual(character.xp, character.xprate.finalValue);
+            Assert.AreEqual(character.xp, character.xprate.value);
 		}
 
 		[Test]

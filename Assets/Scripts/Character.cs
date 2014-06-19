@@ -29,7 +29,7 @@ public class Character : MonoBehaviour {
     }
 
     public void GainExperience() {
-        GainExperience((int)xprate.finalValue);
+        GainExperience((int)xprate.value);
     }
     public void GainExperience(int xp_) {
         xp += xp_;
