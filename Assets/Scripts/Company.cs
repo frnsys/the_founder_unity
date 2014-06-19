@@ -32,6 +32,18 @@ public class Company : MonoBehaviour {
         _employees.Remove(employee);
     }
 
+    public void Pay() {
+        // Pay employees.
+        foreach (Character employee in employees) {
+            cash -= employee.salary;
+        }
+
+        // Pay rent.
+        foreach (Office office in offices) {
+            cash -= office.rent;
+        }
+    }
+
     IEnumerator PayYourDebts() {
         while(true) {
             // Pay debts

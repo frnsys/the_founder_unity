@@ -66,5 +66,30 @@ namespace UnityTest
             UnityEngine.Object.DestroyImmediate(egO);
             UnityEngine.Object.DestroyImmediate(ogO);
 		}
+
+		[Test]
+		public void CompanyPayments()
+		{
+            GameObject egO = new GameObject("TestEmployee");
+            egO.AddComponent<Character>();
+            Character employee = egO.GetComponent<Character>();
+            employee.salary = 1000f;
+
+            GameObject ogO = new GameObject("TestOffice");
+            ogO.AddComponent<Office>();
+            Office office = ogO.GetComponent<Office>();
+            office.size = 1;
+            office.baseRent = 500f;
+
+            company.offices.Add(office);
+            company.HireEmployee(employee, office);
+            company.cash = 2000f;
+            company.Pay();
+
+            Assert.AreEqual(company.cash, 500f);
+
+            UnityEngine.Object.DestroyImmediate(egO);
+            UnityEngine.Object.DestroyImmediate(ogO);
+        }
     }
 }
