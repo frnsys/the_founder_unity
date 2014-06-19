@@ -9,6 +9,7 @@ public class Company : MonoBehaviour {
     public List<Character> employees {
         get { return _employees; }
     }
+    public List<Office> offices = new List<Office>();
 
     void Start() {
         StartCoroutine(PayYourDebts());
@@ -17,8 +18,15 @@ public class Company : MonoBehaviour {
     void Update() {
     }
 
-    public void HireEmployee(Character employee) {
-        _employees.Add(employee);
+    public bool HireEmployee(Character employee, Office office) {
+        if (offices.Contains(office)) {
+            List<Character> officeEmployees = employees.FindAll(i => i.office = office);
+            if (officeEmployees.Count < office.size) {
+                _employees.Add(employee);
+                return true;
+            }
+        }
+        return false;
     }
     public void FireEmployee(Character employee) {
         _employees.Remove(employee);

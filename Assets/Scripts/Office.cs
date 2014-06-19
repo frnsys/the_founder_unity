@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Office : MonoBehaviour {
     public Location location;
+    public Company company;
     public int size;
     public float baseRent;
     public float rent {
