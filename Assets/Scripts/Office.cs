@@ -10,7 +10,7 @@ public class Office : MonoBehaviour {
     public float rent {
         get {
             if (location != null) {
-                return baseRent * location.rentMultiplier;
+                return baseRent * location.expensiveness;
             }
             return baseRent;
         }

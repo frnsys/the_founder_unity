@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Location : MonoBehaviour {
-    public float rentMultiplier = 1;
+    public float expensiveness = 1;
 
     void Start() {
     }

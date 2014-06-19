@@ -36,7 +36,7 @@ namespace UnityTest
             GameObject lgO = new GameObject("TestLocation");
             lgO.AddComponent<Location>();
             Location location = lgO.GetComponent<Location>();
-            location.rentMultiplier = 10;
+            location.expensiveness = 10;
 
             office.baseRent = 1000;
             office.location = location;
