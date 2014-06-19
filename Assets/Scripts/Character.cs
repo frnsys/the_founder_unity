@@ -13,14 +13,14 @@ public class Character : MonoBehaviour {
     public int xp = 0;
     private int nextLevelXp = 1000;
 
-    public Attr happiness = new Attr("Happiness");
-    public Attr productivity = new Attr("Productivity");
+    public Stat happiness = new Stat("Happiness");
+    public Stat productivity = new Stat("Productivity");
 
-    public Attr charisma = new Attr("Charisma");
-    public Attr creativity = new Attr("Creativity");
-    public Attr cleverness = new Attr("Cleverness");
+    public Stat charisma = new Stat("Charisma");
+    public Stat creativity = new Stat("Creativity");
+    public Stat cleverness = new Stat("Cleverness");
 
-    public Attr xprate = new Attr("XP Rate", 25);
+    public Stat xprate = new Stat("XP Rate", 25);
 
     void Update() {
     }
