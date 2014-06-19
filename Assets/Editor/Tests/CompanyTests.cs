@@ -93,5 +93,23 @@ namespace UnityTest
             UnityEngine.Object.DestroyImmediate(egO);
             UnityEngine.Object.DestroyImmediate(ogO);
         }
+
+		[Test]
+		public void ManageOffices()
+		{
+            GameObject lgO = new GameObject("TestLocation");
+            lgO.AddComponent<Location>();
+            Location location = lgO.GetComponent<Location>();
+
+            Assert.AreEqual(company.offices.Count, 0);
+
+            Office office = company.OpenOffice(location);
+            Assert.AreEqual(company.offices.Count, 1);
+
+            company.CloseOffice(office);
+            Assert.AreEqual(company.offices.Count, 0);
+
+            UnityEngine.Object.DestroyImmediate(lgO);
+        }
     }
 }

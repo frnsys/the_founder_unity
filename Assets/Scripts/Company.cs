@@ -31,7 +31,25 @@ public class Company : MonoBehaviour {
     public void FireEmployee(Character employee) {
         Office office = offices.Find(i => i.employees.Contains(employee));
         _employees.Remove(employee);
-        office.employees.Remove(employee);
+        if (office) {
+            office.employees.Remove(employee);
+        }
+    }
+
+    public Office OpenOffice(Location location) {
+        // Check to see that there isn't already an office here.
+        if (!offices.Find(i => i.location == location)) {
+            GameObject gO = new GameObject("Skyscraper");
+            gO.AddComponent<Office>();
+            Office office = gO.GetComponent<Office>();
+            office.location = location;
+            offices.Add(office);
+            return office;
+        }
+        return null;
+    }
+    public void CloseOffice(Office office) {
+        offices.Remove(office);
     }
 
     public void Pay() {
