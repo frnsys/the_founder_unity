@@ -5,6 +5,10 @@ using System.Timers;
 
 public enum BuffType {add, multiply};
 
+public class StatBuffs : MonoBehaviour {
+    public List<StatBuff> buffs = new List<StatBuff>();
+}
+
 public class StatBuff {
     public string name;
     public float value;

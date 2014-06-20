@@ -39,7 +39,7 @@ public class Company : MonoBehaviour {
     public Office OpenOffice(Location location) {
         // Check to see that there isn't already an office here.
         if (!offices.Find(i => i.location == location)) {
-            GameObject gO = new GameObject("Skyscraper");
+            GameObject gO = new GameObject("Default");
             gO.AddComponent<Office>();
             Office office = gO.GetComponent<Office>();
             office.location = location;

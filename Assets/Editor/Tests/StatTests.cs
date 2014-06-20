@@ -1,3 +1,4 @@
+using UnityEngine;
 using System;
 using System.Threading;
 using NUnit.Framework;
@@ -114,6 +115,52 @@ namespace UnityTest
             Assert.AreEqual(stat.value, 30f);
             System.Threading.Thread.Sleep(51);
             Assert.AreEqual(stat.value, statbasevalue);
+        }
+    }
+
+	[TestFixture]
+	internal class StatsTests
+    {
+        private GameObject gO = null;
+        private Stats stats = null;
+
+        [SetUp]
+        public void SetUp() {
+            gO = new GameObject("HasStats");
+            gO.AddComponent<Stats>();
+            stats = gO.GetComponent<Stats>();
+        }
+
+        [TearDown]
+        public void TearDown() {
+            UnityEngine.Object.DestroyImmediate(gO);
+            stats = null;
+        }
+
+        [Test]
+        public void LoadBuffs_UnloadBuffs() {
+            Stat stat = new Stat("Health", 10f);
+            stats.stats.Add(stat);
+            Assert.AreEqual(stats.Get("Health").value, 10f);
+
+            GameObject item = new GameObject();
+            item.AddComponent<StatBuffs>();
+            StatBuffs buffs = item.GetComponent<StatBuffs>();
+
+            StatBuff buff = new StatBuff("Health", 10f, 0);
+            buffs.buffs.Add(buff);
+
+            // "Equip" the item.
+            stats.LoadBuffs(buffs);
+
+            Assert.AreEqual(stats.Get("Health").value, 20f);
+
+            stats.UnloadBuffs(buffs);
+
+            Assert.AreEqual(stats.Get("Health").value, 10f);
+
+            UnityEngine.Object.DestroyImmediate(item);
+            buffs = null;
         }
     }
 }

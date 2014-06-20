@@ -110,6 +110,7 @@ namespace UnityTest
             Assert.AreEqual(company.offices.Count, 0);
 
             UnityEngine.Object.DestroyImmediate(lgO);
+            UnityEngine.Object.DestroyImmediate(office.gameObject);
         }
     }
 }
