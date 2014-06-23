@@ -3,20 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
 
-public enum BuffType {add, multiply};
+public enum BuffType {ADD, MULTIPLY};
 
-public class StatBuffs : MonoBehaviour {
-    public List<StatBuff> buffs = new List<StatBuff>();
-}
-
+[System.Serializable]
 public class StatBuff {
-    public string name;
+    private string _name;
+    public string name {
+        get { return _name; }
+    }
+
     public float value;
     public int duration;
     public BuffType type;
 
-    public StatBuff(string name_, float value_, int duration_ = 0, BuffType type_ = BuffType.add) {
-        name = name_;
+    public StatBuff(string name_, float value_ = 0, int duration_ = 0, BuffType type_ = BuffType.ADD) {
+        _name = name_;
         value = value_;
         duration = duration_;
         type = type_;
@@ -28,7 +29,7 @@ public class StatBuffCollection : System.Collections.ObjectModel.Collection<Stat
 
         // buffifiers that add are calculated first,
         // so they are inserted at the beginning.
-        if (buff.type == BuffType.add) {
+        if (buff.type == BuffType.ADD) {
             base.InsertItem(0, buff);
 
         // Multiplier buffs are calculated at the end.

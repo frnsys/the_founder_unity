@@ -35,12 +35,12 @@ namespace UnityTest
         [Test]
         public void StatBuffConstructor_WithoutDefaults()
         {
-            buff = new StatBuff("test stat", 20f, 5, BuffType.multiply);
+            buff = new StatBuff("test stat", 20f, 5, BuffType.MULTIPLY);
             Assert.IsNotNull(buff);
             Assert.AreEqual(buff.value, 20f);
             Assert.AreEqual(buff.name, "test stat");
             Assert.AreEqual(buff.duration, 5);
-            Assert.AreEqual(buff.type, BuffType.multiply);
+            Assert.AreEqual(buff.type, BuffType.MULTIPLY);
         }
 
         [Test]
@@ -81,10 +81,10 @@ namespace UnityTest
         }
 
         [Test]
-        public void FinalValue_WithMultiplyingbuffs()
+        public void FinalValue_WithMULTIPLYingbuffs()
         {
             float multiple = 2f;
-            buff = new StatBuff("test stat", multiple, 0, BuffType.multiply);
+            buff = new StatBuff("test stat", multiple, 0, BuffType.MULTIPLY);
             Assert.AreEqual(stat.value, statbasevalue);
 
             stat.buffs.Add(buff);
@@ -95,8 +95,8 @@ namespace UnityTest
         public void FinalValue_WithBuffOrderOfOperations()
         {
             float multiple = 2f;
-            buff = new StatBuff("test stat", multiple, 0, BuffType.multiply);
-            StatBuff buff2 = new StatBuff("test stat", 20f, 0, BuffType.add);
+            buff = new StatBuff("test stat", multiple, 0, BuffType.MULTIPLY);
+            StatBuff buff2 = new StatBuff("test stat", 20f, 0, BuffType.ADD);
 
             // Adding the multiplication buff first,
             // but we expect the addition one to be calculated first.
@@ -115,52 +115,6 @@ namespace UnityTest
             Assert.AreEqual(stat.value, 30f);
             System.Threading.Thread.Sleep(51);
             Assert.AreEqual(stat.value, statbasevalue);
-        }
-    }
-
-	[TestFixture]
-	internal class StatsTests
-    {
-        private GameObject gO = null;
-        private Stats stats = null;
-
-        [SetUp]
-        public void SetUp() {
-            gO = new GameObject("HasStats");
-            gO.AddComponent<Stats>();
-            stats = gO.GetComponent<Stats>();
-        }
-
-        [TearDown]
-        public void TearDown() {
-            UnityEngine.Object.DestroyImmediate(gO);
-            stats = null;
-        }
-
-        [Test]
-        public void LoadBuffs_UnloadBuffs() {
-            Stat stat = new Stat("Health", 10f);
-            stats.stats.Add(stat);
-            Assert.AreEqual(stats.Get("Health").value, 10f);
-
-            GameObject item = new GameObject();
-            item.AddComponent<StatBuffs>();
-            StatBuffs buffs = item.GetComponent<StatBuffs>();
-
-            StatBuff buff = new StatBuff("Health", 10f, 0);
-            buffs.buffs.Add(buff);
-
-            // "Equip" the item.
-            stats.LoadBuffs(buffs);
-
-            Assert.AreEqual(stats.Get("Health").value, 20f);
-
-            stats.UnloadBuffs(buffs);
-
-            Assert.AreEqual(stats.Get("Health").value, 10f);
-
-            UnityEngine.Object.DestroyImmediate(item);
-            buffs = null;
         }
     }
 }

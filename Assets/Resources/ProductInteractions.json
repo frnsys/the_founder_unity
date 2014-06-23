@@ -1,0 +1,19 @@
+{
+    "example_ProductType": {
+        "example_Industry": {
+            "example_Market": {
+                "appeal_weight": 0.5,
+                "usability_weight": 0.5,
+                "performance_weight": 0.5,
+                "appeal_threshold": 5,
+                "usability_threshold": 5,
+                "performance_threshold": 5,
+                "revenue_model": 0,
+                "cycles": 10,
+                "results": [
+                    "Super Cool Product"
+                ]
+            }
+        }
+    }
+}
