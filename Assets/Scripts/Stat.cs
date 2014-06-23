@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Timers;
 
 // A group of stats.
 [System.Serializable]
@@ -11,7 +13,11 @@ public class Stat {
         get { return _name; }
     }
     public float baseValue = 0;
-    public StatBuffCollection buffs = new StatBuffCollection();
+
+    private List<StatBuff> _buffs = new List<StatBuff>();
+    public ReadOnlyCollection<StatBuff> buffs {
+        get { return _buffs.AsReadOnly(); }
+    }
 
     public float value {
         get {
@@ -24,6 +30,24 @@ public class Stat {
                 }
             }
             return finalValue;
+        }
+    }
+
+    public void ApplyBuff(StatBuff buff) {
+        // Buffs that add are calculated first,
+        // so they are inserted at the beginning.
+        if (buff.type == BuffType.ADD) {
+            _buffs.Insert(0, buff);
+
+        // Multiplier buffs are calculated at the end.
+        } else {
+            _buffs.Insert(_buffs.Count, buff);
+        }
+
+        if (buff.duration > 0) {
+            Timer timer = new Timer(buff.duration);
+            timer.Elapsed += delegate { _buffs.Remove(buff); };
+            timer.Start();
         }
     }
 

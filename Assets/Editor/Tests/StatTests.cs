@@ -65,7 +65,7 @@ namespace UnityTest
             buff = new StatBuff("test stat", 20f);
             Assert.AreEqual(stat.value, statbasevalue);
 
-            stat.buffs.Add(buff);
+            stat.ApplyBuff(buff);
             Assert.AreEqual(stat.value, 30f);
         }
 
@@ -75,8 +75,8 @@ namespace UnityTest
             buff = new StatBuff("test stat", 20f);
             StatBuff buff2 = new StatBuff("test stat", 10f);
 
-            stat.buffs.Add(buff);
-            stat.buffs.Add(buff2);
+            stat.ApplyBuff(buff);
+            stat.ApplyBuff(buff2);
             Assert.AreEqual(stat.value, 40f);
         }
 
@@ -87,7 +87,7 @@ namespace UnityTest
             buff = new StatBuff("test stat", multiple, 0, BuffType.MULTIPLY);
             Assert.AreEqual(stat.value, statbasevalue);
 
-            stat.buffs.Add(buff);
+            stat.ApplyBuff(buff);
             Assert.AreEqual(stat.value, statbasevalue * multiple);
         }
 
@@ -100,8 +100,8 @@ namespace UnityTest
 
             // Adding the multiplication buff first,
             // but we expect the addition one to be calculated first.
-            stat.buffs.Add(buff);
-            stat.buffs.Add(buff2);
+            stat.ApplyBuff(buff);
+            stat.ApplyBuff(buff2);
             Assert.AreEqual(stat.value, (20f + statbasevalue) * multiple);
         }
 
@@ -109,7 +109,7 @@ namespace UnityTest
         public void StatBuff_Temporary()
         {
             buff = new StatBuff("test stat", 20f, 100);
-            stat.buffs.Add(buff);
+            stat.ApplyBuff(buff);
             Assert.AreEqual(stat.value, 30f);
             System.Threading.Thread.Sleep(50);
             Assert.AreEqual(stat.value, 30f);
