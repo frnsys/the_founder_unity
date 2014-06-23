@@ -1,9 +1,18 @@
 using UnityEngine;
 using System.Collections;
 
+public enum WorkerType {
+    EMPLOYEE,
+    LOCATION,
+    PLANET,
+    STARSYSTEM
+}
+
 public class Worker : MonoBehaviour {
 
     private Levels levels;
+
+    public WorkerType type;
 
     public float salary;
 
