@@ -47,9 +47,9 @@ namespace UnityTest
             p.Develop(10, 5, 15, 25);
 
             Assert.AreEqual(p.progress, 10);
-            Assert.AreEqual(p.appeal.value, 5);
-            Assert.AreEqual(p.usability.value, 15);
-            Assert.AreEqual(p.performance.value, 25);
+            Assert.AreEqual(p.appeal.value, (5+15)/2);
+            Assert.AreEqual(p.usability.value, (25+5)/2);
+            Assert.AreEqual(p.performance.value, (15+25)/2);
             Assert.IsTrue(p.completed);
         }
 

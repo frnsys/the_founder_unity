@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class WorkerStats : MonoBehaviour {
+public class Worker : MonoBehaviour {
 
     private Levels levels;
 
@@ -16,7 +16,6 @@ public class WorkerStats : MonoBehaviour {
     void Start() {
         levels = this.gameObject.GetComponent<Levels>();
     }
-
 
     public void OnEnable() {
         if (levels) {

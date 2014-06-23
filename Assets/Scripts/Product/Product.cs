@@ -7,18 +7,25 @@ public enum RevenueModel {
     GAUSSIAN,
 }
 
-public class Product {
+public interface IProduct {
+    void Develop(float newProgress, float charisma, float creativity, float cleverness);
+    float Revenue(int time);
+    void Launch();
+    void Shutdown();
+}
+
+public class Product : IProduct {
     // Cache the product names and interactions.
     private static JSONClass productNames;
     private static JSONClass productInteractions;
 
     public string name;
 
-    private int _progress = 0;
-    public int progress {
+    private float _progress = 0;
+    public float progress {
         get { return _progress; }
     }
-    private int progressRequired;
+    private float progressRequired;
     private bool _completed = false;
     public bool completed {
         get { return _completed; }
@@ -67,6 +74,7 @@ public class Product {
         LoadInteraction();
     }
 
+
     // Create a random stupid product name.
     private string GenerateName() {
         // Load product name data if necessary.
@@ -99,14 +107,20 @@ public class Product {
         appeal_W = I["appeal_weight"].AsFloat;
         usability_W = I["usability_weight"].AsFloat;
         performance_W = I["performance_weight"].AsFloat;
-        progressRequired = I["cycles"].AsInt;
+        progressRequired = I["cycles"].AsFloat;
 
         JSONArray results = I["results"].AsArray;
         result = results[Random.Range(0, results.Count)];
     }
 
-    public void Develop(int newProgress, int newAppeal, int newUsability, int newPerformance) {
+    #region IProduct implementation
+
+    public void Develop(float newProgress, float charisma, float creativity, float cleverness) {
         if (!_completed) {
+            float newAppeal = (creativity + charisma)/2;
+            float newUsability = (cleverness + charisma)/2;
+            float newPerformance = (creativity + cleverness)/2;
+
             _progress += newProgress;
             appeal.baseValue += newAppeal;
             usability.baseValue += newUsability;
@@ -159,6 +173,8 @@ public class Product {
         // ...
         // Modify product-related event probabilities, etc.
     }
+
+    #endregion
 }
 
 

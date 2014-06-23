@@ -13,11 +13,19 @@ public class GameManager : MonoBehaviour {
         LoadProductTypes();
         LoadIndustries();
         LoadMarkets();
+
+        //StartCoroutine(PayYourDebts());
     }
 
     void Update() {
     }
 
+    IEnumerator PayYourDebts() {
+        while(true) {
+            playerCompany.Pay();
+            yield return new WaitForSeconds(60);
+        }
+    }
 
     void LoadProductTypes() {
         TextAsset productTypes = Resources.Load("ProductTypes") as TextAsset;

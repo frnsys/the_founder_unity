@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class WorkerBuffs : MonoBehaviour {
+public class WorkerBuff : MonoBehaviour {
 
     public StatBuff happiness = new StatBuff("Happiness");
     public StatBuff productivity = new StatBuff("Productivity");

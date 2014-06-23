@@ -1,74 +1,56 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-public class Company : MonoBehaviour {
-    public float cash;
+public class Company {
+    public string name;
+    public float cash = 1000;
+    public int sizeLimit = 10;
+
     public List<Character> founders = new List<Character>();
-    private List<GameObject> _employees = new List<GameObject>();
-    public List<GameObject> employees {
-        get { return _employees; }
+    private List<GameObject> _workers = new List<GameObject>();
+    public ReadOnlyCollection<GameObject> workers {
+        get { return _workers.AsReadOnly(); }
     }
 
-    void Start() {
-        //StartCoroutine(PayYourDebts());
+    public Company(string name_) {
+        name = name_;
     }
 
-    void Update() {
+    public bool HireWorker(GameObject worker) {
+        if (_workers.Count < sizeLimit) {
+            _workers.Add(worker);
+            return true;
+        }
+        return false;
+    }
+    public void FireWorker(GameObject worker) {
+        _workers.Remove(worker);
     }
 
-    //public bool HireEmployee(Character employee, Office office) {
-        //if (offices.Contains(office)) {
-            //if (office.employees.Count < office.size) {
-                //_employees.Add(employee);
-                //office.employees.Add(employee);
-                //return true;
-            //}
-        //}
-        //return false;
-    //}
-    //public void FireEmployee(Character employee) {
-        //Office office = offices.Find(i => i.employees.Contains(employee));
-        //_employees.Remove(employee);
-        //if (office) {
-            //office.employees.Remove(employee);
-        //}
-    //}
+    public void DevelopProduct(IProduct product) {
+        float charisma = 0;
+        float creativity = 0;
+        float cleverness = 0;
+        float progress = 0;
 
-    //public Office OpenOffice(Location location) {
-        //// Check to see that there isn't already an office here.
-        //if (!offices.Find(i => i.location == location)) {
-            //GameObject gO = new GameObject("Default");
-            //gO.AddComponent<Office>();
-            //Office office = gO.GetComponent<Office>();
-            //office.location = location;
-            //offices.Add(office);
-            //return office;
-        //}
-        //return null;
-    //}
-    //public void CloseOffice(Office office) {
-        //offices.Remove(office);
-    //}
+        foreach (GameObject worker in workers) {
+            Worker w = worker.GetComponent<Worker>();
+            charisma += w.charisma.value;
+            creativity += w.creativity.value;
+            cleverness += w.cleverness.value;
+            progress += w.productivity.value;
+        }
 
-    //public void Pay() {
-        //// Pay employees.
-        //foreach (Character employee in employees) {
-            //cash -= employee.salary;
-        //}
+        product.Develop(progress, charisma, creativity, cleverness);
+    }
 
-        //// Pay rent.
-        //foreach (Office office in offices) {
-            //cash -= office.rent;
-        //}
-    //}
-
-    //IEnumerator PayYourDebts() {
-        //while(true) {
-            //// Pay debts
-            //yield return new WaitForSeconds(60);
-        //}
-    //}
+    public void Pay() {
+        foreach (GameObject worker in workers) {
+            cash -= worker.GetComponent<Worker>().salary;
+        }
+    }
 }
 
 
