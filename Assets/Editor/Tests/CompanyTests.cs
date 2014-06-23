@@ -80,5 +80,24 @@ namespace UnityTest
 
             p.Received().Develop(10, 10, 10, 10);
         }
+
+		[Test]
+		public void Buy_CanAfford() {
+            c.cash = 2000;
+            Item i = new Item("Foo", 500);
+
+            Assert.IsTrue(c.Buy(i));
+            Assert.AreEqual(c.cash, 1500);
+            Assert.AreEqual(c.items.Count, 1);
+        }
+
+		[Test]
+		public void Buy_CannotAfford() {
+            c.cash = 200;
+            Item i = new Item("Foo", 500);
+
+            Assert.IsFalse(c.Buy(i));
+            Assert.AreEqual(c.cash, 200);
+        }
     }
 }

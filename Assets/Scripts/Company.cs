@@ -14,6 +14,11 @@ public class Company {
         get { return _workers.AsReadOnly(); }
     }
 
+    public List<Item> _items = new List<Item>();
+    public ReadOnlyCollection<Item> items {
+        get { return _items.AsReadOnly(); }
+    }
+
     public Company(string name_) {
         name = name_;
     }
@@ -50,6 +55,18 @@ public class Company {
         foreach (GameObject worker in workers) {
             cash -= worker.GetComponent<Worker>().salary;
         }
+    }
+
+    public bool Buy(Item item) {
+        if (cash - item.cost >= 0) {
+            cash -= item.cost;
+            _items.Add(item);
+
+            // TO DO: Equip the item
+
+            return true;
+        }
+        return false;
     }
 }
 
