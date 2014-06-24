@@ -113,7 +113,7 @@ namespace UnityTest
             Assert.AreEqual(stat.value, 30f);
             System.Threading.Thread.Sleep(50);
             Assert.AreEqual(stat.value, 30f);
-            System.Threading.Thread.Sleep(51);
+            System.Threading.Thread.Sleep(60);
             Assert.AreEqual(stat.value, statbasevalue);
         }
     }
