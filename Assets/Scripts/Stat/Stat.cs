@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Timers;
 
-// A group of stats.
 [System.Serializable]
 public class Stat {
 
