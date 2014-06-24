@@ -5,11 +5,13 @@
                 "appeal_weight": 0.5,
                 "usability_weight": 0.5,
                 "performance_weight": 0.5,
-                "appeal_threshold": 5,
-                "usability_threshold": 5,
-                "performance_threshold": 5,
-                "revenue_model": 0,
+                "appeal_ideal": 100,
+                "usability_ideal": 100,
+                "performance_ideal": 100,
                 "cycles": 10,
+                "max_longevity": 100,
+                "max_revenue": 1000,
+                "maintenance": 1000,
                 "results": [
                     "Super Cool Product"
                 ]

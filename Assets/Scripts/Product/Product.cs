@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public enum RevenueModel {
-    GAUSSIAN,
-}
-
 public interface IProduct {
     void Develop(float newProgress, float charisma, float creativity, float cleverness);
-    float Revenue(int time);
+    float Revenue(float time);
     void Launch();
     void Shutdown();
 }
 
 public class Product : IProduct {
+    public enum State {
+        DEVELOPMENT,
+        LAUNCHED,
+        RETIRED
+    }
+
     // Cache the product names and interactions.
     private static JSONClass productNames;
     private static JSONClass productInteractions;
@@ -26,16 +28,27 @@ public class Product : IProduct {
         get { return _progress; }
     }
     private float progressRequired;
-    private bool _completed = false;
-    public bool completed {
-        get { return _completed; }
+    private State _state = State.DEVELOPMENT;
+    public State state {
+        get { return _state; }
     }
 
+    public float maintenanceCost;
 
-    private RevenueModel _revenueModel;
-    public RevenueModel revenueModel {
-        get { return _revenueModel; }
-    }
+    // Maximum revenue you can make off this product.
+    private float maxRevenue;
+    private float peakRevenuePercent;
+    private float endFuncAdjustment;
+
+    // How long the product lasts at its peak plateau.
+    private float maxLongevity;
+    private float longevity;
+
+    // Revenue model parameters.
+    private float start_mu;
+    private float start_sd;
+    private float end_mu;
+    private float end_sd;
 
     // Weights
     private float appeal_W;
@@ -43,9 +56,9 @@ public class Product : IProduct {
     private float performance_W;
 
     // Thresholds
-    private float appeal_T;
-    private float usability_T;
-    private float performance_T;
+    private float appeal_I;
+    private float usability_I;
+    private float performance_I;
 
     public string result;
 
@@ -103,11 +116,18 @@ public class Product : IProduct {
         // I = Interaction
         JSONClass I = productInteractions[productType.name][industry.name][market.name].AsObject;
 
-        _revenueModel = (RevenueModel)System.Enum.GetValues(typeof(RevenueModel)).GetValue(I["revenue_model"].AsInt);
         appeal_W = I["appeal_weight"].AsFloat;
         usability_W = I["usability_weight"].AsFloat;
         performance_W = I["performance_weight"].AsFloat;
+
+        appeal_I = I["appeal_ideal"].AsFloat;
+        usability_I = I["usability_ideal"].AsFloat;
+        performance_I = I["performance_ideal"].AsFloat;
+
         progressRequired = I["cycles"].AsFloat;
+        maxRevenue = I["max_revenue"].AsFloat;
+        maxLongevity = I["max_longevity"].AsFloat;
+        maintenanceCost = I["maintenance"].AsFloat;
 
         JSONArray results = I["results"].AsArray;
         result = results[Random.Range(0, results.Count)];
@@ -116,7 +136,7 @@ public class Product : IProduct {
     #region IProduct implementation
 
     public void Develop(float newProgress, float charisma, float creativity, float cleverness) {
-        if (!_completed) {
+        if (state == State.DEVELOPMENT) {
             float newAppeal = (creativity + charisma)/2;
             float newUsability = (cleverness + charisma)/2;
             float newPerformance = (creativity + cleverness)/2;
@@ -127,51 +147,161 @@ public class Product : IProduct {
             performance.baseValue += newPerformance;
 
             if (progress >= progressRequired) {
-                _completed = true;
                 Launch();
             }
         }
     }
 
     public void Launch() {
-        // ...
-        // Modify product-related event probabilities, etc.
+        // Calculate the revenue model's parameters
+        // based on the properties of the product.
+
+        // We're using a piecewise function consisting of
+        // two normal distributions and one constant.
+        // ------------------------------------------
+        // Product has three life stages:
+        // 1. Start     (normal)
+        // 2. Plateau   (constant)
+        // 3. End       (normal)
+        // |
+        // |          2
+        // | 1   ____________  3
+        // |    /            \
+        // |   /              \
+        // |__/________________\___
+        //
+        // The starting stage can either be slow or exponential growth.
+        // The ending stage can either be slow or exponential decline.
+        //
+        // Parameters:
+        //    mu = mean, mu, µ.
+        //      Positions the peak.
+        //    sd = standard deviation, sigma, σ.
+        //      Controls breadth. Lower sigmas are steeper curves.
+        // Note: Math.Exp(x) = e^x
+
+        // Calculate where to position the graph:
+        // --------------------------------------
+        // We want the graph to have the property of f(0) = 0 so that it starts
+        // at the beginning of the curve when t = 0.
+        // Basically we can calculate t where f(t) = 0 and then use the mean to
+        // shift the graph's position by -t.
+        // 99.7% of the normal distribution's space  is within 3 standard deviations.
+        // Since there is not really a position where f(t) = 0, we can use that
+        // property as an approximation for it, so:
+        // f(t) ≈ 0 for t = mu - 3*sd
+        // Then we can calculate the starting mean with mu - (mu - 3*sd),
+        // i.e. 3*sd.
+
+        // Another useful property is that max(f(t)) == f(mu),
+        // that is, f(t) is at its peak when t = mu.
+
+        float A = appeal.value;
+        float U = usability.value;
+        float P = performance.value;
+
+        // Weights
+        float a_w = appeal_W;
+        float u_w = usability_W;
+        float p_w = performance_W;
+
+        // Ideals
+        float a_i = appeal_I;
+        float u_i = usability_I;
+        float p_i = performance_I;
+
+        // Adjusted values, min 0 (no negatives).
+        float A_ = (A/a_i) * a_w;
+        float U_ = (U/u_i) * u_w;
+        float P_ = (P/p_i) * p_w;
+        float combo = A_ + U_ + P_;
+
+        // Revenue model params:
+
+        // Lower is better (more explosive growth).
+        start_sd = LimitRange(1/combo, 0.25f, 3.5f);
+
+        // Higher is better (slower decline).
+        end_sd = LimitRange(combo, 0.25f, 3.5f);
+
+        // Time where the plateau begins, see comments above for rationale.
+        start_mu = 3 * start_sd;
+
+        // How long the plateau lasts.
+        // TO DO tweak this to something that makes more sense.
+        longevity = combo/maxLongevity;
+
+        // Time where the plateau ends
+        end_mu = start_mu + longevity;
+
+        // Calculate the peak revenue percentage for the plateau.
+        peakRevenuePercent = Gaussian(start_mu, start_mu, start_sd);
+
+        // Calculate the constant required to vertically shift the
+        // end function so that it's peak intersects with the starting peak.
+        float endPeak = Gaussian(end_mu, end_mu, end_sd);
+        endFuncAdjustment = peakRevenuePercent - endPeak;
+
+        //Debug.Log("START_SD:" + start_sd);
+        //Debug.Log("START_MU:" + start_mu);
+        //Debug.Log("END_SD:" + end_sd);
+        //Debug.Log("END_MU:" + end_mu);
+        //Debug.Log("PEAK REV:" + peakRevenuePercent);
+        //Debug.Log("ADJ CONST:" + endFuncAdjustment);
+
+        _state = State.LAUNCHED;
     }
 
-    public float Revenue(int time) {
-        if (_completed) {
-            float A = appeal.value;
-            float U = usability.value;
-            float P = performance.value;
+    public float Revenue(float time) {
+        //time /= 3600; // adjusting time scale
 
-            // Weights
-            float a_w = appeal_W;
-            float u_w = usability_W;
-            float p_w = performance_W;
-
-            // Thresholds
-            float a_t = appeal_T;
-            float u_t = usability_T;
-            float p_t = performance_T;
+        float revenuePercent = 0;
+        if (state == State.LAUNCHED) {
 
             // To be replaced by real values...
             float bonus = 0;
             float economy_w = 1;
             float event_c = 0;
 
-            switch(_revenueModel) {
-                case RevenueModel.GAUSSIAN:
-                    // This is not the gaussian at all but just temporary, simple polynomial
-                    return (((A-a_t)*a_w)*time + ((U-u_t)*u_w)*time + ((P-p_t)*p_w)*time + bonus + event_c)*economy_w;
+            // Start
+            if (time < start_mu) {
+                revenuePercent = Gaussian(time, start_mu, start_sd);
+                //Debug.Log("START FUNC");
+
+            // End
+            } else if (time > end_mu) {
+                revenuePercent = Gaussian(time, end_mu, end_sd) + endFuncAdjustment;
+                //Debug.Log("END FUNC");
+
+            // Plateau
+            } else {
+                revenuePercent = peakRevenuePercent;
+                //Debug.Log("PLATEAU FUNC");
             }
+
+            // Bonus, event, and economy's impacts.
+            revenuePercent += bonus + event_c;
+            revenuePercent *= economy_w;
         }
-        return 0;
+
+        //Debug.Log("REVENUE%:" + revenuePercent);
+
+        // Revenue cannot be negative.
+        // Random multiplier for some slight variance.
+        return System.Math.Max(0, revenuePercent * maxRevenue * Random.Range(0.95f, 1.05f));
+    }
+    private float Gaussian(float x, float mean, float sd) {
+        return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
+    }
+    private float LimitRange(float value, float min, float max) {
+        return (value < min) ? min : (value > max) ? max : value;
     }
 
     // Product death
     public void Shutdown() {
         // ...
         // Modify product-related event probabilities, etc.
+        _state = State.RETIRED;
     }
 
     #endregion
