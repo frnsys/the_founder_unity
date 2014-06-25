@@ -239,7 +239,9 @@ public class Product : IProduct {
 
         // Calculate the constant required to vertically shift the
         // end function so that it's peak intersects with the starting peak.
-        float endPeak = Gaussian(end_mu, end_mu, end_sd);
+        // We apply an extra downward weight at the end (0.05f*end_mu)
+        // to ensure that the end function eventually intersects the x-axis (reaches 0).
+        float endPeak = Gaussian(end_mu, end_mu, end_sd) - (0.05f * end_mu);
         endFuncAdjustment = peakRevenuePercent - endPeak;
 
         //Debug.Log("START_SD:" + start_sd);
@@ -270,7 +272,9 @@ public class Product : IProduct {
 
             // End
             } else if (time > end_mu) {
-                revenuePercent = Gaussian(time, end_mu, end_sd) + endFuncAdjustment;
+                // We apply an extra downward weight at the end (0.05f*time)
+                // to ensure that the end function eventually intersects the x-axis (reaches 0).
+                revenuePercent = Gaussian(time, end_mu, end_sd) + endFuncAdjustment - (0.05f * time);
                 //Debug.Log("END FUNC");
 
             // Plateau
