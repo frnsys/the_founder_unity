@@ -9,6 +9,7 @@ public class Company {
     public int sizeLimit = 10;
 
     public List<Character> founders = new List<Character>();
+    public List<Product> products = new List<Products>();
     private List<GameObject> _workers = new List<GameObject>();
     public ReadOnlyCollection<GameObject> workers {
         get { return _workers.AsReadOnly(); }
@@ -34,6 +35,16 @@ public class Company {
         _workers.Remove(worker);
     }
 
+    public void StartNewProduct() {
+        ProductType pt = new ProductType("example_ProductType");
+        Industry i = new Industry("example_Industry");
+        Market m = new Market("example_Market");
+        Product product = new Product(pt, i, m);
+        products.Add(product);
+
+        // apply item buffs
+    }
+
     public void DevelopProduct(IProduct product) {
         float charisma = 0;
         float creativity = 0;
@@ -57,16 +68,38 @@ public class Company {
         }
     }
 
-    public bool Buy(Item item) {
+    public bool BuyItem(Item item) {
         if (cash - item.cost >= 0) {
             cash -= item.cost;
             _items.Add(item);
 
-            // TO DO: Equip the item
+            List<Product> matchingProducts = products.FindAll(p => 
+                item.industries.Contains(p.industry) 
+                || item.productTypes.Contains(p.productType)
+                || item.markets.Contains(p.market)
+            );
+
+            foreach (Product product in matchingProducts) {
+                product.ApplyItem(item);
+            }
 
             return true;
         }
         return false;
+    }
+
+    public bool RemoveItem(Item item) {
+        _items.Remove(item);
+        
+        List<Product> matchingProducts = products.FindAll(p => 
+            item.industries.Contains(p.industry) 
+            || item.productTypes.Contains(p.productType)
+            || item.markets.Contains(p.market)
+        );
+        
+        foreach (Product product in matchingProducts) {
+            product.RemoveItem(item);
+        }
     }
 }
 

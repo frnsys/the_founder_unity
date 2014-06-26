@@ -66,23 +66,24 @@ public class Product : IProduct {
     public Industry industry;
     public Market market;
 
-
     // Creativity + Charisma
-    public Stat appeal = new Stat("Appeal", 0);
+    public Stat appeal;
 
     // Cleverness + Charisma
-    public Stat usability = new Stat("Usability", 0); // or User Experience?
+    public Stat usability; // or User Experience?
 
     // Creativity + Cleverness
-    public Stat performance = new Stat("Performance", 0);
-
-
+    public Stat performance;
 
     public Product(ProductType pt, Industry i, Market m) {
         name = GenerateName();
         productType = pt;
         industry = i;
         market = m;
+
+        appeal = new Stat("Appeal", 0);
+        usability = new Stat("Usability", 0);
+        performance = new Stat("Performance", 0);
 
         LoadInteraction();
     }
@@ -299,6 +300,14 @@ public class Product : IProduct {
     }
     private float LimitRange(float value, float min, float max) {
         return (value < min) ? min : (value > max) ? max : value;
+    }
+
+    public void ApplyItem() {
+
+    }
+
+    public void RemoveItem() {
+
     }
 
     // Product death

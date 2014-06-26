@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum WorkerType {
     EMPLOYEE,
@@ -16,11 +17,21 @@ public class Worker : MonoBehaviour {
 
     public float salary;
 
-    public Stat happiness = new Stat("Happiness");
-    public Stat productivity = new Stat("Productivity");
-    public Stat charisma = new Stat("Charisma");
-    public Stat creativity = new Stat("Creativity");
-    public Stat cleverness = new Stat("Cleverness");
+    public Stat happiness;
+    public Stat productivity;
+    public Stat charisma;
+    public Stat creativity;
+    public Stat cleverness;
+
+    public Worker(float happiness_, float productivity_, float charisma_, 
+        float creativity_, float cleverness_
+    ) {
+        happiness = new Stat("Happiness", happiness_);
+        productivity = new Stat("Productivity", productivity_);
+        charisma = new Stat("Charisma", charisma_);
+        creativity = new Stat("Creativity", creativity_);
+        cleverness = new Stat("Cleverness", cleverness_);
+    }
 
     void Start() {
         levels = this.gameObject.GetComponent<Levels>();
@@ -36,8 +47,12 @@ public class Worker : MonoBehaviour {
             levels.LevelUp -= LeveledUp;
         }
     }
+
     void LeveledUp(int level) {
         print("Leveled");
+    }
+
+    public void ApplyItem(Item item) {
     }
 }
 
