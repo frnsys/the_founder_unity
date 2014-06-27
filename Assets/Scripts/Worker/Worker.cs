@@ -9,7 +9,7 @@ public enum WorkerType {
     STARSYSTEM
 }
 
-public class Worker : MonoBehaviour {
+public class Worker {
 
     private Levels levels;
 
@@ -34,7 +34,7 @@ public class Worker : MonoBehaviour {
     }
 
     void Start() {
-        levels = this.gameObject.GetComponent<Levels>();
+        //levels = this.gameObject.GetComponent<Levels>();
     }
 
     public void OnEnable() {
@@ -49,7 +49,7 @@ public class Worker : MonoBehaviour {
     }
 
     void LeveledUp(int level) {
-        print("Leveled");
+        //print("Leveled");
     }
 
     public void ApplyItem(Item item) {

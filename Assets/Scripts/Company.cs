@@ -9,9 +9,9 @@ public class Company {
     public int sizeLimit = 10;
 
     public List<Character> founders = new List<Character>();
-    public List<Product> products = new List<Products>();
-    private List<GameObject> _workers = new List<GameObject>();
-    public ReadOnlyCollection<GameObject> workers {
+    public List<Product> products = new List<Product>();
+    private List<Worker> _workers = new List<Worker>();
+    public ReadOnlyCollection<Worker> workers {
         get { return _workers.AsReadOnly(); }
     }
 
@@ -24,14 +24,14 @@ public class Company {
         name = name_;
     }
 
-    public bool HireWorker(GameObject worker) {
+    public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit) {
             _workers.Add(worker);
             return true;
         }
         return false;
     }
-    public void FireWorker(GameObject worker) {
+    public void FireWorker(Worker worker) {
         _workers.Remove(worker);
     }
 
@@ -51,20 +51,19 @@ public class Company {
         float cleverness = 0;
         float progress = 0;
 
-        foreach (GameObject worker in workers) {
-            Worker w = worker.GetComponent<Worker>();
-            charisma += w.charisma.value;
-            creativity += w.creativity.value;
-            cleverness += w.cleverness.value;
-            progress += w.productivity.value;
+        foreach (Worker worker in workers) {
+            charisma += worker.charisma.value;
+            creativity += worker.creativity.value;
+            cleverness += worker.cleverness.value;
+            progress += worker.productivity.value;
         }
 
         product.Develop(progress, charisma, creativity, cleverness);
     }
 
     public void Pay() {
-        foreach (GameObject worker in workers) {
-            cash -= worker.GetComponent<Worker>().salary;
+        foreach (Worker worker in workers) {
+            cash -= worker.salary;
         }
     }
 
@@ -88,7 +87,7 @@ public class Company {
         return false;
     }
 
-    public bool RemoveItem(Item item) {
+    public void RemoveItem(Item item) {
         _items.Remove(item);
         
         List<Product> matchingProducts = products.FindAll(p => 

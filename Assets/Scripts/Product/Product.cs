@@ -302,11 +302,11 @@ public class Product : IProduct {
         return (value < min) ? min : (value > max) ? max : value;
     }
 
-    public void ApplyItem() {
+    public void ApplyItem(Item item) {
 
     }
 
-    public void RemoveItem() {
+    public void RemoveItem(Item item) {
 
     }
 
