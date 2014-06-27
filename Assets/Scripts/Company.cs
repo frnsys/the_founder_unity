@@ -72,8 +72,8 @@ public class Company {
             cash -= item.cost;
             _items.Add(item);
 
-            List<Product> matchingProducts = products.FindAll(p => 
-                item.industries.Contains(p.industry) 
+            List<Product> matchingProducts = products.FindAll(p =>
+                item.industries.Contains(p.industry)
                 || item.productTypes.Contains(p.productType)
                 || item.markets.Contains(p.market)
             );
@@ -89,13 +89,13 @@ public class Company {
 
     public void RemoveItem(Item item) {
         _items.Remove(item);
-        
-        List<Product> matchingProducts = products.FindAll(p => 
-            item.industries.Contains(p.industry) 
+
+        List<Product> matchingProducts = products.FindAll(p =>
+            item.industries.Contains(p.industry)
             || item.productTypes.Contains(p.productType)
             || item.markets.Contains(p.market)
         );
-        
+
         foreach (Product product in matchingProducts) {
             product.RemoveItem(item);
         }
