@@ -14,7 +14,17 @@ public class GameEventType {
         BAD
     }
 
-    public float probability;
+    private float _probability;
+    public float probability {
+        set {
+            // Limit to positive values lte 1.
+            value = Mathf.Clamp(value, 0, 1);
+            _probability = value;
+        }
+        get { return _probability; }
+    }
+
+
     public string name;
 
 
