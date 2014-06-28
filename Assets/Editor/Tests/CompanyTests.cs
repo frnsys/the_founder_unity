@@ -11,24 +11,45 @@ namespace UnityTest
 	[TestFixture]
 	internal class CompanyTests
 	{
-        private Company c = null;
-        private Worker worker = null;
+        private GameObject gameObj;
+        private GameManager gameManager;
+        private Company c;
+        private Worker worker;
+        private Item item;
+        List<Industry> industries;
+        List<ProductType> productTypes;
+        List<Market> markets;
 
         [SetUp]
         public void SetUp() {
+            gameObj = new GameObject("Game Manager");
+            gameObj.AddComponent<GameManager>();
+            gameManager = gameObj.GetComponent<GameManager>();
+            gameManager.LoadResources();
+
             c = new Company("Foo Inc");
             worker = new Worker(0, 0, 0, 0, 0);
+            industries = new List<Industry>();
+            industries.Add(new Industry("example_Industry"));
+            productTypes = new List<ProductType>();
+            markets = new List<Market>();
+            item = new Item("example_Item", 500, industries, productTypes, markets);
         }
 
         [TearDown]
         public void TearDown() {
+            UnityEngine.Object.DestroyImmediate(gameObj);        
+            gameManager = null;
             worker = null;
             c = null;
+            item = null;
+            industries = null;
+            productTypes = null;
+            markets = null;
         }
 
 		[Test]
-		public void CompanyConstructor()
-		{
+		public void CompanyConstructor() {
             Assert.IsNotNull(c);
 
             // Creates a name.
@@ -36,8 +57,7 @@ namespace UnityTest
 		}
 
 		[Test]
-		public void ManageWorkers()
-		{
+		public void ManageWorkers() {
             Assert.AreEqual(c.workers.Count, 0);
 
             c.sizeLimit = 0;
@@ -53,8 +73,7 @@ namespace UnityTest
         }
 
 		[Test]
-		public void Pay()
-		{
+		public void Pay() {
             worker.salary = 500;
             c.cash = 2000;
             c.HireWorker(worker);
@@ -63,9 +82,14 @@ namespace UnityTest
             Assert.AreEqual(c.cash, 1500);
         }
 
+        [Test]
+        public void StartNewProduct() {
+            c.StartNewProduct();
+            Assert.AreEqual(c.products.Count, 1);
+        }
+
 		[Test]
-		public void DevelopProduct()
-		{
+		public void DevelopProduct() {
             c.HireWorker(worker);
 
             worker.productivity.baseValue = 10;
@@ -80,28 +104,33 @@ namespace UnityTest
         }
 
 		[Test]
-		public void Buy_CanAfford() {
+		public void BuyItem_CanAfford() {
             c.cash = 2000;
-            List<Industry> industries = new List<Industry>();
-            List<ProductType> productTypes = new List<ProductType>();
-            List<Market> markets = new List<Market>();
-            EquippableItem i = new EquippableItem("Foo", 500, industries, productTypes, markets);
+            c.StartNewProduct();
+            Product p = c.products[0];
+            c.HireWorker(worker);
 
-            Assert.IsTrue(c.BuyItem(i));
+            Assert.IsTrue(c.BuyItem(item));
             Assert.AreEqual(c.cash, 1500);
             Assert.AreEqual(c.items.Count, 1);
+            Assert.AreEqual(p.appeal.value, 10);
+            Assert.AreEqual(worker.happiness.value, 10);
         }
 
 		[Test]
-		public void Buy_CannotAfford() {
+		public void BuyItem_CannotAfford() {
             c.cash = 200;
-            List<Industry> industries = new List<Industry>();
-            List<ProductType> productTypes = new List<ProductType>();
-            List<Market> markets = new List<Market>();
-            EquippableItem i = new EquippableItem("Foo", 500, industries, productTypes, markets);
-
-            Assert.IsFalse(c.BuyItem(i));
+            Assert.IsFalse(c.BuyItem(item));
             Assert.AreEqual(c.cash, 200);
+        }
+
+        [Test]
+        public void RemoveItem() {
+            c.cash = 2000;
+            c.BuyItem(item);
+            c.RemoveItem(item);
+
+            Assert.AreEqual(c.items.Count, 0);
         }
     }
 }

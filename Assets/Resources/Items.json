@@ -1,0 +1,30 @@
+{
+    "example_Item": {
+        "Industries": [
+            "Entertainment",
+            "example_Industry"
+        ],
+        "ProductTypes": [
+            "Social Network",
+            "example_ProductType"
+        ],
+        "Markets": [
+            "Millenials",
+            "Moms",
+            "Dads",
+            "example_Market"
+        ],
+        "ProductBonuses": {
+             "Appeal": 10,
+             "Usability": 10,
+             "Performance": 10
+        },
+        "WorkerBonuses": {
+             "Happiness": 10,
+             "Productivity": 10,
+             "Charisma": 10,
+             "Creativity": 10,
+             "Cleverness": 10
+        }
+    }
+}

@@ -10,10 +10,7 @@ public class GameManager : MonoBehaviour {
     private List<Market> unlockedMarkets = new List<Market>();
 
     void Start() {
-        LoadProductTypes();
-        LoadIndustries();
-        LoadMarkets();
-
+        LoadResources();
         //StartCoroutine(PayYourDebts());
     }
 
@@ -25,6 +22,13 @@ public class GameManager : MonoBehaviour {
             playerCompany.Pay();
             yield return new WaitForSeconds(60);
         }
+    }
+
+    public void LoadResources() {
+        LoadProductTypes();
+        LoadIndustries();
+        LoadMarkets();
+        LoadItems();
     }
 
     void LoadProductTypes() {
@@ -47,6 +51,10 @@ public class GameManager : MonoBehaviour {
             unlockedMarkets.Add(new Market(name));
         }
         Debug.Log("Loaded " + unlockedMarkets.Count + " markets.");
+    }
+    void LoadItems() {
+        TextAsset itemText = Resources.Load("Items") as TextAsset;
+        Item.items = JSON.Parse(itemText.text).AsObject;
     }
 }
 

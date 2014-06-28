@@ -15,7 +15,7 @@ public class StatBuff {
     public int duration;
     public BuffType type;
 
-    public StatBuff(string name_, float value_ = 0, int duration_ = 0, BuffType type_ = BuffType.ADD) {
+    public StatBuff(string name_, float value_, int duration_ = 0, BuffType type_ = BuffType.ADD) {
         _name = name_;
         value = value_;
         duration = duration_;

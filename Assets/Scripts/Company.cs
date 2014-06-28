@@ -73,13 +73,17 @@ public class Company {
             _items.Add(item);
 
             List<Product> matchingProducts = products.FindAll(p =>
-                item.industries.Contains(p.industry)
-                || item.productTypes.Contains(p.productType)
-                || item.markets.Contains(p.market)
+                item.industries.Exists(i => i.name == p.industry.name)
+                || item.productTypes.Exists(pType => pType.name == p.productType.name)
+                || item.markets.Exists(m => m.name == p.market.name)
             );
 
             foreach (Product product in matchingProducts) {
                 product.ApplyItem(item);
+            }
+
+            foreach (Worker worker in _workers) {
+                worker.ApplyItem(item);
             }
 
             return true;

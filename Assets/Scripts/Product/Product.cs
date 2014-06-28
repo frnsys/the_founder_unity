@@ -88,7 +88,6 @@ public class Product : IProduct {
         LoadInteraction();
     }
 
-
     // Create a random stupid product name.
     private string GenerateName() {
         // Load product name data if necessary.
@@ -303,7 +302,21 @@ public class Product : IProduct {
     }
 
     public void ApplyItem(Item item) {
-
+       foreach (StatBuff buff in item.productBuffs) {
+            switch (buff.name) {
+                case "Appeal":
+                    appeal.ApplyBuff(buff);
+                    break;
+                case "Usability":
+                    usability.ApplyBuff(buff);
+                    break;
+                case "Performance":
+                    performance.ApplyBuff(buff);
+                    break;
+                default:
+                    break;
+           }
+       }
     }
 
     public void RemoveItem(Item item) {
