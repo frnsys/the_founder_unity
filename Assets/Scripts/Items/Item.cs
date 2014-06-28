@@ -40,34 +40,16 @@ public class Item {
             markets.Add(new Market(market));
         }
     
-        // TODO: Is there a DRYer way to do this?
-        JSONClass pBuffs = item["ProductBonuses"].AsObject;
-        if (pBuffs["Appeal"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Appeal", pBuffs["Appeal"].AsFloat));
+        foreach (KeyValuePair<string, JSONNode> pBonuses in item["ProductBonuses"].AsObject) {
+            if (pBonuses.Value.AsFloat > 0) {
+                productBuffs.Add(new StatBuff(pBonuses.Key, pBonuses.Value.AsFloat));
+            }
         }
-        if (pBuffs["Usability"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Usability", pBuffs["Usability"].AsFloat));
+        foreach (KeyValuePair<string, JSONNode> wBonuses in item["WorkerBonuses"].AsObject) {
+            if (wBonuses.Value.AsFloat > 0) {
+                productBuffs.Add(new StatBuff(wBonuses.Key, wBonuses.Value.AsFloat));
+            }
         }
-        if (pBuffs["Performance"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Performance", pBuffs["Performance"].AsFloat));
-        }
-
-        JSONClass wBuffs = item["WorkerBonuses"].AsObject;
-        if (wBuffs["Happiness"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Happiness", wBuffs["Happiness"].AsFloat));
-        }
-        if (pBuffs["Productivity"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Productivity", wBuffs["Productivity"].AsFloat));
-        }
-        if (pBuffs["Charisma"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Charisma", wBuffs["Charisma"].AsFloat));
-        }
-        if (pBuffs["Creativity"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Creativity", wBuffs["Creativity"].AsFloat));
-        }
-        if (pBuffs["Cleverness"].AsFloat > 0) {
-            productBuffs.Add(new StatBuff("Cleverness", wBuffs["Cleverness"].AsFloat));
-        }  
     }
 }
 
