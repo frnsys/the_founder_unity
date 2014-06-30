@@ -10,18 +10,15 @@ namespace UnityTest
 	[TestFixture]
 	internal class EventTests
 	{
-        private GameEventType gET = null;
         private GameEvent gE = null;
 
         [SetUp]
         public void SetUp() {
-            gET = new GameEventType("Security", 1f);
-            gE = new GameEvent("Some event");
+            gE = new GameEvent("Some event", 1f);
         }
 
         [TearDown]
         public void TearDown() {
-            gET = null;
             gE = null;
         }
 
@@ -35,18 +32,13 @@ namespace UnityTest
 		[Test]
 		public void EventRolling()
 		{
-            // Tweak the probabilities so we for sure get the
-            // event we're testing for.
-            gET.bad = 1f;
-            gET.bad_catastrophic = 1f;
-
-            List<GameEventType> gETs = new List<GameEventType>() {
-                gET
+            List<GameEvent> candidateEvents = new List<GameEvent>() {
+                gE
             };
 
-            List<GameEvent> gEs = GameEvent.Roll(gETs);
+            List<GameEvent> happeningEvents = GameEvent.Roll(candidateEvents);
 
-            Assert.AreEqual(gEs[0].name, "YOU WERE HACKED");
+            Assert.AreEqual(happeningEvents[0].name, "Some event");
 		}
     }
 }
