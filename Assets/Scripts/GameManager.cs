@@ -86,16 +86,30 @@ public class GameManager : MonoBehaviour {
     void OnEffect(GameEvent.Effect effect) {
         switch(effect.type) {
             case GameEvent.Effect.Type.CASH:
+                playerCompany.cash += effect.amount;
                 break;
+
             case GameEvent.Effect.Type.ECONOMY:
+                // TO DO
                 break;
+
             case GameEvent.Effect.Type.PRODUCT:
+                // TO DO
                 break;
+
             case GameEvent.Effect.Type.WORKER:
+                StatBuff buff = new StatBuff(effect.stat, effect.amount);
+                foreach (Worker worker in playerCompany.workers) {
+                    worker.ApplyBuff(buff);
+                }
                 break;
+
             case GameEvent.Effect.Type.EVENT:
+                // TO DO
                 break;
+
             case GameEvent.Effect.Type.UNLOCK:
+                // TO DO
                 break;
         }
     }
