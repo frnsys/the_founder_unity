@@ -64,6 +64,41 @@ public class GameManager : MonoBehaviour {
         TextAsset itemText = Resources.Load("Items") as TextAsset;
         Item.items = JSON.Parse(itemText.text).AsObject;
     }
+
+
+
+    void EnableEvent(GameEvent gameEvent) {
+        // Add to candidates.
+        candidateEvents.Add(gameEvent);
+
+        // Subscribe to its effect events.
+        gameEvent.EventEffect += OnEffect;
+    }
+
+    void DisableEvent(GameEvent gameEvent) {
+        if (candidateEvents.Contains(gameEvent)) {
+            // Unsubscribe and remove.
+            gameEvent.EventEffect -= OnEffect;
+            candidateEvents.Remove(gameEvent);
+        }
+    }
+
+    void OnEffect(GameEvent.Effect effect) {
+        switch(effect.type) {
+            case GameEvent.Effect.Type.CASH:
+                break;
+            case GameEvent.Effect.Type.ECONOMY:
+                break;
+            case GameEvent.Effect.Type.PRODUCT:
+                break;
+            case GameEvent.Effect.Type.WORKER:
+                break;
+            case GameEvent.Effect.Type.EVENT:
+                break;
+            case GameEvent.Effect.Type.UNLOCK:
+                break;
+        }
+    }
 }
 
 
