@@ -4,17 +4,15 @@ using System.Collections.Generic;
 using SimpleJSON;
 
 public class GameEvent {
-
-    public enum Type {
-        CASH,
-        ECONOMY,
-        PRODUCT,
-        WORKER,
-        EVENT,
-        UNLOCK
-    }
-
     public struct Effect {
+        public enum Type {
+            CASH,
+            ECONOMY,
+            PRODUCT,
+            WORKER,
+            EVENT,
+            UNLOCK
+        }
         public Type type;
         public string subtype;
         public float amount;
@@ -63,7 +61,7 @@ public class GameEvent {
         List<Effect> effects_ = new List<Effect>();
         foreach (JSONNode effect in effects__) {
             string type_ = effect["type"];
-            Type type = (Type)System.Enum.Parse(typeof(Type), type_);
+            Effect.Type type = (Effect.Type)System.Enum.Parse(typeof(Effect.Type), type_, true);
 
             string subtype = effect["subtype"];
             string stat = effect["stat"];
