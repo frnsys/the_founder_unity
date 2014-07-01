@@ -25,24 +25,21 @@ namespace UnityTest
         }
 
 		[Test]
-		public void LevelsConstructor()
-		{
+		public void LevelsConstructor() {
             Assert.IsNotNull(levels);
             Assert.AreEqual(levels.level, 1);
             Assert.AreEqual(levels.xp, 0);
 		}
 
 		[Test]
-		public void GainExperience()
-		{
+		public void GainExperience() {
             Assert.AreEqual(levels.xp, 0);
             levels.GainExperience();
             Assert.AreEqual(levels.xp, levels.xpRate);
 		}
 
 		[Test]
-		public void LevelUp()
-		{
+		public void LevelUp() {
             Assert.AreEqual(levels.level, 1);
 
             levels.GainExperience(1000);

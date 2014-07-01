@@ -7,21 +7,32 @@ using System.Collections.Generic;
 
 namespace UnityTest
 {
+    internal class TestEventListener
+    {
+        public GameEvent gameEvent;
+        public GameEffect effect;
+
+        public TestEventListener(GameEvent gameEvent) {
+            gameEvent.EffectEvent += OnEffect;
+        }
+
+        void OnEffect(GameEffect e) {
+            effect = e;
+        }
+    }
+
 	[TestFixture]
 	internal class EventTests
 	{
-        private GameEventType gET = null;
         private GameEvent gE = null;
 
         [SetUp]
         public void SetUp() {
-            gET = new GameEventType("Security", 1f);
-            gE = new GameEvent("Some event");
+            gE = new GameEvent("Some event", 1f);
         }
 
         [TearDown]
         public void TearDown() {
-            gET = null;
             gE = null;
         }
 
@@ -35,18 +46,31 @@ namespace UnityTest
 		[Test]
 		public void EventRolling()
 		{
-            // Tweak the probabilities so we for sure get the
-            // event we're testing for.
-            gET.bad = 1f;
-            gET.bad_catastrophic = 1f;
-
-            List<GameEventType> gETs = new List<GameEventType>() {
-                gET
+            List<GameEvent> candidateEvents = new List<GameEvent>() {
+                gE
             };
 
-            List<GameEvent> gEs = GameEvent.Roll(gETs);
+            List<GameEvent> happeningEvents = GameEvent.Roll(candidateEvents);
 
-            Assert.AreEqual(gEs[0].name, "YOU WERE HACKED");
+            Assert.AreEqual(happeningEvents[0].name, "Some event");
 		}
+
+        [Test]
+        public void EffectEvents()
+        {
+            // Add an effect to the event.
+            GameEffect effect = new GameEffect(GameEffect.Type.CASH, amount_: 1000f);
+            gE.effects.Add(effect);
+
+            // Our test listener to listen for and capture the effect.
+            TestEventListener eL = new TestEventListener(gE);
+
+            // Trigger the event's effects.
+            gE.Trigger();
+
+            // Check if the effect was captured.
+            Assert.AreEqual(eL.effect.type, GameEffect.Type.CASH);
+            Assert.AreEqual(eL.effect.amount, 1000f);
+        }
     }
 }

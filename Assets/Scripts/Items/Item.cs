@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
-public abstract class Item {
+public class Item : ScriptableObject {
     public string name;
-    public float cost;
+    public float cost = 1000;
+    public float duration = 0;
 
-    //public List<StatBuff> productBuffs = new List<StatBuff>();
-
+    public List<StatBuff> productBuffs = new List<StatBuff>();
+    public List<StatBuff> workerBuffs = new List<StatBuff>();
     public List<Industry> industries = new List<Industry>();
     public List<ProductType> productTypes = new List<ProductType>();
     public List<Market> markets = new List<Market>();

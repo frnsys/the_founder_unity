@@ -25,16 +25,14 @@ namespace UnityTest
         }
 
 		[Test]
-		public void StatConstructor()
-		{
+		public void StatConstructor() {
             Assert.IsNotNull(stat);
             Assert.AreEqual(stat.baseValue, statbasevalue);
             Assert.AreEqual(stat.name, "test stat");
 		}
 
         [Test]
-        public void StatBuffConstructor_WithoutDefaults()
-        {
+        public void StatBuffConstructor_WithoutDefaults() {
             buff = new StatBuff("test stat", 20f, 5, BuffType.MULTIPLY);
             Assert.IsNotNull(buff);
             Assert.AreEqual(buff.value, 20f);
@@ -44,8 +42,7 @@ namespace UnityTest
         }
 
         [Test]
-        public void StatBuffConstructor_WithDefaults()
-        {
+        public void StatBuffConstructor_WithDefaults() {
             buff = new StatBuff("test stat", 20f);
             Assert.IsNotNull(buff);
             Assert.AreEqual(buff.value, 20f);
@@ -54,14 +51,12 @@ namespace UnityTest
         }
 
         [Test]
-        public void FinalValue_Withoutbuffs()
-        {
+        public void FinalValue_Withoutbuffs() {
             Assert.AreEqual(stat.value, statbasevalue);
         }
 
         [Test]
-        public void FinalValue_Withbuffs()
-        {
+        public void FinalValue_Withbuffs() {
             buff = new StatBuff("test stat", 20f);
             Assert.AreEqual(stat.value, statbasevalue);
 
@@ -70,8 +65,7 @@ namespace UnityTest
         }
 
         [Test]
-        public void FinalValue_WithMultiplebuffs()
-        {
+        public void FinalValue_WithMultiplebuffs() {
             buff = new StatBuff("test stat", 20f);
             StatBuff buff2 = new StatBuff("test stat", 10f);
 
@@ -81,8 +75,7 @@ namespace UnityTest
         }
 
         [Test]
-        public void FinalValue_WithMULTIPLYingbuffs()
-        {
+        public void FinalValue_WithMULTIPLYingbuffs() {
             float multiple = 2f;
             buff = new StatBuff("test stat", multiple, 0, BuffType.MULTIPLY);
             Assert.AreEqual(stat.value, statbasevalue);
@@ -92,8 +85,7 @@ namespace UnityTest
         }
 
         [Test]
-        public void FinalValue_WithBuffOrderOfOperations()
-        {
+        public void FinalValue_WithBuffOrderOfOperations() {
             float multiple = 2f;
             buff = new StatBuff("test stat", multiple, 0, BuffType.MULTIPLY);
             StatBuff buff2 = new StatBuff("test stat", 20f, 0, BuffType.ADD);
@@ -106,8 +98,7 @@ namespace UnityTest
         }
 
         [Test]
-        public void StatBuff_Temporary()
-        {
+        public void StatBuff_Temporary() {
             buff = new StatBuff("test stat", 20f, 100);
             stat.ApplyBuff(buff);
             Assert.AreEqual(stat.value, 30f);

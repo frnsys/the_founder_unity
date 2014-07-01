@@ -1,10 +1,24 @@
 using UnityEngine;
 using System.Collections;
 
-public class Industry : IUnlockable {
-    public string name;
-
-    public Industry(string name_) {
-        name = name_;
-    }
+public enum Industry {
+    Agriculture,
+    Bio,
+    Healthcare,
+    Transportation,
+    Space,
+    Military,
+    Security,
+    Law,
+    Entertainment,
+    Journalism,
+    Finance,
+    Politics,
+    Art,
+    Video_Games,
+    Education,
+    Home,
+    Environment,
+    Energy,
+    Mining
 }

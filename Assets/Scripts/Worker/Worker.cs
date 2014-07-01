@@ -53,6 +53,55 @@ public class Worker {
     }
 
     public void ApplyItem(Item item) {
+        foreach (StatBuff buff in item.workerBuffs) {
+            ApplyBuff(buff);
+        }
+    }
+
+    public void ApplyBuff(StatBuff buff) {
+        switch (buff.name) {
+            case "Happiness":
+                happiness.ApplyBuff(buff);
+                break;
+            case "Productivity":
+                productivity.ApplyBuff(buff);
+                break;
+            case "Charisma":
+                charisma.ApplyBuff(buff);
+                break;
+            case "Creativity":
+                creativity.ApplyBuff(buff);
+                break;
+            case "Cleverness":
+                cleverness.ApplyBuff(buff);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void RemoveItem(Item item) {
+        foreach (StatBuff buff in item.workerBuffs) {
+            switch (buff.name) {
+                case "Happiness":
+                    happiness.RemoveBuff(buff);
+                    break;
+                case "Productivity":
+                    productivity.RemoveBuff(buff);
+                    break;
+                case "Charisma":
+                    charisma.RemoveBuff(buff);
+                    break;
+                case "Creativity":
+                    creativity.RemoveBuff(buff);
+                    break;
+                case "Cleverness":
+                    cleverness.RemoveBuff(buff);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
 
