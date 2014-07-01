@@ -8,18 +8,15 @@ public class GameManager : MonoBehaviour {
     private List<ProductType> unlockedProductTypes = new List<ProductType>();
     private List<Industry> unlockedIndustries = new List<Industry>();
     private List<Market> unlockedMarkets = new List<Market>();
+    private List<GameEvent> gameEvents = new List<GameEvent>();
 
     // A list of events which could possibly occur.
     private List<GameEvent> candidateEvents = new List<GameEvent>();
-
-    // Reference to load game events from.
-    private static JSONClass gameEvents;
 
     void Start() {
         LoadResources();
         //StartCoroutine(PayYourDebts());
 
-        //List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
         //Debug.Log(gameEvents.Count);
         //Debug.Log(System.Guid.NewGuid());
     }
@@ -35,19 +32,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void LoadResources() {
-        LoadEvents();
-        LoadItems();
+        List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
     }
-
-    void LoadEvents() {
-        TextAsset gE = Resources.Load("GameEvents") as TextAsset;
-        gameEvents = JSON.Parse(gE.text).AsObject;
-    }
-    void LoadItems() {
-        TextAsset itemText = Resources.Load("Items") as TextAsset;
-        //Item.items = JSON.Parse(itemText.text).AsObject;
-    }
-
 
 
     void EnableEvent(GameEvent gameEvent) {

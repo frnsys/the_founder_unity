@@ -19,6 +19,10 @@ namespace UnityTest
             ProductType pt = ProductType.Social_Network;
             Industry i = Industry.Space;
             Market m = Market.Millenials;
+
+            // This *should* load the Default product recipe.
+            // If it doesn't, you may need to change the PT/I/M
+            // to one that doesn't have an associated recipe.
             p = new Product(pt, i, m);
 
             item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;

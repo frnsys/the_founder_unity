@@ -72,11 +72,18 @@ public class Company {
             cash -= item.cost;
             _items.Add(item);
 
-            List<Product> matchingProducts = products.FindAll(p =>
-                item.industries.Exists(i => i == p.industry)
-                || item.productTypes.Exists(pType => pType == p.productType)
-                || item.markets.Exists(m => m == p.market)
-            );
+            List<Product> matchingProducts;
+
+            // Items which have no product specifications apply to all products.
+            if (item.industries.Count == 0 && item.productTypes.Count == 0 && item.markets.Count == 0) {
+                matchingProducts = products;
+            } else {
+                matchingProducts = products.FindAll(p =>
+                    item.industries.Exists(i => i == p.industry)
+                    || item.productTypes.Exists(pType => pType == p.productType)
+                    || item.markets.Exists(m => m == p.market)
+                );
+            }
 
             foreach (Product product in matchingProducts) {
                 product.ApplyItem(item);

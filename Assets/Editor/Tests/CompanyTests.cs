@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using System;
 using System.Threading;
 using NUnit.Framework;
@@ -16,9 +17,6 @@ namespace UnityTest
         private Company c;
         private Worker worker;
         private Item item;
-        List<Industry> industries;
-        List<ProductType> productTypes;
-        List<Market> markets;
 
         [SetUp]
         public void SetUp() {
@@ -29,11 +27,7 @@ namespace UnityTest
 
             c = new Company("Foo Inc");
             worker = new Worker(0, 0, 0, 0, 0);
-            industries = new List<Industry>();
-            industries.Add(Industry.Space);
-            productTypes = new List<ProductType>();
-            markets = new List<Market>();
-            item = new Item("example_Item", 500, industries, productTypes, markets);
+            item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
         }
 
         [TearDown]
@@ -43,9 +37,6 @@ namespace UnityTest
             worker = null;
             c = null;
             item = null;
-            industries = null;
-            productTypes = null;
-            markets = null;
         }
 
 		[Test]
