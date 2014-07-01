@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using SimpleJSON;
+using System;
 
 public class GameManager : MonoBehaviour {
     private Company playerCompany;
@@ -52,34 +52,30 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void OnEffect(GameEffect effect) {
-        switch(effect.type) {
-            case GameEffect.Type.CASH:
-                playerCompany.cash += effect.amount;
-                break;
+    void OnEffect(GameEffect effect, Type type) {
+        if (type == typeof(CompanyEffect)) {
 
-            case GameEffect.Type.ECONOMY:
-                // TO DO
-                break;
 
-            case GameEffect.Type.PRODUCT:
-                // TO DO
-                break;
+        } else if (type == typeof(EconomyEffect)) {
 
-            case GameEffect.Type.WORKER:
-                StatBuff buff = new StatBuff(effect.stat, effect.amount);
+
+        } else if (type == typeof(ProductEffect)) {
+
+
+        } else if (type == typeof(WorkerEffect)) {
+            foreach (StatBuff buff in ((WorkerEffect)effect).buffs) {
                 foreach (Worker worker in playerCompany.workers) {
                     worker.ApplyBuff(buff);
                 }
-                break;
+            }
 
-            case GameEffect.Type.EVENT:
-                // TO DO
-                break;
 
-            case GameEffect.Type.UNLOCK:
-                // TO DO
-                break;
+        } else if (type == typeof(EventEffect)) {
+
+
+        } else if (type == typeof(UnlockEffect)) {
+
+
         }
     }
 }
