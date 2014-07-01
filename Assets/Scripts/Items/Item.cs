@@ -39,7 +39,7 @@ public class Item {
         foreach (JSONNode market in item["Markets"].AsArray) {
             markets.Add(new Market(market));
         }
-    
+
         foreach (KeyValuePair<string, JSONNode> pBonuses in item["ProductBonuses"].AsObject) {
             if (pBonuses.Value.AsFloat > 0) {
                 productBuffs.Add(new StatBuff(pBonuses.Key, pBonuses.Value.AsFloat));

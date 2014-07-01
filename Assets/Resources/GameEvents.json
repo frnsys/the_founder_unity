@@ -1,9 +1,10 @@
 {
-    "Security": {
-        "BAD": {
-            "CATASTROPHIC": [{
-                "name": "YOU WERE HACKED"
-            }]
-        }
+    "Some Event": {
+        "name": "Some event",
+        "probability": 1.0,
+        "effects": [{
+            "type": "CASH",
+            "amount": 10000
+        }]
     }
 }
