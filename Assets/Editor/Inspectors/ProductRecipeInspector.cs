@@ -3,20 +3,9 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using SimpleJSON;
 
-[InitializeOnLoad]
 [CustomEditor(typeof(ProductRecipe))]
 internal class ProductRecipeInspector : Editor {
-
-    static ProductRecipeInspector() {
-        EditorApplication.update += RunOnce;
-    }
-
-    static void RunOnce() {
-        EditorApplication.update -= RunOnce;
-    }
 
     public override void OnInspectorGUI() {
         ProductRecipe p = target as ProductRecipe;
@@ -42,6 +31,8 @@ internal class ProductRecipeInspector : Editor {
         p.maintenance = EditorGUILayout.FloatField("Maintenance Cost", p.maintenance);
         EditorGUILayout.Space();
 
+
+        // Outcome management.
         EditorGUILayout.LabelField("Outcomes");
         EditorGUI.indentLevel = 1;
         for (int i=0; i < p.outcomes.Count; i++) {
@@ -58,6 +49,8 @@ internal class ProductRecipeInspector : Editor {
         }
         EditorGUI.indentLevel = 0;
 
+
+        // Let Unity know to save on changes.
         if (GUI.changed) {
             EditorUtility.SetDirty(target);
 

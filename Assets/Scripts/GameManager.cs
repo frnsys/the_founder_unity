@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
     }
     void LoadItems() {
         TextAsset itemText = Resources.Load("Items") as TextAsset;
-        Item.items = JSON.Parse(itemText.text).AsObject;
+        //Item.items = JSON.Parse(itemText.text).AsObject;
     }
 
 

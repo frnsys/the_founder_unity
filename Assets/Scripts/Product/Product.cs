@@ -19,7 +19,6 @@ public class Product : IProduct {
 
     // Cache the product names and interactions.
     private static JSONClass productNames;
-    private static JSONClass productInteractions;
 
     public string name;
 
@@ -73,7 +72,11 @@ public class Product : IProduct {
         usability = new Stat("Usability", 0);
         performance = new Stat("Performance", 0);
 
-        LoadInteraction(pt, i, m);
+        recipe = Resources.Load("ProductRecipes/" + pt.ToString() + "." + i.ToString() + "." + m.ToString()) as ProductRecipe;
+        // Load default if we got nothing.
+        if (recipe == null) {
+            recipe = Resources.Load("ProductRecipes/Default") as ProductRecipe;
+        }
     }
 
     // Create a random stupid product name.
@@ -92,11 +95,6 @@ public class Product : IProduct {
         string end = endings[Random.Range(0, endings.Count)];
         beginning = beginning[0].ToString().ToUpper() + beginning.Substring(1);
         return beginning + middle + end;
-    }
-
-    // Calculate the effects of the ProductType/Industry/Market interactions.
-    private void LoadInteraction(ProductType pt, Industry i, Market m) {
-        recipe = Resources.Load("ProductRecipes/" + pt.ToString() + "." + i.ToString() + "." + m.ToString()) as ProductRecipe;
     }
 
     #region IProduct implementation

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using System;
 using System.Threading;
 using NUnit.Framework;
@@ -11,9 +12,6 @@ namespace UnityTest
 	internal class ProductTests
 	{
         private Product p = null;
-        List<Industry> industries;
-        List<ProductType> productTypes;
-        List<Market> markets;
         private Item item;
 
         [SetUp]
@@ -23,20 +21,13 @@ namespace UnityTest
             Market m = Market.Millenials;
             p = new Product(pt, i, m);
 
-            industries = new List<Industry>();
-            industries.Add(Industry.Space);
-            productTypes = new List<ProductType>();
-            markets = new List<Market>();
-            item = new Item("example_Item", 500, industries, productTypes, markets);
+            item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
         }
 
         [TearDown]
         public void TearDown() {
             p = null;
             item = null;
-            industries = null;
-            productTypes = null;
-            markets = null;
         }
 
 		[Test]
@@ -45,8 +36,6 @@ namespace UnityTest
 
             // Creates a name.
             Assert.AreNotEqual(p.name, "");
-
-            // Loads interaction.
 		}
 
 		[Test]
@@ -57,9 +46,9 @@ namespace UnityTest
             Assert.AreEqual(p.usability.value, 0);
             Assert.AreEqual(p.performance.value, 0);
 
-            p.Develop(10, 5, 15, 25);
+            p.Develop(1000, 5, 15, 25);
 
-            Assert.AreEqual(p.progress, 10);
+            Assert.AreEqual(p.progress, 1000);
             Assert.AreEqual(p.appeal.value, (5+15)/2);
             Assert.AreEqual(p.usability.value, (25+5)/2);
             Assert.AreEqual(p.performance.value, (15+25)/2);
