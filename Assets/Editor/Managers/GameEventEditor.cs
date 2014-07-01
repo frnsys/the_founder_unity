@@ -37,8 +37,6 @@ public class GameEventManager : EditorWindow {
     // Keep track of foldout states.
     static private Dictionary<GameEvent, bool> folds;
 
-    public GameEventManager gem;
-
     void OnGUI() {
         query = EditorGUILayout.TextField("Search: ", query);
         searchResults = gameEvents.FindAll(i => i.name.Contains(query));
