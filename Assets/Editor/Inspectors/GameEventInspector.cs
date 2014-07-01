@@ -32,8 +32,8 @@ internal class GameEventInspector : Editor {
     public override void OnInspectorGUI() {
         GameEvent ge = target as GameEvent;
 
-        ge.name = EditorGUILayout.TextField("Name: ", ge.name);
-        ge.probability.baseValue = EditorGUILayout.FloatField("Probability: ", ge.probability.baseValue);
+        ge.name = EditorGUILayout.TextField("Name", ge.name);
+        ge.probability.baseValue = EditorGUILayout.FloatField("Probability", ge.probability.baseValue);
         ge.probability.baseValue = Mathf.Clamp(ge.probability.baseValue, 0, 1);
 
         effectsFoldout = EditorGUILayout.Foldout(effectsFoldout, "Effects");
@@ -55,7 +55,7 @@ internal class GameEventInspector : Editor {
 
                     case GameEffect.Type.ECONOMY:
                         // TO DO
-                        effect.amount = EditorGUILayout.FloatField("Amount: ", effect.amount);
+                        effect.amount = EditorGUILayout.FloatField("Amount", effect.amount);
                         break;
 
                     case GameEffect.Type.PRODUCT:
@@ -86,14 +86,16 @@ internal class GameEventInspector : Editor {
                 EditorUtility.SetDirty(target);
             }
 
-            if (GUI.changed)
+            if (GUI.changed) {
                 EditorUtility.SetDirty(target);
 
                 string path = AssetDatabase.GetAssetPath(target);
+                string name = Path.GetFileNameWithoutExtension(path);
                 if (name != ge.name) {
                     AssetDatabase.RenameAsset(path, ge.name);
                     AssetDatabase.Refresh();
                 }
+            }
 
             EditorGUI.indentLevel = 0;
         }
@@ -105,7 +107,7 @@ internal class GameEventInspector : Editor {
         effect.subtype = null;
         effect.stat = null;
 
-        effect.amount = EditorGUILayout.FloatField("Amount: ", effect.amount);
+        effect.amount = EditorGUILayout.FloatField("Amount", effect.amount);
     }
 
     private void SetupProductEffect(GameEffect effect) {
@@ -116,17 +118,17 @@ internal class GameEventInspector : Editor {
         if (effect.subtype == null) {
             effect.subtype = productSubtypes[0];
         }
-        int subtype = EditorGUILayout.Popup("Subtype: ", Array.IndexOf(productSubtypes, effect.subtype), productSubtypes);
+        int subtype = EditorGUILayout.Popup("Subtype", Array.IndexOf(productSubtypes, effect.subtype), productSubtypes);
         effect.subtype = productSubtypes[subtype];
 
         // Default
         if (effect.stat == null) {
             effect.stat = productStats[0];
         }
-        int stat = EditorGUILayout.Popup("Stat: ", Array.IndexOf(productStats, effect.stat), productStats);
+        int stat = EditorGUILayout.Popup("Stat", Array.IndexOf(productStats, effect.stat), productStats);
         effect.stat = productStats[stat];
 
-        effect.amount = EditorGUILayout.FloatField("Amount: ", effect.amount);
+        effect.amount = EditorGUILayout.FloatField("Amount", effect.amount);
     }
 
     private void SetupWorkerEffect(GameEffect effect) {
@@ -138,9 +140,9 @@ internal class GameEventInspector : Editor {
         if (effect.stat == null) {
             effect.stat = workerStats[0];
         }
-        int stat = EditorGUILayout.Popup("Stat: ", Array.IndexOf(workerStats, effect.stat), workerStats);
+        int stat = EditorGUILayout.Popup("Stat", Array.IndexOf(workerStats, effect.stat), workerStats);
         effect.stat = workerStats[stat];
 
-        effect.amount = EditorGUILayout.FloatField("Amount: ", effect.amount);
+        effect.amount = EditorGUILayout.FloatField("Amount", effect.amount);
     }
 }

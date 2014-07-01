@@ -1,10 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class ProductType : IUnlockable {
-    public string name;
-
-    public ProductType(string name_) {
-        name = name_;
-    }
+public enum ProductType {
+    Social_Network,
+    Dating,
+    Big_Data,
+    Transporation,
+    E_Commerce,
+    Micropayments,
+    Cloud_Storage,
+    Photo_Video_Sharing,
+    Sharing_Economy
 }

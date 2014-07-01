@@ -45,9 +45,9 @@ public class Company {
     }
 
     public void StartNewProduct() {
-        ProductType pt = new ProductType("example_ProductType");
-        Industry i = new Industry("example_Industry");
-        Market m = new Market("example_Market");
+        ProductType pt = ProductType.Social_Network;
+        Industry i = Industry.Space;
+        Market m = Market.Millenials;
         Product product = new Product(pt, i, m);
 
         foreach (Item item in _items) {
@@ -91,7 +91,19 @@ public class Company {
             cash -= item.cost;
             _items.Add(item);
 
-            List<Product> matchingProducts = FindMatchingProducts(item);
+            List<Product> matchingProducts;
+
+            // Items which have no product specifications apply to all products.
+            if (item.industries.Count == 0 && item.productTypes.Count == 0 && item.markets.Count == 0) {
+                matchingProducts = products;
+            } else {
+                matchingProducts = products.FindAll(p =>
+                    item.industries.Exists(i => i == p.industry)
+                    || item.productTypes.Exists(pType => pType == p.productType)
+                    || item.markets.Exists(m => m == p.market)
+                );
+            }
+
             foreach (Product product in matchingProducts) {
                 product.ApplyItem(item);
             }
@@ -108,7 +120,13 @@ public class Company {
     public void RemoveItem(Item item) {
         _items.Remove(item);
 
-        List<Product> matchingProducts = FindMatchingProducts(item);
+        List<Product> matchingProducts;
+        if (item.industries.Count == 0 && item.productTypes.Count == 0 && item.markets.Count == 0) {
+            matchingProducts = products;
+        } else {
+            matchingProducts = FindMatchingProducts(item);
+        }
+
         foreach (Product product in matchingProducts) {
             product.RemoveItem(item);
         }
@@ -122,9 +140,9 @@ public class Company {
     // match the item's industries, product types, or markets.
     private List<Product> FindMatchingProducts(Item item) {
         return products.FindAll(p =>
-            item.industries.Exists(i => i.name == p.industry.name)
-            || item.productTypes.Exists(pType => pType.name == p.productType.name)
-            || item.markets.Exists(m => m.name == p.market.name)
+            item.industries.Exists(i => i == p.industry)
+            || item.productTypes.Exists(pType => pType == p.productType)
+            || item.markets.Exists(m => m == p.market)
         );
     }
 }

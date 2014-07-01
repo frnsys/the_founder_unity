@@ -38,6 +38,7 @@ public class GameEventManager : EditorWindow {
     static private Dictionary<GameEvent, bool> folds;
 
     void OnGUI() {
+        // Search bar.
         query = EditorGUILayout.TextField("Search: ", query);
         searchResults = gameEvents.FindAll(i => i.name.Contains(query));
 

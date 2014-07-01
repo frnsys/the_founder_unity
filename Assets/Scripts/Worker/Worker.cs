@@ -53,7 +53,7 @@ public class Worker {
     }
 
     public void ApplyItem(Item item) {
-        foreach (StatBuff buff in item.productBuffs) {
+        foreach (StatBuff buff in item.workerBuffs) {
             ApplyBuff(buff);
         }
     }
