@@ -30,7 +30,7 @@ namespace UnityTest
             c = new Company("Foo Inc");
             worker = new Worker(0, 0, 0, 0, 0);
             industries = new List<Industry>();
-            industries.Add(new Industry("example_Industry"));
+            industries.Add(Industry.Space);
             productTypes = new List<ProductType>();
             markets = new List<Market>();
             item = new Item("example_Item", 500, industries, productTypes, markets);
@@ -38,7 +38,7 @@ namespace UnityTest
 
         [TearDown]
         public void TearDown() {
-            UnityEngine.Object.DestroyImmediate(gameObj);        
+            UnityEngine.Object.DestroyImmediate(gameObj);
             gameManager = null;
             worker = null;
             c = null;

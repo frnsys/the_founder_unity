@@ -18,13 +18,13 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            ProductType pt = new ProductType("example_ProductType");
-            Industry i = new Industry("example_Industry");
-            Market m = new Market("example_Market");
+            ProductType pt = ProductType.Social_Network;
+            Industry i = Industry.Space;
+            Market m = Market.Millenials;
             p = new Product(pt, i, m);
 
             industries = new List<Industry>();
-            industries.Add(new Industry("example_Industry"));
+            industries.Add(Industry.Space);
             productTypes = new List<ProductType>();
             markets = new List<Market>();
             item = new Item("example_Item", 500, industries, productTypes, markets);
@@ -47,7 +47,6 @@ namespace UnityTest
             Assert.AreNotEqual(p.name, "");
 
             // Loads interaction.
-            Assert.AreEqual(p.result, "Super Cool Product");
 		}
 
 		[Test]

@@ -21,12 +21,12 @@ namespace UnityTest
         public void SetUp() {
             worker = new Worker(0, 0, 0, 0, 0);
             industries = new List<Industry>();
-            industries.Add(new Industry("example_Industry"));
+            industries.Add(Industry.Space);
             productTypes = new List<ProductType>();
             markets = new List<Market>();
             item = new Item("example_Item", 500, industries, productTypes, markets);
         }
-        
+
         [TearDown]
         public void TearDown() {
             worker = null;

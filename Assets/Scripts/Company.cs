@@ -36,9 +36,9 @@ public class Company {
     }
 
     public void StartNewProduct() {
-        ProductType pt = new ProductType("example_ProductType");
-        Industry i = new Industry("example_Industry");
-        Market m = new Market("example_Market");
+        ProductType pt = ProductType.Social_Network;
+        Industry i = Industry.Space;
+        Market m = Market.Millenials;
         Product product = new Product(pt, i, m);
         products.Add(product);
 
@@ -73,9 +73,9 @@ public class Company {
             _items.Add(item);
 
             List<Product> matchingProducts = products.FindAll(p =>
-                item.industries.Exists(i => i.name == p.industry.name)
-                || item.productTypes.Exists(pType => pType.name == p.productType.name)
-                || item.markets.Exists(m => m.name == p.market.name)
+                item.industries.Exists(i => i == p.industry)
+                || item.productTypes.Exists(pType => pType == p.productType)
+                || item.markets.Exists(m => m == p.market)
             );
 
             foreach (Product product in matchingProducts) {

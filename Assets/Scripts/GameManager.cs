@@ -35,31 +35,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public void LoadResources() {
-        LoadProductTypes();
-        LoadIndustries();
-        LoadMarkets();
         LoadEvents();
         LoadItems();
     }
 
-    void LoadProductTypes() {
-        TextAsset productTypes = Resources.Load("ProductTypes") as TextAsset;
-        foreach(JSONNode name in JSON.Parse(productTypes.text).AsArray) {
-            unlockedProductTypes.Add(new ProductType(name));
-        }
-    }
-    void LoadIndustries() {
-        TextAsset industries = Resources.Load("Industries") as TextAsset;
-        foreach(JSONNode name in JSON.Parse(industries.text).AsArray) {
-            unlockedIndustries.Add(new Industry(name));
-        }
-    }
-    void LoadMarkets() {
-        TextAsset markets = Resources.Load("Markets") as TextAsset;
-        foreach(JSONNode name in JSON.Parse(markets.text).AsArray) {
-            unlockedMarkets.Add(new Market(name));
-        }
-    }
     void LoadEvents() {
         TextAsset gE = Resources.Load("GameEvents") as TextAsset;
         gameEvents = JSON.Parse(gE.text).AsObject;

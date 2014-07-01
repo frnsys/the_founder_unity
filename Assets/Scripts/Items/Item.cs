@@ -29,27 +29,27 @@ public class Item {
     }
 
     private void LoadStats() {
-        JSONClass item = items[name].AsObject;
-        foreach (JSONNode industry in item["Industries"].AsArray) {
-            industries.Add(new Industry(industry));
-        }
-        foreach (JSONNode productType in item["ProductTypes"].AsArray) {
-            productTypes.Add(new ProductType(productType));
-        }
-        foreach (JSONNode market in item["Markets"].AsArray) {
-            markets.Add(new Market(market));
-        }
+        //JSONClass item = items[name].AsObject;
+        //foreach (JSONNode industry in item["Industries"].AsArray) {
+            //industries.Add(new Industry(industry));
+        //}
+        //foreach (JSONNode productType in item["ProductTypes"].AsArray) {
+            //productTypes.Add(new ProductType(productType));
+        //}
+        //foreach (JSONNode market in item["Markets"].AsArray) {
+            //markets.Add(new Market(market));
+        //}
 
-        foreach (KeyValuePair<string, JSONNode> pBonuses in item["ProductBonuses"].AsObject) {
-            if (pBonuses.Value.AsFloat > 0) {
-                productBuffs.Add(new StatBuff(pBonuses.Key, pBonuses.Value.AsFloat));
-            }
-        }
-        foreach (KeyValuePair<string, JSONNode> wBonuses in item["WorkerBonuses"].AsObject) {
-            if (wBonuses.Value.AsFloat > 0) {
-                productBuffs.Add(new StatBuff(wBonuses.Key, wBonuses.Value.AsFloat));
-            }
-        }
+        //foreach (KeyValuePair<string, JSONNode> pBonuses in item["ProductBonuses"].AsObject) {
+            //if (pBonuses.Value.AsFloat > 0) {
+                //productBuffs.Add(new StatBuff(pBonuses.Key, pBonuses.Value.AsFloat));
+            //}
+        //}
+        //foreach (KeyValuePair<string, JSONNode> wBonuses in item["WorkerBonuses"].AsObject) {
+            //if (wBonuses.Value.AsFloat > 0) {
+                //productBuffs.Add(new StatBuff(wBonuses.Key, wBonuses.Value.AsFloat));
+            //}
+        //}
     }
 }
 

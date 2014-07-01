@@ -27,21 +27,21 @@ public class Product : IProduct {
     public float progress {
         get { return _progress; }
     }
-    private float progressRequired;
     private State _state = State.DEVELOPMENT;
     public State state {
         get { return _state; }
     }
 
-    public float maintenanceCost;
+    // All the data about how well
+    // this ProductType/Industry/Market
+    // combination does.
+    private ProductRecipe recipe;
 
     // Maximum revenue you can make off this product.
-    private float maxRevenue;
     private float peakRevenuePercent;
     private float endFuncAdjustment;
 
     // How long the product lasts at its peak plateau.
-    private float maxLongevity;
     private float longevity;
 
     // Revenue model parameters.
@@ -49,18 +49,6 @@ public class Product : IProduct {
     private float start_sd;
     private float end_mu;
     private float end_sd;
-
-    // Weights
-    private float appeal_W;
-    private float usability_W;
-    private float performance_W;
-
-    // Thresholds
-    private float appeal_I;
-    private float usability_I;
-    private float performance_I;
-
-    public string result;
 
     public ProductType productType;
     public Industry industry;
@@ -85,7 +73,7 @@ public class Product : IProduct {
         usability = new Stat("Usability", 0);
         performance = new Stat("Performance", 0);
 
-        LoadInteraction();
+        LoadInteraction(pt, i, m);
     }
 
     // Create a random stupid product name.
@@ -107,30 +95,8 @@ public class Product : IProduct {
     }
 
     // Calculate the effects of the ProductType/Industry/Market interactions.
-    private void LoadInteraction() {
-        if (productInteractions == null) {
-            TextAsset pI = Resources.Load("ProductInteractions") as TextAsset;
-            productInteractions = JSON.Parse(pI.text).AsObject;
-        }
-
-        // I = Interaction
-        JSONClass I = productInteractions[productType.name][industry.name][market.name].AsObject;
-
-        appeal_W = I["appeal_weight"].AsFloat;
-        usability_W = I["usability_weight"].AsFloat;
-        performance_W = I["performance_weight"].AsFloat;
-
-        appeal_I = I["appeal_ideal"].AsFloat;
-        usability_I = I["usability_ideal"].AsFloat;
-        performance_I = I["performance_ideal"].AsFloat;
-
-        progressRequired = I["cycles"].AsFloat;
-        maxRevenue = I["max_revenue"].AsFloat;
-        maxLongevity = I["max_longevity"].AsFloat;
-        maintenanceCost = I["maintenance"].AsFloat;
-
-        JSONArray results = I["results"].AsArray;
-        result = results[Random.Range(0, results.Count)];
+    private void LoadInteraction(ProductType pt, Industry i, Market m) {
+        recipe = Resources.Load("ProductRecipes/" + pt.ToString() + "." + i.ToString() + "." + m.ToString()) as ProductRecipe;
     }
 
     #region IProduct implementation
@@ -146,7 +112,7 @@ public class Product : IProduct {
             usability.baseValue += newUsability;
             performance.baseValue += newPerformance;
 
-            if (progress >= progressRequired) {
+            if (progress >= recipe.progressRequired) {
                 Launch();
             }
         }
@@ -201,14 +167,14 @@ public class Product : IProduct {
         float P = performance.value;
 
         // Weights
-        float a_w = appeal_W;
-        float u_w = usability_W;
-        float p_w = performance_W;
+        float a_w = recipe.appeal_W;
+        float u_w = recipe.usability_W;
+        float p_w = recipe.performance_W;
 
         // Ideals
-        float a_i = appeal_I;
-        float u_i = usability_I;
-        float p_i = performance_I;
+        float a_i = recipe.appeal_I;
+        float u_i = recipe.usability_I;
+        float p_i = recipe.performance_I;
 
         // Adjusted values, min 0 (no negatives).
         float A_ = (A/a_i) * a_w;
@@ -229,7 +195,7 @@ public class Product : IProduct {
 
         // How long the plateau lasts.
         // TO DO tweak this to something that makes more sense.
-        longevity = combo/maxLongevity;
+        longevity = combo/recipe.maxLongevity;
 
         // Time where the plateau ends
         end_mu = start_mu + longevity;
@@ -292,7 +258,7 @@ public class Product : IProduct {
 
         // Revenue cannot be negative.
         // Random multiplier for some slight variance.
-        return System.Math.Max(0, revenuePercent * maxRevenue * Random.Range(0.95f, 1.05f));
+        return System.Math.Max(0, revenuePercent * recipe.maxRevenue * Random.Range(0.95f, 1.05f));
     }
     private float Gaussian(float x, float mean, float sd) {
         return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
