@@ -55,9 +55,12 @@ namespace UnityTest
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
 
+            c.cash = 2000;
+            c.BuyItem(item);
             c.sizeLimit = 10;
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 1);
+            Assert.AreEqual(c.workers[0].happiness.value, 10);
 
             c.FireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
@@ -75,8 +78,11 @@ namespace UnityTest
 
         [Test]
         public void StartNewProduct() {
+            c.cash = 2000;
+            c.BuyItem(item);
             c.StartNewProduct();
             Assert.AreEqual(c.products.Count, 1);
+            Assert.AreEqual(c.products[0].appeal.value, 10);
         }
 
 		[Test]
@@ -93,6 +99,17 @@ namespace UnityTest
 
             p.Received().Develop(10, 10, 10, 10);
         }
+
+        [Test]
+        public void RemoveProduct() {
+            c.cash = 2000;
+            c.StartNewProduct();
+            Product p = c.products[0];
+            c.RemoveProduct(p);
+
+            Assert.AreEqual(p.state, Product.State.RETIRED);
+        }
+
 
 		[Test]
 		public void BuyItem_CanAfford() {
@@ -118,10 +135,16 @@ namespace UnityTest
         [Test]
         public void RemoveItem() {
             c.cash = 2000;
+            c.StartNewProduct();
+            Product p = c.products[0];
+            c.HireWorker(worker);
+
             c.BuyItem(item);
             c.RemoveItem(item);
 
             Assert.AreEqual(c.items.Count, 0);
+            Assert.AreEqual(p.appeal.value, 0);
+            Assert.AreEqual(worker.happiness.value, 0);
         }
     }
 }

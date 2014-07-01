@@ -22,7 +22,6 @@ public class Item : ScriptableObject {
         productTypes = productTypes_;
         markets = markets_;
     }
-
 }
 
 
