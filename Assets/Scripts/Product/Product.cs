@@ -320,7 +320,21 @@ public class Product : IProduct {
     }
 
     public void RemoveItem(Item item) {
-
+        foreach (StatBuff buff in item.productBuffs) {
+            switch (buff.name) {
+                case "Appeal":
+                    appeal.RemoveBuff(buff);
+                    break;
+                case "Usability":
+                    usability.RemoveBuff(buff);
+                    break;
+                case "Performance":
+                    performance.RemoveBuff(buff);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     // Product death

@@ -26,12 +26,21 @@ public class Company {
 
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit) {
+            foreach (Item item in _items) {
+                worker.ApplyItem(item);
+            }
+
             _workers.Add(worker);
+           
             return true;
         }
         return false;
     }
     public void FireWorker(Worker worker) {
+        foreach (Item item in _items) {
+            worker.RemoveItem(item);
+        }
+
         _workers.Remove(worker);
     }
 
@@ -40,9 +49,12 @@ public class Company {
         Industry i = new Industry("example_Industry");
         Market m = new Market("example_Market");
         Product product = new Product(pt, i, m);
-        products.Add(product);
 
-        // apply item buffs
+        foreach (Item item in _items) {
+            product.ApplyItem(item);
+        }
+
+        products.Add(product);
     }
 
     public void DevelopProduct(IProduct product) {
@@ -61,6 +73,13 @@ public class Company {
         product.Develop(progress, charisma, creativity, cleverness);
     }
 
+    public void RemoveProduct(Product product) {
+        foreach (Item item in _items) {
+            product.RemoveItem(item);
+        }
+        product.Shutdown();
+    }
+
     public void Pay() {
         foreach (Worker worker in workers) {
             cash -= worker.salary;
@@ -72,12 +91,7 @@ public class Company {
             cash -= item.cost;
             _items.Add(item);
 
-            List<Product> matchingProducts = products.FindAll(p =>
-                item.industries.Exists(i => i.name == p.industry.name)
-                || item.productTypes.Exists(pType => pType.name == p.productType.name)
-                || item.markets.Exists(m => m.name == p.market.name)
-            );
-
+            List<Product> matchingProducts = FindMatchingProducts(item);
             foreach (Product product in matchingProducts) {
                 product.ApplyItem(item);
             }
@@ -94,15 +108,24 @@ public class Company {
     public void RemoveItem(Item item) {
         _items.Remove(item);
 
-        List<Product> matchingProducts = products.FindAll(p =>
-            item.industries.Contains(p.industry)
-            || item.productTypes.Contains(p.productType)
-            || item.markets.Contains(p.market)
-        );
-
+        List<Product> matchingProducts = FindMatchingProducts(item);
         foreach (Product product in matchingProducts) {
             product.RemoveItem(item);
         }
+
+        foreach (Worker worker in _workers) {
+            worker.RemoveItem(item);
+        }
+    }
+
+    // Given an item, find the list of currently active products that 
+    // match the item's industries, product types, or markets.
+    private List<Product> FindMatchingProducts(Item item) {
+        return products.FindAll(p =>
+            item.industries.Exists(i => i.name == p.industry.name)
+            || item.productTypes.Exists(pType => pType.name == p.productType.name)
+            || item.markets.Exists(m => m.name == p.market.name)
+        );
     }
 }
 
