@@ -3,35 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class GameEvent {
-    public struct Effect {
-        public enum Type {
-            CASH,
-            ECONOMY,
-            PRODUCT,
-            WORKER,
-            EVENT,
-            UNLOCK
-        }
-        public Type type;
-        public string subtype;
-        public float amount;
-        public string stat;
-        public int id;
-
-        public Effect(Type type_,
-                string subtype_ = null,
-                string stat_ = null,
-                float amount_ = 0f,
-                int id_ = 0)
-        {
-            type = type_;
-            subtype = subtype_;
-            stat = stat_;
-            amount = amount_;
-            id = id_;
-        }
-    }
+[System.Serializable]
+public class GameEvent : ScriptableObject {
 
     // Roll to see what events happen, out of a set of specified
     // candidate events.
@@ -52,30 +25,30 @@ public class GameEvent {
 
     public string name;
     public Stat probability;
-    public List<Effect> effects = new List<Effect>();
+    public List<GameEffect> effects = new List<GameEffect>();
 
     public GameEvent(JSONClass prototype) {
         // TO DO So ugly. If we move to a more sophisticated
         // event management system, maybe we can clean this up.
         JSONArray effects__ = prototype["effects"].AsArray;
-        List<Effect> effects_ = new List<Effect>();
+        List<GameEffect> effects_ = new List<GameEffect>();
         foreach (JSONNode effect in effects__) {
             string type_ = effect["type"];
-            Effect.Type type = (Effect.Type)System.Enum.Parse(typeof(Effect.Type), type_, true);
+            GameEffect.Type type = (GameEffect.Type)System.Enum.Parse(typeof(GameEffect.Type), type_, true);
 
             string subtype = effect["subtype"];
             string stat = effect["stat"];
             float amount = effect["amount"].AsFloat;
             int id = effect["id"].AsInt;
-            effects_.Add(new Effect(type, subtype, stat, amount, id));
+            effects_.Add(new GameEffect(type, subtype, stat, amount, id));
         }
 
         Initialize(prototype["name"], prototype["probability"].AsFloat, effects_);
     }
     public GameEvent(string name_, float probability_) {
-        Initialize(name_, probability_, new List<Effect>());
+        Initialize(name_, probability_, new List<GameEffect>());
     }
-    public void Initialize(string name_, float probability_, List<Effect> effects_) {
+    public void Initialize(string name_, float probability_, List<GameEffect> effects_) {
         name = name_;
         effects = effects_;
 
@@ -88,13 +61,13 @@ public class GameEvent {
 
 
     // An event which is broadcast for each event effect.
-    public event System.Action<Effect> EventEffect;
+    public event System.Action<GameEffect> EffectEvent;
     public void Trigger() {
         // If there are subscribers to this event...
-        if (EventEffect != null) {
-            foreach (Effect effect in effects) {
+        if (EffectEvent != null) {
+            foreach (GameEffect effect in effects) {
                 // Broadcast the event with the effect.
-                EventEffect(effect);
+                EffectEvent(effect);
             }
         }
     }

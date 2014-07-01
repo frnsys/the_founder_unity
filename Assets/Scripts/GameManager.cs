@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour {
     void Start() {
         LoadResources();
         //StartCoroutine(PayYourDebts());
+
+        //List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
+        //Debug.Log(gameEvents.Count);
+        //Debug.Log(System.Guid.NewGuid());
     }
 
     void Update() {
@@ -72,43 +76,43 @@ public class GameManager : MonoBehaviour {
         candidateEvents.Add(gameEvent);
 
         // Subscribe to its effect events.
-        gameEvent.EventEffect += OnEffect;
+        gameEvent.EffectEvent += OnEffect;
     }
 
     void DisableEvent(GameEvent gameEvent) {
         if (candidateEvents.Contains(gameEvent)) {
             // Unsubscribe and remove.
-            gameEvent.EventEffect -= OnEffect;
+            gameEvent.EffectEvent -= OnEffect;
             candidateEvents.Remove(gameEvent);
         }
     }
 
-    void OnEffect(GameEvent.Effect effect) {
+    void OnEffect(GameEffect effect) {
         switch(effect.type) {
-            case GameEvent.Effect.Type.CASH:
+            case GameEffect.Type.CASH:
                 playerCompany.cash += effect.amount;
                 break;
 
-            case GameEvent.Effect.Type.ECONOMY:
+            case GameEffect.Type.ECONOMY:
                 // TO DO
                 break;
 
-            case GameEvent.Effect.Type.PRODUCT:
+            case GameEffect.Type.PRODUCT:
                 // TO DO
                 break;
 
-            case GameEvent.Effect.Type.WORKER:
+            case GameEffect.Type.WORKER:
                 StatBuff buff = new StatBuff(effect.stat, effect.amount);
                 foreach (Worker worker in playerCompany.workers) {
                     worker.ApplyBuff(buff);
                 }
                 break;
 
-            case GameEvent.Effect.Type.EVENT:
+            case GameEffect.Type.EVENT:
                 // TO DO
                 break;
 
-            case GameEvent.Effect.Type.UNLOCK:
+            case GameEffect.Type.UNLOCK:
                 // TO DO
                 break;
         }
