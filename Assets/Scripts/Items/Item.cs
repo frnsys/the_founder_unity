@@ -47,7 +47,7 @@ public class Item {
         }
         foreach (KeyValuePair<string, JSONNode> wBonuses in item["WorkerBonuses"].AsObject) {
             if (wBonuses.Value.AsFloat > 0) {
-                productBuffs.Add(new StatBuff(wBonuses.Key, wBonuses.Value.AsFloat));
+                workerBuffs.Add(new StatBuff(wBonuses.Key, wBonuses.Value.AsFloat));
             }
         }
     }

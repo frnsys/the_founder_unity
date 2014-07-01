@@ -50,6 +50,10 @@ public class Stat {
         }
     }
 
+    public void RemoveBuff(StatBuff buff) {
+        _buffs.Remove(buff);
+    }
+
     public Stat(string name_, float baseValue_ = 0) {
         _name = name_;
         baseValue = baseValue_;
