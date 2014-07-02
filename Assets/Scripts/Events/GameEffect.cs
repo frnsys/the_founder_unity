@@ -2,32 +2,44 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class GameEffect {
-    public enum Type {
-        CASH,
-        ECONOMY,
-        PRODUCT,
-        WORKER,
-        EVENT,
-        UNLOCK
-    }
-    public Type type;
-    public string subtype;
-    public float amount;
-    public string stat;
-    public int id;
-
-    public GameEffect(Type type_,
-            string subtype_ = null,
-            string stat_ = null,
-            float amount_ = 0f,
-            int id_ = 0)
-    {
-        type = type_;
-        subtype = subtype_;
-        stat = stat_;
-        amount = amount_;
-        id = id_;
-    }
+public abstract class GameEffect {
 }
+
+[System.Serializable]
+public class ProductEffect : GameEffect {
+    public List<ProductType> productTypes = new List<ProductType>();
+    public List<Industry> industries = new List<Industry>();
+    public List<Market> markets = new List<Market>();
+    public List<StatBuff> buffs = new List<StatBuff>();
+}
+
+[System.Serializable]
+public class WorkerEffect : GameEffect {
+    public List<StatBuff> buffs = new List<StatBuff>();
+}
+
+[System.Serializable]
+public class CompanyEffect : GameEffect {
+    public List<StatBuff> buffs = new List<StatBuff>();
+}
+
+[System.Serializable]
+public class EventEffect : GameEffect {
+    public List<StatBuff> buffs = new List<StatBuff>();
+}
+
+[System.Serializable]
+public class EconomyEffect : GameEffect {
+    public List<StatBuff> buffs = new List<StatBuff>();
+}
+
+[System.Serializable]
+public class UnlockEffect : GameEffect {
+}
+
+
+
+
+
+
+

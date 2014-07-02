@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 public class Company {
     public string name;
-    public float cash = 1000;
+    public Stat cash = new Stat("Cash", 1000);
     public int sizeLimit = 10;
 
     public List<Character> founders = new List<Character>();
@@ -31,7 +31,7 @@ public class Company {
             }
 
             _workers.Add(worker);
-           
+
             return true;
         }
         return false;
@@ -82,13 +82,13 @@ public class Company {
 
     public void Pay() {
         foreach (Worker worker in workers) {
-            cash -= worker.salary;
+            cash.baseValue -= worker.salary;
         }
     }
 
     public bool BuyItem(Item item) {
-        if (cash - item.cost >= 0) {
-            cash -= item.cost;
+        if (cash.baseValue - item.cost >= 0) {
+            cash.baseValue -= item.cost;
             _items.Add(item);
 
             List<Product> matchingProducts;

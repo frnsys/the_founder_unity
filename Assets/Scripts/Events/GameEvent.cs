@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using SimpleJSON;
+using System;
+using System.Linq;
 
 [System.Serializable]
 public class GameEvent : ScriptableObject {
@@ -14,7 +15,7 @@ public class GameEvent : ScriptableObject {
         foreach (GameEvent gameEvent in candidateEvents) {
 
             // Does this event happen?
-            if (Random.value < gameEvent.probability.value) {
+            if (UnityEngine.Random.value < gameEvent.probability.value) {
                 theseAreHappening.Add(gameEvent);
             }
 
@@ -25,32 +26,17 @@ public class GameEvent : ScriptableObject {
 
     public string name;
     public Stat probability;
-    public List<GameEffect> effects = new List<GameEffect>();
 
-    public GameEvent(JSONClass prototype) {
-        // TO DO So ugly. If we move to a more sophisticated
-        // event management system, maybe we can clean this up.
-        JSONArray effects__ = prototype["effects"].AsArray;
-        List<GameEffect> effects_ = new List<GameEffect>();
-        foreach (JSONNode effect in effects__) {
-            string type_ = effect["type"];
-            GameEffect.Type type = (GameEffect.Type)System.Enum.Parse(typeof(GameEffect.Type), type_, true);
+    // Effects
+    public List<ProductEffect> productEffects = new List<ProductEffect>();
+    public List<WorkerEffect> workerEffects = new List<WorkerEffect>();
+    public List<CompanyEffect> companyEffects = new List<CompanyEffect>();
+    public List<EventEffect> eventEffects = new List<EventEffect>();
+    public List<EconomyEffect> economyEffects = new List<EconomyEffect>();
+    public List<UnlockEffect> unlockEffects = new List<UnlockEffect>();
 
-            string subtype = effect["subtype"];
-            string stat = effect["stat"];
-            float amount = effect["amount"].AsFloat;
-            int id = effect["id"].AsInt;
-            effects_.Add(new GameEffect(type, subtype, stat, amount, id));
-        }
-
-        Initialize(prototype["name"], prototype["probability"].AsFloat, effects_);
-    }
     public GameEvent(string name_, float probability_) {
-        Initialize(name_, probability_, new List<GameEffect>());
-    }
-    public void Initialize(string name_, float probability_, List<GameEffect> effects_) {
         name = name_;
-        effects = effects_;
 
         // Maximum probability is 1,
         // minimum is 0.
@@ -59,15 +45,23 @@ public class GameEvent : ScriptableObject {
     }
 
 
-
     // An event which is broadcast for each event effect.
-    public event System.Action<GameEffect> EffectEvent;
+    public event System.Action<GameEffect, Type> EffectEvent;
     public void Trigger() {
         // If there are subscribers to this event...
         if (EffectEvent != null) {
+            // What a travesty
+            List<GameEffect> effects = productEffects.Cast<GameEffect>()
+                                        .Concat(workerEffects.Cast<GameEffect>())
+                                        .Concat(companyEffects.Cast<GameEffect>())
+                                        .Concat(eventEffects.Cast<GameEffect>())
+                                        .Concat(economyEffects.Cast<GameEffect>())
+                                        .Concat(unlockEffects.Cast<GameEffect>())
+                                        .ToList();
+
             foreach (GameEffect effect in effects) {
                 // Broadcast the event with the effect.
-                EffectEvent(effect);
+                EffectEvent(effect, effect.GetType());
             }
         }
     }
