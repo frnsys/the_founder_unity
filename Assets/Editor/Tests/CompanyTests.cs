@@ -55,7 +55,7 @@ namespace UnityTest
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
 
-            c.cash = 2000;
+            c.cash.baseValue = 2000;
             c.BuyItem(item);
             c.sizeLimit = 10;
             c.HireWorker(worker);
@@ -69,16 +69,16 @@ namespace UnityTest
 		[Test]
 		public void Pay() {
             worker.salary = 500;
-            c.cash = 2000;
+            c.cash.baseValue = 2000;
             c.HireWorker(worker);
 
             c.Pay();
-            Assert.AreEqual(c.cash, 1500);
+            Assert.AreEqual(c.cash.baseValue, 1500);
         }
 
         [Test]
         public void StartNewProduct() {
-            c.cash = 2000;
+            c.cash.baseValue = 2000;
             c.BuyItem(item);
             c.StartNewProduct();
             Assert.AreEqual(c.products.Count, 1);
@@ -102,7 +102,7 @@ namespace UnityTest
 
         [Test]
         public void RemoveProduct() {
-            c.cash = 2000;
+            c.cash.baseValue = 2000;
             c.StartNewProduct();
             Product p = c.products[0];
             c.RemoveProduct(p);
@@ -113,13 +113,13 @@ namespace UnityTest
 
 		[Test]
 		public void BuyItem_CanAfford() {
-            c.cash = 2000;
+            c.cash.baseValue = 2000;
             c.StartNewProduct();
             Product p = c.products[0];
             c.HireWorker(worker);
 
             Assert.IsTrue(c.BuyItem(item));
-            Assert.AreEqual(c.cash, 1500);
+            Assert.AreEqual(c.cash.baseValue, 1500);
             Assert.AreEqual(c.items.Count, 1);
             Assert.AreEqual(p.appeal.value, 10);
             Assert.AreEqual(worker.happiness.value, 10);
@@ -127,14 +127,14 @@ namespace UnityTest
 
 		[Test]
 		public void BuyItem_CannotAfford() {
-            c.cash = 200;
+            c.cash.baseValue = 200;
             Assert.IsFalse(c.BuyItem(item));
-            Assert.AreEqual(c.cash, 200);
+            Assert.AreEqual(c.cash.baseValue, 200);
         }
 
         [Test]
         public void RemoveItem() {
-            c.cash = 2000;
+            c.cash.baseValue = 2000;
             c.StartNewProduct();
             Product p = c.products[0];
             c.HireWorker(worker);
