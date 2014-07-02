@@ -3,15 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using SimpleJSON;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : Singleton<GameManager> {
+
+    // Disable the constructor so that
+    // this must be a singleton.
+    protected GameManager() {}
+
     private Company playerCompany;
-    private List<ProductType> unlockedProductTypes = new List<ProductType>();
-    private List<Industry> unlockedIndustries = new List<Industry>();
-    private List<Market> unlockedMarkets = new List<Market>();
+
+    private List<ProductType> unlockedProductTypes = new List<ProductType>() {
+        ProductType.Social_Network
+    };
+
+    private List<Industry> unlockedIndustries = new List<Industry>() {
+        Industry.Tech
+    };
+
+    private List<Market> unlockedMarkets = new List<Market>() {
+        Market.Millenials
+    };
+
     private List<GameEvent> gameEvents = new List<GameEvent>();
 
     // A list of events which could possibly occur.
     private List<GameEvent> candidateEvents = new List<GameEvent>();
+
+    public void NewGame(string companyName) {
+        playerCompany = new Company(companyName);
+        Application.LoadLevel("Game");
+    }
+
+    void Awake() {
+        DontDestroyOnLoad(gameObject);
+        Debug.Log(GameManager.Instance);
+    }
 
     void Start() {
         LoadResources();

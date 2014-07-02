@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public enum Industry {
+    Tech,
     Agriculture,
     Bio,
     Healthcare,
