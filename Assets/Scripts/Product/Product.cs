@@ -10,7 +10,7 @@ public interface IProduct {
     void Shutdown();
 }
 
-public class Product : IProduct {
+public class Product : HasStats, IProduct {
     public enum State {
         DEVELOPMENT,
         LAUNCHED,
@@ -266,38 +266,22 @@ public class Product : IProduct {
     }
 
     public void ApplyItem(Item item) {
-       foreach (StatBuff buff in item.productBuffs) {
-            switch (buff.name) {
-                case "Appeal":
-                    appeal.ApplyBuff(buff);
-                    break;
-                case "Usability":
-                    usability.ApplyBuff(buff);
-                    break;
-                case "Performance":
-                    performance.ApplyBuff(buff);
-                    break;
-                default:
-                    break;
-           }
-       }
+        ApplyBuffs(item.productBuffs);
+    }
+    public void RemoveItem(Item item) {
+        RemoveBuffs(item.productBuffs);
     }
 
-    public void RemoveItem(Item item) {
-        foreach (StatBuff buff in item.productBuffs) {
-            switch (buff.name) {
-                case "Appeal":
-                    appeal.RemoveBuff(buff);
-                    break;
-                case "Usability":
-                    usability.RemoveBuff(buff);
-                    break;
-                case "Performance":
-                    performance.RemoveBuff(buff);
-                    break;
-                default:
-                    break;
-            }
+    public override Stat StatByName(string name) {
+        switch (name) {
+            case "Appeal":
+                return appeal;
+            case "Usability":
+                return usability;
+            case "Performance":
+                return performance;
+            default:
+                return null;
         }
     }
 
