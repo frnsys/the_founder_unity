@@ -4,6 +4,20 @@ using System.Collections.Generic;
 
 public class GameManager : Singleton<GameManager> {
 
+    // Disable the constructor so that
+    // this must be a singleton.
+    protected GameManager() {}
+
+    public Company playerCompany = new Company("Thwonk Inc");
+
+
+    private int weekTime = 15;
+    private Month _month = Month.January;
+    public string month {
+        get { return _month.ToString(); }
+    }
+    public int year = 1;
+
     private enum Month {
         January,
         February,
@@ -19,20 +33,6 @@ public class GameManager : Singleton<GameManager> {
         December
     }
 
-    // Disable the constructor so that
-    // this must be a singleton.
-    protected GameManager() {}
-
-    public Company playerCompany = new Company("Thwonk Inc");
-
-    private Month _month = Month.January;
-    public string month {
-        get { return _month.ToString(); }
-    }
-
-    private int weekTime = 15;
-
-    public int year = 1;
 
     private List<ProductType> unlockedProductTypes = new List<ProductType>() {
         ProductType.Social_Network
@@ -54,6 +54,13 @@ public class GameManager : Singleton<GameManager> {
     public void NewGame(string companyName) {
         playerCompany = new Company(companyName);
         Application.LoadLevel("Game");
+    }
+
+    // TESTing, just creates a random worker.
+    public void HireWorker() {
+        Worker worker = new Worker("Franklin", 0, 0, 0, 0, 0);
+        Debug.Log("hiring new fake worker");
+        playerCompany.HireWorker(worker);
     }
 
     void Awake() {
