@@ -59,7 +59,8 @@ namespace UnityTest
         public void EffectEvents()
         {
             // Add an effect to the event.
-            GameEffect effect = new GameEffect(GameEffect.Type.CASH, amount_: 1000f);
+            GameEffect effect = new GameEffect();
+            effect.companyBuffs.Add(new StatBuff("Cash", 1000f));
             gE.effects.Add(effect);
 
             // Our test listener to listen for and capture the effect.
@@ -69,8 +70,8 @@ namespace UnityTest
             gE.Trigger();
 
             // Check if the effect was captured.
-            Assert.AreEqual(eL.effect.type, GameEffect.Type.CASH);
-            Assert.AreEqual(eL.effect.amount, 1000f);
+            Assert.AreEqual(eL.effect, effect);
+            Assert.AreEqual(eL.effect.companyBuffs[0].value, 1000f);
         }
     }
 }

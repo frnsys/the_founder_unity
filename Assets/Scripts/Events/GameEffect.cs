@@ -4,30 +4,10 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class GameEffect {
-    public enum Type {
-        CASH,
-        ECONOMY,
-        PRODUCT,
-        WORKER,
-        EVENT,
-        UNLOCK
-    }
-    public Type type;
-    public string subtype;
-    public float amount;
-    public string stat;
-    public int id;
-
-    public GameEffect(Type type_,
-            string subtype_ = null,
-            string stat_ = null,
-            float amount_ = 0f,
-            int id_ = 0)
-    {
-        type = type_;
-        subtype = subtype_;
-        stat = stat_;
-        amount = amount_;
-        id = id_;
-    }
+    public List<ProductType> productTypes = new List<ProductType>();
+    public List<Industry> industries = new List<Industry>();
+    public List<Market> markets = new List<Market>();
+    public List<StatBuff> productBuffs = new List<StatBuff>();
+    public List<StatBuff> workerBuffs = new List<StatBuff>();
+    public List<StatBuff> companyBuffs = new List<StatBuff>();
 }
