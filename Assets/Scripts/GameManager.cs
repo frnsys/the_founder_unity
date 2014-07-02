@@ -4,11 +4,35 @@ using System.Collections.Generic;
 
 public class GameManager : Singleton<GameManager> {
 
+    private enum Month {
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December
+    }
+
     // Disable the constructor so that
     // this must be a singleton.
     protected GameManager() {}
 
-    private Company playerCompany;
+    public Company playerCompany = new Company("Thwonk Inc");
+
+    private Month _month = Month.January;
+    public string month {
+        get { return _month.ToString(); }
+    }
+
+    private int weekTime = 15;
+
+    public int year = 1;
 
     private List<ProductType> unlockedProductTypes = new List<ProductType>() {
         ProductType.Social_Network
@@ -34,12 +58,14 @@ public class GameManager : Singleton<GameManager> {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
-        Debug.Log(GameManager.Instance);
     }
 
     void Start() {
         LoadResources();
-        //StartCoroutine(PayYourDebts());
+
+        StartCoroutine(Weekly());
+        StartCoroutine(Monthly());
+        StartCoroutine(Yearly());
 
         //Debug.Log(gameEvents.Count);
         //Debug.Log(System.Guid.NewGuid());
@@ -48,10 +74,36 @@ public class GameManager : Singleton<GameManager> {
     void Update() {
     }
 
-    IEnumerator PayYourDebts() {
+    IEnumerator Yearly() {
+        int yearTime = weekTime*4*12;
+        yield return new WaitForSeconds(yearTime);
         while(true) {
+            year++;
+            yield return new WaitForSeconds(yearTime);
+        }
+    }
+
+    IEnumerator Monthly() {
+        int monthTime = weekTime*4;
+        yield return new WaitForSeconds(monthTime);
+        while(true) {
+
+            if (_month == Month.December) {
+                _month = Month.January;
+            } else {
+                _month++;
+            }
+
             playerCompany.Pay();
-            yield return new WaitForSeconds(60);
+            yield return new WaitForSeconds(monthTime);
+        }
+    }
+
+    IEnumerator Weekly() {
+        yield return new WaitForSeconds(weekTime);
+        while(true) {
+            playerCompany.DevelopProducts();
+            yield return new WaitForSeconds(weekTime);
         }
     }
 

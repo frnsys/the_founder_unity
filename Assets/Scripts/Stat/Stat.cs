@@ -58,4 +58,8 @@ public class Stat {
         _name = name_;
         baseValue = baseValue_;
     }
+
+    public override string ToString() {
+        return value.ToString();
+    }
 }

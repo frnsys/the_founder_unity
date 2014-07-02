@@ -123,6 +123,10 @@ namespace UnityTest
             Assert.AreEqual(c.items.Count, 1);
             Assert.AreEqual(p.appeal.value, 10);
             Assert.AreEqual(worker.happiness.value, 10);
+
+            // Item should be removed from worker.
+            c.FireWorker(worker);
+            Assert.AreEqual(worker.happiness.value, 0);
         }
 
 		[Test]
