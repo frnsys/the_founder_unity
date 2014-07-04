@@ -16,7 +16,11 @@ public class GameManager : Singleton<GameManager> {
     public string month {
         get { return _month.ToString(); }
     }
-    public int year = 1;
+    private int _year = 1;
+    public int year {
+        get { return 2014 + _year; }
+    }
+    public int week = 0;
 
     private enum Month {
         January,
@@ -46,6 +50,8 @@ public class GameManager : Singleton<GameManager> {
         Market.Millenials
     };
 
+    public List<Worker> unlockedWorkers = new List<Worker>();
+
     private List<GameEvent> gameEvents = new List<GameEvent>();
 
     // A list of events which could possibly occur.
@@ -56,19 +62,20 @@ public class GameManager : Singleton<GameManager> {
         Application.LoadLevel("Game");
     }
 
-    // TESTing, just creates a random worker.
-    public void HireWorker() {
-        Worker worker = new Worker("Franklin", 0, 0, 0, 0, 0);
-        Debug.Log("hiring new fake worker");
+    public void HireWorker(Worker worker) {
         playerCompany.HireWorker(worker);
+
+        // TO DO worker shouldn't be removed from unlockedWorkers
+        // but instead from availableWorkers.
+        unlockedWorkers.Remove(worker);
     }
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
+        LoadResources();
     }
 
     void Start() {
-        LoadResources();
 
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
@@ -85,7 +92,7 @@ public class GameManager : Singleton<GameManager> {
         int yearTime = weekTime*4*12;
         yield return new WaitForSeconds(yearTime);
         while(true) {
-            year++;
+            _year++;
             yield return new WaitForSeconds(yearTime);
         }
     }
@@ -109,6 +116,11 @@ public class GameManager : Singleton<GameManager> {
     IEnumerator Weekly() {
         yield return new WaitForSeconds(weekTime);
         while(true) {
+            if (week == 3) {
+                week = 0;
+            } else {
+                week++;
+            }
             playerCompany.DevelopProducts();
             yield return new WaitForSeconds(weekTime);
         }
@@ -116,6 +128,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void LoadResources() {
         List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
+        unlockedWorkers = new List<Worker>(Resources.LoadAll<Worker>("Workers/Employees"));
     }
 
     void EnableEvent(GameEvent gameEvent) {

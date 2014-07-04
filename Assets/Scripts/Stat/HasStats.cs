@@ -1,6 +1,7 @@
+using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class HasStats {
+public abstract class HasStats : ScriptableObject {
     public void ApplyBuff(StatBuff buff) {
         StatByName(buff.name).ApplyBuff(buff);
     }

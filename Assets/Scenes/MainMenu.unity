@@ -160,7 +160,7 @@ Transform:
   m_GameObject: {fileID: 488881280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0062305294, y: .0062305294, z: .0062305294}
+  m_LocalScale: {x: .00563380262, y: .00563380262, z: .00563380262}
   m_Children:
   - {fileID: 608802196}
   - {fileID: 2115072062}
@@ -209,6 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d216b17935694c63a07f7075182df04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCompany: {fileID: 0}
+  year: 0
+  unlockedWorkers: []
 --- !u!4 &501869047
 Transform:
   m_ObjectHideFlags: 0
@@ -542,7 +545,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1987197797}
   - 114: {fileID: 1987197798}
-  - 114: {fileID: 1987197799}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -573,31 +575,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 0}
+    target: {fileID: 1476576956}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 0}
+    target: {fileID: 1476576956}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 0}
+    target: {fileID: 1476576956}
     relative: 0
     absolute: 0
   topAnchor:
-    target: {fileID: 0}
+    target: {fileID: 1476576956}
     relative: 1
     absolute: 0
   updateAnchors: 1
   mColor: {r: .786764741, g: .133055791, b: .133055791, a: 1}
   mPivot: 4
-  mWidth: 547
-  mHeight: 321
+  mWidth: 729
+  mHeight: 355
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.70404983
+  aspectRatio: 2.37020326
   mType: 2
   mFillDirection: 4
   mFillAmount: 1
@@ -611,25 +613,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 2f2473f73b9ca724f9080d6d76009ea2, type: 2}
   mSpriteName: Honeycomb
   mFillCenter: 1
---- !u!114 &1987197799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1987197796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b5bd8d2e1bcbe4580036799fb6ca41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiCamera: {fileID: 608802198}
-  container: {fileID: 0}
-  style: 3
-  runOnlyOnce: 0
-  relativeSize: {x: 1, y: 1}
-  initialSize: {x: 1, y: 1}
-  borderPadding: {x: 0, y: 0}
-  widgetContainer: {fileID: 0}
 --- !u!1 &2044936934
 GameObject:
   m_ObjectHideFlags: 0
