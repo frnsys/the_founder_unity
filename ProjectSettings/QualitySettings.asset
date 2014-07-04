@@ -4,54 +4,8 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 4
+  m_CurrentQuality: 2
   m_QualitySettings:
-  - serializedVersion: 2
-    name: Fastest
-    pixelLightCount: 0
-    shadows: 0
-    shadowResolution: 0
-    shadowProjection: 1
-    shadowCascades: 1
-    shadowDistance: 15
-    blendWeights: 1
-    textureQuality: 1
-    anisotropicTextures: 0
-    antiAliasing: 0
-    softParticles: 0
-    softVegetation: 0
-    vSyncCount: 0
-    lodBias: .300000012
-    maximumLODLevel: 0
-    particleRaycastBudget: 4
-    excludedTargetPlatforms:
-    - Web
-    - Standalone
-    - Android
-    - FlashPlayer
-  - serializedVersion: 2
-    name: Fast
-    pixelLightCount: 0
-    shadows: 0
-    shadowResolution: 0
-    shadowProjection: 1
-    shadowCascades: 1
-    shadowDistance: 20
-    blendWeights: 2
-    textureQuality: 0
-    anisotropicTextures: 0
-    antiAliasing: 0
-    softParticles: 0
-    softVegetation: 0
-    vSyncCount: 0
-    lodBias: .400000006
-    maximumLODLevel: 0
-    particleRaycastBudget: 16
-    excludedTargetPlatforms:
-    - Web
-    - FlashPlayer
-    - Android
-    - Standalone
   - serializedVersion: 2
     name: Simple
     pixelLightCount: 1
@@ -128,9 +82,4 @@ QualitySettings:
     maximumLODLevel: 0
     particleRaycastBudget: 4096
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality:
-    Android: 3
-    FlashPlayer: 3
-    Standalone: 4
-    Web: 4
-    iPhone: 2
+  m_PerPlatformDefaultQuality: {}

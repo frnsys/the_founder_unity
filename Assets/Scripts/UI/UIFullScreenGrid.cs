@@ -4,7 +4,6 @@ public class UIFullScreenGrid : MonoBehaviour {
 
     UIGrid grid;
 
-
     void Awake() {
         UICamera.onScreenResize += ScreenSizeChanged;
     }
@@ -19,8 +18,10 @@ public class UIFullScreenGrid : MonoBehaviour {
     }
 
     void SetCells() {
-        grid.cellWidth = Screen.width;
-        grid.cellHeight = Screen.height;
+        UIRoot mRoot = NGUITools.FindInParents<UIRoot>(gameObject);
+        float ratio = (float)mRoot.activeHeight / Screen.height;
+        grid.cellWidth = Mathf.Ceil(Screen.width * ratio);
+        grid.cellHeight = Mathf.Ceil(Screen.height * ratio);
         grid.Reposition();
     }
 }
