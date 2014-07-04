@@ -9,5 +9,6 @@ public enum Market {
     Moms,
     Dads,
     Toddlers,
+    College,
     Government
 }

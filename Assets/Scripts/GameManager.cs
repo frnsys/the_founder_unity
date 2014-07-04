@@ -2,19 +2,84 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour {
-    private Company playerCompany;
-    private List<ProductType> unlockedProductTypes = new List<ProductType>();
-    private List<Industry> unlockedIndustries = new List<Industry>();
-    private List<Market> unlockedMarkets = new List<Market>();
+public class GameManager : Singleton<GameManager> {
+
+    // Disable the constructor so that
+    // this must be a singleton.
+    protected GameManager() {}
+
+    public Company playerCompany = new Company("Thwonk Inc");
+
+
+    private int weekTime = 15;
+    private Month _month = Month.January;
+    public string month {
+        get { return _month.ToString(); }
+    }
+    private int _year = 1;
+    public int year {
+        get { return 2014 + _year; }
+    }
+    public int week = 0;
+
+    private enum Month {
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December
+    }
+
+
+    private List<ProductType> unlockedProductTypes = new List<ProductType>() {
+        ProductType.Social_Network
+    };
+
+    private List<Industry> unlockedIndustries = new List<Industry>() {
+        Industry.Tech
+    };
+
+    private List<Market> unlockedMarkets = new List<Market>() {
+        Market.Millenials
+    };
+
+    public List<Worker> unlockedWorkers = new List<Worker>();
+
     private List<GameEvent> gameEvents = new List<GameEvent>();
 
     // A list of events which could possibly occur.
     private List<GameEvent> candidateEvents = new List<GameEvent>();
 
-    void Start() {
+    public void NewGame(string companyName) {
+        playerCompany = new Company(companyName);
+        Application.LoadLevel("Game");
+    }
+
+    public void HireWorker(Worker worker) {
+        playerCompany.HireWorker(worker);
+
+        // TO DO worker shouldn't be removed from unlockedWorkers
+        // but instead from availableWorkers.
+        unlockedWorkers.Remove(worker);
+    }
+
+    void Awake() {
+        DontDestroyOnLoad(gameObject);
         LoadResources();
-        //StartCoroutine(PayYourDebts());
+    }
+
+    void Start() {
+
+        StartCoroutine(Weekly());
+        StartCoroutine(Monthly());
+        StartCoroutine(Yearly());
 
         //Debug.Log(gameEvents.Count);
         //Debug.Log(System.Guid.NewGuid());
@@ -23,15 +88,47 @@ public class GameManager : MonoBehaviour {
     void Update() {
     }
 
-    IEnumerator PayYourDebts() {
+    IEnumerator Yearly() {
+        int yearTime = weekTime*4*12;
+        yield return new WaitForSeconds(yearTime);
         while(true) {
+            _year++;
+            yield return new WaitForSeconds(yearTime);
+        }
+    }
+
+    IEnumerator Monthly() {
+        int monthTime = weekTime*4;
+        yield return new WaitForSeconds(monthTime);
+        while(true) {
+
+            if (_month == Month.December) {
+                _month = Month.January;
+            } else {
+                _month++;
+            }
+
             playerCompany.Pay();
-            yield return new WaitForSeconds(60);
+            yield return new WaitForSeconds(monthTime);
+        }
+    }
+
+    IEnumerator Weekly() {
+        yield return new WaitForSeconds(weekTime);
+        while(true) {
+            if (week == 3) {
+                week = 0;
+            } else {
+                week++;
+            }
+            playerCompany.DevelopProducts();
+            yield return new WaitForSeconds(weekTime);
         }
     }
 
     public void LoadResources() {
         List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
+        unlockedWorkers = new List<Worker>(Resources.LoadAll<Worker>("Workers/Employees"));
     }
 
     void EnableEvent(GameEvent gameEvent) {

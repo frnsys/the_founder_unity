@@ -26,7 +26,7 @@ namespace UnityTest
             gameManager.LoadResources();
 
             c = new Company("Foo Inc");
-            worker = new Worker(0, 0, 0, 0, 0);
+            worker = new Worker("Franklin", 0, 0, 0, 0, 0);
             item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
         }
 
@@ -123,6 +123,10 @@ namespace UnityTest
             Assert.AreEqual(c.items.Count, 1);
             Assert.AreEqual(p.appeal.value, 10);
             Assert.AreEqual(worker.happiness.value, 10);
+
+            // Item should be removed from worker.
+            c.FireWorker(worker);
+            Assert.AreEqual(worker.happiness.value, 0);
         }
 
 		[Test]

@@ -15,6 +15,7 @@ public class Worker : HasStats {
 
     public WorkerType type;
 
+    public string name;
     public float salary;
 
     public Stat happiness;
@@ -23,9 +24,10 @@ public class Worker : HasStats {
     public Stat creativity;
     public Stat cleverness;
 
-    public Worker(float happiness_, float productivity_, float charisma_, 
+    public Worker(string name_, float happiness_, float productivity_, float charisma_, 
         float creativity_, float cleverness_
     ) {
+        name = name_;
         happiness = new Stat("Happiness", happiness_);
         productivity = new Stat("Productivity", productivity_);
         charisma = new Stat("Charisma", charisma_);

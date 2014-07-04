@@ -56,6 +56,13 @@ public class Company : HasStats {
         products.Add(product);
     }
 
+    public void DevelopProducts() {
+        List<Product> inDevelopment = products.FindAll(p => p.state == Product.State.DEVELOPMENT);
+        foreach (Product product in inDevelopment) {
+            DevelopProduct(product);
+        }
+    }
+
     public void DevelopProduct(IProduct product) {
         float charisma = 0;
         float creativity = 0;

@@ -17,7 +17,7 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            worker = new Worker(0, 0, 0, 0, 0);
+            worker = new Worker("Franklin", 0, 0, 0, 0, 0);
             item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
         }
 
