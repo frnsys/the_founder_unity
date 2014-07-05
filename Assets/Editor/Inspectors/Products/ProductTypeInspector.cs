@@ -13,7 +13,7 @@ internal class ProductTypeInspector : Editor {
         EditorStyles.textField.wordWrap = true;
 
         EditorGUILayout.LabelField("Product Type");
-        p.name = EditorGUILayout.TextField(p.name);
+        p.name = EditorGUILayout.TextField("Name", p.name);
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
 
         // Let Unity know to save on changes.
