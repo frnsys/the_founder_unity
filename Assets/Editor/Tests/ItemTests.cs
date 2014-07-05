@@ -19,7 +19,7 @@ namespace UnityTest
         [SetUp]
         public void SetUp() {
             industries = new List<Industry>();
-            industries.Add(Industry.Space);
+            industries.Add(new Industry());
             productTypes = new List<ProductType>();
             markets = new List<Market>();
             item = new Item("example_Item", 500, industries, productTypes, markets);

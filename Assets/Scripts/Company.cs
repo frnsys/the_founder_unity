@@ -43,10 +43,7 @@ public class Company : HasStats {
         _workers.Remove(worker);
     }
 
-    public void StartNewProduct() {
-        ProductType pt = ProductType.Social_Network;
-        Industry i = Industry.Space;
-        Market m = Market.Millenials;
+    public void StartNewProduct(ProductType pt, Industry i, Market m) {
         Product product = new Product(pt, i, m);
 
         foreach (Item item in _items) {

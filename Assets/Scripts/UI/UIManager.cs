@@ -7,8 +7,8 @@ public class UIManager : MonoBehaviour {
     void OnEnable() {
         gm = GameManager.Instance;
 
-        GameObject newProductFlow = Resources.Load("UI/New Product Selection") as GameObject;
-        NGUITools.AddChild(gameObject, newProductFlow);
+        //GameObject newProductFlow = Resources.Load("UI/New Product Selection") as GameObject;
+        //NGUITools.AddChild(gameObject, newProductFlow);
 
 
         //GameObject workersGrid = GameObject.Find("Available Workers/Grid");

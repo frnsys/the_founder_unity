@@ -38,17 +38,9 @@ public class GameManager : Singleton<GameManager> {
     }
 
 
-    private List<ProductType> unlockedProductTypes = new List<ProductType>() {
-        ProductType.Social_Network
-    };
-
-    private List<Industry> unlockedIndustries = new List<Industry>() {
-        Industry.Tech
-    };
-
-    private List<Market> unlockedMarkets = new List<Market>() {
-        Market.Millenials
-    };
+    private List<ProductType> unlockedProductTypes = new List<ProductType>();
+    private List<Industry> unlockedIndustries = new List<Industry>();
+    private List<Market> unlockedMarkets = new List<Market>();
 
     public List<Worker> unlockedWorkers = new List<Worker>();
 

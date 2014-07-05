@@ -3,16 +3,57 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 [CustomEditor(typeof(ProductRecipe))]
 internal class ProductRecipeInspector : Editor {
 
-    public override void OnInspectorGUI() {
-        ProductRecipe p = target as ProductRecipe;
+    ProductRecipe p;
 
-        p.productType = (ProductType)EditorGUILayout.EnumPopup("Product Type", p.productType);
-        p.industry = (Industry)EditorGUILayout.EnumPopup("Industry", p.industry);
-        p.market = (Market)EditorGUILayout.EnumPopup("Market", p.market);
+    List<ProductType> productTypes;
+    string[] pt_o;
+
+    List<Industry> industries;
+    string[] i_o;
+
+    List<Market> markets;
+    string[] m_o;
+
+    void OnEnable() {
+        p = target as ProductRecipe;
+
+        productTypes = ProductType.LoadAll();
+        pt_o = productTypes.Select(i => i.ToString()).ToArray();
+
+        industries = Industry.LoadAll();
+        i_o = industries.Select(i => i.ToString()).ToArray();
+
+        markets = Market.LoadAll();
+        m_o = markets.Select(i => i.ToString()).ToArray();
+
+
+        // Defaults
+        if (p.productType == null)
+            p.productType = productTypes[0];
+
+        if (p.industry == null)
+            p.industry = industries[0];
+
+        if (p.market == null)
+            p.market = markets[0];
+    }
+
+    public override void OnInspectorGUI() {
+
+        int pt_i = EditorGUILayout.Popup(Array.IndexOf(pt_o, p.productType.ToString()), pt_o);
+        p.productType = productTypes[pt_i];
+
+        int i_i = EditorGUILayout.Popup(Array.IndexOf(i_o, p.industry.ToString()), i_o);
+        p.industry = industries[i_i];
+
+        int m_i = EditorGUILayout.Popup(Array.IndexOf(m_o, p.market.ToString()), m_o);
+        p.market = markets[m_i];
+
         EditorGUILayout.Space();
 
         p.appeal_W = EditorGUILayout.FloatField("Appeal Weight", p.appeal_W);

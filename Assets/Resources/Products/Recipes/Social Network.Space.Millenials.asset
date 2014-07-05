@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Default
+  m_Name: Social Network.Space.Millenials
   m_EditorClassIdentifier: 
-  productType: 0
-  industry: 4
-  market: 0
+  productType: {fileID: 11400000, guid: 4222ff85e6f1c4b8d95bfdcc35abc292, type: 2}
+  industry: {fileID: 11400000, guid: c478866fbff4841da8541c3c64959f75, type: 2}
+  market: {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
   appeal_W: 1
   usability_W: 1
   performance_W: 1

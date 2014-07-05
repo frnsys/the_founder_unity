@@ -72,10 +72,11 @@ public class Product : HasStats, IProduct {
         usability = new Stat("Usability", 0);
         performance = new Stat("Performance", 0);
 
-        recipe = Resources.Load("ProductRecipes/" + pt.ToString() + "." + i.ToString() + "." + m.ToString()) as ProductRecipe;
+        recipe = ProductRecipe.Load(pt, i, m);
+
         // Load default if we got nothing.
         if (recipe == null) {
-            recipe = Resources.Load("ProductRecipes/Default") as ProductRecipe;
+            recipe = ProductRecipe.Load();
         }
     }
 

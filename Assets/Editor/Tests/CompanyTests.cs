@@ -18,6 +18,10 @@ namespace UnityTest
         private Worker worker;
         private Item item;
 
+        private ProductType pt = new ProductType();
+        private Industry i = new Industry();
+        private Market m = new Market();
+
         [SetUp]
         public void SetUp() {
             gameObj = new GameObject("Game Manager");
@@ -80,7 +84,8 @@ namespace UnityTest
         public void StartNewProduct() {
             c.cash.baseValue = 2000;
             c.BuyItem(item);
-            c.StartNewProduct();
+
+            c.StartNewProduct(pt, i, m);
             Assert.AreEqual(c.products.Count, 1);
             Assert.AreEqual(c.products[0].appeal.value, 10);
         }
@@ -103,7 +108,7 @@ namespace UnityTest
         [Test]
         public void RemoveProduct() {
             c.cash.baseValue = 2000;
-            c.StartNewProduct();
+            c.StartNewProduct(pt, i, m);
             Product p = c.products[0];
             c.RemoveProduct(p);
 
@@ -114,7 +119,7 @@ namespace UnityTest
 		[Test]
 		public void BuyItem_CanAfford() {
             c.cash.baseValue = 2000;
-            c.StartNewProduct();
+            c.StartNewProduct(pt, i, m);
             Product p = c.products[0];
             c.HireWorker(worker);
 
@@ -139,7 +144,7 @@ namespace UnityTest
         [Test]
         public void RemoveItem() {
             c.cash.baseValue = 2000;
-            c.StartNewProduct();
+            c.StartNewProduct(pt, i, m);
             Product p = c.products[0];
             c.HireWorker(worker);
 

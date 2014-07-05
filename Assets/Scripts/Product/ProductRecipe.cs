@@ -6,9 +6,9 @@ public class ProductRecipe : ScriptableObject {
     // Naming convention for these assets is:
     // ProductType.Industry.Market.asset
 
-    public ProductType productType = ProductType.Social_Network;
-    public Industry industry = Industry.Space;
-    public Market market = Market.Millenials;
+    public ProductType productType;
+    public Industry industry;
+    public Market market;
 
     // Weights
     public float appeal_W = 1;
@@ -30,5 +30,13 @@ public class ProductRecipe : ScriptableObject {
 
     public string ToString() {
         return productType.ToString() + "." + industry.ToString() + "." + market.ToString();
+    }
+
+    public static ProductRecipe Load(ProductType pt, Industry i, Market m) {
+        return Resources.Load("Products/Recipes/" + pt.ToString() + "." + i.ToString() + "." + m.ToString()) as ProductRecipe;
+    }
+
+    public static ProductRecipe Load() {
+        return Resources.Load("Products/Recipes/Default") as ProductRecipe;
     }
 }

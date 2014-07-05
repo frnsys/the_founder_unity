@@ -6,6 +6,6 @@ using System.Collections.Generic;
 public class ProductRecipeAsset {
     [MenuItem("Assets/Create/ProductRecipe")]
     public static void CreateAsset() {
-        ProductRecipe recipe = CustomAssetUtility.CreateAsset<ProductRecipe>();
+        ProductRecipe asset = CustomAssetUtility.CreateAsset<ProductRecipe>();
     }
 }

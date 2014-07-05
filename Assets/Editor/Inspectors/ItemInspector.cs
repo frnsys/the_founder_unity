@@ -3,6 +3,7 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 [CustomEditor(typeof(Item))]
 internal class ItemInspector : Editor {
@@ -22,8 +23,31 @@ internal class ItemInspector : Editor {
         "Salary"
     };
 
+    Item i;
+
+    List<ProductType> productTypes;
+    string[] pt_o;
+
+    List<Industry> industries;
+    string[] i_o;
+
+    List<Market> markets;
+    string[] m_o;
+
+    void OnEnable() {
+        i = target as Item;
+
+        productTypes = ProductType.LoadAll();
+        pt_o = productTypes.Select(j => j.ToString()).ToArray();
+
+        industries = Industry.LoadAll();
+        i_o = industries.Select(j => j.ToString()).ToArray();
+
+        markets = Market.LoadAll();
+        m_o = markets.Select(j => j.ToString()).ToArray();
+    }
+
     public override void OnInspectorGUI() {
-        Item i = target as Item;
 
         i.name = EditorGUILayout.TextField("Name", i.name);
         i.cost = EditorGUILayout.FloatField("Cost", i.cost);
@@ -35,14 +59,17 @@ internal class ItemInspector : Editor {
         EditorGUI.indentLevel = 1;
         for (int j=0; j < i.productTypes.Count; j++) {
             EditorGUILayout.BeginHorizontal();
-            i.productTypes[j] = (ProductType)EditorGUILayout.EnumPopup(i.productTypes[j]);
+
+            int pt_i = EditorGUILayout.Popup(Array.IndexOf(pt_o, i.productTypes[j].ToString()), pt_o);
+            i.productTypes[j] = productTypes[pt_i];
+
             if (GUILayout.Button("Delete")) {
                 i.productTypes.Remove(i.productTypes[j]);
             }
             EditorGUILayout.EndHorizontal();
         }
         if (GUILayout.Button("Add New Product Type")) {
-            i.productTypes.Add(ProductType.Social_Network);
+            i.productTypes.Add(productTypes[0]);
         }
         EditorGUI.indentLevel = 0;
         EditorGUILayout.Space();
@@ -52,14 +79,17 @@ internal class ItemInspector : Editor {
         EditorGUI.indentLevel = 1;
         for (int j=0; j < i.industries.Count; j++) {
             EditorGUILayout.BeginHorizontal();
-            i.industries[j] = (Industry)EditorGUILayout.EnumPopup(i.industries[j]);
+
+            int i_i = EditorGUILayout.Popup(Array.IndexOf(i_o, i.industries[j].ToString()), i_o);
+            i.industries[j] = industries[i_i];
+
             if (GUILayout.Button("Delete")) {
                 i.industries.Remove(i.industries[j]);
             }
             EditorGUILayout.EndHorizontal();
         }
         if (GUILayout.Button("Add New Industry")) {
-            i.industries.Add(Industry.Space);
+            i.industries.Add(industries[0]);
         }
         EditorGUI.indentLevel = 0;
         EditorGUILayout.Space();
@@ -69,14 +99,17 @@ internal class ItemInspector : Editor {
         EditorGUI.indentLevel = 1;
         for (int j=0; j < i.markets.Count; j++) {
             EditorGUILayout.BeginHorizontal();
-            i.markets[j] = (Market)EditorGUILayout.EnumPopup(i.markets[j]);
+
+            int m_i = EditorGUILayout.Popup(Array.IndexOf(m_o, i.markets[j].ToString()), m_o);
+            i.markets[j] = markets[m_i];
+
             if (GUILayout.Button("Delete")) {
                 i.markets.Remove(i.markets[j]);
             }
             EditorGUILayout.EndHorizontal();
         }
         if (GUILayout.Button("Add New Market")) {
-            i.markets.Add(Market.Millenials);
+            i.markets.Add(markets[0]);
         }
         EditorGUI.indentLevel = 0;
         EditorGUILayout.Space();

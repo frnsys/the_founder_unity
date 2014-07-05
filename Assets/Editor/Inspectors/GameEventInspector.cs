@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 [CustomEditor(typeof(GameEvent))]
 internal class GameEventInspector : Editor {
@@ -40,9 +41,30 @@ internal class GameEventInspector : Editor {
     };
 
     GameEvent ge;
-    public override void OnInspectorGUI() {
+
+    List<ProductType> productTypes;
+    string[] pt_o;
+
+    List<Industry> industries;
+    string[] i_o;
+
+    List<Market> markets;
+    string[] m_o;
+
+    void OnEnable() {
         ge = target as GameEvent;
 
+        productTypes = ProductType.LoadAll();
+        pt_o = productTypes.Select(j => j.ToString()).ToArray();
+
+        industries = Industry.LoadAll();
+        i_o = industries.Select(j => j.ToString()).ToArray();
+
+        markets = Market.LoadAll();
+        m_o = markets.Select(j => j.ToString()).ToArray();
+    }
+
+    public override void OnInspectorGUI() {
         ge.name = EditorGUILayout.TextField("Name", ge.name);
         ge.probability.baseValue = EditorGUILayout.FloatField("Probability", ge.probability.baseValue);
         ge.probability.baseValue = Mathf.Clamp(ge.probability.baseValue, 0, 1);
@@ -70,7 +92,10 @@ internal class GameEventInspector : Editor {
                 EditorGUI.indentLevel += 1;
                 for (int j=0; j < e.productTypes.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
-                    e.productTypes[j] = (ProductType)EditorGUILayout.EnumPopup(e.productTypes[j]);
+
+                    int pt_i = EditorGUILayout.Popup(Array.IndexOf(pt_o, e.productTypes[j].ToString()), pt_o);
+                    e.productTypes[j] = productTypes[pt_i];
+
                     if (GUILayout.Button("Delete")) {
                         e.productTypes.Remove(e.productTypes[j]);
                     }
@@ -78,7 +103,7 @@ internal class GameEventInspector : Editor {
                 }
                 BeginCenter();
                 if (GUILayout.Button("Add New Product Type", GUILayout.ExpandWidth(false))) {
-                    e.productTypes.Add(ProductType.Social_Network);
+                    e.productTypes.Add(productTypes[0]);
                 }
                 EndCenter();
                 EditorGUI.indentLevel -= 1;
@@ -89,7 +114,10 @@ internal class GameEventInspector : Editor {
                 EditorGUI.indentLevel += 1;
                 for (int j=0; j < e.industries.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
-                    e.industries[j] = (Industry)EditorGUILayout.EnumPopup(e.industries[j]);
+
+                    int i_i = EditorGUILayout.Popup(Array.IndexOf(i_o, e.industries[j].ToString()), i_o);
+                    e.industries[j] = industries[i_i];
+
                     if (GUILayout.Button("Delete")) {
                         e.industries.Remove(e.industries[j]);
                     }
@@ -97,7 +125,7 @@ internal class GameEventInspector : Editor {
                 }
                 BeginCenter();
                 if (GUILayout.Button("Add New Industry", GUILayout.ExpandWidth(false))) {
-                    e.industries.Add(Industry.Space);
+                    e.industries.Add(industries[0]);
                 }
                 EndCenter();
                 EditorGUI.indentLevel -= 1;
@@ -108,7 +136,10 @@ internal class GameEventInspector : Editor {
                 EditorGUI.indentLevel += 1;
                 for (int j=0; j < e.markets.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
-                    e.markets[j] = (Market)EditorGUILayout.EnumPopup(e.markets[j]);
+
+                    int m_i = EditorGUILayout.Popup(Array.IndexOf(m_o, e.markets[j].ToString()), m_o);
+                    e.markets[j] = markets[m_i];
+
                     if (GUILayout.Button("Delete")) {
                         e.markets.Remove(e.markets[j]);
                     }
@@ -116,7 +147,7 @@ internal class GameEventInspector : Editor {
                 }
                 BeginCenter();
                 if (GUILayout.Button("Add New Market", GUILayout.ExpandWidth(false))) {
-                    e.markets.Add(Market.Millenials);
+                    e.markets.Add(markets[0]);
                 }
                 EndCenter();
                 EditorGUI.indentLevel -= 1;

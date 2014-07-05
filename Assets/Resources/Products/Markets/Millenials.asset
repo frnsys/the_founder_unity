@@ -8,14 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cafa5a17c45495a9e18fca7cdaadae, type: 3}
-  m_Name: Something
+  m_Script: {fileID: 11500000, guid: 74adeb0e1595d4d8e89923e4356f6b43, type: 3}
+  m_Name: Millenials
   m_EditorClassIdentifier: 
-  name: Something
-  cost: 1000
-  duration: 5
-  productBuffs: []
-  workerBuffs: []
-  industries: []
-  productTypes: []
-  markets: []
+  name: Millenials
+  description: Entitled to spending

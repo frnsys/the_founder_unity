@@ -16,9 +16,9 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            ProductType pt = ProductType.Social_Network;
-            Industry i = Industry.Space;
-            Market m = Market.Millenials;
+            ProductType pt = ProductType.Load("Social Network");
+            Industry i = Industry.Load("Space");
+            Market m = Market.Load("Millenials");
 
             // This *should* load the Default product recipe.
             // If it doesn't, you may need to change the PT/I/M
