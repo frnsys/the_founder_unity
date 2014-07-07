@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 public class Company : HasStats {
     public string name;
     public int sizeLimit = 10;
-    public Stat cash = new Stat("Cash", 1000);
+    public Stat cash = new Stat("Cash", 100000);
 
     public List<Character> founders = new List<Character>();
     public List<Product> products = new List<Product>();
@@ -30,6 +30,7 @@ public class Company : HasStats {
                 worker.ApplyItem(item);
             }
 
+            Debug.Log("Hired " + worker);
             _workers.Add(worker);
             return true;
         }

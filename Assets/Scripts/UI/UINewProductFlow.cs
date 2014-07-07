@@ -158,6 +158,8 @@ public class UINewProductFlow : MonoBehaviour {
     private void WrapGrid() {
         NGUITools.DestroyImmediate(grid.gameObject.GetComponent<UIWrapContent>());
         UIWrapContent wrapper = grid.gameObject.AddComponent<UIWrapContent>();
+
+        wrapper.cullContent = false;
         wrapper.itemSize = (int)grid.cellWidth;
     }
 }

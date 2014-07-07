@@ -19,6 +19,8 @@ internal class WorkerInspector : Editor {
         w.charisma.baseValue = EditorGUILayout.FloatField("Charisma", w.charisma.baseValue);
         w.creativity.baseValue = EditorGUILayout.FloatField("Creativity", w.creativity.baseValue);
         w.cleverness.baseValue = EditorGUILayout.FloatField("Cleverness", w.cleverness.baseValue);
+
+        w.salary = EditorGUILayout.FloatField("Salary", w.salary);
         EditorGUILayout.Space();
 
         if (GUI.changed) {

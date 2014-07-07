@@ -120,7 +120,7 @@ public class GameManager : Singleton<GameManager> {
 
     public void LoadResources() {
         List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
-        unlockedWorkers = new List<Worker>(Resources.LoadAll<Worker>("Workers/Employees"));
+        unlockedWorkers = Worker.LoadAll(WorkerType.Employee);
 
         unlockedProductTypes = ProductType.LoadAll();
         unlockedIndustries = Industry.LoadAll();

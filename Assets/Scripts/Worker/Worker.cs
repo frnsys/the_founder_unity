@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 public enum WorkerType {
-    EMPLOYEE,
-    LOCATION,
-    PLANET,
-    STARSYSTEM
+    Employee,
+    Location,
+    Planet,
+    StarSystem
 }
 
 public class Worker : HasStats {
+    public static List<Worker> LoadAll(WorkerType type) {
+        return new List<Worker>(Resources.LoadAll<Worker>("Workers/" + type + "s"));
+    }
 
     private Levels levels;
 
