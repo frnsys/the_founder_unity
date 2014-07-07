@@ -109,6 +109,11 @@ public class UINewProductFlow : MonoBehaviour {
 
             case Aspect.COMPLETE:
                 gm.playerCompany.StartNewProduct(productType, industry, market);
+
+                // TEMPORARY, this has bad performance.
+                UIRoot.Broadcast("UpdateDevelopingProducts");
+
+                // Destroy self.
                 NGUITools.DestroyImmediate(gameObject);
                 break;
         }

@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ShowNewProductFlow() {
-        GameObject newProductFlow = Resources.Load("UI/New Product Selection") as GameObject;
+        GameObject newProductFlow = Resources.Load("UI/Products/New Product Selection") as GameObject;
         NGUITools.AddChild(gameObject, newProductFlow);
     }
 

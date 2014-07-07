@@ -15,6 +15,12 @@ public class Company : HasStats {
         get { return _workers.AsReadOnly(); }
     }
 
+    public List<Product> developingProducts {
+        get {
+            return products.FindAll(p => p.state == Product.State.DEVELOPMENT);
+        }
+    }
+
     public List<Item> _items = new List<Item>();
     public ReadOnlyCollection<Item> items {
         get { return _items.AsReadOnly(); }
