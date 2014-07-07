@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class UIFullScreenGrid : MonoBehaviour {
 
-    UIGrid grid;
+    public UIGrid grid;
+    public UIWrapContent contentWrap;
 
     void Awake() {
         UICamera.onScreenResize += ScreenSizeChanged;
@@ -13,7 +14,6 @@ public class UIFullScreenGrid : MonoBehaviour {
     void ScreenSizeChanged() { SetCells(); }
 
     void Start() {
-        grid = gameObject.GetComponent<UIGrid>();
         SetCells();
     }
 
@@ -22,6 +22,13 @@ public class UIFullScreenGrid : MonoBehaviour {
         float ratio = (float)mRoot.activeHeight / Screen.height;
         grid.cellWidth = Mathf.Ceil(Screen.width * ratio);
         grid.cellHeight = Mathf.Ceil(Screen.height * ratio);
+
+        // If there is a content wrapper,
+        // update that too.
+        if (contentWrap) {
+            contentWrap.itemSize = (int)grid.cellWidth;
+        }
+
         grid.Reposition();
     }
 }

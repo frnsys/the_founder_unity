@@ -38,9 +38,9 @@ public class GameManager : Singleton<GameManager> {
     }
 
 
-    private List<ProductType> unlockedProductTypes = new List<ProductType>();
-    private List<Industry> unlockedIndustries = new List<Industry>();
-    private List<Market> unlockedMarkets = new List<Market>();
+    public List<ProductType> unlockedProductTypes = new List<ProductType>();
+    public List<Industry> unlockedIndustries = new List<Industry>();
+    public List<Market> unlockedMarkets = new List<Market>();
 
     public List<Worker> unlockedWorkers = new List<Worker>();
 
@@ -121,6 +121,10 @@ public class GameManager : Singleton<GameManager> {
     public void LoadResources() {
         List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
         unlockedWorkers = new List<Worker>(Resources.LoadAll<Worker>("Workers/Employees"));
+
+        unlockedProductTypes = ProductType.LoadAll();
+        unlockedIndustries = Industry.LoadAll();
+        unlockedMarkets = Market.LoadAll();
     }
 
     void EnableEvent(GameEvent gameEvent) {
