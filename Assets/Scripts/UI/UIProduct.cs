@@ -15,7 +15,7 @@ public class UIProduct: MonoBehaviour {
     public UILabel progress;
 
     void Update() {
-        progress.text = product.progress.ToString();
+        progress.text = ((int)(product.progress)).ToString();
     }
 }
 

@@ -74,10 +74,11 @@ public class Company : HasStats {
         float progress = 0;
 
         foreach (Worker worker in workers) {
-            charisma += worker.charisma.value;
-            creativity += worker.creativity.value;
-            cleverness += worker.cleverness.value;
-            progress += worker.productivity.value;
+            // A bit of randomness to make things more interesting.
+            charisma += (worker.charisma.value/2) * Random.Range(0.90f, 1.05f);
+            creativity += (worker.creativity.value/2) * Random.Range(0.90f, 1.05f);
+            cleverness += (worker.cleverness.value/2) * Random.Range(0.90f, 1.05f);
+            progress += (worker.productivity.value/2) * Random.Range(0.90f, 1.05f);
         }
 
         product.Develop(progress, charisma, creativity, cleverness);
