@@ -1,3 +1,11 @@
+/*
+ * New Product Flow
+ * ================
+ *
+ * Selecting a Product Type, Industry, and Market
+ * to start development of a new product.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,3 +1,12 @@
+/*
+ * Product List
+ * ===================
+ *
+ * A simple list of products
+ * the company currently owns.
+ *
+ */
+
 using UnityEngine;
 using System.Collections;
 

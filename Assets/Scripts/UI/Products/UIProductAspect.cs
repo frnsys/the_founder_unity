@@ -1,3 +1,13 @@
+/*
+ * Product Aspect Item
+ * ===================
+ *
+ * A single product aspect (Product Type,
+ * Industry, or Market) for part of the
+ * new product flow.
+ *
+ */
+
 using UnityEngine;
 using System.Collections;
 

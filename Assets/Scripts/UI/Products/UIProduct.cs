@@ -1,3 +1,13 @@
+/*
+ * Product Item
+ * ===================
+ *
+ * A single product item,
+ * to keep track of its progress
+ * and revenue.
+ *
+ */
+
 using UnityEngine;
 using System.Collections;
 
@@ -16,10 +26,12 @@ public class UIProduct: MonoBehaviour {
 
     void Update() {
         switch(product.state) {
+            // Show progress if product is in development.
             case Product.State.DEVELOPMENT:
                 progress.text = ((int)(product.progress)).ToString();
                 break;
 
+            // Show revenue if product has launched.
             case Product.State.LAUNCHED:
                 progress.text = "$" + ((int)(product.revenueEarned)).ToString();
                 break;

@@ -1,3 +1,12 @@
+/*
+ * Status Bar
+ * ================
+ *
+ * Displays important information
+ * about the game.
+ *
+ */
+
 using UnityEngine;
 using System.Collections;
 
@@ -23,6 +32,8 @@ public class UIStatusBar : MonoBehaviour {
         yearLabel.text = gm.year.ToString();
         monthLabel.text = gm.month.ToString().ToUpper();
 
+        // If the week has changed,
+        // update the UI.
         if (week != gm.week) {
             week = gm.week;
             SetWeek();

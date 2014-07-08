@@ -1,3 +1,11 @@
+/*
+ * Worker Hiring
+ * ===================
+ *
+ * UI for hiring workers.
+ *
+ */
+
 using UnityEngine;
 using System.Collections;
 

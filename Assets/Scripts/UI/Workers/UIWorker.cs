@@ -1,3 +1,11 @@
+/*
+ * Worker Item
+ * ===================
+ *
+ * Very simple item for Workers.
+ *
+ */
+
 using UnityEngine;
 using System.Collections;
 

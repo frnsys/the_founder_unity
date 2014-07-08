@@ -1,3 +1,13 @@
+/*
+ * UIFullScreenGrid
+ * ================
+ *
+ * Sets up a grid to always have full-screen cells.
+ * Will additionally handle a UIWrapContent if it
+ * is also present.
+ *
+ */
+
 using UnityEngine;
 
 public class UIFullScreenGrid : MonoBehaviour {

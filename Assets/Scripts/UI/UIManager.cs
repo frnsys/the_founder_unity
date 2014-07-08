@@ -1,3 +1,13 @@
+/*
+ * UIManager
+ * ================
+ *
+ * Handles persistent UI elements, such
+ * as the menu, manages popups, and coordinates
+ * other UI elements.
+ *
+ */
+
 using UnityEngine;
 using System.Collections;
 
@@ -6,19 +16,10 @@ public class UIManager : MonoBehaviour {
 
     public GameObject menu;
     public GameObject closeButton;
-
-    // Currently open popup.
-    private GameObject popup;
+    private GameObject currentPopup;
 
     void OnEnable() {
         gm = GameManager.Instance;
-    }
-
-    void Update() {
-    }
-
-    public void TestLog() {
-        Debug.Log("CLICKED");
     }
 
     public void ToggleMenu() {
@@ -30,23 +31,23 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ShowNewProductFlow() {
-        OpenPopup("UI/Products/New Product Selection");
+        OpenPopup("UI/Products/New Product Popup");
     }
 
     public void ShowHireWorker() {
-        OpenPopup("UI/Workers/Hire Workers");
+        OpenPopup("UI/Workers/Hire Worker Popup");
     }
 
     public void OpenPopup(string popupPrefabPath) {
         GameObject popupPrefab = Resources.Load(popupPrefabPath) as GameObject;
-        popup = NGUITools.AddChild(gameObject, popupPrefab);
+        currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
         closeButton.SetActive(true);
         menu.SetActive(false);
     }
 
     public void ClosePopup() {
-        NGUITools.DestroyImmediate(popup);
-        popup = null;
+        NGUITools.DestroyImmediate(currentPopup);
+        currentPopup = null;
         closeButton.SetActive(false);
     }
 }
