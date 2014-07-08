@@ -11,12 +11,16 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : Singleton<UIManager> {
     private GameManager gm;
 
     public GameObject menu;
     public GameObject closeButton;
     private GameObject currentPopup;
+
+    void Awake() {
+        DontDestroyOnLoad(gameObject);
+    }
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -30,16 +34,7 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    public void ShowNewProductFlow() {
-        OpenPopup("UI/Products/New Product Popup");
-    }
-
-    public void ShowHireWorker() {
-        OpenPopup("UI/Workers/Hire Worker Popup");
-    }
-
-    public void OpenPopup(string popupPrefabPath) {
-        GameObject popupPrefab = Resources.Load(popupPrefabPath) as GameObject;
+    public void OpenPopup(GameObject popupPrefab) {
         currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
         closeButton.SetActive(true);
         menu.SetActive(false);
