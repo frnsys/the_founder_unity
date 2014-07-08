@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using SimpleJSON;
 
 public interface IProduct {
     void Develop(float newProgress, float charisma, float creativity, float cleverness);
@@ -17,8 +16,9 @@ public class Product : HasStats, IProduct {
         RETIRED
     }
 
-    // Cache the product names and interactions.
-    private static JSONClass productNames;
+    // For generating product names.
+    private static string[] prefixes;
+    private static string[] endings;
 
     public string name;
 
@@ -86,17 +86,18 @@ public class Product : HasStats, IProduct {
     // Create a random stupid product name.
     private string GenerateName() {
         // Load product name data if necessary.
-        if (productNames == null) {
-            TextAsset pN = Resources.Load("ProductNames") as TextAsset;
-            productNames = JSON.Parse(pN.text).AsObject;
+        if (prefixes == null) {
+            TextAsset prefixes_ = Resources.Load("Products/Names/Endings") as TextAsset;
+            prefixes = prefixes_.text.Split(new string[] { System.Environment.NewLine }, System.StringSplitOptions.None);
+        }
+        if (endings == null) {
+            TextAsset endings_ = Resources.Load("Products/Names/Prefixes") as TextAsset;
+            endings = endings_.text.Split(new string[] { System.Environment.NewLine }, System.StringSplitOptions.None);
         }
 
-        JSONArray fodder = productNames["fodder"].AsArray;
-        JSONArray endings = productNames["endings"].AsArray;
-
-        string beginning = fodder[Random.Range(0, fodder.Count)];
-        string middle = fodder[Random.Range(0, fodder.Count)];
-        string end = endings[Random.Range(0, endings.Count)];
+        string beginning = prefixes[Random.Range(0, prefixes.Length-1)];
+        string middle = prefixes[Random.Range(0, prefixes.Length-1)];
+        string end = endings[Random.Range(0, endings.Length-1)];
         beginning = beginning[0].ToString().ToUpper() + beginning.Substring(1);
         return beginning + middle + end;
     }
