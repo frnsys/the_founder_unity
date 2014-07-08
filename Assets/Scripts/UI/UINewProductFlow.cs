@@ -40,12 +40,6 @@ public class UINewProductFlow : MonoBehaviour {
 
         gridCenter.onFinished = OnCenter;
 
-        // These labels are hidden at start.
-        productTypeLabel.gameObject.SetActive(false);
-        industryLabel.gameObject.SetActive(false);
-        marketLabel.gameObject.SetActive(false);
-        completedScreen.gameObject.SetActive(false);
-
         LoadProductTypes();
     }
 
