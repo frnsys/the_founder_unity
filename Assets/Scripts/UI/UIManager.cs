@@ -30,13 +30,18 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ShowNewProductFlow() {
-        GameObject newProductFlow = Resources.Load("UI/Products/New Product Selection") as GameObject;
-        popup = NGUITools.AddChild(gameObject, newProductFlow);
-        closeButton.SetActive(true);
+        OpenPopup("UI/Products/New Product Selection");
     }
 
     public void ShowHireWorker() {
-        // to do
+        OpenPopup("UI/Workers/Hire Workers");
+    }
+
+    public void OpenPopup(string popupPrefabPath) {
+        GameObject popupPrefab = Resources.Load(popupPrefabPath) as GameObject;
+        popup = NGUITools.AddChild(gameObject, popupPrefab);
+        closeButton.SetActive(true);
+        menu.SetActive(false);
     }
 
     public void ClosePopup() {

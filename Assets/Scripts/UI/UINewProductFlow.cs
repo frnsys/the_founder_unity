@@ -107,8 +107,7 @@ public class UINewProductFlow : MonoBehaviour {
                 // TEMPORARY, this has bad performance.
                 UIRoot.Broadcast("UpdateDevelopingProducts");
 
-                // Destroy self.
-                NGUITools.DestroyImmediate(gameObject);
+                UIRoot.Broadcast("ClosePopup");
                 break;
         }
     }
