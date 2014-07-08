@@ -15,7 +15,15 @@ public class UIProduct: MonoBehaviour {
     public UILabel progress;
 
     void Update() {
-        progress.text = ((int)(product.progress)).ToString();
+        switch(product.state) {
+            case Product.State.DEVELOPMENT:
+                progress.text = ((int)(product.progress)).ToString();
+                break;
+
+            case Product.State.LAUNCHED:
+                progress.text = "$" + ((int)(product.revenueEarned)).ToString();
+                break;
+        }
     }
 }
 

@@ -67,6 +67,14 @@ public class Company : HasStats {
         }
     }
 
+    public void HarvestProducts(float elapsedTime) {
+        List<Product> launched = products.FindAll(p => p.state == Product.State.LAUNCHED);
+
+        foreach (Product product in launched) {
+            cash.baseValue += product.Revenue(elapsedTime);
+        }
+    }
+
     public void DevelopProduct(IProduct product) {
         float charisma = 0;
         float creativity = 0;

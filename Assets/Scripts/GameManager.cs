@@ -69,10 +69,12 @@ public class GameManager : Singleton<GameManager> {
 
     void Start() {
 
-        StartCoroutine(Daily());
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
         StartCoroutine(Yearly());
+
+        StartCoroutine(ProductDevelopmentCycle());
+        StartCoroutine(ProductRevenueCycle());
 
         //Debug.Log(gameEvents.Count);
         //Debug.Log(System.Guid.NewGuid());
@@ -118,7 +120,7 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    IEnumerator Daily() {
+    IEnumerator ProductDevelopmentCycle() {
         yield return new WaitForSeconds(weekTime/14);
         while(true) {
             playerCompany.DevelopProducts();
@@ -126,6 +128,18 @@ public class GameManager : Singleton<GameManager> {
             // Add a bit of randomness to give things
             // a more "natural" feel.
             yield return new WaitForSeconds(weekTime/14 * Random.Range(0.4f, 1.4f));
+        }
+    }
+
+    IEnumerator ProductRevenueCycle() {
+        yield return new WaitForSeconds(weekTime/14);
+        while(true) {
+            float elapsedTime = weekTime/14 * Random.Range(0.4f, 1.4f);
+            playerCompany.HarvestProducts(elapsedTime);
+
+            // Add a bit of randomness to give things
+            // a more "natural" feel.
+            yield return new WaitForSeconds(elapsedTime);
         }
     }
 

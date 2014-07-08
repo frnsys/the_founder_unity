@@ -102,7 +102,7 @@ namespace UnityTest
             IProduct p = Substitute.For<IProduct>();
             c.DevelopProduct(p);
 
-            p.Received().Develop(10, 10, 10, 10);
+            p.Received().Develop(Arg.Any<float>(), Arg.Any<float>(), Arg.Any<float>(), Arg.Any<float>());
         }
 
         [Test]

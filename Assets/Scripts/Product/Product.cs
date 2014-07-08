@@ -36,6 +36,9 @@ public class Product : HasStats, IProduct {
     // combination does.
     private ProductRecipe recipe;
 
+    private float timeSinceLaunch = 0;
+    public float revenueEarned = 0;
+
     // Maximum revenue you can make off this product.
     private float peakRevenuePercent;
     private float endFuncAdjustment;
@@ -219,8 +222,10 @@ public class Product : HasStats, IProduct {
         _state = State.LAUNCHED;
     }
 
-    public float Revenue(float time) {
+    public float Revenue(float elapsedTime) {
         //time /= 3600; // adjusting time scale
+
+        timeSinceLaunch += elapsedTime;
 
         float revenuePercent = 0;
         if (state == State.LAUNCHED) {
@@ -231,15 +236,15 @@ public class Product : HasStats, IProduct {
             float event_c = 0;
 
             // Start
-            if (time < start_mu) {
-                revenuePercent = Gaussian(time, start_mu, start_sd);
+            if (timeSinceLaunch < start_mu) {
+                revenuePercent = Gaussian(timeSinceLaunch, start_mu, start_sd);
                 //Debug.Log("START FUNC");
 
             // End
-            } else if (time > end_mu) {
-                // We apply an extra downward weight at the end (0.05f*time)
+            } else if (timeSinceLaunch > end_mu) {
+                // We apply an extra downward weight at the end (0.05f*timeSinceLaunch)
                 // to ensure that the end function eventually intersects the x-axis (reaches 0).
-                revenuePercent = Gaussian(time, end_mu, end_sd) + endFuncAdjustment - (0.05f * time);
+                revenuePercent = Gaussian(timeSinceLaunch, end_mu, end_sd) + endFuncAdjustment - (0.05f * timeSinceLaunch);
                 //Debug.Log("END FUNC");
 
             // Plateau
@@ -257,7 +262,10 @@ public class Product : HasStats, IProduct {
 
         // Revenue cannot be negative.
         // Random multiplier for some slight variance.
-        return System.Math.Max(0, revenuePercent * recipe.maxRevenue * Random.Range(0.95f, 1.05f));
+        float revenue = System.Math.Max(0, revenuePercent * recipe.maxRevenue * Random.Range(0.95f, 1.05f));
+
+        revenueEarned += revenue;
+        return revenue;
     }
     private float Gaussian(float x, float mean, float sd) {
         return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );

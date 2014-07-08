@@ -50,9 +50,9 @@ namespace UnityTest
             Assert.AreEqual(p.usability.value, 0);
             Assert.AreEqual(p.performance.value, 0);
 
-            p.Develop(1000, 5, 15, 25);
+            p.Develop(100000, 5, 15, 25);
 
-            Assert.AreEqual(p.progress, 1000);
+            Assert.AreEqual(p.progress, 100000);
             Assert.AreEqual(p.appeal.value, (5+15)/2);
             Assert.AreEqual(p.usability.value, (25+5)/2);
             Assert.AreEqual(p.performance.value, (15+25)/2);
