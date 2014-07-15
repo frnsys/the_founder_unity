@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 public class Company : HasStats {
-    public string name;
     public int sizeLimit = 10;
     public Stat cash = new Stat("Cash", 100000);
 

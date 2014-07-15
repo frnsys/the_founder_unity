@@ -28,7 +28,7 @@ public class ProductRecipe : ScriptableObject {
 
     public List<string> outcomes = new List<string>();
 
-    public string ToString() {
+    public override string ToString() {
         return productType.ToString() + "." + industry.ToString() + "." + market.ToString();
     }
 

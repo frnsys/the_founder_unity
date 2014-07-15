@@ -21,7 +21,7 @@ public class GameEvent : ScriptableObject {
         return theseAreHappening;
     }
 
-    public string name;
+    public string description;
     public Stat probability;
     public List<GameEffect> effects = new List<GameEffect>();
 

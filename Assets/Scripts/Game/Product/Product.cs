@@ -20,8 +20,6 @@ public class Product : HasStats, IProduct {
     private static string[] prefixes;
     private static string[] endings;
 
-    public string name;
-
     private float _progress = 0;
     public float progress {
         get { return _progress; }

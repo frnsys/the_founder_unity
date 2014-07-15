@@ -6,6 +6,6 @@ using System.Collections.Generic;
 public class GameEventAsset {
     [MenuItem("Assets/Create/GameEvent")]
     public static void CreateAsset() {
-        GameEvent gameEvent = CustomAssetUtility.CreateAsset<GameEvent>();
+        CustomAssetUtility.CreateAsset<GameEvent>();
     }
 }

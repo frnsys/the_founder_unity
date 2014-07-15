@@ -18,12 +18,19 @@ public class UIManager : Singleton<UIManager> {
     public GameObject closeButton;
     private GameObject currentPopup;
 
+    public GameObject gameEventNotificationPrefab;
+
     void Awake() {
         DontDestroyOnLoad(gameObject);
     }
 
     void OnEnable() {
         gm = GameManager.Instance;
+
+        // Testing: create a game event notification.
+        UIGameEventNotification gameEventNotification = NGUITools.AddChild(gameObject, gameEventNotificationPrefab).GetComponent<UIGameEventNotification>();
+        GameEvent e = Resources.Load("GameEvents/You Rule The World") as GameEvent;
+        gameEventNotification.gameEvent = e;
     }
 
     public void ToggleMenu() {

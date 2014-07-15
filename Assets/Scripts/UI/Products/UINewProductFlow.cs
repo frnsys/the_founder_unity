@@ -19,8 +19,10 @@ public class UINewProductFlow : MonoBehaviour {
         MARKET,
         COMPLETE
     }
+    // Begin on Product Type selection.
     private Aspect aspect = Aspect.PRODUCTTYPE;
 
+    // Lots of UI elements we will be managing...
     public UILabel aspectLabel;
     public UITexture background;
     public UICenterOnChild gridCenter;
@@ -30,14 +32,22 @@ public class UINewProductFlow : MonoBehaviour {
     public UILabel selectLabel;
     public UIWidget completedScreen;
 
+    // The prefab for all product aspects.
     public GameObject productAspectPrefab;
 
+    // Keep track of the selected product aspects.
     private ProductType productType;
     private Industry industry;
     private Market market;
+
+    // These labels are used to display
+    // the user's current selections.
     public UILabel productTypeLabel;
     public UILabel industryLabel;
     public UILabel marketLabel;
+
+    // These display the user's selections
+    // on the final confirmation screen.
     public UILabel finalProductTypeLabel;
     public UILabel finalIndustryLabel;
     public UILabel finalMarketLabel;
@@ -52,6 +62,8 @@ public class UINewProductFlow : MonoBehaviour {
     }
 
     private void OnCenter() {
+        // Re-enable the select button
+        // when centering the item after a swipe is complete.
         selectButton.isEnabled = true;
     }
 
@@ -165,7 +177,10 @@ public class UINewProductFlow : MonoBehaviour {
         NGUITools.DestroyImmediate(grid.gameObject.GetComponent<UIWrapContent>());
         UIWrapContent wrapper = grid.gameObject.AddComponent<UIWrapContent>();
 
+        // Disable culling since it screws up the grid's layout.
         wrapper.cullContent = false;
+
+        // The wrapper's item width is the same as the grid's cell width, duh
         wrapper.itemSize = (int)grid.cellWidth;
     }
 }

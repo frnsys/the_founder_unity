@@ -66,6 +66,10 @@ internal class GameEventInspector : Editor {
 
     public override void OnInspectorGUI() {
         ge.name = EditorGUILayout.TextField("Name", ge.name);
+
+        EditorGUILayout.LabelField("Description");
+        ge.description = EditorGUILayout.TextArea(ge.description, GUILayout.Height(50));
+
         ge.probability.baseValue = EditorGUILayout.FloatField("Probability", ge.probability.baseValue);
         ge.probability.baseValue = Mathf.Clamp(ge.probability.baseValue, 0, 1);
 
@@ -101,11 +105,9 @@ internal class GameEventInspector : Editor {
                     }
                     EditorGUILayout.EndHorizontal();
                 }
-                BeginCenter();
                 if (GUILayout.Button("Add New Product Type", GUILayout.ExpandWidth(false))) {
                     e.productTypes.Add(productTypes[0]);
                 }
-                EndCenter();
                 EditorGUI.indentLevel -= 1;
                 EditorGUILayout.Space();
 
@@ -123,11 +125,9 @@ internal class GameEventInspector : Editor {
                     }
                     EditorGUILayout.EndHorizontal();
                 }
-                BeginCenter();
                 if (GUILayout.Button("Add New Industry", GUILayout.ExpandWidth(false))) {
                     e.industries.Add(industries[0]);
                 }
-                EndCenter();
                 EditorGUI.indentLevel -= 1;
                 EditorGUILayout.Space();
 
@@ -145,11 +145,9 @@ internal class GameEventInspector : Editor {
                     }
                     EditorGUILayout.EndHorizontal();
                 }
-                BeginCenter();
                 if (GUILayout.Button("Add New Market", GUILayout.ExpandWidth(false))) {
                     e.markets.Add(markets[0]);
                 }
-                EndCenter();
                 EditorGUI.indentLevel -= 1;
 
                 // Product Buffs
@@ -204,23 +202,10 @@ internal class GameEventInspector : Editor {
             }
             EditorGUILayout.EndHorizontal();
         }
-        BeginCenter();
         if (GUILayout.Button("Add New " + name + " Buff", GUILayout.ExpandWidth(false))) {
             buffs.Add(new StatBuff(stats[key][0], 0));
         }
-        EndCenter();
         EditorGUI.indentLevel -= 1;
-        EditorGUILayout.Space();
-    }
-
-    private void BeginCenter() {
-        EditorGUILayout.Space();
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-    }
-    private void EndCenter() {
-        GUILayout.FlexibleSpace();
-        EditorGUILayout.EndHorizontal();
         EditorGUILayout.Space();
     }
 }

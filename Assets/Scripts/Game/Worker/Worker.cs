@@ -18,7 +18,6 @@ public class Worker : HasStats {
 
     public WorkerType type;
 
-    public string name;
     public float salary;
 
     public Stat happiness;

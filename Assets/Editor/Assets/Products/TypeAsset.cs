@@ -6,6 +6,6 @@ using System.Collections.Generic;
 public class ProductTypeAsset {
     [MenuItem("Assets/Create/ProductType")]
     public static void CreateAsset() {
-        ProductType asset = CustomAssetUtility.CreateAsset<ProductType>();
+        CustomAssetUtility.CreateAsset<ProductType>();
     }
 }

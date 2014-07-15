@@ -14,6 +14,7 @@ internal class IndustryInspector : Editor {
 
         EditorGUILayout.LabelField("Industry");
         p.name = EditorGUILayout.TextField("Name", p.name);
+        EditorGUILayout.LabelField("Description");
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
 
         // Let Unity know to save on changes.

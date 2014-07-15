@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Item : ScriptableObject {
-    public string name;
     public float cost = 1000;
     public float duration = 0;
 
