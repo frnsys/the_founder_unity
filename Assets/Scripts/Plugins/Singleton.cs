@@ -1,8 +1,9 @@
 // http://wiki.unity3d.com/index.php/Toolbox
 
 using UnityEngine;
+using FullInspector;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
+public class Singleton<T> : BaseBehavior<BinaryFormatterSerializer> where T : BaseBehavior<BinaryFormatterSerializer> {
 
     private static T _instance;
     private static object _lock = new object();
@@ -30,6 +31,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
                         DontDestroyOnLoad(singleton);
 
                         Debug.Log("[Singleton] An instance of " + typeof(T) + " is needed in the scene, so " + singleton + " was created with DontDestroyOnLoad.");
+                        Debug.Log("Note that this creation does NOT use a prefab, so if you have a particular configuration for the singleton as part of a prefab, you must instead load that yourself.");
                     } else {
                         Debug.Log("[Singleton] Using instance already created: " + _instance.gameObject.name);
                     }

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Item : ScriptableObject {
+public class Item : ScriptableObject, IUnlockable {
     public float cost = 1000;
     public float duration = 0;
 
@@ -21,6 +21,18 @@ public class Item : ScriptableObject {
         productTypes = productTypes_;
         markets = markets_;
     }
+
+    #region IUnlockable implementation
+    private bool unlocked = false;
+    public bool Unlocked {
+        get {
+            return unlocked;
+        }
+        set {
+            unlocked = value;
+        }
+    }
+    #endregion
 }
 
 

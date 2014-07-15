@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-public class Company : HasStats {
+public class Company : HasStats, IUnlockable {
     public int sizeLimit = 10;
     public Stat cash = new Stat("Cash", 100000);
 
@@ -138,16 +138,10 @@ public class Company : HasStats {
         }
     }
 
-    public void ApplyEffect(GameEffect effect) {
-        foreach (Worker worker in workers) {
-            worker.ApplyBuffs(effect.workerBuffs);
-        }
-
-        ApplyBuffs(effect.companyBuffs);
-
+    public void ApplyProductEffect(ProductEffect effect) {
         List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
         foreach (Product product in matchingProducts) {
-            product.ApplyBuffs(effect.productBuffs);
+            product.ApplyBuffs(effect.buffs);
         }
     }
 
@@ -175,6 +169,17 @@ public class Company : HasStats {
         }
     }
 
+    #region IUnlockable implementation
+    private bool unlocked = false;
+    public bool Unlocked {
+        get {
+            return unlocked;
+        }
+        set {
+            unlocked = value;
+        }
+    }
+    #endregion
 }
 
 

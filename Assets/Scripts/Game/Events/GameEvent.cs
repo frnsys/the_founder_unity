@@ -1,9 +1,10 @@
 using UnityEngine;
+using FullInspector;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class GameEvent : ScriptableObject {
+public class GameEvent : BaseScriptableObject<BinaryFormatterSerializer>, IUnlockable {
 
     // Roll to see what events happen, out of a set of specified
     // candidate events.
@@ -22,8 +23,13 @@ public class GameEvent : ScriptableObject {
     }
 
     public string description;
+
     public Stat probability;
-    public List<GameEffect> effects = new List<GameEffect>();
+
+    public List<ProductEffect> productEffects = new List<ProductEffect>();
+    public List<IUnlockable> unlocks = new List<IUnlockable>();
+    public List<StatBuff> workerEffects = new List<StatBuff>();
+    public List<StatBuff> companyEffects = new List<StatBuff>();
 
     public GameEvent(string name_, float probability_) {
         name = name_;
@@ -35,16 +41,27 @@ public class GameEvent : ScriptableObject {
     }
 
     // An event which is broadcast for each event effect.
-    public event System.Action<GameEffect> EffectEvent;
+    public event System.Action<GameEvent> EventTriggered;
     public void Trigger() {
         // If there are subscribers to this event...
-        if (EffectEvent != null) {
-            foreach (GameEffect effect in effects) {
-                // Broadcast the event with the effect.
-                EffectEvent(effect);
-            }
+        if (EventTriggered != null) {
+            // Broadcast the event.
+            EventTriggered(this);
         }
     }
+
+    #region IUnlockable implementation
+    [HideInInspector]
+    public bool Unlocked {
+        get {
+            return unlocked;
+        }
+        set {
+            unlocked = value;
+        }
+    }
+    private bool unlocked = false;
+    #endregion
 }
 
 
