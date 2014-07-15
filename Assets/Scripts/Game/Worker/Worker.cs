@@ -9,7 +9,7 @@ public enum WorkerType {
     StarSystem
 }
 
-public class Worker : HasStats {
+public class Worker : HasStats, IUnlockable {
     public static List<Worker> LoadAll(WorkerType type) {
         return new List<Worker>(Resources.LoadAll<Worker>("Workers/" + type + "s"));
     }
@@ -80,6 +80,18 @@ public class Worker : HasStats {
                 return null;
         }
     }
+
+    #region IUnlockable implementation
+    private bool unlocked = false;
+    public bool Unlocked {
+        get {
+            return unlocked;
+        }
+        set {
+            unlocked = value;
+        }
+    }
+    #endregion
 }
 
 
