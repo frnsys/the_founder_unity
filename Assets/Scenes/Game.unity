@@ -321,7 +321,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 78551336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -135.218292, y: -240, z: 0}
+  m_LocalPosition: {x: -134.901962, y: -240, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 440856356}
@@ -404,7 +404,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 127671518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .997912109, y: -.997924745, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.00001299, y: 1.00001299, z: 1.00001299}
   m_Children:
   - {fileID: 1513043833}
@@ -449,7 +449,7 @@ MonoBehaviour:
   startingRenderQueue: 3003
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: -.997909546, y: -449.002075, z: 500.873169, w: 60}
+  mClipRange: {x: 0, y: -450, z: 499.607849, w: 60}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 200
   mSortingOrder: 0
@@ -527,7 +527,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189669549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -179.434479, y: -454, z: 0}
+  m_LocalPosition: {x: -177.803909, y: -454, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children:
   - {fileID: 893560091}
@@ -1937,12 +1937,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
       propertyPath: _serializedStateValues.Array.data[0]
-      value: '[0]'
+      value: AAEAAAD/////AQAAAAAAAAAMAgAAAA9Bc3NlbWJseS1DU2hhcnAEAQAAAHhTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW0lVbmxvY2thYmxlLCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsXV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAA1JVW5sb2NrYWJsZVtdAgAAAAgICQMAAAABAAAAAQAAAAcDAAAAAAEAAAAEAAAABAtJVW5sb2NrYWJsZQIAAAAJBAAAAA0DBQQAAAAISW5kdXN0cnkBAAAAAmlkAAgCAAAAAAAAAAs=
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
       propertyPath: _objectReferences.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: eccd5bebd526c45f2b8ff1a0c9dcfbef,
+      objectReference: {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
@@ -1972,7 +1972,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513043832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.997894287, y: -449.002075, z: 0}
+  m_LocalPosition: {x: 0, y: -450, z: 0}
   m_LocalScale: {x: .999986947, y: .999986947, z: .999986947}
   m_Children: []
   m_Father: {fileID: 127671519}
@@ -2007,7 +2007,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 501
+  mWidth: 500
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -2062,7 +2062,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1545792663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 135.218292, y: 0, z: 0}
+  m_LocalPosition: {x: 134.901962, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2031260218}
@@ -2389,7 +2389,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .21960783, g: .967707813, b: 1, a: 1}
   mPivot: 4
-  mWidth: 541
+  mWidth: 540
   mHeight: 960
   mDepth: -2
   autoResizeBoxCollider: 0
@@ -2792,11 +2792,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences:
-  - {fileID: 11400000, guid: eccd5bebd526c45f2b8ff1a0c9dcfbef, type: 2}
+  - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
   _serializedStateKeys:
   - unlocked
   _serializedStateValues:
-  - '[0]'
+  - AAEAAAD/////AQAAAAAAAAAMAgAAAA9Bc3NlbWJseS1DU2hhcnAEAQAAAHhTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW0lVbmxvY2thYmxlLCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsXV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAA1JVW5sb2NrYWJsZVtdAgAAAAgICQMAAAABAAAAAQAAAAcDAAAAAAEAAAAEAAAABAtJVW5sb2NrYWJsZQIAAAAJBAAAAA0DBQQAAAAISW5kdXN0cnkBAAAAAmlkAAgCAAAAAAAAAAs=
   playerCompany: {fileID: 0}
   week: 0
 --- !u!4 &2094439594

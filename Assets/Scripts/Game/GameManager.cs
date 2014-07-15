@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager> {
     protected GameManager() {}
 
     [HideInInspector]
-    public Company playerCompany = new Company("THWON");
+    public Company playerCompany;
 
 
     private int weekTime = 15;
@@ -77,10 +77,13 @@ public class GameManager : Singleton<GameManager> {
         base.Awake();
         DontDestroyOnLoad(gameObject);
         LoadResources();
+
+        if (playerCompany == null) {
+            playerCompany = new Company("Foobar Inc");
+        }
     }
 
     void Start() {
-
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
         StartCoroutine(Yearly());
