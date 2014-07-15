@@ -157,19 +157,29 @@ public class GameManager : Singleton<GameManager> {
         candidateEvents.Add(gameEvent);
 
         // Subscribe to its effect events.
-        gameEvent.EffectEvent += OnEffect;
+        gameEvent.EventTriggered += OnEvent;
     }
 
     void DisableEvent(GameEvent gameEvent) {
         if (candidateEvents.Contains(gameEvent)) {
             // Unsubscribe and remove.
-            gameEvent.EffectEvent -= OnEffect;
+            gameEvent.EventTriggered -= OnEvent;
             candidateEvents.Remove(gameEvent);
         }
     }
 
-    void OnEffect(GameEffect effect) {
-        playerCompany.ApplyEffect(effect);
+    void OnEvent(GameEvent e) {
+        playerCompany.ApplyBuffs(e.companyEffects);
+
+        foreach (Worker worker in playerCompany.workers) {
+            worker.ApplyBuffs(e.workerEffects);
+        }
+
+        foreach (ProductEffect pe in e.productEffects) {
+            playerCompany.ApplyProductEffect(pe);
+        }
+
+        // TO DO implement unlocks.
     }
 }
 

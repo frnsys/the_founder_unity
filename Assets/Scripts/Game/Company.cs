@@ -138,16 +138,10 @@ public class Company : HasStats {
         }
     }
 
-    public void ApplyEffect(GameEffect effect) {
-        foreach (Worker worker in workers) {
-            worker.ApplyBuffs(effect.workerBuffs);
-        }
-
-        ApplyBuffs(effect.companyBuffs);
-
+    public void ApplyProductEffect(ProductEffect effect) {
         List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
         foreach (Product product in matchingProducts) {
-            product.ApplyBuffs(effect.productBuffs);
+            product.ApplyBuffs(effect.buffs);
         }
     }
 

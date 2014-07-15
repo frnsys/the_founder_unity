@@ -10,11 +10,10 @@ using System.Linq;
 internal class GameEventInspector : Editor {
 
     Dictionary<string, bool> foldouts = new Dictionary<string, bool> {
-        {"effects", true},
-        {"product", true},
-        {"worker", true},
-        {"company", true},
-        {"economy", true}
+        {"productEffects", true},
+        {"workerEffects", true},
+        {"companyEffects", true},
+        {"unlockEffects", true}
     };
 
     Dictionary<string, string[]> stats = new Dictionary<string, string[]> {
@@ -51,6 +50,9 @@ internal class GameEventInspector : Editor {
     List<Market> markets;
     string[] m_o;
 
+    List<IUnlockable> unlockables;
+    string[] u_o;
+
     void OnEnable() {
         ge = target as GameEvent;
 
@@ -62,6 +64,10 @@ internal class GameEventInspector : Editor {
 
         markets = Market.LoadAll();
         m_o = markets.Select(j => j.ToString()).ToArray();
+
+        object[] uns = Resources.LoadAll("", typeof(IUnlockable));
+        unlockables = new List<IUnlockable>(Array.ConvertAll(uns, i => (IUnlockable)i));
+        u_o = unlockables.Select(j => j.ToString()).ToArray();
     }
 
     public override void OnInspectorGUI() {
@@ -73,26 +79,60 @@ internal class GameEventInspector : Editor {
         ge.probability.baseValue = EditorGUILayout.FloatField("Probability", ge.probability.baseValue);
         ge.probability.baseValue = Mathf.Clamp(ge.probability.baseValue, 0, 1);
 
-        foldouts["effects"] = EditorGUILayout.Foldout(foldouts["effects"], "Effects");
-        if (foldouts["effects"]) {
+        // Worker Effects
+        EditorGUI.indentLevel = 0;
+        foldouts["workerEffects"] = EditorGUILayout.Foldout(foldouts["workerEffects"], "Worker Effects");
+        if (foldouts["workerEffects"]) {
             EditorGUI.indentLevel = 1;
 
-            for (int i=0; i < ge.effects.Count; i++) {
-                GameEffect e = ge.effects[i];
+            if (ge.workerEffects == null) {
+                ge.workerEffects = new List<StatBuff>();
+            }
+
+            // Worker Buffs
+            BuffFields("Worker", ge.workerEffects);
+        }
+
+        // Company Effects
+        EditorGUI.indentLevel = 0;
+        foldouts["companyEffects"] = EditorGUILayout.Foldout(foldouts["companyEffects"], "Company Effects");
+        if (foldouts["companyEffects"]) {
+            EditorGUI.indentLevel = 1;
+
+            if (ge.companyEffects == null) {
+                ge.companyEffects = new List<StatBuff>();
+            }
+
+            // Company Buffs
+            BuffFields("Company", ge.companyEffects);
+        }
+
+
+        // Product Effects
+        EditorGUI.indentLevel = 0;
+        foldouts["productEffects"] = EditorGUILayout.Foldout(foldouts["productEffects"], "Product Effects");
+        if (foldouts["productEffects"]) {
+            EditorGUI.indentLevel = 1;
+
+            if (ge.productEffects == null) {
+                ge.productEffects = new List<ProductEffect>();
+            }
+
+            for (int i=0; i < ge.productEffects.Count; i++) {
+                ProductEffect e = ge.productEffects[i];
 
                 // Deletion
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("An Effect");
+                EditorGUILayout.LabelField("A Product Effect");
                 if (GUILayout.Button("Delete")) {
-                    ge.effects.Remove(e);
+                    ge.productEffects.Remove(e);
                 }
                 EditorGUILayout.EndHorizontal();
 
-                // Product Types
-                EditorGUILayout.LabelField("Product Effects");
                 EditorGUI.indentLevel += 1;
 
-                EditorGUILayout.LabelField("Product Types");
+                // Product Types
+                EditorGUILayout.LabelField("Affected Product Types");
                 EditorGUI.indentLevel += 1;
                 for (int j=0; j < e.productTypes.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
@@ -112,7 +152,7 @@ internal class GameEventInspector : Editor {
                 EditorGUILayout.Space();
 
                 // Industries
-                EditorGUILayout.LabelField("Industries");
+                EditorGUILayout.LabelField("Affected Industries");
                 EditorGUI.indentLevel += 1;
                 for (int j=0; j < e.industries.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
@@ -132,7 +172,7 @@ internal class GameEventInspector : Editor {
                 EditorGUILayout.Space();
 
                 // Markets
-                EditorGUILayout.LabelField("Markets");
+                EditorGUILayout.LabelField("Affected Markets");
                 EditorGUI.indentLevel += 1;
                 for (int j=0; j < e.markets.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
@@ -151,44 +191,81 @@ internal class GameEventInspector : Editor {
                 EditorGUI.indentLevel -= 1;
 
                 // Product Buffs
-                BuffFields("Product", e.productBuffs);
+                EditorGUILayout.LabelField("Product Buffs");
+                BuffFields("Product", e.buffs);
                 EditorGUILayout.Space();
+
                 EditorGUI.indentLevel -= 1;
-
-
-                // Worker Buffs
-                BuffFields("Worker", e.workerBuffs);
-
-                // Company Buffs
-                BuffFields("Company", e.companyBuffs);
             }
 
 
-            // New Effect
-            if (GUILayout.Button("Add New Effect")) {
-                ge.effects.Add(new GameEffect());
+            // New Product Effect
+            if (GUILayout.Button("Add New Product Effect")) {
+                ge.productEffects.Add(new ProductEffect());
                 EditorUtility.SetDirty(target);
             }
+        }
 
-            if (GUI.changed) {
-                EditorUtility.SetDirty(target);
 
-                string path = AssetDatabase.GetAssetPath(target);
-                string name = Path.GetFileNameWithoutExtension(path);
-                if (name != ge.name) {
-                    AssetDatabase.RenameAsset(path, ge.name);
-                    AssetDatabase.Refresh();
+        // Unlock Effects
+        EditorGUI.indentLevel = 0;
+        foldouts["unlockEffects"] = EditorGUILayout.Foldout(foldouts["unlockEffects"], "Unlock Effects");
+        if (foldouts["unlockEffects"]) {
+            EditorGUI.indentLevel = 1;
+
+            if (ge.unlocks == null) {
+                ge.unlocks = new List<IUnlockable>();
+            }
+
+            for (int i=0; i < ge.unlocks.Count; i++) {
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField("A Unlock Effect");
+
+                IUnlockable e = ge.unlocks[i];
+                int u_i = EditorGUILayout.Popup(Array.IndexOf(u_o, e.ToString()), u_o);
+                ge.unlocks[i] = unlockables[u_i];
+
+                // Deletion
+                if (GUILayout.Button("Delete")) {
+                    ge.unlocks.Remove(e);
+                }
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUI.indentLevel -= 1;
+                EditorGUILayout.Space();
+            }
+            EditorGUI.indentLevel -= 1;
+
+
+            // New Unlock Effect
+            if (unlockables.Count > 0) {
+                if (GUILayout.Button("Add New Unlock Effect")) {
+                    ge.unlocks.Add(unlockables[0]);
+                    EditorUtility.SetDirty(target);
                 }
             }
-
-            EditorGUI.indentLevel = 0;
         }
+
+
+
+
+        if (GUI.changed) {
+            EditorUtility.SetDirty(target);
+
+            string path = AssetDatabase.GetAssetPath(target);
+            string name = Path.GetFileNameWithoutExtension(path);
+            if (name != ge.name) {
+                AssetDatabase.RenameAsset(path, ge.name);
+                AssetDatabase.Refresh();
+            }
+        }
+
+        EditorGUI.indentLevel = 0;
     }
 
     private void BuffFields(string name, List<StatBuff> buffs) {
         string key = name.ToLower();
 
-        EditorGUILayout.LabelField(name + " Buffs");
         EditorGUI.indentLevel += 1;
 
         for (int j=0; j < buffs.Count; j++) {

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Some game event
+  m_EditorClassIdentifier: 
+  description: foobar
+  probability:
+    baseValue: .5
+  productEffects:
+  - productTypes:
+    - {fileID: 11400000, guid: 9bcc4eb93a3144a5ca8726047868cd35, type: 2}
+    industries:
+    - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
+    markets:
+    - {fileID: 11400000, guid: 46dd000f89fcd42efa1b0a683b9e2697, type: 2}
+    buffs:
+    - name: Appeal
+      value: 10000
+      duration: 0
+      type: 0
+  workerEffects:
+  - name: Happiness
+    value: 200
+    duration: 0
+    type: 0
+  - name: Cleverness
+    value: -40
+    duration: 0
+    type: 0
+  companyEffects:
+  - name: Cash
+    value: 10000
+    duration: 0
+    type: 0

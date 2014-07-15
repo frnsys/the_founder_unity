@@ -10,14 +10,14 @@ namespace UnityTest
     internal class TestEventListener
     {
         public GameEvent gameEvent;
-        public GameEffect effect;
+        public GameEvent triggeredEvent;
 
         public TestEventListener(GameEvent gameEvent) {
-            gameEvent.EffectEvent += OnEffect;
+            gameEvent.EventTriggered += OnEvent;
         }
 
-        void OnEffect(GameEffect e) {
-            effect = e;
+        void OnEvent(GameEvent e) {
+             triggeredEvent = e;
         }
     }
 
@@ -58,20 +58,17 @@ namespace UnityTest
         [Test]
         public void EffectEvents()
         {
-            // Add an effect to the event.
-            GameEffect effect = new GameEffect();
-            effect.companyBuffs.Add(new StatBuff("Cash", 1000f));
-            gE.effects.Add(effect);
+            gE.companyEffects.Add(new StatBuff("Cash", 1000f));
 
-            // Our test listener to listen for and capture the effect.
+            // Our test listener to listen for and capture the event.
             TestEventListener eL = new TestEventListener(gE);
 
-            // Trigger the event's effects.
+            // Trigger the event.
             gE.Trigger();
 
-            // Check if the effect was captured.
-            Assert.AreEqual(eL.effect, effect);
-            Assert.AreEqual(eL.effect.companyBuffs[0].value, 1000f);
+            // Check if the event was captured.
+            Assert.AreEqual(eL.triggeredEvent, gE);
+            Assert.AreEqual(eL.triggeredEvent.companyEffects[0].value, 1000f);
         }
     }
 }
