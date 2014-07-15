@@ -13,7 +13,6 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public Company playerCompany;
 
-
     private int weekTime = 15;
     private Month _month = Month.January;
     public string month {
@@ -90,9 +89,6 @@ public class GameManager : Singleton<GameManager> {
 
         StartCoroutine(ProductDevelopmentCycle());
         StartCoroutine(ProductRevenueCycle());
-
-        //Debug.Log(gameEvents.Count);
-        //Debug.Log(System.Guid.NewGuid());
     }
 
     void Update() {
