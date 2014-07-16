@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager> {
     // this must be a singleton.
     protected GameManager() {}
 
+    [HideInInspector]
     public Company playerCompany;
 
     private int weekTime = 15;
@@ -21,6 +22,7 @@ public class GameManager : Singleton<GameManager> {
     public int year {
         get { return 2014 + _year; }
     }
+    [HideInInspector]
     public int week = 0;
 
     private enum Month {
