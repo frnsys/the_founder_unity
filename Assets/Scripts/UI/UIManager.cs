@@ -26,11 +26,19 @@ public class UIManager : Singleton<UIManager> {
 
     void OnEnable() {
         gm = GameManager.Instance;
+        GameEvent.EventTriggered += OnEvent;
+    }
 
-        // Testing: create a game event notification.
+    void OnDisable() {
+        GameEvent.EventTriggered -= OnEvent;
+    }
+
+    void OnEvent(GameEvent e) {
         UIGameEventNotification gameEventNotification = NGUITools.AddChild(gameObject, gameEventNotificationPrefab).GetComponent<UIGameEventNotification>();
-        GameEvent e = Resources.Load("GameEvents/You Rule The World") as GameEvent;
         gameEventNotification.gameEvent = e;
+
+        // Pause
+        Time.timeScale = 0;
     }
 
     public void ToggleMenu() {

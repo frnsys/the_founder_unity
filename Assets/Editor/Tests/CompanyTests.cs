@@ -27,7 +27,6 @@ namespace UnityTest
             gameObj = new GameObject("Game Manager");
             gameObj.AddComponent<GameManager>();
             gameManager = gameObj.GetComponent<GameManager>();
-            gameManager.LoadResources();
 
             c = new Company("Foo Inc");
             worker = new Worker("Franklin", 0, 0, 0, 0, 0);

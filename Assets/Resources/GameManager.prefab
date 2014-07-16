@@ -46,7 +46,9 @@ MonoBehaviour:
     industries: []
     markets: []
     workers: []
-    events: []
+    events:
+    - {fileID: 11400000, guid: 7f047f8f55c8d475ab1343ef297da99b, type: 2}
+    items: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

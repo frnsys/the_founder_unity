@@ -13,7 +13,7 @@ namespace UnityTest
         public GameEvent triggeredEvent;
 
         public TestEventListener(GameEvent gameEvent) {
-            gameEvent.EventTriggered += OnEvent;
+            GameEvent.EventTriggered += OnEvent;
         }
 
         void OnEvent(GameEvent e) {
@@ -43,18 +43,6 @@ namespace UnityTest
             Assert.AreEqual(gE.name, "Some event");
 		}
 
-		[Test]
-		public void EventRolling()
-		{
-            List<GameEvent> candidateEvents = new List<GameEvent>() {
-                gE
-            };
-
-            List<GameEvent> happeningEvents = GameEvent.Roll(candidateEvents);
-
-            Assert.AreEqual(happeningEvents[0].name, "Some event");
-		}
-
         [Test]
         public void EffectEvents()
         {
@@ -64,7 +52,7 @@ namespace UnityTest
             TestEventListener eL = new TestEventListener(gE);
 
             // Trigger the event.
-            gE.Trigger();
+            GameEvent.Trigger(gE);
 
             // Check if the event was captured.
             Assert.AreEqual(eL.triggeredEvent, gE);

@@ -7,18 +7,15 @@ public class GameEvent : ScriptableObject, IUnlockable {
 
     // Roll to see what events happen, out of a set of specified
     // candidate events.
-    public static List<GameEvent> Roll(List<GameEvent> candidateEvents) {
-        List<GameEvent> theseAreHappening = new List<GameEvent>();
-
+    public static void Roll(List<GameEvent> candidateEvents) {
         foreach (GameEvent gameEvent in candidateEvents) {
 
             // Does this event happen?
             if (Random.value < gameEvent.probability.value) {
-                theseAreHappening.Add(gameEvent);
+                Trigger(gameEvent);
             }
 
         }
-        return theseAreHappening;
     }
 
     public string description;
@@ -40,12 +37,12 @@ public class GameEvent : ScriptableObject, IUnlockable {
     }
 
     // An event which is broadcast for each event effect.
-    public event System.Action<GameEvent> EventTriggered;
-    public void Trigger() {
+    static public event System.Action<GameEvent> EventTriggered;
+    static public void Trigger(GameEvent ge) {
         // If there are subscribers to this event...
         if (EventTriggered != null) {
             // Broadcast the event.
-            EventTriggered(this);
+            EventTriggered(ge);
         }
     }
 }

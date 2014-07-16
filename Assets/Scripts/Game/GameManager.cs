@@ -42,9 +42,6 @@ public class GameManager : Singleton<GameManager> {
 
     public UnlockSet unlocked = new UnlockSet();
 
-    // A list of events which could possibly occur.
-    private List<GameEvent> candidateEvents = new List<GameEvent>();
-
     public void NewGame(string companyName) {
         playerCompany = new Company(companyName);
         Application.LoadLevel("Game");
@@ -60,11 +57,18 @@ public class GameManager : Singleton<GameManager> {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
-        LoadResources();
 
         if (playerCompany == null) {
             playerCompany = new Company("Foobar Inc");
         }
+    }
+
+    void OnEnable() {
+        GameEvent.EventTriggered += OnEvent;
+    }
+
+    void OnDisable() {
+        GameEvent.EventTriggered -= OnEvent;
     }
 
     void Start() {
@@ -121,6 +125,9 @@ public class GameManager : Singleton<GameManager> {
         while(true) {
             playerCompany.DevelopProducts();
 
+            // Temporarily placed here
+            GameEvent.Roll(unlocked.events);
+
             // Add a bit of randomness to give things
             // a more "natural" feel.
             yield return new WaitForSeconds(weekTime/14 * Random.Range(0.4f, 1.4f));
@@ -139,25 +146,6 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    public void LoadResources() {
-        List<GameEvent> gameEvents = new List<GameEvent>(Resources.LoadAll<GameEvent>("GameEvents"));
-    }
-
-    void EnableEvent(GameEvent gameEvent) {
-        // Add to candidates.
-        candidateEvents.Add(gameEvent);
-
-        // Subscribe to its effect events.
-        gameEvent.EventTriggered += OnEvent;
-    }
-
-    void DisableEvent(GameEvent gameEvent) {
-        if (candidateEvents.Contains(gameEvent)) {
-            // Unsubscribe and remove.
-            gameEvent.EventTriggered -= OnEvent;
-            candidateEvents.Remove(gameEvent);
-        }
-    }
 
     void OnEvent(GameEvent e) {
         playerCompany.ApplyBuffs(e.companyEffects);
