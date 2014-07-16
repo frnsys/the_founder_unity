@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEditorInternal;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,19 +9,52 @@ using System.Collections.Generic;
  * -------------------
  * This class makes it easier to deal with
  * Unity's PropertyDrawers and provides
- * a DrawList method for rendering lists of properties.
+ * a DrawList method for rendering lists of properties,
+ * and a DrawReorderableList method for rendering lists of properties
+ * using UnityEditorInternal.ReorderableList.
  *
- * It's not as slick as the undocumented UnityEditorInternal.ReorderableList,
- * but does fine and is easier to use.
+ * DrawList is not as slick as the undocumented UnityEditorInternal.ReorderableList,
+ * but does fine.
  */
 
 abstract class SuperPropertyDrawer : PropertyDrawer {
     private float buttonWidth = 20;
     private float height = 0;
+    private float padding = 6;
+
+    // Have to keep track of lists so they are not created multiple times.
+    private Dictionary<string, ReorderableList> lists = new Dictionary<string, ReorderableList>();
 
     // Implement in subclasses. This is called within OnGUI.
-    public abstract Rect Edit(Rect position, SerializedObject obj);
+    public abstract Rect Edit(Rect position, SerializedProperty property);
 
+    // Gets a cached ReorderableList. If one doesn't exist for the specified property,
+    // one is created.
+    public Rect DrawReorderableList(Rect position, SerializedProperty thisProp, SerializedProperty targetProp) {
+        ReorderableList list;
+        if (!lists.ContainsKey(targetProp.name)) {
+            list = new UnityEditorInternal.ReorderableList(thisProp.serializedObject, targetProp, true, true, true, true);
+            list.drawHeaderCallback += rect => GUI.Label(rect, targetProp.name);
+            list.drawElementCallback += (rect, index, active, focused) =>
+            {
+                rect.height = 16;
+                rect.y += 2;
+                EditorGUI.PropertyField(rect, 
+                    list.serializedProperty.GetArrayElementAtIndex(index), 
+                    GUIContent.none);
+            };
+            lists[targetProp.name] = list;
+        } else {
+            list = lists[targetProp.name];
+        }
+        list.DoList(position);
+        position.y += list.GetHeight() + padding;
+        return position;
+    }
+
+
+    // This is a jankier list than the UnityEditorInternal.ReorderableList,
+    // but AFAIK it will better support property fields which are larger than one line.
     public Rect DrawList(Rect position, SerializedProperty prop) {
         Rect propertyRect = position;
         for (int i=0; i<prop.arraySize; i++) {
@@ -65,9 +99,6 @@ abstract class SuperPropertyDrawer : PropertyDrawer {
 
     // Draw the property inside the given rect
     public override void OnGUI (Rect position, SerializedProperty property, GUIContent label) {
-        SerializedObject serializedObject = new SerializedObject(property.objectReferenceValue);
-        serializedObject.Update();
-
         // Reset the height.
         height = 0;
 
@@ -83,13 +114,11 @@ abstract class SuperPropertyDrawer : PropertyDrawer {
         Rect propertyRect = position;
         propertyRect.height = EditorGUIUtility.singleLineHeight;
 
-        propertyRect = Edit(propertyRect, serializedObject);
+        propertyRect = Edit(propertyRect, property);
 
         // Set indent back to what it was
         EditorGUI.indentLevel = indent;
         EditorGUI.EndProperty();
-
-        serializedObject.ApplyModifiedProperties();
 
         height = (propertyRect.y - position.y) + propertyRect.height;
     }

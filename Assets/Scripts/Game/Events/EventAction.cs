@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class EventAction : ScriptableObject {
+public class EventAction {
     public string name;
     public List<GameEvent> outcomes;
 

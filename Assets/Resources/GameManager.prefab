@@ -43,11 +43,13 @@ MonoBehaviour:
   week: 0
   unlocked:
     productTypes: []
-    industries: []
-    markets: []
+    industries:
+    - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
+    markets:
+    - {fileID: 11400000, guid: ac0bc9ba73b0040ceb87ee77c4b9d2b5, type: 2}
     workers: []
     events:
-    - {fileID: 11400000, guid: 7f047f8f55c8d475ab1343ef297da99b, type: 2}
+    - {fileID: 11400000, guid: ccbc53ef3b79f4cf19b7c59d457a436d, type: 2}
     items: []
 --- !u!1001 &100100000
 Prefab:
