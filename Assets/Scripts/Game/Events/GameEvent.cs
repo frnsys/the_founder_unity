@@ -18,6 +18,7 @@ public class GameEvent : ScriptableObject, IUnlockable {
         }
     }
 
+    public string name;
     public string description;
 
     public Stat probability;

@@ -93,7 +93,7 @@ internal class GameEventInspector : Editor {
             }
             EditorGUILayout.EndHorizontal();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty(propertyName).GetArrayElementAtIndex(i), true);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(propertyName).GetArrayElementAtIndex(i), GUIContent.none, true);
         }
     }
 
