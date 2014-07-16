@@ -41,6 +41,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCompany: {fileID: 0}
   week: 0
+  unlocked:
+    productTypes: []
+    industries: []
+    markets: []
+    workers: []
+    events: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

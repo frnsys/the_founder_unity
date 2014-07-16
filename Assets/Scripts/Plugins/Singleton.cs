@@ -1,9 +1,8 @@
 // http://wiki.unity3d.com/index.php/Toolbox
 
 using UnityEngine;
-using FullInspector;
 
-public class Singleton<T> : BaseBehavior<BinaryFormatterSerializer> where T : BaseBehavior<BinaryFormatterSerializer> {
+public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 
     private static T _instance;
     private static object _lock = new object();

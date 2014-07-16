@@ -134,7 +134,7 @@ public class UINewProductFlow : MonoBehaviour {
 
     private void LoadProductTypes() {
         ClearGrid();
-        foreach (ProductType a in gm.unlockedProductTypes) {
+        foreach (ProductType a in gm.unlocked.productTypes) {
             GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
             productAspect.GetComponent<UIProductAspect>().aspect = a;
         }
@@ -145,7 +145,7 @@ public class UINewProductFlow : MonoBehaviour {
 
     private void LoadIndustries() {
         ClearGrid();
-        foreach (Industry a in gm.unlockedIndustries) {
+        foreach (Industry a in gm.unlocked.industries) {
             GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
             productAspect.GetComponent<UIProductAspect>().aspect = a;
         }
@@ -156,7 +156,7 @@ public class UINewProductFlow : MonoBehaviour {
 
     private void LoadMarkets() {
         ClearGrid();
-        foreach (Market a in gm.unlockedMarkets) {
+        foreach (Market a in gm.unlocked.markets) {
             GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
             productAspect.GetComponent<UIProductAspect>().aspect = a;
         }

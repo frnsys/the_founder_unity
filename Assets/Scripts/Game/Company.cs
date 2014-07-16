@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-public class Company : HasStats, IUnlockable {
+public class Company : HasStats {
     public int sizeLimit = 10;
     public Stat cash = new Stat("Cash", 100000);
 
@@ -168,18 +168,6 @@ public class Company : HasStats, IUnlockable {
                 return null;
         }
     }
-
-    #region IUnlockable implementation
-    private bool unlocked = false;
-    public bool Unlocked {
-        get {
-            return unlocked;
-        }
-        set {
-            unlocked = value;
-        }
-    }
-    #endregion
 }
 
 

@@ -32,7 +32,7 @@ public class UIWorkerHiring : MonoBehaviour {
         while (grid.transform.childCount > 0)
             NGUITools.DestroyImmediate(grid.transform.GetChild(0).gameObject);
 
-        foreach (Worker worker in gm.unlockedWorkers) {
+        foreach (Worker worker in gm.unlocked.workers) {
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerPrefab);
             workerItem.GetComponent<UIWorker>().worker = worker;
             UIButton hireButton = workerItem.transform.FindChild("Hire Button").GetComponent<UIButton>();

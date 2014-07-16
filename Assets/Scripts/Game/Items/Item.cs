@@ -21,18 +21,6 @@ public class Item : ScriptableObject, IUnlockable {
         productTypes = productTypes_;
         markets = markets_;
     }
-
-    #region IUnlockable implementation
-    private bool unlocked = false;
-    public bool Unlocked {
-        get {
-            return unlocked;
-        }
-        set {
-            unlocked = value;
-        }
-    }
-    #endregion
 }
 
 

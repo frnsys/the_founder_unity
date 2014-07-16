@@ -80,18 +80,6 @@ public class Worker : HasStats, IUnlockable {
                 return null;
         }
     }
-
-    #region IUnlockable implementation
-    private bool unlocked = false;
-    public bool Unlocked {
-        get {
-            return unlocked;
-        }
-        set {
-            unlocked = value;
-        }
-    }
-    #endregion
 }
 
 

@@ -321,7 +321,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 78551336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -135.078537, y: -239.999969, z: 0}
+  m_LocalPosition: {x: -134.92334, y: -240, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 440856356}
@@ -404,7 +404,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 127671518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .81773752, z: 0}
   m_LocalScale: {x: 1.00001299, y: 1.00001299, z: 1.00001299}
   m_Children:
   - {fileID: 1513043833}
@@ -449,7 +449,7 @@ MonoBehaviour:
   startingRenderQueue: 3003
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: -449.999939, z: 500.314148, w: 60}
+  mClipRange: {x: 0, y: -450.817749, z: 499.693359, w: 60}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 200
   mSortingOrder: 0
@@ -527,7 +527,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189669549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -178.157074, y: -454, z: 0}
+  m_LocalPosition: {x: -177.84668, y: -454, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children:
   - {fileID: 893560091}
@@ -1777,9 +1777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b41a3208b254527b6eb4aa2301bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
   menu: {fileID: 845749119}
   closeButton: {fileID: 1063628020}
   gameEventNotificationPrefab: {fileID: 100030, guid: 64589c3556b454a738bd670c46f7db20,
@@ -1888,8 +1885,16 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
+      propertyPath: unlocked.markets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
       propertyPath: _objectReferences.Array.size
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
+      propertyPath: unlocked.industries.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
       propertyPath: _serializedStateKeys.Array.size
@@ -1969,6 +1974,16 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 151cd414dff0145c48ec0c60b9a470ac,
         type: 2}
+    - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
+      propertyPath: unlocked.industries.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c,
+        type: 2}
+    - target: {fileID: 11400000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
+      propertyPath: unlocked.markets.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ac0bc9ba73b0040ceb87ee77c4b9d2b5,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 829111ec5a97b4187a15b690c25ea7bb, type: 2}
   m_RootGameObject: {fileID: 2094439592}
@@ -1997,7 +2012,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513043832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -450, z: 0}
+  m_LocalPosition: {x: 0, y: -450.817749, z: 0}
   m_LocalScale: {x: .999986947, y: .999986947, z: .999986947}
   m_Children: []
   m_Father: {fileID: 127671519}
@@ -2087,7 +2102,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1545792663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 135.078537, y: 0, z: 0}
+  m_LocalPosition: {x: 134.92334, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2031260218}
@@ -2816,19 +2831,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fa9e34331854ea8953f71cd19228e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences:
-  - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
-  - {fileID: 11400000, guid: 685b9e9c72e9f465cbdf832129bef39e, type: 2}
-  - {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
-  - {fileID: 11400000, guid: b0a228b7a5d974838a1bf7f6ee627da2, type: 2}
-  - {fileID: 11400000, guid: ac19fb729de914b08ba47a6ded07ab67, type: 2}
-  - {fileID: 11400000, guid: 151cd414dff0145c48ec0c60b9a470ac, type: 2}
-  _serializedStateKeys:
-  - unlocked
-  _serializedStateValues:
-  - AAEAAAD/////AQAAAAAAAAAMAgAAAA9Bc3NlbWJseS1DU2hhcnAEAQAAAHhTeXN0ZW0uQ29sbGVjdGlvbnMuR2VuZXJpYy5MaXN0YDFbW0lVbmxvY2thYmxlLCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsXV0DAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgQAAA1JVW5sb2NrYWJsZVtdAgAAAAgICQMAAAAGAAAABgAAAAcDAAAAAAEAAAAIAAAABAtJVW5sb2NrYWJsZQIAAAAJBAAAAAkFAAAACQYAAAAJBwAAAAkIAAAACQkAAAAKCgUEAAAACEluZHVzdHJ5AQAAAAJpZAAIAgAAAAAAAAABBQAAAAQAAAABAAAABQYAAAAGTWFya2V0AQAAAAJpZAAIAgAAAAIAAAABBwAAAAYAAAADAAAABQgAAAALUHJvZHVjdFR5cGUBAAAAAmlkAAgCAAAABAAAAAEJAAAACAAAAAUAAAAL
   playerCompany: {fileID: 0}
   week: 0
+  unlocked:
+    productTypes: []
+    industries:
+    - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
+    markets:
+    - {fileID: 11400000, guid: ac0bc9ba73b0040ceb87ee77c4b9d2b5, type: 2}
+    workers: []
+    events: []
 --- !u!4 &2094439594
 Transform:
   m_ObjectHideFlags: 0
