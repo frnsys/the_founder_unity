@@ -52,25 +52,26 @@ internal class GameEventInspector : Editor {
         // Have to handle this one specially cause nested lists are tricky...if not impossible.
         EditorGUILayout.LabelField("Product Effects");
         EditorGUI.indentLevel += 1;
-
         if (ge.productEffects == null) {
             ge.productEffects = new List<ProductEffect>();
         }
-
-        for (int i=0; i < ge.productEffects.Count; i++) {
-            ProductEffect e = ge.productEffects[i];
-
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Delete")) {
-                ge.productEffects.Remove(e);
-            }
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("productEffects").GetArrayElementAtIndex(i), true);
-        }
+        DrawCustomList<ProductEffect>(ge.productEffects, "productEffects");
         if (GUILayout.Button("Add New Product Effect")) {
             ge.productEffects.Add(new ProductEffect());
+            EditorUtility.SetDirty(target);
+        }
+        EditorGUI.indentLevel -= 1;
+
+        // Actions
+        // Have to handle this one specially cause nested lists are tricky...if not impossible.
+        EditorGUILayout.LabelField("Actions");
+        EditorGUI.indentLevel += 1;
+        if (ge.actions == null) {
+            ge.actions = new List<EventAction>();
+        }
+        DrawCustomList<EventAction>(ge.actions, "actions");
+        if (GUILayout.Button("Add New Action")) {
+            ge.actions.Add(new EventAction("Default", new List<GameEvent>()));
             EditorUtility.SetDirty(target);
         }
         EditorGUI.indentLevel -= 1;
@@ -78,6 +79,21 @@ internal class GameEventInspector : Editor {
         if (GUI.changed) {
             EditorUtility.SetDirty(target);
             serializedObject.ApplyModifiedProperties();
+        }
+    }
+
+    private void DrawCustomList<T>(List<T> list, string propertyName) {
+        for (int i=0; i < list.Count; i++) {
+            var e = list[i];
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("Delete")) {
+                list.Remove(e);
+            }
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(propertyName).GetArrayElementAtIndex(i), true);
         }
     }
 

@@ -9,22 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: You Rule The World
+  m_Name: New GameEvent
   m_EditorClassIdentifier: 
-  description: This is a real event!!
+  description: 
   probability:
-    baseValue: .5
+    baseValue: 0
   productEffects: []
-  workerEffects:
-  - name: Charisma
-    value: 2000
-    duration: 0
-    type: 0
-  companyEffects:
-  - name: Cash
-    value: 100
-    duration: 0
-    type: 0
+  workerEffects: []
+  companyEffects: []
   unlocks:
     productTypes: []
     industries: []
@@ -32,3 +24,5 @@ MonoBehaviour:
     workers: []
     events: []
     items: []
+  actions:
+  - {fileID: 0}

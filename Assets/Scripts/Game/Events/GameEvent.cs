@@ -27,6 +27,8 @@ public class GameEvent : ScriptableObject, IUnlockable {
     public List<StatBuff> companyEffects = new List<StatBuff>();
     public UnlockSet unlocks = new UnlockSet();
 
+    public List<EventAction> actions = new List<EventAction>();
+
     public GameEvent(string name_, float probability_) {
         name = name_;
 
