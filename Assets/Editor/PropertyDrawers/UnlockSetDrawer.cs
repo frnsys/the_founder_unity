@@ -18,7 +18,8 @@ class UnlockSetDrawer : PropertyDrawer {
         "markets",
         "productTypes",
         "workers",
-        "events"
+        "events",
+        "items"
     };
 
     private float padding = 6;

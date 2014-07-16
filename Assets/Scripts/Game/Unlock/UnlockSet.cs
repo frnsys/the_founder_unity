@@ -10,6 +10,7 @@ public class UnlockSet {
     public List<Market> markets = new List<Market>();
     public List<Worker> workers = new List<Worker>();
     public List<GameEvent> events = new List<GameEvent>();
+    public List<Item> items = new List<Item>();
 
     // This "unlocks" an UnlockSet by
     // adding the input UnlockSet's values
@@ -20,5 +21,6 @@ public class UnlockSet {
         markets.AddRange(us.markets);
         workers.AddRange(us.workers);
         events.AddRange(us.events);
+        items.AddRange(us.items);
     }
 }

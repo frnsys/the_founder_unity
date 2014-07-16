@@ -52,6 +52,11 @@ internal class GameEventInspector : Editor {
         // Have to handle this one specially cause nested lists are tricky...if not impossible.
         EditorGUILayout.LabelField("Product Effects");
         EditorGUI.indentLevel += 1;
+
+        if (ge.productEffects == null) {
+            ge.productEffects = new List<ProductEffect>();
+        }
+
         for (int i=0; i < ge.productEffects.Count; i++) {
             ProductEffect e = ge.productEffects[i];
 
