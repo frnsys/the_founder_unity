@@ -40,8 +40,16 @@ public class UIGameEventNotification: MonoBehaviour {
         }
     }
 
+    void OnEnable() {
+        // Pause
+        Time.timeScale = 0;
+    }
+
     public void Close(GameObject actionObj) {
         NGUITools.DestroyImmediate(gameObject);
+
+        // Unpause
+        Time.timeScale = 1;
     }
 
     public UILabel titleLabel;

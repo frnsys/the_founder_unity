@@ -36,9 +36,6 @@ public class UIManager : Singleton<UIManager> {
     void OnEvent(GameEvent e) {
         UIGameEventNotification gameEventNotification = NGUITools.AddChild(gameObject, gameEventNotificationPrefab).GetComponent<UIGameEventNotification>();
         gameEventNotification.gameEvent = e;
-
-        // Pause
-        Time.timeScale = 0;
     }
 
     public void ToggleMenu() {
