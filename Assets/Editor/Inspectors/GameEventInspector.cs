@@ -71,7 +71,7 @@ internal class GameEventInspector : Editor {
         }
         DrawCustomList<EventAction>(ge.actions, "actions");
         if (GUILayout.Button("Add New Action")) {
-            ge.actions.Add(new EventAction("Some Action Name", new List<GameEvent>()));
+            ge.actions.Add(new EventAction("Some Action Name", new List<GameEvent>(), 0));
             EditorUtility.SetDirty(target);
         }
         EditorGUI.indentLevel -= 1;

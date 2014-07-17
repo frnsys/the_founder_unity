@@ -12,7 +12,7 @@ namespace UnityTest
         public GameEvent gameEvent;
         public GameEvent triggeredEvent;
 
-        public TestEventListener(GameEvent gameEvent) {
+        public TestEventListener() {
             GameEvent.EventTriggered += OnEvent;
         }
 
@@ -49,7 +49,7 @@ namespace UnityTest
             gE.companyEffects.Add(new StatBuff("Cash", 1000f));
 
             // Our test listener to listen for and capture the event.
-            TestEventListener eL = new TestEventListener(gE);
+            TestEventListener eL = new TestEventListener();
 
             // Trigger the event.
             GameEvent.Trigger(gE);

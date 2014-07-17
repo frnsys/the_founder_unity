@@ -24,7 +24,7 @@ public class UIEventActionButton : MonoBehaviour {
 
     void OnClick() {
         if (action_ != null) {
-            EventAction.Trigger(action_);
+            action_.Execute();
         }
     }
 }

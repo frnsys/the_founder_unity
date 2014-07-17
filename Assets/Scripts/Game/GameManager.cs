@@ -65,12 +65,10 @@ public class GameManager : Singleton<GameManager> {
 
     void OnEnable() {
         GameEvent.EventTriggered += OnEvent;
-        EventAction.ActionTriggered += OnAction;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
-        EventAction.ActionTriggered -= OnAction;
     }
 
     void Start() {
@@ -161,12 +159,6 @@ public class GameManager : Singleton<GameManager> {
         }
 
         unlocked.Unlock(e.unlocks);
-    }
-
-    void OnAction(EventAction a) {
-        // Add this action's possible outcomes
-        // as candidate events.
-        unlocked.events.AddRange(a.outcomes);
     }
 }
 
