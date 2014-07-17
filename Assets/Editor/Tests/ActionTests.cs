@@ -15,7 +15,7 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            outcome = new GameEvent("Some event", 1f);
+            outcome = new GameEvent("Some event", 1f, false);
             List<GameEvent> outcomes = new List<GameEvent>() {
                 outcome
             };

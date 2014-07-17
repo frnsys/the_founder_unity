@@ -30,26 +30,28 @@ public class UIGameEventNotification: MonoBehaviour {
                 foreach (EventAction action in gameEvent_.actions) {
                     GameObject actionObj = NGUITools.AddChild(actionGrid.gameObject, actionPrefab);
                     actionObj.GetComponent<UIEventActionButton>().action = action;
+
+                    // When this action button is clicked, close this notification.
                     UIEventListener.Get(actionObj).onClick += Close;
                 }
             } else {
                 // Create a default "OK" action button.
                 GameObject actionObj = NGUITools.AddChild(actionGrid.gameObject, actionPrefab);
+
+                // When this action button is clicked, close this notification.
                 UIEventListener.Get(actionObj).onClick += Close;
             }
         }
     }
 
     void OnEnable() {
-        // Pause
-        Time.timeScale = 0;
+        GameManager.Instance.Pause();
     }
 
     public void Close(GameObject actionObj) {
         NGUITools.DestroyImmediate(gameObject);
 
-        // Unpause
-        Time.timeScale = 1;
+        GameManager.Instance.Resume();
     }
 
     public UILabel titleLabel;

@@ -146,6 +146,13 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
+    public void Pause() {
+        Time.timeScale = 0;
+    }
+    public void Resume() {
+        Time.timeScale = 1;
+    }
+
 
     void OnEvent(GameEvent e) {
         playerCompany.ApplyBuffs(e.companyEffects);
@@ -159,6 +166,12 @@ public class GameManager : Singleton<GameManager> {
         }
 
         unlocked.Unlock(e.unlocks);
+
+        // If this event is not repeatable,
+        // remove it from the candidate event pool.
+        if (!e.repeatable) {
+            unlocked.events.Remove(e);
+        }
     }
 }
 

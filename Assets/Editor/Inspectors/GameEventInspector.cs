@@ -38,6 +38,9 @@ internal class GameEventInspector : Editor {
         ge.probability.baseValue = Mathf.Clamp(ge.probability.baseValue, 0, 1);
         EditorGUILayout.Space();
 
+        ge.repeatable = EditorGUILayout.Toggle("Repeatable", ge.repeatable);
+        EditorGUILayout.Space();
+
         // Render the lists.
         foreach (string key in listPropertyNames)
         {

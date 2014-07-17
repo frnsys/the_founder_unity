@@ -49,6 +49,7 @@ public class GameEvent : ScriptableObject, IUnlockable {
     }
 
     public string description;
+    public bool repeatable;
 
     public Stat probability;
 
@@ -59,8 +60,9 @@ public class GameEvent : ScriptableObject, IUnlockable {
 
     public List<EventAction> actions = new List<EventAction>();
 
-    public GameEvent(string name_, float probability_) {
+    public GameEvent(string name_, float probability_, bool repeatable_) {
         name = name_;
+        repeatable = repeatable_;
 
         // Maximum probability is 1,
         // minimum is 0.
@@ -73,7 +75,7 @@ public class GameEvent : ScriptableObject, IUnlockable {
     static public void Trigger(GameEvent ge) {
         // If there are subscribers to this event...
         if (EventTriggered != null) {
-            // Broadcast the eventst<.
+            // Broadcast the event.
             EventTriggered(ge);
         }
     }
