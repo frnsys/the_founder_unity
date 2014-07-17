@@ -45,7 +45,11 @@ public class Stat {
 
         if (buff.duration > 0) {
             Timer timer = new Timer(buff.duration);
-            timer.Elapsed += delegate { _buffs.Remove(buff); };
+            timer.Elapsed += delegate {
+                _buffs.Remove(buff);
+                timer.Stop();
+                timer = null;
+            };
             timer.Start();
         }
     }

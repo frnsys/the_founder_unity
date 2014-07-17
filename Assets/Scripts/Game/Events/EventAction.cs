@@ -15,10 +15,18 @@ public class EventAction {
         delay = delay_;
     }
 
+    // Execute the action,
+    // resolving it after a delay if one is specified,
+    // otherwise, it is resolved immediately.
     public void Execute() {
         if (delay > 0) {
+            Debug.Log(delay);
             Timer timer  = new Timer(delay);
-            timer.Elapsed += delegate { Resolve(); };
+            timer.Elapsed += delegate {
+                Resolve();
+                timer.Stop();
+                timer = null;
+            };
             timer.Start();
         } else {
             Resolve();

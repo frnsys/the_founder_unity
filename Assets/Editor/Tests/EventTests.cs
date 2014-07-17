@@ -17,7 +17,7 @@ namespace UnityTest
         }
 
         void OnEvent(GameEvent e) {
-             triggeredEvent = e;
+            triggeredEvent = e;
         }
     }
 
