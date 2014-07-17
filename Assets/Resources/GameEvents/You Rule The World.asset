@@ -11,7 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
   m_Name: You Rule The World
   m_EditorClassIdentifier: 
-  name: 
   description: ' YOU DID IT'
   probability:
     baseValue: .5
@@ -45,5 +44,4 @@ MonoBehaviour:
     workers: []
     events: []
     items: []
-  actions:
-  - {fileID: 0}
+  actions: []

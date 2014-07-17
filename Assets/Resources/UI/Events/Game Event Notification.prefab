@@ -498,7 +498,7 @@ MonoBehaviour:
   pivot: 0
   maxPerLine: 0
   cellWidth: 200
-  cellHeight: 200
+  cellHeight: 62
   animateSmoothly: 0
   hideInactive: 1
   keepWithinPanel: 1
@@ -1095,7 +1095,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 200
+  aspectRatio: .555555582
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1385,6 +1385,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleLabel: {fileID: 11400030}
   descLabel: {fileID: 11400010}
+  actionGrid: {fileID: 11400000}
+  actionPrefab: {fileID: 100002, guid: 6e66f27511b874171b34860fc09d9c86, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -8,17 +8,17 @@ public class GameEvent : ScriptableObject, IUnlockable {
     // Roll to see what events happen, out of a set of specified
     // candidate events.
     public static void Roll(List<GameEvent> candidateEvents) {
-        foreach (GameEvent gameEvent in candidateEvents) {
-
+        // Have to iterate this way, since
+        // the candidateEvents list may change while this is iterating.
+        for (int i=0; i<candidateEvents.Count; i++) {
             // Does this event happen?
-            if (Random.value < gameEvent.probability.value) {
-                Trigger(gameEvent);
+            if (Random.value < candidateEvents[i].probability.value) {
+                Trigger(candidateEvents[i]);
             }
 
         }
     }
 
-    public string name;
     public string description;
 
     public Stat probability;

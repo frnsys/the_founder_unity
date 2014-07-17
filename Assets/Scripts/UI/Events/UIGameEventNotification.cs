@@ -18,11 +18,37 @@ public class UIGameEventNotification: MonoBehaviour {
             gameEvent_ = value;
             titleLabel.text = gameEvent_.name;
             descLabel.text = gameEvent_.description;
+
+            // Clear out existing action elements.
+            while (actionGrid.transform.childCount > 0) {
+                GameObject go = actionGrid.transform.GetChild(0).gameObject;
+                UIEventListener.Get(go).onClick -= Close;
+                NGUITools.DestroyImmediate(go);
+            }
+
+            if (gameEvent.actions.Count > 0) {
+                foreach (EventAction action in gameEvent_.actions) {
+                    GameObject actionObj = NGUITools.AddChild(actionGrid.gameObject, actionPrefab);
+                    actionObj.GetComponent<UIEventActionButton>().action = action;
+                    UIEventListener.Get(actionObj).onClick += Close;
+                }
+            } else {
+                // Create a default "OK" action button.
+                GameObject actionObj = NGUITools.AddChild(actionGrid.gameObject, actionPrefab);
+                UIEventListener.Get(actionObj).onClick += Close;
+            }
         }
+    }
+
+    public void Close(GameObject actionObj) {
+        NGUITools.DestroyImmediate(gameObject);
     }
 
     public UILabel titleLabel;
     public UILabel descLabel;
+    public UIGrid actionGrid;
+
+    public GameObject actionPrefab;
 }
 
 

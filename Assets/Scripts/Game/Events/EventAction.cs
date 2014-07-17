@@ -11,6 +11,13 @@ public class EventAction {
         name = name_;
         outcomes = outcomes_;
     }
+
+    static public event System.Action<EventAction> ActionTriggered;
+    static public void Trigger(EventAction ea) {
+        if (ActionTriggered != null) {
+            ActionTriggered(ea);
+        }
+    }
 }
 
 
