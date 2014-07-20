@@ -19,6 +19,7 @@ public class UIGameEventNotification: MonoBehaviour {
             titleLabel.text = gameEvent_.name;
             descLabel.text = gameEvent_.description;
 
+            Extend(descLabel.height);
             RenderActions();
             RenderEffects();
         }
@@ -49,6 +50,9 @@ public class UIGameEventNotification: MonoBehaviour {
         foreach (Item i in gameEvent_.unlocks.items) {
             RenderUnlockEffect(i.name);
         }
+
+        // -3 because by default there is space for about 3 effects.
+        Extend((int)((effectGrid.GetChildList().size - 3) * effectGrid.cellHeight));
     }
 
     private void RenderUnlockEffect(string name) {
@@ -82,6 +86,11 @@ public class UIGameEventNotification: MonoBehaviour {
         }
     }
 
+    private void Extend(int amount) {
+        int current = body.bottomAnchor.absolute;
+        body.bottomAnchor.Set(image.transform, 0, current - amount);
+    }
+
     void OnEnable() {
         GameManager.Instance.Pause();
     }
@@ -96,6 +105,9 @@ public class UIGameEventNotification: MonoBehaviour {
     public UILabel descLabel;
     public UIGrid actionGrid;
     public UIGrid effectGrid;
+    public UIWidget window;
+    public UIWidget body;
+    public UITexture image;
 
     public GameObject actionPrefab;
     public GameObject unlockEffectPrefab;

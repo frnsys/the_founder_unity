@@ -296,7 +296,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -25, z: 0}
+  m_LocalPosition: {x: 0, y: -9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
@@ -618,23 +618,23 @@ MonoBehaviour:
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 400016}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   topAnchor:
-    target: {fileID: 400016}
+    target: {fileID: 400006}
     relative: 0
-    absolute: 100
+    absolute: -40
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 100
+  mHeight: 18
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.5999999
+  aspectRatio: 6.66666651
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,7 +655,7 @@ MonoBehaviour:
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 400016}
+    target: {fileID: 0}
     relative: 0
     absolute: 60
   topAnchor:
@@ -666,12 +666,12 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 110
+  mHeight: 14
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.27272725
+  aspectRatio: 25.7142849
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: efa123c2aa84c435e8e6d1ced840e560, type: 3}
   mFont: {fileID: 0}
@@ -685,7 +685,7 @@ MonoBehaviour:
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
-  mOverflow: 0
+  mOverflow: 3
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
@@ -1387,6 +1387,9 @@ MonoBehaviour:
   descLabel: {fileID: 11400010}
   actionGrid: {fileID: 11400000}
   effectGrid: {fileID: 11400006}
+  window: {fileID: 11400024}
+  body: {fileID: 11400020}
+  image: {fileID: 11400022}
   actionPrefab: {fileID: 100002, guid: 6e66f27511b874171b34860fc09d9c86, type: 2}
   unlockEffectPrefab: {fileID: 100008, guid: 356d62bb98d1c4622b801d0d43022fb7, type: 2}
 --- !u!1001 &100100000

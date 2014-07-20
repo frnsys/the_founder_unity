@@ -30,6 +30,7 @@ internal class GameEventInspector : Editor {
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
+        EditorStyles.textField.wordWrap = true;
         EditorGUILayout.LabelField("Description");
         ge.description = EditorGUILayout.TextArea(ge.description, GUILayout.Height(50));
         EditorGUILayout.Space();

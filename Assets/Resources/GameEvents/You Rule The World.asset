@@ -11,7 +11,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
   m_Name: You Rule The World
   m_EditorClassIdentifier: 
-  description: ' YOU DID IT'
+  description: "Astra Taylor is a documentary filmmaker who has described her work
+    as the \u201Csteamed broccoli\u201D in our cultural diet. Her last film, \u201CExamined
+    Life,\u201D depicted philosophers walking around and talking about their ideas.
+    She\u2019s the kind of creative person who was supposed to benefit when the Internet
+    revolution collapsed old media hierarchies. But two decades since that revolution
+    began, she\u2019s not impressed: \u201CWe are at risk of starving in the midst
+    of plenty,\u201D Taylor writes. \u201CFree culture, like cheap food, incurs hidden
+    costs.\u201D Instead of serving as the great equalizer, the web has created an
+    abhorrent cultural feudalism. The creative masses connect, create and labor, while
+    Google, Facebook and Amazon collect the cash."
+  repeatable: 0
   probability:
     baseValue: .5
   productEffects:
@@ -40,7 +50,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 151cd414dff0145c48ec0c60b9a470ac, type: 2}
     industries:
     - {fileID: 11400000, guid: 685b9e9c72e9f465cbdf832129bef39e, type: 2}
-    markets: []
+    markets:
+    - {fileID: 11400000, guid: ac0bc9ba73b0040ceb87ee77c4b9d2b5, type: 2}
     workers: []
     events: []
     items: []
