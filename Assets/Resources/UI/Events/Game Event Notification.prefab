@@ -44,7 +44,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
   m_Layer: 8
-  m_Name: Outcomes
+  m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
   pivot: 0
   maxPerLine: 0
   cellWidth: 200
-  cellHeight: 50
+  cellHeight: 34
   animateSmoothly: 0
   hideInactive: 1
   keepWithinPanel: 1
@@ -1386,7 +1386,9 @@ MonoBehaviour:
   titleLabel: {fileID: 11400030}
   descLabel: {fileID: 11400010}
   actionGrid: {fileID: 11400000}
+  effectGrid: {fileID: 11400006}
   actionPrefab: {fileID: 100002, guid: 6e66f27511b874171b34860fc09d9c86, type: 2}
+  unlockEffectPrefab: {fileID: 100008, guid: 356d62bb98d1c4622b801d0d43022fb7, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
