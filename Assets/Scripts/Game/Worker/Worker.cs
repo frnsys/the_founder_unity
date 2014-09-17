@@ -19,6 +19,7 @@ public class Worker : HasStats, IUnlockable {
     public WorkerType type;
 
     public float salary;
+    public string bio;
 
     public Stat happiness;
     public Stat productivity;

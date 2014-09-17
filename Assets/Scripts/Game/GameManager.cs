@@ -137,11 +137,11 @@ public class GameManager : Singleton<GameManager> {
     IEnumerator ProductRevenueCycle() {
         yield return new WaitForSeconds(weekTime/14);
         while(true) {
+            // Add a bit of randomness to give things
+            // a more "natural" feel.
             float elapsedTime = weekTime/14 * Random.Range(0.4f, 1.4f);
             playerCompany.HarvestProducts(elapsedTime);
 
-            // Add a bit of randomness to give things
-            // a more "natural" feel.
             yield return new WaitForSeconds(elapsedTime);
         }
     }

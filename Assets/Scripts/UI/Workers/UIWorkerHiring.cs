@@ -13,20 +13,45 @@ public class UIWorkerHiring : MonoBehaviour {
     private GameManager gm;
 
     public UIGrid grid;
+    public UICenterOnChild gridCenter;
+    public UIScrollView scrollView;
     public GameObject workerPrefab;
+    public UIButton selectButton;
+
+    private Worker currentWorker;
 
     void OnEnable() {
         gm = GameManager.Instance;
-        UpdateAvailableWorkers();
+        gridCenter.onFinished = OnCenter;
+
+        LoadWorkers();
     }
 
-    public void HireWorker(UIButton button, Worker worker) {
+    private void OnCenter() {
+        // Re-enable the select button
+        // when centering the item after a swipe is complete.
+        selectButton.isEnabled = true;
+        currentWorker = gridCenter.centeredObject.GetComponent<UIWorker>().worker as Worker;
+    }
+
+    void Update() {
+        if (scrollView.isDragging) {
+            // Disable the select button
+            // while dragging.
+            selectButton.isEnabled = false;
+        }
+    }
+
+    public void HireWorker() {
         // Disable the button.
-        button.isEnabled = false;
+        //button.isEnabled = false;
+        // this should just remove the worker from the available workers.
 
-        GameManager.Instance.HireWorker(worker);
+        Debug.Log("I WAS CLICKED");
+        GameManager.Instance.HireWorker(currentWorker);
     }
 
+    // NOT USED
     public void UpdateAvailableWorkers() {
         // Clear the grid.
         while (grid.transform.childCount > 0)
@@ -46,6 +71,36 @@ public class UIWorkerHiring : MonoBehaviour {
         }
 
         grid.Reposition();
+    }
+
+    private void LoadWorkers() {
+        ClearGrid();
+        foreach (Worker worker in gm.unlocked.workers) {
+            GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerPrefab);
+            workerItem.GetComponent<UIWorker>().worker = worker;
+        }
+        grid.Reposition();
+        WrapGrid();
+        gridCenter.Recenter();
+    }
+
+    private void ClearGrid() {
+        while (grid.transform.childCount > 0)
+            NGUITools.DestroyImmediate(grid.transform.GetChild(0).gameObject);
+    }
+
+    // The grid has to be re-wrapped whenever
+    // its contents change, since UIWrapContent
+    // caches the grid's contents on its start.
+    private void WrapGrid() {
+        NGUITools.DestroyImmediate(grid.gameObject.GetComponent<UIWrapContent>());
+        UIWrapContent wrapper = grid.gameObject.AddComponent<UIWrapContent>();
+
+        // Disable culling since it screws up the grid's layout.
+        wrapper.cullContent = false;
+
+        // The wrapper's item width is the same as the grid's cell width, duh
+        wrapper.itemSize = (int)grid.cellWidth;
     }
 }
 

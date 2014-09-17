@@ -14,6 +14,7 @@ internal class WorkerInspector : Editor {
 
         w.type = (WorkerType)EditorGUILayout.EnumPopup(w.type);
         w.name = EditorGUILayout.TextField("Name", w.name);
+        w.bio = EditorGUILayout.TextField("Bio", w.bio);
         w.productivity.baseValue = EditorGUILayout.FloatField("Productivity", w.productivity.baseValue);
         w.happiness.baseValue = EditorGUILayout.FloatField("Happiness", w.happiness.baseValue);
         w.charisma.baseValue = EditorGUILayout.FloatField("Charisma", w.charisma.baseValue);
