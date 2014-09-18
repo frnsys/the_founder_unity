@@ -7,7 +7,7 @@ public class Company : HasStats {
     public int sizeLimit = 10;
     public Stat cash = new Stat("Cash", 100000);
 
-    public List<Character> founders = new List<Character>();
+    public List<Worker> founders = new List<Worker>();
     public List<Product> products = new List<Product>();
     private List<Worker> _workers = new List<Worker>();
     public ReadOnlyCollection<Worker> workers {

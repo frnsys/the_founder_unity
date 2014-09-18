@@ -20,7 +20,7 @@ public class GameEvent : ScriptableObject, IUnlockable {
         }
     }
 
-    // Rolls to see what event happens, presuming that the events are dependent
+    // Rolls to see what event happens, assuming that the events are dependent
     // and that only one of them can happen. Probabilities are "normalized",
     // so they can sum up to > 1 and will be handled accordingly.
     public static void RollDependent(List<GameEvent> candidateEvents) {
@@ -48,9 +48,11 @@ public class GameEvent : ScriptableObject, IUnlockable {
         Trigger(selectedEvent);
     }
 
+
+
+
     public string description;
     public bool repeatable;
-
     public Stat probability;
 
     public List<ProductEffect> productEffects = new List<ProductEffect>();
@@ -64,8 +66,6 @@ public class GameEvent : ScriptableObject, IUnlockable {
         name = name_;
         repeatable = repeatable_;
 
-        // Maximum probability is 1,
-        // minimum is 0.
         probability_ = Mathf.Clamp(probability_, 0, 1);
         probability = new Stat("Probability", probability_);
     }

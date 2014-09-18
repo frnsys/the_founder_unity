@@ -40,6 +40,14 @@ public class GameManager : Singleton<GameManager> {
         December
     }
 
+    private enum Phase {
+        Local,
+        Global,
+        Planetary,
+        Galactic
+    }
+    private Phase phase = Phase.Local;
+
     public UnlockSet unlocked = new UnlockSet();
 
     public void NewGame(string companyName) {
