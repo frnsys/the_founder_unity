@@ -20,6 +20,9 @@ public class UIManager : Singleton<UIManager> {
 
     public GameObject gameEventNotificationPrefab;
 
+    public GameObject alertPrefab;
+    public GameObject confirmPrefab;
+
     void Awake() {
         DontDestroyOnLoad(gameObject);
     }
@@ -27,6 +30,8 @@ public class UIManager : Singleton<UIManager> {
     void OnEnable() {
         gm = GameManager.Instance;
         GameEvent.EventTriggered += OnEvent;
+
+        //Confirm("thisthis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long message is a very long message");
     }
 
     void OnDisable() {
@@ -56,6 +61,18 @@ public class UIManager : Singleton<UIManager> {
         NGUITools.DestroyImmediate(currentPopup);
         currentPopup = null;
         closeButton.SetActive(false);
+    }
+
+    public UIAlert Alert(string text) {
+        UIAlert alert = NGUITools.AddChild(gameObject, alertPrefab).GetComponent<UIAlert>();
+        alert.bodyText = text;
+        return alert;
+    }
+
+    public UIConfirm Confirm(string text) {
+        UIConfirm confirm = NGUITools.AddChild(gameObject, confirmPrefab).GetComponent<UIConfirm>();
+        confirm.bodyText = text;
+        return confirm;
     }
 }
 

@@ -9,6 +9,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UIStatusBar : MonoBehaviour {
     private GameManager gm;
@@ -41,8 +42,8 @@ public class UIStatusBar : MonoBehaviour {
     }
 
     private void SetWeek() {
-        BetterList<Transform> gridChildren = weekGrid.GetChildList();
-        for (int i=0; i<gridChildren.size; i++) {
+        List<Transform> gridChildren = weekGrid.GetChildList();
+        for (int i=0; i<gridChildren.Count; i++) {
             if (i == gm.week) {
                 gridChildren[i].GetComponent<UITexture>().color = new Color(activeWeekColor.r, activeWeekColor.g, activeWeekColor.b, activeWeekColor.a);
             } else {

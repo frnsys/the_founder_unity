@@ -10,16 +10,25 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIGameEventNotification: MonoBehaviour {
+public class UIGameEventNotification: UIAlert {
+    public UIWidget title;
+    public UILabel titleLabel;
+    public UIGrid actionGrid;
+    public UIGrid effectGrid;
+    public UITexture image;
+
+    public GameObject actionPrefab;
+    public GameObject unlockEffectPrefab;
+
     private GameEvent gameEvent_;
     public GameEvent gameEvent {
         get { return gameEvent_; }
         set {
             gameEvent_ = value;
             titleLabel.text = gameEvent_.name;
-            descLabel.text = gameEvent_.description;
+            bodyLabel.text = gameEvent_.description;
+            Extend(bodyLabel.height);
 
-            Extend(descLabel.height);
             RenderActions();
             RenderEffects();
         }
@@ -51,8 +60,8 @@ public class UIGameEventNotification: MonoBehaviour {
             RenderUnlockEffect(i.name);
         }
 
-        // -3 because by default there is space for about 3 effects.
-        Extend((int)((effectGrid.GetChildList().size - 3) * effectGrid.cellHeight));
+        // -1 because by default there is space for about 1 effect.
+        Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
     }
 
     private void RenderUnlockEffect(string name) {
@@ -88,29 +97,14 @@ public class UIGameEventNotification: MonoBehaviour {
 
     private void Extend(int amount) {
         int current = body.bottomAnchor.absolute;
-        body.bottomAnchor.Set(image.transform, 0, current - amount);
+        body.bottomAnchor.Set(title.transform, 0, current - amount);
+
+        // Adjust height of the popup shadow.
+        float actionHeight = (actionGrid.GetChildList().Count * actionGrid.cellHeight) - (actionGrid.cellHeight/2) + 3;
+        UIWidget shadow = transform.Find("Shadow").GetComponent<UIWidget>();
+        shadow.bottomAnchor.Set(body.transform, 0, -actionHeight);
     }
 
-    void OnEnable() {
-        GameManager.Instance.Pause();
-    }
-
-    public void Close(GameObject actionObj) {
-        NGUITools.DestroyImmediate(gameObject);
-
-        GameManager.Instance.Resume();
-    }
-
-    public UILabel titleLabel;
-    public UILabel descLabel;
-    public UIGrid actionGrid;
-    public UIGrid effectGrid;
-    public UIWidget window;
-    public UIWidget body;
-    public UITexture image;
-
-    public GameObject actionPrefab;
-    public GameObject unlockEffectPrefab;
 }
 
 
