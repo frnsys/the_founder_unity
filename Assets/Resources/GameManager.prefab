@@ -52,7 +52,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: cb3b14ef507ce49028cde6aa09185379, type: 2}
     events:
     - {fileID: 11400000, guid: ccbc53ef3b79f4cf19b7c59d457a436d, type: 2}
-    items: []
+    items:
+    - {fileID: 11400000, guid: f41e48eedb25045098ce328ffad747a9, type: 2}
+    stores: 00000000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

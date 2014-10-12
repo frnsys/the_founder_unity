@@ -15,7 +15,6 @@ public class UIManager : Singleton<UIManager> {
     private GameManager gm;
 
     public GameObject menu;
-    public GameObject closeButton;
     private GameObject currentPopup;
 
     public GameObject gameEventNotificationPrefab;
@@ -53,14 +52,14 @@ public class UIManager : Singleton<UIManager> {
 
     public void OpenPopup(GameObject popupPrefab) {
         currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
-        closeButton.SetActive(true);
+        //closeButton.SetActive(true);
         menu.SetActive(false);
     }
 
     public void ClosePopup() {
         NGUITools.DestroyImmediate(currentPopup);
         currentPopup = null;
-        closeButton.SetActive(false);
+        //closeButton.SetActive(false);
     }
 
     public UIAlert Alert(string text) {

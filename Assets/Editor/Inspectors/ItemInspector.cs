@@ -50,8 +50,12 @@ internal class ItemInspector : Editor {
     public override void OnInspectorGUI() {
 
         i.name = EditorGUILayout.TextField("Name", i.name);
+        i.description = EditorGUILayout.TextField("Description", i.description);
         i.cost = EditorGUILayout.FloatField("Cost", i.cost);
         i.duration = EditorGUILayout.FloatField("Duration", i.duration);
+
+        EditorGUILayout.LabelField("Store");
+        i.store = (Store)EditorGUILayout.EnumPopup(i.store);
         EditorGUILayout.Space();
 
         // Product Types

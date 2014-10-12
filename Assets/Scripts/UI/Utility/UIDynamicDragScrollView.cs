@@ -10,11 +10,14 @@ using System.Collections;
 public class UIDynamicDragScrollView : UIDragScrollView {
 
     public UICenterOnChild gridCenter;
-    private UIDragScrollView subDragger;
 
     public virtual void Start() {
         gridCenter.onFinished = OnCenter;
-        scrollView = gridCenter.centeredObject.transform.Find("Content Scroll").GetComponent<UIScrollView>();
+
+        // On Start there may not be any objects in the grid yet.
+        if (gridCenter.centeredObject) {
+            scrollView = gridCenter.centeredObject.transform.Find("Content Scroll").GetComponent<UIScrollView>();
+        }
     }
 
     private void OnCenter() {

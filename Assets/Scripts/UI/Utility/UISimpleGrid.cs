@@ -20,6 +20,10 @@ public class UISimpleGrid : UIWidget {
         int columns = Mathf.FloorToInt(bounds.size.x/childSize.x);
         int rows = Mathf.CeilToInt(children.Count/(float)columns);
 
+        Debug.Log(columns);
+        Debug.Log(bounds.size.x);
+        Debug.Log(childSize.x);
+
         // Calculate the size the grid will have.
         int gridWidth = (int)(columns * childSize.x);
         int gridHeight = (int)(rows * childSize.y);
@@ -32,11 +36,11 @@ public class UISimpleGrid : UIWidget {
 			Transform child = children[i];
 			Vector3 localPos = Vector3.zero;
 
-            int row = (int)Mathf.Floor(i/columns);
-            int col = i % columns;
+            int row = columns > 0 ? (int)Mathf.Floor(i/columns) : 0;
+            int col = columns > 0 ? i % columns : 0;
 
             localPos.x = (col * childSize.x) + xShift;
-            localPos.y = (row * childSize.y) - yShift;
+            localPos.y = -(row * childSize.y) - yShift;
 
             child.localPosition = localPos;
         }

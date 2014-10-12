@@ -1,6 +1,8 @@
 /*
  * This class is used to manage a separate vertical and horizontal
  * UIDragScrollView so that it locks to one direction during dragging.
+ * If you want, you can restrict the scrolling to a single direction by setting
+ * the `direction` property.
  */
 
 using UnityEngine;
@@ -10,10 +12,27 @@ public class UIScrollManager : MonoBehaviour {
     public UIDragScrollView horizontalDrag;
     public UIDragScrollView verticalDrag;
 
+    public enum Movement {
+        Unrestricted,
+        Horizontal,
+        Vertical
+    }
+    public Movement direction = Movement.Unrestricted;
+
     private bool directionLock;
 
+    void OnEnable() {
+        if (direction == Movement.Horizontal) {
+            horizontalDrag.enabled = true;
+            verticalDrag.enabled = false;
+        } else if (direction == Movement.Vertical) {
+            horizontalDrag.enabled = false;
+            verticalDrag.enabled = true;
+        }
+    }
+
     void OnDrag(Vector2 delta) {
-        if (!directionLock) {
+        if (!directionLock && verticalDrag && direction == Movement.Unrestricted) {
             directionLock = true;
 
             // Horizontal

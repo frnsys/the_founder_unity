@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class Item : ScriptableObject, IUnlockable {
     public float cost = 1000;
     public float duration = 0;
+    public string description;
+    public Store store;
 
     public List<StatBuff> productBuffs = new List<StatBuff>();
     public List<StatBuff> workerBuffs = new List<StatBuff>();
@@ -23,4 +25,14 @@ public class Item : ScriptableObject, IUnlockable {
     }
 }
 
-
+/*
+ * A Store holds specific types of "items".
+ * E.g. there's a store for Equipment, Perks,
+ * Policies, and Companies.
+ */
+public enum Store {
+    Equipment,
+    Perks,
+    Policies,
+    Companies
+}
