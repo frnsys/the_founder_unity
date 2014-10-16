@@ -7,6 +7,14 @@ public class Company : HasStats {
     public int sizeLimit = 10;
     public Stat cash = new Stat("Cash", 100000);
 
+    private Consultancy _consultancy = null;
+    public Consultancy consultancy {
+        get { return _consultancy; }
+    }
+    public bool researching {
+        get { return _consultancy != null; }
+    }
+
     public List<Worker> founders = new List<Worker>();
     public List<Product> products = new List<Product>();
     private List<Worker> _workers = new List<Worker>();
@@ -29,6 +37,15 @@ public class Company : HasStats {
         name = name_;
     }
 
+
+    void OnEnable() {
+        Consultancy.ResearchCompleted += OnResearchCompleted;
+    }
+
+    void OnDisable() {
+        Consultancy.ResearchCompleted -= OnResearchCompleted;
+    }
+
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit) {
             foreach (Item item in _items) {
@@ -47,6 +64,22 @@ public class Company : HasStats {
         }
 
         _workers.Remove(worker);
+    }
+
+    public bool Research(Consultancy c) {
+        // Only one innovation at time, buddy.
+        if (!researching && cash.baseValue - c.cost >= 0) {
+            cash.baseValue -= c.cost;
+            _consultancy = c;
+            _consultancy.BeginResearch();
+
+            return true;
+        }
+        return false;
+    }
+    void OnResearchCompleted(Consultancy c) {
+        // Reset the consultancy.
+        _consultancy = null;
     }
 
     public void StartNewProduct(ProductType pt, Industry i, Market m) {

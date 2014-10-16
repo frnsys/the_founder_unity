@@ -8,7 +8,7 @@ public enum BuffType {ADD, MULTIPLY};
 public class StatBuff {
     public string name;
     public float value;
-    public int duration;
+    public int duration; // milliseconds
     public BuffType type;
 
     public StatBuff(string name_, float value_, int duration_ = 0, BuffType type_ = BuffType.ADD) {
