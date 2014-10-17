@@ -17,7 +17,7 @@ public class Consultancy : ScriptableObject, IUnlockable {
     public List<ProductType> productTypes = new List<ProductType>();
     public List<Market> markets = new List<Market>();
 
-    private const int researchTime = 30000; // milliseconds
+    public int researchTime = 30000; // milliseconds
 
     private Stopwatch stopwatch = new Stopwatch();
     public float researchProgress {

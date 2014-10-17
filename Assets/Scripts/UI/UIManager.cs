@@ -73,6 +73,14 @@ public class UIManager : Singleton<UIManager> {
         confirm.bodyText = text;
         return confirm;
     }
+
+    void UpdateHUD() {
+        //if (GameManager.Instance.playerCompany.researching) {
+            //progressBar.value = GameManager.Instance.playerCompany.consultancy.researchProgress;
+        //} else {
+            //inProgressOverlay.SetActive(false);
+        //}
+    }
 }
 
 

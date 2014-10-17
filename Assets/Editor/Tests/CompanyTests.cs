@@ -154,5 +154,22 @@ namespace UnityTest
             Assert.AreEqual(p.appeal.value, 0);
             Assert.AreEqual(worker.happiness.value, 0);
         }
+
+        [Test]
+        public void Research() {
+            Consultancy con = new Consultancy();
+            con.researchTime = 50;
+
+            c.cash.baseValue = 2000;
+            c.Research(con);
+
+            Assert.AreEqual(c.cash.baseValue, 2000 - con.cost);
+            Assert.AreEqual(c.consultancy, con);
+            Assert.IsTrue(c.researching);
+
+            System.Threading.Thread.Sleep(60);
+            Assert.IsFalse(c.researching);
+            Assert.AreEqual(c.consultancy, null);
+        }
     }
 }
