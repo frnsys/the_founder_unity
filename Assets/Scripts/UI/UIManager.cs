@@ -29,12 +29,14 @@ public class UIManager : Singleton<UIManager> {
     void OnEnable() {
         gm = GameManager.Instance;
         GameEvent.EventTriggered += OnEvent;
+        ResearchManager.Completed += OnResearchCompleted;
 
         //Confirm("thisthis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long message is a very long message");
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
+        ResearchManager.Completed -= OnResearchCompleted;
     }
 
     void OnEvent(GameEvent e) {
@@ -48,6 +50,11 @@ public class UIManager : Singleton<UIManager> {
         } else {
             menu.SetActive(true);
         }
+    }
+
+    void OnResearchCompleted(Consultancy c) {
+        // temp: just a simple alert.
+        Alert("Research completed!");
     }
 
     public void OpenPopup(GameObject popupPrefab) {

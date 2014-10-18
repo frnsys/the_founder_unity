@@ -13,7 +13,7 @@ public class UIResearch : UIWindow {
         UIConsultancyItem consultancyItem = gameObj.transform.parent.gameObject.GetComponent<UIConsultancyItem>();
 
         // If we successfully hire the consultancy...
-        if (GameManager.Instance.playerCompany.Research(consultancyItem.consultancy)) {
+        if (GameManager.Instance.Research(consultancyItem.consultancy)) {
             // Blackout the research screen,
             // Show the research progress bar.
             inProgressOverlay.SetActive(true);
@@ -24,7 +24,7 @@ public class UIResearch : UIWindow {
     }
 
     void OnEnable() {
-        if (GameManager.Instance.playerCompany.researching) {
+        if (GameManager.Instance.researchManager.researching) {
             inProgressOverlay.SetActive(true);
         }
 
@@ -39,8 +39,8 @@ public class UIResearch : UIWindow {
     }
 
     void Update() {
-        if (GameManager.Instance.playerCompany.researching) {
-            progressBar.value = GameManager.Instance.playerCompany.consultancy.researchProgress;
+        if (GameManager.Instance.researchManager.researching) {
+            progressBar.value = GameManager.Instance.researchManager.progress;
         } else {
             inProgressOverlay.SetActive(false);
         }

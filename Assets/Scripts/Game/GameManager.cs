@@ -13,6 +13,9 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public Company playerCompany;
 
+    // Other managers.
+    public ResearchManager researchManager;
+
     private int weekTime = 15;
     private Month _month = Month.January;
     public string month {
@@ -86,6 +89,8 @@ public class GameManager : Singleton<GameManager> {
 
         StartCoroutine(ProductDevelopmentCycle());
         StartCoroutine(ProductRevenueCycle());
+
+        researchManager = gameObject.AddComponent<ResearchManager>();
     }
 
     void Update() {
@@ -111,7 +116,7 @@ public class GameManager : Singleton<GameManager> {
                 _month++;
             }
 
-            playerCompany.Pay();
+            playerCompany.PayMonthly();
             yield return new WaitForSeconds(monthTime);
         }
     }
@@ -180,6 +185,18 @@ public class GameManager : Singleton<GameManager> {
         if (!e.repeatable) {
             unlocked.events.Remove(e);
         }
+    }
+
+
+    public bool Research(Consultancy c) {
+        // Only one innovation at time, buddy.
+        if (!researchManager.researching && playerCompany.Pay(c.cost)) {
+            researchManager.Begin(c);
+            return true;
+        }
+        return false;
+    }
+    void OnResearchCompleted(Consultancy c) {
     }
 }
 

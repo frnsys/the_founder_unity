@@ -25,8 +25,7 @@ namespace UnityTest
         [SetUp]
         public void SetUp() {
             gameObj = new GameObject("Game Manager");
-            gameObj.AddComponent<GameManager>();
-            gameManager = gameObj.GetComponent<GameManager>();
+            gameManager = gameObj.AddComponent<GameManager>();
 
             c = new Company("Foo Inc");
             worker = new Worker("Franklin", 0, 0, 0, 0, 0);
@@ -70,12 +69,12 @@ namespace UnityTest
         }
 
 		[Test]
-		public void Pay() {
+		public void PayMonthly() {
             worker.salary = 500;
             c.cash.baseValue = 2000;
             c.HireWorker(worker);
 
-            c.Pay();
+            c.PayMonthly();
             Assert.AreEqual(c.cash.baseValue, 1500);
         }
 
@@ -153,23 +152,6 @@ namespace UnityTest
             Assert.AreEqual(c.items.Count, 0);
             Assert.AreEqual(p.appeal.value, 0);
             Assert.AreEqual(worker.happiness.value, 0);
-        }
-
-        [Test]
-        public void Research() {
-            Consultancy con = new Consultancy();
-            con.researchTime = 50;
-
-            c.cash.baseValue = 2000;
-            c.Research(con);
-
-            Assert.AreEqual(c.cash.baseValue, 2000 - con.cost);
-            Assert.AreEqual(c.consultancy, con);
-            Assert.IsTrue(c.researching);
-
-            System.Threading.Thread.Sleep(60);
-            Assert.IsFalse(c.researching);
-            Assert.AreEqual(c.consultancy, null);
         }
     }
 }

@@ -7,10 +7,12 @@ using System.Collections;
 
 public class UIConfirm : UIAlert {
     public void Yes() {
-        Close();
+        // temp, this should return true.
+        Close_();
     }
 
     public void No() {
-        Close();
+        // temp, this should return false.
+        Close_();
     }
 }

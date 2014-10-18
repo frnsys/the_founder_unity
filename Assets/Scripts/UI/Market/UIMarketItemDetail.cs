@@ -52,11 +52,4 @@ public class UIMarketItemDetail : UIAlert {
             GameManager.Instance.playerCompany.BuyItem(item);
         }
     }
-
-    // As of v3.7.4, NGUI cannot handle inherited overloaded methods
-    // when using them as button events. So we have to *manually* redefine methods
-    // in the subclass. Bleh.
-    public void Close_() {
-        Close();
-    }
 }

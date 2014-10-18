@@ -42,11 +42,10 @@ public class UIHUD : MonoBehaviour {
             developmentIndicator.SetActive(false);
         }
 
-        if (GameManager.Instance.playerCompany.researching) {
+        if (GameManager.Instance.researchManager.researching) {
             researchIndicator.SetActive(true);
-            Debug.Log(pos);
             researchIndicator.transform.localPosition = pos;
-            researchProgressBar.value = GameManager.Instance.playerCompany.consultancy.researchProgress;
+            researchProgressBar.value = GameManager.Instance.researchManager.progress;
         } else {
             researchIndicator.SetActive(false);
         }

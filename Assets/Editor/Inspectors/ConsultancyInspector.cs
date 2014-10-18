@@ -16,6 +16,7 @@ internal class ConsultancyInspector : Editor {
         c.description = EditorGUILayout.TextField("Bio", c.description);
         c.cost = EditorGUILayout.FloatField("Cost", c.cost);
         c.baseResearch = EditorGUILayout.FloatField("Base Research Points", c.baseResearch);
+        c.researchTime = EditorGUILayout.IntField("Research Time", c.researchTime);
 
         EditorGUILayout.Space();
 

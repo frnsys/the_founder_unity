@@ -25,13 +25,15 @@ public class UIAlert : UIPopup {
         GameManager.Instance.Pause();
     }
 
-    public void Close() {
+    // As of v3.7.4, NGUI cannot handle inherited overloaded methods
+    // when using them as button events. So we avoid using overloaded methods.
+    public void Close_() {
         GameManager.Instance.Resume();
         StartCoroutine(FadeOverlay(overlayAlpha, 0f));
         Hide(window);
     }
     public void Close(GameObject obj) {
-        Close();
+        Close_();
     }
 
     private void Extend(int amount) {
