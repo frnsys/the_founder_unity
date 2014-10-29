@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class UnlockSet {
 
+    public PrereqSet prereqs;
+
     public List<ProductType> productTypes = new List<ProductType>();
     public List<Industry> industries = new List<Industry>();
     public List<Market> markets = new List<Market>();
@@ -26,5 +28,10 @@ public class UnlockSet {
         items.AddRange(us.items);
         stores.AddRange(us.stores);
         consultancies.AddRange(us.consultancies);
+    }
+
+    // Apply a prereq set and see if it unlocks the set.
+    public bool SatisfyPrereqs(PrereqSet ps) {
+        return prereqs.Satisfy(ps);
     }
 }

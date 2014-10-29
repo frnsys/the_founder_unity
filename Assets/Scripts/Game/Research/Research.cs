@@ -29,7 +29,7 @@ public class ResearchManager : MonoBehaviour {
     // NOWHERE in Unity's documentation does it say that
     // Invoke or StartCoroutine must be called from Update()
     // or Start(). In fact, the example in their docs shows
-    // it being used in another method. Unity is atrocious.
+    // it being used in another method.
     // So using this hacky method to do the research.
     void Update() {
         if (_consultancy != null && progress >= 1) {
