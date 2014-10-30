@@ -10,15 +10,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIGameEventNotification: UIAlert {
+public class UIGameEventNotification: UIEffectAlert {
     public UIWidget title;
     public UILabel titleLabel;
     public UIGrid actionGrid;
-    public UIGrid effectGrid;
     public UITexture image;
 
     public GameObject actionPrefab;
-    public GameObject unlockEffectPrefab;
 
     private GameEvent gameEvent_;
     public GameEvent gameEvent {
@@ -30,43 +28,8 @@ public class UIGameEventNotification: UIAlert {
             Extend(bodyLabel.height);
 
             RenderActions();
-            RenderEffects();
+            RenderEffects(gameEvent_.effects);
         }
-    }
-
-    private void RenderEffects() {
-        // Clear out existing effect elements.
-        while (effectGrid.transform.childCount > 0) {
-            GameObject go = effectGrid.transform.GetChild(0).gameObject;
-            NGUITools.DestroyImmediate(go);
-        }
-
-        // Render the unlock effects for this event.
-        // Note that event unlocks are *not* rendered because
-        // those are "hidden" effects.
-        foreach (Industry i in gameEvent_.unlocks.industries) {
-            RenderUnlockEffect("the " + i.name + " industry");
-        }
-        foreach (ProductType i in gameEvent_.unlocks.productTypes) {
-            RenderUnlockEffect(i.name + " products");
-        }
-        foreach (Market i in gameEvent_.unlocks.markets) {
-            RenderUnlockEffect("the " + i.name + " market");
-        }
-        foreach (Worker i in gameEvent_.unlocks.workers) {
-            RenderUnlockEffect(i.name);
-        }
-        foreach (Item i in gameEvent_.unlocks.items) {
-            RenderUnlockEffect(i.name);
-        }
-
-        // -1 because by default there is space for about 1 effect.
-        Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
-    }
-
-    private void RenderUnlockEffect(string name) {
-        GameObject unlockObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
-        unlockObj.GetComponent<UIUnlockEffect>().Set(name);
     }
 
     private void RenderActions() {

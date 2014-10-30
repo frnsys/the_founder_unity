@@ -55,10 +55,7 @@ public class GameEvent : ScriptableObject, IUnlockable {
     public bool repeatable;
     public Stat probability;
 
-    public List<ProductEffect> productEffects = new List<ProductEffect>();
-    public List<StatBuff> workerEffects = new List<StatBuff>();
-    public List<StatBuff> companyEffects = new List<StatBuff>();
-    public UnlockSet unlocks = new UnlockSet();
+    public EffectSet effects = new EffectSet();
 
     public List<EventAction> actions = new List<EventAction>();
 

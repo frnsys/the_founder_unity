@@ -24,35 +24,35 @@ MonoBehaviour:
   repeatable: 0
   probability:
     baseValue: .5
-  productEffects:
-  - productTypes: []
-    industries:
-    - {fileID: 11400000, guid: 52d45566576554db680f0a5ae977af1b, type: 2}
-    markets:
-    - {fileID: 11400000, guid: 861db110c02c4498b94ecff024c6a442, type: 2}
-    buffs:
-    - name: Appeal
-      value: 444444
+  effects:
+    products:
+    - productTypes: []
+      industries: []
+      markets: []
+      buffs: []
+    workers:
+    - name: 
+      value: 0
       duration: 0
       type: 0
-  workerEffects:
-  - name: Productivity
-    value: 100
-    duration: 5
-    type: 0
-  companyEffects:
-  - name: Cash
-    value: 500
-    duration: 1
-    type: 0
-  unlocks:
-    productTypes:
-    - {fileID: 11400000, guid: 151cd414dff0145c48ec0c60b9a470ac, type: 2}
-    industries:
-    - {fileID: 11400000, guid: 685b9e9c72e9f465cbdf832129bef39e, type: 2}
-    markets:
-    - {fileID: 11400000, guid: ac0bc9ba73b0040ceb87ee77c4b9d2b5, type: 2}
-    workers: []
-    events: []
-    items: []
+    company: []
+    unlocks:
+      prereqs:
+        productTypes: []
+        industries: []
+        markets: []
+        workers: []
+        events: []
+        items: []
+        stores: 
+        consultancies: []
+        researchPoints: 0
+      productTypes: []
+      industries: []
+      markets: []
+      workers: []
+      events: []
+      items: []
+      stores: 
+      consultancies: []
   actions: []

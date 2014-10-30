@@ -8,23 +8,10 @@ using System.Collections.Generic;
 [CustomEditor(typeof(GameEvent))]
 internal class GameEventInspector : Editor {
 
-    private Dictionary<string, ReorderableList> lists = new Dictionary<string, ReorderableList>();
-
-    // The names of the list properties.
-    private string[] listPropertyNames = new string[] {
-        "workerEffects",
-        "companyEffects"
-    };
-
     GameEvent ge;
 
     void OnEnable() {
         ge = target as GameEvent;
-
-        foreach (string key in listPropertyNames)
-        {
-            lists[key] = ShowList(serializedObject.FindProperty(key), key);
-        }
     }
 
     public override void OnInspectorGUI() {
@@ -42,29 +29,8 @@ internal class GameEventInspector : Editor {
         ge.repeatable = EditorGUILayout.Toggle("Repeatable", ge.repeatable);
         EditorGUILayout.Space();
 
-        // Render the lists.
-        foreach (string key in listPropertyNames)
-        {
-            lists[key].DoLayoutList();
-            EditorGUILayout.Space();
-        }
-
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("unlocks"), true);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"));
         EditorGUILayout.Space();
-
-        // Product Effects
-        // Have to handle this one specially cause nested lists are tricky...if not impossible.
-        EditorGUILayout.LabelField("Product Effects");
-        EditorGUI.indentLevel += 1;
-        if (ge.productEffects == null) {
-            ge.productEffects = new List<ProductEffect>();
-        }
-        DrawCustomList<ProductEffect>(ge.productEffects, "productEffects");
-        if (GUILayout.Button("Add New Product Effect")) {
-            ge.productEffects.Add(new ProductEffect());
-            EditorUtility.SetDirty(target);
-        }
-        EditorGUI.indentLevel -= 1;
 
         // Actions
         // Have to handle this one specially cause nested lists are tricky...if not impossible.

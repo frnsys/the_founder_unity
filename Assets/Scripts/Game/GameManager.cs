@@ -168,17 +168,17 @@ public class GameManager : Singleton<GameManager> {
 
 
     void OnEvent(GameEvent e) {
-        playerCompany.ApplyBuffs(e.companyEffects);
+        playerCompany.ApplyBuffs(e.effects.company);
 
         foreach (Worker worker in playerCompany.workers) {
-            worker.ApplyBuffs(e.workerEffects);
+            worker.ApplyBuffs(e.effects.workers);
         }
 
-        foreach (ProductEffect pe in e.productEffects) {
+        foreach (ProductEffect pe in e.effects.products) {
             playerCompany.ApplyProductEffect(pe);
         }
 
-        unlocked.Unlock(e.unlocks);
+        unlocked.Unlock(e.effects.unlocks);
 
         // If this event is not repeatable,
         // remove it from the candidate event pool.
