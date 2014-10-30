@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIMarketItemDetail : UIAlert {
+public class UIMarketItemDetail : UIEffectAlert {
     private Item item_;
     public Item item {
         get { return item_; }
@@ -10,6 +10,9 @@ public class UIMarketItemDetail : UIAlert {
             nameLabel.text = item.name;
             descLabel.text = item.description;
             UpdateTotal();
+
+            RenderEffects(item.effects);
+            AdjustEffectsHeight();
         }
     }
 

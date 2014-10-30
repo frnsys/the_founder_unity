@@ -21,6 +21,7 @@ public class UIManager : Singleton<UIManager> {
 
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
+    public GameObject effectAlertPrefab;
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -54,7 +55,8 @@ public class UIManager : Singleton<UIManager> {
 
     void OnResearchCompleted(Consultancy c) {
         // temp: just a simple alert.
-        Alert("Research completed!");
+        EffectSet es = new EffectSet();
+        EffectAlert("Research completed!", es);
     }
 
     public void OpenPopup(GameObject popupPrefab) {
@@ -72,6 +74,14 @@ public class UIManager : Singleton<UIManager> {
     public UIAlert Alert(string text) {
         UIAlert alert = NGUITools.AddChild(gameObject, alertPrefab).GetComponent<UIAlert>();
         alert.bodyText = text;
+        return alert;
+    }
+
+    public UIEffectAlert EffectAlert(string text, EffectSet es) {
+        UIEffectAlert alert = NGUITools.AddChild(gameObject, effectAlertPrefab).GetComponent<UIEffectAlert>();
+        alert.bodyText = text;
+        alert.RenderEffects(es);
+        alert.AdjustEffectsHeight();
         return alert;
     }
 

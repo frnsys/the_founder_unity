@@ -273,13 +273,6 @@ public class Product : HasStats, IProduct {
         return (value < min) ? min : (value > max) ? max : value;
     }
 
-    public void ApplyItem(Item item) {
-        ApplyBuffs(item.productBuffs);
-    }
-    public void RemoveItem(Item item) {
-        RemoveBuffs(item.productBuffs);
-    }
-
     public override Stat StatByName(string name) {
         switch (name) {
             case "Appeal":

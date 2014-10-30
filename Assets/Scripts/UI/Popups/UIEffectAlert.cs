@@ -75,4 +75,12 @@ public class UIEffectAlert : UIAlert {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
         effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
     }
+
+    public void Extend(int amount) {
+        amount = (amount/2) + 8;
+        int currentBottom = body.bottomAnchor.absolute;
+        int currentTop = body.topAnchor.absolute;
+        body.bottomAnchor.Set(window.transform, 0, currentBottom-amount);
+        body.topAnchor.Set(window.transform, 0, currentTop+amount);
+    }
 }

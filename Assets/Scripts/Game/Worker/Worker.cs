@@ -58,11 +58,11 @@ public class Worker : HasStats, IUnlockable {
     }
 
     public void ApplyItem(Item item) {
-        ApplyBuffs(item.workerBuffs);
+        ApplyBuffs(item.effects.workers);
     }
 
     public void RemoveItem(Item item) {
-        RemoveBuffs(item.workerBuffs);
+        RemoveBuffs(item.effects.workers);
     }
 
     public override Stat StatByName(string name) {

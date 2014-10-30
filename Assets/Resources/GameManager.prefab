@@ -40,8 +40,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCompany: {fileID: 0}
+  researchManager: {fileID: 0}
   week: 0
   unlocked:
+    prereqs:
+      productTypes: []
+      industries: []
+      markets: []
+      workers: []
+      events: []
+      items: []
+      stores: 
+      consultancies: []
+      researchPoints: 0
     productTypes: []
     industries:
     - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
@@ -53,7 +64,7 @@ MonoBehaviour:
     events:
     - {fileID: 11400000, guid: ccbc53ef3b79f4cf19b7c59d457a436d, type: 2}
     items:
-    - {fileID: 11400000, guid: f41e48eedb25045098ce328ffad747a9, type: 2}
+    - {fileID: 11400000, guid: eb24045815fa646dfbecfead8d90881a, type: 2}
     stores: 00000000
     consultancies:
     - {fileID: 11400000, guid: e5c2cf6be06ef44dcae31e0396d36971, type: 2}

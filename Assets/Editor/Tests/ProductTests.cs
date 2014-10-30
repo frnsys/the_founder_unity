@@ -100,12 +100,6 @@ namespace UnityTest
             Assert.IsTrue(p.Revenue(4) > zeroRev);
         }
 
-        [Test]
-        public void ApplyItem() {
-            p.ApplyItem(item);
-            Assert.AreEqual(p.appeal.value, 10);
-        }
-
 		[Test]
 		public void Shutdown() {
             p.Shutdown();

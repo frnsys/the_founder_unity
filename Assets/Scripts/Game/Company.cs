@@ -51,8 +51,14 @@ public class Company : HasStats {
     public void StartNewProduct(ProductType pt, Industry i, Market m) {
         Product product = new Product(pt, i, m);
 
+        // Apply any applicable items to the new product.
+        // TO DO: should this be held off until after the product is completed?
         foreach (Item item in _items) {
-            product.ApplyItem(item);
+            foreach (ProductEffect pe in item.effects.products) {
+                if (pe.productTypes.Contains(pt) || pe.industries.Contains(i) || pe.markets.Contains(m)) {
+                    product.ApplyBuff(pe.buff);
+                }
+            }
         }
 
         products.Add(product);
@@ -91,9 +97,9 @@ public class Company : HasStats {
     }
 
     public void RemoveProduct(Product product) {
-        foreach (Item item in _items) {
-            product.RemoveItem(item);
-        }
+        //foreach (Item item in _items) {
+            //product.RemoveItem(item);
+        //}
         product.Shutdown();
     }
 
@@ -115,10 +121,12 @@ public class Company : HasStats {
         if (Pay(item.cost)) {
             _items.Add(item);
 
-            List<Product> matchingProducts = FindMatchingProducts(item.productTypes, item.industries, item.markets);
+            foreach (ProductEffect pe in item.effects.products) {
+                List<Product> matchingProducts = FindMatchingProducts(pe.productTypes, pe.industries, pe.markets);
 
-            foreach (Product product in matchingProducts) {
-                product.ApplyItem(item);
+                foreach (Product product in matchingProducts) {
+                    product.ApplyBuff(pe.buff);
+                }
             }
 
             foreach (Worker worker in _workers) {
@@ -133,10 +141,12 @@ public class Company : HasStats {
     public void RemoveItem(Item item) {
         _items.Remove(item);
 
-        List<Product> matchingProducts = FindMatchingProducts(item.productTypes, item.industries, item.markets);
+        foreach (ProductEffect pe in item.effects.products) {
+            List<Product> matchingProducts = FindMatchingProducts(pe.productTypes, pe.industries, pe.markets);
 
-        foreach (Product product in matchingProducts) {
-            product.RemoveItem(item);
+            foreach (Product product in matchingProducts) {
+                product.ApplyBuff(pe.buff);
+            }
         }
 
         foreach (Worker worker in _workers) {

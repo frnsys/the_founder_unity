@@ -8,20 +8,11 @@ public class Item : ScriptableObject, IUnlockable {
     public string description;
     public Store store;
 
-    public List<StatBuff> productBuffs = new List<StatBuff>();
-    public List<StatBuff> workerBuffs = new List<StatBuff>();
-    public List<Industry> industries = new List<Industry>();
-    public List<ProductType> productTypes = new List<ProductType>();
-    public List<Market> markets = new List<Market>();
+    public EffectSet effects = new EffectSet();
 
-    public Item(string name_, float cost_, List<Industry> industries_,
-        List<ProductType> productTypes_, List<Market> markets_
-    ) {
+    public Item(string name_, float cost_) {
         name = name_;
         cost = cost_;
-        industries = industries_;
-        productTypes = productTypes_;
-        markets = markets_;
     }
 }
 
