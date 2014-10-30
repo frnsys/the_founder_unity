@@ -18,10 +18,13 @@ class EffectSetDrawer : SuperPropertyDrawer {
             position = DrawReorderableList(position, property, property.FindPropertyRelative(key));
         }
 
-        EditorGUI.PropertyField(position, property.FindPropertyRelative("unlocks"));
+        EditorGUI.LabelField(position, "unlocks");
+        position.y += 20;
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("unlocks"), GUIContent.none);
         position.y += EditorGUI.GetPropertyHeight(property.FindPropertyRelative("unlocks"), GUIContent.none, true);
 
-        position = EditorGUI.PrefixLabel(position, new GUIContent("products"));
+        EditorGUI.LabelField(position, "product buffs");
+        position.y += 20;
         position = DrawList(position, property.FindPropertyRelative("products"));
 
         return position;

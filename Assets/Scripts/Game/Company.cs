@@ -147,7 +147,7 @@ public class Company : HasStats {
     public void ApplyProductEffect(ProductEffect effect) {
         List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
         foreach (Product product in matchingProducts) {
-            product.ApplyBuffs(effect.buffs);
+            product.ApplyBuff(effect.buff);
         }
     }
 

@@ -29,6 +29,9 @@ public class UIGameEventNotification: UIEffectAlert {
 
             RenderActions();
             RenderEffects(gameEvent_.effects);
+
+            // -1 because by default there is space for about 1 effect.
+            Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
         }
     }
 
@@ -58,7 +61,7 @@ public class UIGameEventNotification: UIEffectAlert {
         }
     }
 
-    private void Extend(int amount) {
+    public void Extend(int amount) {
         int current = body.bottomAnchor.absolute;
         body.bottomAnchor.Set(title.transform, 0, current - amount);
 

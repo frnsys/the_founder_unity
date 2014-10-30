@@ -27,15 +27,25 @@ MonoBehaviour:
   effects:
     products:
     - productTypes: []
-      industries: []
-      markets: []
-      buffs: []
+      industries:
+      - {fileID: 11400000, guid: 52d45566576554db680f0a5ae977af1b, type: 2}
+      markets:
+      - {fileID: 11400000, guid: d2b9f10bb4d63456a8275d46fa12c09a, type: 2}
+      buff:
+        name: Appeal
+        value: 124
+        duration: 0
+        type: 0
     workers:
-    - name: 
-      value: 0
+    - name: Creativity
+      value: 1000
       duration: 0
       type: 0
-    company: []
+    company:
+    - name: Cash
+      value: 20000
+      duration: 0
+      type: 0
     unlocks:
       prereqs:
         productTypes: []
@@ -48,7 +58,8 @@ MonoBehaviour:
         consultancies: []
         researchPoints: 0
       productTypes: []
-      industries: []
+      industries:
+      - {fileID: 11400000, guid: 685b9e9c72e9f465cbdf832129bef39e, type: 2}
       markets: []
       workers: []
       events: []

@@ -22,7 +22,9 @@ public class UIEffectAlert : UIAlert {
         RenderUnlockEffects(es);
         RenderBuffEffects(es);
         RenderProductEffects(es);
+    }
 
+    public void AdjustEffectsHeight() {
         // -1 because by default there is space for about 1 effect.
         Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
     }
@@ -50,17 +52,17 @@ public class UIEffectAlert : UIAlert {
 
     private void RenderBuffEffects(EffectSet es) {
         foreach (StatBuff buff in es.workers) {
-            RenderBuffEffect(buff.name);
+            RenderBuffEffect(buff, "workers");
         }
         foreach (StatBuff buff in es.company) {
-            RenderBuffEffect(buff.name);
+            RenderBuffEffect(buff, "the company");
         }
     }
 
     private void RenderProductEffects(EffectSet es) {
         foreach (ProductEffect pe in es.products) {
             GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
-            effectObj.GetComponent<UIUnlockEffect>().Set(name);
+            effectObj.GetComponent<UIProductEffect>().Set(pe);
         }
     }
 
@@ -69,8 +71,8 @@ public class UIEffectAlert : UIAlert {
         effectObj.GetComponent<UIUnlockEffect>().Set(name);
     }
 
-    private void RenderBuffEffect(string name) {
+    private void RenderBuffEffect(StatBuff buff, string target) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
-        effectObj.GetComponent<UIUnlockEffect>().Set(name);
+        effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
     }
 }
