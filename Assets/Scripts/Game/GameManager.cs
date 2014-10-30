@@ -159,6 +159,18 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
+    IEnumerator ResearchCycle() {
+        yield return new WaitForSeconds(weekTime/14);
+        while(true) {
+            // Add a bit of randomness to give things
+            // a more "natural" feel.
+            float elapsedTime = weekTime/14 * Random.Range(0.4f, 1.4f);
+            researchManager.Research();
+
+            yield return new WaitForSeconds(elapsedTime);
+        }
+    }
+
     public void Pause() {
         Time.timeScale = 0;
     }
@@ -168,17 +180,7 @@ public class GameManager : Singleton<GameManager> {
 
 
     void OnEvent(GameEvent e) {
-        playerCompany.ApplyBuffs(e.effects.company);
-
-        foreach (Worker worker in playerCompany.workers) {
-            worker.ApplyBuffs(e.effects.workers);
-        }
-
-        foreach (ProductEffect pe in e.effects.products) {
-            playerCompany.ApplyProductEffect(pe);
-        }
-
-        unlocked.Unlock(e.effects.unlocks);
+        ApplyEffectSet(e.effects);
 
         // If this event is not repeatable,
         // remove it from the candidate event pool.
@@ -188,15 +190,22 @@ public class GameManager : Singleton<GameManager> {
     }
 
 
-    public bool Research(Consultancy c) {
-        // Only one innovation at time, buddy.
-        if (!researchManager.researching && playerCompany.Pay(c.cost)) {
-            researchManager.Begin(c);
-            return true;
-        }
-        return false;
+    void OnResearchCompleted(Discovery d) {
+        ApplyEffectSet(d.effects);
     }
-    void OnResearchCompleted(Consultancy c) {
+
+    private void ApplyEffectSet(EffectSet es) {
+        playerCompany.ApplyBuffs(es.company);
+
+        foreach (Worker worker in playerCompany.workers) {
+            worker.ApplyBuffs(es.workers);
+        }
+
+        foreach (ProductEffect pe in es.products) {
+            playerCompany.ApplyProductEffect(pe);
+        }
+
+        unlocked.Unlock(es.unlocks);
     }
 }
 

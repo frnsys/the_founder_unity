@@ -57,6 +57,9 @@ public class UIManager : Singleton<UIManager> {
         // temp: just a simple alert.
         EffectSet es = new EffectSet();
         EffectAlert("Research completed!", es);
+
+        // TODO
+        // then need to pick the next discovery.
     }
 
     public void OpenPopup(GameObject popupPrefab) {

@@ -1,58 +1,54 @@
-/*
- * Manages the player's research.
- */
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics; // for Stopwatch
 
-public class ResearchManager : MonoBehaviour {
-    private Stopwatch stopwatch = new Stopwatch();
-    private Consultancy _consultancy;
-    public Consultancy consultancy {
-        get { return _consultancy; }
+
+public class Research {
+    public float management = 0;
+    public float technical = 0;
+    public float design = 0;
+
+    public float total {
+        get { return management + technical + design; }
     }
 
-    public float progress {
-        get {
-            if (_consultancy != null) {
-                return stopwatch.ElapsedMilliseconds / (_consultancy.researchTime * 1000f);
-            }
-            return 0;
+    public Research(float m, float t, float d) {
+        management = m;
+        technical = t;
+        design = d;
+    }
+
+    public static Research operator +(Research left, Research right) {
+        return new Research(
+                    left.management + right.management,
+                    left.technical + right.technical,
+                    left.design + right.design);
+    }
+
+    public static float operator /(Research left, Research right) {
+        // The left values can't be greater than the right's values.
+        float m = left.management > right.management ? right.management : left.management;
+        float t = left.technical > right.technical ? right.technical : left.technical;
+        float d = left.design > right.design ? right.design : left.design;
+
+        return (m + t + d)/right.total;
+    }
+
+    public static bool operator >=(Research left, Research right) {
+        if (left / right >= 1f) {
+            return true;
+        } else {
+            return false;
         }
     }
-    public bool researching {
-        get { return _consultancy != null; }
-    }
 
-    // NOWHERE in Unity's documentation does it say that
-    // Invoke or StartCoroutine must be called from Update()
-    // or Start(). In fact, the example in their docs shows
-    // it being used in another method.
-    // So using this hacky method to do the research.
-    void Update() {
-        if (_consultancy != null && progress >= 1) {
-            End();
+    public static bool operator <=(Research left, Research right) {
+        if (left / right <= 1f) {
+            return true;
+        } else {
+            return false;
         }
     }
-
-    static public event System.Action<Consultancy> Completed;
-    public void Begin(Consultancy c) {
-        _consultancy = c;
-        stopwatch.Start();
-    }
-    public void End() {
-        stopwatch.Stop();
-        stopwatch.Reset();
-
-        // Trigger the Completed event.
-        if (Completed != null) {
-            Completed(_consultancy);
-        }
-        _consultancy = null;
-    }
-
 }
 
 
