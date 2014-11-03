@@ -64,13 +64,6 @@ public class UIManager : Singleton<UIManager> {
         menu.SetActive(false);
     }
 
-    public void TestDiscoveryPopup(GameObject popupPrefab, Discovery discovery) {
-        currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
-        currentPopup.GetComponent<UIResearchCompletedAlert>().discovery = discovery;
-        //closeButton.SetActive(true);
-        menu.SetActive(false);
-    }
-
     public void ClosePopup() {
         NGUITools.DestroyImmediate(currentPopup);
         currentPopup = null;
