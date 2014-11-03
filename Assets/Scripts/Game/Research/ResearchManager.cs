@@ -8,39 +8,52 @@ using System.Collections.Generic;
 
 public class ResearchManager : MonoBehaviour {
     public Consultancy consultancy;
-    private Discovery discovery;
-    private Research research;
+
+    private Discovery discovery_;
+    public Discovery discovery {
+        get { return discovery_; }
+    }
+
+    private Research research_ = new Research(0,0,0);
+    public Research research {
+        get { return research_; }
+    }
+    public bool researching {
+        get { return discovery != null; }
+    }
 
     public float progress {
         get {
             if (discovery != null) {
-                return research / discovery.research;
+                return research_ / discovery_.requiredResearch;
             }
             return 0;
         }
     }
 
     public void Research() {
-        research += consultancy.research;
+        if (consultancy && discovery_) {
+            research_ += consultancy.research;
 
-        if (research >= discovery.research) {
-            EndResearch();
+            if (research_ >= discovery_.requiredResearch) {
+                EndResearch();
+            }
         }
     }
 
     static public event System.Action<Discovery> Completed;
     public void BeginResearch(Discovery d) {
-        discovery = d;
+        discovery_ = d;
     }
     public void EndResearch() {
         // Trigger the Completed event.
         if (Completed != null) {
-            Completed(discovery);
+            Completed(discovery_);
         }
 
         // Reset.
-        discovery = null;
-        research = new Research(0,0,0);
+        discovery_ = null;
+        research_ = new Research(0,0,0);
     }
 
 }

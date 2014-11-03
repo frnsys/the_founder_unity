@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
+[System.Serializable]
 public class Research {
     public float management = 0;
     public float technical = 0;

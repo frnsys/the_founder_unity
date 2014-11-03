@@ -9,14 +9,18 @@ internal class ConsultancyInspector : Editor {
 
     private Consultancy c;
 
-    public override void OnInspectorGUI() {
+    void OnEnable() {
         c = target as Consultancy;
+    }
 
+    public override void OnInspectorGUI() {
+        serializedObject.Update();
+
+        EditorStyles.textField.wordWrap = true;
         c.name = EditorGUILayout.TextField("Name", c.name);
         c.description = EditorGUILayout.TextField("Bio", c.description);
         c.cost = EditorGUILayout.FloatField("Cost", c.cost);
-        c.baseResearch = EditorGUILayout.FloatField("Base Research Points", c.baseResearch);
-        c.researchTime = EditorGUILayout.IntField("Research Time", c.researchTime);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("research"));
 
         EditorGUILayout.Space();
 

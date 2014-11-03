@@ -25,6 +25,8 @@ public class Company : HasStats {
         get { return _items.AsReadOnly(); }
     }
 
+    public Consultancy consultancy;
+
     public Company(string name_) {
         name = name_;
     }
@@ -106,6 +108,9 @@ public class Company : HasStats {
     public void PayMonthly() {
         foreach (Worker worker in workers) {
             cash.baseValue -= worker.salary;
+        }
+        if (consultancy != null) {
+            cash.baseValue -= consultancy.cost;
         }
     }
 

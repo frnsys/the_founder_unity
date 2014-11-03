@@ -2,47 +2,57 @@ using UnityEngine;
 using System.Collections;
 
 public class UIResearch : UIWindow {
-    public GameObject inProgressOverlay;
-    public UIProgressBar progressBar;
     public GameObject consultancyItemPrefab;
-    public bool researchComplete;
+    public GameObject consultancyList;
+    public GameObject consultancyView;
 
     public void Hire(GameObject gameObj) {
         // Not very elegant...
         // Go up and get the UIConsultancyItem this button belongs to.
         UIConsultancyItem consultancyItem = gameObj.transform.parent.gameObject.GetComponent<UIConsultancyItem>();
 
-        // If we successfully hire the consultancy...
-        if (GameManager.Instance.Research(consultancyItem.consultancy)) {
-            // Blackout the research screen,
-            // Show the research progress bar.
-            inProgressOverlay.SetActive(true);
-            progressBar.value = 0;
+        // Hire the consultancy...
+        GameManager.Instance.HireConsultancy(consultancyItem.consultancy);
 
-            // Show the research progress bar on the main screen.
-        }
+        SetCurrent();
+    }
+
+    public void ShowConsultancies() {
+        consultancyList.SetActive(true);
+        consultancyView.SetActive(false);
+    }
+    public void HideConsultancies() {
+        consultancyList.SetActive(false);
+        consultancyView.SetActive(true);
     }
 
     void OnEnable() {
-        if (GameManager.Instance.researchManager.researching) {
-            inProgressOverlay.SetActive(true);
-        }
-
         // Load the unlocked consultancies.
-        GameObject grid = transform.Find("Content Scroll/Items Grid").gameObject;
+        GameObject grid = transform.Find("Consultancies/Content Scroll/Items Grid").gameObject;
         foreach (Consultancy c in GameManager.Instance.unlocked.consultancies) {
             GameObject item = NGUITools.AddChild(grid, consultancyItemPrefab);
             item.GetComponent<UIConsultancyItem>().consultancy = c;
             UIEventListener.Get(item.transform.Find("Hire").gameObject).onClick += Hire;
         }
         grid.GetComponent<UICenteredGrid>().Reposition();
+
+        SetCurrent();
     }
 
-    void Update() {
-        if (GameManager.Instance.researchManager.researching) {
-            progressBar.value = GameManager.Instance.researchManager.progress;
+    private void SetCurrent() {
+        // Set the current research and consultancy.
+        if (GameManager.Instance.researchManager.discovery != null) {
+            Discovery currentDiscovery = GameManager.Instance.researchManager.discovery;
+            transform.Find("Current/Researching/Discovery Name").GetComponent<UILabel>().text = currentDiscovery.name;
         } else {
-            inProgressOverlay.SetActive(false);
+            transform.Find("Current/Researching/Discovery Name").GetComponent<UILabel>().text = "none";
         }
+        if (GameManager.Instance.researchManager.consultancy != null) {
+            Consultancy currentConsultancy = GameManager.Instance.researchManager.consultancy;
+            transform.Find("Current/Consultancy/Consultancy Name").GetComponent<UILabel>().text = currentConsultancy.name;
+        } else {
+            transform.Find("Current/Consultancy/Consultancy Name").GetComponent<UILabel>().text = "none";
+        }
+        Research currentResearch = GameManager.Instance.researchManager.research;
     }
 }

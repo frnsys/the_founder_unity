@@ -22,6 +22,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
+    public GameObject researchCompletedAlertPrefab;
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -53,17 +54,19 @@ public class UIManager : Singleton<UIManager> {
         }
     }
 
-    void OnResearchCompleted(Consultancy c) {
-        // temp: just a simple alert.
-        EffectSet es = new EffectSet();
-        EffectAlert("Research completed!", es);
-
-        // TODO
-        // then need to pick the next discovery.
+    void OnResearchCompleted(Discovery d) {
+        NGUITools.AddChild(gameObject, researchCompletedAlertPrefab);
     }
 
     public void OpenPopup(GameObject popupPrefab) {
         currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
+        //closeButton.SetActive(true);
+        menu.SetActive(false);
+    }
+
+    public void TestDiscoveryPopup(GameObject popupPrefab, Discovery discovery) {
+        currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
+        currentPopup.GetComponent<UIResearchCompletedAlert>().discovery = discovery;
         //closeButton.SetActive(true);
         menu.SetActive(false);
     }

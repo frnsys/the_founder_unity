@@ -11,7 +11,7 @@ public class Consultancy : ScriptableObject, IUnlockable {
     // Technical consultancies give bonus cleverness.
     // Design consultancies give bonus creativity.
     // Management consultancies give bonus charisma.
-    public float research = new Research(10,10,10);
+    public Research research = new Research(10,10,10);
 }
 
 

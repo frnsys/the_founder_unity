@@ -20,9 +20,7 @@ public class UIAlert : UIPopup {
     private float overlayAlpha = 0.3f;
 
     void OnEnable() {
-        StartCoroutine(FadeOverlay(0f, overlayAlpha));
-        Show(window);
-        GameManager.Instance.Pause();
+        Show();
     }
 
     // As of v3.7.4, NGUI cannot handle inherited overloaded methods
@@ -34,6 +32,12 @@ public class UIAlert : UIPopup {
     }
     public void Close(GameObject obj) {
         Close_();
+    }
+
+    public void Show() {
+        StartCoroutine(FadeOverlay(0f, overlayAlpha));
+        base.Show(window);
+        GameManager.Instance.Pause();
     }
 
     public void Extend(int amount) {

@@ -29,21 +29,15 @@ namespace UnityTest
         }
 
         [Test]
-        public void Research() {
+        public void HireConsultancy() {
             Consultancy con = new Consultancy();
-            con.researchTime = 1;
 
             gameManager.playerCompany.cash.baseValue = 2000;
-            gameManager.Research(con);
+            gameManager.HireConsultancy(con);
 
             Assert.AreEqual(gameManager.playerCompany.cash.baseValue, 2000 - con.cost);
+            Assert.AreEqual(gameManager.playerCompany.consultancy, con);
             Assert.AreEqual(gameManager.researchManager.consultancy, con);
-            Assert.IsTrue(gameManager.researchManager.researching);
-
-            // Can't figure out how the hell to unit test a coroutine.
-            //System.Threading.Thread.Sleep(1000);
-            //Assert.IsFalse(gameManager.researchManager.researching);
-            //Assert.AreEqual(gameManager.researchManager.consultancy, null);
         }
     }
 }

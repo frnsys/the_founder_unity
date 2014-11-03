@@ -89,6 +89,7 @@ public class GameManager : Singleton<GameManager> {
 
         StartCoroutine(ProductDevelopmentCycle());
         StartCoroutine(ProductRevenueCycle());
+        StartCoroutine(ResearchCycle());
 
         researchManager = gameObject.AddComponent<ResearchManager>();
     }
@@ -206,6 +207,16 @@ public class GameManager : Singleton<GameManager> {
         }
 
         unlocked.Unlock(es.unlocks);
+    }
+
+    public bool HireConsultancy(Consultancy c) {
+        // You pay the consultancy cost initially when hired, then repeated monthly.
+        if (playerCompany.Pay(c.cost)) {
+            researchManager.consultancy = c;
+            playerCompany.consultancy = c;
+            return true;
+        }
+        return false;
     }
 }
 
