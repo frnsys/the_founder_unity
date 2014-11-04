@@ -15,6 +15,7 @@ internal class MarketInspector : Editor {
         EditorGUILayout.LabelField("Market");
         p.name = EditorGUILayout.TextField("Name", p.name);
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
+        p.points = EditorGUILayout.IntField("Product Points", p.points);
 
         // Let Unity know to save on changes.
         if (GUI.changed) {

@@ -8,6 +8,7 @@ public class UIHUD : MonoBehaviour {
     private GameObject developmentIndicator;
     private GameObject researchIndicator;
     private UIProgressBar researchProgressBar;
+    private UIProgressBar developmentProgressBar;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -16,13 +17,13 @@ public class UIHUD : MonoBehaviour {
         developmentIndicator = transform.Find("Development").gameObject;
         researchIndicator = transform.Find("Research").gameObject;
         researchProgressBar = researchIndicator.transform.Find("Indicator/Progress Bar").gameObject.GetComponent<UIProgressBar>();
+        developmentProgressBar = developmentIndicator.transform.Find("Indicator/Progress Bar").gameObject.GetComponent<UIProgressBar>();
     }
 
     void Update() {
         Vector3 pos = Vector3.zero;
         float height = 0;
 
-        // temp: this should check if there are any active products
         if (false) {
             productsIndicator.SetActive(true);
             productsIndicator.transform.localPosition = pos;
@@ -33,9 +34,11 @@ public class UIHUD : MonoBehaviour {
         }
 
         // temp: this should check if a product is being developed
-        if (false) {
+        if (GameManager.Instance.playerCompany.developingProducts.Count > 0) {
             developmentIndicator.SetActive(true);
             developmentIndicator.transform.localPosition = pos;
+            // TO DO this should create a progress bar for each developing product. Or we should just limit it to one product in development.
+            developmentProgressBar.value = GameManager.Instance.playerCompany.developingProducts[0].progress;
             height = developmentIndicator.GetComponent<UIWidget>().CalculateBounds().size.y;
             pos.y += height;
         } else {

@@ -19,11 +19,13 @@ public class UIProductAspect : MonoBehaviour {
             aspect_ = value;
             label.text = aspect_.ToString();
             description.text = aspect_.description;
+            points.text = aspect_.points.ToString() + "PP";
         }
     }
 
     public UILabel label;
     public UILabel description;
+    public UILabel points;
 }
 
 

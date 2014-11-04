@@ -2,33 +2,25 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 public class Company : HasStats {
-    public int sizeLimit = 10;
     public Stat cash = new Stat("Cash", 100000);
-
-    public List<Worker> founders = new List<Worker>();
-    public List<Product> products = new List<Product>();
-    private List<Worker> _workers = new List<Worker>();
-    public ReadOnlyCollection<Worker> workers {
-        get { return _workers.AsReadOnly(); }
-    }
-
-    public List<Product> developingProducts {
-        get {
-            return products.FindAll(p => p.state == Product.State.DEVELOPMENT);
-        }
-    }
-
-    public List<Item> _items = new List<Item>();
-    public ReadOnlyCollection<Item> items {
-        get { return _items.AsReadOnly(); }
-    }
-
     public Consultancy consultancy;
 
     public Company(string name_) {
         name = name_;
+    }
+
+    // ===============================================
+    // Worker Management =============================
+    // ===============================================
+
+    public int sizeLimit = 10;
+    public List<Worker> founders = new List<Worker>();
+    private List<Worker> _workers = new List<Worker>();
+    public ReadOnlyCollection<Worker> workers {
+        get { return _workers.AsReadOnly(); }
     }
 
     public bool HireWorker(Worker worker) {
@@ -48,6 +40,54 @@ public class Company : HasStats {
         }
 
         _workers.Remove(worker);
+    }
+
+
+    // Total feature points available.
+    public FeaturePoints featurePoints {
+        get {
+            // You start with some by default.
+            int def = 4;
+
+            float charisma_ = 0;
+            float cleverness_ = 0;
+            float creativity_ = 0;
+            foreach (Worker w in _workers) {
+                charisma_ += w.charisma.value;
+                cleverness_ += w.cleverness.value;
+                creativity_ += w.creativity.value;
+            }
+
+            // You get one feature point for every 10 worker points.
+            int charisma = (int)(charisma_/10) + def;
+            int cleverness = (int)(cleverness_/10) + def;
+            int creativity = (int)(creativity_/10) + def;
+
+            // TO DO: bonuses which increase any of these.
+
+            return new FeaturePoints(charisma, cleverness, creativity);
+        }
+    }
+
+
+    // ===============================================
+    // Product Management ============================
+    // ===============================================
+
+    // Total product point capacity.
+    public int productPoints = 10;
+    public int usedProductPoints {
+        get { return products.Sum(i=>i.points); }
+    }
+    public int availableProductPoints {
+        get { return productPoints - usedProductPoints; }
+    }
+
+    public List<Product> products = new List<Product>();
+    public List<Product> developingProducts {
+        get {
+            return products.FindAll(p => p.state == Product.State.DEVELOPMENT);
+        }
     }
 
     public void StartNewProduct(ProductType pt, Industry i, Market m) {
@@ -105,6 +145,12 @@ public class Company : HasStats {
         product.Shutdown();
     }
 
+
+
+    // ===============================================
+    // Financial Management ==========================
+    // ===============================================
+
     public void PayMonthly() {
         foreach (Worker worker in workers) {
             cash.baseValue -= worker.salary;
@@ -120,6 +166,17 @@ public class Company : HasStats {
             return true;
         }
         return false;
+    }
+
+
+
+    // ===============================================
+    // Item Management ===============================
+    // ===============================================
+
+    public List<Item> _items = new List<Item>();
+    public ReadOnlyCollection<Item> items {
+        get { return _items.AsReadOnly(); }
     }
 
     public bool BuyItem(Item item) {
@@ -180,6 +237,12 @@ public class Company : HasStats {
                 || markets.Exists(m => m == p.market));
         }
     }
+
+
+
+    // ===============================================
+    // Utility =======================================
+    // ===============================================
 
     public override Stat StatByName(string name) {
         switch (name) {

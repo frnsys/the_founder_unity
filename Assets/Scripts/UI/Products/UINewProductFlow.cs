@@ -13,14 +13,15 @@ using System.Collections.Generic;
 public class UINewProductFlow : MonoBehaviour {
     private GameManager gm;
 
-    private enum Aspect {
+    private enum Stage {
         PRODUCTTYPE,
         INDUSTRY,
         MARKET,
-        COMPLETE
+        CONFIRM,
+        POINTS
     }
     // Begin on Product Type selection.
-    private Aspect aspect = Aspect.PRODUCTTYPE;
+    private Stage stage = Stage.PRODUCTTYPE;
 
     // Lots of UI elements we will be managing...
     public UILabel aspectLabel;
@@ -31,14 +32,19 @@ public class UINewProductFlow : MonoBehaviour {
     public UIButton selectButton;
     public UILabel selectLabel;
     public UIWidget completedScreen;
+    public UIWidget pointsScreen;
 
-    // The prefab for all product aspects.
+    // The prefabs for all product aspects and features.
     public GameObject productAspectPrefab;
+    public GameObject featurePrefab;
 
     // Keep track of the selected product aspects.
     private ProductType productType;
     private Industry industry;
     private Market market;
+
+    // The available feature points.
+    private FeaturePoints featurePoints;
 
     // These labels are used to display
     // the user's current selections.
@@ -54,6 +60,7 @@ public class UINewProductFlow : MonoBehaviour {
 
     void OnEnable() {
         gm = GameManager.Instance;
+        featurePoints = GameManager.Instance.playerCompany.featurePoints;
         background.color = new Color(0.61f,0.067f,0.57f,1f);
 
         gridCenter.onFinished = OnCenter;
@@ -76,9 +83,9 @@ public class UINewProductFlow : MonoBehaviour {
     }
 
     public void Select() {
-        switch (aspect) {
-            case Aspect.PRODUCTTYPE:
-                aspect = Aspect.INDUSTRY;
+        switch (stage) {
+            case Stage.PRODUCTTYPE:
+                stage = Stage.INDUSTRY;
                 aspectLabel.text = "INDUSTRY";
                 background.color = new Color(1f,1f,1f,1f);
 
@@ -89,8 +96,8 @@ public class UINewProductFlow : MonoBehaviour {
                 LoadIndustries();
                 break;
 
-            case Aspect.INDUSTRY:
-                aspect = Aspect.MARKET;
+            case Stage.INDUSTRY:
+                stage = Stage.MARKET;
                 aspectLabel.text = "MARKET";
                 background.color = new Color(1f,0.69f,1f,1f);
 
@@ -101,8 +108,8 @@ public class UINewProductFlow : MonoBehaviour {
                 LoadMarkets();
                 break;
 
-            case Aspect.MARKET:
-                aspect = Aspect.COMPLETE;
+            case Stage.MARKET:
+                stage = Stage.CONFIRM;
                 background.color = new Color(0.2f,0.69f,0.7f,1f);
 
                 // Hide the aspect label.
@@ -118,10 +125,27 @@ public class UINewProductFlow : MonoBehaviour {
                 finalIndustryLabel.text = industry.ToString();
                 finalMarketLabel.text = market.ToString();
 
+                int totalPoints = productType.points + industry.points + market.points;
+                int diffPoints = totalPoints - GameManager.Instance.playerCompany.availableProductPoints;
+                if (diffPoints <= 0) {
+                    selectLabel.text = "OK";
+                } else {
+                    selectButton.isEnabled = false;
+                    selectLabel.text = "You need " + diffPoints.ToString() + " more product points.";
+                }
+                break;
+
+            case Stage.CONFIRM:
+                stage = Stage.POINTS;
+                UpdateFeaturePoints();
+
+                completedScreen.gameObject.SetActive(false);
+                pointsScreen.gameObject.SetActive(true);
+
                 selectLabel.text = "Start";
                 break;
 
-            case Aspect.COMPLETE:
+            case Stage.POINTS:
                 gm.playerCompany.StartNewProduct(productType, industry, market);
 
                 // TEMPORARY, this has bad performance.
@@ -131,6 +155,11 @@ public class UINewProductFlow : MonoBehaviour {
                 break;
         }
     }
+
+
+    // ===============================================
+    // Loading =======================================
+    // ===============================================
 
     private void LoadProductTypes() {
         ClearGrid();
@@ -164,6 +193,45 @@ public class UINewProductFlow : MonoBehaviour {
         WrapGrid();
         gridCenter.Recenter();
     }
+
+
+    // ===============================================
+    // Point Allocation ==============================
+    // ===============================================
+
+    private FeatureSet features = new FeatureSet();
+
+    public void AddPoint(GameObject obj) {
+        UpdateFeature(obj, true);
+    }
+    public void SubtractPoint(GameObject obj) {
+        UpdateFeature(obj, false);
+    }
+    private void UpdateFeature(GameObject obj, bool inc) {
+        string featureName = obj.transform.Find("Feature Name").GetComponent<UILabel>().text;
+
+        if (inc) {
+            featurePoints = features.Increment(featureName, featurePoints);
+        } else {
+            featurePoints = features.Decrement(featureName, featurePoints);
+        }
+
+        if (features[featureName] < 0)
+            features[featureName] = 0;
+        obj.transform.Find("Total").GetComponent<UILabel>().text = features[featureName].ToString();
+        UpdateFeaturePoints();
+    }
+
+    private void UpdateFeaturePoints() {
+        pointsScreen.transform.Find("Available Charisma").GetComponent<UILabel>().text = "CHA:" + featurePoints.charisma.ToString();
+        pointsScreen.transform.Find("Available Cleverness").GetComponent<UILabel>().text = "CLE:" + featurePoints.cleverness.ToString();
+        pointsScreen.transform.Find("Available Creativity").GetComponent<UILabel>().text = "CRE:" + featurePoints.creativity.ToString();
+    }
+
+
+    // ===============================================
+    // Utility =======================================
+    // ===============================================
 
     private void ClearGrid() {
         while (grid.transform.childCount > 0)

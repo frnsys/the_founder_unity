@@ -22,7 +22,7 @@ public class Product : HasStats, IProduct {
 
     private float _progress = 0;
     public float progress {
-        get { return _progress; }
+        get { return _progress/recipe.progressRequired; }
     }
     private State _state = State.DEVELOPMENT;
     public State state {
@@ -53,6 +53,13 @@ public class Product : HasStats, IProduct {
     public ProductType productType;
     public Industry industry;
     public Market market;
+
+    // The number of product points this product requires.
+    public int points {
+        get {
+            return productType.points + industry.points + market.points;
+        }
+    }
 
     // Creativity + Charisma
     public Stat appeal;
@@ -113,7 +120,7 @@ public class Product : HasStats, IProduct {
             usability.baseValue += newUsability;
             performance.baseValue += newPerformance;
 
-            if (progress >= recipe.progressRequired) {
+            if (_progress >= recipe.progressRequired) {
                 Launch();
             }
         }
