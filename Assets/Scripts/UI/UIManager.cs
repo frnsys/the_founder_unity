@@ -23,6 +23,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
     public GameObject researchCompletedAlertPrefab;
+    public GameObject productCompletedAlertPrefab;
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -32,6 +33,7 @@ public class UIManager : Singleton<UIManager> {
         gm = GameManager.Instance;
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
+        Product.Completed += OnProductCompleted;
 
         //Confirm("thisthis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long message is a very long message");
     }
@@ -39,6 +41,7 @@ public class UIManager : Singleton<UIManager> {
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
         ResearchManager.Completed -= OnResearchCompleted;
+        Product.Completed -= OnProductCompleted;
     }
 
     void OnEvent(GameEvent e) {
@@ -55,7 +58,12 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnResearchCompleted(Discovery d) {
-        NGUITools.AddChild(gameObject, researchCompletedAlertPrefab);
+        GameObject popup = NGUITools.AddChild(gameObject, researchCompletedAlertPrefab);
+        popup.GetComponent<UIResearchCompletedAlert>().discovery = d;
+    }
+    void OnProductCompleted(Product p) {
+        GameObject popup = NGUITools.AddChild(gameObject, productCompletedAlertPrefab);
+        popup.GetComponent<UIProductCompletedAlert>().product = p;
     }
 
     public void OpenPopup(GameObject popupPrefab) {

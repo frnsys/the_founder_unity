@@ -34,9 +34,7 @@ public class UINewProductFlow : MonoBehaviour {
     public UIWidget completedScreen;
     public UIWidget pointsScreen;
 
-    // The prefabs for all product aspects and features.
     public GameObject productAspectPrefab;
-    public GameObject featurePrefab;
 
     // Keep track of the selected product aspects.
     private ProductType productType;

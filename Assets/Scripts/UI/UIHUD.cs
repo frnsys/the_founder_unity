@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UIHUD : MonoBehaviour {
     private GameManager gm;
@@ -7,8 +8,10 @@ public class UIHUD : MonoBehaviour {
     private GameObject productsIndicator;
     private GameObject developmentIndicator;
     private GameObject researchIndicator;
+    private GameObject productsGrid;
     private UIProgressBar researchProgressBar;
     private UIProgressBar developmentProgressBar;
+    public GameObject activeProductPrefab;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -18,22 +21,38 @@ public class UIHUD : MonoBehaviour {
         researchIndicator = transform.Find("Research").gameObject;
         researchProgressBar = researchIndicator.transform.Find("Indicator/Progress Bar").gameObject.GetComponent<UIProgressBar>();
         developmentProgressBar = developmentIndicator.transform.Find("Indicator/Progress Bar").gameObject.GetComponent<UIProgressBar>();
+        productsGrid = productsIndicator.transform.Find("Indicator").gameObject;
     }
+
+    private List<Product> displayedProducts = new List<Product>();
 
     void Update() {
         Vector3 pos = Vector3.zero;
         float height = 0;
 
-        if (false) {
+        if (GameManager.Instance.playerCompany.activeProducts.Count > 0) {
             productsIndicator.SetActive(true);
             productsIndicator.transform.localPosition = pos;
+
+            foreach (Product p in GameManager.Instance.playerCompany.activeProducts) {
+                if (!displayedProducts.Contains(p)) {
+                    GameObject productItem = NGUITools.AddChild(productsGrid, activeProductPrefab);
+                    productItem.transform.Find("Product Name").GetComponent<UILabel>().text = p.name;
+                    productItem.transform.Find("Product Revenue").GetComponent<UILabel>().text = "$" + p.revenueEarned.ToString();
+                    displayedProducts.Add(p);
+                } else {
+                    int i = displayedProducts.IndexOf(p);
+                    productsGrid.transform.GetChild(i).Find("Product Revenue").GetComponent<UILabel>().text = "$" + ((int)p.revenueEarned).ToString();
+                }
+            }
+
+            productsGrid.GetComponent<UICenteredGrid>().Reposition();
             height = productsIndicator.GetComponent<UIWidget>().CalculateBounds().size.y;
             pos.y += height;
         } else {
             productsIndicator.SetActive(false);
         }
 
-        // temp: this should check if a product is being developed
         if (GameManager.Instance.playerCompany.developingProducts.Count > 0) {
             developmentIndicator.SetActive(true);
             developmentIndicator.transform.localPosition = pos;

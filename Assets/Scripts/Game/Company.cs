@@ -77,13 +77,18 @@ public class Company : HasStats {
     // Total product point capacity.
     public int productPoints = 10;
     public int usedProductPoints {
-        get { return products.Sum(i=>i.points); }
+        get { return products.Sum(p => p.state != Product.State.RETIRED ? p.points : 0); }
     }
     public int availableProductPoints {
         get { return productPoints - usedProductPoints; }
     }
 
     public List<Product> products = new List<Product>();
+    public List<Product> activeProducts {
+        get {
+            return products.FindAll(p => p.state == Product.State.LAUNCHED);
+        }
+    }
     public List<Product> developingProducts {
         get {
             return products.FindAll(p => p.state == Product.State.DEVELOPMENT);
@@ -122,10 +127,11 @@ public class Company : HasStats {
     }
 
     public void DevelopProduct(IProduct product) {
-        float charisma = 0;
-        float creativity = 0;
-        float cleverness = 0;
-        float progress = 0;
+        float charisma = 100;
+        float creativity = 100;
+        float cleverness = 100;
+        //float progress = 0;
+        float progress = 100; // testing
 
         foreach (Worker worker in workers) {
             // A bit of randomness to make things more interesting.

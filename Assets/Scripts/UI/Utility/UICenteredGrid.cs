@@ -11,6 +11,7 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class UICenteredGrid : UIWidget {
 	public List<EventDelegate> OnReposition;
+    public bool fullWidth = false;
 
 	[ContextMenu("Execute")]
     public void Reposition() {
@@ -20,6 +21,10 @@ public class UICenteredGrid : UIWidget {
 		for (int i = 0; i < children.Count; ++i) {
 			Transform child = children[i];
 			Vector3 localPos = Vector3.zero;
+
+            if (fullWidth)
+                child.GetComponent<UIWidget>().width = width;
+
             Vector3 size = child.GetComponent<UIWidget>().CalculateBounds().size;
 
             localPos.x = 0;

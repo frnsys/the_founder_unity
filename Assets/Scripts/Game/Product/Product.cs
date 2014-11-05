@@ -20,6 +20,9 @@ public class Product : HasStats, IProduct {
     private static string[] prefixes;
     private static string[] endings;
 
+    // TO DO this should come from the product recipe.
+    public string description;
+
     private float _progress = 0;
     public float progress {
         get { return _progress/recipe.progressRequired; }
@@ -28,6 +31,9 @@ public class Product : HasStats, IProduct {
     public State state {
         get { return _state; }
     }
+    public bool launched { get { return _state == State.LAUNCHED; } }
+    public bool developing { get { return _state == State.DEVELOPMENT; } }
+    public bool retired { get { return _state == State.RETIRED; } }
 
     // All the data about how well
     // this ProductType/Industry/Market
@@ -109,6 +115,9 @@ public class Product : HasStats, IProduct {
 
     #region IProduct implementation
 
+
+    static public event System.Action<Product> Completed;
+
     public void Develop(float newProgress, float charisma, float creativity, float cleverness) {
         if (state == State.DEVELOPMENT) {
             float newAppeal = (creativity + charisma)/2;
@@ -122,6 +131,11 @@ public class Product : HasStats, IProduct {
 
             if (_progress >= recipe.progressRequired) {
                 Launch();
+
+                // Trigger completed event.
+                if (Completed != null) {
+                    Completed(this);
+                }
             }
         }
     }
@@ -295,6 +309,7 @@ public class Product : HasStats, IProduct {
 
     // Product death
     public void Shutdown() {
+        // TO DO
         // ...
         // Modify product-related event probabilities, etc.
         _state = State.RETIRED;
