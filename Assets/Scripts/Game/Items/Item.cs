@@ -1,8 +1,12 @@
+/*
+ * Any item which can be purchased from the market.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Item : ScriptableObject, IUnlockable {
+public class Item : ScriptableObject {
     public float cost = 1000;
     public float duration = 0;
     public string description;

@@ -1,3 +1,7 @@
+/*
+ * A set of prequisites which results in some event.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

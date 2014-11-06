@@ -1,3 +1,7 @@
+/*
+ * The company is the primary entity of the game.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,26 +49,24 @@ public class Company : HasStats {
         _workers.Remove(worker);
     }
 
-
     // Total feature points available.
+    private int baseFeaturePoints = 4;
     public FeaturePoints featurePoints {
         get {
-            // You start with some by default.
-            int def = 4;
 
-            float charisma_ = 0;
+            float charisma_   = 0;
             float cleverness_ = 0;
             float creativity_ = 0;
             foreach (Worker w in _workers) {
-                charisma_ += w.charisma.value;
+                charisma_   += w.charisma.value;
                 cleverness_ += w.cleverness.value;
                 creativity_ += w.creativity.value;
             }
 
             // You get one feature point for every 10 worker points.
-            int charisma = (int)(charisma_/10) + def;
-            int cleverness = (int)(cleverness_/10) + def;
-            int creativity = (int)(creativity_/10) + def;
+            int charisma   = (int)(charisma_/10)   + baseFeaturePoints;
+            int cleverness = (int)(cleverness_/10) + baseFeaturePoints;
+            int creativity = (int)(creativity_/10) + baseFeaturePoints;
 
             // TO DO: bonuses which increase any of these.
 

@@ -1,9 +1,3 @@
-/*
- * Buff Effect
- * ===================
- *
- */
-
 using UnityEngine;
 
 public class UIBuffEffect : MonoBehaviour {

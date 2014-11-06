@@ -1,12 +1,3 @@
-/*
- * EventAction Button
- * ===================
- *
- * Shows up in GameEvent notifications
- * as an action.
- *
- */
-
 using UnityEngine;
 using System.Collections;
 

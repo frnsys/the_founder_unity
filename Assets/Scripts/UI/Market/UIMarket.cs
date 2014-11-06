@@ -5,19 +5,22 @@ public class UIMarket : UIWindow {
     public GameObject storePagePrefab;
     public GameObject itemItemPrefab;
     public GameObject itemDetailPrefab;
+
     public UISimpleGrid storePageGrid;
     public UIScrollManager scrollManager;
     public UIDynamicDragScrollView currentPageScrollDrag;
 
     void OnEnable() {
+        // Create a page for each unlocked store.
         foreach (Store store in GameManager.Instance.unlocked.stores) {
             GameObject storePage = NGUITools.AddChild(storePageGrid.gameObject, storePagePrefab);
             storePage.GetComponent<UIWidget>().SetAnchor(storePageGrid.gameObject);
-
             storePage.transform.Find("Title").GetComponent<UILabel>().text = store.ToString();
-            GameObject itemGrid = storePage.transform.Find("Content Scroll/Items Grid").gameObject;
 
+            // Render each unlocked item for this store.
+            GameObject itemGrid = storePage.transform.Find("Content Scroll/Items Grid").gameObject;
             foreach (Item item in GameManager.Instance.unlocked.items.FindAll(i => i.store == store)) {
+                // TO DO
                 // This for loop is just for testing a bunch of items in the grid layout.
                 for (int i =0; i< 20; i++) {
                     GameObject itemItem = NGUITools.AddChild(itemGrid, itemItemPrefab);
@@ -37,7 +40,7 @@ public class UIMarket : UIWindow {
         Transform startingPage = UISimpleGrid.GetChildren(storePageGrid.transform)[0].transform;
         currentPageScrollDrag.scrollView = startingPage.Find("Content Scroll").GetComponent<UIScrollView>();
 
-        // If there is only one store, disable page-to-page scrolling.
+        // If there is only one store, disable page-to-page (store-to-store) scrolling.
         if (GameManager.Instance.unlocked.stores.Count == 1) {
             scrollManager.direction = UIScrollManager.Movement.Vertical;
         }

@@ -1,12 +1,3 @@
-/*
- * GameEvent Notification
- * ===================
- *
- * This manages the UI element
- * which is displayed when a gameEvent occurs.
- *
- */
-
 using UnityEngine;
 using System.Collections;
 

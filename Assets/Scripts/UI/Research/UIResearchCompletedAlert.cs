@@ -7,7 +7,7 @@ public class UIResearchCompletedAlert: UIEffectAlert {
     public GameObject discoveryPrefab;
     public GameObject selectedDiscoveryItem;
 
-    // For mapping GameObjects to Discoveries.
+    // For mapping GameObjects (by id) to Discoveries.
     public Dictionary<int, Discovery> discoveries = new Dictionary<int, Discovery>();
 
     private Discovery discovery_;

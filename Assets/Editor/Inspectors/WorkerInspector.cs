@@ -12,7 +12,7 @@ internal class WorkerInspector : Editor {
     public override void OnInspectorGUI() {
         w = target as Worker;
 
-        w.type = (WorkerType)EditorGUILayout.EnumPopup(w.type);
+        w.tier = (Worker.Tier)EditorGUILayout.EnumPopup(w.tier);
         w.name = EditorGUILayout.TextField("Name", w.name);
         w.bio = EditorGUILayout.TextField("Bio", w.bio);
         w.productivity.baseValue = EditorGUILayout.FloatField("Productivity", w.productivity.baseValue);

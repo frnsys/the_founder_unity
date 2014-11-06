@@ -2,11 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UIHireWorkers : MonoBehaviour {
+public class UIHireWorkers : UIFullScreenPager {
     public GameObject workerItemPrefab;
-    public UIFullScreenGrid grid;
-    public UICenterOnChild gridCenter;
-    public UIScrollView scrollView;
 
     public UIButton hireButton;
 
@@ -41,7 +38,7 @@ public class UIHireWorkers : MonoBehaviour {
         UnityEngine.Object.DestroyImmediate(workerItem);
 
         // Re-wrap the grid to reset the wrapped items.
-        WrapGrid();
+        Adjust();
 
         // TO DO make this fancier
         UIManager.Instance.Alert("It's been my lifelong dream to work for " + GameManager.Instance.playerCompany.name + "!!");
@@ -61,22 +58,7 @@ public class UIHireWorkers : MonoBehaviour {
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
             workerItem.GetComponent<UIWorker>().worker = w;
         }
-        grid.Reposition();
-        WrapGrid();
-        gridCenter.Recenter();
+        Adjust();
     }
 
-    // The grid has to be re-wrapped whenever
-    // its contents change, since UIWrapContent
-    // caches the grid's contents on its start.
-    private void WrapGrid() {
-        NGUITools.DestroyImmediate(grid.gameObject.GetComponent<UIWrapContent>());
-        UIWrapContent wrapper = grid.gameObject.AddComponent<UIWrapContent>();
-
-        // Disable culling since it screws up the grid's layout.
-        wrapper.cullContent = false;
-
-        // The wrapper's item width is the same as the grid's cell width, duh
-        wrapper.itemSize = (int)grid.childSize.x;
-    }
 }

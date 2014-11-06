@@ -1,3 +1,7 @@
+/*
+ * A bundle of different effects that affect products.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

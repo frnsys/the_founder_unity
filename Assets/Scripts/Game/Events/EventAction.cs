@@ -1,3 +1,7 @@
+/*
+ * An action the player can choose in response to an event.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,15 +1,12 @@
-/*
- * A text alert popup with an OK button.
- */
-
 using UnityEngine;
 using System.Collections;
 
+// A text alert popup with an OK button.
 public class UIAlert : UIPopup {
     public GameObject window;
     public UITexture overlay;
-    public UILabel bodyLabel;
     public UIWidget body;
+    public UILabel bodyLabel;
     public string bodyText {
         set {
             bodyLabel.text = value;

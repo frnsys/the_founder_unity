@@ -7,13 +7,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ResearchManager : MonoBehaviour {
+    // The currently-hired consultancy.
     public Consultancy consultancy;
 
+    // The currently-pursued discovery.
     private Discovery discovery_;
     public Discovery discovery {
         get { return discovery_; }
     }
 
+    // The accumulated research for the current discovery.
     private Research research_ = new Research(0,0,0);
     public Research research {
         get { return research_; }
@@ -22,6 +25,7 @@ public class ResearchManager : MonoBehaviour {
         get { return discovery != null; }
     }
 
+    // Progress towards the discovery's completion.
     public float progress {
         get {
             if (discovery != null) {
@@ -31,6 +35,7 @@ public class ResearchManager : MonoBehaviour {
         }
     }
 
+    // Accumulate research.
     public void Research() {
         if (consultancy && discovery_) {
             research_ += consultancy.research;
@@ -51,7 +56,7 @@ public class ResearchManager : MonoBehaviour {
             Completed(discovery_);
         }
 
-        // Reset.
+        // Reset the discovery & accumulated research.
         discovery_ = null;
         research_ = new Research(0,0,0);
     }

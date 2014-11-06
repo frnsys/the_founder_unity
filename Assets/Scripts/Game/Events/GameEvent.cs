@@ -1,10 +1,14 @@
+/*
+ * A random or trigger game event that has some effects.
+ */
+
 using UnityEngine;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class GameEvent : ScriptableObject, IUnlockable {
+public class GameEvent : ScriptableObject {
 
     // Roll to see what events happen, out of a set of specified
     // candidate events.

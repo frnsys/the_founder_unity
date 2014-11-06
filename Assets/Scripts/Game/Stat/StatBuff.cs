@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+/*
+ * A Buff modifies a Stat.
+ */
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 

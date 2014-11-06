@@ -1,7 +1,4 @@
 /*
- * UIManager
- * ================
- *
  * Handles persistent UI elements, such
  * as the menu, manages popups, and coordinates
  * other UI elements.
@@ -42,11 +39,6 @@ public class UIManager : Singleton<UIManager> {
         Product.Completed -= OnProductCompleted;
     }
 
-    void OnEvent(GameEvent e) {
-        UIGameEventNotification gameEventNotification = NGUITools.AddChild(gameObject, gameEventNotificationPrefab).GetComponent<UIGameEventNotification>();
-        gameEventNotification.gameEvent = e;
-    }
-
     public void ToggleMenu() {
         if (menu.activeInHierarchy) {
             menu.SetActive(false);
@@ -55,26 +47,42 @@ public class UIManager : Singleton<UIManager> {
         }
     }
 
+    // Show an event notification.
+    void OnEvent(GameEvent e) {
+        UIGameEventNotification gameEventNotification = NGUITools.AddChild(gameObject, gameEventNotificationPrefab).GetComponent<UIGameEventNotification>();
+        gameEventNotification.gameEvent = e;
+    }
+
+    // Show a "research completed" alert.
     void OnResearchCompleted(Discovery d) {
         GameObject popup = NGUITools.AddChild(gameObject, researchCompletedAlertPrefab);
         popup.GetComponent<UIResearchCompletedAlert>().discovery = d;
     }
+
+    // Show a "product completed" alert.
     void OnProductCompleted(Product p) {
         GameObject popup = NGUITools.AddChild(gameObject, productCompletedAlertPrefab);
         popup.GetComponent<UIProductCompletedAlert>().product = p;
     }
 
+    public GameObject currentPopup;
     public void OpenPopup(GameObject popupPrefab) {
-        NGUITools.AddChild(gameObject, popupPrefab);
+        currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
         menu.SetActive(false);
     }
+    public void ClosePopup() {
+        NGUITools.DestroyImmediate(currentPopup);
+        currentPopup = null;
+    }
 
+    // Create a simple alert.
     public UIAlert Alert(string text) {
         UIAlert alert = NGUITools.AddChild(gameObject, alertPrefab).GetComponent<UIAlert>();
         alert.bodyText = text;
         return alert;
     }
 
+    // Create an alert which lists some effects.
     public UIEffectAlert EffectAlert(string text, EffectSet es) {
         UIEffectAlert alert = NGUITools.AddChild(gameObject, effectAlertPrefab).GetComponent<UIEffectAlert>();
         alert.bodyText = text;
@@ -83,6 +91,7 @@ public class UIManager : Singleton<UIManager> {
         return alert;
     }
 
+    // Create a confirmation popup.
     public UIConfirm Confirm(string text, Action yes, Action no) {
         UIConfirm confirm = NGUITools.AddChild(gameObject, confirmPrefab).GetComponent<UIConfirm>();
         confirm.bodyText = text;
@@ -92,7 +101,7 @@ public class UIManager : Singleton<UIManager> {
             confirm.Close_();
         };
 
-        // The no method can be null if you just want nothing to happen.
+        // The `no` method can be null if you just want nothing to happen.
         UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
             if (no != null)
                 no();

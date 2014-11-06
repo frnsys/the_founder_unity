@@ -1,10 +1,7 @@
-/*
- * A text alert popup which supports rendering effects.
- */
-
 using UnityEngine;
 using System.Collections;
 
+// A text alert popup which supports rendering effects.
 public class UIEffectAlert : UIAlert {
     public UIGrid effectGrid;
 
@@ -32,7 +29,7 @@ public class UIEffectAlert : UIAlert {
     private void RenderUnlockEffects(EffectSet es) {
         // Render the unlock effects for this event.
         // Note that event unlocks are *not* rendered because
-        // those are "hidden" effects.
+        // those are "hidden" effects. You don't know they can happen until they do happen.
         foreach (Industry i in es.unlocks.industries) {
             RenderUnlockEffect("the " + i.name + " industry");
         }

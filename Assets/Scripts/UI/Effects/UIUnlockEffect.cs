@@ -1,9 +1,3 @@
-/*
- * Unlock Effect
- * ===================
- *
- */
-
 using UnityEngine;
 
 public class UIUnlockEffect : MonoBehaviour {

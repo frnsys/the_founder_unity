@@ -1,3 +1,7 @@
+/*
+ * Research is accumulated to achieve a Discovery.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +9,7 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class Research {
+    // Different kinds of research points.
     public float management = 0;
     public float technical = 0;
     public float design = 0;
@@ -36,19 +41,11 @@ public class Research {
     }
 
     public static bool operator >=(Research left, Research right) {
-        if (left / right >= 1f) {
-            return true;
-        } else {
-            return false;
-        }
+        return (left/right >= 1f);
     }
 
     public static bool operator <=(Research left, Research right) {
-        if (left / right <= 1f) {
-            return true;
-        } else {
-            return false;
-        }
+        return (left/right <= 1f);
     }
 }
 

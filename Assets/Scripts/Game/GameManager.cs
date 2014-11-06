@@ -1,3 +1,8 @@
+/*
+ * The central manager for everything in the game.
+ * Delegates to other managers for more specific domains.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,33 +20,6 @@ public class GameManager : Singleton<GameManager> {
 
     // Other managers.
     public ResearchManager researchManager;
-
-    private int weekTime = 15;
-    private Month _month = Month.January;
-    public string month {
-        get { return _month.ToString(); }
-    }
-    private int _year = 1;
-    public int year {
-        get { return 2014 + _year; }
-    }
-    [HideInInspector]
-    public int week = 0;
-
-    private enum Month {
-        January,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December
-    }
 
     private enum Phase {
         Local,
@@ -91,7 +69,82 @@ public class GameManager : Singleton<GameManager> {
         researchManager = gameObject.AddComponent<ResearchManager>();
     }
 
-    void Update() {
+    void OnEvent(GameEvent e) {
+        ApplyEffectSet(e.effects);
+
+        // If this event is not repeatable,
+        // remove it from the candidate event pool.
+        if (!e.repeatable) {
+            unlocked.events.Remove(e);
+        }
+    }
+
+    void OnResearchCompleted(Discovery d) {
+        ApplyEffectSet(d.effects);
+    }
+
+    private void ApplyEffectSet(EffectSet es) {
+        playerCompany.ApplyBuffs(es.company);
+
+        foreach (Worker worker in playerCompany.workers) {
+            worker.ApplyBuffs(es.workers);
+        }
+
+        foreach (ProductEffect pe in es.products) {
+            playerCompany.ApplyProductEffect(pe);
+        }
+
+        unlocked.Unlock(es.unlocks);
+    }
+
+    public bool HireConsultancy(Consultancy c) {
+        // You pay the consultancy cost initially when hired, then repeated monthly.
+        if (playerCompany.Pay(c.cost)) {
+            researchManager.consultancy = c;
+            playerCompany.consultancy = c;
+            return true;
+        }
+        return false;
+    }
+
+
+    // ===============================================
+    // Time ==========================================
+    // ===============================================
+
+    private int weekTime = 15;
+    private Month _month = Month.January;
+    public string month {
+        get { return _month.ToString(); }
+    }
+    private int _year = 1;
+    public int year {
+        get { return 2014 + _year; }
+    }
+    [HideInInspector]
+    public int week = 0;
+
+    private enum Month {
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December
+    }
+
+
+    public void Pause() {
+        Time.timeScale = 0;
+    }
+    public void Resume() {
+        Time.timeScale = 1;
     }
 
     IEnumerator Yearly() {
@@ -136,7 +189,7 @@ public class GameManager : Singleton<GameManager> {
         while(true) {
             playerCompany.DevelopProducts();
 
-            // Temporarily placed here
+            // TO DO Temporarily placed here
             GameEvent.Roll(unlocked.events);
 
             // Add a bit of randomness to give things
@@ -169,52 +222,7 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    public void Pause() {
-        Time.timeScale = 0;
-    }
-    public void Resume() {
-        Time.timeScale = 1;
-    }
 
-
-    void OnEvent(GameEvent e) {
-        ApplyEffectSet(e.effects);
-
-        // If this event is not repeatable,
-        // remove it from the candidate event pool.
-        if (!e.repeatable) {
-            unlocked.events.Remove(e);
-        }
-    }
-
-
-    void OnResearchCompleted(Discovery d) {
-        ApplyEffectSet(d.effects);
-    }
-
-    private void ApplyEffectSet(EffectSet es) {
-        playerCompany.ApplyBuffs(es.company);
-
-        foreach (Worker worker in playerCompany.workers) {
-            worker.ApplyBuffs(es.workers);
-        }
-
-        foreach (ProductEffect pe in es.products) {
-            playerCompany.ApplyProductEffect(pe);
-        }
-
-        unlocked.Unlock(es.unlocks);
-    }
-
-    public bool HireConsultancy(Consultancy c) {
-        // You pay the consultancy cost initially when hired, then repeated monthly.
-        if (playerCompany.Pay(c.cost)) {
-            researchManager.consultancy = c;
-            playerCompany.consultancy = c;
-            return true;
-        }
-        return false;
-    }
 }
 
 

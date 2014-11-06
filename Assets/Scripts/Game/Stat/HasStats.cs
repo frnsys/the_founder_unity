@@ -1,3 +1,7 @@
+/*
+ * An abstract class for any class which has stats.
+ */
+
 using UnityEngine;
 using System.Collections.Generic;
 

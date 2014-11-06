@@ -1,22 +1,29 @@
+/*
+ * A worker which contributes to the development of products.
+ * "Worker" here is used abstractly - it can mean an employee, or a location, or a planet.
+ * i.e. a worker is some _productive_ entity.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum WorkerType {
-    Employee,
-    Location,
-    Planet,
-    StarSystem
-}
 
-public class Worker : HasStats, IUnlockable {
-    public static List<Worker> LoadAll(WorkerType type) {
-        return new List<Worker>(Resources.LoadAll<Worker>("Workers/" + type + "s"));
+public class Worker : HasStats {
+    public enum Tier {
+        Employee,
+        Location,
+        Planet,
+        StarSystem
+    }
+    public Tier tier;
+
+    public static List<Worker> LoadAll(Tier tier) {
+        return new List<Worker>(Resources.LoadAll<Worker>("Workers/" + tier + "s"));
     }
 
     private Levels levels;
 
-    public WorkerType type;
 
     public float salary;
     public string bio;
@@ -30,12 +37,12 @@ public class Worker : HasStats, IUnlockable {
     public Worker(string name_, float happiness_, float productivity_, float charisma_, 
         float creativity_, float cleverness_
     ) {
-        name = name_;
-        happiness = new Stat("Happiness", happiness_);
+        name         = name_;
+        happiness    = new Stat("Happiness", happiness_);
         productivity = new Stat("Productivity", productivity_);
-        charisma = new Stat("Charisma", charisma_);
-        creativity = new Stat("Creativity", creativity_);
-        cleverness = new Stat("Cleverness", cleverness_);
+        charisma     = new Stat("Charisma", charisma_);
+        creativity   = new Stat("Creativity", creativity_);
+        cleverness   = new Stat("Cleverness", cleverness_);
     }
 
     void Start() {

@@ -1,3 +1,7 @@
+/*
+ * A set of things which are unlocked together.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

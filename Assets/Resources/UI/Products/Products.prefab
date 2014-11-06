@@ -797,10 +797,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400094}
-  - 114: {fileID: 11400142}
-  - 114: {fileID: 11400140}
   - 114: {fileID: 11400144}
   - 114: {fileID: 11400138}
+  - 114: {fileID: 11400140}
   m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
@@ -1162,7 +1161,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 102.5, y: 1.52587891e-05, z: 0}
+  m_LocalPosition: {x: 87.5, y: 1.52587891e-05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -1174,7 +1173,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.5, y: 1.52587891e-05, z: 0}
+  m_LocalPosition: {x: -32.5, y: 1.52587891e-05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -1228,7 +1227,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 209, y: 1.52587891e-05, z: 0}
+  m_LocalPosition: {x: 224, y: 1.52587891e-05, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -1801,7 +1800,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -167.966644, y: 268.5, z: 0}
+  m_LocalPosition: {x: -175.483307, y: 268.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400100}
@@ -2226,7 +2225,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 495, y: 960, z: 0}
+  m_Size: {x: 525, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500032
 BoxCollider:
@@ -2252,7 +2251,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   productItemPrefab: {fileID: 100008, guid: 65bb79ef341984487a84d93a42b78181, type: 2}
-  developingProductItemPrefab: {fileID: 0}
   productsGrid: {fileID: 100002}
   productsGridGrid: {fileID: 11400006}
 --- !u!114 &11400002
@@ -2322,7 +2320,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: 0, y: -479.934387, z: 494.999969, w: 819.999878}
+  mClipRange: {x: 0, y: -479.934387, z: 524.999939, w: 819.999878}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 220
   mSortingOrder: 0
@@ -2357,7 +2355,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
-  mWidth: 447
+  mWidth: 477
   mHeight: 820
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -2396,7 +2394,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .998580098, b: .948529422, a: 1}
   mPivot: 4
-  mWidth: 495
+  mWidth: 525
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -2742,13 +2740,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .970588207, g: .837403059, b: .0927767903, a: 1}
   mPivot: 4
-  mWidth: 495
+  mWidth: 525
   mHeight: 80
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12
+  aspectRatio: 6.1875
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -2800,7 +2798,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: .529411793}
   mPivot: 4
-  mWidth: 470
+  mWidth: 500
   mHeight: 80
   mDepth: 2
   autoResizeBoxCollider: 0
@@ -5413,7 +5411,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 495
+  mWidth: 525
   mHeight: 960
   mDepth: 2
   autoResizeBoxCollider: 1
@@ -5487,7 +5485,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: .841125488, y: 0, z: 494.999969, w: 959.999939}
+  mClipRange: {x: .841125488, y: 0, z: 524.999939, w: 959.999939}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 101
   mSortingOrder: 0
@@ -5503,7 +5501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 400
+  itemSize: 690
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -5515,30 +5513,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 100094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 39b0b4115d6a74f8fad02919b4e030d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11400142
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07c4de3b4b6fe9045b059ee627c100df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrangement: 0
-  sorting: 0
-  pivot: 0
-  maxPerLine: 0
-  cellWidth: 400
-  cellHeight: 200
-  animateSmoothly: 0
-  hideInactive: 1
-  keepWithinPanel: 0
-  sorted: 0
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 1
+  childSize: {x: 690, y: 960}
+  OnReposition: []
+  padding: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11400144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5917,7 +5923,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 119
+  mWidth: 134
   mHeight: 23
   mDepth: 3
   autoResizeBoxCollider: 0
@@ -6360,7 +6366,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .611764729, g: .0666666701, b: .572549045, a: 1}
   mPivot: 4
-  mWidth: 495
+  mWidth: 525
   mHeight: 960
   mDepth: -1
   autoResizeBoxCollider: 0
@@ -6399,11 +6405,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ea50452c87b44a89d99f653195e71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 11400140}
+  gridCenter: {fileID: 11400144}
+  scrollView: {fileID: 11400134}
   aspectLabel: {fileID: 11400162}
   background: {fileID: 11400176}
-  gridCenter: {fileID: 11400144}
-  grid: {fileID: 11400142}
-  scrollView: {fileID: 11400134}
   selectButton: {fileID: 11400146}
   selectLabel: {fileID: 11400150}
   completedScreen: {fileID: 11400174}
@@ -6490,7 +6496,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .551470578, g: .551470578, b: .551470578, a: 1}
   mPivot: 4
-  mWidth: 447
+  mWidth: 477
   mHeight: 40
   mDepth: 250
   autoResizeBoxCollider: 0

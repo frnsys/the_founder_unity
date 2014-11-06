@@ -1,12 +1,9 @@
-/*
- * Popup class with scaling up/down show/hide behavior (respectively).
- */
-
 using UnityEngine;
 using System;
 using System.Collections;
 
-public class UIPopup : MonoBehaviour {
+// Popup class with scaling up/down show/hide behavior (respectively).
+public abstract class UIPopup : MonoBehaviour {
     public void Show(GameObject target) {
         StartCoroutine(Scale(target, 0f, 1f));
     }

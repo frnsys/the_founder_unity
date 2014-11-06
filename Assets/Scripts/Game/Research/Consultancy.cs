@@ -1,13 +1,20 @@
+/*
+ * Consultancies are the entities which conduct research for a company.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 
-public class Consultancy : ScriptableObject, IUnlockable {
-    public float cost = 10;
+public class Consultancy : ScriptableObject {
     public string description;
 
-    // Specializations.
+    // Monthly cost.
+    public float cost = 10;
+
+    // The amount of research the consultancy outputs.
+    // There's a possibility to model specialization here:
     // Technical consultancies give bonus cleverness.
     // Design consultancies give bonus creativity.
     // Management consultancies give bonus charisma.

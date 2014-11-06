@@ -1,16 +1,8 @@
-/*
- * Status Bar
- * ================
- *
- * Displays important information
- * about the game.
- *
- */
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+// Displays cash and time info.
 public class UIStatusBar : MonoBehaviour {
     private GameManager gm;
 
@@ -18,8 +10,10 @@ public class UIStatusBar : MonoBehaviour {
     public UILabel yearLabel;
     public UILabel monthLabel;
     public UIGrid weekGrid;
+
     public Color activeWeekColor;
     public Color defaultWeekColor;
+
     private int week;
 
     void OnEnable() {
@@ -45,9 +39,9 @@ public class UIStatusBar : MonoBehaviour {
         List<Transform> gridChildren = weekGrid.GetChildList();
         for (int i=0; i<gridChildren.Count; i++) {
             if (i == gm.week) {
-                gridChildren[i].GetComponent<UITexture>().color = new Color(activeWeekColor.r, activeWeekColor.g, activeWeekColor.b, activeWeekColor.a);
+                gridChildren[i].GetComponent<UITexture>().color = activeWeekColor;
             } else {
-                gridChildren[i].GetComponent<UITexture>().color = new Color(defaultWeekColor.r, defaultWeekColor.g, defaultWeekColor.b, defaultWeekColor.a);
+                gridChildren[i].GetComponent<UITexture>().color = defaultWeekColor;
             }
         }
     }

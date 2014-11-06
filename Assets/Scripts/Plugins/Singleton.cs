@@ -1,4 +1,4 @@
-// http://wiki.unity3d.com/index.php/Toolbox
+// From: http://wiki.unity3d.com/index.php/Toolbox
 
 using UnityEngine;
 
@@ -40,22 +40,13 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
         }
     }
 
-
-    //void Awake () {
-   //if(i == null) {
-     //i = this;
-     //DontDestroyOnLoad(gameObject);
-   //}
-   //else Destroy(this); // or gameObject
-//}
-
     private static bool applicationIsQuitting = false;
 
     // When Unity quits, it destroys objects in a random order.
 	// In principle, a Singleton is only destroyed when application quits.
 	// If any script calls Instance after it have been destroyed,
-	//   it will create a buggy ghost object that will stay on the Editor scene
-	//   even after stopping playing the Application. Really bad!
+	// it will create a buggy ghost object that will stay on the Editor scene
+	// even after stopping playing the Application. Really bad!
 	// So, this was made to be sure we're not creating that buggy ghost object.
     public void OnDestroy() {
         applicationIsQuitting = true;

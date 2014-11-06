@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+/*
+ * A Stat is some number value which can be modified by buffs.
+ */
+
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

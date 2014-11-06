@@ -1,3 +1,8 @@
+/*
+ * This is a set of points which are distributed amongst
+ * a FeatureSet.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

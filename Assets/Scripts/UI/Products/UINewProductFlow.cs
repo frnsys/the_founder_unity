@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UINewProductFlow : MonoBehaviour {
+public class UINewProductFlow : UIFullScreenPager {
     private GameManager gm;
 
     private enum Stage {
@@ -26,9 +26,6 @@ public class UINewProductFlow : MonoBehaviour {
     // Lots of UI elements we will be managing...
     public UILabel aspectLabel;
     public UITexture background;
-    public UICenterOnChild gridCenter;
-    public UIGrid grid;
-    public UIScrollView scrollView;
     public UIButton selectButton;
     public UILabel selectLabel;
     public UIWidget completedScreen;
@@ -146,10 +143,7 @@ public class UINewProductFlow : MonoBehaviour {
             case Stage.POINTS:
                 gm.playerCompany.StartNewProduct(productType, industry, market);
 
-                // TEMPORARY, this has bad performance.
-                UIRoot.Broadcast("UpdateDevelopingProducts");
-
-                UIRoot.Broadcast("ClosePopup");
+                UIManager.Instance.ClosePopup();
                 break;
         }
     }
@@ -165,9 +159,7 @@ public class UINewProductFlow : MonoBehaviour {
             GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
             productAspect.GetComponent<UIProductAspect>().aspect = a;
         }
-        grid.Reposition();
-        WrapGrid();
-        gridCenter.Recenter();
+        Adjust();
     }
 
     private void LoadIndustries() {
@@ -176,9 +168,7 @@ public class UINewProductFlow : MonoBehaviour {
             GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
             productAspect.GetComponent<UIProductAspect>().aspect = a;
         }
-        grid.Reposition();
-        WrapGrid();
-        gridCenter.Recenter();
+        Adjust();
     }
 
     private void LoadMarkets() {
@@ -187,9 +177,7 @@ public class UINewProductFlow : MonoBehaviour {
             GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
             productAspect.GetComponent<UIProductAspect>().aspect = a;
         }
-        grid.Reposition();
-        WrapGrid();
-        gridCenter.Recenter();
+        Adjust();
     }
 
 
@@ -226,29 +214,6 @@ public class UINewProductFlow : MonoBehaviour {
         pointsScreen.transform.Find("Available Creativity").GetComponent<UILabel>().text = "CRE:" + featurePoints.creativity.ToString();
     }
 
-
-    // ===============================================
-    // Utility =======================================
-    // ===============================================
-
-    private void ClearGrid() {
-        while (grid.transform.childCount > 0)
-            NGUITools.DestroyImmediate(grid.transform.GetChild(0).gameObject);
-    }
-
-    // The grid has to be re-wrapped whenever
-    // its contents change, since UIWrapContent
-    // caches the grid's contents on its start.
-    private void WrapGrid() {
-        NGUITools.DestroyImmediate(grid.gameObject.GetComponent<UIWrapContent>());
-        UIWrapContent wrapper = grid.gameObject.AddComponent<UIWrapContent>();
-
-        // Disable culling since it screws up the grid's layout.
-        wrapper.cullContent = false;
-
-        // The wrapper's item width is the same as the grid's cell width, duh
-        wrapper.itemSize = (int)grid.cellWidth;
-    }
 }
 
 

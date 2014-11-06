@@ -1,3 +1,8 @@
+/*
+ * A bundle of different effects,
+ * makes managing effects much more convenient.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

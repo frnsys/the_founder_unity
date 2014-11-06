@@ -1,3 +1,7 @@
+/*
+ * The set of "features" which affect the performance of a product.
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,6 +76,8 @@ public class FeatureSet : Dictionary<string, int> {
 
 
     public FeaturePoints Decrement(string feature, FeaturePoints points) {
+        // Feature values can decrease to negative values,
+        // e.g. if some event happens that affects a particular product.
         switch (feature) {
             case "Delight":
                 // CRE+CRE
