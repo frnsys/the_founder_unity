@@ -350,7 +350,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 400, y: 60, z: 0}
+  m_Size: {x: 200, y: 60, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500002
 BoxCollider:
@@ -362,7 +362,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 400, y: 60, z: 0}
+  m_Size: {x: 200, y: 60, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500004
 BoxCollider:
@@ -384,13 +384,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 100018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f25406f75b0f4ad7a05e27466bb544f, type: 3}
+  m_Script: {fileID: 11500000, guid: e2a6a9b6763a24bf39076a21b1d35d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100014}
-  overlay: {fileID: 0}
+  overlay: {fileID: 11400026}
   bodyLabel: {fileID: 11400016}
   body: {fileID: 11400018}
+  yesButton: {fileID: 100006}
+  noButton: {fileID: 100000}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,11 +417,7 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 11400000}
-    mMethodName: No
-    mParameters: []
-    oneShot: 0
+  onClick: []
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,7 +451,7 @@ MonoBehaviour:
   mWidth: 200
   mHeight: 60
   mDepth: 17
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 3.33333325
@@ -635,7 +633,7 @@ MonoBehaviour:
   mWidth: 200
   mHeight: 60
   mDepth: 17
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 3.33333325
@@ -684,11 +682,7 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 11400000}
-    mMethodName: Yes
-    mParameters: []
-    oneShot: 0
+  onClick: []
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -928,7 +922,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3008
+  startingRenderQueue: 3006
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

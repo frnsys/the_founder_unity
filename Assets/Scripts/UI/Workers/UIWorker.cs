@@ -9,7 +9,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIWorker: MonoBehaviour {
+public class UIWorker : MonoBehaviour {
     private Worker worker_;
     public Worker worker {
         get { return worker_; }

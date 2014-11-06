@@ -22,6 +22,9 @@ public class Company : HasStats {
     public ReadOnlyCollection<Worker> workers {
         get { return _workers.AsReadOnly(); }
     }
+    public int remainingSpace {
+        get { return sizeLimit - _workers.Count; }
+    }
 
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit) {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -49,10 +50,14 @@ public class UIManageProducts : MonoBehaviour {
     public void ShutdownProduct(GameObject obj) {
         GameObject productItem = obj.transform.parent.gameObject;
         Product product = productItem.GetComponent<UIProduct>().product;
-        product.Shutdown();
-        displayedProducts.Remove(product);
-        UnityEngine.Object.DestroyImmediate(productItem);
-        productsGridGrid.Reposition();
+
+        Action yes = delegate() {
+            product.Shutdown();
+            displayedProducts.Remove(product);
+            UnityEngine.Object.DestroyImmediate(productItem);
+            productsGridGrid.Reposition();
+        };
+        UIManager.Instance.Confirm("Are you sure want to shutdown " + product.name + "?", yes, null);
     }
 
     void OnDisable() {

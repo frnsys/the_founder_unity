@@ -9,13 +9,13 @@
  */
 
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class UIManager : Singleton<UIManager> {
     private GameManager gm;
 
     public GameObject menu;
-    private GameObject currentPopup;
 
     public GameObject gameEventNotificationPrefab;
 
@@ -34,8 +34,6 @@ public class UIManager : Singleton<UIManager> {
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
-
-        //Confirm("thisthis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long messagethis is a very long message is a very long message");
     }
 
     void OnDisable() {
@@ -67,15 +65,8 @@ public class UIManager : Singleton<UIManager> {
     }
 
     public void OpenPopup(GameObject popupPrefab) {
-        currentPopup = NGUITools.AddChild(gameObject, popupPrefab);
-        //closeButton.SetActive(true);
+        NGUITools.AddChild(gameObject, popupPrefab);
         menu.SetActive(false);
-    }
-
-    public void ClosePopup() {
-        NGUITools.DestroyImmediate(currentPopup);
-        currentPopup = null;
-        //closeButton.SetActive(false);
     }
 
     public UIAlert Alert(string text) {
@@ -92,18 +83,26 @@ public class UIManager : Singleton<UIManager> {
         return alert;
     }
 
-    public UIConfirm Confirm(string text) {
+    public UIConfirm Confirm(string text, Action yes, Action no) {
         UIConfirm confirm = NGUITools.AddChild(gameObject, confirmPrefab).GetComponent<UIConfirm>();
         confirm.bodyText = text;
-        return confirm;
-    }
 
-    void UpdateHUD() {
-        //if (GameManager.Instance.playerCompany.researching) {
-            //progressBar.value = GameManager.Instance.playerCompany.consultancy.researchProgress;
-        //} else {
-            //inProgressOverlay.SetActive(false);
-        //}
+        UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
+            yes();
+            confirm.Close_();
+        };
+
+        // The no method can be null if you just want nothing to happen.
+        UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
+            if (no != null)
+                no();
+            confirm.Close_();
+        };
+
+        UIEventListener.Get(confirm.yesButton).onClick += yesAction;
+        UIEventListener.Get(confirm.noButton).onClick += noAction;
+
+        return confirm;
     }
 }
 

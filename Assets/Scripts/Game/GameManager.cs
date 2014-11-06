@@ -52,18 +52,15 @@ public class GameManager : Singleton<GameManager> {
     private Phase phase = Phase.Local;
 
     public UnlockSet unlocked = new UnlockSet();
+    public List<Worker> availableWorkers {
+        get {
+            return unlocked.workers.Where(w => !playerCompany.workers.Contains(w)).ToList();
+        }
+    }
 
     public void NewGame(string companyName) {
         playerCompany = new Company(companyName);
         Application.LoadLevel("Game");
-    }
-
-    public void HireWorker(Worker worker) {
-        playerCompany.HireWorker(worker);
-
-        // TO DO worker shouldn't be removed from unlockedWorkers
-        // but instead from availableWorkers.
-        //unlockedWorkers.Remove(worker);
     }
 
     void Awake() {

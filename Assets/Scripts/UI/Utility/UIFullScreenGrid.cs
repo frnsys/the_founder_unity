@@ -58,8 +58,6 @@ public class UIFullScreenGrid : UISimpleGrid {
     public void Reposition() {
         List<Transform> children = GetChildren(transform);
 
-        Debug.Log("repositioning");
-
 		for (int i = 0; i < children.Count; ++i) {
 			Transform child = children[i];
 			Vector3 localPos = Vector3.zero;
