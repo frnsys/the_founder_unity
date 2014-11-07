@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2caad3cadff8c41b9bbabba4ad7e0d5b, type: 3}
+  m_Name: New AICompany
+  m_EditorClassIdentifier: 
+  cash:
+    baseValue: 0
+  consultancy: {fileID: 0}
+  phase: 0
+  sizeLimit: 0
+  founders: []
+  productPoints: 0
+  products: []
+  lastMonthCosts: 0
+  lastMonthRevenue: 0
+  _items: []
+  specialties: []
+  personality: {fileID: 0}
+  description: 
+  unlocked:
+    prereqs:
+      productTypes: []
+      industries: []
+      markets: []
+      workers: []
+      events: []
+      items: []
+      stores: 
+      consultancies: []
+      researchPoints: 0
+    productTypes: []
+    industries: []
+    markets: []
+    workers: []
+    events: []
+    items: []
+    stores: 
+    consultancies: []

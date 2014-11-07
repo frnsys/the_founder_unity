@@ -2,14 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public interface IProduct {
-    void Develop(float newProgress, float charisma, float creativity, float cleverness);
-    float Revenue(float time);
-    void Launch();
-    void Shutdown();
-}
-
-public class Product : HasStats, IProduct {
+public class Product : HasStats {
     public enum State {
         DEVELOPMENT,
         LAUNCHED,
@@ -40,8 +33,13 @@ public class Product : HasStats, IProduct {
     // combination does.
     private ProductRecipe recipe;
 
-    private float timeSinceLaunch = 0;
+    public float timeSinceLaunch = 0;
+
+    // Revenue earned over the product's lifetime.
     public float revenueEarned = 0;
+
+    // Revenue earned during the last cycle.
+    public float lastRevenue = 0;
 
     // Maximum revenue you can make off this product.
     private float peakRevenuePercent;
@@ -112,8 +110,6 @@ public class Product : HasStats, IProduct {
         beginning = beginning[0].ToString().ToUpper() + beginning.Substring(1);
         return beginning + middle + end;
     }
-
-    #region IProduct implementation
 
 
     static public event System.Action<Product> Completed;
@@ -285,6 +281,7 @@ public class Product : HasStats, IProduct {
         float revenue = System.Math.Max(0, revenuePercent * recipe.maxRevenue * Random.Range(0.95f, 1.05f));
 
         revenueEarned += revenue;
+        lastRevenue = revenue;
         return revenue;
     }
     private float Gaussian(float x, float mean, float sd) {
@@ -314,8 +311,6 @@ public class Product : HasStats, IProduct {
         // Modify product-related event probabilities, etc.
         _state = State.RETIRED;
     }
-
-    #endregion
 }
 
 

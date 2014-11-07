@@ -16,6 +16,17 @@ public class Company : HasStats {
         name = name_;
     }
 
+    // At what phase the company is operating.
+    public enum Phase {
+        Local,
+        Global,
+        Planetary,
+        Galactic
+    }
+    public Phase phase = Phase.Local;
+
+
+
     // ===============================================
     // Worker Management =============================
     // ===============================================
@@ -126,15 +137,21 @@ public class Company : HasStats {
     public void HarvestProducts(float elapsedTime) {
         List<Product> launched = products.FindAll(p => p.state == Product.State.LAUNCHED);
 
+        float newRevenue = 0;
         foreach (Product product in launched) {
-            cash.baseValue += product.Revenue(elapsedTime);
+            newRevenue += product.Revenue(elapsedTime);
         }
+        cash.baseValue += newRevenue;
+        lastMonthRevenue += newRevenue;
     }
 
-    public void DevelopProduct(IProduct product) {
-        float charisma = 100;
-        float creativity = 100;
-        float cleverness = 100;
+    public void DevelopProduct(Product product) {
+        //float charisma = 0;
+        //float creativity = 0;
+        //float cleverness = 0;
+        float charisma = 100; // testing
+        float creativity = 100; // testing
+        float cleverness = 100; // testing
         //float progress = 0;
         float progress = 100; // testing
 
@@ -162,18 +179,30 @@ public class Company : HasStats {
     // Financial Management ==========================
     // ===============================================
 
+    // Keep track of each month's costs.
+    public float lastMonthCosts = 0;
+    public float lastMonthRevenue = 0;
     public void PayMonthly() {
+        float toPay = 0;
         foreach (Worker worker in workers) {
-            cash.baseValue -= worker.salary;
+            toPay += worker.salary;
         }
         if (consultancy != null) {
-            cash.baseValue -= consultancy.cost;
+            toPay += consultancy.cost;
         }
+        cash.baseValue -= toPay;
+
+        // Reset month's costs with this month's costs.
+        lastMonthCosts = toPay;
+
+        // Also reset month's revenues.
+        lastMonthRevenue = 0;
     }
 
     public bool Pay(float cost) {
         if (cash.baseValue - cost >= 0) {
             cash.baseValue -= cost;
+            lastMonthCosts += cost;
             return true;
         }
         return false;

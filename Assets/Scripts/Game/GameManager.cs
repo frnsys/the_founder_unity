@@ -21,13 +21,9 @@ public class GameManager : Singleton<GameManager> {
     // Other managers.
     public ResearchManager researchManager;
 
-    private enum Phase {
-        Local,
-        Global,
-        Planetary,
-        Galactic
+    private Company.Phase phase {
+        get { return playerCompany.phase; }
     }
-    private Phase phase = Phase.Local;
 
     public UnlockSet unlocked = new UnlockSet();
     public List<Worker> availableWorkers {

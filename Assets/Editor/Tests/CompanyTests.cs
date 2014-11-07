@@ -97,7 +97,7 @@ namespace UnityTest
             worker.creativity.baseValue = 10;
             worker.cleverness.baseValue = 10;
 
-            IProduct p = Substitute.For<IProduct>();
+            Product p = Substitute.For<Product>();
             c.DevelopProduct(p);
 
             p.Received().Develop(Arg.Any<float>(), Arg.Any<float>(), Arg.Any<float>(), Arg.Any<float>());
