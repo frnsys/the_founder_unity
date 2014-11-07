@@ -12,21 +12,32 @@ MonoBehaviour:
   m_Name: New AICompany
   m_EditorClassIdentifier: 
   cash:
-    baseValue: 0
+    baseValue: 1e+06
   consultancy: {fileID: 0}
   phase: 0
-  sizeLimit: 0
-  founders: []
+  sizeLimit: 10
+  founders:
+  - {fileID: 0}
   productPoints: 0
   products: []
   lastMonthCosts: 0
   lastMonthRevenue: 0
   _items: []
-  specialties: []
-  personality: {fileID: 0}
-  description: 
-  unlocked:
-    prereqs:
+  bonuses:
+    products: []
+    workers: []
+    company: []
+    unlocks:
+      prereqs:
+        productTypes: []
+        industries: []
+        markets: []
+        workers: []
+        events: []
+        items: []
+        stores: 
+        consultancies: []
+        researchPoints: 0
       productTypes: []
       industries: []
       markets: []
@@ -35,12 +46,10 @@ MonoBehaviour:
       items: []
       stores: 
       consultancies: []
-      researchPoints: 0
-    productTypes: []
-    industries: []
-    markets: []
-    workers: []
-    events: []
-    items: []
-    stores: 
-    consultancies: []
+  startWorkers: []
+  startProducts: []
+  personality:
+    aggression: 0
+    cooperativeness: 0
+    luck: 0
+  description: 

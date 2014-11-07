@@ -246,6 +246,7 @@ public class Product : HasStats {
         float revenuePercent = 0;
         if (state == State.LAUNCHED) {
 
+            // TO DO
             // To be replaced by real values...
             float bonus = 0;
             float economy_w = 1;
