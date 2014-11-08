@@ -55,21 +55,26 @@ public class UIFullScreenGrid : UISimpleGrid {
     }
 
 	[ContextMenu("Execute")]
-    public void Reposition() {
+    public override void Reposition() {
         List<Transform> children = GetChildren(transform);
 
         width = (int)childSize.x;
+        height = (int)childSize.y;
 		for (int i = 0; i < children.Count; ++i) {
 			Transform child = children[i];
 			Vector3 localPos = Vector3.zero;
 
+            // Set the actual width to be full screen as well.
+            //child.gameObject.GetComponent<UIWidget>().width = (int)childSize.x;
+
             localPos.x = (i * (padding.x + childSize.x + padding.z)) + padding.x;
             child.localPosition = localPos;
-
-            // Set the actual width to be full screen as well.
-            child.gameObject.GetComponent<UIWidget>().width = (int)childSize.x;
         }
 
 		EventDelegate.Execute(OnReposition);
+    }
+
+    void Update() {
+        // get rid of base class's update method
     }
 }

@@ -17,7 +17,7 @@ public class UISimpleGrid : UIWidget {
     }
 
 	[ContextMenu("Execute")]
-    public void Reposition() {
+    public virtual void Reposition() {
         Bounds bounds = CalculateBounds();
         List<Transform> children = GetChildren(transform);
 

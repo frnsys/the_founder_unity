@@ -925,7 +925,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 683, y: 960, z: 0}
+  m_Size: {x: 535, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500006
 BoxCollider:
@@ -1017,14 +1017,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 683
-  mHeight: 100
+  mWidth: 775
+  mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.82999992
-  childSize: {x: 683, y: 960}
+  aspectRatio: .807291687
+  childSize: {x: 775, y: 960}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11400002
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .622916639
+  aspectRatio: .534375012
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 683
+  itemSize: 775
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: .841110229, y: 0, z: 682.609253, w: 960.153625}
+  mClipRange: {x: .841110229, y: 0, z: 535.085693, w: 960.153625}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 101
   mSortingOrder: 0
@@ -1653,13 +1653,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 683
+  mWidth: 535
   mHeight: 960
   mDepth: 2
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .534375012
+  aspectRatio: .557291687
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 692
+  itemSize: 775
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -590,16 +590,16 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 692
-  mHeight: 880
+  mWidth: 775
+  mHeight: 900
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .786363661
-  childSize: {x: 692, y: 920}
+  aspectRatio: .861111104
+  childSize: {x: 775, y: 900}
   OnReposition: []
-  padding: {x: 0, y: 0, z: 0, w: 40}
+  padding: {x: 0, y: 0, z: 0, w: 80}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -785,7 +785,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12
+  aspectRatio: 8.63749981
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .785227299
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1100,7 +1100,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .719791651
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
