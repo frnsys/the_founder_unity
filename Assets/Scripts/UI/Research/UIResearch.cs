@@ -8,23 +8,6 @@ public class UIResearch : UIWindow {
     public GameObject consultancyList;
     public GameObject consultancyView;
 
-    public void Hire(GameObject gameObj) {
-        // Not very elegant...
-        // Go up and get the UIConsultancyItem this button belongs to.
-        Consultancy consultancy = gameObj.transform.parent.gameObject.GetComponent<UIConsultancyItem>().consultancy;
-
-        Action yes = delegate() {
-            // Hire the consultancy...
-            gm.HireConsultancy(consultancy);
-            UpdateCurrent();
-        };
-        if (gm.researchManager.consultancy) {
-            UIManager.Instance.Confirm("This will replace " + gm.researchManager.consultancy.name + ", are you sure?", yes, null);
-        } else {
-            yes();
-        }
-    }
-
     public void ShowConsultancies() {
         consultancyList.SetActive(true);
         consultancyView.SetActive(false);
@@ -45,7 +28,13 @@ public class UIResearch : UIWindow {
         foreach (Consultancy c in gm.unlocked.consultancies) {
             GameObject item = NGUITools.AddChild(grid, consultancyItemPrefab);
             item.GetComponent<UIConsultancyItem>().consultancy = c;
-            UIEventListener.Get(item.transform.Find("Hire").gameObject).onClick += Hire;
+
+            GameObject hireButton = item.transform.Find("Hire").gameObject;
+            UIEventListener.Get(hireButton).onClick += Hire;
+
+            if (gm.researchManager.consultancy == c) {
+                SetCurrentHireButton(hireButton);
+            }
         }
         grid.GetComponent<UICenteredGrid>().Reposition();
     }
@@ -71,5 +60,39 @@ public class UIResearch : UIWindow {
 
         // TO DO show progress of current discovery.
         Research currentResearch = gm.researchManager.research;
+    }
+
+    public void Hire(GameObject gameObj) {
+        // Not very elegant...
+        // Go up and get the UIConsultancyItem this button belongs to.
+        Consultancy consultancy = gameObj.transform.parent.gameObject.GetComponent<UIConsultancyItem>().consultancy;
+
+        Action yes = delegate() {
+            // Hire the consultancy...
+            gm.HireConsultancy(consultancy);
+            UpdateCurrent();
+
+            // Disable this button.
+            SetCurrentHireButton(gameObj);
+
+        };
+        if (gm.researchManager.consultancy) {
+            UIManager.Instance.Confirm("This will replace " + gm.researchManager.consultancy.name + ", are you sure?", yes, null);
+        } else {
+            yes();
+        }
+    }
+
+    private GameObject currentHiredButton;
+    private void SetCurrentHireButton(GameObject go) {
+        go.GetComponent<UIButton>().isEnabled = false;
+        go.transform.Find("Hire Label").GetComponent<UILabel>().text = "Hired";
+
+        if (currentHiredButton != null) {
+            // Renable the previous button.
+            currentHiredButton.GetComponent<UIButton>().isEnabled = true;
+            currentHiredButton.transform.Find("Hire Label").GetComponent<UILabel>().text = "Hire";
+            currentHiredButton = go;
+        }
     }
 }
