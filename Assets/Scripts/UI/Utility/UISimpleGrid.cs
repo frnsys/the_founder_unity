@@ -12,6 +12,10 @@ public class UISimpleGrid : UIWidget {
 	public Vector2 childSize = Vector2.zero;
 	public List<EventDelegate> OnReposition;
 
+    void Update() {
+        Reposition();
+    }
+
 	[ContextMenu("Execute")]
     public void Reposition() {
         Bounds bounds = CalculateBounds();
@@ -57,5 +61,5 @@ public class UISimpleGrid : UIWidget {
 		}
 
 		return list;
-	}	
+	}
 }

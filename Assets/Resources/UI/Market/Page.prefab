@@ -197,7 +197,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 13.454545
+  aspectRatio: 9.27272701
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -381,12 +381,12 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3007
   mClipTexture: {fileID: 0}
   mAlpha: 1
-  mClipping: 4
+  mClipping: 3
   mClipRange: {x: 0, y: -437.500122, z: 510, w: 815}
-  mClipSoftness: {x: 4, y: 4}
+  mClipSoftness: {x: 0, y: 0}
   mDepth: 220
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
@@ -426,7 +426,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.33093524
+  aspectRatio: .91726619
   childSize: {x: 240, y: 240}
   OnReposition: []
 --- !u!1001 &100100000

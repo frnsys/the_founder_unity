@@ -34,9 +34,12 @@ public class UIResearch : UIWindow {
         consultancyView.SetActive(true);
     }
 
-    void OnEnable() {
+    protected override void PreSetup(GameObject obj) {
         gm = GameManager.Instance;
+        UpdateCurrent();
+    }
 
+    protected override void Setup(GameObject obj) {
         // Load the unlocked consultancies.
         GameObject grid = transform.Find("Consultancies/Content Scroll/Items Grid").gameObject;
         foreach (Consultancy c in gm.unlocked.consultancies) {
@@ -45,8 +48,6 @@ public class UIResearch : UIWindow {
             UIEventListener.Get(item.transform.Find("Hire").gameObject).onClick += Hire;
         }
         grid.GetComponent<UICenteredGrid>().Reposition();
-
-        UpdateCurrent();
     }
 
     private void UpdateCurrent() {
