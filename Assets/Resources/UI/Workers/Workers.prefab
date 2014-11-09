@@ -925,7 +925,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 544, y: 960, z: 0}
+  m_Size: {x: 593, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500006
 BoxCollider:
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: .841110229, y: 0, z: 543.837036, w: 960.153625}
+  mClipRange: {x: .841110229, y: 0, z: 592.594849, w: 960.153625}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 101
   mSortingOrder: 0
@@ -1653,7 +1653,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 544
+  mWidth: 593
   mHeight: 960
   mDepth: 2
   autoResizeBoxCollider: 1
@@ -2327,8 +2327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35d721694fa0ee48a2d14bddfcbf4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  springStrength: 20
-  nextPageThreshold: 0
+  springStrength: 8
+  nextPageThreshold: 200
 --- !u!114 &11400172
 MonoBehaviour:
   m_ObjectHideFlags: 1

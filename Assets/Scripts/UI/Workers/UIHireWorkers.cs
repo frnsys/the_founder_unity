@@ -22,6 +22,7 @@ public class UIHireWorkers : UIFullScreenPager {
             // while dragging.
             hireButton.isEnabled = false;
         }
+        grid.Reposition();
     }
 
     public void HireWorker() {

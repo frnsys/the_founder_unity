@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 775
+  itemSize: 756
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -590,14 +590,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 775
-  mHeight: 900
+  mWidth: 756
+  mHeight: 880
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .861111104
-  childSize: {x: 775, y: 900}
+  aspectRatio: .859090924
+  childSize: {x: 756, y: 880}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 80}
 --- !u!114 &11400010
@@ -612,8 +612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100004}
-  hover: {r: .756592333, g: .588235319, b: .882352948, a: 1}
-  pressed: {r: 1, g: .745098054, b: .235294104, a: 1}
+  hover: {r: 0, g: 0, b: 0, a: .313725501}
+  pressed: {r: 0, g: 0, b: 0, a: .392156869}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
