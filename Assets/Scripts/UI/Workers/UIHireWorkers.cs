@@ -53,6 +53,7 @@ public class UIHireWorkers : UIFullScreenPager {
 
 
     private void LoadWorkers() {
+        ClearGrid();
         foreach (Worker w in GameManager.Instance.availableWorkers) {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);

@@ -41,7 +41,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCompany: {fileID: 0}
   researchManager: {fileID: 0}
-  week: 0
   unlocked:
     prereqs:
       productTypes: []
@@ -55,13 +54,16 @@ MonoBehaviour:
       researchPoints: 0
     productTypes:
     - {fileID: 11400000, guid: 4375a30c867bc4dccaca3cd56bba460f, type: 2}
+    - {fileID: 11400000, guid: 322fb54be4c424378a16591d473bfa5f, type: 2}
     industries:
     - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
+    - {fileID: 11400000, guid: 996a2d7e0e0a54fc887350a6980d8e73, type: 2}
     markets:
     - {fileID: 11400000, guid: ac0bc9ba73b0040ceb87ee77c4b9d2b5, type: 2}
+    - {fileID: 11400000, guid: 861db110c02c4498b94ecff024c6a442, type: 2}
     workers:
-    - {fileID: 11400000, guid: 2223a54e608e64f65a824a703ce2646c, type: 2}
-    - {fileID: 11400000, guid: cb3b14ef507ce49028cde6aa09185379, type: 2}
+    - {fileID: 11400000, guid: 3e17d13c0c97740d6905c151936591ff, type: 2}
+    - {fileID: 11400000, guid: 3762f9dbcd0454acb81bc53710cc6e51, type: 2}
     events:
     - {fileID: 11400000, guid: ccbc53ef3b79f4cf19b7c59d457a436d, type: 2}
     items:
@@ -69,6 +71,7 @@ MonoBehaviour:
     stores: 00000000
     consultancies:
     - {fileID: 11400000, guid: e5c2cf6be06ef44dcae31e0396d36971, type: 2}
+  week: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

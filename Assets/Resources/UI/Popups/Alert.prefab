@@ -497,8 +497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100002}
-  hover: {r: .698529422, g: .698529422, b: .698529422, a: 1}
-  pressed: {r: .308823526, g: .307309687, b: .30428201, a: 1}
+  hover: {r: .937254906, g: .270588249, b: .258823544, a: 1}
+  pressed: {r: .866666675, g: .215686277, b: .203921571, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -672,7 +672,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.28676474
+  aspectRatio: 1.15131581
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
@@ -764,7 +764,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.3157897
+  aspectRatio: 14.3999996
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1

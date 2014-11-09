@@ -34,7 +34,7 @@ public class Worker : HasStats {
     public Stat creativity;
     public Stat cleverness;
 
-    public Worker(string name_, float happiness_, float productivity_, float charisma_, 
+    public Worker(string name_, float happiness_, float productivity_, float charisma_,
         float creativity_, float cleverness_
     ) {
         name         = name_;

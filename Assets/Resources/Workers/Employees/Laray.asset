@@ -9,18 +9,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
-  m_Name: Franklin
+  m_Name: Laray
   m_EditorClassIdentifier: 
-  type: 0
-  salary: 2000
-  bio: ya this is my bio
+  tier: 0
+  salary: 0
+  bio: yoyoyo
   happiness:
-    baseValue: 10
+    baseValue: 40
+    _buffs: []
   productivity:
-    baseValue: 10
+    baseValue: 40
+    _buffs: []
   charisma:
-    baseValue: 10
+    baseValue: 40
+    _buffs: []
   creativity:
-    baseValue: 10
+    baseValue: 40
+    _buffs: []
   cleverness:
-    baseValue: 10
+    baseValue: 40
+    _buffs: []

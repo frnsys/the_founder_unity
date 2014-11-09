@@ -17,6 +17,7 @@ public class Stat {
     }
     public float baseValue = 0;
 
+    [SerializeField]
     private List<StatBuff> _buffs = new List<StatBuff>();
     public ReadOnlyCollection<StatBuff> buffs {
         get { return _buffs.AsReadOnly(); }
@@ -25,7 +26,7 @@ public class Stat {
     public float value {
         get {
             float finalValue = baseValue;
-            foreach (StatBuff buff in buffs) {
+            foreach (StatBuff buff in _buffs) {
                 if (buff.type == BuffType.ADD) {
                     finalValue += buff.value;
                 } else {

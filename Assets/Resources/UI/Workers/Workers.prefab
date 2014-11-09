@@ -925,7 +925,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 535, y: 960, z: 0}
+  m_Size: {x: 544, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500006
 BoxCollider:
@@ -1017,14 +1017,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 775
+  mWidth: 756
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .807291687
-  childSize: {x: 775, y: 960}
+  aspectRatio: .787500024
+  childSize: {x: 756, y: 960}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11400002
@@ -1039,9 +1039,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100000}
-  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
-  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
-  disabledColor: {r: 1, g: 1, b: 1, a: .274509817}
+  hover: {r: .866666675, g: .211764708, b: .196078435, a: 1}
+  pressed: {r: .866666675, g: .215686277, b: .203921571, a: 1}
+  disabledColor: {r: .866666675, g: .211764708, b: .196078435, a: 1}
   duration: .200000003
   dragHighlight: 0
   hoverSprite: 
@@ -1473,9 +1473,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100014}
-  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
-  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
-  disabledColor: {r: 1, g: 1, b: 1, a: .274509817}
+  hover: {r: .866666675, g: .211764708, b: .196078435, a: 1}
+  pressed: {r: .866666675, g: .215686277, b: .203921571, a: 1}
+  disabledColor: {r: .866666675, g: .211764708, b: .196078435, a: 1}
   duration: .200000003
   dragHighlight: 0
   hoverSprite: 
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 775
+  itemSize: 756
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: .841110229, y: 0, z: 535.085693, w: 960.153625}
+  mClipRange: {x: .841110229, y: 0, z: 543.837036, w: 960.153625}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 101
   mSortingOrder: 0
@@ -1653,13 +1653,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 535
+  mWidth: 544
   mHeight: 960
   mDepth: 2
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .557291687
+  aspectRatio: .566666663
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1779,8 +1779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100020}
-  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
-  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
+  hover: {r: 1, g: 1, b: 1, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: .588235319}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -1808,8 +1808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100022}
-  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
-  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
+  hover: {r: 1, g: 1, b: 1, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: .588235319}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -2122,8 +2122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100030}
-  hover: {r: .756592333, g: .588235319, b: .882352948, a: 1}
-  pressed: {r: 1, g: .745098054, b: .235294104, a: 1}
+  hover: {r: 0, g: 0, b: 0, a: .313725501}
+  pressed: {r: 0, g: 0, b: 0, a: .313725501}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -2295,7 +2295,7 @@ MonoBehaviour:
   startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
-  mClipping: 3
+  mClipping: 0
   mClipRange: {x: .841125488, y: 0, z: 487.499969, w: 959.999939}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 101
@@ -2341,9 +2341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100108}
-  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
-  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
-  disabledColor: {r: 1, g: 1, b: 1, a: .274509817}
+  hover: {r: .176470593, g: .266666681, b: .917647064, a: 1}
+  pressed: {r: .106617644, g: .171349838, b: .852941155, a: 1}
+  disabledColor: {r: .176470593, g: .266666681, b: .917647064, a: 1}
   duration: .200000003
   dragHighlight: 0
   hoverSprite: 

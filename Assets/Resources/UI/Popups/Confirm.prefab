@@ -405,8 +405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100000}
-  hover: {r: .698529422, g: .698529422, b: .698529422, a: 1}
-  pressed: {r: .308823526, g: .307309687, b: .30428201, a: 1}
+  hover: {r: 1, g: .329411775, b: .31764707, a: 1}
+  pressed: {r: .866666675, g: .215686277, b: .203921571, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -670,8 +670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100006}
-  hover: {r: .698529422, g: .698529422, b: .698529422, a: 1}
-  pressed: {r: .308823526, g: .307309687, b: .30428201, a: 1}
+  hover: {r: .937254906, g: .270588249, b: .258823544, a: 1}
+  pressed: {r: .866666675, g: .215686277, b: .203921571, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0

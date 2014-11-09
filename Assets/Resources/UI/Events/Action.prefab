@@ -129,6 +129,7 @@ MonoBehaviour:
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
+  mFixedAspect: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,8 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100002}
-  hover: {r: .698529422, g: .698529422, b: .698529422, a: 1}
-  pressed: {r: .308823526, g: .307309687, b: .30428201, a: 1}
+  hover: {r: .937254906, g: .270588249, b: .258823544, a: 1}
+  pressed: {r: .867647052, g: .21565792, b: .204152241, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
 --- !u!1001 &100100000
