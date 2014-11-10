@@ -25,20 +25,36 @@ public class ProductCombo {
     }
 }
 
-// https://stackoverflow.com/a/5852926/1097920
-public class FixedSizedQueue<T> : Queue<T> {
-    public int Size { get; private set; }
-    public FixedSizedQueue(int size) {
+// Subclass these generic types so that they serialize.
+[System.Serializable]
+public class PerformanceDict : SerializableDictionary<string, float> {
+    public override string ToString() {
+        string str = "";
+        foreach (string key in Keys) {
+            str += key + ":" + this[key].ToString() + ", ";
+        }
+        return str.Substring(0, str.Length - 2);
+    }
+}
+
+[System.Serializable]
+public class PerformanceHistory : FixedSizeQueue<PerformanceDict> {
+
+    public PerformanceHistory(int size) : base(size) {
         Size = size;
     }
 
-     public void Enqueue(T obj) {
-        base.Enqueue(obj);
-        T overflow;
-        while (Count > Size)
-            Dequeue();
-     }
- }
+    public override string ToString() {
+        string str = "";
+        foreach (PerformanceDict d in this) {
+            str += d.ToString() + " | ";
+        }
+        return str.Substring(0, str.Length - 3);
+    }
+}
+
+
+
 
 public class AICompany : Company {
     public static List<AICompany> companies = new List<AICompany>();
@@ -48,21 +64,52 @@ public class AICompany : Company {
     }
 
     // Bonuses the company gets for particular product aspects.
-    public EffectSet bonuses = new EffectSet();
-    private List<ProductType> specialtyProductTypes = new List<ProductType>();
-    private List<Industry> specialtyIndustries = new List<Industry>();
-    private List<Market> specialtyMarkets = new List<Market>();
+    public EffectSet bonuses;
+    private List<ProductType> specialtyProductTypes;
+    private List<Industry> specialtyIndustries;
+    private List<Market> specialtyMarkets;
 
-    public List<Worker> startWorkers = new List<Worker>();
-    public List<Product> startProducts = new List<Product>();
+    public List<Worker> startWorkers;
+    public List<Product> startProducts;
 
-    // The personality tweaks many of the decision functions.
-    public Personality personality = new Personality();
+    public override void Awake() {
+        base.Awake();
+
+        // Initialize stuff.
+        bonuses = new EffectSet();
+        specialtyProductTypes = new List<ProductType>();
+        specialtyIndustries = new List<Industry>();
+        specialtyMarkets = new List<Market>();
+
+        startWorkers = new List<Worker>();
+        startProducts = new List<Product>();
+
+        PerfHistory = new PerformanceHistory(24);
+        ProductPerfHistory = new PerformanceHistory(24);
+        WorkerPerfHistory = new PerformanceHistory(24);
+    }
+
+    // Influences how hostile they are against others.
+    // 0 = friendly, unlikely to do anything hostile.
+    // 1 = will try to sue the shit out of everyone.
+    public float aggression;
+
+    // Influences how willing they are to cooperate.
+    // 0 = unwilling to cooperate on anything.
+    // 1 = hellooo wage fixing!
+    public float cooperativeness;
+
+    // Influences how lucky they are.
+    // <1 = a penalty to luck
+    // >1 = a bonus to luck
+    public float luck;
+
 
     public string description;
 
     // The stuff the company has access to, including
     // product aspects, workers, discoveries, etc...
+    [SerializeField]
     private UnlockSet unlocked;
 
     void OnEnable() {
@@ -81,19 +128,29 @@ public class AICompany : Company {
                     specialtyMarkets.Add(i);
             }
         }
-        unlocked = bonuses.unlocks;
+
+        // TO DO we may need to manage the base unlocks on the game manager separately from the player company's unlocks, so that the AI companies don't just get everything the player has unlocked too.
+        unlocked = GameManager.Instance.unlocked;
+        unlocked.Unlock(bonuses.unlocks);
+
     }
 
     // Each turn the AI calculates the utility of all possible actions and does the one with the highest utility, provided it is above some threshold (?).
     public void Decide() {
+        Debug.Log("AI Company " + name + " has " + cash.value.ToString() + " cash.");
+        Debug.Log("AI Company " + name + " is deciding...");
 
-        // Decide which products to shutdown or sell.
-        DecideShutdownProducts();
-        DecideNewProducts();
+        // Only decide if there's enough history to act off of.
+        if (PerfHistory.Count > 5) {
+            // Decide which products to shutdown or sell.
+            DecideShutdownProducts();
+            DecideNewProducts();
 
-        // Decide what to do with workers.
-        ReviewWorkers();
-        DecideHireWorkers();
+            // Decide what to do with workers.
+            ReviewWorkers();
+            DecideHireWorkers();
+        }
+
     }
 
 
@@ -108,7 +165,7 @@ public class AICompany : Company {
 
             // The more aggressive the company, the more likely they are
             // to try and edge into a competitor's territory.
-            if (Random.value < personality.aggression) {
+            if (Random.value < aggression) {
 
                 // First look at what other companies have in the market.
                 // Ones that a performing well are considered candidates
@@ -131,6 +188,7 @@ public class AICompany : Company {
 
                     // Create as many as possible.
                     if (p.points <= availableProductPoints) {
+                        Debug.Log(name + " is starting a new competing product...");
                         StartNewProduct(p.productType, p.industry, p.market);
                     }
                 }
@@ -143,6 +201,7 @@ public class AICompany : Company {
             while (true) {
                 ProductCombo pc = RandomSpecialtyProduct();
                 if (pc.points <= availableProductPoints) {
+                    Debug.Log(name + " is starting a new product...");
                     StartNewProduct(pc.pt, pc.i, pc.m);
                 } else {
                     break;
@@ -152,7 +211,7 @@ public class AICompany : Company {
     }
 
     private void DecideShutdownProducts() {
-        float historicalAvgROI = PerfHistory.Sum(x => x["Average ROI"])/PerfHistory.Size;
+        float historicalAvgROI = ProductPerfHistory.Sum(x => x["Average ROI"])/ProductPerfHistory.Size;
         foreach (Product p in activeProducts) {
             // Some minimum amount of time a product is kept in market before considering shutdown.
             // TO DO tweak this value.
@@ -162,6 +221,7 @@ public class AICompany : Company {
                 // is performing less than 1/3 of average, shutdown.
                 // TO DO this should maybe look at standard deviations instead?
                 if (p.lastRevenue == 0 || ProductROI(p) < historicalAvgROI * 0.33) {
+                    Debug.Log(name + " is shutting down a product...");
                     p.Shutdown();
                 }
             }
@@ -183,11 +243,29 @@ public class AICompany : Company {
         return score;
     }
 
-    // Generate a random product combo based on this company's specialties.
+    // Generate a random product combo based on this company's specialties. If no specialties are available for the aspect, a random unlocked one is chosen.
     private ProductCombo RandomSpecialtyProduct() {
-        ProductType pt = specialtyProductTypes[Random.Range(0, specialtyProductTypes.Count)];
-        Industry i     = specialtyIndustries[Random.Range(0, specialtyIndustries.Count)];
-        Market m       = specialtyMarkets[Random.Range(0, specialtyMarkets.Count)];
+        ProductType pt;
+        Industry i;
+        Market m;
+
+        if (specialtyProductTypes.Count > 0) {
+            pt = specialtyProductTypes[Random.Range(0, specialtyProductTypes.Count)];
+        } else {
+            pt = unlocked.productTypes[Random.Range(0, unlocked.productTypes.Count)];
+        }
+
+        if (specialtyIndustries.Count > 0) {
+            i = specialtyIndustries[Random.Range(0, specialtyIndustries.Count)];
+        } else {
+            i = unlocked.industries[Random.Range(0, unlocked.industries.Count)];
+        }
+
+        if (specialtyMarkets.Count > 0) {
+            m = specialtyMarkets[Random.Range(0, specialtyMarkets.Count)];
+        } else {
+            m = unlocked.markets[Random.Range(0, unlocked.markets.Count)];
+        }
         return new ProductCombo(pt, i, m);
     }
 
@@ -229,6 +307,7 @@ public class AICompany : Company {
             // TO DO this should maybe look at standard deviations instead?
             float ROI = WorkerROI(w);
             if (ROI < historicalAvgROI * 0.33) {
+                Debug.Log(name + " is firing a worker...");
                 FireWorker(w);
             } else if (ROI < historicalAvgROI) {
                 // TO DO UpgradeWorker hasn't been implemented yet.
@@ -248,7 +327,7 @@ public class AICompany : Company {
             // The more aggressive the company, the more likely they are
             // to try and poach a competitor's employees.
             List<Worker> candidates = new List<Worker>();
-            if (Random.value < personality.aggression) {
+            if (Random.value < aggression) {
                 foreach (AICompany c in companies.Where(x => x != this)) {
                     foreach (Worker w in c.workers) {
                         if (CanAffordWorker(w, expectedMonthlyProfits) &&
@@ -274,6 +353,7 @@ public class AICompany : Company {
 
                 if (workers.Count < sizeLimit &&
                     CanAffordWorker(w, expectedMonthlyProfits - newMonthlyCosts)) {
+                    Debug.Log(name + " is hiring a worker...");
                     HireWorker(w);
                     newMonthlyCosts += w.salary;
                 }
@@ -312,54 +392,72 @@ public class AICompany : Company {
     // The AI Company must surveil its assets in order to make decisions.
 
     public void CollectPerformanceData() {
+        Debug.Log(name + " is collecting performance data...");
+
         PerfHistory.Enqueue(SamplePerformance());
         ProductPerfHistory.Enqueue(ProductAverages());
         WorkerPerfHistory.Enqueue(WorkerAverages());
+
+        Debug.Log(PerfHistory);
+        Debug.Log(ProductPerfHistory);
+        Debug.Log(WorkerPerfHistory);
     }
 
     // Keep track of company performance history as well to try and make decisions.
-    private FixedSizedQueue<Dictionary<string, float>> PerfHistory = new FixedSizedQueue<Dictionary<string, float>>(24);
-    private FixedSizedQueue<Dictionary<string, float>> ProductPerfHistory = new FixedSizedQueue<Dictionary<string, float>>(24);
-    private FixedSizedQueue<Dictionary<string, float>> WorkerPerfHistory = new FixedSizedQueue<Dictionary<string, float>>(24);
+    [SerializeField]
+    private PerformanceHistory PerfHistory;
+    [SerializeField]
+    private PerformanceHistory ProductPerfHistory;
+    [SerializeField]
+    private PerformanceHistory WorkerPerfHistory;
 
     // These data are sampled every month.
-    private Dictionary<string, float> SamplePerformance() {
-        return new Dictionary<string, float> {
+    private PerformanceDict SamplePerformance() {
+        return new PerformanceDict {
             {"Month Revenue", lastMonthRevenue},
             {"Month Costs", lastMonthCosts}
         };
     }
 
-    private Dictionary<string, float> ProductAverages() {
+    private PerformanceDict ProductAverages() {
         float avgROI = 0;
-        foreach (Product p in activeProducts) {
-            avgROI += ProductROI(p);
-        }
-        avgROI /= activeProducts.Count;
 
-        return new Dictionary<string, float> {
+        if (activeProducts.Count > 0) {
+            foreach (Product p in activeProducts) {
+                avgROI += ProductROI(p);
+            }
+            avgROI /= activeProducts.Count;
+        }
+
+        return new PerformanceDict {
             {"Average ROI", avgROI}
         };
     }
 
     // Aggregate averages of certain worker stats.
-    private Dictionary<string, float> WorkerAverages() {
-        Dictionary<string, float> results = new Dictionary<string, float> {
+    private PerformanceDict WorkerAverages() {
+        PerformanceDict results = new PerformanceDict {
             {"Happiness", 0f},
             {"Productivity", 0f}
         };
-        float avgROI = 0;
-        foreach (Worker w in workers) {
-            foreach (string stat in results.Keys) {
-                results[stat] += w.StatByName(stat).value;
-            }
-            avgROI += WorkerROI(w);
-        }
+        List<string> statNames = results.Keys.ToList();
 
-        foreach (string stat in results.Keys) {
-            results[stat] /= workers.Count;
+        if (workers.Count > 0) {
+            float avgROI = 0;
+            foreach (Worker w in workers) {
+                foreach (string stat in statNames) {
+                    results[stat] += w.StatByName(stat).value;
+                }
+                avgROI += WorkerROI(w);
+            }
+
+            foreach (string stat in statNames) {
+                results[stat] /= workers.Count;
+            }
+            results["Average ROI"] = avgROI/workers.Count;
+        } else {
+            results["Average ROI"] = 0;
         }
-        results["Average ROI"] = avgROI/workers.Count;
 
         return results;
     }

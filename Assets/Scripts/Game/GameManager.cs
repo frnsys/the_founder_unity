@@ -18,6 +18,9 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public Company playerCompany;
 
+    // Other companies in the world.
+    public List<AICompany> otherCompanies = new List<AICompany>();
+
     // Other managers.
     public ResearchManager researchManager;
 
@@ -163,6 +166,12 @@ public class GameManager : Singleton<GameManager> {
                 _month++;
             }
 
+            // AI companies gather business intelligence!!
+            foreach (AICompany aic in otherCompanies) {
+                aic.CollectPerformanceData();
+                aic.PayMonthly();
+            }
+
             playerCompany.PayMonthly();
             yield return new WaitForSeconds(monthTime);
         }
@@ -176,6 +185,12 @@ public class GameManager : Singleton<GameManager> {
             } else {
                 week++;
             }
+
+            foreach (AICompany aic in otherCompanies) {
+                aic.Decide();
+            }
+
+
             yield return new WaitForSeconds(weekTime);
         }
     }
@@ -184,6 +199,10 @@ public class GameManager : Singleton<GameManager> {
         yield return new WaitForSeconds(weekTime/14);
         while(true) {
             playerCompany.DevelopProducts();
+
+            foreach (AICompany aic in otherCompanies) {
+                aic.DevelopProducts();
+            }
 
             // TO DO Temporarily placed here
             GameEvent.Roll(unlocked.events);
@@ -201,6 +220,10 @@ public class GameManager : Singleton<GameManager> {
             // a more "natural" feel.
             float elapsedTime = weekTime/14 * Random.Range(0.4f, 1.4f);
             playerCompany.HarvestProducts(elapsedTime);
+
+            foreach (AICompany aic in otherCompanies) {
+                aic.HarvestProducts(elapsedTime);
+            }
 
             yield return new WaitForSeconds(elapsedTime);
         }

@@ -34,7 +34,10 @@ internal class AICompanyInspector : Editor {
 
         EditorGUILayout.Space();
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("personality"));
+        EditorGUILayout.LabelField("Personality");
+        c.aggression = EditorGUILayout.FloatField("Aggression", c.aggression);
+        c.cooperativeness = EditorGUILayout.FloatField("Cooperativeness", c.cooperativeness);
+        c.luck = EditorGUILayout.FloatField("Luck", c.luck);
 
         EditorGUILayout.Space();
 

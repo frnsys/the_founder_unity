@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 public class Company : HasStats {
-    public Stat cash = new Stat("Cash", 100000);
+    public Stat cash;
     public Consultancy consultancy;
 
     public Company(string name_) {
@@ -23,17 +23,31 @@ public class Company : HasStats {
         Planetary,
         Galactic
     }
-    public Phase phase = Phase.Local;
+    public Phase phase;
 
+
+    public virtual void Awake() {
+        // Default values.
+        phase = Phase.Local;
+        cash = new Stat("Cash", 100000);
+        sizeLimit = 10;
+        founders = new List<Worker>();
+        _workers = new List<Worker>();
+        baseFeaturePoints = 4;
+        productPoints = 10;
+        lastMonthCosts = 0;
+        lastMonthRevenue = 0;
+        _items = new List<Item>();
+    }
 
 
     // ===============================================
     // Worker Management =============================
     // ===============================================
 
-    public int sizeLimit = 10;
-    public List<Worker> founders = new List<Worker>();
-    private List<Worker> _workers = new List<Worker>();
+    public int sizeLimit;
+    public List<Worker> founders;
+    private List<Worker> _workers;
     public ReadOnlyCollection<Worker> workers {
         get { return _workers.AsReadOnly(); }
     }
@@ -61,7 +75,7 @@ public class Company : HasStats {
     }
 
     // Total feature points available.
-    private int baseFeaturePoints = 4;
+    private int baseFeaturePoints;
     public FeaturePoints featurePoints {
         get {
 
@@ -91,7 +105,7 @@ public class Company : HasStats {
     // ===============================================
 
     // Total product point capacity.
-    public int productPoints = 10;
+    public int productPoints;
     public int usedProductPoints {
         get { return products.Sum(p => p.state != Product.State.RETIRED ? p.points : 0); }
     }
@@ -180,8 +194,8 @@ public class Company : HasStats {
     // ===============================================
 
     // Keep track of each month's costs.
-    public float lastMonthCosts = 0;
-    public float lastMonthRevenue = 0;
+    public float lastMonthCosts;
+    public float lastMonthRevenue;
     public void PayMonthly() {
         float toPay = 0;
         foreach (Worker worker in workers) {
@@ -214,7 +228,7 @@ public class Company : HasStats {
     // Item Management ===============================
     // ===============================================
 
-    public List<Item> _items = new List<Item>();
+    public List<Item> _items;
     public ReadOnlyCollection<Item> items {
         get { return _items.AsReadOnly(); }
     }
@@ -263,7 +277,7 @@ public class Company : HasStats {
         }
     }
 
-    // Given an item, find the list of currently active products that 
+    // Given an item, find the list of currently active products that
     // match the item's industries, product types, or markets.
     private List<Product> FindMatchingProducts(List<ProductType> productTypes, List<Industry> industries, List<Market> markets) {
         // Items which have no product specifications apply to all products.
