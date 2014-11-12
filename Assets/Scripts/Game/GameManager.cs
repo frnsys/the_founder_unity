@@ -21,6 +21,11 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public TheBoard board;
 
+    // How many years and months you have to play.
+    private int lifetimeYear;
+    private int lifetimeMonth;
+    private int lifetimeWeek;
+
     // Other companies in the world.
     public List<AICompany> otherCompanies = new List<AICompany>();
 
@@ -70,7 +75,21 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ResearchCycle());
 
         researchManager = gameObject.AddComponent<ResearchManager>();
+
+        // TO DO These should be moved into NewGame when that menu is setup.
         board = new TheBoard();
+
+        // You start your business at 25,
+        // so the amount of time you have really ranges from 40-60.
+        float lifetime = Random.Range(65f, 85f) - 25;
+
+        // Translate the lifetime into a year, month, & week.
+        lifetimeYear = (int)lifetime;
+
+        float month = (lifetime - lifetimeYear) * 12;
+        lifetimeMonth = (int)month;
+
+        lifetimeWeek = (int)((month - lifetimeMonth) * 4);
     }
 
     void OnEvent(GameEvent e) {
@@ -165,6 +184,11 @@ public class GameManager : Singleton<GameManager> {
 
             UIManager.Instance.AnnualReport(results, deltas, board);
 
+            // Lose condition:
+            if (board.happiness < -20)
+                // TO DO this should be a proper "lose game"
+                UIManager.Instance.Alert("YOU LOSE");
+
             yield return new WaitForSeconds(yearTime);
         }
     }
@@ -200,6 +224,11 @@ public class GameManager : Singleton<GameManager> {
             } else {
                 week++;
             }
+
+            // TO DO this should be a proper "lose game"
+            // Do you die?
+            if (year > lifetimeYear && month > lifetimeMonth && week > lifetimeWeek)
+                UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
 
             foreach (AICompany aic in otherCompanies) {
                 aic.Decide();

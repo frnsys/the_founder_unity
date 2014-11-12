@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class TheBoard {
-    float happiness = 10;
+    public float happiness = 10;
 
     public void EvaluatePerformance(PerformanceDict deltas) {
         float revenueDelta = deltas["Annual Revenue"];
