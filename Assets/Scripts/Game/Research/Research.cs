@@ -3,6 +3,7 @@
  */
 
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -20,32 +21,49 @@ public class Research {
 
     public Research(float m, float t, float d) {
         management = m;
-        technical = t;
-        design = d;
+        technical  = t;
+        design     = d;
     }
 
     public static Research operator +(Research left, Research right) {
         return new Research(
                     left.management + right.management,
-                    left.technical + right.technical,
-                    left.design + right.design);
+                    left.technical  + right.technical,
+                    left.design     + right.design);
     }
 
     public static float operator /(Research left, Research right) {
         // The left values can't be greater than the right's values.
-        float m = left.management > right.management ? right.management : left.management;
-        float t = left.technical > right.technical ? right.technical : left.technical;
-        float d = left.design > right.design ? right.design : left.design;
+        float m = Math.Min(left.management, right.management);
+        float t = Math.Min(left.technical,  right.technical);
+        float d = Math.Min(left.design,     right.design);
 
         return (m + t + d)/right.total;
     }
 
     public static bool operator >=(Research left, Research right) {
-        return (left/right >= 1f);
+        return left/right >= 1f;
     }
 
     public static bool operator <=(Research left, Research right) {
-        return (left/right <= 1f);
+        return left/right <= 1f;
+    }
+
+    public static bool operator ==(Research left, Research right) {
+        if (left.management - right.management != 0)
+            return false;
+
+        if (left.technical - right.technical != 0)
+            return false;
+
+        if (left.design - right.design != 0)
+            return false;
+
+        return true;
+    }
+
+    public static bool operator !=(Research left, Research right) {
+        return !(left == right);
     }
 }
 

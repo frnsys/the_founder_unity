@@ -34,19 +34,18 @@ public class Worker : HasStats {
     public Stat creativity;
     public Stat cleverness;
 
-    public Worker(string name_, float happiness_, float productivity_, float charisma_,
-        float creativity_, float cleverness_
-    ) {
-        name         = name_;
-        happiness    = new Stat("Happiness", happiness_);
-        productivity = new Stat("Productivity", productivity_);
-        charisma     = new Stat("Charisma", charisma_);
-        creativity   = new Stat("Creativity", creativity_);
-        cleverness   = new Stat("Cleverness", cleverness_);
-    }
-
     void Start() {
-        //levels = this.gameObject.GetComponent<Levels>();
+        Init("Default Worker");
+    }
+    public void Init(string name_) {
+        name         = name_;
+        salary       = 0;
+        happiness    = new Stat("Happiness",    0);
+        productivity = new Stat("Productivity", 0);
+        charisma     = new Stat("Charisma",     0);
+        creativity   = new Stat("Creativity",   0);
+        cleverness   = new Stat("Cleverness",   0);
+        //levels     = this.gameObject.GetComponent<Levels>();
     }
 
     public void OnEnable() {

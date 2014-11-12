@@ -74,7 +74,7 @@ public class Product : HasStats {
     // Creativity + Cleverness
     public Stat performance;
 
-    public Product(ProductType pt, Industry i, Market m) {
+    public void Init(ProductType pt, Industry i, Market m) {
         name = GenerateName();
         productType = pt;
         industry = i;

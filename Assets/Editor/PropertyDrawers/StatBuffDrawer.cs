@@ -37,7 +37,7 @@ class StatBuffDrawer : PropertyDrawer {
         propertyRect.width /= 4;
 
         int name_i = EditorGUI.Popup(propertyRect, Array.IndexOf(validStats, property.FindPropertyRelative("name").stringValue), validStats);
-        if (name_i > 0)
+        if (name_i >= 0)
             property.FindPropertyRelative("name").stringValue = validStats[name_i];
 
         propertyRect.x += propertyRect.width;

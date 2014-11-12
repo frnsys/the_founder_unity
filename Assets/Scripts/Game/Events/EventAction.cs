@@ -24,7 +24,6 @@ public class EventAction {
     // otherwise, it is resolved immediately.
     public void Execute() {
         if (delay > 0) {
-            Debug.Log(delay);
             Timer timer  = new Timer(delay);
             timer.Elapsed += delegate {
                 Resolve();

@@ -28,7 +28,11 @@ namespace UnityTest
             gameManager = gameObj.AddComponent<GameManager>();
 
             c = new Company("Foo Inc");
-            worker = new Worker("Franklin", 0, 0, 0, 0, 0);
+            c.productPoints = 10;
+
+            worker = ScriptableObject.CreateInstance<Worker>();
+            worker.Init("Franklin");
+
             item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
         }
 
@@ -78,12 +82,22 @@ namespace UnityTest
             Assert.AreEqual(c.cash.baseValue, 1500);
         }
 
+
+
+        // ===============================================
+        // Product Management ============================
+        // ===============================================
+
         [Test]
         public void StartNewProduct() {
             c.cash.baseValue = 2000;
             c.BuyItem(item);
 
             c.StartNewProduct(pt, i, m);
+            Assert.AreEqual(c.developingProducts[0], c.products[0]);
+            Assert.AreEqual(c.availableProductPoints, c.productPoints - (pt.points + i.points + m.points));
+
+            // Creating a new product should apply existing items.
             Assert.AreEqual(c.products.Count, 1);
             Assert.AreEqual(c.products[0].appeal.value, 10);
         }
@@ -97,22 +111,59 @@ namespace UnityTest
             worker.creativity.baseValue = 10;
             worker.cleverness.baseValue = 10;
 
-            Product p = Substitute.For<Product>();
+            Product p = ScriptableObject.CreateInstance<Product>();
+            p.Init(pt, i, m);
             c.DevelopProduct(p);
 
-            p.Received().Develop(Arg.Any<float>(), Arg.Any<float>(), Arg.Any<float>(), Arg.Any<float>());
+            Assert.IsTrue(p.progress > 0);
+            Assert.IsTrue(p.appeal.value > 0);
+            Assert.IsTrue(p.usability.value > 0);
+            Assert.IsTrue(p.performance.value > 0);
+        }
+
+		[Test]
+		public void HarvestProduct() {
+            c.cash.baseValue = 2000;
+            c.HireWorker(worker);
+
+            worker.productivity.baseValue = 100;
+            worker.charisma.baseValue = 100;
+            worker.creativity.baseValue = 100;
+            worker.cleverness.baseValue = 100;
+
+            c.StartNewProduct(pt, i, m);
+            Product p = c.products[0];
+            c.DevelopProduct(p);
+
+            p.Launch();
+            Assert.AreEqual(c.activeProducts[0], p);
+
+            c.HarvestProducts(2);
+
+            Assert.IsTrue(c.cash.baseValue > 2000);
         }
 
         [Test]
-        public void RemoveProduct() {
+        public void ShutdownProduct() {
             c.cash.baseValue = 2000;
+            c.BuyItem(item);
+
             c.StartNewProduct(pt, i, m);
             Product p = c.products[0];
-            c.RemoveProduct(p);
+            Assert.AreEqual(p.appeal.value, 10);
+
+            c.ShutdownProduct(p);
 
             Assert.AreEqual(p.state, Product.State.RETIRED);
+            Assert.AreEqual(p.appeal.value, 0);
+            Assert.AreEqual(c.availableProductPoints, c.productPoints);
         }
 
+
+
+        // ===============================================
+        // Item Management ===============================
+        // ===============================================
 
 		[Test]
 		public void BuyItem_CanAfford() {
@@ -126,10 +177,12 @@ namespace UnityTest
             Assert.AreEqual(c.items.Count, 1);
             Assert.AreEqual(p.appeal.value, 10);
             Assert.AreEqual(worker.happiness.value, 10);
+            Assert.AreEqual(worker.productivity.value, 20);
 
             // Item should be removed from worker.
             c.FireWorker(worker);
             Assert.AreEqual(worker.happiness.value, 0);
+            Assert.AreEqual(worker.productivity.value, 0);
         }
 
 		[Test]

@@ -78,7 +78,6 @@ public class Company : HasStats {
     private int baseFeaturePoints;
     public FeaturePoints featurePoints {
         get {
-
             float charisma_   = 0;
             float cleverness_ = 0;
             float creativity_ = 0;
@@ -126,13 +125,17 @@ public class Company : HasStats {
     }
 
     public void StartNewProduct(ProductType pt, Industry i, Market m) {
-        Product product = new Product(pt, i, m);
+        Product product = ScriptableObject.CreateInstance<Product>();
+        product.Init(pt, i, m);
 
         // Apply any applicable items to the new product.
         // TO DO: should this be held off until after the product is completed?
         foreach (Item item in _items) {
             foreach (ProductEffect pe in item.effects.products) {
-                if (pe.productTypes.Contains(pt) || pe.industries.Contains(i) || pe.markets.Contains(m)) {
+                // If the product effect is indiscriminate (i.e. doesn't specify any aspects), it applies to every product.
+                // Otherwise, a product must fit at least one of the aspects to have the effect applied.
+                if ((pe.productTypes.Count == 0 && pe.industries.Count == 0 && pe.markets.Count == 0) ||
+                    (pe.productTypes.Contains(pt) || pe.industries.Contains(i) || pe.markets.Contains(m))) {
                     product.ApplyBuff(pe.buff);
                 }
             }
@@ -160,14 +163,10 @@ public class Company : HasStats {
     }
 
     public void DevelopProduct(Product product) {
-        //float charisma = 0;
-        //float creativity = 0;
-        //float cleverness = 0;
-        float charisma = 100; // testing
-        float creativity = 100; // testing
-        float cleverness = 100; // testing
-        //float progress = 0;
-        float progress = 100; // testing
+        float charisma = 0;
+        float creativity = 0;
+        float cleverness = 0;
+        float progress = 0;
 
         foreach (Worker worker in workers) {
             // A bit of randomness to make things more interesting.
@@ -180,11 +179,47 @@ public class Company : HasStats {
         product.Develop(progress, charisma, creativity, cleverness);
     }
 
-    public void RemoveProduct(Product product) {
-        //foreach (Item item in _items) {
-            //product.RemoveItem(item);
-        //}
+    public void ShutdownProduct(Product product) {
+        foreach (Item item in _items) {
+            foreach (ProductEffect pe in item.effects.products) {
+                // If the product effect is indiscriminate (i.e. doesn't specify any aspects), it applies to every product.
+                // Otherwise, a product must fit at least one of the aspects to have the effect applied.
+                if ((pe.productTypes.Count == 0 && pe.industries.Count == 0 && pe.markets.Count == 0) ||
+                    (pe.productTypes.Contains(product.productType) || pe.industries.Contains(product.industry) || pe.markets.Contains(product.market))) {
+                    product.RemoveBuff(pe.buff);
+                }
+            }
+        }
         product.Shutdown();
+    }
+
+    public void ApplyProductEffect(ProductEffect effect) {
+        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
+        foreach (Product product in matchingProducts) {
+            product.ApplyBuff(effect.buff);
+        }
+    }
+    public void RemoveProductEffect(ProductEffect effect) {
+        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
+        foreach (Product product in matchingProducts) {
+            product.RemoveBuff(effect.buff);
+        }
+    }
+
+
+    // Given an item, find the list of currently active products that
+    // match the item's industries, product types, or markets.
+    private List<Product> FindMatchingProducts(List<ProductType> productTypes, List<Industry> industries, List<Market> markets) {
+        // Items which have no product specifications apply to all products.
+        if (industries.Count == 0 && productTypes.Count == 0 && markets.Count == 0) {
+            return products;
+
+        } else {
+            return products.FindAll(p =>
+                industries.Exists(i => i == p.industry)
+                || productTypes.Exists(pType => pType == p.productType)
+                || markets.Exists(m => m == p.market));
+        }
     }
 
 
@@ -238,11 +273,7 @@ public class Company : HasStats {
             _items.Add(item);
 
             foreach (ProductEffect pe in item.effects.products) {
-                List<Product> matchingProducts = FindMatchingProducts(pe.productTypes, pe.industries, pe.markets);
-
-                foreach (Product product in matchingProducts) {
-                    product.ApplyBuff(pe.buff);
-                }
+                ApplyProductEffect(pe);
             }
 
             foreach (Worker worker in _workers) {
@@ -258,37 +289,11 @@ public class Company : HasStats {
         _items.Remove(item);
 
         foreach (ProductEffect pe in item.effects.products) {
-            List<Product> matchingProducts = FindMatchingProducts(pe.productTypes, pe.industries, pe.markets);
-
-            foreach (Product product in matchingProducts) {
-                product.ApplyBuff(pe.buff);
-            }
+            RemoveProductEffect(pe);
         }
 
         foreach (Worker worker in _workers) {
             worker.RemoveItem(item);
-        }
-    }
-
-    public void ApplyProductEffect(ProductEffect effect) {
-        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
-        foreach (Product product in matchingProducts) {
-            product.ApplyBuff(effect.buff);
-        }
-    }
-
-    // Given an item, find the list of currently active products that
-    // match the item's industries, product types, or markets.
-    private List<Product> FindMatchingProducts(List<ProductType> productTypes, List<Industry> industries, List<Market> markets) {
-        // Items which have no product specifications apply to all products.
-        if (industries.Count == 0 && productTypes.Count == 0 && markets.Count == 0) {
-            return products;
-
-        } else {
-            return products.FindAll(p =>
-                industries.Exists(i => i == p.industry)
-                || productTypes.Exists(pType => pType == p.productType)
-                || markets.Exists(m => m == p.market));
         }
     }
 

@@ -12,6 +12,7 @@ namespace UnityTest
 	internal class ProductTests
 	{
         private Product p = null;
+        private ProductRecipe pr = null;
         private Item item;
 
         [SetUp]
@@ -20,10 +21,9 @@ namespace UnityTest
             Industry i = Industry.Load("Space");
             Market m = Market.Load("Millenials");
 
-            // This *should* load the Default product recipe.
-            // If it doesn't, you may need to change the PT/I/M
-            // to one that doesn't have an associated recipe.
-            p = new Product(pt, i, m);
+            p = ScriptableObject.CreateInstance<Product>();
+            p.Init(pt, i, m);
+            pr = ProductRecipe.Load(pt, i, m);
 
             item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
         }
@@ -52,7 +52,7 @@ namespace UnityTest
 
             p.Develop(100000, 5, 15, 25);
 
-            Assert.AreEqual(p.progress, 100000);
+            Assert.AreEqual(p.progress, 100000/pr.progressRequired);
             Assert.AreEqual(p.appeal.value, (5+15)/2);
             Assert.AreEqual(p.usability.value, (25+5)/2);
             Assert.AreEqual(p.performance.value, (15+25)/2);
@@ -105,6 +105,11 @@ namespace UnityTest
             p.Shutdown();
 
             Assert.AreEqual(p.state, Product.State.RETIRED);
+        }
+
+        [Test]
+        public void Points() {
+            Assert.AreEqual(p.points, p.productType.points + p.industry.points + p.market.points);
         }
     }
 }

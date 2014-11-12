@@ -9,7 +9,7 @@ using System.Collections;
 public abstract class ProductAspect : ScriptableObject {
     // Product points.
     // Each aspect requires a number of product points from a company.
-    public int points;
+    public int points = 1;
 
     public string description;
 
