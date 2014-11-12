@@ -114,7 +114,7 @@ public class Product : HasStats {
 
     static public event System.Action<Product> Completed;
 
-    public void Develop(float newProgress, float charisma, float creativity, float cleverness) {
+    public bool Develop(float newProgress, float charisma, float creativity, float cleverness) {
         if (state == State.DEVELOPMENT) {
             float newAppeal = (creativity + charisma)/2;
             float newUsability = (cleverness + charisma)/2;
@@ -132,8 +132,10 @@ public class Product : HasStats {
                 if (Completed != null) {
                     Completed(this);
                 }
+                return true;
             }
         }
+        return false;
     }
 
     public void Launch() {

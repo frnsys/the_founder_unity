@@ -25,7 +25,15 @@ MonoBehaviour:
     _buffs: []
   creativity:
     baseValue: 20
-    _buffs: []
+    _buffs:
+    - name: Creativity
+      value: 1000
+      duration: 0
+      type: 0
+    - name: Creativity
+      value: 1000
+      duration: 0
+      type: 0
   cleverness:
     baseValue: 20
     _buffs: []

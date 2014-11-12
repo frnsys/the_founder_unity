@@ -40,8 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCompany: {fileID: 0}
-  otherCompanies:
-  - {fileID: 11400000, guid: 770c864449ef54f4eb81d205f89993ea, type: 2}
+  otherCompanies: []
   researchManager: {fileID: 0}
   unlocked:
     prereqs:

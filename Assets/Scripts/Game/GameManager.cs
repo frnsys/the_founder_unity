@@ -18,10 +18,14 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public Company playerCompany;
 
+    [HideInInspector]
+    public TheBoard board;
+
     // Other companies in the world.
     public List<AICompany> otherCompanies = new List<AICompany>();
 
     // Other managers.
+    [HideInInspector]
     public ResearchManager researchManager;
 
     private Company.Phase phase {
@@ -66,6 +70,7 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ResearchCycle());
 
         researchManager = gameObject.AddComponent<ResearchManager>();
+        board = new TheBoard();
     }
 
     void OnEvent(GameEvent e) {
@@ -151,6 +156,15 @@ public class GameManager : Singleton<GameManager> {
         yield return new WaitForSeconds(yearTime);
         while(true) {
             _year++;
+
+            // Get the annual performance data and generate the report.
+            List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
+            PerformanceDict results = annualData[0];
+            PerformanceDict deltas = annualData[1];
+            board.EvaluatePerformance(deltas);
+
+            UIManager.Instance.AnnualReport(results, deltas, board);
+
             yield return new WaitForSeconds(yearTime);
         }
     }
@@ -172,6 +186,7 @@ public class GameManager : Singleton<GameManager> {
                 aic.PayMonthly();
             }
 
+            playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
             yield return new WaitForSeconds(monthTime);
         }

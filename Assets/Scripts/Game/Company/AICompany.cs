@@ -25,35 +25,6 @@ public class ProductCombo {
     }
 }
 
-// Subclass these generic types so that they serialize.
-[System.Serializable]
-public class PerformanceDict : SerializableDictionary<string, float> {
-    public override string ToString() {
-        string str = "";
-        foreach (string key in Keys) {
-            str += key + ":" + this[key].ToString() + ", ";
-        }
-        return str.Substring(0, str.Length - 2);
-    }
-}
-
-[System.Serializable]
-public class PerformanceHistory : FixedSizeQueue<PerformanceDict> {
-
-    public PerformanceHistory(int size) : base(size) {
-        Size = size;
-    }
-
-    public override string ToString() {
-        string str = "";
-        foreach (PerformanceDict d in this) {
-            str += d.ToString() + " | ";
-        }
-        return str.Substring(0, str.Length - 3);
-    }
-}
-
-
 
 
 public class AICompany : Company {
@@ -84,6 +55,7 @@ public class AICompany : Company {
         startWorkers = new List<Worker>();
         startProducts = new List<Product>();
 
+        // Keep track of data for 2 years.
         PerfHistory = new PerformanceHistory(24);
         ProductPerfHistory = new PerformanceHistory(24);
         WorkerPerfHistory = new PerformanceHistory(24);
@@ -211,7 +183,7 @@ public class AICompany : Company {
     }
 
     private void DecideShutdownProducts() {
-        float historicalAvgROI = ProductPerfHistory.Sum(x => x["Average ROI"])/ProductPerfHistory.Size;
+        float historicalAvgROI = ProductPerfHistory.Average(x => x["Average ROI"]);
         foreach (Product p in activeProducts) {
             // Some minimum amount of time a product is kept in market before considering shutdown.
             // TO DO tweak this value.
@@ -277,28 +249,14 @@ public class AICompany : Company {
                 x.market      == p.market).ToList();
     }
 
-    // Calculate the return on investment for a product,
-    // normalized for time.
-    private float ProductROI(Product p) {
-        // TO DO tweak this
-        // this should maybe also take into account cash invested
-        // (e.g. rent, salaries, etc) and value of items that contributed (normalized for their lifetime)
-        return (p.revenueEarned/p.timeSinceLaunch)/p.points;
-    }
-
 
 
     // ===============================================
     // Worker Management =============================
     // ===============================================
 
-    // Calculate the "value" of a worker.
-    private float WorkerROI(Worker w) {
-        return (w.productivity.value + ((w.charisma.value + w.creativity.value + w.cleverness.value)/3))/(w.salary+w.happiness.value);
-    }
-
     private void ReviewWorkers() {
-        float historicalAvgROI = WorkerPerfHistory.Sum(x => x["Average ROI"])/WorkerPerfHistory.Size;
+        float historicalAvgROI = WorkerPerfHistory.Average(x => x["Average ROI"]);
 
         // Review all hired workers, except the founder obv.
         foreach (Worker w in workers.Where(x => !founders.Contains(x))) {
@@ -320,8 +278,8 @@ public class AICompany : Company {
 
     private void DecideHireWorkers() {
         if (workers.Count < sizeLimit) {
-            float avgMonthlyRevenue = PerfHistory.Sum(x => x["Month Revenue"])/PerfHistory.Size;
-            float avgMonthlyCosts = PerfHistory.Sum(x => x["Month Costs"])/PerfHistory.Size;
+            float avgMonthlyRevenue = PerfHistory.Average(x => x["Month Revenue"]);
+            float avgMonthlyCosts = PerfHistory.Average(x => x["Month Costs"]);
             float expectedMonthlyProfits = avgMonthlyRevenue - avgMonthlyCosts;
 
             // The more aggressive the company, the more likely they are
@@ -384,83 +342,6 @@ public class AICompany : Company {
     // pick a consultancy to hire
     // somehow assess which discovery is most worthwhile to pursue.
 
-
-    // ===============================================
-    // Performance Data ==============================
-    // ===============================================
-
-    // The AI Company must surveil its assets in order to make decisions.
-
-    public void CollectPerformanceData() {
-        Debug.Log(name + " is collecting performance data...");
-
-        PerfHistory.Enqueue(SamplePerformance());
-        ProductPerfHistory.Enqueue(ProductAverages());
-        WorkerPerfHistory.Enqueue(WorkerAverages());
-
-        Debug.Log(PerfHistory);
-        Debug.Log(ProductPerfHistory);
-        Debug.Log(WorkerPerfHistory);
-    }
-
-    // Keep track of company performance history as well to try and make decisions.
-    [SerializeField]
-    private PerformanceHistory PerfHistory;
-    [SerializeField]
-    private PerformanceHistory ProductPerfHistory;
-    [SerializeField]
-    private PerformanceHistory WorkerPerfHistory;
-
-    // These data are sampled every month.
-    private PerformanceDict SamplePerformance() {
-        return new PerformanceDict {
-            {"Month Revenue", lastMonthRevenue},
-            {"Month Costs", lastMonthCosts}
-        };
-    }
-
-    private PerformanceDict ProductAverages() {
-        float avgROI = 0;
-
-        if (activeProducts.Count > 0) {
-            foreach (Product p in activeProducts) {
-                avgROI += ProductROI(p);
-            }
-            avgROI /= activeProducts.Count;
-        }
-
-        return new PerformanceDict {
-            {"Average ROI", avgROI}
-        };
-    }
-
-    // Aggregate averages of certain worker stats.
-    private PerformanceDict WorkerAverages() {
-        PerformanceDict results = new PerformanceDict {
-            {"Happiness", 0f},
-            {"Productivity", 0f}
-        };
-        List<string> statNames = results.Keys.ToList();
-
-        if (workers.Count > 0) {
-            float avgROI = 0;
-            foreach (Worker w in workers) {
-                foreach (string stat in statNames) {
-                    results[stat] += w.StatByName(stat).value;
-                }
-                avgROI += WorkerROI(w);
-            }
-
-            foreach (string stat in statNames) {
-                results[stat] /= workers.Count;
-            }
-            results["Average ROI"] = avgROI/workers.Count;
-        } else {
-            results["Average ROI"] = 0;
-        }
-
-        return results;
-    }
 
 
     /*

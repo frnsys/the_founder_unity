@@ -21,6 +21,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
+    public GameObject annualReportPrefab;
     public GameObject researchCompletedAlertPrefab;
     public GameObject productCompletedAlertPrefab;
 
@@ -67,6 +68,7 @@ public class UIManager : Singleton<UIManager> {
         popup.GetComponent<UIProductCompletedAlert>().product = p;
     }
 
+    [HideInInspector]
     public GameObject currentPopup;
     public void OpenPopup(GameObject popupPrefab) {
         currentPopup = NGUITools.AddChild(windowsPanel, popupPrefab);
@@ -118,6 +120,13 @@ public class UIManager : Singleton<UIManager> {
         UIEventListener.Get(confirm.noButton).onClick += noAction;
 
         return confirm;
+    }
+
+    // Create an annual report.
+    public UIAnnualReport AnnualReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+        UIAnnualReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIAnnualReport>();
+        report.BuildReport(results, deltas, board);
+        return report;
     }
 }
 

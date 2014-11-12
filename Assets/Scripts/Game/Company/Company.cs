@@ -38,6 +38,15 @@ public class Company : HasStats {
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
         _items = new List<Item>();
+
+        // Keep track for a year.
+        PerfHistory = new PerformanceHistory(12);
+        ProductPerfHistory = new PerformanceHistory(12);
+        WorkerPerfHistory = new PerformanceHistory(12);
+        ProductsReleased = new List<Product>();
+
+        // Keep track for 10 years.
+        AnnualPerfHistory = new PerformanceHistory(10);
     }
 
 
@@ -176,7 +185,10 @@ public class Company : HasStats {
             progress += (worker.productivity.value/2) * Random.Range(0.90f, 1.05f);
         }
 
-        product.Develop(progress, charisma, creativity, cleverness);
+        bool completed = product.Develop(progress, charisma, creativity, cleverness);
+        if (completed) {
+            ProductsReleased.Add(product);
+        }
     }
 
     public void ShutdownProduct(Product product) {
@@ -296,6 +308,138 @@ public class Company : HasStats {
             worker.RemoveItem(item);
         }
     }
+
+
+
+    // ===============================================
+    // Performance Data ==============================
+    // ===============================================
+
+    // The Company must surveil its assets to track performance.
+    public void CollectPerformanceData() {
+        Debug.Log(name + " is collecting performance data...");
+
+        PerfHistory.Enqueue(SamplePerformance());
+        ProductPerfHistory.Enqueue(ProductAverages());
+        WorkerPerfHistory.Enqueue(WorkerAverages());
+
+        Debug.Log(PerfHistory);
+        Debug.Log(ProductPerfHistory);
+        Debug.Log(WorkerPerfHistory);
+    }
+
+    // Keep track of company performance history as well to try and make decisions.
+    [SerializeField]
+    protected PerformanceHistory PerfHistory;
+    [SerializeField]
+    protected PerformanceHistory ProductPerfHistory;
+    [SerializeField]
+    protected PerformanceHistory WorkerPerfHistory;
+    [SerializeField]
+    protected PerformanceHistory AnnualPerfHistory;
+    protected List<Product> ProductsReleased;
+
+    // These data are sampled every month.
+    private PerformanceDict SamplePerformance() {
+        return new PerformanceDict {
+            {"Month Revenue", lastMonthRevenue},
+            {"Month Costs", lastMonthCosts}
+        };
+    }
+
+    // Annually, aggregate data for the past year is collected.
+    public List<PerformanceDict> CollectAnnualPerformanceData() {
+        PerformanceDict results = new PerformanceDict();
+        results["Annual Revenue"] = PerfHistory.Sum(x => x["Month Revenue"]);
+        results["Annual Costs"] = PerfHistory.Sum(x => x["Month Costs"]);
+
+        float avgPROI = 0;
+        foreach (Product p in ProductsReleased) {
+            // TO DO this could be more detailed.
+            avgPROI += p.revenueEarned/p.points;
+        }
+        results["Product ROI"] = avgPROI/ProductsReleased.Count;
+        AnnualPerfHistory.Enqueue(results);
+
+        // Reset the products released for the new year.
+        ProductsReleased.Clear();
+
+        // Compare this year's performance to last years (if available).
+        PerformanceDict deltas = new PerformanceDict();
+        if (AnnualPerfHistory.Count > 1) {
+            // Last year is the second to last element.
+            PerformanceDict lastYear = (PerformanceDict)AnnualPerfHistory.Skip(AnnualPerfHistory.Count - 2).Take(1);
+
+            foreach (string key in results.Keys) {
+                deltas[key] = results[key]/lastYear[key] - 1f;
+            }
+
+        // Otherwise, everything improved by 100%!!!
+        } else {
+            foreach (string key in results.Keys) {
+                deltas[key] = 1f;
+            }
+        }
+        return new List<PerformanceDict> { results, deltas };
+    }
+
+    private PerformanceDict ProductAverages() {
+        float avgROI = 0;
+
+        if (activeProducts.Count > 0) {
+            foreach (Product p in activeProducts) {
+                avgROI += ProductROI(p);
+            }
+            avgROI /= activeProducts.Count;
+        }
+
+        return new PerformanceDict {
+            {"Average ROI", avgROI}
+        };
+    }
+
+    // Calculate the return on investment for a product,
+    // normalized for time.
+    protected float ProductROI(Product p) {
+        // TO DO tweak this
+        // this should maybe also take into account cash invested
+        // (e.g. rent, salaries, etc) and value of items that contributed (normalized for their lifetime)
+        return (p.revenueEarned/p.timeSinceLaunch)/p.points;
+    }
+
+    // Aggregate averages of certain worker stats.
+    private PerformanceDict WorkerAverages() {
+        PerformanceDict results = new PerformanceDict {
+            {"Happiness", 0f},
+            {"Productivity", 0f}
+        };
+        List<string> statNames = results.Keys.ToList();
+
+        if (workers.Count > 0) {
+            float avgROI = 0;
+            foreach (Worker w in workers) {
+                foreach (string stat in statNames) {
+                    results[stat] += w.StatByName(stat).value;
+                }
+                avgROI += WorkerROI(w);
+            }
+
+            foreach (string stat in statNames) {
+                results[stat] /= workers.Count;
+            }
+            results["Average ROI"] = avgROI/workers.Count;
+        } else {
+            results["Average ROI"] = 0;
+        }
+
+        return results;
+    }
+
+    // Calculate the "value" of a worker.
+    protected float WorkerROI(Worker w) {
+        return (w.productivity.value + ((w.charisma.value + w.creativity.value + w.cleverness.value)/3))/(w.salary+w.happiness.value);
+    }
+
 
 
 
