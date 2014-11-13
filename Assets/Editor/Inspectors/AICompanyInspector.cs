@@ -26,10 +26,10 @@ internal class AICompanyInspector : Editor {
 
         EditorGUILayout.LabelField("Founder/CEO");
         if (c.founders.Count == 0) {
-            Worker founder = (Worker)EditorGUILayout.ObjectField(null, typeof(Worker));
+            Founder founder = (Founder)EditorGUILayout.ObjectField(null, typeof(Founder));
             c.founders.Add(founder);
         } else {
-            c.founders[0] = (Worker)EditorGUILayout.ObjectField(c.founders[0], typeof(Worker));
+            c.founders[0] = (Founder)EditorGUILayout.ObjectField(c.founders[0], typeof(Founder));
         }
 
         EditorGUILayout.Space();

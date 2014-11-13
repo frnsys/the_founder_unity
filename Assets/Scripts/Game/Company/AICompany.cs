@@ -258,8 +258,8 @@ public class AICompany : Company {
     private void ReviewWorkers() {
         float historicalAvgROI = WorkerPerfHistory.Average(x => x["Average ROI"]);
 
-        // Review all hired workers, except the founder obv.
-        foreach (Worker w in workers.Where(x => !founders.Contains(x))) {
+        // Review all hired workers (this should not include the founder(s)).
+        foreach (Worker w in workers) {
             // If this worker is performing significantly worse than the average, fire them.
             // If they are underperforming but could be doing better, upgrade them.
             // TO DO this should maybe look at standard deviations instead?

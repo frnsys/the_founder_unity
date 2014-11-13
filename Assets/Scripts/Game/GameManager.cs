@@ -33,6 +33,9 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public ResearchManager researchManager;
 
+    [HideInInspector]
+    public NarrativeManager narrativeManager;
+
     private Company.Phase phase {
         get { return playerCompany.phase; }
     }
@@ -75,6 +78,7 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ResearchCycle());
 
         researchManager = gameObject.AddComponent<ResearchManager>();
+        narrativeManager = gameObject.AddComponent<NarrativeManager>();
 
         // TO DO These should be moved into NewGame when that menu is setup.
         board = new TheBoard();
@@ -90,6 +94,9 @@ public class GameManager : Singleton<GameManager> {
         lifetimeMonth = (int)month;
 
         lifetimeWeek = (int)((month - lifetimeMonth) * 4);
+
+        // TESTing hello from your mentor!
+        //narrativeManager.MentorMessage("A message from your mentor", "Welcome to The Founder!");
     }
 
     void OnEvent(GameEvent e) {
@@ -227,7 +234,9 @@ public class GameManager : Singleton<GameManager> {
 
             // TO DO this should be a proper "lose game"
             // Do you die?
-            if (year > lifetimeYear && month > lifetimeMonth && week > lifetimeWeek)
+            if (year > lifetimeYear &&
+                (int)_month > lifetimeMonth &&
+                week > lifetimeWeek)
                 UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
 
             foreach (AICompany aic in otherCompanies) {

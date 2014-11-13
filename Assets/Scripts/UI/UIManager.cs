@@ -20,6 +20,7 @@ public class UIManager : Singleton<UIManager> {
 
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
+    public GameObject emailPrefab;
     public GameObject effectAlertPrefab;
     public GameObject annualReportPrefab;
     public GameObject researchCompletedAlertPrefab;
@@ -127,6 +128,14 @@ public class UIManager : Singleton<UIManager> {
         UIAnnualReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIAnnualReport>();
         report.BuildReport(results, deltas, board);
         return report;
+    }
+
+    // Create an email.
+    public UIEmail Email(string from, string to, string subject, string message) {
+        UIEmail email = NGUITools.AddChild(alertsPanel, emailPrefab).GetComponent<UIEmail>();
+        email.SetHeaders(from, to, subject);
+        email.bodyText = message;
+        return email;
     }
 }
 

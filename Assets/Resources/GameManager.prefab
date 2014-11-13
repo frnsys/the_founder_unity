@@ -40,8 +40,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCompany: {fileID: 0}
+  board:
+    happiness: 10
   otherCompanies: []
   researchManager: {fileID: 0}
+  narrativeManager: {fileID: 0}
   unlocked:
     prereqs:
       productTypes: []

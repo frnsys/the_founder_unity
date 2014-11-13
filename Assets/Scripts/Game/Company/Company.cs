@@ -31,7 +31,7 @@ public class Company : HasStats {
         phase = Phase.Local;
         cash = new Stat("Cash", 100000);
         sizeLimit = 10;
-        founders = new List<Worker>();
+        founders = new List<Founder>();
         _workers = new List<Worker>();
         baseFeaturePoints = 4;
         productPoints = 10;
@@ -55,7 +55,7 @@ public class Company : HasStats {
     // ===============================================
 
     public int sizeLimit;
-    public List<Worker> founders;
+    public List<Founder> founders;
     private List<Worker> _workers;
     public ReadOnlyCollection<Worker> workers {
         get { return _workers.AsReadOnly(); }

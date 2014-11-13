@@ -6,6 +6,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 
     private static T _instance;
     private static object _lock = new object();
+    protected static GameObject prefab;
+
+    public static bool hasInstance {
+        get { return _instance != null; }
+    }
 
     public static T Instance {
         get {
@@ -23,8 +28,15 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
                     }
 
                     if (_instance == null) {
-                        GameObject singleton = new GameObject();
-                        _instance = singleton.AddComponent<T>();
+                        GameObject singleton;
+                        Debug.Log(prefab);
+                        if (prefab == null) {
+                            singleton = new GameObject();
+                            _instance = singleton.AddComponent<T>();
+                        } else {
+                            singleton = Instantiate(prefab) as GameObject;
+                            _instance = singleton.GetComponent<T>();
+                        }
                         singleton.name = "(singleton) " + typeof(T).ToString();
 
                         DontDestroyOnLoad(singleton);
