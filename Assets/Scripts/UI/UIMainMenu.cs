@@ -10,11 +10,13 @@ public class UIMainMenu : Singleton<UIMainMenu> {
     public UIGrid menu;
     public GameObject newGameButton;
     public GameObject continueButton;
+    public GameObject confirmPrefab;
     public GameObject inputConfirmPrefab;
 
+    // TO DO actually check if there's an existing game.
+    private bool existingGame = false;
+
     void OnEnable() {
-        // TO DO actually check if there's an existing game.
-        bool existingGame = false;
         if (!existingGame) {
             continueButton.SetActive(false);
         }
@@ -40,8 +42,31 @@ public class UIMainMenu : Singleton<UIMainMenu> {
         UIEventListener.Get(ic.noButton).onClick += noAction;
     }
 
-    public void StartNewGame(GameObject obj) {
-        string companyName = obj.GetComponent<UIInput>().value;
+    public void StartNewGame(GameObject go) {
+        string companyName = go.GetComponent<UIInput>().value;
+
+        // If a game exists, confirm overwrite.
+        if (existingGame) {
+            UIConfirm confirm = NGUITools.AddChild(gameObject, confirmPrefab).GetComponent<UIConfirm>();
+            confirm.bodyText = "Are you sure you want to start a new game? This will overwrite your existing one.";
+
+            UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
+                BeginNewGame(companyName);
+            };
+
+            UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
+                confirm.Close_();
+            };
+
+            UIEventListener.Get(confirm.yesButton).onClick += yesAction;
+            UIEventListener.Get(confirm.noButton).onClick += noAction;
+
+        } else {
+            BeginNewGame(companyName);
+        }
+    }
+
+    private void BeginNewGame(string companyName) {
 
         // Load the starting game manager.
         GameManager.prefab = Resources.Load("GameManager") as GameObject;
@@ -50,8 +75,8 @@ public class UIMainMenu : Singleton<UIMainMenu> {
         // Create the player company.
         gm.playerCompany = new Company(companyName);
 
-        // Switch to the game scene.
-        Application.LoadLevel("Game");
+        // Switch to the onboarding scene.
+        Application.LoadLevel("Onboarding");
     }
 
     public void Continue() {

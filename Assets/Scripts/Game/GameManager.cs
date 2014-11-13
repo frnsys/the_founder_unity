@@ -113,13 +113,15 @@ public class GameManager : Singleton<GameManager> {
         ApplyEffectSet(d.effects);
     }
 
-    private void ApplyEffectSet(EffectSet es) {
+    public void ApplyEffectSet(EffectSet es) {
         playerCompany.ApplyBuffs(es.company);
 
+        // TO DO this needs to apply bonuses to new workers as well.
         foreach (Worker worker in playerCompany.workers) {
             worker.ApplyBuffs(es.workers);
         }
 
+        // TO DO this needs to apply bonuses to new products as well.
         foreach (ProductEffect pe in es.products) {
             playerCompany.ApplyProductEffect(pe);
         }
