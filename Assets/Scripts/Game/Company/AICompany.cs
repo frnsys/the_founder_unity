@@ -26,7 +26,7 @@ public class ProductCombo {
 }
 
 
-
+[System.Serializable]
 public class AICompany : Company {
     public static List<AICompany> companies = new List<AICompany>();
 

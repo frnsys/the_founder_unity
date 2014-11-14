@@ -8,7 +8,6 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class UnlockSet {
-
     public PrereqSet prereqs;
 
     public List<ProductType> productTypes = new List<ProductType>();

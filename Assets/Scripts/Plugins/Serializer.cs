@@ -1,6 +1,6 @@
 /*
- * This class can properly serialize a bunch of scriptable objects
- * so we can save it to a binary file.
+ * This class can properly serialize (and serialize) ScriptableObjects
+ * so we can save them to a binary file.
  *
  * NOTES:
  * =========================
@@ -39,6 +39,13 @@ public class Serializer {
             typeRef = tr;
         }
     }
+
+
+
+
+    // ===============================================
+    // Serialization =================================
+    // ===============================================
 
     public static Serialized Serialize(object obj) {
         Type type = obj.GetType();
@@ -93,8 +100,8 @@ public class Serializer {
                     typeRef.Add(name, ft);
 
                 } else {
-                    Debug.Log("FELL THROUGH");
-                    DebugField(fi, obj);
+                    Debug.Log("This serializable field was not serialized. Maybe you forgot to mark it as [Serializable]?");
+                    Debug.Log(fi.Name + " :: " + fi.FieldType.ToString());
                 }
             }
         }
@@ -108,12 +115,13 @@ public class Serializer {
         return new Serialized(tree, typeRef);
     }
 
-    private static void DebugField(FieldInfo fi, object obj) {
-        Debug.Log(fi.Name);
-        Debug.Log("\t" + fi.FieldType.ToString());
-        //Debug.Log("\t" + fi.GetValue(obj).ToString());
-    }
 
+
+
+
+    // ===============================================
+    // Deserialization ===============================
+    // ===============================================
 
     public static T Deserialize<T>(Serialized serialized) where T : ScriptableObject {
         T obj = ScriptableObject.CreateInstance<T>();
@@ -145,7 +153,6 @@ public class Serializer {
                     // Otherwise, handle the generics if they are serializable.
                     } else if (g.IsSerializable) {
 
-                        // TO DO this might need fixing. does it know val is enumerable?
                         // This only supports lists at the moment.
                         if (val is IEnumerable) {
                             Type genericListType = typeof(List<>).MakeGenericType(g);
@@ -188,6 +195,16 @@ public class Serializer {
         return method.Invoke(null, new object[] {serialized});
     }
 
+
+
+
+
+
+
+
+    // ===============================================
+    // Utility =======================================
+    // ===============================================
 
     private static bool IsScriptableObject(Type type) {
         return type.IsSubclassOf(typeof(ScriptableObject));
