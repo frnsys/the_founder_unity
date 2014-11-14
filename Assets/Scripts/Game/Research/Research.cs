@@ -24,6 +24,11 @@ public class Research {
         technical  = t;
         design     = d;
     }
+    public Research() {
+        management = 0;
+        technical  = 0;
+        design     = 0;
+    }
 
     public static Research operator +(Research left, Research right) {
         return new Research(

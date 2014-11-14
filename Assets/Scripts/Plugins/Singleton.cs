@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 
-    private static T _instance;
     private static object _lock = new object();
+    protected static T _instance;
+
+    // If the singleton is meant to be created from a prefab, set it here.
     protected static GameObject prefab;
 
     public static bool hasInstance {
@@ -29,7 +31,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 
                     if (_instance == null) {
                         GameObject singleton;
-                        Debug.Log(prefab);
                         if (prefab == null) {
                             singleton = new GameObject();
                             _instance = singleton.AddComponent<T>();

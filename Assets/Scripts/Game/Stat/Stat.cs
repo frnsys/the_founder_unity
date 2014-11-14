@@ -67,6 +67,10 @@ public class Stat {
         _name = name_;
         baseValue = baseValue_;
     }
+    public Stat() {
+        _name = "DEFAULTNAME";
+        baseValue = 0;
+    }
 
     public override string ToString() {
         return value.ToString();

@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Item : ScriptableObject {
     public float cost = 1000;
     public float duration = 0;

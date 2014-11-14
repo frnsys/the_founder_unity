@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class ProductType : ProductAspect {
     public static ProductType Load(string name) {
         return Resources.Load("Products/Types/" + name) as ProductType;

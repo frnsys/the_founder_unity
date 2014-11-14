@@ -13,11 +13,8 @@ public class UIMainMenu : Singleton<UIMainMenu> {
     public GameObject confirmPrefab;
     public GameObject inputConfirmPrefab;
 
-    // TO DO actually check if there's an existing game.
-    private bool existingGame = false;
-
     void OnEnable() {
-        if (!existingGame) {
+        if (!GameData.SaveExists) {
             continueButton.SetActive(false);
         }
         menu.Reposition();
@@ -46,7 +43,7 @@ public class UIMainMenu : Singleton<UIMainMenu> {
         string companyName = go.GetComponent<UIInput>().value;
 
         // If a game exists, confirm overwrite.
-        if (existingGame) {
+        if (GameData.SaveExists) {
             UIConfirm confirm = NGUITools.AddChild(gameObject, confirmPrefab).GetComponent<UIConfirm>();
             confirm.bodyText = "Are you sure you want to start a new game? This will overwrite your existing one.";
 
@@ -67,21 +64,20 @@ public class UIMainMenu : Singleton<UIMainMenu> {
     }
 
     private void BeginNewGame(string companyName) {
-
-        // Load the starting game manager.
-        GameManager.prefab = Resources.Load("GameManager") as GameObject;
-        GameManager gm = GameManager.Instance;
-
-        // Create the player company.
-        gm.playerCompany = new Company(companyName);
+        // Setup the game data.
+        GameData data = GameData.New(companyName);
+        GameManager.Instance.Load(data);
 
         // Switch to the onboarding scene.
         Application.LoadLevel("Onboarding");
     }
 
     public void Continue() {
-        // TO DO
         // Load the game and everything.
+        GameManager.Instance.Load(GameData.Load());
+
+        // Switch to the game scene.
+        Application.LoadLevel("Game");
     }
 }
 

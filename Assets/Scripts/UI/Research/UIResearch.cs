@@ -69,7 +69,7 @@ public class UIResearch : UIWindow {
 
         Action yes = delegate() {
             // Hire the consultancy...
-            gm.HireConsultancy(consultancy);
+            gm.researchManager.HireConsultancy(consultancy);
             UpdateCurrent();
 
             // Disable this button.

@@ -33,4 +33,21 @@ public class FeaturePoints {
                     left.cleverness - right.cleverness,
                     left.creativity - right.creativity);
     }
+
+    public static bool operator ==(FeaturePoints left, FeaturePoints right) {
+        if (left.charisma - right.charisma != 0)
+            return false;
+
+        if (left.cleverness - right.cleverness != 0)
+            return false;
+
+        if (left.creativity - right.creativity != 0)
+            return false;
+
+        return true;
+    }
+
+    public static bool operator !=(FeaturePoints left, FeaturePoints right) {
+        return !(left == right);
+    }
 }

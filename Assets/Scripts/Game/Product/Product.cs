@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class Product : HasStats {
     public enum State {
         DEVELOPMENT,
@@ -16,14 +17,18 @@ public class Product : HasStats {
     // TO DO this should come from the product recipe.
     public string description;
 
+    [SerializeField]
     private float _progress = 0;
     public float progress {
         get { return _progress/recipe.progressRequired; }
     }
+
+    [SerializeField]
     private State _state = State.DEVELOPMENT;
     public State state {
         get { return _state; }
     }
+
     public bool launched { get { return _state == State.LAUNCHED; } }
     public bool developing { get { return _state == State.DEVELOPMENT; } }
     public bool retired { get { return _state == State.RETIRED; } }
@@ -31,6 +36,7 @@ public class Product : HasStats {
     // All the data about how well
     // this ProductType/Industry/Market
     // combination does.
+    [SerializeField]
     private ProductRecipe recipe;
 
     public float timeSinceLaunch = 0;
@@ -42,16 +48,24 @@ public class Product : HasStats {
     public float lastRevenue = 0;
 
     // Maximum revenue you can make off this product.
+    [SerializeField]
     private float peakRevenuePercent;
+
+    [SerializeField]
     private float endFuncAdjustment;
 
     // How long the product lasts at its peak plateau.
+    [SerializeField]
     private float longevity;
 
     // Revenue model parameters.
+    [SerializeField]
     private float start_mu;
+    [SerializeField]
     private float start_sd;
+    [SerializeField]
     private float end_mu;
+    [SerializeField]
     private float end_sd;
 
     public ProductType productType;

@@ -8,26 +8,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-[System.Serializable]
 public class GameManager : Singleton<GameManager> {
 
     // Disable the constructor so that
     // this must be a singleton.
     protected GameManager() {}
 
-    [HideInInspector]
-    public Company playerCompany;
+    // All the game data which gets persisted.
+    private GameData data;
 
-    [HideInInspector]
-    public TheBoard board;
-
-    // How many years and months you have to play.
-    private int lifetimeYear;
-    private int lifetimeMonth;
-    private int lifetimeWeek;
-
-    // Other companies in the world.
-    public List<AICompany> otherCompanies = new List<AICompany>();
+    public Company playerCompany {
+        get { return data.company; }
+    }
+    public UnlockSet unlocked {
+        get { return data.unlocked; }
+    }
 
     // Other managers.
     [HideInInspector]
@@ -37,26 +32,29 @@ public class GameManager : Singleton<GameManager> {
     public NarrativeManager narrativeManager;
 
     private Company.Phase phase {
-        get { return playerCompany.phase; }
+        get { return data.company.phase; }
     }
 
-    public UnlockSet unlocked = new UnlockSet();
     public List<Worker> availableWorkers {
         get {
-            return unlocked.workers.Where(w => !playerCompany.workers.Contains(w)).ToList();
+            return data.unlocked.workers.Where(w => !playerCompany.workers.Contains(w)).ToList();
         }
     }
 
-    public void NewGame(string companyName) {
-        playerCompany = new Company(companyName);
-        Application.LoadLevel("Game");
+    // Load existing game data.
+    public void Load(GameData d) {
+        researchManager = gameObject.AddComponent<ResearchManager>();
+        narrativeManager = gameObject.AddComponent<NarrativeManager>();
+
+        data = d;
+        researchManager.Load(d);
     }
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
 
-        if (playerCompany == null) {
-            playerCompany = new Company("Foobar Inc");
+        if (data == null) {
+            Load(GameData.New("DEFAULTCORP"));
         }
     }
 
@@ -77,24 +75,6 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ProductRevenueCycle());
         StartCoroutine(ResearchCycle());
 
-        researchManager = gameObject.AddComponent<ResearchManager>();
-        narrativeManager = gameObject.AddComponent<NarrativeManager>();
-
-        // TO DO These should be moved into NewGame when that menu is setup.
-        board = new TheBoard();
-
-        // You start your business at 25,
-        // so the amount of time you have really ranges from 40-60.
-        float lifetime = Random.Range(65f, 85f) - 25;
-
-        // Translate the lifetime into a year, month, & week.
-        lifetimeYear = (int)lifetime;
-
-        float month = (lifetime - lifetimeYear) * 12;
-        lifetimeMonth = (int)month;
-
-        lifetimeWeek = (int)((month - lifetimeMonth) * 4);
-
         // TESTing hello from your mentor!
         //narrativeManager.MentorMessage("A message from your mentor", "Welcome to The Founder!");
     }
@@ -105,7 +85,7 @@ public class GameManager : Singleton<GameManager> {
         // If this event is not repeatable,
         // remove it from the candidate event pool.
         if (!e.repeatable) {
-            unlocked.events.Remove(e);
+            data.unlocked.events.Remove(e);
         }
     }
 
@@ -126,18 +106,9 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.ApplyProductEffect(pe);
         }
 
-        unlocked.Unlock(es.unlocks);
+        data.unlocked.Unlock(es.unlocks);
     }
 
-    public bool HireConsultancy(Consultancy c) {
-        // You pay the consultancy cost initially when hired, then repeated monthly.
-        if (playerCompany.Pay(c.cost)) {
-            researchManager.consultancy = c;
-            playerCompany.consultancy = c;
-            return true;
-        }
-        return false;
-    }
 
 
     // ===============================================
@@ -156,20 +127,6 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public int week = 0;
 
-    private enum Month {
-        January,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December
-    }
 
 
     public void Pause() {
@@ -189,12 +146,12 @@ public class GameManager : Singleton<GameManager> {
             List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
             PerformanceDict results = annualData[0];
             PerformanceDict deltas = annualData[1];
-            board.EvaluatePerformance(deltas);
+            data.board.EvaluatePerformance(deltas);
 
-            UIManager.Instance.AnnualReport(results, deltas, board);
+            UIManager.Instance.AnnualReport(results, deltas, data.board);
 
             // Lose condition:
-            if (board.happiness < -20)
+            if (data.board.happiness < -20)
                 // TO DO this should be a proper "lose game"
                 UIManager.Instance.Alert("YOU LOSE");
 
@@ -207,14 +164,14 @@ public class GameManager : Singleton<GameManager> {
         yield return new WaitForSeconds(monthTime);
         while(true) {
 
-            if (_month == Month.December) {
-                _month = Month.January;
+            if (data.month == Month.December) {
+                data.month = Month.January;
             } else {
-                _month++;
+                data.month++;
             }
 
             // AI companies gather business intelligence!!
-            foreach (AICompany aic in otherCompanies) {
+            foreach (AICompany aic in data.otherCompanies) {
                 aic.CollectPerformanceData();
                 aic.PayMonthly();
             }
@@ -228,23 +185,25 @@ public class GameManager : Singleton<GameManager> {
     IEnumerator Weekly() {
         yield return new WaitForSeconds(weekTime);
         while(true) {
-            if (week == 3) {
-                week = 0;
+            if (data.week == 3) {
+                data.week = 0;
             } else {
-                week++;
+                data.week++;
             }
 
             // TO DO this should be a proper "lose game"
             // Do you die?
-            if (year > lifetimeYear &&
-                (int)_month > lifetimeMonth &&
-                week > lifetimeWeek)
+            if (data.year > data.lifetimeYear &&
+                (int)data.month > data.lifetimeMonth &&
+                data.week > data.lifetimeWeek)
                 UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
 
-            foreach (AICompany aic in otherCompanies) {
+            foreach (AICompany aic in data.otherCompanies) {
                 aic.Decide();
             }
 
+            // Save the game every week.
+            //GameData.Save(data);
 
             yield return new WaitForSeconds(weekTime);
         }
@@ -255,12 +214,12 @@ public class GameManager : Singleton<GameManager> {
         while(true) {
             playerCompany.DevelopProducts();
 
-            foreach (AICompany aic in otherCompanies) {
+            foreach (AICompany aic in data.otherCompanies) {
                 aic.DevelopProducts();
             }
 
             // TO DO Temporarily placed here
-            GameEvent.Roll(unlocked.events);
+            GameEvent.Roll(data.unlocked.events);
 
             // Add a bit of randomness to give things
             // a more "natural" feel.
@@ -276,7 +235,7 @@ public class GameManager : Singleton<GameManager> {
             float elapsedTime = weekTime/14 * Random.Range(0.4f, 1.4f);
             playerCompany.HarvestProducts(elapsedTime);
 
-            foreach (AICompany aic in otherCompanies) {
+            foreach (AICompany aic in data.otherCompanies) {
                 aic.HarvestProducts(elapsedTime);
             }
 

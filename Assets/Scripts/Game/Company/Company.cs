@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
+[System.Serializable]
 public class Company : HasStats {
     public Stat cash;
     public Consultancy consultancy;
@@ -56,7 +57,10 @@ public class Company : HasStats {
 
     public int sizeLimit;
     public List<Founder> founders;
+
+    [SerializeField]
     private List<Worker> _workers;
+
     public ReadOnlyCollection<Worker> workers {
         get { return _workers.AsReadOnly(); }
     }

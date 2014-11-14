@@ -21,7 +21,7 @@ namespace UnityTest
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
             gm.researchManager = gameObj.AddComponent<ResearchManager>();
-            gm.playerCompany = new Company("Foo Inc");
+            gm.Load(GameData.New("DEFAULTCORP"));
 
             rm = gm.researchManager;
             disc = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestDiscovery.asset", typeof(Discovery)) as Discovery;
@@ -38,7 +38,7 @@ namespace UnityTest
             Consultancy con = new Consultancy();
 
             gm.playerCompany.cash.baseValue = 2000;
-            gm.HireConsultancy(con);
+            gm.researchManager.HireConsultancy(con);
 
             Assert.AreEqual(gm.playerCompany.cash.baseValue, 2000 - con.cost);
             Assert.AreEqual(gm.playerCompany.consultancy, con);
@@ -57,7 +57,7 @@ namespace UnityTest
             Assert.IsTrue(rm.research == new Research(0,0,0));
 
             Consultancy con = new Consultancy();
-            rm.consultancy = con;
+            rm.HireConsultancy(con);
             con.research = new Research(50,50,50);
 
             rm.Research();
@@ -81,7 +81,7 @@ namespace UnityTest
             rm.BeginResearch(disc);
 
             Consultancy con = new Consultancy();
-            rm.consultancy = con;
+            rm.HireConsultancy(con);
             con.research = new Research(50,0,0);
 
             // Check that progress is properly calculated.

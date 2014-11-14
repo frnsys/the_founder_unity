@@ -7,19 +7,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ResearchManager : MonoBehaviour {
+    private GameData data;
+
     // The currently-hired consultancy.
-    public Consultancy consultancy;
+    public Consultancy consultancy {
+        get { return data.company.consultancy; }
+    }
 
     // The currently-pursued discovery.
-    private Discovery discovery_;
     public Discovery discovery {
-        get { return discovery_; }
+        get { return data.discovery; }
     }
 
     // The accumulated research for the current discovery.
-    private Research research_ = new Research(0,0,0);
     public Research research {
-        get { return research_; }
+        get { return data.research; }
     }
     public bool researching {
         get { return discovery != null; }
@@ -29,7 +31,7 @@ public class ResearchManager : MonoBehaviour {
     public float progress {
         get {
             if (discovery != null) {
-                return research_ / discovery_.requiredResearch;
+                return research / discovery.requiredResearch;
             }
             return 0;
         }
@@ -37,30 +39,42 @@ public class ResearchManager : MonoBehaviour {
 
     // Accumulate research.
     public void Research() {
-        if (consultancy && discovery_) {
-            research_ += consultancy.research;
+        if (consultancy && discovery) {
+            data.research += consultancy.research;
 
-            if (research_ >= discovery_.requiredResearch) {
+            if (research >= discovery.requiredResearch) {
                 EndResearch();
             }
         }
     }
 
+    public bool HireConsultancy(Consultancy c) {
+        // You pay the consultancy cost initially when hired, then repeated monthly.
+        if (data.company.Pay(c.cost)) {
+            data.company.consultancy = c;
+            return true;
+        }
+        return false;
+    }
+
     static public event System.Action<Discovery> Completed;
     public void BeginResearch(Discovery d) {
-        discovery_ = d;
+        data.discovery = d;
     }
     public void EndResearch() {
         // Trigger the Completed event.
         if (Completed != null) {
-            Completed(discovery_);
+            Completed(discovery);
         }
 
         // Reset the discovery & accumulated research.
-        discovery_ = null;
-        research_ = new Research(0,0,0);
+        data.discovery = null;
+        data.research = new Research(0,0,0);
     }
 
+    public void Load(GameData d) {
+        data = d;
+    }
 }
 
 

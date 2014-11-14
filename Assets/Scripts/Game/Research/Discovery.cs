@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
+[System.Serializable]
 public class Discovery : ScriptableObject {
     public string description;
 
@@ -15,5 +16,3 @@ public class Discovery : ScriptableObject {
 
     public EffectSet effects = new EffectSet();
 }
-
-

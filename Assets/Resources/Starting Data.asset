@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17a9e0542e3945c49777a77a5cb367e, type: 3}
+  m_Name: Starting Data
+  m_EditorClassIdentifier: 
+  company: {fileID: 0}
+  board:
+    happiness: 10
+  unlocked:
+    prereqs:
+      productTypes: []
+      industries: []
+      markets: []
+      workers: []
+      events: []
+      items: []
+      stores: 
+      consultancies: []
+      researchPoints: 0
+    productTypes: []
+    industries: []
+    markets: []
+    workers: []
+    events: []
+    items: []
+    stores: 
+    consultancies: []
+  discovery: {fileID: 0}
+  research:
+    management: 0
+    technical: 0
+    design: 0
+  otherCompanies: []
+  month: 0
+  week: 0
+  year: 0
+  lifetimeYear: 0
+  lifetimeMonth: 0
+  lifetimeWeek: 0

@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class ProductRecipe : ScriptableObject {
     // Naming convention for these assets is:
     // ProductType.Industry.Market.asset

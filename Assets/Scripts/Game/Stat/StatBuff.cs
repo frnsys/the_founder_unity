@@ -21,4 +21,10 @@ public class StatBuff {
         duration = duration_;
         type = type_;
     }
+    public StatBuff() {
+        name = "DEFAULTNAME";
+        value = 0;
+        duration = 0;
+        type = BuffType.ADD;
+    }
 }
