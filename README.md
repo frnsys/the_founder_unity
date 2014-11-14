@@ -11,4 +11,8 @@ Store into the `Assets/Imports/` folder. Again, don't import the `Examples`
 folder.
 
 ## Important Notes
-* Need to get proper licenses for any fonts being used
+
+`UIPanel` depth rules:
+- use 200+ for menu screens
+- HUD uses 10-20
+- alerts & notifications use 400+
