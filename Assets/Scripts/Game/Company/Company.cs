@@ -188,6 +188,12 @@ public class Company : HasStats {
             cleverness += (worker.cleverness.value/2) * Random.Range(0.90f, 1.05f);
             progress += (worker.productivity.value/2) * Random.Range(0.90f, 1.05f);
         }
+        foreach (Founder founder in founders) {
+            charisma += (founder.charisma.value/2) * Random.Range(0.90f, 1.05f);
+            creativity += (founder.creativity.value/2) * Random.Range(0.90f, 1.05f);
+            cleverness += (founder.cleverness.value/2) * Random.Range(0.90f, 1.05f);
+            progress += (founder.productivity.value/2) * Random.Range(0.90f, 1.05f);
+        }
 
         bool completed = product.Develop(progress, charisma, creativity, cleverness);
         if (completed) {
