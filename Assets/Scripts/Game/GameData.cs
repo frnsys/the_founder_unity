@@ -108,7 +108,7 @@ public class GameData : ScriptableObject {
     }
     public static void Save(GameData gd, string savePath) {
         Debug.Log("Saving game...");
-        Serializer.Serialized data = Serializer.Serialize(gd);
+        Serializer.Replica data = Serializer.Serialize(gd);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(savePath);
         bf.Serialize(file, data);
@@ -124,7 +124,7 @@ public class GameData : ScriptableObject {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(savePath, FileMode.Open);
 
-            Serializer.Serialized data = (Serializer.Serialized)bf.Deserialize(file);
+            Serializer.Replica data = (Serializer.Replica)bf.Deserialize(file);
             gd = Serializer.Deserialize<GameData>(data);
             file.Close();
         }

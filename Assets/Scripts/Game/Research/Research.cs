@@ -11,37 +11,37 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Research {
     // Different kinds of research points.
-    public float management = 0;
-    public float technical = 0;
-    public float design = 0;
+    public float charisma   = 0;
+    public float cleverness = 0;
+    public float creativity = 0;
 
     public float total {
-        get { return management + technical + design; }
+        get { return charisma + cleverness + creativity; }
     }
 
-    public Research(float m, float t, float d) {
-        management = m;
-        technical  = t;
-        design     = d;
+    public Research(float ch, float cl, float cr) {
+        charisma   = ch;
+        cleverness = cl;
+        creativity = cr;
     }
     public Research() {
-        management = 0;
-        technical  = 0;
-        design     = 0;
+        charisma   = 0;
+        cleverness = 0;
+        creativity = 0;
     }
 
     public static Research operator +(Research left, Research right) {
         return new Research(
-                    left.management + right.management,
-                    left.technical  + right.technical,
-                    left.design     + right.design);
+                    left.charisma   + right.charisma,
+                    left.cleverness + right.cleverness,
+                    left.creativity + right.creativity);
     }
 
     public static float operator /(Research left, Research right) {
         // The left values can't be greater than the right's values.
-        float m = Math.Min(left.management, right.management);
-        float t = Math.Min(left.technical,  right.technical);
-        float d = Math.Min(left.design,     right.design);
+        float m = Math.Min(left.charisma,   right.charisma);
+        float t = Math.Min(left.cleverness, right.cleverness);
+        float d = Math.Min(left.creativity, right.creativity);
 
         return (m + t + d)/right.total;
     }
@@ -55,16 +55,9 @@ public class Research {
     }
 
     public static bool operator ==(Research left, Research right) {
-        if (left.management - right.management != 0)
-            return false;
-
-        if (left.technical - right.technical != 0)
-            return false;
-
-        if (left.design - right.design != 0)
-            return false;
-
-        return true;
+        return left.charisma   - right.charisma   == 0 &&
+               left.cleverness - right.cleverness == 0 &&
+               left.creativity - right.creativity == 0 ;
     }
 
     public static bool operator !=(Research left, Research right) {

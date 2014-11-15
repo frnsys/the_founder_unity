@@ -10,41 +10,34 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class FeaturePoints {
-    public int charisma = 0;
+    public int charisma   = 0;
     public int cleverness = 0;
     public int creativity = 0;
 
     public FeaturePoints(int ch, int cl, int cr) {
-        charisma = ch;
+        charisma   = ch;
         cleverness = cl;
         creativity = cr;
     }
 
     public static FeaturePoints operator +(FeaturePoints left, FeaturePoints right) {
         return new FeaturePoints(
-                    left.charisma + right.charisma,
+                    left.charisma   + right.charisma,
                     left.cleverness + right.cleverness,
                     left.creativity + right.creativity);
     }
 
     public static FeaturePoints operator -(FeaturePoints left, FeaturePoints right) {
         return new FeaturePoints(
-                    left.charisma - right.charisma,
+                    left.charisma   - right.charisma,
                     left.cleverness - right.cleverness,
                     left.creativity - right.creativity);
     }
 
     public static bool operator ==(FeaturePoints left, FeaturePoints right) {
-        if (left.charisma - right.charisma != 0)
-            return false;
-
-        if (left.cleverness - right.cleverness != 0)
-            return false;
-
-        if (left.creativity - right.creativity != 0)
-            return false;
-
-        return true;
+        return left.charisma   - right.charisma   == 0 &&
+               left.cleverness - right.cleverness == 0 &&
+               left.creativity - right.creativity == 0 ;
     }
 
     public static bool operator !=(FeaturePoints left, FeaturePoints right) {

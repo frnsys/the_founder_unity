@@ -8,7 +8,7 @@
  * - Public fields are serialized by default. Add the [NonSerialized] attribute to skip them.
  * - Any class, including ScriptableObject subclasses, which are to be serialized must have the [Serializable] attribute.
  * - Any non-ScriptableObject class which is to be serialized MUST have a parameterless constructor. Keep this in mind if you need to do some initialization stuff.
- * - Similarly, ScriptableObjects must have any setup manually run.
+ * - Similarly, ScriptableObjects must have any setup/initialization manually run.
  *
  *
  * TO DO:
@@ -26,17 +26,25 @@ using System.Reflection;
 public class Serializer {
 
     [Serializable]
-    public struct Serialized {
-        public Dictionary<string, object> tree;
+    // This is a representation of a SerializedObject or a non-SerializedObject class
+    // in a form that can be serialized.
+    public class Replica {
+        // Matches field names to data.
+        public Dictionary<string, object> map;
 
         // Although typeRef is never used for deserialization,
         // it's nice to have on hand in case something changes.
         // Then we will at least remember what the original types were.
         public Dictionary<string, Type> typeRef;
 
-        public Serialized(Dictionary<string, object> t, Dictionary<string, Type> tr) {
-            tree = t;
-            typeRef = tr;
+        public Replica() {
+            map = new Dictionary<string, object>();
+            typeRef = new Dictionary<string, Type>();
+        }
+
+        public void Add(string name, object obj, Type type) {
+            map.Add(name, obj);
+            typeRef.Add(name, type);
         }
     }
 
@@ -47,12 +55,9 @@ public class Serializer {
     // Serialization =================================
     // ===============================================
 
-    public static Serialized Serialize(object obj) {
+    public static Replica Serialize(object obj) {
+        Replica replica = new Replica();
         Type type = obj.GetType();
-
-        // This tree maps the object hierarchy.
-        Dictionary<string, object> tree = new Dictionary<string, object>();
-        Dictionary<string, Type> typeRef = new Dictionary<string, Type>();
 
         // Each public field which is not specifically marked "nonserialized".
         // Each private field which is specifically marked "serialized".
@@ -65,8 +70,7 @@ public class Serializer {
                 object val = fi.GetValue(obj);
 
                 if (IsSimpleType(ft)) {
-                    tree.Add(name, val);
-                    typeRef.Add(name, ft);
+                    replica.Add(name, val, ft);
 
                 // Check if it is a property with a generic type.
                 } else if (ft.IsGenericType) {
@@ -74,30 +78,25 @@ public class Serializer {
 
                     // If it a simple generic type, just save it.
                     if (IsSimpleType(g)) {
-                        tree.Add(name, val);
-                        typeRef.Add(name, ft);
+                        replica.Add(name, val, ft);
 
                     // Otherwise, handle the generics if they are serializable.
                     } else if (g.IsSerializable) {
 
                         // This only supports lists at the moment.
-                        //if (ft.GetGenericTypeDefinition() == typeof(List<>)) {
                         if (val is IEnumerable) {
-                            List<Serialized> ser = new List<Serialized>();
+                            List<Replica> sl = new List<Replica>();
                             foreach (object o in (IEnumerable)val) {
-                                ser.Add(Serialize(o));
+                                sl.Add(Serialize(o));
                             }
-
-                            tree.Add(name, ser);
-                            typeRef.Add(name, ft);
+                            replica.Add(name, sl, ft);
                         }
 
                     }
 
                 // Handle other classes marked for serialization.
                 } else if (ft.IsSerializable && val != null) {
-                    tree.Add(name, Serialize(val));
-                    typeRef.Add(name, ft);
+                    replica.Add(name, Serialize(val), ft);
 
                 } else {
                     Debug.Log("This serializable field was not serialized. Maybe you forgot to mark it as [Serializable]?");
@@ -108,11 +107,10 @@ public class Serializer {
 
         // If it is a ScriptableObject, get its name as well.
         if (IsScriptableObject(type)) {
-            tree.Add("name", type.GetProperty("name").GetValue(obj, null));
-            typeRef.Add("name", typeof(string));
+            replica.Add("name", type.GetProperty("name").GetValue(obj, null), typeof(string));
         }
 
-        return new Serialized(tree, typeRef);
+        return replica;
     }
 
 
@@ -123,21 +121,37 @@ public class Serializer {
     // Deserialization ===============================
     // ===============================================
 
-    public static T Deserialize<T>(Serialized serialized) where T : ScriptableObject {
+    public static T Deserialize<T>(Replica replica) where T : ScriptableObject {
         T obj = ScriptableObject.CreateInstance<T>();
-        return (T)Deserialize(serialized, obj);
+        return (T)Deserialize(replica, obj);
     }
-    private static T DeserializeClass<T>(Serialized serialized) {
+
+    // Deserializes a non-ScriptableObject class instance.
+    private static T DeserializeClass<T>(Replica replica) {
         T obj = (T)Activator.CreateInstance(typeof(T));
-        return (T)Deserialize(serialized, obj);
+        return (T)Deserialize(replica, obj);
     }
-    private static object Deserialize(Serialized serialized, object obj) {
+
+    private static object Deserialize(Replica replica, Type t) {
+        // I don't like this anymore than you do
+        MethodInfo method;
+        if (IsScriptableObject(t)) {
+            method = typeof(Serializer).GetMethod("Deserialize", BindingFlags.Public | BindingFlags.Static);
+        } else {
+            method = typeof(Serializer).GetMethod("DeserializeClass", BindingFlags.NonPublic | BindingFlags.Static);
+        }
+
+        method = method.MakeGenericMethod(t);
+        return method.Invoke(null, new object[] {replica});
+    }
+
+    private static object Deserialize(Replica replica, object obj) {
         Type type = obj.GetType();
         foreach (FieldInfo fi in type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)) {
-            if (IsSerializable(fi) && serialized.tree.Keys.Contains(fi.Name)) {
+            if (IsSerializable(fi) && replica.map.Keys.Contains(fi.Name)) {
                 Type ft = fi.FieldType;
                 string name = fi.Name;
-                object val = serialized.tree[name];
+                object val = replica.map[name];
 
                 if (IsSimpleType(ft)) {
                     fi.SetValue(obj, Convert.ChangeType(val, ft));
@@ -157,8 +171,8 @@ public class Serializer {
                         if (val is IEnumerable) {
                             Type genericListType = typeof(List<>).MakeGenericType(g);
                             IList l = (IList)Activator.CreateInstance(genericListType);
-                            foreach (Serialized o in (List<Serialized>)val) {
-                                l.Add(Deserialize(o, g));
+                            foreach (Replica r in (List<Replica>)val) {
+                                l.Add(Deserialize(r, g));
                             }
                             fi.SetValue(obj, Convert.ChangeType(l, ft));
                         }
@@ -167,7 +181,7 @@ public class Serializer {
 
                 // Handle other classes marked for serialization.
                 } else if (ft.IsSerializable && val != null) {
-                    object o = Deserialize((Serialized)val, ft);
+                    object o = Deserialize((Replica)val, ft);
                     fi.SetValue(obj, Convert.ChangeType(o, ft));
                 }
             }
@@ -176,25 +190,11 @@ public class Serializer {
         // If it is a ScriptableObject, get its name as well.
         if (IsScriptableObject(type)) {
             PropertyInfo prop = type.GetProperty("name");
-            prop.SetValue(obj, (string)serialized.tree["name"], null);
+            prop.SetValue(obj, (string)replica.map["name"], null);
         }
 
         return obj;
     }
-
-    private static object Deserialize(Serialized serialized, Type t) {
-        // I don't like this anymore than you do
-        MethodInfo method;
-        if (IsScriptableObject(t)) {
-            method = typeof(Serializer).GetMethod("Deserialize", BindingFlags.Public | BindingFlags.Static);
-        } else {
-            method = typeof(Serializer).GetMethod("DeserializeClass", BindingFlags.NonPublic | BindingFlags.Static);
-        }
-
-        method = method.MakeGenericMethod(t);
-        return method.Invoke(null, new object[] {serialized});
-    }
-
 
 
 

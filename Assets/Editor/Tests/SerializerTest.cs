@@ -36,7 +36,7 @@ namespace UnityTest
                     data.company.products.Add(CreateProduct());
                 }
 
-                Item item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
+                Item item = CreateItem();
                 data.company.BuyItem(item);
 
             data.board    = new TheBoard();
@@ -48,7 +48,14 @@ namespace UnityTest
                 data.discovery.description      = "foobar";
                 data.discovery.requiredResearch = new Research(4,5,6);
 
-            // TO DO AI companies and unlock set
+            // TO DO AI companies
+            data.unlocked = new UnlockSet();
+                ProductType pt = ProductType.Load("Social Network");
+                Industry ind   = Industry.Load("Space");
+                Market m       = Market.Load("Millenials");
+                data.unlocked.productTypes.Add(pt);
+                data.unlocked.industries.Add(ind);
+                data.unlocked.markets.Add(m);
 
             data.month         = Month.March;
             data.year          = 14;
@@ -147,7 +154,7 @@ namespace UnityTest
                 Assert.AreEqual(f.creativity.baseValue,     f_.creativity.baseValue);
                 Assert.AreEqual(f.creativity.baseValue,     f_.creativity.baseValue);
 
-                // TO DO check that bonuses are there.
+                CompareEffectSets(f.bonuses, f_.bonuses);
             }
 
             Assert.AreEqual(gd.company.items.Count, data.company.items.Count);
@@ -161,10 +168,13 @@ namespace UnityTest
                 Assert.AreEqual(m.duration,                 m_.duration);
                 Assert.AreEqual(m.store,                    m_.store);
 
-                // TO DO check that effects are there.
+                CompareEffectSets(m.effects, m_.effects);
             }
 
-            // NEED TO CHECK that references remain the same. E.g. if two companies have the same consultancy hired, that should be the same instance, not two different ones.
+
+            // TO DO NEED TO CHECK that references remain the same. E.g. if two companies have the same consultancy hired, that should be the same instance, not two different ones.
+
+            CompareUnlockSets(gd.unlocked,               data.unlocked);
 
             Assert.AreEqual(gd.board.happiness,         data.board.happiness);
 
@@ -172,8 +182,49 @@ namespace UnityTest
             Assert.AreEqual(gd.discovery.description,   data.discovery.description);
             Assert.IsTrue(gd.research == data.research);
             Assert.IsTrue(gd.discovery.requiredResearch == data.discovery.requiredResearch);
-
 		}
+
+        private void CompareEffectSets(EffectSet es, EffectSet es_) {
+            Assert.AreEqual(es.workers.Count, es_.workers.Count);
+            for (int j=0;j<es.workers.Count;j++) {
+                StatBuff sb  = es.workers[j];
+                StatBuff sb_ = es_.workers[j];
+
+                Assert.AreEqual(sb.name,  sb_.name);
+                Assert.AreEqual(sb.value, sb_.value);
+            }
+            Assert.AreEqual(es.company.Count, es_.company.Count);
+            for (int j=0;j<es.company.Count;j++) {
+                StatBuff sb  = es.company[j];
+                StatBuff sb_ = es_.company[j];
+
+                Assert.AreEqual(sb.name,  sb_.name);
+                Assert.AreEqual(sb.value, sb_.value);
+            }
+
+            Assert.AreEqual(es.products.Count, es_.products.Count);
+            for (int j=0;j<es.products.Count;j++) {
+                ProductEffect pe  = es.products[j];
+                ProductEffect pe_ = es_.products[j];
+
+                Assert.AreEqual(pe.buff.name,       pe_.buff.name);
+                Assert.AreEqual(pe.buff.value,      pe_.buff.value);
+                Assert.AreEqual(pe.markets[0].name, pe_.markets[0].name);
+            }
+            CompareUnlockSets(es.unlocks, es_.unlocks);
+
+        }
+
+        private void CompareUnlockSets(UnlockSet us, UnlockSet us_) {
+            Assert.AreEqual(us.productTypes.Count,   us_.productTypes.Count);
+            Assert.AreEqual(us.productTypes[0].name, us_.productTypes[0].name);
+
+            Assert.AreEqual(us.industries.Count,   us_.industries.Count);
+            Assert.AreEqual(us.industries[0].name, us_.industries[0].name);
+
+            Assert.AreEqual(us.markets.Count,   us_.markets.Count);
+            Assert.AreEqual(us.markets[0].name, us_.markets[0].name);
+        }
 
         private Worker CreateWorker(string name, int stat) {
             Worker worker = ScriptableObject.CreateInstance<Worker>();
@@ -196,7 +247,7 @@ namespace UnityTest
             founder.charisma.baseValue     = stat;
             founder.creativity.baseValue   = stat;
             founder.cleverness.baseValue   = stat;
-            founder.bonuses                = new EffectSet();
+            founder.bonuses                = CreateEffectSet();
             return founder;
         }
 
@@ -220,9 +271,36 @@ namespace UnityTest
             return product;
         }
 
+        private EffectSet CreateEffectSet() {
+            EffectSet e = new EffectSet();
+
+            e.company.Add(new StatBuff("Cash",         RandFloat()));
+            e.workers.Add(new StatBuff("Happiness",    RandFloat()));
+            e.workers.Add(new StatBuff("Productivity", RandFloat()));
+
+            ProductType pt = ProductType.Load("Social Network");
+            Industry i     = Industry.Load("Space");
+            Market m       = Market.Load("Millenials");
+            e.unlocks.productTypes.Add(pt);
+            e.unlocks.industries.Add(i);
+            e.unlocks.markets.Add(m);
+
+            ProductEffect pe = new ProductEffect();
+            pe.markets.Add(m);
+            pe.buff = new StatBuff("Appeal", RandFloat());
+            e.products.Add(pe);
+
+            return e;
+        }
+
+        private Item CreateItem() {
+            Item item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
+            item.effects = CreateEffectSet();
+            return item;
+        }
+
         private float RandFloat() {
             return Random.Range(10, 50);
         }
-
     }
 }
