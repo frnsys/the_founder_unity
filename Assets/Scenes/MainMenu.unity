@@ -132,13 +132,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .950912833, b: .676470578, a: 1}
   mPivot: 4
-  mWidth: 463
+  mWidth: 546
   mHeight: 768
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .602864563
+  aspectRatio: .7109375
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -172,6 +172,7 @@ GameObject:
   - 114: {fileID: 488881281}
   - 54: {fileID: 488881284}
   - 114: {fileID: 488881285}
+  - 114: {fileID: 488881286}
   m_Layer: 8
   m_Name: UI Root
   m_TagString: Untagged
@@ -291,6 +292,17 @@ MonoBehaviour:
   continueButton: {fileID: 530356668}
   confirmPrefab: {fileID: 100018, guid: b55794495b527438681764bbd55f3b19, type: 2}
   inputConfirmPrefab: {fileID: 100020, guid: ada7eb9d65cac4487aede8287dd284cb, type: 2}
+--- !u!114 &488881286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 488881280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2707eaf26b94365a7a06a67b620d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &530356668
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,13 +744,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
-  mWidth: 463
+  mWidth: 546
   mHeight: 384
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.20572913
+  aspectRatio: 1.421875
 --- !u!1 &1209284506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,13 +1245,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .16911763, g: .16911763, b: .16911763, a: 1}
   mPivot: 4
-  mWidth: 463
+  mWidth: 546
   mHeight: 200
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.31500006
+  aspectRatio: 2.73000002
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
