@@ -3,10 +3,9 @@
  */
 
 using UnityEngine;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 [System.Serializable]
 public class Company : HasStats {

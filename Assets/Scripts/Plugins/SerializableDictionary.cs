@@ -1,10 +1,10 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-//http://answers.unity3d.com/questions/460727/how-to-serialize-dictionary-with-unity-serializati.html
+// A dictionary which supports serialization. You can't directly serialize this dictionary -
 // For this to work you need to derive a non-generic class, e.g.
 // [Serializable] public class DictionaryOfStringAndInt : SerializableDictionary<string, int> {}
+// http://answers.unity3d.com/questions/460727/how-to-serialize-dictionary-with-unity-serializati.html
 
 [System.Serializable]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver {

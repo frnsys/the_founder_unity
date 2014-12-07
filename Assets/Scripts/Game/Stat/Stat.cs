@@ -3,10 +3,9 @@
  */
 
 using UnityEngine;
-using System.Collections;
+using System.Timers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Timers;
 
 [System.Serializable]
 public class Stat {

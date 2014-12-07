@@ -3,7 +3,6 @@
  */
 
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -20,6 +19,7 @@ public class Item : ScriptableObject {
         cost = cost_;
     }
 }
+
 
 /*
  * A Store holds specific types of "items".

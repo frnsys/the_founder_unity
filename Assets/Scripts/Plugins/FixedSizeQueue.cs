@@ -1,7 +1,7 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
+// First-in, first-out serializable queue with a fixed size.
 // https://stackoverflow.com/a/5852926/1097920
 [System.Serializable]
 public class FixedSizeQueue<T> : Queue<T>, ISerializationCallbackReceiver {

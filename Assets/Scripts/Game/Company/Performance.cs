@@ -1,6 +1,11 @@
+/*
+ * These classes keep track of company performance data, which is used by AICompanies
+ * to make decisions and by the Board to assess *your* performance.
+ * These classes have to be subclassed from these generics in order to properly serialize.
+ */
+
 using UnityEngine;
 
-// Subclass these generic types so that they serialize.
 [System.Serializable]
 public class PerformanceDict : SerializableDictionary<string, float> {
     public override string ToString() {

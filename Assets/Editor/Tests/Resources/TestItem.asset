@@ -23,21 +23,21 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
       buff:
         name: Appeal
-        value: 24
+        value: 12
         duration: 0
         type: 0
     workers:
     - name: Happiness
-      value: 11
+      value: 29
       duration: 0
       type: 0
     - name: Productivity
-      value: 47
+      value: 11
       duration: 0
       type: 0
     company:
     - name: Cash
-      value: 26
+      value: 12
       duration: 0
       type: 0
     unlocks:

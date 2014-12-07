@@ -1,11 +1,8 @@
 /*
- * The board can make you resign.
+ * The board can make you resign SO MAKE THEM HAPPY
  */
 
 using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 [System.Serializable]
 public class TheBoard {
