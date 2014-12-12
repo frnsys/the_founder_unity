@@ -122,16 +122,16 @@ public class GameManager : Singleton<GameManager> {
     // ===============================================
 
     private int weekTime = 15;
-    private Month _month = Month.January;
     public string month {
-        get { return _month.ToString(); }
+        get { return data.month.ToString(); }
     }
-    private int _year = 1;
     public int year {
-        get { return 2014 + _year; }
+        get { return 2014 + data.year; }
     }
     [HideInInspector]
-    public int week = 0;
+    public int week {
+        get { return data.week; }
+    }
 
 
 
@@ -146,7 +146,7 @@ public class GameManager : Singleton<GameManager> {
         int yearTime = weekTime*4*12;
         yield return new WaitForSeconds(yearTime);
         while(true) {
-            _year++;
+            data.year++;
 
             // Get the annual performance data and generate the report.
             List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
@@ -201,8 +201,9 @@ public class GameManager : Singleton<GameManager> {
             // Do you die?
             if (data.year > data.lifetimeYear &&
                 (int)data.month > data.lifetimeMonth &&
-                data.week > data.lifetimeWeek)
+                data.week > data.lifetimeWeek) {
                 UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
+            }
 
             foreach (AICompany aic in data.otherCompanies) {
                 aic.Decide();
