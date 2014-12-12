@@ -28,6 +28,17 @@ public class UIOnboarding : MonoBehaviour {
             go.name = cf.name;
             label.text = cf.name;
 
+            // Create the 3d models and position them.
+            GameObject model = NGUITools.AddChild(label.gameObject, GameManager.Instance.config.employeeModelPrefab);
+            model.transform.localScale = new Vector3(40, 40, 40);
+            model.transform.localPosition = new Vector3(-120, 0, 0);
+
+            model.transform.Find("Cone").GetComponent<SkinnedMeshRenderer>().material.mainTexture = cf.texture;
+
+            // Set the label so that the model can be clicked on.
+            label.pivot = UIWidget.Pivot.Bottom;
+            label.height = 150;
+
             UIEventListener.Get(go).onClick += SelectCofounder;
         }
         cofounderGrid.Reposition();

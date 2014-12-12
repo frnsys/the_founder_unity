@@ -23,6 +23,7 @@ public class Worker : HasStats {
 
     private Levels levels;
 
+    public Texture texture;
 
     public float salary;
     public string bio;
