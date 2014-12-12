@@ -18,7 +18,7 @@ public class UIOnboarding : MonoBehaviour {
         foreach (Founder cf in cofounders) {
             // TO DO
             // Keep it simple (just labels) for now...but later make it more interesting.
-            GameObject go = NGUITools.AddChild(cofounderGrid.gameObject, new GameObject());
+            GameObject go = NGUITools.AddChild(cofounderGrid.gameObject);
             UILabel label = go.AddComponent<UILabel>();
             label.trueTypeFont = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
             label.color = new Color(0f, 0f, 0f, 1f);
@@ -42,6 +42,12 @@ public class UIOnboarding : MonoBehaviour {
             UIEventListener.Get(go).onClick += SelectCofounder;
         }
         cofounderGrid.Reposition();
+
+        List<string> messages = new List<string> {
+            "Picking the cofounder is one of the most important decisions for a business.",
+            "Here are some of the people in your network who could be good."
+        };
+        GameManager.Instance.narrativeManager.MentorMessages(messages);
     }
 
     public void SelectCofounder(GameObject obj) {

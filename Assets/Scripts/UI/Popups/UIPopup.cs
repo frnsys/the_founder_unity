@@ -4,13 +4,13 @@ using System.Collections;
 
 // Popup class with scaling up/down show/hide behavior (respectively).
 public abstract class UIPopup : MonoBehaviour {
-    public void Show(GameObject target) {
+    public void Show(GameObject target, float from=0f, float to=1f) {
         PreSetup(gameObject);
-        StartCoroutine(Scale(target, 0f, 1f, Setup));
+        StartCoroutine(Scale(target, from, to, Setup));
     }
 
-    public void Hide(GameObject target) {
-        StartCoroutine(Scale(target, 1f, 0f, NGUITools.DestroyImmediate));
+    public void Hide(GameObject target, float from=1f, float to=0f) {
+        StartCoroutine(Scale(target, from, to, NGUITools.DestroyImmediate));
     }
 
     // Override this to set stuff up before scaling up.
@@ -19,7 +19,7 @@ public abstract class UIPopup : MonoBehaviour {
     // Override this to set stuff up after scaling up.
     protected virtual void Setup(GameObject obj) {}
 
-    private IEnumerator Scale(GameObject target, float from, float to, Action<GameObject> cb = null) {
+    protected IEnumerator Scale(GameObject target, float from, float to, Action<GameObject> cb = null) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
         float step = 0.1f;
