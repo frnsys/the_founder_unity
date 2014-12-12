@@ -28,14 +28,14 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     // A message from your mentor.
-    public void MentorMessage(string message) {
+    public UIMentor MentorMessage(string message) {
         UIEventListener.VoidDelegate callback = delegate(GameObject obj) {
             obj.GetComponent<UIMentor>().Hide();
         };
-        MentorMessage(message, callback);
+        return MentorMessage(message, callback);
     }
 
-    public void MentorMessage(string message, UIEventListener.VoidDelegate callback) {
+    public UIMentor MentorMessage(string message, UIEventListener.VoidDelegate callback) {
         GameObject alerts = UIRoot.list[0].transform.Find("Alerts").gameObject;
 
         GameObject msg = NGUITools.AddChild(alerts, mentorMessagePrefab);
@@ -45,20 +45,28 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         UIEventListener.Get(mentor.box).onClick += delegate(GameObject obj) {
             callback(msg);
         };
+
+        return mentor;
     }
 
     // A list of messages to be shown in sequence (on tap).
     public void MentorMessages(List<string> messages) {
+        UIEventListener.VoidDelegate callback = delegate(GameObject obj) {};
+        MentorMessages(messages, callback);
+    }
+
+    public void MentorMessages(List<string> messages, UIEventListener.VoidDelegate callback) {
         int i = 0;
-        UIEventListener.VoidDelegate callback = delegate(GameObject obj) {
+        UIEventListener.VoidDelegate afterEach = delegate(GameObject obj) {
             if (i < messages.Count - 1) {
                 i++;
                 obj.GetComponent<UIMentor>().message = messages[i];
             } else {
                 obj.GetComponent<UIMentor>().Hide();
+                callback(obj);
             }
         };
-        MentorMessage(messages[0], callback);
+        MentorMessage(messages[0], afterEach);
     }
 
     public AICompany SelectCofounder(Founder cofounder) {

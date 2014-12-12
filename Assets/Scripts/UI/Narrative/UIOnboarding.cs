@@ -14,43 +14,48 @@ public class UIOnboarding : MonoBehaviour {
     private Founder selectedCofounder;
 
     void OnEnable() {
-        cofounders = GameManager.Instance.narrativeManager.cofounders;
-        foreach (Founder cf in cofounders) {
-            // TO DO
-            // Keep it simple (just labels) for now...but later make it more interesting.
-            GameObject go = NGUITools.AddChild(cofounderGrid.gameObject);
-            UILabel label = go.AddComponent<UILabel>();
-            label.trueTypeFont = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-            label.color = new Color(0f, 0f, 0f, 1f);
-            label.autoResizeBoxCollider = true;
-            BoxCollider bc = go.AddComponent<BoxCollider>();
-            bc.isTrigger = true;
-            go.name = cf.name;
-            label.text = cf.name;
-
-            // Create the 3d models and position them.
-            GameObject model = NGUITools.AddChild(label.gameObject, GameManager.Instance.config.employeeModelPrefab);
-            model.transform.localScale = new Vector3(40, 40, 40);
-            model.transform.localPosition = new Vector3(-120, 0, 0);
-
-            model.transform.Find("Cone").GetComponent<SkinnedMeshRenderer>().material.mainTexture = cf.texture;
-
-            // Set the label so that the model can be clicked on.
-            label.pivot = UIWidget.Pivot.Bottom;
-            label.height = 150;
-
-            UIEventListener.Get(go).onClick += SelectCofounder;
-        }
-        cofounderGrid.Reposition();
-
         List<string> messages = new List<string> {
             "Picking the cofounder is one of the most important decisions for a business.",
             "Here are some of the people in your network who could be good."
         };
-        GameManager.Instance.narrativeManager.MentorMessages(messages);
+        GameManager.Instance.narrativeManager.MentorMessages(messages, delegate(GameObject obj) {
+            cofounders = GameManager.Instance.narrativeManager.cofounders;
+            foreach (Founder cf in cofounders) {
+                // TO DO
+                // Keep it simple (just labels) for now...but later make it more interesting.
+                GameObject go = NGUITools.AddChild(cofounderGrid.gameObject);
+                UILabel label = go.AddComponent<UILabel>();
+                label.trueTypeFont = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                label.color = new Color(0f, 0f, 0f, 1f);
+                label.autoResizeBoxCollider = true;
+                BoxCollider bc = go.AddComponent<BoxCollider>();
+                bc.isTrigger = true;
+                go.name = cf.name;
+                label.text = cf.name;
+
+                // Create the 3d models and position them.
+                GameObject model = NGUITools.AddChild(label.gameObject, GameManager.Instance.config.employeeModelPrefab);
+                model.transform.localScale = new Vector3(40, 40, 40);
+                model.transform.localPosition = new Vector3(-120, 0, 0);
+
+                model.transform.Find("Cone").GetComponent<SkinnedMeshRenderer>().material.mainTexture = cf.texture;
+
+                // Set the label so that the model can be clicked on.
+                label.pivot = UIWidget.Pivot.Bottom;
+                label.height = 150;
+
+                UIEventListener.Get(go).onClick += SelectCofounder;
+            }
+            cofounderGrid.Reposition();
+        });
     }
 
+    private UIMentor mentorMessage;
     public void SelectCofounder(GameObject obj) {
+        if (mentorMessage != null) {
+            mentorMessage.Hide();
+        }
+
         // This could be better too.
 
         // Unselect other cofounders.
@@ -60,6 +65,8 @@ public class UIOnboarding : MonoBehaviour {
 
         selectedCofounder = cofounders.Find(x => x.name == obj.name);
         obj.GetComponent<UILabel>().color = new Color(0.18f, 0.67f, 0.23f, 1f);
+
+        mentorMessage = GameManager.Instance.narrativeManager.MentorMessage("Oh, "+ obj.name +" has some pedigree. MBA from Wharton. Ran one successful business. Completely useless when it comes to product, though.");
     }
 
     public void ConfirmSelection() {
