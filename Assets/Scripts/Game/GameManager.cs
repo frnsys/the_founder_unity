@@ -31,6 +31,9 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public NarrativeManager narrativeManager;
 
+    [HideInInspector]
+    public GameConfig config;
+
     private Company.Phase phase {
         get { return data.company.phase; }
     }
@@ -52,6 +55,9 @@ public class GameManager : Singleton<GameManager> {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
+
+        // Load internal config.
+        config = Resources.Load("GameConfig") as GameConfig;
 
         if (data == null) {
             Load(GameData.New("DEFAULTCORP"));
