@@ -13,11 +13,6 @@ public class Item : ScriptableObject {
     public Store store;
 
     public EffectSet effects = new EffectSet();
-
-    public Item(string name_, float cost_) {
-        name = name_;
-        cost = cost_;
-    }
 }
 
 
@@ -30,5 +25,6 @@ public enum Store {
     Equipment,
     Perks,
     Policies,
-    Companies
+    Companies,
+    Infrastructure
 }

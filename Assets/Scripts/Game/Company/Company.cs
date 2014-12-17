@@ -16,6 +16,9 @@ public class Company : HasStats {
         name = name_;
     }
 
+    public List<Vertical> verticals;
+    public List<Technology> technologies;
+
     // At what phase the company is operating.
     public enum Phase {
         Local,
@@ -24,7 +27,6 @@ public class Company : HasStats {
         Galactic
     }
     public Phase phase;
-
 
     public virtual void Awake() {
         // Default values.
