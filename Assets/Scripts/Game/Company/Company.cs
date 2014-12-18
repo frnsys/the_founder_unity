@@ -19,25 +19,35 @@ public class Company : HasStats {
         name = name_;
     }
 
+    public List<Location> locations;
     public List<Vertical> verticals;
     public List<Technology> technologies;
     public List<Infrastructure> infrastructures;
+
+    public int availableCapacity {
+        get {
+            int total = locations.Sum(i => i.capacity);
+            return total - infrastructures.Count;
+        }
+    }
 
     public virtual void Awake() {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
-        sizeLimit = 10;
-        founders = new List<Founder>();
-        _workers = new List<Worker>();
-        verticals = new List<Vertical>();
-        technologies = new List<Technology>();
-        infrastructures = new List<Infrastructure>();
         baseFeaturePoints = 4;
         productPoints = 10;
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
+        baseSizeLimit = 5;
         _items = new List<Item>();
+
+        founders = new List<Founder>();
+        _workers = new List<Worker>();
+        locations = new List<Location>();
+        verticals = new List<Vertical>();
+        technologies = new List<Technology>();
+        infrastructures = new List<Infrastructure>();
 
         // Keep track for a year.
         PerfHistory = new PerformanceHistory(12);
@@ -54,7 +64,13 @@ public class Company : HasStats {
     // Worker Management =============================
     // ===============================================
 
-    public int sizeLimit;
+    public int baseSizeLimit;
+    public int sizeLimit {
+        // You can manage 5 employees at your HQ, other locations are managed by one employee.
+        get {
+            return baseSizeLimit + locations.Count;
+        }
+    }
     public List<Founder> founders;
 
     [SerializeField]
@@ -260,6 +276,10 @@ public class Company : HasStats {
 
         foreach (Infrastructure inf in infrastructures) {
             toPay += inf.cost;
+        }
+
+        foreach (Location loc in locations) {
+            toPay += loc.rent;
         }
 
         toPay += researchCash;

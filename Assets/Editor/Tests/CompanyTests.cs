@@ -57,13 +57,13 @@ namespace UnityTest
 		public void ManageWorkers() {
             Assert.AreEqual(c.workers.Count, 0);
 
-            c.sizeLimit = 0;
+            c.baseSizeLimit = 0;
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
 
             c.cash.baseValue = 2000;
             c.BuyItem(item);
-            c.sizeLimit = 10;
+            c.baseSizeLimit = 10;
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 1);
             Assert.AreEqual(c.workers[0].happiness.value, 10);
@@ -78,10 +78,14 @@ namespace UnityTest
             inf.cost = 200;
             c.infrastructures.Add(inf);
 
+            Location loc = ScriptableObject.CreateInstance<Location>();
+            loc.rent = 100;
+            c.locations.Add(loc);
+
             worker.salary = 500;
             c.cash.baseValue = 2000;
 
-            float paid = worker.salary + c.researchCash + inf.cost;
+            float paid = worker.salary + c.researchCash + inf.cost + loc.rent;
 
             c.HireWorker(worker);
 

@@ -16,6 +16,7 @@ public class UnlockSet {
     public List<GameEvent> events = new List<GameEvent>();
     public List<Item> items = new List<Item>();
     public List<Store> stores = new List<Store>();
+    public List<Location> locations = new List<Location>();
 
     // This "unlocks" an UnlockSet by
     // adding the input UnlockSet's values
@@ -28,6 +29,7 @@ public class UnlockSet {
         events.AddRange(us.events);
         items.AddRange(us.items);
         stores.AddRange(us.stores);
+        locations.AddRange(us.locations);
     }
 
     // Apply a prereq set and see if it unlocks the set.
