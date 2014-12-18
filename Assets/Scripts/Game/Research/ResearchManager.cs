@@ -51,6 +51,7 @@ public class ResearchManager : MonoBehaviour {
     public void EndResearch() {
         // Trigger the Completed event.
         if (Completed != null) {
+            data.company.technologies.Add(technology);
             Completed(technology);
         }
 

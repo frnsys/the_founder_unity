@@ -23,6 +23,16 @@ public class Company : HasStats {
     public List<Vertical> verticals;
     public List<Technology> technologies;
     public List<Infrastructure> infrastructures;
+    public Infrastructures infrastructureAlloc {
+        get {
+            Infrastructures infras = new Infrastructures();
+
+            foreach (Infrastructure i in infrastructures) {
+                infras[i.type]++;
+            }
+            return infras;
+        }
+    }
 
     public int availableCapacity {
         get {

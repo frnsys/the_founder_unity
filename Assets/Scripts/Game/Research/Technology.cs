@@ -13,9 +13,11 @@ public class Technology : ScriptableObject, IHasPrereqs {
     public List<Technology> requiredTechnologies;
 
     public bool isAvailable(Company company) {
+        // The technology's vertical must be active on the company.
         if (!company.verticals.Contains(requiredVertical))
             return false;
 
+        // The technology's prerequisite technologies must have been researched.
         foreach (Technology t in requiredTechnologies) {
             if (!company.technologies.Contains(t))
                 return false;

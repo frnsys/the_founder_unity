@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Product : HasStats {
+public class Product : HasStats, IHasPrereqs {
     public enum State {
         DEVELOPMENT,
         LAUNCHED,
@@ -27,6 +27,20 @@ public class Product : HasStats {
     private State _state = State.DEVELOPMENT;
     public State state {
         get { return _state; }
+    }
+
+
+    // Note: we don't have required technologies because a technology is necessary for *unlocking* a product. Technologies don't disappear so it never needs to be checked again after the product is unlocked.
+    public Vertical requiredVertical;
+    public Infrastructures requiredInfrastructures;
+    public bool isAvailable(Company company) {
+        if (!company.verticals.Contains(requiredVertical))
+            return false;
+
+        if (company.infrastructureAlloc < requiredInfrastructures)
+            return false;
+
+        return true;
     }
 
     public bool launched { get { return _state == State.LAUNCHED; } }
