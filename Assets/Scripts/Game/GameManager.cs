@@ -95,8 +95,8 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    void OnResearchCompleted(Discovery d) {
-        ApplyEffectSet(d.effects);
+    void OnResearchCompleted(Technology t) {
+        ApplyEffectSet(t.effects);
     }
 
     public void ApplyEffectSet(EffectSet es) {

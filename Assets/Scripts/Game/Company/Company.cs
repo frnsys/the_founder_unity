@@ -10,7 +10,10 @@ using System.Collections.ObjectModel;
 [System.Serializable]
 public class Company : HasStats {
     public Stat cash;
-    public Consultancy consultancy;
+    public Stat research;
+
+    // TO DO make this nicer
+    public float researchCash = 1000;
 
     public Company(string name_) {
         name = name_;
@@ -32,6 +35,7 @@ public class Company : HasStats {
         // Default values.
         phase = Phase.Local;
         cash = new Stat("Cash", 100000);
+        research = new Stat("Research", 1);
         sizeLimit = 10;
         founders = new List<Founder>();
         _workers = new List<Worker>();
@@ -259,9 +263,7 @@ public class Company : HasStats {
         foreach (Worker worker in workers) {
             toPay += worker.salary;
         }
-        if (consultancy != null) {
-            toPay += consultancy.cost;
-        }
+        toPay += researchCash;
         cash.baseValue -= toPay;
 
         // Reset month's costs with this month's costs.

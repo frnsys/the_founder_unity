@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Technology : ScriptableObject, IHasPrereqs {
     public string description;
 
-    public Research requiredResearch = new Research(100,100,100);
+    public float requiredResearch = 1000;
 
     public EffectSet effects = new EffectSet();
 

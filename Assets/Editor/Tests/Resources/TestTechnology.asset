@@ -8,21 +8,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 241106a2bf4724b8492d5a08556b752e, type: 3}
-  m_Name: Electricity
+  m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
+  m_Name: TestTechnology
   m_EditorClassIdentifier: 
-  description: yo this is electricity
-  requiredResearch:
-    management: 20
-    technical: 40
-    design: 10
+  description: This is a test technology
+  requiredResearch: 1000
   effects:
     products: []
-    workers:
-    - name: Productivity
-      value: 40
-      duration: 0
-      type: 0
+    workers: []
     company: []
     unlocks:
       prereqs:
@@ -33,7 +26,6 @@ MonoBehaviour:
         events: []
         items: []
         stores: 
-        consultancies: []
         researchPoints: 0
       productTypes: []
       industries: []
@@ -42,4 +34,6 @@ MonoBehaviour:
       events: []
       items: []
       stores: 
-      consultancies: []
+  requiredVertical:
+    cost: 1e+07
+  requiredTechnologies: []

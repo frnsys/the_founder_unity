@@ -17,15 +17,12 @@ namespace UnityTest
             // Initialize new game stuff.
             data.company  = new Company("TESTINGCORP");
                 data.company.founders.Add(CreateFounder("STEVE", 100));
-                data.company.phase            = Company.Phase.Planetary;
-                data.company.sizeLimit        = 17;
-                data.company.lastMonthRevenue = 28517;
-                data.company.lastMonthCosts   = 14789;
-                data.company.cash.baseValue   = 100000000;
-                data.company.consultancy      = ScriptableObject.CreateInstance<Consultancy>();
-                    data.company.consultancy.name     = "RADCONSULTANTS";
-                    data.company.consultancy.cost     = 145814;
-                    data.company.consultancy.research = new Research(8,9,7);
+                data.company.phase              = Company.Phase.Planetary;
+                data.company.sizeLimit          = 17;
+                data.company.lastMonthRevenue   = 28517;
+                data.company.lastMonthCosts     = 14789;
+                data.company.cash.baseValue     = 100000000;
+                data.company.research.baseValue = 1000;
 
                 for (int i=0;i<5;i++) {
                     Worker worker = CreateWorker("WORKER"+i, i*10);
@@ -42,11 +39,11 @@ namespace UnityTest
             data.board    = new TheBoard();
                 data.board.happiness = 20;
 
-            data.research  = new Research(11,12,13);
-            data.discovery = ScriptableObject.CreateInstance<Discovery>();
-                data.discovery.name             = "my discovery";
-                data.discovery.description      = "foobar";
-                data.discovery.requiredResearch = new Research(4,5,6);
+            data.research  = 500;
+            data.technology = ScriptableObject.CreateInstance<Technology>();
+                data.technology.name             = "my technology";
+                data.technology.description      = "foobar";
+                data.technology.requiredResearch = 1000;
 
             // TO DO AI companies
             data.unlocked = new UnlockSet();
@@ -100,10 +97,7 @@ namespace UnityTest
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.IsTrue  (gd.company.featurePoints   ==  data.company.featurePoints);
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
-
-            Assert.AreEqual(gd.company.consultancy.name,   data.company.consultancy.name);
-            Assert.AreEqual(gd.company.consultancy.cost,   data.company.consultancy.cost);
-            Assert.IsTrue(gd.company.consultancy.research == data.company.consultancy.research);
+            Assert.AreEqual(gd.company.research.value,     data.company.research.value);
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);
             for (int i=0;i<gd.company.workers.Count;i++) {
@@ -172,16 +166,16 @@ namespace UnityTest
             }
 
 
-            // TO DO NEED TO CHECK that references remain the same. E.g. if two companies have the same consultancy hired, that should be the same instance, not two different ones.
+            // TO DO NEED TO CHECK that references remain the same. E.g. two technologies are the same instance.
 
             CompareUnlockSets(gd.unlocked,               data.unlocked);
 
             Assert.AreEqual(gd.board.happiness,         data.board.happiness);
 
-            Assert.AreEqual(gd.discovery.name,          data.discovery.name);
-            Assert.AreEqual(gd.discovery.description,   data.discovery.description);
+            Assert.AreEqual(gd.technology.name,          data.technology.name);
+            Assert.AreEqual(gd.technology.description,   data.technology.description);
             Assert.IsTrue(gd.research == data.research);
-            Assert.IsTrue(gd.discovery.requiredResearch == data.discovery.requiredResearch);
+            Assert.IsTrue(gd.technology.requiredResearch == data.technology.requiredResearch);
 		}
 
         private void CompareEffectSets(EffectSet es, EffectSet es_) {

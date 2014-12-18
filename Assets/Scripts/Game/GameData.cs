@@ -36,8 +36,8 @@ public class GameData : ScriptableObject {
     public UnlockSet unlocked;
 
     // Research stuff.
-    public Discovery discovery;
-    public Research research;
+    public Technology technology;
+    public float research;
 
     // Other companies in the world.
     public List<AICompany> otherCompanies;
@@ -79,7 +79,7 @@ public class GameData : ScriptableObject {
         // Initialize new game stuff.
         data.company  = new Company(companyName);
         data.board    = new TheBoard();
-        data.research = new Research(0,0,0);
+        data.research = 0;
 
         data.month = Month.January;
         data.year  = 1;

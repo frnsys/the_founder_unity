@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Vertical : IHasPrereqs {
+public class Vertical : ScriptableObject, IHasPrereqs {
     public float cost = 10000000;
 
     public bool isAvailable(Company company) {

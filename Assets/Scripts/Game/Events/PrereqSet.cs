@@ -16,7 +16,6 @@ public class PrereqSet {
     public List<GameEvent> events = new List<GameEvent>();
     public List<Item> items = new List<Item>();
     public List<Store> stores = new List<Store>();
-    public List<Consultancy> consultancies = new List<Consultancy>();
     public int researchPoints = 0;
 
     // This satisfies prereqs by removing the completed ones.
@@ -29,7 +28,6 @@ public class PrereqSet {
         events = events.Except(ps.events).ToList();
         items = items.Except(ps.items).ToList();
         stores = stores.Except(ps.stores).ToList();
-        consultancies = consultancies.Except(ps.consultancies).ToList();
         researchPoints -= ps.researchPoints;
 
         return Completed();
@@ -51,8 +49,6 @@ public class PrereqSet {
         else if (items.Count > 0)
             return false;
         else if (stores.Count > 0)
-            return false;
-        else if (consultancies.Count > 0)
             return false;
         else
             return true;

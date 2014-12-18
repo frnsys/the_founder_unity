@@ -336,8 +336,7 @@ public class AICompany : Company {
     // ===============================================
 
     // TO DO:
-    // pick a consultancy to hire
-    // somehow assess which discovery is most worthwhile to pursue.
+    // somehow assess which technology is most worthwhile to pursue.
 
 
 
