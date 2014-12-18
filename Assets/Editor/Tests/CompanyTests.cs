@@ -74,12 +74,19 @@ namespace UnityTest
 
 		[Test]
 		public void PayMonthly() {
+            Infrastructure inf = ScriptableObject.CreateInstance<Infrastructure>();
+            inf.cost = 200;
+            c.infrastructures.Add(inf);
+
             worker.salary = 500;
             c.cash.baseValue = 2000;
+
+            float paid = worker.salary + c.researchCash + inf.cost;
+
             c.HireWorker(worker);
 
             c.PayMonthly();
-            Assert.AreEqual(c.cash.baseValue, 1500);
+            Assert.AreEqual(c.cash.baseValue, 2000 - paid);
         }
 
 

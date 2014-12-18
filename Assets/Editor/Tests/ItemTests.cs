@@ -15,7 +15,7 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            item = (Item)ScriptableObject.CreateInstance(typeof(Item));
+            item = ScriptableObject.CreateInstance<Item>();
             item.name = "example_Item";
             item.cost = 500;
         }

@@ -21,6 +21,7 @@ public class Company : HasStats {
 
     public List<Vertical> verticals;
     public List<Technology> technologies;
+    public List<Infrastructure> infrastructures;
 
     // At what phase the company is operating.
     public enum Phase {
@@ -39,6 +40,9 @@ public class Company : HasStats {
         sizeLimit = 10;
         founders = new List<Founder>();
         _workers = new List<Worker>();
+        verticals = new List<Vertical>();
+        technologies = new List<Technology>();
+        infrastructures = new List<Infrastructure>();
         baseFeaturePoints = 4;
         productPoints = 10;
         lastMonthCosts = 0;
@@ -263,7 +267,13 @@ public class Company : HasStats {
         foreach (Worker worker in workers) {
             toPay += worker.salary;
         }
+
+        foreach (Infrastructure inf in infrastructures) {
+            toPay += inf.cost;
+        }
+
         toPay += researchCash;
+
         cash.baseValue -= toPay;
 
         // Reset month's costs with this month's costs.
