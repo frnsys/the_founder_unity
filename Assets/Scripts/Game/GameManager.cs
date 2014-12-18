@@ -34,10 +34,6 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public GameConfig config;
 
-    private Company.Phase phase {
-        get { return data.company.phase; }
-    }
-
     public List<Worker> availableWorkers {
         get {
             return data.unlocked.workers.Where(w => !playerCompany.workers.Contains(w)).ToList();

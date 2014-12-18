@@ -17,7 +17,6 @@ namespace UnityTest
             // Initialize new game stuff.
             data.company  = new Company("TESTINGCORP");
                 data.company.founders.Add(CreateFounder("STEVE", 100));
-                data.company.phase              = Company.Phase.Planetary;
                 data.company.sizeLimit          = 17;
                 data.company.lastMonthRevenue   = 28517;
                 data.company.lastMonthCosts     = 14789;
@@ -89,7 +88,6 @@ namespace UnityTest
             Assert.AreEqual(gd.lifetimeWeek,               data.lifetimeWeek);
 
             Assert.AreEqual(gd.company.name,               data.company.name);
-            Assert.AreEqual(gd.company.phase,              data.company.phase);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
             Assert.AreEqual(gd.company.sizeLimit,          data.company.sizeLimit);
             Assert.AreEqual(gd.company.productPoints,      data.company.productPoints);

@@ -23,18 +23,8 @@ public class Company : HasStats {
     public List<Technology> technologies;
     public List<Infrastructure> infrastructures;
 
-    // At what phase the company is operating.
-    public enum Phase {
-        Local,
-        Global,
-        Planetary,
-        Galactic
-    }
-    public Phase phase;
-
     public virtual void Awake() {
         // Default values.
-        phase = Phase.Local;
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
         sizeLimit = 10;

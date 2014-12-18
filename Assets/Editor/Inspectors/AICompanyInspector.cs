@@ -21,7 +21,6 @@ internal class AICompanyInspector : Editor {
         EditorGUILayout.LabelField("Description");
         c.description = EditorGUILayout.TextArea(c.description, GUILayout.Height(50));
         c.sizeLimit = EditorGUILayout.IntField("Worker Size Limit", c.sizeLimit);
-        c.phase = (Company.Phase)EditorGUILayout.EnumPopup("Starting Phase", c.phase);
         c.cash.baseValue  = EditorGUILayout.FloatField("Starting Cash", c.cash.baseValue);
 
         EditorGUILayout.LabelField("Founder/CEO");
