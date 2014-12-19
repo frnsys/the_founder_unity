@@ -8,11 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
-  m_Name: Social Network
+  m_Script: {fileID: 11500000, guid: d0b1831c028b54282895987c9bffb251, type: 3}
+  m_Name: Information
   m_EditorClassIdentifier: 
-  description: 
-  requiredVerticals: []
-  requiredInfrastructure:
-    keys: 00000000010000000200000003000000
-    values: 02000000000000000000000000000000
+  cost: 100000

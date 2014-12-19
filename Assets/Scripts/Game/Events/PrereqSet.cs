@@ -10,8 +10,7 @@ using System.Collections.Generic;
 public class PrereqSet {
     // Prerequisites
     public List<ProductType> productTypes = new List<ProductType>();
-    public List<Industry> industries = new List<Industry>();
-    public List<Market> markets = new List<Market>();
+    public List<Vertical> verticals = new List<Vertical>();
     public List<Worker> workers = new List<Worker>();
     public List<GameEvent> events = new List<GameEvent>();
     public List<Item> items = new List<Item>();
@@ -22,8 +21,7 @@ public class PrereqSet {
     // Returns true if the prereq set is completed.
     public bool Satisfy(PrereqSet ps) {
         productTypes = productTypes.Except(ps.productTypes).ToList();
-        industries = industries.Except(ps.industries).ToList();
-        markets = markets.Except(ps.markets).ToList();
+        verticals = verticals.Except(ps.verticals).ToList();
         workers = workers.Except(ps.workers).ToList();
         events = events.Except(ps.events).ToList();
         items = items.Except(ps.items).ToList();
@@ -38,9 +36,7 @@ public class PrereqSet {
             return false;
         else if (productTypes.Count > 0)
             return false;
-        else if (industries.Count > 0)
-            return false;
-        else if (markets.Count > 0)
+        else if (verticals.Count > 0)
             return false;
         else if (workers.Count > 0)
             return false;

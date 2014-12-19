@@ -17,16 +17,32 @@ public class Infrastructure : Item {
 }
 
 [System.Serializable]
-public class Infrastructures : SerializableDictionary<Infrastructure.Type, int> {
+public class InfrastructureDict : SerializableDictionary<Infrastructure.Type, int> {
 
-    public Infrastructures() {
+    public InfrastructureDict() {
         // Initialize with 0 of each infrastructure type.
         foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
             Add(t, 0);
         }
     }
 
-    public static bool operator >(Infrastructures left, Infrastructures right) {
+    public override string ToString() {
+        string repr = "";
+        foreach(KeyValuePair<Infrastructure.Type, int> item in this) {
+            repr += item.Key.ToString() + ":" + item.Value.ToString() + " ";
+        }
+        return repr;
+    }
+
+    public bool Equals(InfrastructureDict left, InfrastructureDict right) {
+        foreach(KeyValuePair<Infrastructure.Type, int> item in left) {
+            if (item.Value != right[item.Key])
+                return false;
+        }
+        return true;
+    }
+
+    public static bool operator >(InfrastructureDict left, InfrastructureDict right) {
         foreach(KeyValuePair<Infrastructure.Type, int> item in left) {
             if (item.Value < right[item.Key])
                 return false;
@@ -34,11 +50,27 @@ public class Infrastructures : SerializableDictionary<Infrastructure.Type, int> 
         return true;
     }
 
-    public static bool operator <(Infrastructures left, Infrastructures right) {
+    public static bool operator <(InfrastructureDict left, InfrastructureDict right) {
         foreach(KeyValuePair<Infrastructure.Type, int> item in left) {
             if (item.Value > right[item.Key])
                 return false;
         }
         return true;
+    }
+
+    public static InfrastructureDict operator +(InfrastructureDict left, InfrastructureDict right) {
+        InfrastructureDict result = new InfrastructureDict();
+        foreach(KeyValuePair<Infrastructure.Type, int> item in left) {
+            result[item.Key] = item.Value + right[item.Key];
+        }
+        return result;
+    }
+
+    public static InfrastructureDict operator -(InfrastructureDict left, InfrastructureDict right) {
+        InfrastructureDict result = new InfrastructureDict();
+        foreach(KeyValuePair<Infrastructure.Type, int> item in left) {
+            result[item.Key] = item.Value - right[item.Key];
+        }
+        return result;
     }
 }

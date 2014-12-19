@@ -22,22 +22,45 @@ public class Company : HasStats {
     public List<Location> locations;
     public List<Vertical> verticals;
     public List<Technology> technologies;
-    public List<Infrastructure> infrastructures;
-    public Infrastructures infrastructureAlloc {
-        get {
-            Infrastructures infras = new Infrastructures();
+    public List<Infrastructure> infrastructure;
 
-            foreach (Infrastructure i in infrastructures) {
+    // Infrastructure which is available for new products.
+    public InfrastructureDict availableInfrastructure {
+        get {
+            return allInfrastructure - usedInfrastructure;
+        }
+    }
+
+    // Infrastructure which is tied up in existing products.
+    public InfrastructureDict usedInfrastructure {
+        get {
+            InfrastructureDict usedInfras = new InfrastructureDict();
+            foreach (Product p in products) {
+                if (p.state != Product.State.RETIRED) {
+                    Debug.Log(p.requiredInfrastructure);
+                    usedInfras += p.requiredInfrastructure;
+                }
+            }
+            return usedInfras;
+        }
+    }
+
+    // Total infrastructure on hand.
+    public InfrastructureDict allInfrastructure {
+        get {
+            InfrastructureDict infras = new InfrastructureDict();
+            foreach (Infrastructure i in infrastructure) {
                 infras[i.type]++;
             }
             return infras;
         }
     }
 
+    // How much space is left for new infrastructure.
     public int availableCapacity {
         get {
             int total = locations.Sum(i => i.capacity);
-            return total - infrastructures.Count;
+            return total - infrastructure.Count;
         }
     }
 
@@ -46,7 +69,6 @@ public class Company : HasStats {
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
         baseFeaturePoints = 4;
-        productPoints = 10;
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
         baseSizeLimit = 5;
@@ -57,7 +79,7 @@ public class Company : HasStats {
         locations = new List<Location>();
         verticals = new List<Vertical>();
         technologies = new List<Technology>();
-        infrastructures = new List<Infrastructure>();
+        infrastructure = new List<Infrastructure>();
 
         // Keep track for a year.
         PerfHistory = new PerformanceHistory(12);
@@ -141,15 +163,6 @@ public class Company : HasStats {
     // Product Management ============================
     // ===============================================
 
-    // Total product point capacity.
-    public int productPoints;
-    public int usedProductPoints {
-        get { return products.Sum(p => p.state != Product.State.RETIRED ? p.points : 0); }
-    }
-    public int availableProductPoints {
-        get { return productPoints - usedProductPoints; }
-    }
-
     public List<Product> products = new List<Product>();
     public List<Product> activeProducts {
         get {
@@ -162,24 +175,27 @@ public class Company : HasStats {
         }
     }
 
-    public void StartNewProduct(ProductType pt, Industry i, Market m) {
+    public void StartNewProduct(List<ProductType> pts) {
         Product product = ScriptableObject.CreateInstance<Product>();
-        product.Init(pt, i, m);
+        product.Init(pts);
 
         // Apply any applicable items to the new product.
         // TO DO: should this be held off until after the product is completed?
         foreach (Item item in _items) {
             foreach (ProductEffect pe in item.effects.products) {
-                // If the product effect is indiscriminate (i.e. doesn't specify any aspects), it applies to every product.
-                // Otherwise, a product must fit at least one of the aspects to have the effect applied.
-                if ((pe.productTypes.Count == 0 && pe.industries.Count == 0 && pe.markets.Count == 0) ||
-                    (pe.productTypes.Contains(pt) || pe.industries.Contains(i) || pe.markets.Contains(m))) {
+                if (IsEligibleForEffect(product, pe)) {
                     product.ApplyBuff(pe.buff);
                 }
             }
         }
 
         products.Add(product);
+    }
+
+    private bool IsEligibleForEffect(Product p, ProductEffect pe) {
+        // If the product effect is indiscriminate (i.e. doesn't specify any product types), it applies to every product.
+        // Otherwise, a product must contain at least one of the specified effect's product types.
+        return pe.productTypes.Count == 0 || pe.productTypes.Intersect(p.productTypes).Any();
     }
 
     public void DevelopProducts() {
@@ -229,10 +245,7 @@ public class Company : HasStats {
     public void ShutdownProduct(Product product) {
         foreach (Item item in _items) {
             foreach (ProductEffect pe in item.effects.products) {
-                // If the product effect is indiscriminate (i.e. doesn't specify any aspects), it applies to every product.
-                // Otherwise, a product must fit at least one of the aspects to have the effect applied.
-                if ((pe.productTypes.Count == 0 && pe.industries.Count == 0 && pe.markets.Count == 0) ||
-                    (pe.productTypes.Contains(product.productType) || pe.industries.Contains(product.industry) || pe.markets.Contains(product.market))) {
+                if (IsEligibleForEffect(product, pe)) {
                     product.RemoveBuff(pe.buff);
                 }
             }
@@ -241,13 +254,13 @@ public class Company : HasStats {
     }
 
     public void ApplyProductEffect(ProductEffect effect) {
-        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
+        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes);
         foreach (Product product in matchingProducts) {
             product.ApplyBuff(effect.buff);
         }
     }
     public void RemoveProductEffect(ProductEffect effect) {
-        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes, effect.industries, effect.markets);
+        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes);
         foreach (Product product in matchingProducts) {
             product.RemoveBuff(effect.buff);
         }
@@ -255,17 +268,15 @@ public class Company : HasStats {
 
 
     // Given an item, find the list of currently active products that
-    // match the item's industries, product types, or markets.
-    private List<Product> FindMatchingProducts(List<ProductType> productTypes, List<Industry> industries, List<Market> markets) {
+    // match the item's product types.
+    protected List<Product> FindMatchingProducts(List<ProductType> productTypes) {
         // Items which have no product specifications apply to all products.
-        if (industries.Count == 0 && productTypes.Count == 0 && markets.Count == 0) {
+        if (productTypes.Count == 0) {
             return products;
 
         } else {
             return products.FindAll(p =>
-                industries.Exists(i => i == p.industry)
-                || productTypes.Exists(pType => pType == p.productType)
-                || markets.Exists(m => m == p.market));
+                productTypes.Exists(pType => p.productTypes.Contains(pType)));
         }
     }
 
@@ -284,7 +295,7 @@ public class Company : HasStats {
             toPay += worker.salary;
         }
 
-        foreach (Infrastructure inf in infrastructures) {
+        foreach (Infrastructure inf in infrastructure) {
             toPay += inf.cost;
         }
 

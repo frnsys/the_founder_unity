@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEditor;
-using System.Threading;
 using NUnit.Framework;
+using System.Threading;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace UnityTest
 {
@@ -39,19 +41,14 @@ namespace UnityTest
                 data.board.happiness = 20;
 
             data.research  = 500;
-            data.technology = ScriptableObject.CreateInstance<Technology>();
-                data.technology.name             = "my technology";
-                data.technology.description      = "foobar";
-                data.technology.requiredResearch = 1000;
+            data.technology = Technology.Load("3D Printing");
 
             // TO DO AI companies
             data.unlocked = new UnlockSet();
                 ProductType pt = ProductType.Load("Social Network");
-                Industry ind   = Industry.Load("Space");
-                Market m       = Market.Load("Millenials");
+                Vertical vert  = Vertical.Load("Information");
                 data.unlocked.productTypes.Add(pt);
-                data.unlocked.industries.Add(ind);
-                data.unlocked.markets.Add(m);
+                data.unlocked.verticals.Add(vert);
 
             data.month         = Month.March;
             data.year          = 14;
@@ -68,9 +65,6 @@ namespace UnityTest
 
 		[Test]
 		public void TestSerialize() {
-            //Serializer.Serialized s = Serializer.Serialize(data);
-            //GameData gd = Serializer.Deserialize<GameData>(s);
-
             // Save and re-load the data: check to make sure its consistent.
             string filepath = "/tmp/the_founder_test_saving.dat";
             GameData.Save(data, filepath);
@@ -90,7 +84,7 @@ namespace UnityTest
             Assert.AreEqual(gd.company.name,               data.company.name);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
             Assert.AreEqual(gd.company.baseSizeLimit,      data.company.baseSizeLimit);
-            Assert.AreEqual(gd.company.productPoints,      data.company.productPoints);
+            Assert.AreEqual(gd.company.allInfrastructure,  data.company.allInfrastructure);
             Assert.AreEqual(gd.company.lastMonthRevenue,   data.company.lastMonthRevenue);
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.IsTrue  (gd.company.featurePoints   ==  data.company.featurePoints);
@@ -128,9 +122,10 @@ namespace UnityTest
                 Assert.AreEqual(p.usability.value,    p_.usability.value);
                 Assert.AreEqual(p.performance.value,  p_.performance.value);
 
-                Assert.AreEqual(p.productType.name,   p_.productType.name);
-                Assert.AreEqual(p.industry.name,      p_.industry.name);
-                Assert.AreEqual(p.market.name,        p_.market.name);
+                for (int j=0; j<p.productTypes.Count; j++) {
+                    Assert.AreEqual(p.productTypes[j].name, p_.productTypes[j].name);
+                    Assert.IsTrue(p.productTypes[j].requiredInfrastructure.Equals(p_.productTypes[j].requiredInfrastructure));
+                }
             }
 
             Assert.AreEqual(gd.company.founders.Count, data.company.founders.Count);
@@ -164,16 +159,13 @@ namespace UnityTest
             }
 
 
-            // TO DO NEED TO CHECK that references remain the same. E.g. two technologies are the same instance.
-
             CompareUnlockSets(gd.unlocked,               data.unlocked);
 
-            Assert.AreEqual(gd.board.happiness,         data.board.happiness);
+            Assert.AreEqual(gd.board.happiness,          data.board.happiness);
 
-            Assert.AreEqual(gd.technology.name,          data.technology.name);
-            Assert.AreEqual(gd.technology.description,   data.technology.description);
+            // These should be the _same instance_!
+            Assert.AreEqual(gd.technology, data.technology);
             Assert.IsTrue(gd.research == data.research);
-            Assert.IsTrue(gd.technology.requiredResearch == data.technology.requiredResearch);
 		}
 
         private void CompareEffectSets(EffectSet es, EffectSet es_) {
@@ -201,7 +193,7 @@ namespace UnityTest
 
                 Assert.AreEqual(pe.buff.name,       pe_.buff.name);
                 Assert.AreEqual(pe.buff.value,      pe_.buff.value);
-                Assert.AreEqual(pe.markets[0].name, pe_.markets[0].name);
+                Assert.AreEqual(pe.productTypes[0].name, pe_.productTypes[0].name);
             }
             CompareUnlockSets(es.unlocks, es_.unlocks);
 
@@ -211,11 +203,8 @@ namespace UnityTest
             Assert.AreEqual(us.productTypes.Count,   us_.productTypes.Count);
             Assert.AreEqual(us.productTypes[0].name, us_.productTypes[0].name);
 
-            Assert.AreEqual(us.industries.Count,   us_.industries.Count);
-            Assert.AreEqual(us.industries[0].name, us_.industries[0].name);
-
-            Assert.AreEqual(us.markets.Count,   us_.markets.Count);
-            Assert.AreEqual(us.markets[0].name, us_.markets[0].name);
+            Assert.AreEqual(us.verticals.Count,   us_.verticals.Count);
+            Assert.AreEqual(us.verticals[0].name, us_.verticals[0].name);
         }
 
         private Worker CreateWorker(string name, int stat) {
@@ -245,11 +234,11 @@ namespace UnityTest
 
         private Product CreateProduct() {
             ProductType pt = ProductType.Load("Social Network");
-            Industry i     = Industry.Load("Space");
-            Market m       = Market.Load("Millenials");
+            Vertical v     = Vertical.Load("Information");
+            List<ProductType> pts = new List<ProductType>() { pt };
 
             Product product = ScriptableObject.CreateInstance<Product>();
-            product.Init(pt, i, m);
+            product.Init(pts);
 
             product.Develop(RandFloat(), RandFloat(), RandFloat(), RandFloat());
 
@@ -271,14 +260,12 @@ namespace UnityTest
             e.workers.Add(new StatBuff("Productivity", RandFloat()));
 
             ProductType pt = ProductType.Load("Social Network");
-            Industry i     = Industry.Load("Space");
-            Market m       = Market.Load("Millenials");
+            Vertical v     = Vertical.Load("Information");
             e.unlocks.productTypes.Add(pt);
-            e.unlocks.industries.Add(i);
-            e.unlocks.markets.Add(m);
+            e.unlocks.verticals.Add(v);
 
             ProductEffect pe = new ProductEffect();
-            pe.markets.Add(m);
+            pe.productTypes.Add(pt);
             pe.buff = new StatBuff("Appeal", RandFloat());
             e.products.Add(pe);
 
@@ -286,7 +273,7 @@ namespace UnityTest
         }
 
         private Item CreateItem() {
-            Item item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
+            Item item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
             item.effects = CreateEffectSet();
             return item;
         }

@@ -18,7 +18,7 @@ namespace UnityTest
         public void SetUp() {
             worker = ScriptableObject.CreateInstance<Worker>();
             worker.Init("Franklin");
-            item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
+            item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
         }
 
         [TearDown]

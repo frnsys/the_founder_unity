@@ -6,21 +6,20 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
+// TO DO this should be rehauled to calculate by necessary infrastructure, not points.
 // For convenience...
 public class ProductCombo {
-    public ProductType pt;
-    public Industry i;
-    public Market m;
+    public List<ProductType> pts;
 
     // The number of product points this product requires.
+    // TO DO this will be replaced by infrastructure requirements instead
     public int points {
-        get { return pt.points + i.points + m.points; }
+        // temp
+        get { return 0; }
     }
 
-    public ProductCombo(ProductType pt_, Industry i_, Market m_) {
-        pt = pt_;
-        i  = i_;
-        m  = m_;
+    public ProductCombo(List<ProductType> pts_) {
+        pts = pts_;
     }
 }
 
@@ -33,11 +32,10 @@ public class AICompany : Company {
         name = name_;
     }
 
-    // Bonuses the company gets for particular product aspects.
+    // Bonuses the company gets for particular verticals.
     public EffectSet bonuses;
     private List<ProductType> specialtyProductTypes;
-    private List<Industry> specialtyIndustries;
-    private List<Market> specialtyMarkets;
+    private List<Vertical> specialtyVerticals;
 
     public List<Worker> startWorkers;
     public List<Product> startProducts;
@@ -48,8 +46,7 @@ public class AICompany : Company {
         // Initialize stuff.
         bonuses = new EffectSet();
         specialtyProductTypes = new List<ProductType>();
-        specialtyIndustries = new List<Industry>();
-        specialtyMarkets = new List<Market>();
+        specialtyVerticals = new List<Vertical>();
 
         startWorkers = new List<Worker>();
         startProducts = new List<Product>();
@@ -90,13 +87,9 @@ public class AICompany : Company {
                 if (!specialtyProductTypes.Contains(i))
                     specialtyProductTypes.Add(i);
             }
-            foreach (Industry i in pe.industries) {
-                if (!specialtyIndustries.Contains(i))
-                    specialtyIndustries.Add(i);
-            }
-            foreach (Market i in pe.markets) {
-                if (!specialtyMarkets.Contains(i))
-                    specialtyMarkets.Add(i);
+            foreach (Vertical i in pe.verticals) {
+                if (!specialtyVerticals.Contains(i))
+                    specialtyVerticals.Add(i);
             }
         }
 
@@ -130,6 +123,8 @@ public class AICompany : Company {
 
     private void DecideNewProducts() {
         // 3 is the min. PP required for a new product.
+        // TEMP
+        int availableProductPoints = 4;
         if (availableProductPoints > 3) {
 
             // The more aggressive the company, the more likely they are
@@ -146,7 +141,7 @@ public class AICompany : Company {
                         // or if the company already has this kind of product.
                         if (availableProductPoints > p.points &&
                             ProductROI(p) > 1.2 && // this threshold value can really be anything. how to best determine it?
-                            MatchingProducts(p).Count == 0) {
+                            FindMatchingProducts(p.productTypes).Count == 0) {
                             candidates.Add(p);
                         }
                     }
@@ -158,7 +153,7 @@ public class AICompany : Company {
                     // Create as many as possible.
                     if (p.points <= availableProductPoints) {
                         Debug.Log(name + " is starting a new competing product...");
-                        StartNewProduct(p.productType, p.industry, p.market);
+                        StartNewProduct(p.productTypes);
                     }
                 }
 
@@ -171,7 +166,7 @@ public class AICompany : Company {
                 ProductCombo pc = RandomSpecialtyProduct();
                 if (pc.points <= availableProductPoints) {
                     Debug.Log(name + " is starting a new product...");
-                    StartNewProduct(pc.pt, pc.i, pc.m);
+                    StartNewProduct(pc.pts);
                 } else {
                     break;
                 }
@@ -200,12 +195,14 @@ public class AICompany : Company {
     // TO DO tweak this
     private float ScoreProduct(Product p) {
         float score = 0;
-        if (specialtyProductTypes.Contains(p.productType))
-            score += 1;
-        if (specialtyIndustries.Contains(p.industry))
-            score += 1;
-        if (specialtyMarkets.Contains(p.market))
-            score += 1;
+        foreach (ProductType pt in p.productTypes) {
+            if (specialtyProductTypes.Contains(pt))
+                score += 1;
+        }
+        foreach (Vertical v in p.requiredVerticals) {
+            if (specialtyVerticals.Contains(v))
+                score += 1;
+        }
 
         score += ProductROI(p);
 
@@ -214,38 +211,23 @@ public class AICompany : Company {
 
     // Generate a random product combo based on this company's specialties. If no specialties are available for the aspect, a random unlocked one is chosen.
     private ProductCombo RandomSpecialtyProduct() {
-        ProductType pt;
-        Industry i;
-        Market m;
+        List<ProductType> pts = new List<ProductType>();
 
-        if (specialtyProductTypes.Count > 0) {
-            pt = specialtyProductTypes[Random.Range(0, specialtyProductTypes.Count)];
-        } else {
-            pt = unlocked.productTypes[Random.Range(0, unlocked.productTypes.Count)];
+        // Number of product types to use.
+        int numProductTypes = Random.Range(1,2);
+
+        // TO DO Note that it's possible that the AI company creates a product with a double product type.
+        // (two of the same product type). Do we want this?
+        while (pts.Count < numProductTypes) {
+            if (specialtyProductTypes.Count > 0) {
+                pts.Add(specialtyProductTypes[Random.Range(0, specialtyProductTypes.Count)]);
+            } else {
+                pts.Add(unlocked.productTypes[Random.Range(0, unlocked.productTypes.Count)]);
+            }
         }
 
-        if (specialtyIndustries.Count > 0) {
-            i = specialtyIndustries[Random.Range(0, specialtyIndustries.Count)];
-        } else {
-            i = unlocked.industries[Random.Range(0, unlocked.industries.Count)];
-        }
-
-        if (specialtyMarkets.Count > 0) {
-            m = specialtyMarkets[Random.Range(0, specialtyMarkets.Count)];
-        } else {
-            m = unlocked.markets[Random.Range(0, unlocked.markets.Count)];
-        }
-        return new ProductCombo(pt, i, m);
+        return new ProductCombo(pts);
     }
-
-    // Returns products which matches the aspect combo of another.
-    private List<Product> MatchingProducts(Product p) {
-        return products.Where(x =>
-                x.productType == p.productType &&
-                x.industry    == p.industry &&
-                x.market      == p.market).ToList();
-    }
-
 
 
     // ===============================================

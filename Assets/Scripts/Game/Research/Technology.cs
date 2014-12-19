@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Technology : ScriptableObject, IHasPrereqs {
+public class Technology : Resource<Technology>, IHasPrereqs {
     public string description;
 
     public float requiredResearch = 1000;
@@ -11,6 +11,15 @@ public class Technology : ScriptableObject, IHasPrereqs {
 
     public Vertical requiredVertical;
     public List<Technology> requiredTechnologies;
+
+    public virtual void Awake() {
+        // Default values.
+        requiredTechnologies = new List<Technology>();
+    }
+
+    public static Technology Load(string name) {
+        return Resources.Load("Technologies/" + name) as Technology;
+    }
 
     public bool isAvailable(Company company) {
         // The technology's vertical must be active on the company.

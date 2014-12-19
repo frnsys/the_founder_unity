@@ -11,10 +11,7 @@ public class UIProductEffect : UIBuffEffect {
         foreach (ProductType x in pe.productTypes) {
             targets.Add(x.name);
         }
-        foreach (Industry x in pe.industries) {
-            targets.Add(x.name);
-        }
-        foreach (Market x in pe.markets) {
+        foreach (Vertical x in pe.verticals) {
             targets.Add(x.name);
         }
         string target = string.Join(", ", targets.ToArray());

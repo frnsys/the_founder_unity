@@ -13,7 +13,8 @@ public class UIProducts : UIWindow {
     private Color inactiveColor = new Color(1f,1f,1f,0.75f);
 
     void Update() {
-        ppLabel.text = GameManager.Instance.playerCompany.availableProductPoints.ToString() + "PP available";
+        // TO DO this should show x/y infrastructure available for each infrastructure type.
+        //ppLabel.text = GameManager.Instance.playerCompany.availableProductPoints.ToString() + "PP available";
     }
 
     public void ShowNewProductFlow() {

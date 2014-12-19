@@ -12,14 +12,16 @@ using UnityEngine;
 using System.Collections;
 
 public class UIProductAspect : MonoBehaviour {
-    private ProductAspect aspect_;
-    public ProductAspect aspect {
+    // TO DO replace this eventually
+    private ProductType aspect_;
+    public ProductType aspect {
         get { return aspect_; }
         set {
             aspect_ = value;
             label.text = aspect_.ToString();
             description.text = aspect_.description;
-            points.text = aspect_.points.ToString() + "PP";
+            // TO DO this should be required infrastructure
+            //points.text = aspect_.points.ToString() + "PP";
         }
     }
 

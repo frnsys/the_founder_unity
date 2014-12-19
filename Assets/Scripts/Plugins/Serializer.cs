@@ -55,12 +55,21 @@ public class Serializer {
     // Serialization =================================
     // ===============================================
 
+    // Serialize an object.
     public static Replica Serialize(object obj) {
         Replica replica = new Replica();
         Type type = obj.GetType();
 
-        // Each public field which is not specifically marked "nonserialized".
-        // Each private field which is specifically marked "serialized".
+        // If this object is a resource, we need only serialize its name,
+        // and skip everything else.
+        if (IsResource(type)) {
+            replica.Add("name", type.GetProperty("name").GetValue(obj, null), typeof(string));
+            return replica;
+        }
+
+        // For...
+        // each public field which is not specifically marked "nonserialized".
+        // each private field which is specifically marked "serialized".
         foreach (FieldInfo fi in type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)) {
             // Check if the field is something we're allowed to serialize.
             if (IsSerializable(fi)) {
@@ -69,14 +78,22 @@ public class Serializer {
                 string name = fi.Name;
                 object val = fi.GetValue(obj);
 
-                if (IsSimpleType(ft)) {
+                // If this field references a resource,
+                // we don't want to serialize the entire resource.
+                // Just enough data (name and type) so that we can reload it on deserialization.
+                if (IsResource(ft)) {
+                    ScriptableObject resource = (ScriptableObject)val;
+                    replica.Add(name, resource.name, ft);
+
+                // If it is a simple type, we can just serialize it as-is.
+                } else if (IsSimpleType(ft)) {
                     replica.Add(name, val, ft);
 
                 // Check if it is a property with a generic type.
                 } else if (ft.IsGenericType) {
                     Type g = ft.GetGenericArguments()[0];
 
-                    // If it a simple generic type, just save it.
+                    // If it a simple type, just save it.
                     if (IsSimpleType(g)) {
                         replica.Add(name, val, ft);
 
@@ -94,13 +111,13 @@ public class Serializer {
 
                     }
 
-                // Handle other classes marked for serialization.
+                // Handle other classes (non-simple, non-generic, non-resource) marked for serialization.
                 } else if (ft.IsSerializable && val != null) {
                     replica.Add(name, Serialize(val), ft);
 
                 } else {
                     Debug.Log("This serializable field was not serialized. Maybe you forgot to mark it as [Serializable]?");
-                    Debug.Log(fi.Name + " :: " + fi.FieldType.ToString());
+                    Debug.Log("\t" + fi.Name + " :: " + fi.FieldType.ToString());
                 }
             }
         }
@@ -147,13 +164,26 @@ public class Serializer {
 
     private static object Deserialize(Replica replica, object obj) {
         Type type = obj.GetType();
+
+        // If this object is a resource, we just reload it.
+        if (IsResource(type)) {
+            string resourceName = (string)replica.map["name"];
+            return type.GetMethod("Load").Invoke(null, new object[] { resourceName });
+        }
+
         foreach (FieldInfo fi in type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)) {
             if (IsSerializable(fi) && replica.map.Keys.Contains(fi.Name)) {
                 Type ft = fi.FieldType;
                 string name = fi.Name;
                 object val = replica.map[name];
 
-                if (IsSimpleType(ft)) {
+                // If this field references a resource,
+                // reload it based on the name and type.
+                if (IsResource(ft)) {
+                    string resourceName = (string)val;
+                    fi.SetValue(obj, ft.GetMethod("Load").Invoke(null, new object[] { resourceName }));
+
+                } else if (IsSimpleType(ft)) {
                     fi.SetValue(obj, Convert.ChangeType(val, ft));
 
                 // Check if it is a property with a generic type.
@@ -215,6 +245,10 @@ public class Serializer {
                (fi.GetCustomAttributes(typeof(SerializeField), true).Length > 0 && fi.IsPrivate);
     }
 
+    private static bool IsResource(Type type) {
+        return IsSubclassOfRawGeneric(typeof(Resource<>), type);
+    }
+
     // https://gist.github.com/jonathanconway/3330614
     // https://stackoverflow.com/questions/2442534/how-to-test-if-type-is-primitive
     private static bool IsSimpleType(Type type) {
@@ -230,5 +264,30 @@ public class Serializer {
 				typeof(Guid)
 			}.Contains(type) ||
 			Convert.GetTypeCode(type) != TypeCode.Object;
+    }
+
+    // http://stackoverflow.com/a/457708/1097920
+    static bool IsSubclassOfRawGeneric(Type generic, Type toCheck) {
+        while (toCheck != null && toCheck != typeof(object)) {
+            var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+            if (generic == cur) {
+                return true;
+            }
+            toCheck = toCheck.BaseType;
+        }
+        return false;
+    }
+
+    // NOT USED ATM
+    // Use this custom attribute to tag classes which are serializable, but should be treated as Resources.
+    //[System.AttributeUsage(System.AttributeTargets.Class)]
+    //public class Resource : System.Attribute {}
+}
+
+// Resources are not serialized/deserialized,
+// the resource name is remembered and then they are just reloaded.
+public class Resource<T> : ScriptableObject where T : UnityEngine.Object {
+    public static T Load(string name) {
+        return Resources.Load<T>(name);
     }
 }

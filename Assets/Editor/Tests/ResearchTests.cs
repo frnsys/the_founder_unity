@@ -28,7 +28,6 @@ namespace UnityTest
 
             rm = gm.researchManager;
             tech = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestTechnology.asset", typeof(Technology)) as Technology;
-
             gd.company.research.baseValue = 50;
             gd.company.researchCash = 0;
         }

@@ -39,10 +39,9 @@ internal class TechnologyInspector : Editor {
             }
             EditorGUILayout.EndHorizontal();
         }
-
-        Technology newTechnology = (Technology)EditorGUILayout.ObjectField(null, typeof(Technology));
-        if (newTechnology != null)
-            d.requiredTechnologies.Add(newTechnology);
+        if (GUILayout.Button("Add Required Technology")) {
+            d.requiredTechnologies.Add(null);
+        }
 
         EditorGUILayout.Space();
 

@@ -8,31 +8,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cafa5a17c45495a9e18fca7cdaadae, type: 3}
-  m_Name: TestItem
+  m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
+  m_Name: 3D Printing
   m_EditorClassIdentifier: 
-  cost: 500
-  duration: 0
   description: 
-  store: 0
+  requiredResearch: 1000
   effects:
-    products:
-    - productTypes: []
-      verticals: []
-      buff:
-        name: Appeal
-        value: 10
-        duration: 0
-        type: 0
-    workers:
-    - name: Happiness
-      value: 10
-      duration: 0
-      type: 0
-    - name: Productivity
-      value: 20
-      duration: 0
-      type: 0
+    products: []
+    workers: []
     company: []
     unlocks:
       prereqs:
@@ -43,12 +26,12 @@ MonoBehaviour:
         items: []
         stores: 
         researchPoints: 0
-      productTypes:
-      - {fileID: 0}
+      productTypes: []
       workers: []
       events: []
       items: []
       stores: 
       locations: []
-      verticals:
-      - {fileID: 0}
+      verticals: []
+  requiredVertical: {fileID: 0}
+  requiredTechnologies: []

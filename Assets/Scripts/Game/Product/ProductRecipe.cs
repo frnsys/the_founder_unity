@@ -4,17 +4,16 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
 public class ProductRecipe : ScriptableObject {
-    // Naming convention for these assets is:
-    // ProductType.Industry.Market.asset
+    // Naming convention:
+    // ProductType.ProductType.<etc>.asset
 
-    public ProductType productType;
-    public Industry industry;
-    public Market market;
+    public List<ProductType> productTypes;
 
     // Weights: how important a given feature is to the product's performance.
     public float appeal_W = 1;
@@ -40,17 +39,20 @@ public class ProductRecipe : ScriptableObject {
 
 
     // TO DO use this or maybe it's not being used?
+    // This can eventually become where product bonus effects are kept.
     public List<string> outcomes = new List<string>();
 
     public override string ToString() {
-        return productType.ToString() + "." + industry.ToString() + "." + market.ToString();
+        return string.Join(".", productTypes.Select(pt => pt.name).ToArray());
     }
 
-    public static ProductRecipe Load(ProductType pt, Industry i, Market m) {
-        return Resources.Load("Products/Recipes/" + pt.ToString() + "." + i.ToString() + "." + m.ToString()) as ProductRecipe;
+    public static ProductRecipe Load(List<ProductType> productTypes) {
+        string name = string.Join(".", productTypes.Select(pt => pt.name).ToArray());
+        name = name.Replace("(Clone)", "");
+        return Instantiate(Resources.Load("Products/Recipes/" + name)) as ProductRecipe;
     }
 
     public static ProductRecipe Load() {
-        return Resources.Load("Products/Recipes/Default") as ProductRecipe;
+        return Instantiate(Resources.Load("Products/Recipes/Default")) as ProductRecipe;
     }
 }

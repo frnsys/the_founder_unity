@@ -30,14 +30,11 @@ public class UIEffectAlert : UIAlert {
         // Render the unlock effects for this event.
         // Note that event unlocks are *not* rendered because
         // those are "hidden" effects. You don't know they can happen until they do happen.
-        foreach (Industry i in es.unlocks.industries) {
-            RenderUnlockEffect("the " + i.name + " industry");
-        }
         foreach (ProductType i in es.unlocks.productTypes) {
             RenderUnlockEffect(i.name + " products");
         }
-        foreach (Market i in es.unlocks.markets) {
-            RenderUnlockEffect("the " + i.name + " market");
+        foreach (Vertical i in es.unlocks.verticals) {
+            RenderUnlockEffect("the " + i.name + " vertical");
         }
         foreach (Worker i in es.unlocks.workers) {
             RenderUnlockEffect(i.name);

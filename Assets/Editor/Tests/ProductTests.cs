@@ -3,6 +3,7 @@ using UnityEditor;
 using System;
 using System.Threading;
 using NUnit.Framework;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,14 +19,14 @@ namespace UnityTest
         [SetUp]
         public void SetUp() {
             ProductType pt = ProductType.Load("Social Network");
-            Industry i = Industry.Load("Space");
-            Market m = Market.Load("Millenials");
+
+            List<ProductType> pts = new List<ProductType>() { pt };
 
             p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pt, i, m);
-            pr = ProductRecipe.Load(pt, i, m);
+            p.Init(pts);
+            pr = ProductRecipe.Load(pts);
 
-            item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
+            item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
         }
 
         [TearDown]
@@ -109,7 +110,7 @@ namespace UnityTest
 
         [Test]
         public void Points() {
-            Assert.AreEqual(p.points, p.productType.points + p.industry.points + p.market.points);
+            Assert.AreEqual(p.points, p.productTypes.Sum(t => t.points));
         }
     }
 }

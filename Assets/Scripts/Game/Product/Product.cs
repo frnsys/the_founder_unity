@@ -1,9 +1,10 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Product : HasStats, IHasPrereqs {
+public class Product : HasStats {
     public enum State {
         DEVELOPMENT,
         LAUNCHED,
@@ -29,18 +30,27 @@ public class Product : HasStats, IHasPrereqs {
         get { return _state; }
     }
 
-
-    // Note: we don't have required technologies because a technology is necessary for *unlocking* a product. Technologies don't disappear so it never needs to be checked again after the product is unlocked.
-    public Vertical requiredVertical;
-    public Infrastructures requiredInfrastructures;
-    public bool isAvailable(Company company) {
-        if (!company.verticals.Contains(requiredVertical))
-            return false;
-
-        if (company.infrastructureAlloc < requiredInfrastructures)
-            return false;
-
-        return true;
+    public int points {
+        get { return productTypes.Sum(p => p.points); }
+    }
+    public InfrastructureDict requiredInfrastructure {
+        get {
+            InfrastructureDict infras = new InfrastructureDict();
+            foreach (ProductType pt in productTypes) {
+                if (pt.requiredInfrastructure != null)
+                    infras += pt.requiredInfrastructure;
+            }
+            return infras;
+        }
+    }
+    public List<Vertical> requiredVerticals {
+        get {
+            List<Vertical> verts = new List<Vertical>();
+            foreach (ProductType pt in productTypes) {
+                verts.AddRange(pt.requiredVerticals);
+            }
+            return verts.Distinct().ToList();
+        }
     }
 
     public bool launched { get { return _state == State.LAUNCHED; } }
@@ -48,8 +58,7 @@ public class Product : HasStats, IHasPrereqs {
     public bool retired { get { return _state == State.RETIRED; } }
 
     // All the data about how well
-    // this ProductType/Industry/Market
-    // combination does.
+    // this ProductType combination does.
     [SerializeField]
     private ProductRecipe recipe;
 
@@ -82,16 +91,7 @@ public class Product : HasStats, IHasPrereqs {
     [SerializeField]
     private float end_sd;
 
-    public ProductType productType;
-    public Industry industry;
-    public Market market;
-
-    // The number of product points this product requires.
-    public int points {
-        get {
-            return productType.points + industry.points + market.points;
-        }
-    }
+    public List<ProductType> productTypes;
 
     // Creativity + Charisma
     public Stat appeal;
@@ -102,17 +102,15 @@ public class Product : HasStats, IHasPrereqs {
     // Creativity + Cleverness
     public Stat performance;
 
-    public void Init(ProductType pt, Industry i, Market m) {
+    public void Init(List<ProductType> pts) {
         name = GenerateName();
-        productType = pt;
-        industry = i;
-        market = m;
+        productTypes = pts;
 
         appeal = new Stat("Appeal", 0);
         usability = new Stat("Usability", 0);
         performance = new Stat("Performance", 0);
 
-        recipe = ProductRecipe.Load(pt, i, m);
+        recipe = ProductRecipe.Load(pts);
 
         // Load default if we got nothing.
         if (recipe == null) {
