@@ -193,9 +193,18 @@ public class Company : HasStats {
     }
 
     private bool IsEligibleForEffect(Product p, ProductEffect pe) {
-        // If the product effect is indiscriminate (i.e. doesn't specify any product types), it applies to every product.
-        // Otherwise, a product must contain at least one of the specified effect's product types.
-        return pe.productTypes.Count == 0 || pe.productTypes.Intersect(p.productTypes).Any();
+        // If the product effect is indiscriminate (i.e. doesn't specify any product types or verticals), it applies to every product.
+        // Otherwise, a product must contain at least one of the specified effect's product types or verticals.
+        if (pe.verticals.Count == 0 && pe.productTypes.Count == 0)
+            return true;
+        else if (pe.verticals.Count == 0 && pe.productTypes.Intersect(p.productTypes).Any())
+            return true;
+        else if (pe.productTypes.Count == 0 && pe.verticals.Intersect(p.verticals).Any())
+            return true;
+        else if (pe.productTypes.Intersect(p.productTypes).Any() && pe.verticals.Intersect(p.verticals).Any())
+            return true;
+        else
+            return false;
     }
 
     public void DevelopProducts() {
