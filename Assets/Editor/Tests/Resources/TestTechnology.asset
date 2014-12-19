@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: TestTechnology
   m_EditorClassIdentifier: 
   description: This is a test technology
-  requiredResearch: 1000
+  requiredResearch: 100
   effects:
     products: []
     workers: []
@@ -20,20 +20,18 @@ MonoBehaviour:
     unlocks:
       prereqs:
         productTypes: []
-        industries: []
-        markets: []
+        verticals: []
         workers: []
         events: []
         items: []
         stores: 
         researchPoints: 0
       productTypes: []
-      industries: []
-      markets: []
       workers: []
       events: []
       items: []
       stores: 
-  requiredVertical:
-    cost: 1e+07
+      locations: []
+      verticals: []
+  requiredVertical: {fileID: 11400000, guid: 801736dea036a4cba8e4c03a8d5c7ec0, type: 2}
   requiredTechnologies: []

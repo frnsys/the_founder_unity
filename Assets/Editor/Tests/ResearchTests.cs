@@ -16,6 +16,7 @@ namespace UnityTest
         private GameManager gm;
         private ResearchManager rm;
         private Technology tech;
+        private Vertical vert;
 
         [SetUp]
         public void SetUp() {
@@ -27,7 +28,8 @@ namespace UnityTest
             gm.Load(gd);
 
             rm = gm.researchManager;
-            tech = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestTechnology.asset", typeof(Technology)) as Technology;
+            tech = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestTechnology.asset", typeof(Technology))) as Technology;
+            vert = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestVertical.asset", typeof(Vertical)) as Vertical;
             gd.company.research.baseValue = 50;
             gd.company.researchCash = 0;
         }
@@ -72,6 +74,24 @@ namespace UnityTest
             // Check that progress is properly calculated.
             rm.Research();
             Assert.AreEqual(rm.progress, 0.5);
+        }
+
+        [Test]
+        public void TechnologyAvailableConditions() {
+            // Should be false as the company has no verticals yet.
+            Assert.IsFalse(tech.isAvailable(gd.company));
+
+            gd.company.verticals.Add(vert);
+            Assert.IsTrue(tech.isAvailable(gd.company));
+
+            Technology requiredTech = ScriptableObject.CreateInstance<Technology>();
+            tech.requiredTechnologies.Add(requiredTech);
+
+            // Should be false as the company does not have the required tech.
+            Assert.IsFalse(tech.isAvailable(gd.company));
+
+            gd.company.technologies.Add(requiredTech);
+            Assert.IsTrue(tech.isAvailable(gd.company));
         }
     }
 }

@@ -34,8 +34,8 @@ public class InfrastructureDict : SerializableDictionary<Infrastructure.Type, in
         return repr;
     }
 
-    public bool Equals(InfrastructureDict left, InfrastructureDict right) {
-        foreach(KeyValuePair<Infrastructure.Type, int> item in left) {
+    public bool Equals(InfrastructureDict right) {
+        foreach(KeyValuePair<Infrastructure.Type, int> item in this) {
             if (item.Value != right[item.Key])
                 return false;
         }
