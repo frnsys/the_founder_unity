@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class ManagerWindow<T> : EditorWindow where T : ScriptableObject {
-    protected static List<T> targets;
+    protected List<T> targets = new List<T>();
     protected int selIdx = 0;
     protected string[] targetNames;
     protected SerializedObject serializedObject;
@@ -15,13 +15,10 @@ public abstract class ManagerWindow<T> : EditorWindow where T : ScriptableObject
     protected string typeName = typeof(T).FullName;
     private Vector2 scrollPos = Vector2.zero;
 
-    protected abstract List<T> LoadTargets();
     protected abstract string path { get; }
     protected abstract void DrawInspector();
 
     void OnGUI() {
-        targets = LoadTargets();
-
         EditorGUILayout.Space();
         EditorGUILayout.Space();
         if (GUILayout.Button("Add New " + typeName)) {
@@ -30,6 +27,7 @@ public abstract class ManagerWindow<T> : EditorWindow where T : ScriptableObject
             AssetDatabase.CreateAsset(newTarget, assetPathAndName);
             AssetDatabase.SaveAssets();
             targets.Add(newTarget);
+            selIdx = targets.Count - 1;
         }
         EditorGUILayout.Space();
         EditorGUILayout.Space();

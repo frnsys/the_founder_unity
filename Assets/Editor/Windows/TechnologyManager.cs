@@ -10,14 +10,12 @@ public class TechnologyManager : ManagerWindow<Technology> {
     [MenuItem("The Founder/Technology Manager")]
     static void Init() {
         TechnologyManager window = EditorWindow.CreateInstance<TechnologyManager>();
+        window.targets = Technology.LoadAll();
         window.Show();
     }
 
     protected override string path {
         get { return "Assets/Resources/Technologies"; }
-    }
-    protected override List<Technology> LoadTargets() {
-        return Technology.LoadAll();
     }
 
     protected override void DrawInspector() {
@@ -37,7 +35,7 @@ public class TechnologyManager : ManagerWindow<Technology> {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("requiredVertical"), GUIContent.none);
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("Required targets");
+        EditorGUILayout.LabelField("Required Technologies");
         for (int i=0; i < target.requiredTechnologies.Count; i++) {
             EditorGUILayout.BeginHorizontal();
             target.requiredTechnologies[i] = (Technology)EditorGUILayout.ObjectField(target.requiredTechnologies[i], typeof(Technology));

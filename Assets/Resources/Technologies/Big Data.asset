@@ -8,21 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Social Network
+  m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
+  m_Name: Big Data
   m_EditorClassIdentifier: 
-  productTypes:
-  - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-  appeal_W: 1
-  usability_W: 1
-  performance_W: 1
-  appeal_I: 100
-  usability_I: 100
-  performance_I: 100
-  progressRequired: 100000
-  maxLongevity: 1000
-  maxRevenue: 1000
-  maintenance: 1000
+  description: We have a ton of information to process now! We should try to make
+    sense of it - We may find some valuable insights.
+  requiredResearch: 1000
   effects:
     products: []
     workers: []
@@ -43,3 +34,6 @@ MonoBehaviour:
       stores: 
       locations: []
       verticals: []
+  requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+  requiredTechnologies:
+  - {fileID: 11400000, guid: 393b9abda4e6e42f7a9f3bd48644f65e, type: 2}

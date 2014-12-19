@@ -10,14 +10,12 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
     [MenuItem("The Founder/Product Recipe Manager")]
     static void Init() {
         ProductRecipeManager window = EditorWindow.CreateInstance<ProductRecipeManager>();
+        window.targets = ProductRecipe.LoadAll();
         window.Show();
     }
 
     protected override string path {
         get { return "Assets/Resources/Products/Recipes"; }
-    }
-    protected override List<ProductRecipe> LoadTargets() {
-        return ProductRecipe.LoadAll();
     }
 
     List<ProductType> productTypes;

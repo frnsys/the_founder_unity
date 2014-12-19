@@ -10,14 +10,12 @@ public class ProductTypeManager : ManagerWindow<ProductType> {
     [MenuItem("The Founder/Product Type Manager")]
     static void Init() {
         ProductTypeManager window = EditorWindow.CreateInstance<ProductTypeManager>();
+        window.targets = ProductType.LoadAll();
         window.Show();
     }
 
     protected override string path {
         get { return "Assets/Resources/Products/Types"; }
-    }
-    protected override List<ProductType> LoadTargets() {
-        return ProductType.LoadAll();
     }
 
     protected override void DrawInspector() {

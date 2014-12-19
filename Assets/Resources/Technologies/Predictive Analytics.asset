@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
   m_Name: Predictive Analytics
   m_EditorClassIdentifier: 
-  description: 
+  description: With so much big data and sophisticated machine learning algorithms,
+    we can start to predict emergent phenomena some time in advance to their actual
+    occurence.
   requiredResearch: 1000
   effects:
     products: []
@@ -33,5 +35,5 @@ MonoBehaviour:
       stores: 
       locations: []
       verticals: []
-  requiredVertical: {fileID: 0}
+  requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredTechnologies: []
