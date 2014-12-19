@@ -21,6 +21,10 @@ public class Technology : Resource<Technology>, IHasPrereqs {
         return Resources.Load("Technologies/" + name) as Technology;
     }
 
+    public static List<Technology> LoadAll() {
+        return new List<Technology>(Resources.LoadAll<Technology>("Technologies"));
+    }
+
     public bool isAvailable(Company company) {
         // The technology's vertical must be active on the company.
         if (!company.verticals.Contains(requiredVertical))

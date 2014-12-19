@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEditor;
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(ProductType))]
 internal class ProductTypeInspector : Editor {

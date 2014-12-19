@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
-  m_Name: 3D Printing
+  m_Name: Predictive Analytics
   m_EditorClassIdentifier: 
   description: 
   requiredResearch: 1000
@@ -33,5 +33,5 @@ MonoBehaviour:
       stores: 
       locations: []
       verticals: []
-  requiredVertical: {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+  requiredVertical: {fileID: 0}
   requiredTechnologies: []

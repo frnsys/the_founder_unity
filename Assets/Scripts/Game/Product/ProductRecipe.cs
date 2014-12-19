@@ -57,4 +57,8 @@ public class ProductRecipe : Resource<ProductRecipe> {
     public static ProductRecipe LoadDefault() {
         return Load("Default");
     }
+
+    public static List<ProductRecipe> LoadAll() {
+        return new List<ProductRecipe>(Resources.LoadAll<ProductRecipe>("Products/Recipes"));
+    }
 }
