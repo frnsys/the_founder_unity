@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: TestProductType
   m_EditorClassIdentifier: 
   description: 
-  requiredVerticals: []
+  requiredVerticals:
+  - {fileID: 11400000, guid: 801736dea036a4cba8e4c03a8d5c7ec0, type: 2}
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
     values: 02000000010000000000000000000000

@@ -199,9 +199,9 @@ public class Company : HasStats {
             return true;
         else if (pe.verticals.Count == 0 && pe.productTypes.Intersect(p.productTypes).Any())
             return true;
-        else if (pe.productTypes.Count == 0 && pe.verticals.Intersect(p.verticals).Any())
+        else if (pe.productTypes.Count == 0 && pe.verticals.Intersect(p.requiredVerticals).Any())
             return true;
-        else if (pe.productTypes.Intersect(p.productTypes).Any() && pe.verticals.Intersect(p.verticals).Any())
+        else if (pe.productTypes.Intersect(p.productTypes).Any() && pe.verticals.Intersect(p.requiredVerticals).Any())
             return true;
         else
             return false;
