@@ -24,7 +24,7 @@ namespace UnityTest
 
             p = ScriptableObject.CreateInstance<Product>();
             p.Init(pts);
-            pr = ProductRecipe.Load(pts);
+            pr = ProductRecipe.LoadFromTypes(pts);
 
             item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
         }

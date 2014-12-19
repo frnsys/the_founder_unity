@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class ProductRecipe : ScriptableObject {
+public class ProductRecipe : Resource<ProductRecipe> {
     // Naming convention:
     // ProductType.ProductType.<etc>.asset
 
@@ -46,13 +46,17 @@ public class ProductRecipe : ScriptableObject {
         return string.Join(".", productTypes.Select(pt => pt.name).ToArray());
     }
 
-    public static ProductRecipe Load(List<ProductType> productTypes) {
-        string name = string.Join(".", productTypes.Select(pt => pt.name).ToArray());
-        name = name.Replace("(Clone)", "");
-        return Instantiate(Resources.Load("Products/Recipes/" + name)) as ProductRecipe;
+    public static ProductRecipe Load(string name) {
+        return Resources.Load("Products/Recipes/" + name) as ProductRecipe;
     }
 
-    public static ProductRecipe Load() {
-        return Instantiate(Resources.Load("Products/Recipes/Default")) as ProductRecipe;
+    public static ProductRecipe LoadFromTypes(List<ProductType> productTypes) {
+        string name = string.Join(".", productTypes.Select(pt => pt.name).ToArray());
+        name = name.Replace("(Clone)", "");
+        return Load(name);
+    }
+
+    public static ProductRecipe LoadDefault() {
+        return Load("Default");
     }
 }

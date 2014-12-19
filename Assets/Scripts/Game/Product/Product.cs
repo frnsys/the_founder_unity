@@ -110,11 +110,11 @@ public class Product : HasStats {
         usability = new Stat("Usability", 0);
         performance = new Stat("Performance", 0);
 
-        recipe = ProductRecipe.Load(pts);
+        recipe = ProductRecipe.LoadFromTypes(pts);
 
         // Load default if we got nothing.
         if (recipe == null) {
-            recipe = ProductRecipe.Load();
+            recipe = ProductRecipe.LoadDefault();
         }
     }
 
