@@ -25,6 +25,8 @@ internal class ProductRecipeInspector : Editor {
     }
 
     public override void OnInspectorGUI() {
+        serializedObject.Update();
+
         EditorGUILayout.LabelField("ProductTypes");
         EditorGUI.indentLevel = 1;
         for (int i=0; i < p.productTypes.Count; i++) {
@@ -63,24 +65,8 @@ internal class ProductRecipeInspector : Editor {
         p.maintenance = EditorGUILayout.FloatField("Maintenance Cost", p.maintenance);
         EditorGUILayout.Space();
 
-
-        // Outcome management.
-        EditorGUILayout.LabelField("Outcomes");
-        EditorGUI.indentLevel = 1;
-        for (int i=0; i < p.outcomes.Count; i++) {
-            EditorGUILayout.BeginHorizontal();
-            p.outcomes[i] = EditorGUILayout.TextField(p.outcomes[i]);
-            if (GUILayout.Button("Delete")) {
-                p.outcomes.Remove(p.outcomes[i]);
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        if (GUILayout.Button("Add New Outcome")) {
-            p.outcomes.Add("New outcome");
-        }
-        EditorGUI.indentLevel = 0;
-
+        EditorGUILayout.LabelField("Effects");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"), GUIContent.none);
 
         // Let Unity know to save on changes.
         if (GUI.changed) {
@@ -93,6 +79,7 @@ internal class ProductRecipeInspector : Editor {
                 AssetDatabase.RenameAsset(path, p.ToString());
                 AssetDatabase.Refresh();
             }
+            serializedObject.ApplyModifiedProperties();
         }
     }
 

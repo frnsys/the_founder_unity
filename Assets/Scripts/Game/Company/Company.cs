@@ -248,6 +248,8 @@ public class Company : HasStats {
         bool completed = product.Develop(progress, charisma, creativity, cleverness);
         if (completed) {
             ProductsReleased.Add(product);
+
+            // The product's effects are applied by the GameManager.
         }
     }
 
@@ -260,6 +262,20 @@ public class Company : HasStats {
             }
         }
         product.Shutdown();
+    }
+
+    public void ApplyEffectSet(EffectSet es) {
+        ApplyBuffs(es.company);
+
+        // TO DO this needs to apply bonuses to new workers as well.
+        foreach (Worker worker in workers) {
+            worker.ApplyBuffs(es.workers);
+        }
+
+        // TO DO this needs to apply bonuses to new products as well.
+        foreach (ProductEffect pe in es.products) {
+            ApplyProductEffect(pe);
+        }
     }
 
     public void ApplyProductEffect(ProductEffect effect) {

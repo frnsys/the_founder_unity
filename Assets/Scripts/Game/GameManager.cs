@@ -62,10 +62,14 @@ public class GameManager : Singleton<GameManager> {
 
     void OnEnable() {
         GameEvent.EventTriggered += OnEvent;
+        ResearchManager.Completed += OnResearchCompleted;
+        Product.Completed += OnProductCompleted;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
+        ResearchManager.Completed -= OnResearchCompleted;
+        Product.Completed -= OnProductCompleted;
     }
 
     void Start() {
@@ -95,23 +99,14 @@ public class GameManager : Singleton<GameManager> {
         ApplyEffectSet(t.effects);
     }
 
-    public void ApplyEffectSet(EffectSet es) {
-        playerCompany.ApplyBuffs(es.company);
-
-        // TO DO this needs to apply bonuses to new workers as well.
-        foreach (Worker worker in playerCompany.workers) {
-            worker.ApplyBuffs(es.workers);
-        }
-
-        // TO DO this needs to apply bonuses to new products as well.
-        foreach (ProductEffect pe in es.products) {
-            playerCompany.ApplyProductEffect(pe);
-        }
-
-        data.unlocked.Unlock(es.unlocks);
+    void OnProductCompleted(Product p) {
+        ApplyEffectSet(p.effects);
     }
 
-
+    public void ApplyEffectSet(EffectSet es) {
+        playerCompany.ApplyEffectSet(es);
+        data.unlocked.Unlock(es.unlocks);
+    }
 
     // ===============================================
     // Time ==========================================

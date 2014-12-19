@@ -30,6 +30,7 @@ public class Product : HasStats {
         get { return _state; }
     }
 
+    // Infrastructure, in points, used by the product.
     public int points {
         get { return productTypes.Sum(p => p.points); }
     }
@@ -51,6 +52,9 @@ public class Product : HasStats {
             }
             return verts.Distinct().ToList();
         }
+    }
+    public EffectSet effects {
+        get { return recipe.effects; }
     }
 
     public bool launched { get { return _state == State.LAUNCHED; } }

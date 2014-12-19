@@ -37,10 +37,8 @@ public class ProductRecipe : Resource<ProductRecipe> {
     // The cost of this product's maintenance.
     public float maintenance = 1000;
 
-
-    // TO DO use this or maybe it's not being used?
-    // This can eventually become where product bonus effects are kept.
-    public List<string> outcomes = new List<string>();
+    // Bonus effects.
+    public EffectSet effects = new EffectSet();
 
     public override string ToString() {
         return string.Join(".", productTypes.Select(pt => pt.name).ToArray());
