@@ -7,6 +7,7 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,6 +16,7 @@ public class UINewProductFlow : MonoBehaviour {
 
     public GameObject productTypePrefab;
     public GameObject selectedProductTypePrefab;
+    public List<GameObject> productTypeItems;
     public UIGrid selectedGrid;
     public UISimpleGrid grid;
     public UIButton confirmSelectionButton;
@@ -29,10 +31,9 @@ public class UINewProductFlow : MonoBehaviour {
         gm = GameManager.Instance;
         featurePoints = GameManager.Instance.playerCompany.featurePoints;
 
-        LoadProductTypes();
-
         if (productTypes == null) {
             productTypes = new List<ProductType>();
+            productTypeItems = new List<GameObject>();
         }
 
         if (productTypes.Count == 0) {
@@ -40,14 +41,23 @@ public class UINewProductFlow : MonoBehaviour {
         } else {
             confirmSelectionButton.isEnabled = true;
         }
+
+        LoadProductTypes();
+
     }
 
     private void LoadProductTypes() {
         grid.Clear();
+        productTypeItems.Clear();
         foreach (ProductType pt in gm.unlocked.productTypes) {
             GameObject productType = NGUITools.AddChild(grid.gameObject, productTypePrefab);
             UIEventListener.Get(productType).onClick += SelectProductType;
             productType.GetComponent<UIProductType>().productType = pt;
+            productTypeItems.Add(productType);
+
+            bool capacity = HasCapacityFor(pt);
+            productType.GetComponent<UIButton>().isEnabled = capacity;
+            productType.transform.Find("Overlay").gameObject.SetActive(!capacity);
         }
         grid.Reposition();
     }
@@ -66,11 +76,34 @@ public class UINewProductFlow : MonoBehaviour {
 
                 if (productTypes.Count == 0)
                     confirmSelectionButton.isEnabled = false;
+
+                UpdateProductTypeItems();
             };
 
             productTypes.Add(pt);
             selectedGrid.Reposition();
+            UpdateProductTypeItems();
         }
+    }
+
+    private void UpdateProductTypeItems() {
+        foreach (GameObject item in productTypeItems) {
+            ProductType pt = item.GetComponent<UIProductType>().productType;
+
+            bool capacity = HasCapacityFor(pt);
+            item.GetComponent<UIButton>().isEnabled = capacity;
+            item.transform.Find("Overlay").gameObject.SetActive(!capacity);
+        }
+    }
+
+    private bool HasCapacityFor(ProductType pt) {
+        Infrastructure selectionInf = new Infrastructure();
+        if (productTypes.Count > 0) {
+            IEnumerable<Infrastructure> selectionInfs = productTypes.Select(x => x.requiredInfrastructure);
+            if (selectionInfs.Count() > 0)
+                selectionInf += selectionInfs.Aggregate((x, y) => x + y);
+        }
+        return (gm.playerCompany.availableInfrastructure - selectionInf) > pt.requiredInfrastructure;
     }
 
     public void ConfirmSelection() {

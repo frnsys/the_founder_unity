@@ -7,14 +7,27 @@ public class UIProducts : UIWindow {
     public GameObject manageProducts;
     public UIButton newProductButton;
     public UIButton manageProductsButton;
-    public UILabel ppLabel;
+    public UILabel infrastructureLabel;
+
+    private Company playerCompany;
 
     private Color activeColor = new Color(1f,1f,1f,1f);
     private Color inactiveColor = new Color(1f,1f,1f,0.75f);
 
+    void Awake() {
+        playerCompany = GameManager.Instance.playerCompany;
+    }
+
     void Update() {
-        // TO DO this should show x/y infrastructure available for each infrastructure type.
-        //ppLabel.text = GameManager.Instance.playerCompany.availableProductPoints.ToString() + "PP available";
+        Infrastructure infra = playerCompany.infrastructure;
+        Infrastructure used = playerCompany.usedInfrastructure;
+
+        // Update the status of used vs usedable infrastructure.
+        string infStatus = "Used Infrastructure => ";
+        foreach (Infrastructure.Type t in Infrastructure.Types) {
+            infStatus += t.ToString() + ": " + used[t].ToString() + "/" + infra[t].ToString() + " ";
+        }
+        infrastructureLabel.text = infStatus;
     }
 
     public void ShowNewProductFlow() {

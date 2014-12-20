@@ -14,10 +14,12 @@ public class UIManageInfrastructure : MonoBehaviour {
         grid = gameObject.GetComponent<UICenteredGrid>();
         playerCompany = GameManager.Instance.playerCompany;
 
+        // Create an item for each infrastructure type.
         foreach (Infrastructure.Type t in Infrastructure.Types) {
             GameObject item = NGUITools.AddChild(gameObject, infrastructureItemPrefab);
             item.transform.Find("Label").GetComponent<UILabel>().text = t.ToString();
 
+            // Setup button actions.
             Infrastructure.Type lT = t;
             UIEventListener.VoidDelegate buyInf = delegate(GameObject obj) {
                 Infrastructure inf = Infrastructure.ForType(lT);
@@ -32,6 +34,7 @@ public class UIManageInfrastructure : MonoBehaviour {
                 UpdateButtons();
             };
 
+            // Bind actions to buttons.
             GameObject buyButton = item.transform.Find("Buy Button").gameObject;
             UIEventListener.Get(buyButton).onClick += buyInf;
 
@@ -49,11 +52,11 @@ public class UIManageInfrastructure : MonoBehaviour {
         Infrastructure capacity = playerCompany.infrastructureCapacity;
         Infrastructure infra    = playerCompany.infrastructure;
 
+        // Update the amount of infrastructure against the total capacity.
         for (int i=0; i<gridItems.Count; i++) {
             GameObject item = gridItems[i];
             Infrastructure.Type t = Infrastructure.Types[i];
             item.transform.Find("Used and Capacity").GetComponent<UILabel>().text = infra[t].ToString() + "/" +  capacity[t].ToString();
-
         }
     }
 
@@ -61,6 +64,7 @@ public class UIManageInfrastructure : MonoBehaviour {
         Infrastructure capacity = playerCompany.infrastructureCapacity;
         Infrastructure infra    = playerCompany.infrastructure;
 
+        // Update the buy/destroy buttons for infrastructure (disable/enable them).
         for (int i=0; i<gridItems.Count; i++) {
             GameObject item = gridItems[i];
             Infrastructure.Type t = Infrastructure.Types[i];
