@@ -2,7 +2,7 @@
  * New Product Flow
  * ================
  *
- * Selecting a Product Type, Industry, and Market
+ * Select one or more Product Types
  * to start development of a new product.
  */
 
@@ -15,9 +15,6 @@ public class UINewProductFlow : UIFullScreenPager {
 
     private enum Stage {
         PRODUCTTYPE,
-        INDUSTRY,
-        MARKET,
-        CONFIRM,
         POINTS
     }
     // Begin on Product Type selection.
@@ -34,9 +31,7 @@ public class UINewProductFlow : UIFullScreenPager {
     public GameObject productAspectPrefab;
 
     // Keep track of the selected product aspects.
-    private ProductType productType;
-    private Industry industry;
-    private Market market;
+    private List<ProductType> productTypes;
 
     // The available feature points.
     private FeaturePoints featurePoints;
@@ -44,14 +39,10 @@ public class UINewProductFlow : UIFullScreenPager {
     // These labels are used to display
     // the user's current selections.
     public UILabel productTypeLabel;
-    public UILabel industryLabel;
-    public UILabel marketLabel;
 
     // These display the user's selections
     // on the final confirmation screen.
     public UILabel finalProductTypeLabel;
-    public UILabel finalIndustryLabel;
-    public UILabel finalMarketLabel;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -80,57 +71,6 @@ public class UINewProductFlow : UIFullScreenPager {
     public void Select() {
         switch (stage) {
             case Stage.PRODUCTTYPE:
-                stage = Stage.INDUSTRY;
-                aspectLabel.text = "INDUSTRY";
-                background.color = new Color(1f,1f,1f,1f);
-
-                productType = gridCenter.centeredObject.GetComponent<UIProductAspect>().aspect as ProductType;
-                productTypeLabel.text = productType.ToString();
-                productTypeLabel.gameObject.SetActive(true);
-
-                LoadIndustries();
-                break;
-
-            case Stage.INDUSTRY:
-                stage = Stage.MARKET;
-                aspectLabel.text = "MARKET";
-                background.color = new Color(1f,0.69f,1f,1f);
-
-                industry = gridCenter.centeredObject.GetComponent<UIProductAspect>().aspect as Industry;
-                industryLabel.text = industry.ToString();
-                industryLabel.gameObject.SetActive(true);
-
-                LoadMarkets();
-                break;
-
-            case Stage.MARKET:
-                stage = Stage.CONFIRM;
-                background.color = new Color(0.2f,0.69f,0.7f,1f);
-
-                // Hide the aspect label.
-                aspectLabel.gameObject.SetActive(false);
-
-                market = gridCenter.centeredObject.GetComponent<UIProductAspect>().aspect as Market;
-                marketLabel.text = market.ToString();
-                marketLabel.gameObject.SetActive(true);
-
-                scrollView.gameObject.SetActive(false);
-                completedScreen.gameObject.SetActive(true);
-                finalProductTypeLabel.text = productType.ToString();
-                finalIndustryLabel.text = industry.ToString();
-                finalMarketLabel.text = market.ToString();
-
-                int totalPoints = productType.points + industry.points + market.points;
-                int diffPoints = totalPoints - GameManager.Instance.playerCompany.availableProductPoints;
-                if (diffPoints <= 0) {
-                    selectLabel.text = "OK";
-                } else {
-                    selectButton.isEnabled = false;
-                    selectLabel.text = "You need " + diffPoints.ToString() + " more product points.";
-                }
-                break;
-
-            case Stage.CONFIRM:
                 stage = Stage.POINTS;
                 UpdateFeaturePoints();
 
@@ -141,7 +81,7 @@ public class UINewProductFlow : UIFullScreenPager {
                 break;
 
             case Stage.POINTS:
-                gm.playerCompany.StartNewProduct(productType, industry, market);
+                gm.playerCompany.StartNewProduct(productTypes);
 
                 UIManager.Instance.ClosePopup();
                 break;
@@ -161,25 +101,6 @@ public class UINewProductFlow : UIFullScreenPager {
         }
         Adjust();
     }
-
-    private void LoadIndustries() {
-        ClearGrid();
-        foreach (Industry a in gm.unlocked.industries) {
-            GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
-            productAspect.GetComponent<UIProductAspect>().aspect = a;
-        }
-        Adjust();
-    }
-
-    private void LoadMarkets() {
-        ClearGrid();
-        foreach (Market a in gm.unlocked.markets) {
-            GameObject productAspect = NGUITools.AddChild(grid.gameObject, productAspectPrefab);
-            productAspect.GetComponent<UIProductAspect>().aspect = a;
-        }
-        Adjust();
-    }
-
 
     // ===============================================
     // Point Allocation ==============================

@@ -58,9 +58,9 @@ public class UIManager : Singleton<UIManager> {
     }
 
     // Show a "research completed" alert.
-    void OnResearchCompleted(Discovery d) {
+    void OnResearchCompleted(Technology t) {
         GameObject popup = NGUITools.AddChild(alertsPanel, researchCompletedAlertPrefab);
-        popup.GetComponent<UIResearchCompletedAlert>().discovery = d;
+        popup.GetComponent<UIResearchCompletedAlert>().technology = t;
     }
 
     // Show a "product completed" alert.

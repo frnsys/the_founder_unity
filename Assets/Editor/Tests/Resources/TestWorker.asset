@@ -11,15 +11,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: TestWorker
   m_EditorClassIdentifier: 
-  type: 0
+  tier: 0
+  texture: {fileID: 0}
   salary: 10
+  bio: 
   happiness:
     baseValue: 10
+    _buffs: []
   productivity:
     baseValue: 10
+    _buffs: []
   charisma:
     baseValue: 10
+    _buffs: []
   creativity:
     baseValue: 10
+    _buffs: []
   cleverness:
     baseValue: 10
+    _buffs: []

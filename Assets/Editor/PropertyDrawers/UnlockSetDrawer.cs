@@ -9,14 +9,13 @@ class UnlockSetDrawer : SuperPropertyDrawer {
 
     // The names of the list properties.
     private string[] listPropertyNames = new string[] {
-        "industries",
-        "markets",
         "productTypes",
+        "verticals",
         "workers",
         "events",
         "items",
         "stores",
-        "consultancies"
+        "locations"
     };
 
     public override Rect Edit(Rect position, SerializedProperty property) {

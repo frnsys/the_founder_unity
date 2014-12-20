@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -29,13 +30,39 @@ public class Product : HasStats {
         get { return _state; }
     }
 
+    // Infrastructure, in points, used by the product.
+    public int points {
+        get { return productTypes.Sum(p => p.points); }
+    }
+    public InfrastructureDict requiredInfrastructure {
+        get {
+            InfrastructureDict infras = new InfrastructureDict();
+            foreach (ProductType pt in productTypes) {
+                if (pt.requiredInfrastructure != null)
+                    infras += pt.requiredInfrastructure;
+            }
+            return infras;
+        }
+    }
+    public List<Vertical> requiredVerticals {
+        get {
+            List<Vertical> verts = new List<Vertical>();
+            foreach (ProductType pt in productTypes) {
+                verts.AddRange(pt.requiredVerticals);
+            }
+            return verts.Distinct().ToList();
+        }
+    }
+    public EffectSet effects {
+        get { return recipe.effects; }
+    }
+
     public bool launched { get { return _state == State.LAUNCHED; } }
     public bool developing { get { return _state == State.DEVELOPMENT; } }
     public bool retired { get { return _state == State.RETIRED; } }
 
     // All the data about how well
-    // this ProductType/Industry/Market
-    // combination does.
+    // this ProductType combination does.
     [SerializeField]
     private ProductRecipe recipe;
 
@@ -68,16 +95,7 @@ public class Product : HasStats {
     [SerializeField]
     private float end_sd;
 
-    public ProductType productType;
-    public Industry industry;
-    public Market market;
-
-    // The number of product points this product requires.
-    public int points {
-        get {
-            return productType.points + industry.points + market.points;
-        }
-    }
+    public List<ProductType> productTypes;
 
     // Creativity + Charisma
     public Stat appeal;
@@ -88,21 +106,19 @@ public class Product : HasStats {
     // Creativity + Cleverness
     public Stat performance;
 
-    public void Init(ProductType pt, Industry i, Market m) {
+    public void Init(List<ProductType> pts) {
         name = GenerateName();
-        productType = pt;
-        industry = i;
-        market = m;
+        productTypes = pts;
 
         appeal = new Stat("Appeal", 0);
         usability = new Stat("Usability", 0);
         performance = new Stat("Performance", 0);
 
-        recipe = ProductRecipe.Load(pt, i, m);
+        recipe = ProductRecipe.LoadFromTypes(pts);
 
         // Load default if we got nothing.
         if (recipe == null) {
-            recipe = ProductRecipe.Load();
+            recipe = ProductRecipe.LoadDefault();
         }
     }
 

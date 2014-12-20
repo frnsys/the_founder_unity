@@ -18,9 +18,7 @@ namespace UnityTest
         private Worker worker;
         private Item item;
 
-        private ProductType pt = new ProductType();
-        private Industry i = new Industry();
-        private Market m = new Market();
+        private List<ProductType> pts;
 
         [SetUp]
         public void SetUp() {
@@ -28,12 +26,15 @@ namespace UnityTest
             gameManager = gameObj.AddComponent<GameManager>();
 
             c = new Company("Foo Inc");
-            c.productPoints = 10;
+
+            pts = new List<ProductType>() {
+                ProductType.Load("Social Network")
+            };
 
             worker = ScriptableObject.CreateInstance<Worker>();
             worker.Init("Franklin");
 
-            item = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)) as Item;
+            item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
         }
 
         [TearDown]
@@ -57,13 +58,13 @@ namespace UnityTest
 		public void ManageWorkers() {
             Assert.AreEqual(c.workers.Count, 0);
 
-            c.sizeLimit = 0;
+            c.baseSizeLimit = 0;
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
 
             c.cash.baseValue = 2000;
             c.BuyItem(item);
-            c.sizeLimit = 10;
+            c.baseSizeLimit = 10;
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 1);
             Assert.AreEqual(c.workers[0].happiness.value, 10);
@@ -74,12 +75,23 @@ namespace UnityTest
 
 		[Test]
 		public void PayMonthly() {
+            Infrastructure inf = ScriptableObject.CreateInstance<Infrastructure>();
+            inf.cost = 200;
+            c.infrastructure.Add(inf);
+
+            Location loc = ScriptableObject.CreateInstance<Location>();
+            loc.rent = 100;
+            c.locations.Add(loc);
+
             worker.salary = 500;
             c.cash.baseValue = 2000;
+
+            float paid = worker.salary + c.researchCash + inf.cost + loc.rent;
+
             c.HireWorker(worker);
 
             c.PayMonthly();
-            Assert.AreEqual(c.cash.baseValue, 1500);
+            Assert.AreEqual(c.cash.baseValue, 2000 - paid);
         }
 
 
@@ -93,9 +105,18 @@ namespace UnityTest
             c.cash.baseValue = 2000;
             c.BuyItem(item);
 
-            c.StartNewProduct(pt, i, m);
+            Infrastructure i = ScriptableObject.CreateInstance<Infrastructure>();
+            i.type = Infrastructure.Type.Datacenter;
+
+            Infrastructure i_ = ScriptableObject.CreateInstance<Infrastructure>();
+            i_.type = Infrastructure.Type.Factory;
+
+            c.infrastructure = new List<Infrastructure>() { i, i_ };
+
+            c.StartNewProduct(pts);
             Assert.AreEqual(c.developingProducts[0], c.products[0]);
-            Assert.AreEqual(c.availableProductPoints, c.productPoints - (pt.points + i.points + m.points));
+
+            Assert.AreEqual(c.availableInfrastructure, c.allInfrastructure - pts[0].requiredInfrastructure);
 
             // Creating a new product should apply existing items.
             Assert.AreEqual(c.products.Count, 1);
@@ -112,7 +133,7 @@ namespace UnityTest
             worker.cleverness.baseValue = 10;
 
             Product p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pt, i, m);
+            p.Init(pts);
             c.DevelopProduct(p);
 
             Assert.IsTrue(p.progress > 0);
@@ -131,7 +152,7 @@ namespace UnityTest
             worker.creativity.baseValue = 100;
             worker.cleverness.baseValue = 100;
 
-            c.StartNewProduct(pt, i, m);
+            c.StartNewProduct(pts);
             Product p = c.products[0];
             c.DevelopProduct(p);
 
@@ -148,7 +169,7 @@ namespace UnityTest
             c.cash.baseValue = 2000;
             c.BuyItem(item);
 
-            c.StartNewProduct(pt, i, m);
+            c.StartNewProduct(pts);
             Product p = c.products[0];
             Assert.AreEqual(p.appeal.value, 10);
 
@@ -156,7 +177,7 @@ namespace UnityTest
 
             Assert.AreEqual(p.state, Product.State.RETIRED);
             Assert.AreEqual(p.appeal.value, 0);
-            Assert.AreEqual(c.availableProductPoints, c.productPoints);
+            Assert.AreEqual(c.availableInfrastructure, c.allInfrastructure);
         }
 
 
@@ -168,7 +189,7 @@ namespace UnityTest
 		[Test]
 		public void BuyItem_CanAfford() {
             c.cash.baseValue = 2000;
-            c.StartNewProduct(pt, i, m);
+            c.StartNewProduct(pts);
             Product p = c.products[0];
             c.HireWorker(worker);
 
@@ -195,7 +216,7 @@ namespace UnityTest
         [Test]
         public void RemoveItem() {
             c.cash.baseValue = 2000;
-            c.StartNewProduct(pt, i, m);
+            c.StartNewProduct(pts);
             Product p = c.products[0];
             c.HireWorker(worker);
 

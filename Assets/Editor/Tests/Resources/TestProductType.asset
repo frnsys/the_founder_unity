@@ -8,8 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa9f682a6db4432492982f944f7506a, type: 3}
+  m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
   m_Name: TestProductType
   m_EditorClassIdentifier: 
-  points: 0
-  description: This is a test product type
+  description: 
+  requiredVerticals:
+  - {fileID: 11400000, guid: 801736dea036a4cba8e4c03a8d5c7ec0, type: 2}
+  requiredInfrastructure:
+    keys: 00000000010000000200000003000000
+    values: 02000000010000000000000000000000

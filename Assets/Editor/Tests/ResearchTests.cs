@@ -12,19 +12,26 @@ namespace UnityTest
     internal class ResearchTests
     {
         private GameObject gameObj;
+        private GameData gd;
         private GameManager gm;
         private ResearchManager rm;
-        private Discovery disc;
+        private Technology tech;
+        private Vertical vert;
 
         [SetUp]
         public void SetUp() {
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
             gm.researchManager = gameObj.AddComponent<ResearchManager>();
-            gm.Load(GameData.New("DEFAULTCORP"));
+
+            gd = GameData.New("DEFAULTCORP");
+            gm.Load(gd);
 
             rm = gm.researchManager;
-            disc = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestDiscovery.asset", typeof(Discovery)) as Discovery;
+            tech = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestTechnology.asset", typeof(Technology))) as Technology;
+            vert = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestVertical.asset", typeof(Vertical)) as Vertical;
+            gd.company.research.baseValue = 50;
+            gd.company.researchCash = 0;
         }
 
         [TearDown]
@@ -34,65 +41,57 @@ namespace UnityTest
         }
 
         [Test]
-        public void HireConsultancy() {
-            Consultancy con = new Consultancy();
-
-            gm.playerCompany.cash.baseValue = 2000;
-            gm.researchManager.HireConsultancy(con);
-
-            Assert.AreEqual(gm.playerCompany.cash.baseValue, 2000 - con.cost);
-            Assert.AreEqual(gm.playerCompany.consultancy, con);
-            Assert.AreEqual(gm.researchManager.consultancy, con);
-        }
-
-        [Test]
         public void Research() {
             Assert.IsFalse(rm.researching);
 
-            rm.BeginResearch(disc);
+            rm.BeginResearch(tech);
 
             Assert.IsTrue(rm.researching);
-            Assert.AreEqual(rm.discovery, disc);
+            Assert.AreEqual(rm.technology, tech);
             Assert.AreEqual(rm.progress, 0);
-            Assert.IsTrue(rm.research == new Research(0,0,0));
-
-            Consultancy con = new Consultancy();
-            rm.HireConsultancy(con);
-            con.research = new Research(50,50,50);
+            Assert.IsTrue(rm.research == 0);
 
             rm.Research();
 
             Assert.AreEqual(rm.progress, 0.5);
-            Assert.IsTrue(rm.research == new Research(50,50,50));
+            Assert.IsTrue(rm.research == 50);
 
             rm.Research();
 
             // Research should be completed now.
             Assert.IsFalse(rm.researching);
-            Assert.AreEqual(rm.discovery, null);
+            Assert.AreEqual(rm.technology, null);
             Assert.AreEqual(rm.progress, 0);
-            Assert.IsTrue(rm.research == new Research(0,0,0));
+            Assert.IsTrue(rm.research == 0);
         }
 
         [Test]
         public void ResearchProgress() {
-            disc.requiredResearch = new Research(100,0,0);
+            tech.requiredResearch = 100;
 
-            rm.BeginResearch(disc);
-
-            Consultancy con = new Consultancy();
-            rm.HireConsultancy(con);
-            con.research = new Research(50,0,0);
+            rm.BeginResearch(tech);
 
             // Check that progress is properly calculated.
             rm.Research();
             Assert.AreEqual(rm.progress, 0.5);
+        }
 
-            // Check that progress goes by the required research point types.
-            con.research = new Research(0,100,0);
+        [Test]
+        public void TechnologyAvailableConditions() {
+            // Should be false as the company has no verticals yet.
+            Assert.IsFalse(tech.isAvailable(gd.company));
 
-            rm.Research();
-            Assert.AreEqual(rm.progress, 0.5);
+            gd.company.verticals.Add(vert);
+            Assert.IsTrue(tech.isAvailable(gd.company));
+
+            Technology requiredTech = ScriptableObject.CreateInstance<Technology>();
+            tech.requiredTechnologies.Add(requiredTech);
+
+            // Should be false as the company does not have the required tech.
+            Assert.IsFalse(tech.isAvailable(gd.company));
+
+            gd.company.technologies.Add(requiredTech);
+            Assert.IsTrue(tech.isAvailable(gd.company));
         }
     }
 }

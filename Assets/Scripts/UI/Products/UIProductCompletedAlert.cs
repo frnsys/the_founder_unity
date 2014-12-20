@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,7 +11,7 @@ public class UIProductCompletedAlert: UIEffectAlert {
         set {
             nameLabel.text = value.name;
             bodyLabel.text = value.description;
-            aspectsLabel.text = value.productType.name + " for " + value.industry.name + " " + value.market.name;
+            aspectsLabel.text = string.Join(" & ", value.productTypes.Select(pt => pt.name).ToArray());
             Extend(bodyLabel.height);
 
             // NOT USED

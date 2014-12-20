@@ -8,9 +8,8 @@ using System.Collections.Generic;
 class ProductEffectDrawer : SuperPropertyDrawer {
     // The names of the list properties.
     private string[] listPropertyNames = new string[] {
-        "industries",
-        "markets",
-        "productTypes"
+        "productTypes",
+        "verticals"
     };
 
     public override Rect Edit(Rect position, SerializedProperty property) {

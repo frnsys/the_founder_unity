@@ -31,15 +31,13 @@ namespace UnityTest
             UnlockSet unlockables = new UnlockSet();
 
             unlockables.productTypes.Add(LoadTestResource("TestProductType", typeof(ProductType)) as ProductType);
-            unlockables.industries.Add(LoadTestResource("TestIndustry", typeof(Industry)) as Industry);
-            unlockables.markets.Add(LoadTestResource("TestMarket", typeof(Market)) as Market);
+            unlockables.verticals.Add(LoadTestResource("TestVertical", typeof(Vertical)) as Vertical);
             unlockables.events.Add(LoadTestResource("TestGameEvent", typeof(GameEvent)) as GameEvent);
             unlockables.workers.Add(LoadTestResource("TestWorker", typeof(Worker)) as Worker);
             unlockables.items.Add(LoadTestResource("TestItem", typeof(Item)) as Item);
 
             Assert.AreEqual(unlocked.productTypes.Count, 0);
-            Assert.AreEqual(unlocked.industries.Count, 0);
-            Assert.AreEqual(unlocked.markets.Count, 0);
+            Assert.AreEqual(unlocked.verticals.Count, 0);
             Assert.AreEqual(unlocked.events.Count, 0);
             Assert.AreEqual(unlocked.workers.Count, 0);
             Assert.AreEqual(unlocked.items.Count, 0);
@@ -47,8 +45,7 @@ namespace UnityTest
             unlocked.Unlock(unlockables);
 
             Assert.AreEqual(unlocked.productTypes.Count, 1);
-            Assert.AreEqual(unlocked.industries.Count, 1);
-            Assert.AreEqual(unlocked.markets.Count, 1);
+            Assert.AreEqual(unlocked.verticals.Count, 1);
             Assert.AreEqual(unlocked.events.Count, 1);
             Assert.AreEqual(unlocked.workers.Count, 1);
             Assert.AreEqual(unlocked.items.Count, 1);

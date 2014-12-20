@@ -4,17 +4,16 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class ProductRecipe : ScriptableObject {
-    // Naming convention for these assets is:
-    // ProductType.Industry.Market.asset
+public class ProductRecipe : Resource<ProductRecipe> {
+    // Naming convention:
+    // ProductType.ProductType.<etc>.asset
 
-    public ProductType productType;
-    public Industry industry;
-    public Market market;
+    public List<ProductType> productTypes;
 
     // Weights: how important a given feature is to the product's performance.
     public float appeal_W = 1;
@@ -38,19 +37,28 @@ public class ProductRecipe : ScriptableObject {
     // The cost of this product's maintenance.
     public float maintenance = 1000;
 
-
-    // TO DO use this or maybe it's not being used?
-    public List<string> outcomes = new List<string>();
+    // Bonus effects.
+    public EffectSet effects = new EffectSet();
 
     public override string ToString() {
-        return productType.ToString() + "." + industry.ToString() + "." + market.ToString();
+        return string.Join(".", productTypes.Select(pt => pt.name).ToArray());
     }
 
-    public static ProductRecipe Load(ProductType pt, Industry i, Market m) {
-        return Resources.Load("Products/Recipes/" + pt.ToString() + "." + i.ToString() + "." + m.ToString()) as ProductRecipe;
+    public static ProductRecipe Load(string name) {
+        return Resources.Load("Products/Recipes/" + name) as ProductRecipe;
     }
 
-    public static ProductRecipe Load() {
-        return Resources.Load("Products/Recipes/Default") as ProductRecipe;
+    public static ProductRecipe LoadFromTypes(List<ProductType> productTypes) {
+        string name = string.Join(".", productTypes.Select(pt => pt.name).ToArray());
+        name = name.Replace("(Clone)", "");
+        return Load(name);
+    }
+
+    public static ProductRecipe LoadDefault() {
+        return Load("Default");
+    }
+
+    public static List<ProductRecipe> LoadAll() {
+        return new List<ProductRecipe>(Resources.LoadAll<ProductRecipe>("Products/Recipes"));
     }
 }

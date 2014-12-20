@@ -18,47 +18,37 @@ MonoBehaviour:
   effects:
     products:
     - productTypes: []
-      industries: []
-      markets:
-      - {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
+      verticals: []
       buff:
         name: Appeal
-        value: 12
+        value: 10
         duration: 0
         type: 0
     workers:
     - name: Happiness
-      value: 29
+      value: 10
       duration: 0
       type: 0
     - name: Productivity
-      value: 11
+      value: 20
       duration: 0
       type: 0
-    company:
-    - name: Cash
-      value: 12
-      duration: 0
-      type: 0
+    company: []
     unlocks:
       prereqs:
         productTypes: []
-        industries: []
-        markets: []
+        verticals: []
         workers: []
         events: []
         items: []
         stores: 
-        consultancies: []
         researchPoints: 0
       productTypes:
-      - {fileID: 11400000, guid: 4222ff85e6f1c4b8d95bfdcc35abc292, type: 2}
-      industries:
-      - {fileID: 11400000, guid: c478866fbff4841da8541c3c64959f75, type: 2}
-      markets:
-      - {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
+      - {fileID: 0}
       workers: []
       events: []
       items: []
       stores: 
-      consultancies: []
+      locations: []
+      verticals:
+      - {fileID: 0}

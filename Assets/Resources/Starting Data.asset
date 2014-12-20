@@ -23,7 +23,6 @@ MonoBehaviour:
       events: []
       items: []
       stores: 
-      consultancies: []
       researchPoints: 0
     productTypes:
     - {fileID: 11400000, guid: 322fb54be4c424378a16591d473bfa5f, type: 2}
@@ -43,14 +42,9 @@ MonoBehaviour:
     events: []
     items:
     - {fileID: 11400000, guid: eb24045815fa646dfbecfead8d90881a, type: 2}
-    stores: 00000000
-    consultancies:
-    - {fileID: 11400000, guid: e5c2cf6be06ef44dcae31e0396d36971, type: 2}
-  discovery: {fileID: 0}
-  research:
-    charisma: 0
-    cleverness: 0
-    creativity: 0
+    stores: 0000000004000000
+  technology: {fileID: 0}
+  research: 0
   otherCompanies: []
   month: 0
   week: 0

@@ -4,22 +4,22 @@ using System.Collections.Generic;
 
 public class UIResearchCompletedAlert: UIEffectAlert {
     public UILabel nameLabel;
-    public GameObject discoveryPrefab;
-    public GameObject selectedDiscoveryItem;
+    public GameObject technologyPrefab;
+    public GameObject selectedTechnologyItem;
 
-    // For mapping GameObjects (by id) to Discoveries.
-    public Dictionary<int, Discovery> discoveries = new Dictionary<int, Discovery>();
+    // For mapping GameObjects (by id) to technologies.
+    public Dictionary<int, Technology> technologies = new Dictionary<int, Technology>();
 
-    private Discovery discovery_;
-    public Discovery discovery {
-        get { return discovery_; }
+    private Technology technology_;
+    public Technology technology {
+        get { return technology_; }
         set {
-            discovery_ = value;
-            nameLabel.text = discovery_.name;
-            bodyLabel.text = discovery_.description;
+            technology_ = value;
+            nameLabel.text = technology_.name;
+            bodyLabel.text = technology_.description;
             Extend(bodyLabel.height);
 
-            RenderEffects(discovery.effects);
+            RenderEffects(technology.effects);
 
             // -1 because by default there is space for about 1 effect.
             Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
@@ -34,23 +34,23 @@ public class UIResearchCompletedAlert: UIEffectAlert {
     void OnEnable() {
         Show();
 
-        // TO DO needs to load the next three discoveries to choose from.
-        //foreach (Discovery d in GameManager.Instance.researchManager.nextDiscoveries) {
+        // TO DO needs to load the next three technologies to choose from.
+        //foreach (Technology d in GameManager.Instance.researchManager.nexttechnologies) {
         //}
         // Temporary:
-        Discovery di = Resources.Load("Discoveries/Electricity") as Discovery;
+        Technology di = Resources.Load("technologies/Electricity") as Technology;
 
-        GameObject discoveriesGrid = transform.Find("New Research Window/Body/Discoveries").gameObject;
-        int width = discoveriesGrid.GetComponent<UIWidget>().width;
+        GameObject technologiesGrid = transform.Find("New Research Window/Body/technologies").gameObject;
+        int width = technologiesGrid.GetComponent<UIWidget>().width;
 
-        List<Discovery> nextDiscoveries = new List<Discovery>();
-        nextDiscoveries.Add(di);
-        nextDiscoveries.Add(di);
-        nextDiscoveries.Add(di);
+        List<Technology> nexttechnologies = new List<Technology>();
+        nexttechnologies.Add(di);
+        nexttechnologies.Add(di);
+        nexttechnologies.Add(di);
 
-        foreach (Discovery d in nextDiscoveries) {
-            GameObject dItem = NGUITools.AddChild(discoveriesGrid, discoveryPrefab);
-            dItem.transform.Find("Discovery Name").GetComponent<UILabel>().text = d.name;
+        foreach (Technology d in nexttechnologies) {
+            GameObject dItem = NGUITools.AddChild(technologiesGrid, technologyPrefab);
+            dItem.transform.Find("Technology Name").GetComponent<UILabel>().text = d.name;
 
             // Have to manually set all of this.
             int height = dItem.transform.GetComponent<UITexture>().height;
@@ -58,29 +58,29 @@ public class UIResearchCompletedAlert: UIEffectAlert {
             dItem.transform.GetComponent<UITexture>().depth = 10;
             dItem.transform.GetComponent<BoxCollider>().size = new Vector3(width, height, 1);
 
-            UIEventListener.Get(dItem).onClick += SelectDiscovery;
-            discoveries.Add(dItem.GetInstanceID(), d);
+            UIEventListener.Get(dItem).onClick += SelectTechnology;
+            technologies.Add(dItem.GetInstanceID(), d);
         }
-        SelectDiscovery( discoveriesGrid.transform.GetChild(0).gameObject );
+        SelectTechnology( technologiesGrid.transform.GetChild(0).gameObject );
 
-        discoveriesGrid.GetComponent<UICenteredGrid>().Reposition();
+        technologiesGrid.GetComponent<UICenteredGrid>().Reposition();
     }
 
-    void SelectDiscovery(GameObject obj) {
+    void SelectTechnology(GameObject obj) {
         // Revert previously selected item.
-        if (selectedDiscoveryItem != null) {
-            selectedDiscoveryItem.GetComponent<UIButton>().defaultColor = new Color(1f, 1f, 1f, 1f);
-            selectedDiscoveryItem.transform.Find("Discovery Name").gameObject.GetComponent<UILabel>().color = new Color(0.1f, 0.1f, 0.1f, 1f);
+        if (selectedTechnologyItem != null) {
+            selectedTechnologyItem.GetComponent<UIButton>().defaultColor = new Color(1f, 1f, 1f, 1f);
+            selectedTechnologyItem.transform.Find("Technology Name").gameObject.GetComponent<UILabel>().color = new Color(0.1f, 0.1f, 0.1f, 1f);
         }
 
         // Highlight selected item.
-        selectedDiscoveryItem = obj;
+        selectedTechnologyItem = obj;
         obj.GetComponent<UIButton>().defaultColor = new Color(0.57f, 0.41f, 0.98f, 1f);
-        obj.transform.Find("Discovery Name").gameObject.GetComponent<UILabel>().color = new Color(1f, 1f, 1f, 1f);
+        obj.transform.Find("Technology Name").gameObject.GetComponent<UILabel>().color = new Color(1f, 1f, 1f, 1f);
     }
 
-    public void ConfirmDiscovery() {
-        Discovery d = discoveries[selectedDiscoveryItem.GetInstanceID()];
+    public void ConfirmTechnology() {
+        Technology d = technologies[selectedTechnologyItem.GetInstanceID()];
         GameManager.Instance.researchManager.BeginResearch(d);
         Close_();
     }
