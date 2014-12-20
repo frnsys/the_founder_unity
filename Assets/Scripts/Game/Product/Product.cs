@@ -281,7 +281,6 @@ public class Product : HasStats {
             // TO DO
             // To be replaced by real values...
             float bonus = 0;
-            float economy_w = 1;
             float event_c = 0;
 
             // Start
@@ -304,7 +303,7 @@ public class Product : HasStats {
 
             // Bonus, event, and economy's impacts.
             revenuePercent += bonus + event_c;
-            revenuePercent *= economy_w;
+            revenuePercent *= GameManager.Instance.economyMultiplier;
         }
 
         //Debug.Log("REVENUE%:" + revenuePercent);

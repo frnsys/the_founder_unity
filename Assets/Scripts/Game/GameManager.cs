@@ -24,6 +24,10 @@ public class GameManager : Singleton<GameManager> {
         get { return data.unlocked; }
     }
 
+    public float economyMultiplier {
+        get { return data.economyMultiplier; }
+    }
+
     // Other managers.
     [HideInInspector]
     public ResearchManager researchManager;
@@ -173,6 +177,9 @@ public class GameManager : Singleton<GameManager> {
                 aic.PayMonthly();
             }
 
+            // See how the economy is.
+            data.economyMultiplier = EconomyMultiplier();
+
             playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
             yield return new WaitForSeconds(monthTime);
@@ -253,6 +260,30 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
+    // http://stackoverflow.com/q/5817490/1097920
+    public static double RandomGaussian()
+    {
+        double U, u, v, S;
+
+        do
+        {
+            u = 2.0 * Random.value - 1.0;
+            v = 2.0 * Random.value - 1.0;
+            S = u * u + v * v;
+        }
+        while (S >= 1.0);
+
+        double fac = System.Math.Sqrt(-2.0 * System.Math.Log(S) / S);
+        return u * fac;
+    }
+
+    public float EconomyMultiplier() {
+        float r = (float)RandomGaussian();
+
+        float mean = 1;
+        float std  = 0.2f;
+        return (r * std) + 1;
+    }
 
 }
 

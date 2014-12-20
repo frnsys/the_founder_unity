@@ -52,6 +52,8 @@ public class GameData : ScriptableObject {
     public int lifetimeMonth;
     public int lifetimeWeek;
 
+    // Economy health
+    public float economyMultiplier;
 
 
     // ===============================================
@@ -84,6 +86,8 @@ public class GameData : ScriptableObject {
         data.month = Month.January;
         data.year  = 1;
         data.week  = 0;
+
+        data.economyMultiplier = 1f;
 
         // You start your business at 25,
         // so the amount of time you have really ranges from 40-60.
