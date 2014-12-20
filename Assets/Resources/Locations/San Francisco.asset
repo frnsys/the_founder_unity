@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff6a8bdef60740f5ba4b4f19ead6a63, type: 3}
   m_Name: San Francisco
   m_EditorClassIdentifier: 
-  description: 
+  description: This is the hot spot. Not quite Silicon Valley, but young, talented
+    engineers are easier to find here.
   cost: 1e+06
-  rent: 10000
-  capacity: 10
+  capacity:
+    keys: 00000000010000000200000003000000
+    values: 04000000000000000100000000000000
   effects:
     products: []
     workers: []
@@ -22,18 +24,16 @@ MonoBehaviour:
     unlocks:
       prereqs:
         productTypes: []
-        industries: []
-        markets: []
+        verticals: []
         workers: []
         events: []
         items: []
         stores: 
         researchPoints: 0
       productTypes: []
-      industries: []
-      markets: []
       workers: []
       events: []
       items: []
       stores: 
       locations: []
+      verticals: []

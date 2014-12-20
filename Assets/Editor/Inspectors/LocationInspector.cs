@@ -5,26 +5,33 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-[CustomEditor(typeof(Item))]
-internal class ItemInspector : Editor {
+[CustomEditor(typeof(Location))]
+internal class LocationInspector : Editor {
 
-    Item i;
+    Location i;
 
     void OnEnable() {
-        i = target as Item;
+        i = target as Location;
     }
 
     public override void OnInspectorGUI() {
+        serializedObject.Update();
+
+        EditorStyles.textField.wordWrap = true;
 
         i.name = EditorGUILayout.TextField("Name", i.name);
-        i.description = EditorGUILayout.TextField("Description", i.description);
         i.cost = EditorGUILayout.FloatField("Cost", i.cost);
-        i.duration = EditorGUILayout.FloatField("Duration", i.duration);
 
-        EditorGUILayout.LabelField("Store");
-        i.store = (Store)EditorGUILayout.EnumPopup(i.store);
+        EditorGUILayout.LabelField("Description");
+        i.description = EditorGUILayout.TextArea(i.description, GUILayout.Height(50));
+
+        EditorGUILayout.LabelField("Infrastructure Capacity");
+
+        foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
+            i.capacity[t] =  EditorGUILayout.IntField(t.ToString(), i.capacity[t]);
+        }
+
         EditorGUILayout.Space();
-
         EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"));
         EditorGUILayout.Space();
 

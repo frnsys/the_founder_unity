@@ -9,6 +9,7 @@ public class UILocationItem : MonoBehaviour {
             location_ = value;
             label.text = location_.name;
             description.text = location_.description;
+            capacity.text = "Adds capacity for:\n" + location_.capacity.ToString();
 
             if (GameManager.Instance.playerCompany.locations.Contains(location_)) {
                 cost.text = "owned";
@@ -29,9 +30,10 @@ public class UILocationItem : MonoBehaviour {
         }, null);
     }
 
-    public UILabel label;
-    public UILabel description;
     public UILabel cost;
+    public UILabel label;
+    public UILabel capacity;
+    public UILabel description;
     public GameObject expandButton;
 }
 

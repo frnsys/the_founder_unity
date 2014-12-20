@@ -24,18 +24,16 @@ MonoBehaviour:
       stores: 
       researchPoints: 0
     productTypes:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers:
     - {fileID: 11400000, guid: 3e17d13c0c97740d6905c151936591ff, type: 2}
     - {fileID: 11400000, guid: 3762f9dbcd0454acb81bc53710cc6e51, type: 2}
     events: []
     items:
     - {fileID: 11400000, guid: eb24045815fa646dfbecfead8d90881a, type: 2}
-    stores: 0000000004000000
+    stores: 00000000
     locations:
-    - {fileID: 11400000, guid: 862f928919afa44519cd5f8a13d237e5, type: 2}
+    - {fileID: 11400000, guid: ae259c9c620bc4513afb0726a125afc1, type: 2}
     verticals:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
