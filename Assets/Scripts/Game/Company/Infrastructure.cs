@@ -12,6 +12,16 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         Lab
     }
 
+    public static Type[] Types {
+        get { return Enum.GetValues(typeof(Type)) as Type[]; }
+    }
+
+    public static Infrastructure ForType(Type t) {
+        Infrastructure inf = new Infrastructure();
+        inf[t] = 1;
+        return inf;
+    }
+
     public Infrastructure() {
         // Initialize with 0 of each infrastructure type.
         foreach (Type t in Enum.GetValues(typeof(Type))) {
@@ -77,6 +87,10 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         Infrastructure result = new Infrastructure();
         foreach(KeyValuePair<Type, int> item in left) {
             result[item.Key] = item.Value - right[item.Key];
+
+            // The smallest is 0, no negatives.
+            if (result[item.Key] < 0)
+                result[item.Key] = 0;
         }
         return result;
     }

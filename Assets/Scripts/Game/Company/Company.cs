@@ -423,7 +423,10 @@ public class Company : HasStats {
     // Total infrastructure capacity.
     public Infrastructure infrastructureCapacity {
         get {
-            return baseInfrastructureCapacity + locations.Select(i => i.capacity).Aggregate((x,y) => x + y);
+            IEnumerable<Infrastructure> locationCapacities = locations.Select(i => i.capacity);
+            if (locationCapacities.Count() > 0)
+                return baseInfrastructureCapacity + locationCapacities.Aggregate((x,y) => x + y);
+            return baseInfrastructureCapacity;
         }
     }
 
@@ -440,6 +443,10 @@ public class Company : HasStats {
             return true;
         }
         return false;
+    }
+
+    public void DestroyInfrastructure(Infrastructure i) {
+        _infrastructure -= i;
     }
 
     public bool HasCapacityFor(Infrastructure i) {

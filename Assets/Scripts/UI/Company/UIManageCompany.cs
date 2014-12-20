@@ -7,9 +7,8 @@ public class UIManageCompany : UIFullScreenPager {
 
     public GameObject locationPrefab;
     public GameObject verticalPrefab;
-    public UIButton locationButton;
-    public UIButton verticalButton;
-    private bool locationsActive = false;
+    public GameObject infrastructureView;
+    public GameObject locationVerticalView;
 
     private Color activeColor = new Color(1f,1f,1f,1f);
     private Color inactiveColor = new Color(1f,1f,1f,0.75f);
@@ -17,23 +16,34 @@ public class UIManageCompany : UIFullScreenPager {
     void OnEnable() {
         gm = GameManager.Instance;
 
-        ToggleManageView();
+        // First view.
+        LoadLocations();
     }
 
-    public void ToggleManageView() {
+    public void ShowView(UIButton button) {
         ClearGrid();
 
-        if (locationsActive) {
-            LoadVerticals();
-            verticalButton.defaultColor = activeColor;
-            locationButton.defaultColor = inactiveColor;
-        } else {
-            LoadLocations();
-            locationButton.defaultColor = activeColor;
-            verticalButton.defaultColor = inactiveColor;
+        foreach (UIButton b in transform.Find("Subheader").GetComponentsInChildren<UIButton>()) {
+            b.defaultColor = inactiveColor;
         }
+        button.defaultColor = activeColor;
 
-        locationsActive = !locationsActive;
+        switch(button.gameObject.name) {
+            case "Locations Button":
+                locationVerticalView.SetActive(true);
+                infrastructureView.SetActive(false);
+                LoadLocations();
+                break;
+            case "Verticals Button":
+                locationVerticalView.SetActive(true);
+                infrastructureView.SetActive(false);
+                LoadVerticals();
+                break;
+            default:
+                locationVerticalView.SetActive(false);
+                infrastructureView.SetActive(true);
+                break;
+        }
 
         Adjust();
     }
