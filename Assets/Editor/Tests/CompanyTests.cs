@@ -77,9 +77,9 @@ namespace UnityTest
 		public void PayMonthly() {
             c.cash.baseValue = 2000;
 
-            Infrastructure inf = ScriptableObject.CreateInstance<Infrastructure>();
-            inf.cost = 200;
-            c.infrastructure.Add(inf);
+            Infrastructure i = new Infrastructure();
+            i[Infrastructure.Type.Datacenter] = 1;
+            c.BuyInfrastructure(i);
 
             Location loc = ScriptableObject.CreateInstance<Location>();
             loc.cost = 100;
@@ -88,7 +88,8 @@ namespace UnityTest
             worker.salary = 500;
 
             // Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
-            float paid = worker.salary + c.researchCash + inf.cost + loc.cost + loc.cost;
+            // Same for infrastructure.
+            float paid = worker.salary + c.researchCash + i.cost + i.cost + loc.cost + loc.cost;
 
             c.HireWorker(worker);
 
@@ -107,18 +108,15 @@ namespace UnityTest
             c.cash.baseValue = 2000;
             c.BuyItem(item);
 
-            Infrastructure i = ScriptableObject.CreateInstance<Infrastructure>();
-            i.type = Infrastructure.Type.Datacenter;
-
-            Infrastructure i_ = ScriptableObject.CreateInstance<Infrastructure>();
-            i_.type = Infrastructure.Type.Factory;
-
-            c.infrastructure = new List<Infrastructure>() { i, i_ };
+            Infrastructure i = new Infrastructure();
+            i[Infrastructure.Type.Datacenter] = 1;
+            i[Infrastructure.Type.Factory] = 1;
+            c.BuyInfrastructure(i);
 
             c.StartNewProduct(pts);
             Assert.AreEqual(c.developingProducts[0], c.products[0]);
 
-            Assert.AreEqual(c.availableInfrastructure, c.allInfrastructure - pts[0].requiredInfrastructure);
+            Assert.AreEqual(c.availableInfrastructure, c.infrastructure - pts[0].requiredInfrastructure);
 
             // Creating a new product should apply existing items.
             Assert.AreEqual(c.products.Count, 1);
@@ -179,7 +177,7 @@ namespace UnityTest
 
             Assert.AreEqual(p.state, Product.State.RETIRED);
             Assert.AreEqual(p.appeal.value, 0);
-            Assert.AreEqual(c.availableInfrastructure, c.allInfrastructure);
+            Assert.AreEqual(c.availableInfrastructure, c.infrastructure);
         }
 
 

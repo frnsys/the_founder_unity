@@ -47,16 +47,10 @@ namespace UnityTest
             // Should still be false since the company does not have the required infrastructure.
             Assert.IsFalse(pt.isAvailable(gd.company));
 
-            Infrastructure inf;
-            for (int i=0; i <= 2; i++) {
-                inf = ScriptableObject.CreateInstance<Infrastructure>();
-                inf.type = Infrastructure.Type.Datacenter;
-                gd.company.infrastructure.Add(inf);
-            }
-
-            inf = ScriptableObject.CreateInstance<Infrastructure>();
-            inf.type = Infrastructure.Type.Factory;
-            gd.company.infrastructure.Add(inf);
+            Infrastructure i = new Infrastructure();
+            i[Infrastructure.Type.Datacenter] = 2;
+            i[Infrastructure.Type.Factory] = 1;
+            gd.company.BuyInfrastructure(i);
 
             Assert.IsTrue(pt.isAvailable(gd.company));
         }

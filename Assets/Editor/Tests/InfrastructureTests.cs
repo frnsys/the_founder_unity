@@ -11,16 +11,16 @@ namespace UnityTest
     [TestFixture]
     internal class InfrastructureTests
     {
-        InfrastructureDict id;
-        InfrastructureDict id_;
+        Infrastructure id;
+        Infrastructure id_;
 
         [SetUp]
         public void SetUp() {
-            id  = new InfrastructureDict();
+            id  = new Infrastructure();
             id[Infrastructure.Type.Datacenter] = 5;
             id[Infrastructure.Type.Studio]     = 2;
 
-            id_ = new InfrastructureDict();
+            id_ = new Infrastructure();
             id_[Infrastructure.Type.Datacenter] = 6;
             id_[Infrastructure.Type.Factory]    = 1;
         }
@@ -64,7 +64,7 @@ namespace UnityTest
 
         [Test]
         public void Addition() {
-            InfrastructureDict result = new InfrastructureDict();
+            Infrastructure result = new Infrastructure();
             result[Infrastructure.Type.Datacenter] = 11;
             result[Infrastructure.Type.Studio]     = 2;
             result[Infrastructure.Type.Factory]    = 1;
@@ -74,7 +74,7 @@ namespace UnityTest
 
         [Test]
         public void Subtract() {
-            InfrastructureDict result = new InfrastructureDict();
+            Infrastructure result = new Infrastructure();
             result[Infrastructure.Type.Datacenter] = -1;
             result[Infrastructure.Type.Studio]     = 2;
             result[Infrastructure.Type.Factory]    = -1;

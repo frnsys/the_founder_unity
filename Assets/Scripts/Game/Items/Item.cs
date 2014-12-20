@@ -25,6 +25,5 @@ public enum Store {
     Equipment,
     Perks,
     Policies,
-    Companies,
-    Infrastructure
+    Companies
 }

@@ -34,9 +34,9 @@ public class Product : HasStats {
     public int points {
         get { return productTypes.Sum(p => p.points); }
     }
-    public InfrastructureDict requiredInfrastructure {
+    public Infrastructure requiredInfrastructure {
         get {
-            InfrastructureDict infras = new InfrastructureDict();
+            Infrastructure infras = new Infrastructure();
             foreach (ProductType pt in productTypes) {
                 if (pt.requiredInfrastructure != null)
                     infras += pt.requiredInfrastructure;

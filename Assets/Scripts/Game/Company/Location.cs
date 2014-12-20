@@ -7,8 +7,6 @@ public class Location : ScriptableObject {
 
     public float cost = 1000000;
 
-    // Infrastructure
-    public int capacity = 10;
-
+    public Infrastructure capacity = new Infrastructure();
     public EffectSet effects = new EffectSet();
 }

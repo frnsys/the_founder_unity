@@ -20,47 +20,6 @@ public class Company : HasStats {
     }
 
     public List<Technology> technologies;
-    public List<Infrastructure> infrastructure;
-
-    // Infrastructure which is available for new products.
-    public InfrastructureDict availableInfrastructure {
-        get {
-            return allInfrastructure - usedInfrastructure;
-        }
-    }
-
-    // Infrastructure which is tied up in existing products.
-    public InfrastructureDict usedInfrastructure {
-        get {
-            InfrastructureDict usedInfras = new InfrastructureDict();
-            foreach (Product p in products) {
-                if (p.state != Product.State.RETIRED) {
-                    Debug.Log(p.requiredInfrastructure);
-                    usedInfras += p.requiredInfrastructure;
-                }
-            }
-            return usedInfras;
-        }
-    }
-
-    // Total infrastructure on hand.
-    public InfrastructureDict allInfrastructure {
-        get {
-            InfrastructureDict infras = new InfrastructureDict();
-            foreach (Infrastructure i in infrastructure) {
-                infras[i.type]++;
-            }
-            return infras;
-        }
-    }
-
-    // How much space is left for new infrastructure.
-    public int availableCapacity {
-        get {
-            int total = locations.Sum(i => i.capacity);
-            return total - infrastructure.Count;
-        }
-    }
 
     public virtual void Awake() {
         // Default values.
@@ -78,8 +37,12 @@ public class Company : HasStats {
         _verticals = new List<Vertical>() {
             Vertical.Load("Information")
         };
+        _infrastructure = new Infrastructure();
         technologies = new List<Technology>();
-        infrastructure = new List<Infrastructure>();
+
+        baseInfrastructureCapacity = new Infrastructure();
+        baseInfrastructureCapacity[Infrastructure.Type.Datacenter] = 4;
+        baseInfrastructureCapacity[Infrastructure.Type.Studio]     = 1;
 
         // Keep track for a year.
         PerfHistory = new PerformanceHistory(12);
@@ -359,14 +322,11 @@ public class Company : HasStats {
             toPay += worker.salary;
         }
 
-        foreach (Infrastructure inf in infrastructure) {
-            toPay += inf.cost;
-        }
-
         foreach (Location loc in locations) {
             toPay += loc.cost;
         }
 
+        toPay += infrastructure.cost;
         toPay += researchCash;
 
         cash.baseValue -= toPay;
@@ -427,6 +387,64 @@ public class Company : HasStats {
         }
     }
 
+    // ===============================================
+    // Infrastructure Management =====================
+    // ===============================================
+
+    [SerializeField]
+    private Infrastructure _infrastructure;
+    public Infrastructure infrastructure {
+        get { return _infrastructure; }
+    }
+
+    [SerializeField]
+    private Infrastructure baseInfrastructureCapacity;
+
+    // Infrastructure which is available for new products.
+    public Infrastructure availableInfrastructure {
+        get {
+            return infrastructure - usedInfrastructure;
+        }
+    }
+
+    // Infrastructure which is tied up in existing products.
+    public Infrastructure usedInfrastructure {
+        get {
+            Infrastructure usedInfras = new Infrastructure();
+            foreach (Product p in products) {
+                if (p.state != Product.State.RETIRED) {
+                    usedInfras += p.requiredInfrastructure;
+                }
+            }
+            return usedInfras;
+        }
+    }
+
+    // Total infrastructure capacity.
+    public Infrastructure infrastructureCapacity {
+        get {
+            return baseInfrastructureCapacity + locations.Select(i => i.capacity).Aggregate((x,y) => x + y);
+        }
+    }
+
+    // Infrastructure capacity which is unused.
+    public Infrastructure availableInfrastructureCapacity {
+        get {
+            return infrastructureCapacity - infrastructure;
+        }
+    }
+
+    public bool BuyInfrastructure(Infrastructure i) {
+        if (HasCapacityFor(i) && Pay(i.cost)) {
+            _infrastructure += i;
+            return true;
+        }
+        return false;
+    }
+
+    public bool HasCapacityFor(Infrastructure i) {
+        return availableInfrastructureCapacity > i;
+    }
 
 
     // ===============================================

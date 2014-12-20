@@ -84,7 +84,7 @@ namespace UnityTest
             Assert.AreEqual(gd.company.name,               data.company.name);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
             Assert.AreEqual(gd.company.baseSizeLimit,      data.company.baseSizeLimit);
-            Assert.AreEqual(gd.company.allInfrastructure,  data.company.allInfrastructure);
+            Assert.AreEqual(gd.company.infrastructure,     data.company.infrastructure);
             Assert.AreEqual(gd.company.lastMonthRevenue,   data.company.lastMonthRevenue);
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.IsTrue  (gd.company.featurePoints   ==  data.company.featurePoints);
