@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class ProductType : Resource<ProductType>, IHasPrereqs {
     public string description;
 
+    public float difficulty;
+
     public override string ToString() {
         return name;
     }

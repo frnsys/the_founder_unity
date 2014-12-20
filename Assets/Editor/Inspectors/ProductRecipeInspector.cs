@@ -62,7 +62,6 @@ internal class ProductRecipeInspector : Editor {
         p.progressRequired = EditorGUILayout.FloatField("Progress Required", p.progressRequired);
         p.maxLongevity = EditorGUILayout.FloatField("Max Longevity", p.maxLongevity);
         p.maxRevenue = EditorGUILayout.FloatField("Max Revenue", p.maxRevenue);
-        p.maintenance = EditorGUILayout.FloatField("Maintenance Cost", p.maintenance);
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Effects");

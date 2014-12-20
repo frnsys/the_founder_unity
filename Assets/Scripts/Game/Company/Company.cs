@@ -24,7 +24,6 @@ public class Company : HasStats {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
-        baseFeaturePoints = 4;
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
         baseSizeLimit = 5;
@@ -96,27 +95,16 @@ public class Company : HasStats {
         _workers.Remove(worker);
     }
 
-    // Total feature points available.
-    private int baseFeaturePoints;
-    public FeaturePoints featurePoints {
-        get {
-            float charisma_   = 0;
-            float cleverness_ = 0;
-            float creativity_ = 0;
-            foreach (Worker w in _workers) {
-                charisma_   += w.charisma.value;
-                cleverness_ += w.cleverness.value;
-                creativity_ += w.creativity.value;
-            }
-
-            // You get one feature point for every 10 worker points.
-            int charisma   = (int)(charisma_/10)   + baseFeaturePoints;
-            int cleverness = (int)(cleverness_/10) + baseFeaturePoints;
-            int creativity = (int)(creativity_/10) + baseFeaturePoints;
-
-            // TO DO: bonuses which increase any of these.
-
-            return new FeaturePoints(charisma, cleverness, creativity);
+    public float AggregateWorkerSkill(string skill) {
+        switch (skill) {
+            case "charisma":
+                return _workers.Sum(x => x.charisma.value);
+            case "cleverness":
+                return _workers.Sum(x => x.cleverness.value);
+            case "creativity":
+                return _workers.Sum(x => x.creativity.value);
+            default:
+                return 0;
         }
     }
 

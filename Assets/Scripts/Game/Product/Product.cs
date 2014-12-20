@@ -18,6 +18,9 @@ public class Product : HasStats {
     // TO DO this should come from the product recipe.
     public string description;
 
+    // The feature set of the product.
+    public FeatureSet features;
+
     [SerializeField]
     private float _progress = 0;
     public float progress {
@@ -65,6 +68,11 @@ public class Product : HasStats {
     // this ProductType combination does.
     [SerializeField]
     private ProductRecipe recipe;
+
+    // The difficulty of a product is the average of its product types' difficulties.
+    public float difficulty {
+        get { return productTypes.Sum(pt => pt.difficulty)/productTypes.Count; }
+    }
 
     public float timeSinceLaunch = 0;
 

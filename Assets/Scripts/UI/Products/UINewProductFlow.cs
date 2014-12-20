@@ -24,12 +24,8 @@ public class UINewProductFlow : MonoBehaviour {
     // Keep track of the selected product aspects.
     private List<ProductType> productTypes;
 
-    // The available feature points.
-    private FeaturePoints featurePoints;
-
     void OnEnable() {
         gm = GameManager.Instance;
-        featurePoints = GameManager.Instance.playerCompany.featurePoints;
 
         if (productTypes == null) {
             productTypes = new List<ProductType>();

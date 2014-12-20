@@ -8,123 +8,54 @@ using System.Collections.Generic;
 
 
 [System.Serializable]
-public class FeatureSet : Dictionary<string, int> {
-    public FeatureSet() {
-        string[] features = new string[] {
-            "Delight",
-            "Usability",
-            "Security",
-            "Stability",
-            "Branding",
-            "Marketing"
-        };
-        foreach (string key in features) {
-            base.Add(key, 0);
-        }
+public class FeatureSet {
+    public static int baseProgress = 1000;
+
+    public int design = 0;
+    public int engineering = 0;
+    public int marketing = 0;
+
+    // Total feature points.
+    public int total {
+        get { return design + engineering + marketing; }
     }
 
-    public FeaturePoints Increment(string feature, FeaturePoints points) {
+    // Progress required for the nth point.
+    public static float ProgressRequired(string feature, int n, Product p, Company c) {
+        float progress = Fibonacci(n+2) * baseProgress;
+        progress *= p.difficulty;
+
         switch (feature) {
-            case "Delight":
-                // CRE+CRE
-                if (points.creativity >= 2) {
-                    points.creativity -= 2;
-                    this["Delight"]++;
-                }
+            case "design":
+                progress /= c.AggregateWorkerSkill("creativity");
                 break;
-            case "Usability":
-                // CRE+CLE
-                if (points.creativity >= 1 && points.cleverness >= 1) {
-                    points.creativity--;
-                    points.cleverness--;
-                    this["Usability"]++;
-                }
+            case "engineering":
+                progress /= c.AggregateWorkerSkill("cleverness");
                 break;
-            case "Security":
-                // CLE+CHA
-                if (points.cleverness >= 1 && points.charisma >= 1) {
-                    points.cleverness--;
-                    points.charisma--;
-                    this["Security"]++;
-                }
+            case "charisma":
+                progress /= c.AggregateWorkerSkill("marketing");
                 break;
-            case "Stability":
-                // CLE+CLE
-                if (points.cleverness >= 2) {
-                    points.cleverness -= 2;
-                    this["Stability"]++;
-                }
-                break;
-            case "Branding":
-                // CRE+CHA
-                if (points.creativity >= 1 && points.charisma >= 1) {
-                    points.creativity--;
-                    points.charisma--;
-                    this["Branding"]++;
-                }
-                break;
-            case "Marketing":
-                // CHA+CHA
-                if (points.charisma >= 2) {
-                    points.charisma -= 2;
-                    this["Marketing"]++;
-                }
+            default:
                 break;
         }
-        return points;
+
+        return progress;
     }
 
+    public float TotalProgressRequired(Product p, Company c) {
+        float progress = 0;
+        progress += ProgressRequired("design", design, p, c);
+        progress += ProgressRequired("engineering", engineering, p, c);
+        progress += ProgressRequired("marketing", marketing, p, c);
+        return progress;
+    }
 
-    public FeaturePoints Decrement(string feature, FeaturePoints points) {
-        // Feature values can decrease to negative values,
-        // e.g. if some event happens that affects a particular product.
-        switch (feature) {
-            case "Delight":
-                // CRE+CRE
-                if (this["Delight"] > 0) {
-                    points.creativity += 2;
-                }
-                this["Delight"]--;
-                break;
-            case "Usability":
-                // CRE+CLE
-                if (this["Usability"] > 0) {
-                    points.creativity++;
-                    points.cleverness++;
-                }
-                this["Usability"]--;
-                break;
-            case "Security":
-                // CLE+CHA
-                if (this["Security"] > 0) {
-                    points.cleverness++;
-                    points.charisma++;
-                }
-                this["Security"]--;
-                break;
-            case "Stability":
-                // CLE+CLE
-                if (this["Stability"] > 0) {
-                    points.cleverness += 2;
-                }
-                this["Stability"]--;
-                break;
-            case "Branding":
-                // CRE+CHA
-                if (this["Branding"] > 0) {
-                    points.creativity++;
-                    points.charisma++;
-                }
-                this["Branding"]--;
-                break;
-            case "Marketing":
-                // CHA+CHA
-                if (this["Marketing"] > 0) {
-                    points.charisma += 2;
-                }
-                this["Marketing"]--;
-                break;
-        }
-        return points;
+    public static int Fibonacci(int n) {
+        if (n == 0)
+            return 0;
+        else if (n == 1)
+            return 1;
+        else
+            return Fibonacci(n-1) + Fibonacci(n-2);
     }
 }

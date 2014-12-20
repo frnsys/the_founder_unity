@@ -34,9 +34,6 @@ public class ProductRecipe : Resource<ProductRecipe> {
     // The maximum amount of revenue this product can generate.
     public float maxRevenue = 1000;
 
-    // The cost of this product's maintenance.
-    public float maintenance = 1000;
-
     // Bonus effects.
     public EffectSet effects = new EffectSet();
 

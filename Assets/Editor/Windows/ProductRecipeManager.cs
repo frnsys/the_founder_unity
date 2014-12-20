@@ -59,7 +59,6 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         target.progressRequired = EditorGUILayout.FloatField("Progress Required", target.progressRequired);
         target.maxLongevity = EditorGUILayout.FloatField("Max Longevity", target.maxLongevity);
         target.maxRevenue = EditorGUILayout.FloatField("Max Revenue", target.maxRevenue);
-        target.maintenance = EditorGUILayout.FloatField("Maintenance Cost", target.maintenance);
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Effects");
