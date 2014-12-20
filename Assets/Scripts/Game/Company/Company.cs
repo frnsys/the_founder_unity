@@ -12,8 +12,7 @@ public class Company : HasStats {
     public Stat cash;
     public Stat research;
 
-    // TO DO make this nicer
-    public float researchCash = 1000;
+    public float researchInvestment = 1000;
 
     public Company(string name_) {
         name = name_;
@@ -327,7 +326,7 @@ public class Company : HasStats {
         }
 
         toPay += infrastructure.cost;
-        toPay += researchCash;
+        toPay += researchInvestment;
 
         cash.baseValue -= toPay;
 

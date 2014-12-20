@@ -36,7 +36,7 @@ public class ResearchManager : MonoBehaviour {
     public void Research() {
         if (technology) {
             // TO DO invested cash shouldn't have as simple a relationship to research.
-            data.research += data.company.research.value + data.company.researchCash/1000;
+            data.research += data.company.research.value + data.company.researchInvestment/1000;
 
             if (research >= technology.requiredResearch) {
                 EndResearch();
