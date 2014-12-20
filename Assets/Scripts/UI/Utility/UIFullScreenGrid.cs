@@ -65,7 +65,8 @@ public class UIFullScreenGrid : UISimpleGrid {
 			Vector3 localPos = Vector3.zero;
 
             // Set the actual width to be full screen as well.
-            //child.gameObject.GetComponent<UIWidget>().width = (int)childSize.x;
+            child.gameObject.GetComponent<UIWidget>().width = width;
+            child.gameObject.GetComponent<UIWidget>().height = height;
 
             localPos.x = (i * (padding.x + childSize.x + padding.z)) + padding.x;
             child.localPosition = localPos;

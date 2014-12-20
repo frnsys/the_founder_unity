@@ -49,5 +49,5 @@ public class UICenteredGrid : UIWidget {
 		}
 
 		return list;
-	}	
+	}
 }

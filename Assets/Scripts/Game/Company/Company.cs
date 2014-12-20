@@ -77,7 +77,9 @@ public class Company : HasStats {
         founders = new List<Founder>();
         _workers = new List<Worker>();
         locations = new List<Location>();
-        verticals = new List<Vertical>();
+        verticals = new List<Vertical>() {
+            Vertical.Load("Information")
+        };
         technologies = new List<Technology>();
         infrastructure = new List<Infrastructure>();
 

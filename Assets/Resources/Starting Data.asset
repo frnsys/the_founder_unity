@@ -17,25 +17,16 @@ MonoBehaviour:
   unlocked:
     prereqs:
       productTypes: []
-      industries: []
-      markets: []
+      verticals: []
       workers: []
       events: []
       items: []
       stores: 
       researchPoints: 0
     productTypes:
-    - {fileID: 11400000, guid: 322fb54be4c424378a16591d473bfa5f, type: 2}
-    - {fileID: 11400000, guid: 4222ff85e6f1c4b8d95bfdcc35abc292, type: 2}
-    - {fileID: 11400000, guid: 10a80f923bdbe4ca6bb924e227eb3f1f, type: 2}
-    industries:
-    - {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
-    - {fileID: 11400000, guid: 996a2d7e0e0a54fc887350a6980d8e73, type: 2}
-    - {fileID: 11400000, guid: c478866fbff4841da8541c3c64959f75, type: 2}
-    markets:
-    - {fileID: 11400000, guid: ac0bc9ba73b0040ceb87ee77c4b9d2b5, type: 2}
-    - {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
-    - {fileID: 11400000, guid: d2b9f10bb4d63456a8275d46fa12c09a, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     workers:
     - {fileID: 11400000, guid: 3e17d13c0c97740d6905c151936591ff, type: 2}
     - {fileID: 11400000, guid: 3762f9dbcd0454acb81bc53710cc6e51, type: 2}
@@ -43,6 +34,11 @@ MonoBehaviour:
     items:
     - {fileID: 11400000, guid: eb24045815fa646dfbecfead8d90881a, type: 2}
     stores: 0000000004000000
+    locations:
+    - {fileID: 11400000, guid: 862f928919afa44519cd5f8a13d237e5, type: 2}
+    verticals:
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
   technology: {fileID: 0}
   research: 0
   otherCompanies: []

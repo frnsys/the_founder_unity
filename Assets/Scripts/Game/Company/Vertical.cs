@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Vertical : Resource<Vertical>, IHasPrereqs {
     public float cost = 10000000;
+    public string description;
 
     public bool isAvailable(Company company) {
         if (company.verticals.Count < company.locations.Count)
