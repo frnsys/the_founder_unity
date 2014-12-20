@@ -62,4 +62,11 @@ public class UISimpleGrid : UIWidget {
 
 		return list;
 	}
+
+    public void Clear() {
+        int children = transform.childCount;
+        for (int i=0;i<children;i++) {
+            NGUITools.Destroy(transform.GetChild(0).gameObject);
+        }
+    }
 }

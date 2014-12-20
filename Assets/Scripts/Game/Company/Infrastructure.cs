@@ -46,7 +46,8 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
     public override string ToString() {
         string repr = "";
         foreach(KeyValuePair<Type, int> item in this) {
-            repr += item.Key.ToString() + ":" + item.Value.ToString() + " ";
+            if (item.Value > 0)
+                repr += item.Key.ToString() + ":" + item.Value.ToString() + " ";
         }
         return repr;
     }

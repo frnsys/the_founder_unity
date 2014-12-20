@@ -29,7 +29,6 @@ public class UIFullScreenPager : MonoBehaviour {
     public void ClearGrid() {
         int children = grid.transform.childCount;
         for (int i=0;i<children;i++) {
-            Debug.Log("Destroying...");
             NGUITools.Destroy(grid.transform.GetChild(0).gameObject);
         }
     }
