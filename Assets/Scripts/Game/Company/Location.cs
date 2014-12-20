@@ -6,7 +6,6 @@ public class Location : ScriptableObject {
     public string description;
 
     public float cost = 1000000;
-    public float rent = 10000;
 
     // Infrastructure
     public int capacity = 10;

@@ -75,18 +75,20 @@ namespace UnityTest
 
 		[Test]
 		public void PayMonthly() {
+            c.cash.baseValue = 2000;
+
             Infrastructure inf = ScriptableObject.CreateInstance<Infrastructure>();
             inf.cost = 200;
             c.infrastructure.Add(inf);
 
             Location loc = ScriptableObject.CreateInstance<Location>();
-            loc.rent = 100;
-            c.locations.Add(loc);
+            loc.cost = 100;
+            c.ExpandToLocation(loc);
 
             worker.salary = 500;
-            c.cash.baseValue = 2000;
 
-            float paid = worker.salary + c.researchCash + inf.cost + loc.rent;
+            // Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
+            float paid = worker.salary + c.researchCash + inf.cost + loc.cost + loc.cost;
 
             c.HireWorker(worker);
 

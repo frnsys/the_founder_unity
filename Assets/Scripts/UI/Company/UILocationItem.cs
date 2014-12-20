@@ -20,7 +20,13 @@ public class UILocationItem : MonoBehaviour {
     }
 
     public void ExpandToLocation() {
-        // TO DO
+        UIManager.Instance.Confirm("Are you sure want to expand to " + location_.name + "?", delegate() {
+            bool success = GameManager.Instance.playerCompany.ExpandToLocation(location_);
+
+            if (!success) {
+                UIManager.Instance.Alert("You don't have enough capital to expand here. Get out.");
+            }
+        }, null);
     }
 
     public UILabel label;

@@ -81,7 +81,8 @@ namespace UnityTest
             // Should be false as the company has no verticals yet.
             Assert.IsFalse(tech.isAvailable(gd.company));
 
-            gd.company.verticals.Add(vert);
+            gd.company.cash.baseValue = 2000;
+            gd.company.ExpandToVertical(vert);
             Assert.IsTrue(tech.isAvailable(gd.company));
 
             Technology requiredTech = ScriptableObject.CreateInstance<Technology>();

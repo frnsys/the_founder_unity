@@ -19,7 +19,13 @@ public class UIVerticalItem : MonoBehaviour {
     }
 
     public void ExpandToVertical() {
-        // TO DO
+        UIManager.Instance.Confirm("Are you sure want to expand into " + vertical_.name + "?", delegate() {
+            bool success = GameManager.Instance.playerCompany.ExpandToVertical(vertical_);
+
+            if (!success) {
+                UIManager.Instance.Alert("You don't have enough capital to break into this industry. Get out of my office.");
+            }
+        }, null);
     }
 
     public UILabel label;

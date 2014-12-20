@@ -19,8 +19,6 @@ public class Company : HasStats {
         name = name_;
     }
 
-    public List<Location> locations;
-    public List<Vertical> verticals;
     public List<Technology> technologies;
     public List<Infrastructure> infrastructure;
 
@@ -76,8 +74,8 @@ public class Company : HasStats {
 
         founders = new List<Founder>();
         _workers = new List<Worker>();
-        locations = new List<Location>();
-        verticals = new List<Vertical>() {
+        _locations = new List<Location>();
+        _verticals = new List<Vertical>() {
             Vertical.Load("Information")
         };
         technologies = new List<Technology>();
@@ -160,6 +158,45 @@ public class Company : HasStats {
         }
     }
 
+    // ===============================================
+    // Location Management ===========================
+    // ===============================================
+
+    [SerializeField]
+    private List<Location> _locations;
+    public ReadOnlyCollection<Location> locations {
+        get { return _locations.AsReadOnly(); }
+    }
+
+    public bool ExpandToLocation(Location l) {
+        if (Pay(l.cost)) {
+            _locations.Add(l);
+
+            // Note this doesn't apply unlock effects...for now assuming locations don't have those.
+            ApplyEffectSet(l.effects);
+            return true;
+        }
+        return false;
+    }
+
+
+    // ===============================================
+    // Vertical Management ===========================
+    // ===============================================
+
+    [SerializeField]
+    private List<Vertical> _verticals;
+    public ReadOnlyCollection<Vertical> verticals {
+        get { return _verticals.AsReadOnly(); }
+    }
+
+    public bool ExpandToVertical(Vertical v) {
+        if (Pay(v.cost)) {
+            _verticals.Add(v);
+            return true;
+        }
+        return false;
+    }
 
     // ===============================================
     // Product Management ============================
@@ -327,7 +364,7 @@ public class Company : HasStats {
         }
 
         foreach (Location loc in locations) {
-            toPay += loc.rent;
+            toPay += loc.cost;
         }
 
         toPay += researchCash;

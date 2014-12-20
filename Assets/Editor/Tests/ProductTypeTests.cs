@@ -41,7 +41,8 @@ namespace UnityTest
             // The company does not yet have the required vertical.
             Assert.IsFalse(pt.isAvailable(gd.company));
 
-            gd.company.verticals.Add(vert);
+            gd.company.cash.baseValue = 2000;
+            gd.company.ExpandToVertical(vert);
 
             // Should still be false since the company does not have the required infrastructure.
             Assert.IsFalse(pt.isAvailable(gd.company));

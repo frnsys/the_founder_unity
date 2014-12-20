@@ -24,7 +24,7 @@ public class ProductType : Resource<ProductType>, IHasPrereqs {
     public InfrastructureDict requiredInfrastructure;
     public bool isAvailable(Company company) {
         // Check that all required verticals are active on the company.
-        if (company.verticals.Except(requiredVerticals).Any())
+        if (requiredVerticals.Except(company.verticals).Any())
             return false;
 
         // Check that the required infrastructure is available.
