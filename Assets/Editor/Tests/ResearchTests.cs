@@ -14,6 +14,7 @@ namespace UnityTest
         private GameObject gameObj;
         private GameData gd;
         private GameManager gm;
+
         private ResearchManager rm;
         private Technology tech;
         private Vertical vert;

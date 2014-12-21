@@ -16,17 +16,14 @@ public class ProductRecipe : Resource<ProductRecipe> {
     public List<ProductType> productTypes;
 
     // Weights: how important a given feature is to the product's performance.
-    public float appeal_W = 1;
-    public float usability_W = 1;
-    public float performance_W = 1;
+    public float design_W = 1;
+    public float marketing_W = 1;
+    public float engineering_W = 1;
 
     // Ideals: some minimum value a feature must achieve for good performance.
-    public float appeal_I = 100;
-    public float usability_I = 100;
-    public float performance_I = 100;
-
-    // The amount of progress necessary for finishing the product.
-    public float progressRequired = 1000;
+    public float design_I = 100;
+    public float marketing_I = 100;
+    public float engineering_I = 100;
 
     // How long this product will be profitable on the market.
     public float maxLongevity = 1000;

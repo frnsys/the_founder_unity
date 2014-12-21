@@ -97,11 +97,11 @@ public class Company : HasStats {
 
     public float AggregateWorkerSkill(string skill) {
         switch (skill) {
-            case "charisma":
+            case "Charisma":
                 return _workers.Sum(x => x.charisma.value);
-            case "cleverness":
+            case "Cleverness":
                 return _workers.Sum(x => x.cleverness.value);
-            case "creativity":
+            case "Creativity":
                 return _workers.Sum(x => x.creativity.value);
             default:
                 return 0;
@@ -384,8 +384,7 @@ public class Company : HasStats {
         get { return _infrastructure; }
     }
 
-    [SerializeField]
-    private Infrastructure baseInfrastructureCapacity;
+    public Infrastructure baseInfrastructureCapacity;
 
     // Infrastructure which is available for new products.
     public Infrastructure availableInfrastructure {
@@ -437,7 +436,7 @@ public class Company : HasStats {
     }
 
     public bool HasCapacityFor(Infrastructure i) {
-        return availableInfrastructureCapacity > i;
+        return availableInfrastructureCapacity >= i;
     }
 
 

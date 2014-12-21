@@ -18,13 +18,17 @@ public class Product : HasStats {
     // TO DO this should come from the product recipe.
     public string description;
 
-    // The feature set of the product.
-    public FeatureSet features;
-
     [SerializeField]
     private float _progress = 0;
     public float progress {
-        get { return _progress/recipe.progressRequired; }
+        get { return _progress/progressRequired; }
+    }
+
+    public float progressRequired {
+        get {
+            // TO DO calculates based on TotalProgressRequired
+            return 1;
+        }
     }
 
     [SerializeField]
@@ -105,22 +109,17 @@ public class Product : HasStats {
 
     public List<ProductType> productTypes;
 
-    // Creativity + Charisma
-    public Stat appeal;
-
-    // Cleverness + Charisma
-    public Stat usability; // or User Experience?
-
-    // Creativity + Cleverness
-    public Stat performance;
+    public Stat design;
+    public Stat marketing;
+    public Stat engineering;
 
     public void Init(List<ProductType> pts) {
         name = GenerateName();
         productTypes = pts;
 
-        appeal = new Stat("Appeal", 0);
-        usability = new Stat("Usability", 0);
-        performance = new Stat("Performance", 0);
+        design = new Stat("Design", 0);
+        marketing = new Stat("Marketing", 0);
+        engineering = new Stat("Engineering", 0);
 
         recipe = ProductRecipe.LoadFromTypes(pts);
 
@@ -154,16 +153,16 @@ public class Product : HasStats {
 
     public bool Develop(float newProgress, float charisma, float creativity, float cleverness) {
         if (state == State.DEVELOPMENT) {
-            float newAppeal = (creativity + charisma)/2;
-            float newUsability = (cleverness + charisma)/2;
-            float newPerformance = (creativity + cleverness)/2;
+            float newDesign = (creativity + charisma)/2;
+            float newMarketing = (cleverness + charisma)/2;
+            float newEngineering = (creativity + cleverness)/2;
 
             _progress += newProgress;
-            appeal.baseValue += newAppeal;
-            usability.baseValue += newUsability;
-            performance.baseValue += newPerformance;
+            design.baseValue += newDesign;
+            marketing.baseValue += newMarketing;
+            engineering.baseValue += newEngineering;
 
-            if (_progress >= recipe.progressRequired) {
+            if (_progress >= progressRequired) {
                 Launch();
 
                 // Trigger completed event.
@@ -220,19 +219,19 @@ public class Product : HasStats {
         // Another useful property is that max(f(t)) == f(mu),
         // that is, f(t) is at its peak when t = mu.
 
-        float A = appeal.value;
-        float U = usability.value;
-        float P = performance.value;
+        float A = design.value;
+        float U = marketing.value;
+        float P = engineering.value;
 
         // Weights
-        float a_w = recipe.appeal_W;
-        float u_w = recipe.usability_W;
-        float p_w = recipe.performance_W;
+        float a_w = recipe.design_W;
+        float u_w = recipe.marketing_W;
+        float p_w = recipe.engineering_W;
 
         // Ideals
-        float a_i = recipe.appeal_I;
-        float u_i = recipe.usability_I;
-        float p_i = recipe.performance_I;
+        float a_i = recipe.design_I;
+        float u_i = recipe.marketing_I;
+        float p_i = recipe.engineering_I;
 
         // Adjusted values, min 0 (no negatives).
         float A_ = (A/a_i) * a_w;
@@ -333,12 +332,12 @@ public class Product : HasStats {
 
     public override Stat StatByName(string name) {
         switch (name) {
-            case "Appeal":
-                return appeal;
-            case "Usability":
-                return usability;
-            case "Performance":
-                return performance;
+            case "Design":
+                return design;
+            case "Marketing":
+                return marketing;
+            case "Engineering":
+                return engineering;
             default:
                 return null;
         }
@@ -350,6 +349,47 @@ public class Product : HasStats {
         // ...
         // Modify product-related event probabilities, etc.
         _state = State.RETIRED;
+    }
+
+
+    // Progress required for the nth point.
+    public static int baseProgress = 1000;
+    public float ProgressRequired(string feature, int n, Company c) {
+        float reqProgress = Fibonacci(n+2) * baseProgress;
+        reqProgress *= difficulty;
+
+        switch (feature) {
+            case "Design":
+                reqProgress /= c.AggregateWorkerSkill("Creativity");
+                break;
+            case "Engineering":
+                reqProgress /= c.AggregateWorkerSkill("Cleverness");
+                break;
+            case "Marketing":
+                reqProgress /= c.AggregateWorkerSkill("Charisma");
+                break;
+            default:
+                break;
+        }
+
+        return reqProgress;
+    }
+
+    public static int Fibonacci(int n) {
+        if (n == 0)
+            return 0;
+        else if (n == 1)
+            return 1;
+        else
+            return Fibonacci(n-1) + Fibonacci(n-2);
+    }
+
+    public float TotalProgressRequired(Company c) {
+        float reqProgress = 0;
+        reqProgress += ProgressRequired("Design", (int)design.value, c);
+        reqProgress += ProgressRequired("Engineering", (int)engineering.value, c);
+        reqProgress += ProgressRequired("Marketing", (int)marketing.value, c);
+        return reqProgress;
     }
 }
 

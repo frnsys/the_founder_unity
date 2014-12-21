@@ -14,9 +14,9 @@ class StatBuffDrawer : PropertyDrawer {
         "Charisma",
         "Cleverness",
         "Creativity",
-        "Appeal",
-        "Performance",
-        "Usability",
+        "Design",
+        "Marketing",
+        "Engineering",
         "Cash"
     };
 

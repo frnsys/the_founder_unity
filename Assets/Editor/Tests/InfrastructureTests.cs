@@ -43,23 +43,23 @@ namespace UnityTest
         }
 
         [Test]
-        public void GreaterThan() {
-            Assert.IsFalse(id > id_);
+        public void GreaterThanEqual() {
+            Assert.IsFalse(id >= id_);
 
             id[Infrastructure.Type.Factory]     = 2;
             id_[Infrastructure.Type.Datacenter] = 1;
 
-            Assert.IsTrue(id > id_);
+            Assert.IsTrue(id >= id_);
         }
 
         [Test]
-        public void LessThan() {
-            Assert.IsFalse(id < id_);
+        public void LessThanEqual() {
+            Assert.IsFalse(id <= id_);
 
             id_[Infrastructure.Type.Datacenter] = 10;
             id_[Infrastructure.Type.Studio]     = 10;
 
-            Assert.IsTrue(id < id_);
+            Assert.IsTrue(id <= id_);
         }
 
         [Test]
@@ -75,9 +75,11 @@ namespace UnityTest
         [Test]
         public void Subtract() {
             Infrastructure result = new Infrastructure();
-            result[Infrastructure.Type.Datacenter] = -1;
+
+            // Minimum value is 0.
+            result[Infrastructure.Type.Datacenter] = 0;
             result[Infrastructure.Type.Studio]     = 2;
-            result[Infrastructure.Type.Factory]    = -1;
+            result[Infrastructure.Type.Factory]    = 0;
 
             Assert.IsTrue(result.Equals(id - id_));
         }

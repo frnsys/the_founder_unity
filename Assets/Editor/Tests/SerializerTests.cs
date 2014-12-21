@@ -121,9 +121,9 @@ namespace UnityTest
                 Assert.AreEqual(p.lastRevenue,        p_.lastRevenue);
                 Assert.AreEqual(p.points,             p_.points);
 
-                Assert.AreEqual(p.appeal.value,       p_.appeal.value);
-                Assert.AreEqual(p.usability.value,    p_.usability.value);
-                Assert.AreEqual(p.performance.value,  p_.performance.value);
+                Assert.AreEqual(p.design.value,       p_.design.value);
+                Assert.AreEqual(p.marketing.value,    p_.marketing.value);
+                Assert.AreEqual(p.engineering.value,  p_.engineering.value);
 
                 for (int j=0; j<p.productTypes.Count; j++) {
                     Assert.AreEqual(p.productTypes[j].name, p_.productTypes[j].name);
@@ -269,7 +269,7 @@ namespace UnityTest
 
             ProductEffect pe = new ProductEffect();
             pe.productTypes.Add(pt);
-            pe.buff = new StatBuff("Appeal", RandFloat());
+            pe.buff = new StatBuff("Design", RandFloat());
             e.products.Add(pe);
 
             return e;

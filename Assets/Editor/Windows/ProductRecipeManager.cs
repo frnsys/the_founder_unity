@@ -46,17 +46,16 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
 
         EditorGUILayout.Space();
 
-        target.appeal_W = EditorGUILayout.FloatField("Appeal Weight", target.appeal_W);
-        target.usability_W = EditorGUILayout.FloatField("Usability Weight", target.usability_W);
-        target.performance_W = EditorGUILayout.FloatField("Performance Weight", target.performance_W);
+        target.design_W = EditorGUILayout.FloatField("Design Weight", target.design_W);
+        target.marketing_W = EditorGUILayout.FloatField("Marketing Weight", target.marketing_W);
+        target.engineering_W = EditorGUILayout.FloatField("Engineering Weight", target.engineering_W);
         EditorGUILayout.Space();
 
-        target.appeal_I = EditorGUILayout.FloatField("Appeal Ideal", target.appeal_I);
-        target.usability_I = EditorGUILayout.FloatField("Usability Ideal", target.usability_I);
-        target.performance_I = EditorGUILayout.FloatField("Performance Ideal", target.performance_I);
+        target.design_I = EditorGUILayout.FloatField("Design Ideal", target.design_I);
+        target.marketing_I = EditorGUILayout.FloatField("Marketing Ideal", target.marketing_I);
+        target.engineering_I = EditorGUILayout.FloatField("Engineering Ideal", target.engineering_I);
         EditorGUILayout.Space();
 
-        target.progressRequired = EditorGUILayout.FloatField("Progress Required", target.progressRequired);
         target.maxLongevity = EditorGUILayout.FloatField("Max Longevity", target.maxLongevity);
         target.maxRevenue = EditorGUILayout.FloatField("Max Revenue", target.maxRevenue);
         EditorGUILayout.Space();

@@ -99,7 +99,7 @@ public class UINewProductFlow : MonoBehaviour {
             if (selectionInfs.Count() > 0)
                 selectionInf += selectionInfs.Aggregate((x, y) => x + y);
         }
-        return (gm.playerCompany.availableInfrastructure - selectionInf) > pt.requiredInfrastructure;
+        return (gm.playerCompany.availableInfrastructure - selectionInf) >= pt.requiredInfrastructure;
     }
 
     public void ConfirmSelection() {

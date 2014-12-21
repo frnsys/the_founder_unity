@@ -22,6 +22,9 @@ internal class ProductTypeInspector : Editor {
         p.name = EditorGUILayout.TextField("Name", p.name);
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
 
+        p.progressRequired = EditorGUILayout.FloatField("Progress Required", p.progressRequired);
+        p.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", p.difficulty);
+
         EditorGUILayout.LabelField("Required Verticals");
         for (int i=0; i < p.requiredVerticals.Count; i++) {
             EditorGUILayout.BeginHorizontal();

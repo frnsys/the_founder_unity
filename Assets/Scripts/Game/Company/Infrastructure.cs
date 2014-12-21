@@ -60,17 +60,17 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         return true;
     }
 
-    public static bool operator >(Infrastructure left, Infrastructure right) {
+    public static bool operator <=(Infrastructure left, Infrastructure right) {
         foreach(KeyValuePair<Type, int> item in left) {
-            if (item.Value < right[item.Key])
+            if (item.Value > right[item.Key])
                 return false;
         }
         return true;
     }
 
-    public static bool operator <(Infrastructure left, Infrastructure right) {
+    public static bool operator >=(Infrastructure left, Infrastructure right) {
         foreach(KeyValuePair<Type, int> item in left) {
-            if (item.Value > right[item.Key])
+            if (item.Value < right[item.Key])
                 return false;
         }
         return true;

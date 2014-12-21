@@ -7,6 +7,10 @@ using System.Collections.Generic;
 public class ProductType : Resource<ProductType>, IHasPrereqs {
     public string description;
 
+    // The base amount of progress necessary for finishing the product.
+    public float progressRequired = 1000;
+
+    // The difficulty modifier for this product type.
     public float difficulty;
 
     public override string ToString() {
@@ -30,10 +34,7 @@ public class ProductType : Resource<ProductType>, IHasPrereqs {
             return false;
 
         // Check that the required infrastructure is available.
-        if (company.availableInfrastructure < requiredInfrastructure)
-            return false;
-
-        return true;
+        return company.availableInfrastructure >= requiredInfrastructure;
     }
 
     // Generalize a "points" metric which is just the total number of infrastructure required.

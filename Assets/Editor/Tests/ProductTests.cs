@@ -12,6 +12,10 @@ namespace UnityTest
 	[TestFixture]
 	internal class ProductTests
 	{
+        private GameObject gameObj;
+        private GameData gd;
+        private GameManager gm;
+
         private Product p = null;
         private ProductRecipe pr = null;
         private Item item;
@@ -19,6 +23,11 @@ namespace UnityTest
         [SetUp]
         public void SetUp() {
             ProductType pt = ProductType.Load("Social Network");
+
+            gameObj = new GameObject("Game Manager");
+            gm = gameObj.AddComponent<GameManager>();
+            gd = GameData.New("DEFAULTCORP");
+            gm.Load(gd);
 
             List<ProductType> pts = new List<ProductType>() { pt };
 
@@ -47,16 +56,16 @@ namespace UnityTest
 		public void Develop() {
             Assert.AreEqual(p.state, Product.State.DEVELOPMENT);
             Assert.AreEqual(p.progress, 0);
-            Assert.AreEqual(p.appeal.value, 0);
-            Assert.AreEqual(p.usability.value, 0);
-            Assert.AreEqual(p.performance.value, 0);
+            Assert.AreEqual(p.design.value, 0);
+            Assert.AreEqual(p.marketing.value, 0);
+            Assert.AreEqual(p.engineering.value, 0);
 
             p.Develop(100000, 5, 15, 25);
 
-            Assert.AreEqual(p.progress, 100000/pr.progressRequired);
-            Assert.AreEqual(p.appeal.value, (5+15)/2);
-            Assert.AreEqual(p.usability.value, (25+5)/2);
-            Assert.AreEqual(p.performance.value, (15+25)/2);
+            Assert.AreEqual(p.progress, 100000/p.progressRequired);
+            Assert.AreEqual(p.design.value, (5+15)/2);
+            Assert.AreEqual(p.marketing.value, (25+5)/2);
+            Assert.AreEqual(p.engineering.value, (15+25)/2);
             Assert.AreEqual(p.state, Product.State.LAUNCHED);
         }
 
@@ -68,9 +77,9 @@ namespace UnityTest
 
 		[Test]
 		public void Revenue_Launched() {
-            p.appeal.baseValue = 100;
-            p.usability.baseValue = 100;
-            p.performance.baseValue = 100;
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
 
             p.Launch();
 
@@ -79,9 +88,9 @@ namespace UnityTest
 
 		[Test]
 		public void Revenue_ZeroStats() {
-            p.appeal.baseValue = 0;
-            p.usability.baseValue = 0;
-            p.performance.baseValue = 0;
+            p.design.baseValue = 0;
+            p.marketing.baseValue = 0;
+            p.engineering.baseValue = 0;
 
             p.Launch();
 
@@ -92,9 +101,9 @@ namespace UnityTest
 
 
             // But it should be less than a product with more stats.
-            p.appeal.baseValue = 100;
-            p.usability.baseValue = 100;
-            p.performance.baseValue = 100;
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
 
             p.Launch();
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using System.Collections;
@@ -50,6 +51,10 @@ namespace UnityTest
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 2;
             i[Infrastructure.Type.Factory] = 1;
+
+            gd.company.baseInfrastructureCapacity[Infrastructure.Type.Datacenter] = 2;
+            gd.company.baseInfrastructureCapacity[Infrastructure.Type.Factory] = 1;
+            gd.company.cash.baseValue = i.cost;
             gd.company.BuyInfrastructure(i);
 
             Assert.IsTrue(pt.isAvailable(gd.company));

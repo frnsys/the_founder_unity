@@ -49,17 +49,16 @@ internal class ProductRecipeInspector : Editor {
 
         EditorGUILayout.Space();
 
-        p.appeal_W = EditorGUILayout.FloatField("Appeal Weight", p.appeal_W);
-        p.usability_W = EditorGUILayout.FloatField("Usability Weight", p.usability_W);
-        p.performance_W = EditorGUILayout.FloatField("Performance Weight", p.performance_W);
+        p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);
+        p.marketing_W = EditorGUILayout.FloatField("Marketing Weight", p.marketing_W);
+        p.engineering_W = EditorGUILayout.FloatField("Engineering Weight", p.engineering_W);
         EditorGUILayout.Space();
 
-        p.appeal_I = EditorGUILayout.FloatField("Appeal Ideal", p.appeal_I);
-        p.usability_I = EditorGUILayout.FloatField("Usability Ideal", p.usability_I);
-        p.performance_I = EditorGUILayout.FloatField("Performance Ideal", p.performance_I);
+        p.design_I = EditorGUILayout.FloatField("Design Ideal", p.design_I);
+        p.marketing_I = EditorGUILayout.FloatField("Marketing Ideal", p.marketing_I);
+        p.engineering_I = EditorGUILayout.FloatField("Engineering Ideal", p.engineering_I);
         EditorGUILayout.Space();
 
-        p.progressRequired = EditorGUILayout.FloatField("Progress Required", p.progressRequired);
         p.maxLongevity = EditorGUILayout.FloatField("Max Longevity", p.maxLongevity);
         p.maxRevenue = EditorGUILayout.FloatField("Max Revenue", p.maxRevenue);
         EditorGUILayout.Space();

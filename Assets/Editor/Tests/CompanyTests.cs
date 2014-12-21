@@ -13,7 +13,9 @@ namespace UnityTest
 	internal class CompanyTests
 	{
         private GameObject gameObj;
-        private GameManager gameManager;
+        private GameData gd;
+        private GameManager gm;
+
         private Company c;
         private Worker worker;
         private Item item;
@@ -23,7 +25,9 @@ namespace UnityTest
         [SetUp]
         public void SetUp() {
             gameObj = new GameObject("Game Manager");
-            gameManager = gameObj.AddComponent<GameManager>();
+            gm = gameObj.AddComponent<GameManager>();
+            gd = GameData.New("DEFAULTCORP");
+            gm.Load(gd);
 
             c = new Company("Foo Inc");
 
@@ -40,7 +44,7 @@ namespace UnityTest
         [TearDown]
         public void TearDown() {
             UnityEngine.Object.DestroyImmediate(gameObj);
-            gameManager = null;
+            gm = null;
             worker = null;
             c = null;
             item = null;
@@ -75,7 +79,10 @@ namespace UnityTest
 
 		[Test]
 		public void PayMonthly() {
-            c.cash.baseValue = 2000;
+            // For this test to work, startCash has to be enough for all these purchases.
+            // Otherwise the purchases don't go through.
+            float startCash = 200000;
+            c.cash.baseValue = startCash;
 
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 1;
@@ -94,7 +101,7 @@ namespace UnityTest
             c.HireWorker(worker);
 
             c.PayMonthly();
-            Assert.AreEqual(c.cash.baseValue, 2000 - paid);
+            Assert.AreEqual(c.cash.baseValue, startCash - paid);
         }
 
 
@@ -120,7 +127,7 @@ namespace UnityTest
 
             // Creating a new product should apply existing items.
             Assert.AreEqual(c.products.Count, 1);
-            Assert.AreEqual(c.products[0].appeal.value, 10);
+            Assert.AreEqual(c.products[0].design.value, 10);
         }
 
 		[Test]
@@ -137,9 +144,9 @@ namespace UnityTest
             c.DevelopProduct(p);
 
             Assert.IsTrue(p.progress > 0);
-            Assert.IsTrue(p.appeal.value > 0);
-            Assert.IsTrue(p.usability.value > 0);
-            Assert.IsTrue(p.performance.value > 0);
+            Assert.IsTrue(p.design.value > 0);
+            Assert.IsTrue(p.marketing.value > 0);
+            Assert.IsTrue(p.engineering.value > 0);
         }
 
 		[Test]
@@ -171,12 +178,12 @@ namespace UnityTest
 
             c.StartNewProduct(pts);
             Product p = c.products[0];
-            Assert.AreEqual(p.appeal.value, 10);
+            Assert.AreEqual(p.design.value, 10);
 
             c.ShutdownProduct(p);
 
             Assert.AreEqual(p.state, Product.State.RETIRED);
-            Assert.AreEqual(p.appeal.value, 0);
+            Assert.AreEqual(p.design.value, 0);
             Assert.AreEqual(c.availableInfrastructure, c.infrastructure);
         }
 
@@ -196,7 +203,7 @@ namespace UnityTest
             Assert.IsTrue(c.BuyItem(item));
             Assert.AreEqual(c.cash.baseValue, 1500);
             Assert.AreEqual(c.items.Count, 1);
-            Assert.AreEqual(p.appeal.value, 10);
+            Assert.AreEqual(p.design.value, 10);
             Assert.AreEqual(worker.happiness.value, 10);
             Assert.AreEqual(worker.productivity.value, 20);
 
@@ -224,7 +231,7 @@ namespace UnityTest
             c.RemoveItem(item);
 
             Assert.AreEqual(c.items.Count, 0);
-            Assert.AreEqual(p.appeal.value, 0);
+            Assert.AreEqual(p.design.value, 0);
             Assert.AreEqual(worker.happiness.value, 0);
         }
     }

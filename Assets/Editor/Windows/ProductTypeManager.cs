@@ -25,6 +25,9 @@ public class ProductTypeManager : ManagerWindow<ProductType> {
         target.name = EditorGUILayout.TextField("Name", target.name);
         target.description = EditorGUILayout.TextArea(target.description, GUILayout.Height(50));
 
+        target.progressRequired = EditorGUILayout.FloatField("Progress Required", target.progressRequired);
+        target.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", target.difficulty);
+
         EditorGUILayout.LabelField("Required Verticals");
         for (int i=0; i < target.requiredVerticals.Count; i++) {
             EditorGUILayout.BeginHorizontal();

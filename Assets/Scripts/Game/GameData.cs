@@ -87,7 +87,7 @@ public class GameData : ScriptableObject {
         data.year  = 1;
         data.week  = 0;
 
-        data.economyMultiplier = 1f;
+        data.economyMultiplier = 1;
 
         // You start your business at 25,
         // so the amount of time you have really ranges from 40-60.
