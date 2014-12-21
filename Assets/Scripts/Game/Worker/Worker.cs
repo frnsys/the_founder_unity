@@ -26,9 +26,10 @@ public class Worker : HasStats {
     public float minSalary {
         get {
             // If the employee is currently hired, i.e. has a salary > 0,
-            // their minimum acceptable salary is higher than what they're currently paid.
+            // their minimum acceptable salary depends on their happiness at their current company.
+            // If happiness is below 5, the employee will actually accept a lower salary to move.
             if (salary > 0)
-                return salary * 1.2f;
+                return salary * (1 + (happiness - 5)/10);
             return baseMinSalary;
         }
     }
