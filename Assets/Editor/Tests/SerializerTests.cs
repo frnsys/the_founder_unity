@@ -27,6 +27,8 @@ namespace UnityTest
 
                 for (int i=0;i<5;i++) {
                     Worker worker = CreateWorker("WORKER"+i, i*10);
+                    worker.offMarketTime = i;
+                    worker.recentPlayerOffers = i;
                     data.company.HireWorker(worker);
                 }
 
@@ -101,6 +103,8 @@ namespace UnityTest
 
                 Assert.AreEqual(w.name,                     w_.name);
                 Assert.AreEqual(w.salary,                   w_.salary);
+                Assert.AreEqual(w.offMarketTime,            w_.offMarketTime);
+                Assert.AreEqual(w.recentPlayerOffers,       w_.recentPlayerOffers);
                 Assert.AreEqual(w.happiness.baseValue,      w_.happiness.baseValue);
                 Assert.AreEqual(w.productivity.baseValue,   w_.productivity.baseValue);
                 Assert.AreEqual(w.charisma.baseValue,       w_.charisma.baseValue);

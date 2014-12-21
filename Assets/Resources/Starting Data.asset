@@ -26,8 +26,8 @@ MonoBehaviour:
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers:
-    - {fileID: 11400000, guid: 3e17d13c0c97740d6905c151936591ff, type: 2}
-    - {fileID: 11400000, guid: 3762f9dbcd0454acb81bc53710cc6e51, type: 2}
+    - {fileID: 11400000, guid: ab147395ddb924b6bbb72fc291176108, type: 2}
+    - {fileID: 11400000, guid: def0cbbde04104d19823162e38dee52b, type: 2}
     events: []
     items:
     - {fileID: 11400000, guid: eb24045815fa646dfbecfead8d90881a, type: 2}
@@ -46,3 +46,4 @@ MonoBehaviour:
   lifetimeYear: 0
   lifetimeMonth: 0
   lifetimeWeek: 0
+  economyMultiplier: 0

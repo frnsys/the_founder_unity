@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager> {
 
     public List<Worker> availableWorkers {
         get {
-            return data.unlocked.workers.Where(w => !playerCompany.workers.Contains(w)).ToList();
+            return data.unlocked.workers.Where(w => !playerCompany.workers.Contains(w) && w.offMarketTime == 0).ToList();
         }
     }
 
@@ -203,8 +203,17 @@ public class GameManager : Singleton<GameManager> {
                 UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
             }
 
+            // Make other AI company moves.
             foreach (AICompany aic in data.otherCompanies) {
                 aic.Decide();
+            }
+
+            // Update workers' off market times.
+            foreach (Worker w in data.unlocked.workers.Where(w => w.offMarketTime > 0)) {
+                // Reset player offers if appropriate.
+                if (--w.offMarketTime == 0) {
+                    w.recentPlayerOffers = 0;
+                }
             }
 
             // Save the game every week.

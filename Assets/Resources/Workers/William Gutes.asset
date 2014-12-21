@@ -9,24 +9,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
-  m_Name: Laray
+  m_Name: William Gutes
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   salary: 0
-  bio: yoyoyo
-  minSalary: 0
+  bio: He's really good with computers.
+  minSalary: 40000
+  offMarketTime: 0
+  recentPlayerOffers: 0
   happiness:
-    baseValue: 40
+    baseValue: 0
     _buffs: []
   productivity:
-    baseValue: 40
+    baseValue: 8
     _buffs: []
   charisma:
-    baseValue: 40
+    baseValue: 4
     _buffs: []
   creativity:
-    baseValue: 40
+    baseValue: 4
     _buffs: []
   cleverness:
-    baseValue: 40
+    baseValue: 9
     _buffs: []

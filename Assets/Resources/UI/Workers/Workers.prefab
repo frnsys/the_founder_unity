@@ -293,6 +293,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100034
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400034}
+  - 114: {fileID: 11400058}
+  m_Layer: 8
+  m_Name: No Workers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &100104
 GameObject:
   m_ObjectHideFlags: 1
@@ -671,6 +687,18 @@ Transform:
   - {fileID: 400004}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &400034
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .841125488, y: 50, z: 0}
+  m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
+  m_Children: []
+  m_Father: {fileID: 400140}
+  m_RootOrder: 0
 --- !u!4 &400104
 Transform:
   m_ObjectHideFlags: 1
@@ -733,7 +761,7 @@ Transform:
   - {fileID: 400106}
   - {fileID: 400104}
   m_Father: {fileID: 400140}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &400134
 Transform:
   m_ObjectHideFlags: 1
@@ -746,7 +774,7 @@ Transform:
   m_Children:
   - {fileID: 400116}
   m_Father: {fileID: 400140}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &400138
 Transform:
   m_ObjectHideFlags: 1
@@ -758,7 +786,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400140}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &400140
 Transform:
   m_ObjectHideFlags: 1
@@ -769,6 +797,7 @@ Transform:
   m_LocalPosition: {x: -.841121554, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400034}
   - {fileID: 400138}
   - {fileID: 400134}
   - {fileID: 400132}
@@ -1704,6 +1733,8 @@ MonoBehaviour:
   gridCenter: {fileID: 11400170}
   scrollView: {fileID: 11400160}
   workerItemPrefab: {fileID: 100010, guid: 0e4cb85a0e41544f592f49b906eb7b56, type: 2}
+  offerPrefab: {fileID: 100020, guid: 97c84dc3691364888a63c9468abe7359, type: 2}
+  noWorkersNotice: {fileID: 100034}
   hireButton: {fileID: 11400172}
 --- !u!114 &11400040
 MonoBehaviour:
@@ -2139,6 +2170,68 @@ MonoBehaviour:
     mMethodName: Close
     mParameters: []
     oneShot: 0
+--- !u!114 &11400058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400140}
+    relative: .5
+    absolute: -160
+  rightAnchor:
+    target: {fileID: 400140}
+    relative: .5
+    absolute: 160
+  bottomAnchor:
+    target: {fileID: 400140}
+    relative: .5
+    absolute: -80
+  topAnchor:
+    target: {fileID: 400140}
+    relative: .5
+    absolute: 180
+  updateAnchors: 1
+  mColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
+  mPivot: 4
+  mWidth: 320
+  mHeight: 260
+  mDepth: 3
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: .676923096
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
+  mFont: {fileID: 0}
+  mText: Looks like the job market is empty.
+  mFontSize: 48
+  mFontStyle: 0
+  mAlignment: 1
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
 --- !u!114 &11400060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2169,14 +2262,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1224
+  mWidth: 810
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.27499998
-  childSize: {x: 1224, y: 960}
+  aspectRatio: .84375
+  childSize: {x: 810, y: 960}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11400156
@@ -2292,7 +2385,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -2312,7 +2405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 1224
+  itemSize: 810
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -2532,7 +2625,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3010
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -2635,7 +2728,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3007
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

@@ -5,12 +5,14 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
 public class Worker : HasStats {
     public static List<Worker> LoadAll() {
-        return new List<Worker>(Resources.LoadAll<Worker>("Workers"));
+        // Load workers as _copies_ so any changes don't get saved to the actual resources.
+        return Resources.LoadAll<Worker>("Workers").ToList().Select(w => Instantiate(w) as Worker).ToList();
     }
 
     private Levels levels;
@@ -21,6 +23,11 @@ public class Worker : HasStats {
     public float salary;
     public string bio;
     public float minSalary;
+
+    // How many weeks the worker is off the job market for.
+    // Recent offers the player has made.
+    public int offMarketTime;
+    public int recentPlayerOffers;
 
     public Stat happiness;
     public Stat productivity;
@@ -40,6 +47,9 @@ public class Worker : HasStats {
         charisma     = new Stat("Charisma",     0);
         creativity   = new Stat("Creativity",   0);
         cleverness   = new Stat("Cleverness",   0);
+
+        offMarketTime = 0;
+        recentPlayerOffers = 0;
         //levels     = this.gameObject.GetComponent<Levels>();
     }
 
