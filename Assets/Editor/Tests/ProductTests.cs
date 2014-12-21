@@ -40,6 +40,8 @@ namespace UnityTest
 
         [TearDown]
         public void TearDown() {
+            UnityEngine.Object.DestroyImmediate(gameObj);
+            gm = null;
             p = null;
             item = null;
         }
