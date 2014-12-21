@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class ProductType : Resource<ProductType>, IHasPrereqs {
+public class ProductType : Resource<ProductType> {
     public string description;
 
     // The base amount of progress necessary for finishing the product.
