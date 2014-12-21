@@ -242,10 +242,10 @@ public class Product : HasStats {
         // Revenue model params:
 
         // Lower is better (more explosive growth).
-        start_sd = LimitRange(1/combo, 0.25f, 3.5f);
+        start_sd = Tools.LimitRange(1/combo, 0.25f, 3.5f);
 
         // Higher is better (slower decline).
-        end_sd = LimitRange(combo, 0.25f, 3.5f);
+        end_sd = Tools.LimitRange(combo, 0.25f, 3.5f);
 
         // Time where the plateau begins, see comments above for rationale.
         start_mu = 3 * start_sd;
@@ -258,13 +258,13 @@ public class Product : HasStats {
         end_mu = start_mu + longevity;
 
         // Calculate the peak revenue percentage for the plateau.
-        peakRevenuePercent = Gaussian(start_mu, start_mu, start_sd);
+        peakRevenuePercent = Tools.Gaussian(start_mu, start_mu, start_sd);
 
         // Calculate the constant required to vertically shift the
         // end function so that it's peak intersects with the starting peak.
         // We apply an extra downward weight at the end (0.05f*end_mu)
         // to ensure that the end function eventually intersects the x-axis (reaches 0).
-        float endPeak = Gaussian(end_mu, end_mu, end_sd) - (0.05f * end_mu);
+        float endPeak = Tools.Gaussian(end_mu, end_mu, end_sd) - (0.05f * end_mu);
         endFuncAdjustment = peakRevenuePercent - endPeak;
 
         //Debug.Log("START_SD:" + start_sd);
@@ -292,14 +292,14 @@ public class Product : HasStats {
 
             // Start
             if (timeSinceLaunch < start_mu) {
-                revenuePercent = Gaussian(timeSinceLaunch, start_mu, start_sd);
+                revenuePercent = Tools.Gaussian(timeSinceLaunch, start_mu, start_sd);
                 //Debug.Log("START FUNC");
 
             // End
             } else if (timeSinceLaunch > end_mu) {
                 // We apply an extra downward weight at the end (0.05f*timeSinceLaunch)
                 // to ensure that the end function eventually intersects the x-axis (reaches 0).
-                revenuePercent = Gaussian(timeSinceLaunch, end_mu, end_sd) + endFuncAdjustment - (0.05f * timeSinceLaunch);
+                revenuePercent = Tools.Gaussian(timeSinceLaunch, end_mu, end_sd) + endFuncAdjustment - (0.05f * timeSinceLaunch);
                 //Debug.Log("END FUNC");
 
             // Plateau
@@ -322,12 +322,6 @@ public class Product : HasStats {
         revenueEarned += revenue;
         lastRevenue = revenue;
         return revenue;
-    }
-    private float Gaussian(float x, float mean, float sd) {
-        return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
-    }
-    private float LimitRange(float value, float min, float max) {
-        return (value < min) ? min : (value > max) ? max : value;
     }
 
     public override Stat StatByName(string name) {
@@ -360,13 +354,13 @@ public class Product : HasStats {
 
         switch (feature) {
             case "Design":
-                reqProgress /= c.AggregateWorkerSkill("Creativity");
+                reqProgress /= c.AggregateWorkerStat("Creativity");
                 break;
             case "Engineering":
-                reqProgress /= c.AggregateWorkerSkill("Cleverness");
+                reqProgress /= c.AggregateWorkerStat("Cleverness");
                 break;
             case "Marketing":
-                reqProgress /= c.AggregateWorkerSkill("Charisma");
+                reqProgress /= c.AggregateWorkerStat("Charisma");
                 break;
             default:
                 break;

@@ -31,4 +31,11 @@ class Tools {
         else
             return Fibonacci(n-1) + Fibonacci(n-2);
     }
+
+    public static float Gaussian(float x, float mean, float sd) {
+        return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
+    }
+    public static float LimitRange(float value, float min, float max) {
+        return (value < min) ? min : (value > max) ? max : value;
+    }
 }

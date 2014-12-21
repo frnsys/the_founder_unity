@@ -123,5 +123,56 @@ namespace UnityTest
         public void Points() {
             Assert.AreEqual(p.points, p.productTypes.Sum(t => t.points));
         }
+
+        [Test]
+        public void Difficulty() {
+            ProductType pt_  = ScriptableObject.CreateInstance<ProductType>();
+            pt_.difficulty  = 1f;
+
+            ProductType pt__ = ScriptableObject.CreateInstance<ProductType>();
+            pt__.difficulty = 2f;
+
+            Product prod = ScriptableObject.CreateInstance<Product>();
+            prod.Init( new List<ProductType> { pt_, pt__ } );
+
+            Assert.AreEqual(prod.difficulty, 1.5);
+        }
+
+        [Test]
+        public void RequiredVerticals() {
+            ProductType pt_  = ScriptableObject.CreateInstance<ProductType>();
+            Vertical vert_   = ScriptableObject.CreateInstance<Vertical>();
+            pt_.requiredVerticals = new List<Vertical>() { vert_ };
+
+            ProductType pt__ = ScriptableObject.CreateInstance<ProductType>();
+            Vertical vert__  = ScriptableObject.CreateInstance<Vertical>();
+            pt__.requiredVerticals = new List<Vertical>() { vert__ };
+
+            Product prod = ScriptableObject.CreateInstance<Product>();
+            prod.Init( new List<ProductType> { pt_, pt__ } );
+
+            Assert.AreEqual(prod.requiredVerticals, new List<Vertical>() { vert_, vert__ });
+        }
+
+        [Test]
+        public void RequiredInfrastructure() {
+            ProductType pt_   = ScriptableObject.CreateInstance<ProductType>();
+            Infrastructure i_ = new Infrastructure();
+            i_[Infrastructure.Type.Datacenter] = 10;
+            pt_.requiredInfrastructure = i_;
+
+            ProductType pt__   = ScriptableObject.CreateInstance<ProductType>();
+            Infrastructure i__ = new Infrastructure();
+            i__[Infrastructure.Type.Studio] = 3;
+            pt__.requiredInfrastructure = i__;
+
+            Product prod = ScriptableObject.CreateInstance<Product>();
+            prod.Init( new List<ProductType> { pt_, pt__ } );
+
+            Infrastructure i = new Infrastructure();
+            i[Infrastructure.Type.Datacenter] = 10;
+            i[Infrastructure.Type.Studio] = 3;
+            Assert.IsTrue(prod.requiredInfrastructure.Equals(i));
+        }
     }
 }

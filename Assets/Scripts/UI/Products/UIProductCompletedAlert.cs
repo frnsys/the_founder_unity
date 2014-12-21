@@ -14,7 +14,7 @@ public class UIProductCompletedAlert: UIEffectAlert {
             aspectsLabel.text = string.Join(" & ", value.productTypes.Select(pt => pt.name).ToArray());
             Extend(bodyLabel.height);
 
-            // NOT USED
+            // TO DO add product effects
             //RenderEffects(product.effects);
 
             // -1 because by default there is space for about 1 effect.

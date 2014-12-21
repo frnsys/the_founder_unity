@@ -78,6 +78,62 @@ namespace UnityTest
         }
 
 		[Test]
+		public void AggregateWorkerStats() {
+            Founder founder = ScriptableObject.CreateInstance<Founder>();
+            founder.Init("Jobs");
+            founder.charisma.baseValue = 10;
+            founder.creativity.baseValue = 20;
+            founder.cleverness.baseValue = 30;
+            founder.happiness.baseValue = 40;
+            founder.productivity.baseValue = 50;
+            c.founders.Add(founder);
+
+            worker.charisma.baseValue = 1;
+            worker.creativity.baseValue = 2;
+            worker.cleverness.baseValue = 3;
+            worker.happiness.baseValue = 4;
+            worker.productivity.baseValue = 5;
+            c.HireWorker(worker);
+
+            Assert.AreEqual(c.AggregateWorkerStat("Charisma"), 11);
+            Assert.AreEqual(c.AggregateWorkerStat("Creativity"), 22);
+            Assert.AreEqual(c.AggregateWorkerStat("Cleverness"), 33);
+            Assert.AreEqual(c.AggregateWorkerStat("Happiness"), 44);
+            Assert.AreEqual(c.AggregateWorkerStat("Productivity"), 55);
+        }
+
+		[Test]
+        public void ExpandToVertical() {
+            c.cash.baseValue = 0;
+            Vertical vert = ScriptableObject.CreateInstance<Vertical>();
+            vert.cost = 2000;
+
+            Assert.IsFalse(c.ExpandToVertical(vert));
+
+            c.cash.baseValue = 2000;
+            Assert.IsTrue(c.ExpandToVertical(vert));
+            Assert.IsTrue(c.verticals.Contains(vert));
+        }
+
+		[Test]
+        public void ExpandToLocation() {
+            c.cash.baseValue = 0;
+            Location loc = ScriptableObject.CreateInstance<Location>();
+            loc.cost = 2000;
+
+            EffectSet es = new EffectSet();
+            es.company.Add( new StatBuff("Cash", 5000) );
+            loc.effects = es;
+
+            Assert.IsFalse(c.ExpandToLocation(loc));
+
+            c.cash.baseValue = 2000;
+            Assert.IsTrue(c.ExpandToLocation(loc));
+            Assert.IsTrue(c.locations.Contains(loc));
+            Assert.AreEqual(c.cash.value, 5000);
+        }
+
+		[Test]
 		public void PayMonthly() {
             // For this test to work, startCash has to be enough for all these purchases.
             // Otherwise the purchases don't go through.
@@ -102,6 +158,80 @@ namespace UnityTest
 
             c.PayMonthly();
             Assert.AreEqual(c.cash.baseValue, startCash - paid);
+        }
+
+        [Test]
+        public void ManageInfrastructure() {
+            int baseDatacenterCapacity = c.baseInfrastructureCapacity[Infrastructure.Type.Datacenter];
+            Infrastructure zeroInf = new Infrastructure();
+
+            // The only capacity should be the base capacity,
+            // and it should all be available.
+            // No infrastructure is currently being used.
+            Assert.IsTrue(c.infrastructureCapacity.Equals(c.baseInfrastructureCapacity));
+            Assert.IsTrue(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
+            Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
+
+            Infrastructure i = new Infrastructure();
+            i[Infrastructure.Type.Datacenter] = baseDatacenterCapacity + 1;
+
+            // Can't buy the infrastructure, not enough cash.
+            c.cash.baseValue = 0;
+            Assert.IsFalse(c.BuyInfrastructure(i));
+
+            // Can't buy the infrastructure, not enough capacity.
+            c.cash.baseValue = i.cost;
+            Assert.IsFalse(c.BuyInfrastructure(i));
+
+            // Can buy the infrastructure: enough cash + capacity.
+            i[Infrastructure.Type.Datacenter] = baseDatacenterCapacity;
+            Assert.IsTrue(c.BuyInfrastructure(i));
+
+            // The available capacity should now be less than the total capacity.
+            Assert.IsFalse(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
+
+            // The entireity of the available infrastructure should only be the one set we added.
+            // All of the company's infrastructure should be available.
+            // None of it is being used.
+            Assert.IsTrue(c.availableInfrastructure.Equals(i));
+            Assert.IsTrue(c.availableInfrastructure.Equals(c.infrastructure));
+            Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
+
+            ProductType pt = ScriptableObject.CreateInstance<ProductType>();
+            Infrastructure required = new Infrastructure();
+            required[Infrastructure.Type.Datacenter] = baseDatacenterCapacity;
+            pt.requiredInfrastructure = required;
+            c.StartNewProduct( new List<ProductType> { pt } );
+
+            // All infrastructure is being used now,
+            // so none of it is available.
+            // The amount used should equal the amount the product needed.
+            Assert.IsFalse(c.usedInfrastructure.Equals(zeroInf));
+            Assert.IsTrue(c.availableInfrastructure.Equals(zeroInf));
+            Assert.AreEqual(c.usedInfrastructure[Infrastructure.Type.Datacenter], baseDatacenterCapacity);
+
+            c.ShutdownProduct(c.products[0]);
+
+            // Now that the product is retired, it shouldn't count towards used infrastructure.
+            Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
+            Assert.IsTrue(c.availableInfrastructure.Equals(c.infrastructure));
+
+            Location loc = ScriptableObject.CreateInstance<Location>();
+            Infrastructure cap = new Infrastructure();
+            cap[Infrastructure.Type.Datacenter] = 10;
+            loc.capacity = cap;
+            loc.cost = 0;
+            c.ExpandToLocation(loc);
+
+            // Adding a location should have increased the capacity by the amount the location gives.
+            Assert.AreEqual(c.infrastructureCapacity[Infrastructure.Type.Datacenter], c.baseInfrastructureCapacity[Infrastructure.Type.Datacenter] + 10);
+
+            c.DestroyInfrastructure(i);
+
+            // Destroying the infrastructure we had should have cleared up all capacity.
+            // No infrastructure should be available now.
+            Assert.IsTrue(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
+            Assert.IsTrue(c.availableInfrastructure.Equals(zeroInf));
         }
 
 

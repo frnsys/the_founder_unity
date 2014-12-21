@@ -60,9 +60,7 @@ public class Company : HasStats {
     public int baseSizeLimit;
     public int sizeLimit {
         // You can manage 5 employees at your HQ, other locations are managed by one employee.
-        get {
-            return baseSizeLimit + locations.Count;
-        }
+        get { return baseSizeLimit + locations.Count; }
     }
     public List<Founder> founders;
 
@@ -74,6 +72,10 @@ public class Company : HasStats {
     }
     public int remainingSpace {
         get { return sizeLimit - _workers.Count; }
+    }
+
+    public IEnumerable<Worker> allWorkers {
+        get { return _workers.Concat(founders.Cast<Worker>()); }
     }
 
     public bool HireWorker(Worker worker) {
@@ -95,14 +97,18 @@ public class Company : HasStats {
         _workers.Remove(worker);
     }
 
-    public float AggregateWorkerSkill(string skill) {
-        switch (skill) {
+    public float AggregateWorkerStat(string stat) {
+        switch (stat) {
             case "Charisma":
-                return _workers.Sum(x => x.charisma.value);
+                return allWorkers.Sum(x => x.charisma.value);
             case "Cleverness":
-                return _workers.Sum(x => x.cleverness.value);
+                return allWorkers.Sum(x => x.cleverness.value);
             case "Creativity":
-                return _workers.Sum(x => x.creativity.value);
+                return allWorkers.Sum(x => x.creativity.value);
+            case "Productivity":
+                return allWorkers.Sum(x => x.productivity.value);
+            case "Happiness":
+                return allWorkers.Sum(x => x.happiness.value);
             default:
                 return 0;
         }
@@ -220,18 +226,12 @@ public class Company : HasStats {
         float cleverness = 0;
         float progress = 0;
 
-        foreach (Worker worker in workers) {
+        foreach (Worker worker in allWorkers) {
             // A bit of randomness to make things more interesting.
             charisma += (worker.charisma.value/2) * Random.Range(0.90f, 1.05f);
             creativity += (worker.creativity.value/2) * Random.Range(0.90f, 1.05f);
             cleverness += (worker.cleverness.value/2) * Random.Range(0.90f, 1.05f);
             progress += (worker.productivity.value/2) * Random.Range(0.90f, 1.05f);
-        }
-        foreach (Founder founder in founders) {
-            charisma += (founder.charisma.value/2) * Random.Range(0.90f, 1.05f);
-            creativity += (founder.creativity.value/2) * Random.Range(0.90f, 1.05f);
-            cleverness += (founder.cleverness.value/2) * Random.Range(0.90f, 1.05f);
-            progress += (founder.productivity.value/2) * Random.Range(0.90f, 1.05f);
         }
 
         bool completed = product.Develop(progress, charisma, creativity, cleverness);

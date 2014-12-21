@@ -8,7 +8,7 @@ using UnityEngine;
 public class Founder : Worker {
     public EffectSet bonuses;
 
-    void Start() {
+    public virtual void Awake() {
         bonuses = new EffectSet();
     }
 }

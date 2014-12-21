@@ -16,6 +16,7 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         get { return Enum.GetValues(typeof(Type)) as Type[]; }
     }
 
+    // Create an infrastructure consisting of 1 unit of 1 type.
     public static Infrastructure ForType(Type t) {
         Infrastructure inf = new Infrastructure();
         inf[t] = 1;
