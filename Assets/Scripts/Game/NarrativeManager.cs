@@ -30,6 +30,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         return MentorMessage(message, callback);
     }
 
+    // A message from your mentor with a callback after tap.
     public UIMentor MentorMessage(string message, UIEventListener.VoidDelegate callback) {
         GameObject alerts = UIRoot.list[0].transform.Find("Alerts").gameObject;
 

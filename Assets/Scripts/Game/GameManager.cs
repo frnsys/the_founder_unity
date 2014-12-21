@@ -178,7 +178,7 @@ public class GameManager : Singleton<GameManager> {
             }
 
             // See how the economy is.
-            data.economyMultiplier = EconomyMultiplier();
+            data.economyMultiplier = Tools.RandomGaussian(1f, 0.2f);
 
             playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
@@ -260,31 +260,4 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    // http://stackoverflow.com/q/5817490/1097920
-    public static double RandomGaussian()
-    {
-        double U, u, v, S;
-
-        do
-        {
-            u = 2.0 * Random.value - 1.0;
-            v = 2.0 * Random.value - 1.0;
-            S = u * u + v * v;
-        }
-        while (S >= 1.0);
-
-        double fac = System.Math.Sqrt(-2.0 * System.Math.Log(S) / S);
-        return u * fac;
-    }
-
-    public float EconomyMultiplier() {
-        float r = (float)RandomGaussian();
-
-        float mean = 1;
-        float std  = 0.2f;
-        return (r * std) + 1;
-    }
-
 }
-
-

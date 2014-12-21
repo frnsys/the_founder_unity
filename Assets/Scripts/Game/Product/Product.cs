@@ -355,7 +355,7 @@ public class Product : HasStats {
     // Progress required for the nth point.
     public static int baseProgress = 1000;
     public float ProgressRequired(string feature, int n, Company c) {
-        float reqProgress = Fibonacci(n+2) * baseProgress;
+        float reqProgress = Tools.Fibonacci(n+2) * baseProgress;
         reqProgress *= difficulty;
 
         switch (feature) {
@@ -373,15 +373,6 @@ public class Product : HasStats {
         }
 
         return reqProgress;
-    }
-
-    public static int Fibonacci(int n) {
-        if (n == 0)
-            return 0;
-        else if (n == 1)
-            return 1;
-        else
-            return Fibonacci(n-1) + Fibonacci(n-2);
     }
 
     public float TotalProgressRequired(Company c) {

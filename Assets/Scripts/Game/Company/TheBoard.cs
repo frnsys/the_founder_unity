@@ -1,5 +1,5 @@
 /*
- * The board can make you resign SO MAKE THEM HAPPY
+ * The board can make you resign SO KEEP THEM HAPPY
  */
 
 using UnityEngine;

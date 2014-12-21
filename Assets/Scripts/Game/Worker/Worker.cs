@@ -23,6 +23,7 @@ public class Worker : HasStats {
 
     private Levels levels;
 
+    // Each worker has their own style!
     public Texture texture;
 
     public float salary;
