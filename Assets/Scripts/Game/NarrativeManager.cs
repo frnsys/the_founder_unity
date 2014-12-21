@@ -12,11 +12,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     // Disable the constructor.
     protected NarrativeManager() {}
 
-    // Prerequests for transitioning to each stage.
-    public PrereqSet globalPrereqs;
-    public PrereqSet planetaryPrereqs;
-    public PrereqSet galacticPrereqs;
-
     // The 3 starting cofounders you can choose from.
     public List<Founder> cofounders;
 

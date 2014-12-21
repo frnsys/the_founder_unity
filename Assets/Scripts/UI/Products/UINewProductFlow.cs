@@ -16,6 +16,8 @@ public class UINewProductFlow : MonoBehaviour {
 
     public GameObject productTypePrefab;
     public GameObject selectedProductTypePrefab;
+    public GameObject productTypeSelectionView;
+    public GameObject pointAllocationView;
     public List<GameObject> productTypeItems;
     public UIGrid selectedGrid;
     public UISimpleGrid grid;
@@ -23,6 +25,7 @@ public class UINewProductFlow : MonoBehaviour {
 
     // Keep track of the selected product aspects.
     private List<ProductType> productTypes;
+    private Product product;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -42,6 +45,7 @@ public class UINewProductFlow : MonoBehaviour {
 
     }
 
+    // Load product types into the grid.
     private void LoadProductTypes() {
         grid.Clear();
         productTypeItems.Clear();
@@ -58,6 +62,7 @@ public class UINewProductFlow : MonoBehaviour {
         grid.Reposition();
     }
 
+    // Select a product type for the new product.
     private void SelectProductType(GameObject obj) {
         if (selectedGrid.transform.childCount < 2) {
             confirmSelectionButton.isEnabled = true;
@@ -82,6 +87,7 @@ public class UINewProductFlow : MonoBehaviour {
         }
     }
 
+    // Update which product types can be selected.
     private void UpdateProductTypeItems() {
         foreach (GameObject item in productTypeItems) {
             ProductType pt = item.GetComponent<UIProductType>().productType;
@@ -92,6 +98,7 @@ public class UINewProductFlow : MonoBehaviour {
         }
     }
 
+    // Check if the company has enough capacity for a particular product type.
     private bool HasCapacityFor(ProductType pt) {
         Infrastructure selectionInf = new Infrastructure();
         if (productTypes.Count > 0) {
@@ -102,43 +109,126 @@ public class UINewProductFlow : MonoBehaviour {
         return (gm.playerCompany.availableInfrastructure - selectionInf) >= pt.requiredInfrastructure;
     }
 
+    // Go to the point allocation page.
     public void ConfirmSelection() {
-        Debug.Log("confirming product types");
+        productTypeSelectionView.SetActive(false);
+        pointAllocationView.SetActive(true);
+
+        // Create a dummy product with the new product types.
+        product = new Product();
+        product.Init(productTypes);
+
+        // Update the required progress for each feature.
+        GameObject obj;
+        obj = transform.Find("Point Allocation/Features/Design").gameObject;
+        UpdateProgressRequired(obj, "Design",       design);
+
+        obj = transform.Find("Point Allocation/Features/Marketing").gameObject;
+        UpdateProgressRequired(obj, "Marketing",    marketing);
+
+        obj = transform.Find("Point Allocation/Features/Engineering").gameObject;
+        UpdateProgressRequired(obj, "Engineering",  engineering);
     }
 
     // ===============================================
     // Point Allocation ==============================
     // ===============================================
 
-    //private FeatureSet features = new FeatureSet();
+    private int design = 0;
+    private int marketing = 0;
+    private int engineering = 0;
+    private Color activeColor = new Color(1f, 0.49f, 0.49f, 1f);
+    private Color inactiveColor = new Color(1f, 0.76f, 0.76f, 1f);
 
-    //public void AddPoint(GameObject obj) {
-        //UpdateFeature(obj, true);
-    //}
-    //public void SubtractPoint(GameObject obj) {
-        //UpdateFeature(obj, false);
-    //}
-    //private void UpdateFeature(GameObject obj, bool inc) {
-        //string featureName = obj.transform.Find("Feature Name").GetComponent<UILabel>().text;
+    public void IncreaseFeature(GameObject obj) {
+        int points = 0;
+        string feature = obj.name;
+        switch(obj.name) {
+            case "Design":
+                if (design < 10) {
+                    design++;
+                }
+                points = design;
+                break;
 
-        //if (inc) {
-            //featurePoints = features.Increment(featureName, featurePoints);
-        //} else {
-            //featurePoints = features.Decrement(featureName, featurePoints);
-        //}
+            case "Marketing":
+                if (marketing < 10) {
+                    marketing++;
+                }
+                points = marketing;
+                break;
 
-        //if (features[featureName] < 0)
-            //features[featureName] = 0;
-        //obj.transform.Find("Total").GetComponent<UILabel>().text = features[featureName].ToString();
-        //UpdateFeaturePoints();
-    //}
+            case "Engineering":
+                if (engineering < 10) {
+                    engineering++;
+                }
+                points = engineering;
+                break;
 
-    //private void UpdateFeaturePoints() {
-        //pointsScreen.transform.Find("Available Charisma").GetComponent<UILabel>().text = "CHA:" + featurePoints.charisma.ToString();
-        //pointsScreen.transform.Find("Available Cleverness").GetComponent<UILabel>().text = "CLE:" + featurePoints.cleverness.ToString();
-        //pointsScreen.transform.Find("Available Creativity").GetComponent<UILabel>().text = "CRE:" + featurePoints.creativity.ToString();
-    //}
+            default:
+                break;
+        }
 
+        Transform items = obj.transform.Find("Points");
+        for (int i=0; i < items.childCount; i++) {
+            if (i < points)
+                items.GetChild(i).GetComponent<UITexture>().color = activeColor;
+            else
+                items.GetChild(i).GetComponent<UITexture>().color = inactiveColor;
+        }
+
+        UpdateProgressRequired(obj, feature, points);
+    }
+
+    public void DecreaseFeature(GameObject obj) {
+        int points = 0;
+        string feature = obj.name;
+        switch(feature) {
+            case "Design":
+                if (design > 0) {
+                    design--;
+                }
+                points = design;
+                break;
+
+            case "Marketing":
+                if (marketing > 0) {
+                    marketing--;
+                }
+                points = marketing;
+                break;
+
+            case "Engineering":
+                if (engineering > 0) {
+                    engineering--;
+                }
+                points = engineering;
+                break;
+
+            default:
+                break;
+        }
+
+        Transform items = obj.transform.Find("Points");
+        for (int i=0; i < items.childCount; i++) {
+            if (i < points)
+                items.GetChild(i).GetComponent<UITexture>().color = activeColor;
+            else
+                items.GetChild(i).GetComponent<UITexture>().color = inactiveColor;
+        }
+
+        UpdateProgressRequired(obj, feature, points);
+    }
+
+    private void UpdateProgressRequired(GameObject obj, string feature, int points) {
+        float progressRequired = product.ProgressRequired(feature, points, gm.playerCompany);
+        UILabel label = obj.transform.Find("Progress Required").gameObject.GetComponent<UILabel>();
+        if (float.IsNaN(progressRequired)) {
+            label.text = "forever";
+        } else {
+            label.text = progressRequired.ToString();
+        }
+    }
 }
 
 
