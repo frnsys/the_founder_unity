@@ -52,13 +52,12 @@ public class UIHireWorkers : UIFullScreenPager {
         currentWorker = gridCenter.centeredObject.GetComponent<UIWorker>().worker as Worker;
     }
 
-
     private void LoadWorkers() {
         ClearGrid();
         foreach (Worker w in GameManager.Instance.availableWorkers) {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
-            workerItem.GetComponent<UIWorker>().worker = w;
+            workerItem.GetComponent<UIWorker>().SetFuzzyWorker(w);
         }
         Adjust();
     }

@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &100000
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: Creativity
+  m_Name: Cleverness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18,7 +18,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100002
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400002}
   m_Layer: 8
-  m_Name: Cleverness
+  m_Name: Creativity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 114: {fileID: 11400004}
   m_Layer: 8
-  m_Name: Worker Bio
+  m_Name: Charisma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 114: {fileID: 11400006}
   m_Layer: 8
-  m_Name: Worker Name
+  m_Name: Bio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100008
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -74,7 +74,7 @@ GameObject:
   - 4: {fileID: 400008}
   - 114: {fileID: 11400010}
   m_Layer: 8
-  m_Name: Charisma
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,22 +89,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   - 114: {fileID: 11400012}
-  m_Layer: 8
-  m_Name: Stats
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &100012
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400012}
-  - 114: {fileID: 11400014}
   - 114: {fileID: 11400008}
   m_Layer: 8
   m_Name: Worker
@@ -120,11 +104,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -99.7500076, y: -22, z: 0}
+  m_LocalPosition: {x: -1.52587891e-05, y: 232.000092, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400010}
-  m_RootOrder: 2
+  m_RootOrder: 4
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -132,11 +116,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -99.7500076, y: 2, z: 0}
+  m_LocalPosition: {x: -1.52587891e-05, y: 280.000061, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400010}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -144,11 +128,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 130, z: 0}
+  m_LocalPosition: {x: -1.52587891e-05, y: 328.000031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400012}
-  m_RootOrder: 1
+  m_Father: {fileID: 400010}
+  m_RootOrder: 2
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -156,11 +140,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 160.000015, z: 0}
+  m_LocalPosition: {x: -1.52587891e-05, y: 414.000031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400012}
-  m_RootOrder: 0
+  m_Father: {fileID: 400010}
+  m_RootOrder: 1
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 1
@@ -168,7 +152,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -99.7500076, y: 26, z: 0}
+  m_LocalPosition: {x: 0, y: 450.000031, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400010}
@@ -184,23 +168,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
-  - {fileID: 400002}
-  - {fileID: 400000}
-  m_Father: {fileID: 400012}
-  m_RootOrder: 2
---- !u!4 &400012
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
   - {fileID: 400006}
   - {fileID: 400004}
-  - {fileID: 400010}
+  - {fileID: 400002}
+  - {fileID: 400000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &11400000
@@ -215,36 +186,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400010}
+    target: {fileID: 400002}
     relative: 0
-    absolute: 24
+    absolute: 0
   rightAnchor:
-    target: {fileID: 400010}
-    relative: .5
+    target: {fileID: 400002}
+    relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 400010}
-    relative: 1
-    absolute: -84
+    target: {fileID: 400002}
+    relative: 0
+    absolute: -48
   topAnchor:
-    target: {fileID: 400010}
-    relative: 1
-    absolute: -60
+    target: {fileID: 400002}
+    relative: 0
+    absolute: -24
   updateAnchors: 1
-  mColor: {r: 0, g: 0, b: 0, a: 1}
+  mColor: {r: .170793667, g: .286764681, b: .200386256, a: .501960814}
   mPivot: 4
-  mWidth: 200
+  mWidth: 524
   mHeight: 24
-  mDepth: 2
+  mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 100
+  aspectRatio: 17.333334
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
-  mText: stat
-  mFontSize: 16
+  mText: 'Cleverness: val'
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -277,36 +248,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400010}
+    target: {fileID: 400004}
     relative: 0
-    absolute: 24
+    absolute: 0
   rightAnchor:
-    target: {fileID: 400010}
-    relative: .5
+    target: {fileID: 400004}
+    relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 400010}
-    relative: 1
-    absolute: -60
+    target: {fileID: 400004}
+    relative: 0
+    absolute: -48
   topAnchor:
-    target: {fileID: 400010}
-    relative: 1
-    absolute: -36
+    target: {fileID: 400004}
+    relative: 0
+    absolute: -24
   updateAnchors: 1
-  mColor: {r: 0, g: 0, b: 0, a: 1}
+  mColor: {r: .170793667, g: .286764681, b: .200386256, a: .501960814}
   mPivot: 4
-  mWidth: 200
+  mWidth: 524
   mHeight: 24
-  mDepth: 2
+  mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 100
+  aspectRatio: 17.333334
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
-  mText: stat
-  mFontSize: 16
+  mText: 'Creativity: val'
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -339,36 +310,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400010}
+    target: {fileID: 400006}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 400010}
+    target: {fileID: 400006}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 400010}
-    relative: 1
-    absolute: 0
+    target: {fileID: 400006}
+    relative: 0
+    absolute: -24
   topAnchor:
-    target: {fileID: 400010}
-    relative: 1
-    absolute: 80
+    target: {fileID: 400006}
+    relative: 0
+    absolute: 0
   updateAnchors: 1
-  mColor: {r: .111591689, g: .32515499, b: .948529422, a: 1}
-  mPivot: 1
-  mWidth: 447
-  mHeight: 80
-  mDepth: 3
+  mColor: {r: .170793667, g: .286764681, b: .200386256, a: .501960814}
+  mPivot: 4
+  mWidth: 524
+  mHeight: 24
+  mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.5875001
+  aspectRatio: 17.333334
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
-  mText: worker bio
-  mFontSize: 18
+  mText: 'Charisma: val'
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -401,36 +372,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400004}
+    target: {fileID: 400008}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 400004}
+    target: {fileID: 400008}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 400004}
-    relative: 1
-    absolute: 0
+    target: {fileID: 400008}
+    relative: 0
+    absolute: -80
   topAnchor:
-    target: {fileID: 400004}
-    relative: 1
-    absolute: 60
+    target: {fileID: 400008}
+    relative: 0
+    absolute: -6
   updateAnchors: 1
-  mColor: {r: .111591689, g: .32515499, b: .948529422, a: 1}
-  mPivot: 4
-  mWidth: 447
-  mHeight: 60
+  mColor: {r: .375, g: .375, b: .375, a: 1}
+  mPivot: 1
+  mWidth: 524
+  mHeight: 74
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 7.44999981
+  aspectRatio: 5.62162161
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
-  mText: worker name
-  mFontSize: 32
+  mText: Yoyoyoyoyoyoy
+  mFontSize: 18
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -456,17 +427,17 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
+  m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 966fa52347ca24c0ba1474c6520ede71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 11400006}
-  bio: {fileID: 11400004}
-  creativity: {fileID: 11400000}
-  charisma: {fileID: 11400010}
-  cleverness: {fileID: 11400002}
+  name: {fileID: 11400010}
+  bio: {fileID: 11400006}
+  creativity: {fileID: 11400002}
+  charisma: {fileID: 11400004}
+  cleverness: {fileID: 11400000}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -481,34 +452,34 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 400010}
     relative: 0
-    absolute: 24
+    absolute: 32
   rightAnchor:
     target: {fileID: 400010}
-    relative: .5
-    absolute: 0
+    relative: 1
+    absolute: -32
   bottomAnchor:
     target: {fileID: 400010}
     relative: 1
-    absolute: -36
+    absolute: -200
   topAnchor:
     target: {fileID: 400010}
     relative: 1
-    absolute: -12
+    absolute: -140
   updateAnchors: 1
-  mColor: {r: 0, g: 0, b: 0, a: 1}
+  mColor: {r: .183823526, g: .183823526, b: .183823526, a: 1}
   mPivot: 4
-  mWidth: 200
-  mHeight: 24
+  mWidth: 524
+  mHeight: 60
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 100
+  aspectRatio: 6.9333334
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
-  mText: stat
-  mFontSize: 16
+  mText: Bob Bobina
+  mFontSize: 32
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -537,64 +508,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 100010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c5ca47aa5c01740810b7c66662099f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftAnchor:
-    target: {fileID: 400012}
-    relative: 0
-    absolute: 24
-  rightAnchor:
-    target: {fileID: 400012}
-    relative: 1
-    absolute: -24
-  bottomAnchor:
-    target: {fileID: 400012}
-    relative: .5
-    absolute: -50
-  topAnchor:
-    target: {fileID: 400012}
-    relative: .5
-    absolute: 50
-  updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
-  mWidth: 447
-  mHeight: 100
-  mDepth: 1
-  autoResizeBoxCollider: 0
-  hideIfOffScreen: 0
-  keepAspectRatio: 0
-  aspectRatio: 4.46999979
-  mType: 0
-  mFillDirection: 4
-  mFillAmount: 1
-  mInvert: 0
-  mFlip: 0
-  centerType: 1
-  leftType: 1
-  rightType: 1
-  bottomType: 1
-  topType: 1
-  mRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  mTexture: {fileID: 2800000, guid: e63049291060b4a4b8371566a051126d, type: 3}
-  mMat: {fileID: 0}
-  mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
-  mBorder: {x: 0, y: 0, z: 0, w: 0}
-  mFixedAspect: 0
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -617,13 +530,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 495
-  mHeight: 100
-  mDepth: 0
+  mWidth: 588
+  mHeight: 960
+  mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.94999981
+  aspectRatio: .612500012
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -633,6 +546,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 100012}
+  m_RootGameObject: {fileID: 100010}
   m_IsPrefabParent: 1
   m_IsExploded: 1

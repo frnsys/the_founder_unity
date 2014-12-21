@@ -151,8 +151,8 @@ namespace UnityTest
             worker.salary = 500;
 
             // Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
-            // Same for infrastructure.
-            float paid = worker.salary + c.researchInvestment + i.cost + i.cost + loc.cost + loc.cost;
+            // Same for infrastructure and worker salary.
+            float paid = worker.salary + worker.salary + c.researchInvestment + i.cost + i.cost + loc.cost + loc.cost;
 
             c.HireWorker(worker);
 

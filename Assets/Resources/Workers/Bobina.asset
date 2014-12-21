@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Bobina
   m_EditorClassIdentifier: 
-  tier: 0
+  texture: {fileID: 0}
   salary: 0
   bio: hey hey
+  minSalary: 0
   happiness:
     baseValue: 20
     _buffs: []

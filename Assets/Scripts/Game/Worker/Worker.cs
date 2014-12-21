@@ -9,16 +9,8 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class Worker : HasStats {
-    public enum Tier {
-        Employee,
-        Location,
-        Planet,
-        StarSystem
-    }
-    public Tier tier;
-
-    public static List<Worker> LoadAll(Tier tier) {
-        return new List<Worker>(Resources.LoadAll<Worker>("Workers/" + tier + "s"));
+    public static List<Worker> LoadAll() {
+        return new List<Worker>(Resources.LoadAll<Worker>("Workers"));
     }
 
     private Levels levels;
@@ -28,6 +20,7 @@ public class Worker : HasStats {
 
     public float salary;
     public string bio;
+    public float minSalary;
 
     public Stat happiness;
     public Stat productivity;
@@ -41,6 +34,7 @@ public class Worker : HasStats {
     public void Init(string name_) {
         name         = name_;
         salary       = 0;
+        minSalary    = 30000;
         happiness    = new Stat("Happiness",    0);
         productivity = new Stat("Productivity", 0);
         charisma     = new Stat("Charisma",     0);

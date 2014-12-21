@@ -925,7 +925,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 593, y: 960, z: 0}
+  m_Size: {x: 588, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500006
 BoxCollider:
@@ -973,7 +973,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 487, y: 960, z: 0}
+  m_Size: {x: 588, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500038
 BoxCollider:
@@ -1017,14 +1017,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 756
+  mWidth: 588
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .787500024
-  childSize: {x: 756, y: 960}
+  aspectRatio: .612500012
+  childSize: {x: 588, y: 960}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11400002
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   grid: {fileID: 11400000}
   gridCenter: {fileID: 11400022}
   scrollView: {fileID: 11400030}
-  workerItemPrefab: {fileID: 100012, guid: 0e4cb85a0e41544f592f49b906eb7b56, type: 2}
+  workerItemPrefab: {fileID: 100010, guid: 0e4cb85a0e41544f592f49b906eb7b56, type: 2}
   fireButton: {fileID: 11400002}
   upgradeButton: {fileID: 11400020}
 --- !u!114 &11400010
@@ -1266,7 +1266,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .296712786, g: .823529422, b: .540138423, a: 1}
+  mColor: {r: .911764681, g: 1, b: .95253551, a: 1}
   mPivot: 4
   mWidth: 513
   mHeight: 960
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 756
+  itemSize: 588
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: .841110229, y: 0, z: 592.594849, w: 960.153625}
+  mClipRange: {x: .841094971, y: 0, z: 587.594055, w: 960.153625}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 101
   mSortingOrder: 0
@@ -1653,13 +1653,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 593
+  mWidth: 588
   mHeight: 960
   mDepth: 2
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .566666663
+  aspectRatio: .612500012
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1703,7 +1703,7 @@ MonoBehaviour:
   grid: {fileID: 11400060}
   gridCenter: {fileID: 11400170}
   scrollView: {fileID: 11400160}
-  workerItemPrefab: {fileID: 100012, guid: 0e4cb85a0e41544f592f49b906eb7b56, type: 2}
+  workerItemPrefab: {fileID: 100010, guid: 0e4cb85a0e41544f592f49b906eb7b56, type: 2}
   hireButton: {fileID: 11400172}
 --- !u!114 &11400040
 MonoBehaviour:
@@ -2169,14 +2169,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 100
-  mHeight: 100
+  mWidth: 1224
+  mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
-  childSize: {x: 0, y: 0}
+  aspectRatio: 1.27499998
+  childSize: {x: 1224, y: 960}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &11400156
@@ -2222,13 +2222,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 487
+  mWidth: 588
   mHeight: 960
   mDepth: 2
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .515625
+  aspectRatio: 1
 --- !u!114 &11400160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2292,11 +2292,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3008
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
-  mClipping: 0
-  mClipRange: {x: .841125488, y: 0, z: 487.499969, w: 959.999939}
+  mClipping: 4
+  mClipRange: {x: .841125488, y: 0, z: 587.5, w: 959.999939}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 101
   mSortingOrder: 0
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 400
+  itemSize: 1224
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -2532,7 +2532,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -2569,15 +2569,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .611764729, g: .0666666701, b: .572549045, a: 1}
+  mColor: {r: .941176474, g: .978093326, b: 1, a: 1}
   mPivot: 4
-  mWidth: 487
+  mWidth: 513
   mHeight: 960
   mDepth: -1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .515625
+  aspectRatio: .534375012
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -2594,7 +2594,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: a1bbc13b989e44b9a9b46ce5327a374d, type: 3}
+  mTexture: {fileID: 2800000, guid: e63049291060b4a4b8371566a051126d, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -2635,7 +2635,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

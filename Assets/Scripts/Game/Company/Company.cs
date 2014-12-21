@@ -79,7 +79,7 @@ public class Company : HasStats {
     }
 
     public bool HireWorker(Worker worker) {
-        if (_workers.Count < sizeLimit) {
+        if (_workers.Count < sizeLimit && Pay(worker.salary)) {
             foreach (Item item in _items) {
                 worker.ApplyItem(item);
             }
