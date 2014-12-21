@@ -60,7 +60,7 @@ GameObject:
   - 4: {fileID: 400006}
   - 114: {fileID: 11400010}
   m_Layer: 8
-  m_Name: Product Points
+  m_Name: Infrastructure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: {fileID: 11400022}
   revenue: {fileID: 11400008}
-  points: {fileID: 11400010}
+  infrastructure: {fileID: 11400010}
   progress: {fileID: 11400018}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -538,7 +538,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: product points
+  mText: '{infra}'
   mFontSize: 16
   mFontStyle: 0
   mAlignment: 1

@@ -18,7 +18,7 @@ public class UIProduct: MonoBehaviour {
         set {
             product_ = value;
             name.text = product_.name;
-            points.text = product_.points.ToString() + "pp";
+            infrastructure.text = product_.requiredInfrastructure.ToString();
 
             if (revenue)
                 revenue.text = "$" + product_.revenueEarned.ToString();
@@ -30,7 +30,7 @@ public class UIProduct: MonoBehaviour {
 
     public UILabel name;
     public UILabel revenue;
-    public UILabel points;
+    public UILabel infrastructure;
     public UIProgressBar progress;
 }
 
