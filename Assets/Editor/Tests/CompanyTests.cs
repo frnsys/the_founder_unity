@@ -66,6 +66,7 @@ namespace UnityTest
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
 
+
             c.cash.baseValue = 2000;
             c.BuyItem(item);
             c.baseSizeLimit = 10;
@@ -73,8 +74,10 @@ namespace UnityTest
             Assert.AreEqual(c.workers.Count, 1);
             Assert.AreEqual(c.workers[0].happiness.value, 10);
 
+            worker.salary = 2000;
             c.FireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
+            Assert.AreEqual(worker.salary, 0);
         }
 
 		[Test]

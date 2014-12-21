@@ -21,7 +21,7 @@ internal class WorkerInspector : Editor {
         w.cleverness.baseValue = EditorGUILayout.FloatField("Cleverness", w.cleverness.baseValue);
 
         w.salary = EditorGUILayout.FloatField("Salary", w.salary);
-        w.minSalary = EditorGUILayout.FloatField("Minimum Salary", w.minSalary);
+        w.baseMinSalary = EditorGUILayout.FloatField("Base Minimum Salary", w.baseMinSalary);
         EditorGUILayout.Space();
 
         if (GUI.changed) {

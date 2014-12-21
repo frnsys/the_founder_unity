@@ -22,7 +22,16 @@ public class Worker : HasStats {
 
     public float salary;
     public string bio;
-    public float minSalary;
+    public float baseMinSalary;
+    public float minSalary {
+        get {
+            // If the employee is currently hired, i.e. has a salary > 0,
+            // their minimum acceptable salary is higher than what they're currently paid.
+            if (salary > 0)
+                return salary * 1.2f;
+            return baseMinSalary;
+        }
+    }
 
     // How many weeks the worker is off the job market for.
     // Recent offers the player has made.
@@ -39,14 +48,14 @@ public class Worker : HasStats {
         Init("Default Worker");
     }
     public void Init(string name_) {
-        name         = name_;
-        salary       = 0;
-        minSalary    = 30000;
-        happiness    = new Stat("Happiness",    0);
-        productivity = new Stat("Productivity", 0);
-        charisma     = new Stat("Charisma",     0);
-        creativity   = new Stat("Creativity",   0);
-        cleverness   = new Stat("Cleverness",   0);
+        name          = name_;
+        salary        = 0;
+        baseMinSalary = 30000;
+        happiness     = new Stat("Happiness",    0);
+        productivity  = new Stat("Productivity", 0);
+        charisma      = new Stat("Charisma",     0);
+        creativity    = new Stat("Creativity",   0);
+        cleverness    = new Stat("Cleverness",   0);
 
         offMarketTime = 0;
         recentPlayerOffers = 0;

@@ -94,6 +94,7 @@ public class Company : HasStats {
             worker.RemoveItem(item);
         }
 
+        worker.salary = 0;
         _workers.Remove(worker);
     }
 

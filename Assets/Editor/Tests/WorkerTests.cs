@@ -47,5 +47,15 @@ namespace UnityTest
             Assert.AreEqual(worker.happiness.value, 0);
             Assert.AreEqual(worker.productivity.value, 0);
         }
+
+        [Test]
+        public void MinimumSalary() {
+            worker.baseMinSalary = 1;
+
+            Assert.AreEqual(worker.minSalary, worker.baseMinSalary);
+
+            worker.salary = 10000;
+            Assert.AreEqual(worker.minSalary, 12000);
+        }
     }
 }

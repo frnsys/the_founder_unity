@@ -34,6 +34,11 @@ public class UIHireWorkers : UIFullScreenPager {
         UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
             ic.Close_();
             if (ic.offer >= currentWorker.minSalary) {
+                // Set the worker's salary to the offer.
+                // Reset the player offer counter.
+                // Hire the worker!
+                currentWorker.salary = ic.offer;
+                currentWorker.recentPlayerOffers = 0;
                 HireWorker_();
             } else {
                 if (++currentWorker.recentPlayerOffers >= 3) {
