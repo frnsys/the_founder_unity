@@ -229,6 +229,15 @@ public class UINewProductFlow : MonoBehaviour {
             label.text = progressRequired.ToString();
         }
     }
+
+    public void BeginProductDevelopment() {
+        UIManager.Instance.Confirm("Are you happy with this product configuration? It will take {X} weeks to develop.", BeginProductDevelopment_, null);
+    }
+
+    private void BeginProductDevelopment_() {
+        gm.playerCompany.StartNewProduct(productTypes);
+        SendMessageUpwards("Close");
+    }
 }
 
 
