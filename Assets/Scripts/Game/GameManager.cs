@@ -40,6 +40,9 @@ public class GameManager : Singleton<GameManager> {
     public NarrativeManager narrativeManager;
 
     [HideInInspector]
+    public EventManager eventManager;
+
+    [HideInInspector]
     public GameConfig config;
 
     public List<Worker> availableWorkers {
@@ -52,9 +55,11 @@ public class GameManager : Singleton<GameManager> {
     public void Load(GameData d) {
         researchManager = gameObject.AddComponent<ResearchManager>();
         narrativeManager = gameObject.AddComponent<NarrativeManager>();
+        eventManager = gameObject.AddComponent<EventManager>();
 
         data = d;
         researchManager.Load(d);
+        eventManager.Load(d);
     }
 
     void Awake() {
