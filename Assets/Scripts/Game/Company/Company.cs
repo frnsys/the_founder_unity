@@ -85,6 +85,12 @@ public class Company : HasStats {
             }
 
             _workers.Add(worker);
+
+            // Update the progress required for developing products.
+            foreach (Product p in developingProducts) {
+                p.requiredProgress = p.TotalProgressRequired(this);
+            }
+
             return true;
         }
         return false;
@@ -94,8 +100,15 @@ public class Company : HasStats {
             worker.RemoveItem(item);
         }
 
+        // Reset the salary.
         worker.salary = 0;
+
         _workers.Remove(worker);
+
+        // Update the progress required for developing products.
+        foreach (Product p in developingProducts) {
+            p.requiredProgress = p.TotalProgressRequired(this);
+        }
     }
 
     public float AggregateWorkerStat(string stat) {
@@ -185,7 +198,7 @@ public class Company : HasStats {
 
     public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();
-        product.Init(pts, design, marketing, engineering);
+        product.Init(pts, design, marketing, engineering, this);
 
         // Apply any applicable items to the new product.
         // TO DO: should this be held off until after the product is completed?

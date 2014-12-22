@@ -62,10 +62,21 @@ namespace UnityTest
 		public void ManageWorkers() {
             Assert.AreEqual(c.workers.Count, 0);
 
+            worker.creativity.baseValue = 20;
+
+            // Prepare a product to check that hiring/firing workers automatically updates
+            // progress required for developing products.
+            ProductType pt = ScriptableObject.CreateInstance<ProductType>();
+            pt.difficulty = 1;
+            c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
+            Product p = c.products[0];
+
+            float requiredProgress = p.TotalProgressRequired(c);
+            Assert.AreEqual(p.requiredProgress, requiredProgress);
+
             c.baseSizeLimit = 0;
             c.HireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
-
 
             c.cash.baseValue = 2000;
             c.BuyItem(item);
@@ -74,10 +85,21 @@ namespace UnityTest
             Assert.AreEqual(c.workers.Count, 1);
             Assert.AreEqual(c.workers[0].happiness.value, 10);
 
+            // The total progress required should be different now,
+            // and it should be reflected on the product.
+            // As a reminder, we don't constantly calculate TotalProgressRequired because
+            // it is kind of expensive, so we only recalc it when a worker is hired or fired.
+            float newRequiredProgress = p.TotalProgressRequired(c);
+            Assert.AreNotEqual(requiredProgress, newRequiredProgress);
+            Assert.AreEqual(p.requiredProgress, newRequiredProgress);
+
             worker.salary = 2000;
             c.FireWorker(worker);
             Assert.AreEqual(c.workers.Count, 0);
             Assert.AreEqual(worker.salary, 0);
+
+            // Firing the worker should have brought the required progress back to the previous value.
+            Assert.AreEqual(p.requiredProgress, requiredProgress);
         }
 
 		[Test]
@@ -254,13 +276,18 @@ namespace UnityTest
             c.BuyInfrastructure(i);
 
             c.StartNewProduct(pts, 0, 0, 0);
-            Assert.AreEqual(c.developingProducts[0], c.products[0]);
+            Product p = c.products[0];
+            Assert.AreEqual(c.developingProducts[0], p);
 
+            // Assure the infrastructure is properly used up.
             Assert.AreEqual(c.availableInfrastructure, c.infrastructure - pts[0].requiredInfrastructure);
+
+            // Assure the progress is properly set when the company starts the product.
+            Assert.AreEqual(p.requiredProgress, p.TotalProgressRequired(c));
 
             // Creating a new product should apply existing items.
             Assert.AreEqual(c.products.Count, 1);
-            Assert.AreEqual(c.products[0].design.value, 10);
+            Assert.AreEqual(p.design.value, 10);
         }
 
 		[Test]
@@ -273,7 +300,7 @@ namespace UnityTest
             worker.cleverness.baseValue = 10;
 
             Product p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pts, 0, 0, 0);
+            p.Init(pts, 0, 0, 0, c);
             c.DevelopProduct(p);
 
             Assert.IsTrue(p.progress > 0);

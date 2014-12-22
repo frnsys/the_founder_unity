@@ -122,6 +122,7 @@ namespace UnityTest
                 Assert.AreEqual(p.state,              p_.state);
                 Assert.AreEqual(p.timeSinceLaunch,    p_.timeSinceLaunch);
                 Assert.AreEqual(p.revenueEarned,      p_.revenueEarned);
+                Assert.AreEqual(p.requiredProgress,   p_.requiredProgress);
                 Assert.AreEqual(p.lastRevenue,        p_.lastRevenue);
                 Assert.AreEqual(p.points,             p_.points);
 
@@ -246,6 +247,7 @@ namespace UnityTest
 
             Product product = ScriptableObject.CreateInstance<Product>();
             product.Init(pts, 0, 0, 0);
+            product.requiredProgress = 100000;
 
             product.Develop(RandFloat());
 

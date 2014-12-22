@@ -19,6 +19,7 @@ namespace UnityTest
         private Product p = null;
         private ProductRecipe pr = null;
         private ProductType pt;
+        private List<ProductType> pts;
         private Item item;
 
         [SetUp]
@@ -30,7 +31,7 @@ namespace UnityTest
             gd = GameData.New("DEFAULTCORP");
             gm.Load(gd);
 
-            List<ProductType> pts = new List<ProductType>() { pt };
+            pts = new List<ProductType>() { pt };
 
             p = ScriptableObject.CreateInstance<Product>();
             p.Init(pts, 0, 0, 0);
@@ -44,8 +45,9 @@ namespace UnityTest
             UnityEngine.Object.DestroyImmediate(gameObj);
             gm = null;
             p = null;
-            pt = null;
             pr = null;
+            pt = null;
+            pts = null;
             item = null;
         }
 
@@ -64,7 +66,7 @@ namespace UnityTest
 
             p.Develop(100000);
 
-            Assert.AreEqual(p.progress, 100000/p.progressRequired);
+            Assert.AreEqual(p.progress, 100000/p.requiredProgress);
             Assert.AreEqual(p.state, Product.State.LAUNCHED);
         }
 
@@ -146,7 +148,7 @@ namespace UnityTest
             pt__.requiredVerticals = new List<Vertical>() { vert__ };
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0 );
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0);
 
             Assert.AreEqual(prod.requiredVerticals, new List<Vertical>() { vert_, vert__ });
         }
@@ -164,7 +166,7 @@ namespace UnityTest
             pt__.requiredInfrastructure = i__;
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0 );
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0);
 
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 10;
@@ -196,6 +198,7 @@ namespace UnityTest
             Assert.AreEqual(gd.company.AggregateWorkerStat("Charisma"),   cha);
 
             int n = 3;
+            float totalExpected = 0;
             float expected;
             float required;
 
@@ -204,15 +207,27 @@ namespace UnityTest
 
             expected = (fib * baseProgress * difficulty)/cre;
             required = p.ProgressRequired("Design", n, gd.company);
+            totalExpected += expected;
             Assert.AreEqual(expected, required);
 
             expected = (fib * baseProgress * difficulty)/cle;
             required = p.ProgressRequired("Engineering", n, gd.company);
+            totalExpected += expected;
             Assert.AreEqual(expected, required);
 
             expected = (fib * baseProgress * difficulty)/cha;
             required = p.ProgressRequired("Marketing", n, gd.company);
+            totalExpected += expected;
             Assert.AreEqual(expected, required);
+
+            p.design.baseValue      = (float)n;
+            p.marketing.baseValue   = (float)n;
+            p.engineering.baseValue = (float)n;
+            Assert.AreEqual(p.TotalProgressRequired(gd.company), totalExpected);
+
+            // Assure the progress is properly set when the company starts the product.
+            gd.company.StartNewProduct(pts, n, n, n);
+            Assert.AreEqual(gd.company.products[0].requiredProgress, totalExpected);
         }
     }
 }

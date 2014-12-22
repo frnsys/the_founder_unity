@@ -28,15 +28,10 @@ public class Product : HasStats {
     [SerializeField]
     private float _progress = 0;
     public float progress {
-        get { return _progress/progressRequired; }
+        get { return _progress/requiredProgress; }
     }
 
-    public float progressRequired {
-        get {
-            // TO DO calculates based on TotalProgressRequired
-            return 1;
-        }
-    }
+    public float requiredProgress;
 
     [SerializeField]
     private State _state = State.DEVELOPMENT;
@@ -120,13 +115,18 @@ public class Product : HasStats {
     public Stat marketing;
     public Stat engineering;
 
-    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_) {
+    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_, Company c = null) {
         name = GenerateName();
         productTypes = pts;
 
         design =      new Stat("Design",      (float)design_);
         marketing =   new Stat("Marketing",   (float)marketing_);
         engineering = new Stat("Engineering", (float)engineering_);
+
+        if (c != null)
+            requiredProgress = TotalProgressRequired(c);
+        else
+            requiredProgress = 1;
 
         recipe = ProductRecipe.LoadFromTypes(pts);
 
@@ -162,7 +162,7 @@ public class Product : HasStats {
         if (state == State.DEVELOPMENT) {
             _progress += newProgress;
 
-            if (_progress >= progressRequired) {
+            if (_progress >= requiredProgress) {
                 Launch();
 
                 // Trigger completed event.
@@ -350,30 +350,36 @@ public class Product : HasStats {
     public static int baseProgress = 1000;
     public float ProgressRequired(string feature, int n, Company c) {
         float reqProgress = Utils.Fibonacci(n+2) * baseProgress;
+        float aggStat = 0;
         reqProgress *= difficulty;
 
         switch (feature) {
             case "Design":
-                reqProgress /= c.AggregateWorkerStat("Creativity");
+                aggStat = c.AggregateWorkerStat("Creativity");
                 break;
             case "Engineering":
-                reqProgress /= c.AggregateWorkerStat("Cleverness");
+                aggStat = c.AggregateWorkerStat("Cleverness");
                 break;
             case "Marketing":
-                reqProgress /= c.AggregateWorkerStat("Charisma");
+                aggStat = c.AggregateWorkerStat("Charisma");
                 break;
             default:
                 break;
         }
 
-        return reqProgress;
+        if (aggStat == 0)
+            return reqProgress;
+        return reqProgress/aggStat;
     }
 
     public float TotalProgressRequired(Company c) {
         float reqProgress = 0;
-        reqProgress += ProgressRequired("Design", (int)design.value, c);
-        reqProgress += ProgressRequired("Engineering", (int)engineering.value, c);
-        reqProgress += ProgressRequired("Marketing", (int)marketing.value, c);
+
+        // We only count the base value of these stats, since bonuses to them
+        // should not penalize development time.
+        reqProgress += ProgressRequired("Design",      (int)design.baseValue, c);
+        reqProgress += ProgressRequired("Engineering", (int)engineering.baseValue, c);
+        reqProgress += ProgressRequired("Marketing",   (int)marketing.baseValue, c);
         return reqProgress;
     }
 }
