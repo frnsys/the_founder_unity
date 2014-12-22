@@ -39,7 +39,11 @@ public class UIManageProducts : MonoBehaviour {
             UnityEngine.Object.DestroyImmediate(productItem);
             productsGridGrid.Reposition();
         };
-        UIManager.Instance.Confirm("Are you sure want to shutdown " + product.name + "?", yes, null);
+
+        if (product.developing)
+            UIManager.Instance.Confirm("Are you sure want to stop developing this " + product.genericName + "?", yes, null);
+        else
+            UIManager.Instance.Confirm("Are you sure want to stop shutdown " + product.name + "? Its effects will become inactive.", yes, null);
     }
 
     void OnDisable() {

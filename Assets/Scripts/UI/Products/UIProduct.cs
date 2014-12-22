@@ -21,6 +21,7 @@ public class UIProduct : MonoBehaviour {
             // This never changes so just set it once.
             infrastructure.text = product_.requiredInfrastructure.ToString();
 
+            UpdateState();
             SetData();
         }
     }
@@ -28,32 +29,38 @@ public class UIProduct : MonoBehaviour {
 
     void Update() {
         if (product_ != null)
+            // These things only need to update if product the state has changed.
+            if (state != product_.state)
+                UpdateState();
             SetData();
     }
 
-    private void SetData() {
-        // These things only need to update if product the state has changed.
-        if (state != product_.state) {
-            if (product_.developing) {
-                name.text = product_.genericName;
-                status.text = "Developing";
-                description.gameObject.SetActive(false);
-            }
-            else {
-                name.text = product_.name;
-                progress.gameObject.SetActive(false);
-                description.gameObject.SetActive(true);
-                RenderEffects(product_.effects);
-                AdjustEffectsHeight();
-            }
-
-            if (product_.retired) {
-                shutdown.isEnabled = false;
-                shutdown.transform.Find("Label").GetComponent<UILabel>().text = "Discontinued";
-            }
-            state = product_.state;
+    private void UpdateState() {
+        if (product_.developing) {
+            name.text = product_.genericName;
+            status.text = "Developing...";
+            description.gameObject.SetActive(false);
+        }
+        else {
+            name.text = product_.name;
+            progress.gameObject.SetActive(false);
+            description.gameObject.SetActive(true);
+            RenderEffects(product_.effects);
+            AdjustEffectsHeight();
         }
 
+        if (product_.retired) {
+            shutdown.isEnabled = false;
+            shutdown.transform.Find("Label").GetComponent<UILabel>().text = "Discontinued";
+
+            foreach (Transform t in effectGrid.transform) {
+                t.gameObject.GetComponent<UIBuffEffect>().Disable();
+            }
+        }
+        state = product_.state;
+    }
+
+    private void SetData() {
         // These things are always updating.
         if (product_.developing) {
             progress.value = product_.progress;
@@ -80,7 +87,10 @@ public class UIProduct : MonoBehaviour {
             NGUITools.DestroyImmediate(go);
         }
 
-        RenderUnlockEffects(es);
+        // Note that we do not render unlock effects because they are permanent.
+        // They show up in the product completion alert.
+        // This way we can grey out these other effects without confusing the player as to
+        // whether unlocked things have become re-locked.
         RenderBuffEffects(es);
         RenderProductEffects(es);
     }
@@ -91,24 +101,6 @@ public class UIProduct : MonoBehaviour {
         // If there are effects, expand the height for them.
         if (count > 0)
             Extend((int)((count + 1) * effectGrid.cellHeight));
-    }
-
-    private void RenderUnlockEffects(EffectSet es) {
-        // Render the unlock effects for this event.
-        // Note that event unlocks are *not* rendered because
-        // those are "hidden" effects. You don't know they can happen until they do happen.
-        foreach (ProductType i in es.unlocks.productTypes) {
-            RenderUnlockEffect(i.name + " products");
-        }
-        foreach (Vertical i in es.unlocks.verticals) {
-            RenderUnlockEffect("the " + i.name + " vertical");
-        }
-        foreach (Worker i in es.unlocks.workers) {
-            RenderUnlockEffect(i.name);
-        }
-        foreach (Item i in es.unlocks.items) {
-            RenderUnlockEffect(i.name);
-        }
     }
 
     private void RenderBuffEffects(EffectSet es) {
@@ -129,19 +121,9 @@ public class UIProduct : MonoBehaviour {
         }
     }
 
-    private void RenderUnlockEffect(string name) {
-        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
-        effectObj.GetComponent<UIUnlockEffect>().Set(name);
-        effectObj.GetComponent<UIWidget>().leftAnchor.Set(description.transform, 0, 0);
-        effectObj.GetComponent<UIWidget>().rightAnchor.Set(description.transform, 0, 0);
-    }
-
     private void RenderBuffEffect(StatBuff buff, string target) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
         effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
-        Debug.Log("rendering");
-        Debug.Log(description.width);
-        Debug.Log(description.localSize.x);
         effectObj.GetComponent<UIWidget>().leftAnchor.Set(description.transform, 0, 0);
         effectObj.GetComponent<UIWidget>().rightAnchor.Set(description.transform, 0, 0);
     }

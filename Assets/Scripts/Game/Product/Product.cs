@@ -347,7 +347,7 @@ public class Product : HasStats {
 
 
     // Progress required for the nth point.
-    public static int baseProgress = 1000;
+    public static int baseProgress = 1;
     public float ProgressRequired(string feature, int n, Company c) {
         float reqProgress = Utils.Fibonacci(n+2) * baseProgress;
         float aggStat = 0;

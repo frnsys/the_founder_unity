@@ -35,6 +35,15 @@ public class UIBuffEffect : MonoBehaviour {
 
         label.text = buffText;
     }
+
+    // Grey out this effect to indicate that it is inactive.
+    private Color disabledColor = new Color(0.75f, 0.75f, 0.75f, 1f);
+    private Color disabledTextureColor = new Color(1f, 1f, 1f, 0.15f);
+    public void Disable() {
+        label.color     = disabledColor;
+        typeLabel.color = disabledColor;
+        typeIcon.color  = disabledTextureColor;
+    }
 }
 
 
