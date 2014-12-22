@@ -221,17 +221,14 @@ public class UINewProductFlow : MonoBehaviour {
     }
 
     private void UpdateProgressRequired(GameObject obj, string feature, int points) {
-        float progressRequired = product.ProgressRequired(feature, points, gm.playerCompany);
+        int estimatedWeeks = product.EstimatedCompletionWeeks(feature, points, gm.playerCompany);
         UILabel label = obj.transform.Find("Progress Required").gameObject.GetComponent<UILabel>();
-        if (float.IsNaN(progressRequired)) {
-            label.text = "forever";
-        } else {
-            label.text = progressRequired.ToString();
-        }
+        label.text = "about " + estimatedWeeks.ToString() + " weeks";
     }
 
     public void BeginProductDevelopment() {
-        UIManager.Instance.Confirm("Are you happy with this product configuration? It will take {X} weeks to develop.", BeginProductDevelopment_, null);
+        int totalWeeks = product.EstimatedCompletionWeeks(gm.playerCompany);
+        UIManager.Instance.Confirm("Are you happy with this product configuration? It will take about " + totalWeeks.ToString() + " weeks to develop.", BeginProductDevelopment_, null);
     }
 
     private void BeginProductDevelopment_() {

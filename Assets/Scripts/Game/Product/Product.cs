@@ -347,7 +347,7 @@ public class Product : HasStats {
 
 
     // Progress required for the nth point.
-    public static int baseProgress = 1;
+    public static int baseProgress = 1000;
     public float ProgressRequired(string feature, int n, Company c) {
         float reqProgress = Utils.Fibonacci(n+2) * baseProgress;
         float aggStat = 0;
@@ -381,6 +381,21 @@ public class Product : HasStats {
         reqProgress += ProgressRequired("Engineering", (int)engineering.baseValue, c);
         reqProgress += ProgressRequired("Marketing",   (int)marketing.baseValue, c);
         return reqProgress;
+    }
+
+    public int EstimatedCompletionWeeks(Company c) {
+        float aggProductivity = c.AggregateWorkerStat("Productivity");
+        float reqProgress = TotalProgressRequired(c);
+
+        // Products are developed per development cycle, which is hardcoded to 14 per week.
+        // Int to round down because of Hofstadter's Law: "It always takes longer than you expect, even when you take into account Hofstadter's Law."
+        return (int)(reqProgress/(aggProductivity * 14));
+    }
+
+    public int EstimatedCompletionWeeks(string feature, int n, Company c) {
+        float aggProductivity = c.AggregateWorkerStat("Productivity");
+        float reqProgress = ProgressRequired(feature, n, c);
+        return (int)(reqProgress/(aggProductivity * 14));
     }
 }
 
