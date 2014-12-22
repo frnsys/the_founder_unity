@@ -30,10 +30,12 @@ public class GameData : ScriptableObject {
     // ===============================================
 
     public Company company;
-
     public TheBoard board;
-
     public UnlockSet unlocked;
+
+    // Maximum product types that can be combined.
+    // Initially this is just 1.
+    public int maxProductTypes;
 
     // Research stuff.
     public Technology technology;
@@ -87,6 +89,7 @@ public class GameData : ScriptableObject {
         data.year  = 1;
         data.week  = 0;
 
+        data.maxProductTypes   = 1;
         data.economyMultiplier = 1;
 
         // You start your business at 25,

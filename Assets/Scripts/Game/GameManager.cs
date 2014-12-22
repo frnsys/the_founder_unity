@@ -28,6 +28,10 @@ public class GameManager : Singleton<GameManager> {
         get { return data.economyMultiplier; }
     }
 
+    public int maxProductTypes {
+        get { return data.maxProductTypes; }
+    }
+
     // Other managers.
     [HideInInspector]
     public ResearchManager researchManager;
