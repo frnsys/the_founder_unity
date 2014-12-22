@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Name: Social Network
   m_EditorClassIdentifier: 
   description: 
+  progressRequired: 1000
+  difficulty: 1
   requiredVerticals: []
   requiredInfrastructure:
     keys: 00000000010000000200000003000000

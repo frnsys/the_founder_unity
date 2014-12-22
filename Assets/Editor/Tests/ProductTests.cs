@@ -18,11 +18,12 @@ namespace UnityTest
 
         private Product p = null;
         private ProductRecipe pr = null;
+        private ProductType pt;
         private Item item;
 
         [SetUp]
         public void SetUp() {
-            ProductType pt = ProductType.Load("Social Network");
+            pt = ProductType.Load("Social Network");
 
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
@@ -43,6 +44,8 @@ namespace UnityTest
             UnityEngine.Object.DestroyImmediate(gameObj);
             gm = null;
             p = null;
+            pt = null;
+            pr = null;
             item = null;
         }
 
@@ -173,6 +176,49 @@ namespace UnityTest
             i[Infrastructure.Type.Datacenter] = 10;
             i[Infrastructure.Type.Studio] = 3;
             Assert.IsTrue(prod.requiredInfrastructure.Equals(i));
+        }
+
+        [Test]
+        public void RequiredProgress() {
+            int baseProgress = Product.baseProgress;
+            float difficulty = 2;
+            pt.difficulty = difficulty;
+
+            Assert.AreEqual(p.difficulty, difficulty);
+
+            float cre = 2;
+            float cle = 3;
+            float cha = 4;
+
+            Worker w = ScriptableObject.CreateInstance<Worker>();
+            w.Init("Yoyo Ma");
+            w.creativity.baseValue = cre;
+            w.cleverness.baseValue = cle;
+            w.charisma.baseValue   = cha;
+            gd.company.HireWorker(w);
+
+            Assert.AreEqual(gd.company.AggregateWorkerStat("Creativity"), cre);
+            Assert.AreEqual(gd.company.AggregateWorkerStat("Cleverness"), cle);
+            Assert.AreEqual(gd.company.AggregateWorkerStat("Charisma"),   cha);
+
+            int n = 3;
+            float expected;
+            float required;
+
+            // Fibonacci value for n+2:
+            int fib = 5;
+
+            expected = (fib * baseProgress * difficulty)/cre;
+            required = p.ProgressRequired("Design", n, gd.company);
+            Assert.AreEqual(expected, required);
+
+            expected = (fib * baseProgress * difficulty)/cle;
+            required = p.ProgressRequired("Engineering", n, gd.company);
+            Assert.AreEqual(expected, required);
+
+            expected = (fib * baseProgress * difficulty)/cha;
+            required = p.ProgressRequired("Marketing", n, gd.company);
+            Assert.AreEqual(expected, required);
         }
     }
 }

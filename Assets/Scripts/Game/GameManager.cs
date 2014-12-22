@@ -178,7 +178,7 @@ public class GameManager : Singleton<GameManager> {
             }
 
             // See how the economy is.
-            data.economyMultiplier = Tools.RandomGaussian(1f, 0.2f);
+            data.economyMultiplier = Utils.RandomGaussian(1f, 0.2f);
 
             playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();

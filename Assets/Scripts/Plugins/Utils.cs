@@ -1,6 +1,6 @@
 using UnityEngine;
 
-class Tools {
+class Utils {
     // http://stackoverflow.com/q/5817490/1097920
     public static double RandomGaussian()
     {
