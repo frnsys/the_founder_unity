@@ -204,7 +204,7 @@ namespace UnityTest
             Infrastructure required = new Infrastructure();
             required[Infrastructure.Type.Datacenter] = baseDatacenterCapacity;
             pt.requiredInfrastructure = required;
-            c.StartNewProduct( new List<ProductType> { pt } );
+            c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
 
             // All infrastructure is being used now,
             // so none of it is available.
@@ -253,7 +253,7 @@ namespace UnityTest
             i[Infrastructure.Type.Factory] = 1;
             c.BuyInfrastructure(i);
 
-            c.StartNewProduct(pts);
+            c.StartNewProduct(pts, 0, 0, 0);
             Assert.AreEqual(c.developingProducts[0], c.products[0]);
 
             Assert.AreEqual(c.availableInfrastructure, c.infrastructure - pts[0].requiredInfrastructure);
@@ -273,13 +273,10 @@ namespace UnityTest
             worker.cleverness.baseValue = 10;
 
             Product p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pts);
+            p.Init(pts, 0, 0, 0);
             c.DevelopProduct(p);
 
             Assert.IsTrue(p.progress > 0);
-            Assert.IsTrue(p.design.value > 0);
-            Assert.IsTrue(p.marketing.value > 0);
-            Assert.IsTrue(p.engineering.value > 0);
         }
 
 		[Test]
@@ -292,7 +289,7 @@ namespace UnityTest
             worker.creativity.baseValue = 100;
             worker.cleverness.baseValue = 100;
 
-            c.StartNewProduct(pts);
+            c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             c.DevelopProduct(p);
 
@@ -309,7 +306,7 @@ namespace UnityTest
             c.cash.baseValue = 2000;
             c.BuyItem(item);
 
-            c.StartNewProduct(pts);
+            c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             Assert.AreEqual(p.design.value, 10);
 
@@ -329,7 +326,7 @@ namespace UnityTest
 		[Test]
 		public void BuyItem_CanAfford() {
             c.cash.baseValue = 2000;
-            c.StartNewProduct(pts);
+            c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             c.HireWorker(worker);
 
@@ -356,7 +353,7 @@ namespace UnityTest
         [Test]
         public void RemoveItem() {
             c.cash.baseValue = 2000;
-            c.StartNewProduct(pts);
+            c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             c.HireWorker(worker);
 

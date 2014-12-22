@@ -116,7 +116,7 @@ public class UINewProductFlow : MonoBehaviour {
 
         // Create a dummy product with the new product types.
         product = new Product();
-        product.Init(productTypes);
+        product.Init(productTypes, 0, 0, 0);
 
         // Update the required progress for each feature.
         GameObject obj;
@@ -235,7 +235,7 @@ public class UINewProductFlow : MonoBehaviour {
     }
 
     private void BeginProductDevelopment_() {
-        gm.playerCompany.StartNewProduct(productTypes);
+        gm.playerCompany.StartNewProduct(productTypes, design, marketing, engineering);
         SendMessageUpwards("Close");
     }
 }

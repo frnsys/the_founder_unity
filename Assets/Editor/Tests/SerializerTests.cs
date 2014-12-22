@@ -245,9 +245,9 @@ namespace UnityTest
             List<ProductType> pts = new List<ProductType>() { pt };
 
             Product product = ScriptableObject.CreateInstance<Product>();
-            product.Init(pts);
+            product.Init(pts, 0, 0, 0);
 
-            product.Develop(RandFloat(), RandFloat(), RandFloat(), RandFloat());
+            product.Develop(RandFloat());
 
             float r = Random.Range(0,1);
             if (r > 0.33) {

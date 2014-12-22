@@ -33,7 +33,7 @@ namespace UnityTest
             List<ProductType> pts = new List<ProductType>() { pt };
 
             p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pts);
+            p.Init(pts, 0, 0, 0);
             pr = ProductRecipe.LoadFromTypes(pts);
 
             item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
@@ -61,16 +61,10 @@ namespace UnityTest
 		public void Develop() {
             Assert.AreEqual(p.state, Product.State.DEVELOPMENT);
             Assert.AreEqual(p.progress, 0);
-            Assert.AreEqual(p.design.value, 0);
-            Assert.AreEqual(p.marketing.value, 0);
-            Assert.AreEqual(p.engineering.value, 0);
 
-            p.Develop(100000, 5, 15, 25);
+            p.Develop(100000);
 
             Assert.AreEqual(p.progress, 100000/p.progressRequired);
-            Assert.AreEqual(p.design.value, (5+15)/2);
-            Assert.AreEqual(p.marketing.value, (25+5)/2);
-            Assert.AreEqual(p.engineering.value, (15+25)/2);
             Assert.AreEqual(p.state, Product.State.LAUNCHED);
         }
 
@@ -136,7 +130,7 @@ namespace UnityTest
             pt__.difficulty = 2f;
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ } );
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0);
 
             Assert.AreEqual(prod.difficulty, 1.5);
         }
@@ -152,7 +146,7 @@ namespace UnityTest
             pt__.requiredVerticals = new List<Vertical>() { vert__ };
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ } );
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0 );
 
             Assert.AreEqual(prod.requiredVerticals, new List<Vertical>() { vert_, vert__ });
         }
@@ -170,7 +164,7 @@ namespace UnityTest
             pt__.requiredInfrastructure = i__;
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ } );
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0 );
 
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 10;

@@ -116,12 +116,13 @@ public class GameManager : Singleton<GameManager> {
     // Time ==========================================
     // ===============================================
 
-    private int weekTime = 15;
+    private static int weekTime = 15;
+    private static float cycleTime = weekTime/14;
     public string month {
         get { return data.month.ToString(); }
     }
     public int year {
-        get { return 2014 + data.year; }
+        get { return 2000 + data.year; }
     }
     [HideInInspector]
     public int week {
@@ -224,7 +225,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     IEnumerator ProductDevelopmentCycle() {
-        yield return new WaitForSeconds(weekTime/14);
+        yield return new WaitForSeconds(cycleTime);
         while(true) {
             playerCompany.DevelopProducts();
 
@@ -237,16 +238,16 @@ public class GameManager : Singleton<GameManager> {
 
             // Add a bit of randomness to give things
             // a more "natural" feel.
-            yield return new WaitForSeconds(weekTime/14 * Random.Range(0.4f, 1.4f));
+            yield return new WaitForSeconds(cycleTime * Random.Range(0.4f, 1.4f));
         }
     }
 
     IEnumerator ProductRevenueCycle() {
-        yield return new WaitForSeconds(weekTime/14);
+        yield return new WaitForSeconds(cycleTime);
         while(true) {
             // Add a bit of randomness to give things
             // a more "natural" feel.
-            float elapsedTime = weekTime/14 * Random.Range(0.4f, 1.4f);
+            float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
             playerCompany.HarvestProducts(elapsedTime);
 
             foreach (AICompany aic in data.otherCompanies) {
@@ -258,11 +259,11 @@ public class GameManager : Singleton<GameManager> {
     }
 
     IEnumerator ResearchCycle() {
-        yield return new WaitForSeconds(weekTime/14);
+        yield return new WaitForSeconds(cycleTime);
         while(true) {
             // Add a bit of randomness to give things
             // a more "natural" feel.
-            float elapsedTime = weekTime/14 * Random.Range(0.4f, 1.4f);
+            float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
             researchManager.Research();
 
             yield return new WaitForSeconds(elapsedTime);

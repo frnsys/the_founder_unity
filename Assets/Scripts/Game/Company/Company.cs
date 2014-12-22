@@ -183,9 +183,9 @@ public class Company : HasStats {
         }
     }
 
-    public void StartNewProduct(List<ProductType> pts) {
+    public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();
-        product.Init(pts);
+        product.Init(pts, design, marketing, engineering);
 
         // Apply any applicable items to the new product.
         // TO DO: should this be held off until after the product is completed?
@@ -234,20 +234,14 @@ public class Company : HasStats {
     }
 
     public void DevelopProduct(Product product) {
-        float charisma = 0;
-        float creativity = 0;
-        float cleverness = 0;
         float progress = 0;
 
         foreach (Worker worker in allWorkers) {
             // A bit of randomness to make things more interesting.
-            charisma += (worker.charisma.value/2) * Random.Range(0.90f, 1.05f);
-            creativity += (worker.creativity.value/2) * Random.Range(0.90f, 1.05f);
-            cleverness += (worker.cleverness.value/2) * Random.Range(0.90f, 1.05f);
-            progress += (worker.productivity.value/2) * Random.Range(0.90f, 1.05f);
+            progress += worker.productivity.value * Random.Range(0.90f, 1.05f);
         }
 
-        bool completed = product.Develop(progress, charisma, creativity, cleverness);
+        bool completed = product.Develop(progress);
         if (completed) {
             ProductsReleased.Add(product);
 

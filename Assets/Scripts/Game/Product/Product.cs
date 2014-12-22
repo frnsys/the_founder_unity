@@ -120,13 +120,13 @@ public class Product : HasStats {
     public Stat marketing;
     public Stat engineering;
 
-    public void Init(List<ProductType> pts) {
+    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_) {
         name = GenerateName();
         productTypes = pts;
 
-        design = new Stat("Design", 0);
-        marketing = new Stat("Marketing", 0);
-        engineering = new Stat("Engineering", 0);
+        design =      new Stat("Design",      (float)design_);
+        marketing =   new Stat("Marketing",   (float)marketing_);
+        engineering = new Stat("Engineering", (float)engineering_);
 
         recipe = ProductRecipe.LoadFromTypes(pts);
 
@@ -158,16 +158,9 @@ public class Product : HasStats {
 
     static public event System.Action<Product> Completed;
 
-    public bool Develop(float newProgress, float charisma, float creativity, float cleverness) {
+    public bool Develop(float newProgress) {
         if (state == State.DEVELOPMENT) {
-            float newDesign = (creativity + charisma)/2;
-            float newMarketing = (cleverness + charisma)/2;
-            float newEngineering = (creativity + cleverness)/2;
-
             _progress += newProgress;
-            design.baseValue += newDesign;
-            marketing.baseValue += newMarketing;
-            engineering.baseValue += newEngineering;
 
             if (_progress >= progressRequired) {
                 Launch();

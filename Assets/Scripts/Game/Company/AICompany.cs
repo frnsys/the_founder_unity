@@ -153,7 +153,8 @@ public class AICompany : Company {
                     // Create as many as possible.
                     if (p.points <= availableProductPoints) {
                         Debug.Log(name + " is starting a new competing product...");
-                        StartNewProduct(p.productTypes);
+                        // TO DO these should be actual design, marketing, engineering values.
+                        StartNewProduct(p.productTypes, 0, 0, 0);
                     }
                 }
 
@@ -166,7 +167,9 @@ public class AICompany : Company {
                 ProductCombo pc = RandomSpecialtyProduct();
                 if (pc.points <= availableProductPoints) {
                     Debug.Log(name + " is starting a new product...");
-                    StartNewProduct(pc.pts);
+
+                    // TO DO these should be actual design, marketing, engineering values.
+                    StartNewProduct(pc.pts, 0, 0, 0);
                 } else {
                     break;
                 }
