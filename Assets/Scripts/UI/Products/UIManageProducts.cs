@@ -15,36 +15,15 @@ public class UIManageProducts : MonoBehaviour {
     private List<Product> displayedProducts = new List<Product>();
     void Update() {
         foreach (Product p in GameManager.Instance.playerCompany.products) {
-            // Show only developing and in-market products.
-            if (!p.retired) {
-                if (!displayedProducts.Contains(p)) {
-                    GameObject productItem = NGUITools.AddChild(productsGrid, productItemPrefab);
-                    UIProduct uip = productItem.GetComponent<UIProduct>();
+            // If we aren't already displaying this product, display it.
+            if (!displayedProducts.Contains(p)) {
+                GameObject productItem = NGUITools.AddChild(productsGrid, productItemPrefab);
+                UIProduct uip = productItem.GetComponent<UIProduct>();
+                uip.product = p;
 
-                    uip.product = p;
+                UIEventListener.Get(productItem.transform.Find("Shutdown Button").gameObject).onClick += ShutdownProduct;
 
-                    if (p.developing) {
-                        uip.revenue.gameObject.SetActive(false);
-                        uip.progress.gameObject.SetActive(true);
-                    }
-
-                    UIEventListener.Get(productItem.transform.Find("Shutdown Button").gameObject).onClick += ShutdownProduct;
-
-                    displayedProducts.Add(p);
-
-                } else {
-                    // Just update the revenue.
-                    int i = displayedProducts.IndexOf(p);
-                    UIProduct uip = productsGrid.transform.GetChild(i).GetComponent<UIProduct>();
-
-                    if (p.state == Product.State.LAUNCHED) {
-                        uip.revenue.text = "$" + ((int)p.revenueEarned).ToString();
-                        uip.revenue.gameObject.SetActive(true);
-                        uip.progress.gameObject.SetActive(false);
-                    } else if (p.state == Product.State.DEVELOPMENT) {
-                        uip.progress.value = p.progress;
-                    }
-                }
+                displayedProducts.Add(p);
             }
         }
         productsGridGrid.Reposition();

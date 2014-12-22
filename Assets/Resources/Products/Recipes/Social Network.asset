@@ -13,20 +13,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productTypes:
   - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-  appeal_W: 1
-  usability_W: 1
-  performance_W: 1
-  appeal_I: 100
-  usability_I: 100
-  performance_I: 100
-  progressRequired: 100000
+  design_W: 1
+  marketing_W: 1
+  engineering_W: 1
+  design_I: 100
+  marketing_I: 100
+  engineering_I: 100
   maxLongevity: 1000
   maxRevenue: 1000
-  maintenance: 1000
   effects:
     products: []
     workers: []
-    company: []
+    company:
+    - name: Cash
+      value: 1000
+      duration: 0
+      type: 0
     unlocks:
       prereqs:
         productTypes: []

@@ -29,7 +29,7 @@ public class Worker : HasStats {
             // their minimum acceptable salary depends on their happiness at their current company.
             // If happiness is below 5, the employee will actually accept a lower salary to move.
             if (salary > 0)
-                return salary * (1 + (happiness - 5)/10);
+                return salary * (1 + (happiness.value - 5)/10);
             return baseMinSalary;
         }
     }

@@ -18,6 +18,13 @@ public class Product : HasStats {
     // TO DO this should come from the product recipe.
     public string description;
 
+    // A generic name just based on the product types.
+    public string genericName {
+        get {
+            return string.Join(" + ", productTypes.Select(pt => pt.name).ToArray());
+        }
+    }
+
     [SerializeField]
     private float _progress = 0;
     public float progress {

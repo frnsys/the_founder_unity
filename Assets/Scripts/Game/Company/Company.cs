@@ -170,6 +170,18 @@ public class Company : HasStats {
             return products.FindAll(p => p.state == Product.State.DEVELOPMENT);
         }
     }
+    public List<Product> retiredProducts {
+        get {
+            return products.FindAll(p => p.state == Product.State.RETIRED);
+        }
+    }
+
+    // Products grouped by state.
+    public List<Product> sortedProducts {
+        get {
+            return developingProducts.Concat(activeProducts).Concat(retiredProducts).ToList();
+        }
+    }
 
     public void StartNewProduct(List<ProductType> pts) {
         Product product = ScriptableObject.CreateInstance<Product>();
