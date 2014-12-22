@@ -380,19 +380,19 @@ public class Product : HasStats {
         return reqProgress;
     }
 
-    public int EstimatedCompletionWeeks(Company c) {
+    public int EstimatedCompletionTime(Company c) {
         float aggProductivity = c.AggregateWorkerStat("Productivity");
         float reqProgress = TotalProgressRequired(c);
 
-        // Products are developed per development cycle, which is hardcoded to 14 per week.
+        // Products are developed per development cycle.
         // Int to round down because of Hofstadter's Law: "It always takes longer than you expect, even when you take into account Hofstadter's Law."
-        return (int)(reqProgress/(aggProductivity * 14));
+        return (int)((reqProgress/aggProductivity) * GameManager.CycleTime);
     }
 
-    public int EstimatedCompletionWeeks(string feature, int n, Company c) {
+    public int EstimatedCompletionTime(string feature, int n, Company c) {
         float aggProductivity = c.AggregateWorkerStat("Productivity");
         float reqProgress = ProgressRequired(feature, n, c);
-        return (int)(reqProgress/(aggProductivity * 14));
+        return (int)((reqProgress/aggProductivity) * GameManager.CycleTime);
     }
 }
 

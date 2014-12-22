@@ -118,6 +118,9 @@ public class GameManager : Singleton<GameManager> {
 
     private static int weekTime = 15;
     private static float cycleTime = weekTime/14;
+    public static float CycleTime {
+        get { return cycleTime; }
+    }
     public string month {
         get { return data.month.ToString(); }
     }
