@@ -43,8 +43,11 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
             }
         }
         EditorGUI.indentLevel = 0;
-
         EditorGUILayout.Space();
+
+        EditorStyles.textField.wordWrap = true;
+        EditorGUILayout.LabelField("Names (comma-delimited)");
+        target.names = EditorGUILayout.TextArea(target.names);
 
         target.design_W = EditorGUILayout.FloatField("Design Weight", target.design_W);
         target.marketing_W = EditorGUILayout.FloatField("Marketing Weight", target.marketing_W);

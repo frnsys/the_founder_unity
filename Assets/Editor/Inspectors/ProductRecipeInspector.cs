@@ -46,8 +46,11 @@ internal class ProductRecipeInspector : Editor {
             }
         }
         EditorGUI.indentLevel = 0;
-
         EditorGUILayout.Space();
+
+        EditorStyles.textField.wordWrap = true;
+        EditorGUILayout.LabelField("Names (comma-delimited)");
+        p.names = EditorGUILayout.TextArea(p.names);
 
         p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);
         p.marketing_W = EditorGUILayout.FloatField("Marketing Weight", p.marketing_W);

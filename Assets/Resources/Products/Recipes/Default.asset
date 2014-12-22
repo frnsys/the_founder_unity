@@ -11,17 +11,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
   m_Name: Default
   m_EditorClassIdentifier: 
-  productType: {fileID: 11400000, guid: 4222ff85e6f1c4b8d95bfdcc35abc292, type: 2}
-  industry: {fileID: 11400000, guid: c0b1f441b2d87444e9c9bf2a5263063c, type: 2}
-  market: {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
-  appeal_W: 1
-  usability_W: 1
-  performance_W: 1
-  appeal_I: 100
-  usability_I: 100
-  performance_I: 100
-  progressRequired: 1000
+  productTypes: []
+  names: 
+  design_W: 1
+  marketing_W: 1
+  engineering_W: 1
+  design_I: 100
+  marketing_I: 100
+  engineering_I: 100
   maxLongevity: 1000
   maxRevenue: 1000
-  maintenance: 1000
-  outcomes: []
+  effects:
+    products: []
+    workers: []
+    company: []
+    unlocks:
+      prereqs:
+        productTypes: []
+        verticals: []
+        workers: []
+        events: []
+        items: []
+        stores: 
+        researchPoints: 0
+      productTypes: []
+      workers: []
+      events: []
+      items: []
+      stores: 
+      locations: []
+      verticals: []

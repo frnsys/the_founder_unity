@@ -15,6 +15,9 @@ public class ProductRecipe : Resource<ProductRecipe> {
 
     public List<ProductType> productTypes;
 
+    // Comma-delimited list of names.
+    public string names;
+
     // Weights: how important a given feature is to the product's performance.
     public float design_W = 1;
     public float marketing_W = 1;

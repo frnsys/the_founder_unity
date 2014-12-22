@@ -302,7 +302,7 @@ public class Company : HasStats {
 
 
     // Given an item, find the list of currently active products that
-    // match the item's product types.
+    // match at least one of the item's product types.
     protected List<Product> FindMatchingProducts(List<ProductType> productTypes) {
         // Items which have no product specifications apply to all products.
         if (productTypes.Count == 0) {

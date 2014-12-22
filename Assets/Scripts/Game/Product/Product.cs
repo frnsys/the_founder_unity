@@ -116,7 +116,6 @@ public class Product : HasStats {
     public Stat engineering;
 
     public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_, Company c = null) {
-        name = GenerateName();
         productTypes = pts;
 
         design =      new Stat("Design",      (float)design_);
@@ -134,25 +133,23 @@ public class Product : HasStats {
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
+
+        name = GenerateName();
     }
 
-    // Create a random stupid product name.
+    // Generate a product name.
     private string GenerateName() {
-        // Load product name data if necessary.
-        if (prefixes == null) {
-            TextAsset prefixes_ = Resources.Load("Products/Names/Endings") as TextAsset;
-            prefixes = prefixes_.text.Split(new string[] { System.Environment.NewLine }, System.StringSplitOptions.None);
-        }
-        if (endings == null) {
-            TextAsset endings_ = Resources.Load("Products/Names/Prefixes") as TextAsset;
-            endings = endings_.text.Split(new string[] { System.Environment.NewLine }, System.StringSplitOptions.None);
+        if (recipe.names != null) {
+            // TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
+            // make sure companies can't have products of the same name. Subsequent products of the same product type combination
+            // use the existing name but at "2.0" etc at the end.
+            string[] names = recipe.names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
+            if (names.Length > 0)
+                return names[Random.Range(0, names.Length-1)];
         }
 
-        string beginning = prefixes[Random.Range(0, prefixes.Length-1)];
-        string middle = prefixes[Random.Range(0, prefixes.Length-1)];
-        string end = endings[Random.Range(0, endings.Length-1)];
-        beginning = beginning[0].ToString().ToUpper() + beginning.Substring(1);
-        return beginning + middle + end;
+        // Fallback to a rather generic name.
+        return string.Join(" ", productTypes.Select(pt => pt.name).ToArray());
     }
 
 

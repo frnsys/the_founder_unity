@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
   m_Name: Social Network
   m_EditorClassIdentifier: 
-  productTypes:
-  - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+  productTypes: []
+  names: Friendbook, Palster, Lets Connect, Digibuds
   design_W: 1
   marketing_W: 1
   engineering_W: 1
@@ -24,11 +24,7 @@ MonoBehaviour:
   effects:
     products: []
     workers: []
-    company:
-    - name: Cash
-      value: 1000
-      duration: 0
-      type: 0
+    company: []
     unlocks:
       prereqs:
         productTypes: []
