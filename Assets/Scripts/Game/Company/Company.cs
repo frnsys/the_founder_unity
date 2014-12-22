@@ -196,6 +196,12 @@ public class Company : HasStats {
         }
     }
 
+    public bool developing {
+        get {
+            return developingProducts.Count > 0;
+        }
+    }
+
     public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();
         product.Init(pts, design, marketing, engineering, this);
