@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: Discoveries
+  m_Name: Technologies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,7 +571,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -131.496475, z: 0}
+  m_LocalPosition: {x: 0, y: -163.49649, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400044}
@@ -709,6 +709,7 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: 1.3114754
   OnReposition: []
+  fullWidth: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1214,15 +1215,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 100046}
   overlay: {fileID: 11400030}
-  bodyLabel: {fileID: 11400056}
   body: {fileID: 11400062}
+  bodyLabel: {fileID: 11400056}
   effectGrid: {fileID: 11400058}
   buffEffectPrefab: {fileID: 100000, guid: 75fc8a3a57b014758ac27337a73251ec, type: 2}
   unlockEffectPrefab: {fileID: 100008, guid: 356d62bb98d1c4622b801d0d43022fb7, type: 2}
   productEffectPrefab: {fileID: 100000, guid: 39b9fab38ff9d4956bf988f948c90648, type: 2}
   nameLabel: {fileID: 11400036}
-  discoveryPrefab: {fileID: 100002, guid: 7825d0e4513574139b2878b72deed1c2, type: 2}
-  selectedDiscoveryItem: {fileID: 0}
+  technologyPrefab: {fileID: 0}
+  selectedTechnologyItem: {fileID: 0}
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1259,7 +1260,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3006
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1737,7 +1738,7 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 1
   mWidth: 350
-  mHeight: 192
+  mHeight: 224
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -1826,7 +1827,7 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 94
+  mHeight: 62
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0

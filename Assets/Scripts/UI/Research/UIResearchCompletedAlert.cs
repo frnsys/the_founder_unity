@@ -35,20 +35,20 @@ public class UIResearchCompletedAlert: UIEffectAlert {
         Show();
 
         // TO DO needs to load the next three technologies to choose from.
-        //foreach (Technology d in GameManager.Instance.researchManager.nexttechnologies) {
+        //foreach (Technology d in GameManager.Instance.researchManager.nextTechnologies) {
         //}
         // Temporary:
-        Technology di = Resources.Load("technologies/Electricity") as Technology;
+        Technology di = Resources.Load("Technologies/Electricity") as Technology;
 
-        GameObject technologiesGrid = transform.Find("New Research Window/Body/technologies").gameObject;
+        GameObject technologiesGrid = transform.Find("New Research Window/Body/Technologies").gameObject;
         int width = technologiesGrid.GetComponent<UIWidget>().width;
 
-        List<Technology> nexttechnologies = new List<Technology>();
-        nexttechnologies.Add(di);
-        nexttechnologies.Add(di);
-        nexttechnologies.Add(di);
+        List<Technology> nextTechnologies = new List<Technology>();
+        nextTechnologies.Add(di);
+        nextTechnologies.Add(di);
+        nextTechnologies.Add(di);
 
-        foreach (Technology d in nexttechnologies) {
+        foreach (Technology d in nextTechnologies) {
             GameObject dItem = NGUITools.AddChild(technologiesGrid, technologyPrefab);
             dItem.transform.Find("Technology Name").GetComponent<UILabel>().text = d.name;
 
