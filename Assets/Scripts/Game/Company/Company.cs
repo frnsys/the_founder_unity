@@ -10,8 +10,18 @@ using System.Collections.ObjectModel;
 [System.Serializable]
 public class Company : HasStats {
     public Stat cash;
-    public Stat research;
 
+    [SerializeField]
+    private Worker researchCzar;
+    public Worker ResearchCzar {
+        get { return researchCzar; }
+        set {
+            researchCzar = value;
+            research.baseValue = researchCzar.cleverness.value;
+        }
+    }
+
+    public Stat research;
     public float researchInvestment = 1000;
 
     public Company(string name_) {
@@ -74,8 +84,9 @@ public class Company : HasStats {
         get { return sizeLimit - _workers.Count; }
     }
 
+    // This does not include czars!
     public IEnumerable<Worker> allWorkers {
-        get { return _workers.Concat(founders.Cast<Worker>()); }
+        get { return _workers.Concat(founders.Cast<Worker>()).Where(w => w != researchCzar); }
     }
 
     public bool HireWorker(Worker worker) {

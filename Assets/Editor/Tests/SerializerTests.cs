@@ -16,6 +16,8 @@ namespace UnityTest
         public void SetUp() {
             data = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestingGameData.asset", typeof(GameData)) as GameData;
 
+            Worker researchCzar = CreateWorker("RESEARCHER", 1000);
+
             // Initialize new game stuff.
             data.company  = new Company("TESTINGCORP");
                 data.company.founders.Add(CreateFounder("STEVE", 100));
@@ -23,7 +25,7 @@ namespace UnityTest
                 data.company.lastMonthRevenue   = 28517;
                 data.company.lastMonthCosts     = 14789;
                 data.company.cash.baseValue     = 100000000;
-                data.company.research.baseValue = 1000;
+                data.company.ResearchCzar       = researchCzar;
 
                 for (int i=0;i<5;i++) {
                     Worker worker = CreateWorker("WORKER"+i, i*10);
@@ -95,21 +97,14 @@ namespace UnityTest
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.AreEqual(gd.company.research.value,     data.company.research.value);
+            CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);
             for (int i=0;i<gd.company.workers.Count;i++) {
                 Worker w  = data.company.workers[i];
                 Worker w_ = gd.company.workers[i];
 
-                Assert.AreEqual(w.name,                     w_.name);
-                Assert.AreEqual(w.salary,                   w_.salary);
-                Assert.AreEqual(w.offMarketTime,            w_.offMarketTime);
-                Assert.AreEqual(w.recentPlayerOffers,       w_.recentPlayerOffers);
-                Assert.AreEqual(w.happiness.baseValue,      w_.happiness.baseValue);
-                Assert.AreEqual(w.productivity.baseValue,   w_.productivity.baseValue);
-                Assert.AreEqual(w.charisma.baseValue,       w_.charisma.baseValue);
-                Assert.AreEqual(w.creativity.baseValue,     w_.creativity.baseValue);
-                Assert.AreEqual(w.creativity.baseValue,     w_.creativity.baseValue);
+                CompareWorkers(w, w_);
             }
 
             Assert.AreEqual(gd.company.products.Count, data.company.products.Count);
@@ -289,6 +284,18 @@ namespace UnityTest
 
         private float RandFloat() {
             return Random.Range(10, 50);
+        }
+
+        private void CompareWorkers(Worker w, Worker w_) {
+            Assert.AreEqual(w.name,                     w_.name);
+            Assert.AreEqual(w.salary,                   w_.salary);
+            Assert.AreEqual(w.offMarketTime,            w_.offMarketTime);
+            Assert.AreEqual(w.recentPlayerOffers,       w_.recentPlayerOffers);
+            Assert.AreEqual(w.happiness.baseValue,      w_.happiness.baseValue);
+            Assert.AreEqual(w.productivity.baseValue,   w_.productivity.baseValue);
+            Assert.AreEqual(w.charisma.baseValue,       w_.charisma.baseValue);
+            Assert.AreEqual(w.creativity.baseValue,     w_.creativity.baseValue);
+            Assert.AreEqual(w.creativity.baseValue,     w_.creativity.baseValue);
         }
     }
 }

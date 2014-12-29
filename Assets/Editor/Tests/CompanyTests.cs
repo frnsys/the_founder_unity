@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEditor;
-using System;
-using System.Threading;
-using NUnit.Framework;
 using NSubstitute;
+using NUnit.Framework;
+using System;
+using System.Linq;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -100,6 +101,28 @@ namespace UnityTest
 
             // Firing the worker should have brought the required progress back to the previous value.
             Assert.AreEqual(p.requiredProgress, requiredProgress);
+        }
+
+        [Test]
+        public void ResearchCzar() {
+            worker = ScriptableObject.CreateInstance<Worker>();
+            worker.Init("Researcher");
+            worker.cleverness.baseValue = 10000;
+
+            Assert.AreNotEqual(worker.cleverness.value, c.research.baseValue);
+
+            c.HireWorker(worker);
+            Assert.AreEqual(c.workers.Count, 1);
+
+            Assert.IsTrue(c.allWorkers.Contains(worker));
+
+            c.ResearchCzar = worker;
+
+            // Company's base research should be the research czar's cleverness.
+            Assert.AreEqual(worker.cleverness.value, c.research.baseValue);
+
+            // The research czar should not be counted among "all workers".
+            Assert.IsFalse(c.allWorkers.Contains(worker));
         }
 
 		[Test]

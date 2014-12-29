@@ -1,5 +1,5 @@
 /*
- * A random or trigger game event that has some effects.
+ * A random or triggered game event that has some effects.
  */
 
 using UnityEngine;
