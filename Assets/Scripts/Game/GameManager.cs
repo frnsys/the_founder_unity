@@ -169,6 +169,18 @@ public class GameManager : Singleton<GameManager> {
                 // TO DO this should be a proper "lose game"
                 UIManager.Instance.Alert("YOU LOSE");
 
+            // Anniversary/birthday alert!
+            int age = 25 + data.year;
+            int lastDigit = age % 10;
+            string ending = "th";
+            if (lastDigit == 1)
+                ending = "st";
+            else if (lastDigit == 2)
+                ending = "nd";
+            else if (lastDigit == 3)
+                ending = "rd";
+            UIManager.Instance.Alert("Happy " + data.year + ending + " birthday!");
+
             yield return new WaitForSeconds(yearTime);
         }
     }
