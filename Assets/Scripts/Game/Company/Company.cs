@@ -21,7 +21,18 @@ public class Company : HasStats {
         }
     }
 
+    [SerializeField]
+    private Worker opinionCzar;
+    public Worker OpinionCzar {
+        get { return opinionCzar; }
+        set {
+            opinionCzar = value;
+            opinion.baseValue = opinionCzar.charisma.value;
+        }
+    }
+
     public Stat research;
+    public Stat opinion;
     public float researchInvestment = 1000;
 
     public Company(string name_) {
@@ -34,6 +45,7 @@ public class Company : HasStats {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
+        opinion  = new Stat("Opinion",  1);
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
         baseSizeLimit = 5;
@@ -86,7 +98,7 @@ public class Company : HasStats {
 
     // This does not include czars!
     public IEnumerable<Worker> allWorkers {
-        get { return _workers.Concat(founders.Cast<Worker>()).Where(w => w != researchCzar); }
+        get { return _workers.Concat(founders.Cast<Worker>()).Where(w => w != researchCzar && w != opinionCzar); }
     }
 
     public bool HireWorker(Worker worker) {

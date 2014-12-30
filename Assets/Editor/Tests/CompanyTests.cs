@@ -61,69 +61,91 @@ namespace UnityTest
 
 		[Test]
 		public void ManageWorkers() {
-            Assert.AreEqual(c.workers.Count, 0);
+          Assert.AreEqual(c.workers.Count, 0);
 
-            worker.creativity.baseValue = 20;
+          worker.creativity.baseValue = 20;
 
-            // Prepare a product to check that hiring/firing workers automatically updates
-            // progress required for developing products.
-            ProductType pt = ScriptableObject.CreateInstance<ProductType>();
-            pt.difficulty = 1;
-            c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
-            Product p = c.products[0];
+          // Prepare a product to check that hiring/firing workers automatically updates
+          // progress required for developing products.
+          ProductType pt = ScriptableObject.CreateInstance<ProductType>();
+          pt.difficulty = 1;
+          c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
+          Product p = c.products[0];
 
-            float requiredProgress = p.TotalProgressRequired(c);
-            Assert.AreEqual(p.requiredProgress, requiredProgress);
+          float requiredProgress = p.TotalProgressRequired(c);
+          Assert.AreEqual(p.requiredProgress, requiredProgress);
 
-            c.baseSizeLimit = 0;
-            c.HireWorker(worker);
-            Assert.AreEqual(c.workers.Count, 0);
+          c.baseSizeLimit = 0;
+          c.HireWorker(worker);
+          Assert.AreEqual(c.workers.Count, 0);
 
-            c.cash.baseValue = 2000;
-            c.BuyItem(item);
-            c.baseSizeLimit = 10;
-            c.HireWorker(worker);
-            Assert.AreEqual(c.workers.Count, 1);
-            Assert.AreEqual(c.workers[0].happiness.value, 10);
+          c.cash.baseValue = 2000;
+          c.BuyItem(item);
+          c.baseSizeLimit = 10;
+          c.HireWorker(worker);
+          Assert.AreEqual(c.workers.Count, 1);
+          Assert.AreEqual(c.workers[0].happiness.value, 10);
 
-            // The total progress required should be different now,
-            // and it should be reflected on the product.
-            // As a reminder, we don't constantly calculate TotalProgressRequired because
-            // it is kind of expensive, so we only recalc it when a worker is hired or fired.
-            float newRequiredProgress = p.TotalProgressRequired(c);
-            Assert.AreNotEqual(requiredProgress, newRequiredProgress);
-            Assert.AreEqual(p.requiredProgress, newRequiredProgress);
+          // The total progress required should be different now,
+          // and it should be reflected on the product.
+          // As a reminder, we don't constantly calculate TotalProgressRequired because
+          // it is kind of expensive, so we only recalc it when a worker is hired or fired.
+          float newRequiredProgress = p.TotalProgressRequired(c);
+          Assert.AreNotEqual(requiredProgress, newRequiredProgress);
+          Assert.AreEqual(p.requiredProgress, newRequiredProgress);
 
-            worker.salary = 2000;
-            c.FireWorker(worker);
-            Assert.AreEqual(c.workers.Count, 0);
-            Assert.AreEqual(worker.salary, 0);
+          worker.salary = 2000;
+          c.FireWorker(worker);
+          Assert.AreEqual(c.workers.Count, 0);
+          Assert.AreEqual(worker.salary, 0);
 
-            // Firing the worker should have brought the required progress back to the previous value.
-            Assert.AreEqual(p.requiredProgress, requiredProgress);
-        }
+          // Firing the worker should have brought the required progress back to the previous value.
+          Assert.AreEqual(p.requiredProgress, requiredProgress);
+      }
 
-        [Test]
-        public void ResearchCzar() {
-            worker = ScriptableObject.CreateInstance<Worker>();
-            worker.Init("Researcher");
-            worker.cleverness.baseValue = 10000;
+      [Test]
+      public void ResearchCzar() {
+          worker = ScriptableObject.CreateInstance<Worker>();
+          worker.Init("Researcher");
+          worker.cleverness.baseValue = 10000;
 
-            Assert.AreNotEqual(worker.cleverness.value, c.research.baseValue);
+          Assert.AreNotEqual(worker.cleverness.value, c.research.baseValue);
 
-            c.HireWorker(worker);
-            Assert.AreEqual(c.workers.Count, 1);
+          c.HireWorker(worker);
+          Assert.AreEqual(c.workers.Count, 1);
 
-            Assert.IsTrue(c.allWorkers.Contains(worker));
+          Assert.IsTrue(c.allWorkers.Contains(worker));
 
-            c.ResearchCzar = worker;
+          c.ResearchCzar = worker;
 
-            // Company's base research should be the research czar's cleverness.
-            Assert.AreEqual(worker.cleverness.value, c.research.baseValue);
+          // Company's base research should be the research czar's cleverness.
+          Assert.AreEqual(worker.cleverness.value, c.research.baseValue);
 
-            // The research czar should not be counted among "all workers".
-            Assert.IsFalse(c.allWorkers.Contains(worker));
-        }
+          // The research czar should not be counted among "all workers".
+          Assert.IsFalse(c.allWorkers.Contains(worker));
+      }
+
+      [Test]
+      public void OpinionCzar() {
+          worker = ScriptableObject.CreateInstance<Worker>();
+          worker.Init("Opinioner");
+          worker.charisma.baseValue = 10000;
+
+          Assert.AreNotEqual(worker.charisma.value, c.opinion.baseValue);
+
+          c.HireWorker(worker);
+          Assert.AreEqual(c.workers.Count, 1);
+
+          Assert.IsTrue(c.allWorkers.Contains(worker));
+
+          c.OpinionCzar = worker;
+
+          // Company's base opinion should be the opinion czar's charisma.
+          Assert.AreEqual(worker.charisma.value, c.opinion.baseValue);
+
+          // The opinion czar should not be counted among "all workers".
+          Assert.IsFalse(c.allWorkers.Contains(worker));
+      }
 
 		[Test]
 		public void AggregateWorkerStats() {

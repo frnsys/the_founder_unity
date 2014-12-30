@@ -17,6 +17,7 @@ namespace UnityTest
             data = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestingGameData.asset", typeof(GameData)) as GameData;
 
             Worker researchCzar = CreateWorker("RESEARCHER", 1000);
+            Worker opinionCzar  = CreateWorker("OPINIONER",  2000);
 
             // Initialize new game stuff.
             data.company  = new Company("TESTINGCORP");
@@ -26,6 +27,7 @@ namespace UnityTest
                 data.company.lastMonthCosts     = 14789;
                 data.company.cash.baseValue     = 100000000;
                 data.company.ResearchCzar       = researchCzar;
+                data.company.OpinionCzar        = opinionCzar;
 
                 for (int i=0;i<5;i++) {
                     Worker worker = CreateWorker("WORKER"+i, i*10);
@@ -98,6 +100,7 @@ namespace UnityTest
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.AreEqual(gd.company.research.value,     data.company.research.value);
             CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
+            CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);
             for (int i=0;i<gd.company.workers.Count;i++) {
