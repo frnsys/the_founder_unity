@@ -27,6 +27,10 @@ class EffectSetDrawer : SuperPropertyDrawer {
         position.y += 20;
         position = DrawList(position, property.FindPropertyRelative("products"));
 
+        EditorGUI.LabelField(position, "opinion events");
+        position.y += 20;
+        position = DrawList(position, property.FindPropertyRelative("opinionEvents"));
+
         return position;
     }
 }
