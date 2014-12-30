@@ -39,6 +39,11 @@ public class Product : HasStats {
         get { return _state; }
     }
 
+    // A product may be disabled if the company
+    // has less infrastructure than necessary to support it.
+    // A disabled product generates no revenue and does not continue developing.
+    public bool disabled = false;
+
     // Infrastructure, in points, used by the product.
     public int points {
         get { return productTypes.Sum(p => p.points); }
@@ -153,7 +158,7 @@ public class Product : HasStats {
     static public event System.Action<Product> Completed;
 
     public bool Develop(float newProgress) {
-        if (state == State.DEVELOPMENT) {
+        if (state == State.DEVELOPMENT && !disabled) {
             _progress += newProgress;
 
             if (_progress >= requiredProgress) {
@@ -277,7 +282,7 @@ public class Product : HasStats {
         timeSinceLaunch += elapsedTime;
 
         float revenuePercent = 0;
-        if (state == State.LAUNCHED) {
+        if (state == State.LAUNCHED && !disabled) {
 
             // TO DO
             // To be replaced by real values...

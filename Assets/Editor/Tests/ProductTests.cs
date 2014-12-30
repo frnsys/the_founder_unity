@@ -73,6 +73,17 @@ namespace UnityTest
         }
 
 		[Test]
+		public void Develop_Disabled() {
+            Assert.AreEqual(p.state, Product.State.DEVELOPMENT);
+            Assert.AreEqual(p.progress, 0);
+
+            p.disabled = true;
+            p.Develop(100000);
+
+            Assert.AreEqual(p.progress, 0);
+        }
+
+		[Test]
 		public void Revenue_NotLaunched() {
             Assert.AreNotEqual(p.state, Product.State.LAUNCHED);
             Assert.AreEqual(p.Revenue(10, c), 0);
@@ -134,6 +145,18 @@ namespace UnityTest
             p.Launch();
 
             Assert.IsTrue(p.Revenue(4, c) > zeroRev);
+        }
+
+		[Test]
+		public void Revenue_Disabled() {
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
+
+            p.Launch();
+
+            p.disabled = true;
+            Assert.AreEqual(p.Revenue(4, c), 0);
         }
 
 		[Test]

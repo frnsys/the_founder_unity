@@ -130,6 +130,7 @@ namespace UnityTest
 
                 Assert.AreEqual(p.name,               p_.name);
                 Assert.AreEqual(p.progress,           p_.progress);
+                Assert.AreEqual(p.disabled,           p_.disabled);
                 Assert.AreEqual(p.state,              p_.state);
                 Assert.AreEqual(p.timeSinceLaunch,    p_.timeSinceLaunch);
                 Assert.AreEqual(p.revenueEarned,      p_.revenueEarned);
@@ -266,9 +267,14 @@ namespace UnityTest
             if (r > 0.33) {
                 product.Launch();
                 product.Revenue(5, data.company);
+
+                if (Random.Range(0,1) > 0.5) {
+                    product.disabled = true;
+                }
             } else if (r > 0.66) {
                 product.Shutdown();
             }
+
             return product;
         }
 

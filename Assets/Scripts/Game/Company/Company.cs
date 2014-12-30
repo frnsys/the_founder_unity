@@ -494,6 +494,7 @@ public class Company : HasStats {
     public bool BuyInfrastructure(Infrastructure i) {
         if (HasCapacityFor(i) && Pay(i.cost)) {
             _infrastructure += i;
+            UpdateProductStatuses();
             return true;
         }
         return false;
@@ -501,6 +502,39 @@ public class Company : HasStats {
 
     public void DestroyInfrastructure(Infrastructure i) {
         _infrastructure -= i;
+        UpdateProductStatuses();
+    }
+
+    private void UpdateProductStatuses() {
+        // Get all products which are currently using infrastructure.
+        List<Product> supportedProducts = products.FindAll(p => p.state != Product.State.RETIRED);
+
+        // Tally up the total infrastructure required to support all products.
+        Infrastructure allInf = new Infrastructure();
+        foreach (Product p in supportedProducts) {
+            allInf += p.requiredInfrastructure;
+        }
+
+        // Figure out which infrastructure types are overloaded.
+        List<Infrastructure.Type> overloadedTypes = new List<Infrastructure.Type>();
+        foreach (Infrastructure.Type t in Infrastructure.Types) {
+            if (allInf[t] > _infrastructure[t]) {
+                overloadedTypes.Add(t);
+            }
+        }
+
+        // Disable products which rely on infrastructure which is overloaded.
+        // Re-enable products which rely on infrastructure which is no longer overloaded.
+        foreach (Product p in supportedProducts) {
+            bool set = false;
+            foreach (Infrastructure.Type t in overloadedTypes) {
+                if (p.requiredInfrastructure[t] > 0) {
+                    set = true;
+                    break;
+                }
+            }
+            p.disabled = set;
+        }
     }
 
     public bool HasCapacityFor(Infrastructure i) {
