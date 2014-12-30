@@ -44,6 +44,7 @@ public class Company : HasStats {
         }
     }
 
+    public List<MarketManager.Market> markets;
 
     public Company(string name_) {
         name = name_;
@@ -68,6 +69,7 @@ public class Company : HasStats {
         };
         _infrastructure = new Infrastructure();
         technologies = new List<Technology>();
+        markets = new List<MarketManager.Market>();
 
         baseInfrastructureCapacity = new Infrastructure();
         baseInfrastructureCapacity[Infrastructure.Type.Datacenter] = 4;
@@ -177,6 +179,10 @@ public class Company : HasStats {
     public bool ExpandToLocation(Location l) {
         if (Pay(l.cost)) {
             _locations.Add(l);
+
+            // The location's market region is now available.
+            if (!markets.Contains(l.market))
+                markets.Add(l.market);
 
             // Note this doesn't apply unlock effects...for now assuming locations don't have those.
             ApplyEffectSet(l.effects);

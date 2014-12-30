@@ -190,6 +190,7 @@ namespace UnityTest
             c.cash.baseValue = 0;
             Location loc = ScriptableObject.CreateInstance<Location>();
             loc.cost = 2000;
+            loc.market = MarketManager.Market.Antarctica;
 
             EffectSet es = new EffectSet();
             es.company.Add( new StatBuff("Cash", 5000) );
@@ -200,6 +201,7 @@ namespace UnityTest
             c.cash.baseValue = 2000;
             Assert.IsTrue(c.ExpandToLocation(loc));
             Assert.IsTrue(c.locations.Contains(loc));
+            Assert.IsTrue(c.markets.Contains(loc.market));
             Assert.AreEqual(c.cash.value, 5000);
         }
 
