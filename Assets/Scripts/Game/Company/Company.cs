@@ -20,6 +20,8 @@ public class Company : HasStats {
             research.baseValue = researchCzar.cleverness.value;
         }
     }
+    public Stat research;
+    public float researchInvestment = 1000;
 
     [SerializeField]
     private Worker opinionCzar;
@@ -30,10 +32,18 @@ public class Company : HasStats {
             opinion.baseValue = opinionCzar.charisma.value;
         }
     }
-
-    public Stat research;
     public Stat opinion;
-    public float researchInvestment = 1000;
+    public float forgettingRate;
+    private List<OpinionEvent> opinionEvents;
+    public ReadOnlyCollection<OpinionEvent> OpinionEvents {
+        get { return opinionEvents.AsReadOnly(); }
+    }
+    public void ForgetOpinionEvents() {
+        foreach (OpinionEvent oe in opinionEvents) {
+            oe.Forget(forgettingRate);
+        }
+    }
+
 
     public Company(string name_) {
         name = name_;
@@ -45,7 +55,6 @@ public class Company : HasStats {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
-        opinion  = new Stat("Opinion",  1);
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
         baseSizeLimit = 5;
@@ -63,6 +72,10 @@ public class Company : HasStats {
         baseInfrastructureCapacity = new Infrastructure();
         baseInfrastructureCapacity[Infrastructure.Type.Datacenter] = 4;
         baseInfrastructureCapacity[Infrastructure.Type.Studio]     = 1;
+
+        forgettingRate = 1;
+        opinion = new Stat("Opinion", 1);
+        opinionEvents = new List<OpinionEvent>();
 
         // Keep track for a year.
         PerfHistory = new PerformanceHistory(12);
@@ -313,6 +326,12 @@ public class Company : HasStats {
         // TO DO this needs to apply bonuses to new products as well.
         foreach (ProductEffect pe in es.products) {
             ApplyProductEffect(pe);
+        }
+
+        // Apply opinion events.
+        foreach (OpinionEvent oe in es.opinionEvents) {
+            opinion.ApplyBuff(oe.effect);
+            opinionEvents.Add(oe);
         }
     }
 

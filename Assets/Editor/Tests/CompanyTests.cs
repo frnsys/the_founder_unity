@@ -436,5 +436,23 @@ namespace UnityTest
             Assert.AreEqual(p.design.value, 0);
             Assert.AreEqual(worker.happiness.value, 0);
         }
+
+        [Test]
+        public void OpinionEvents() {
+            c.opinion.baseValue = 200;
+            c.forgettingRate    = 10;
+
+            OpinionEvent oe = new OpinionEvent(100);
+            EffectSet es = new EffectSet();
+            es.opinionEvents.Add(oe);
+
+            c.ApplyEffectSet(es);
+
+            Assert.AreEqual(c.opinion.value, 300);
+
+            c.ForgetOpinionEvents();
+
+            Assert.AreEqual(c.opinion.value, 290);
+        }
     }
 }

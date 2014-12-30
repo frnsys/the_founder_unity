@@ -294,4 +294,21 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
+    IEnumerator OpinionCycle() {
+        yield return new WaitForSeconds(cycleTime);
+        while(true) {
+            // Add a bit of randomness to give things
+            // a more "natural" feel.
+            float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
+
+            // Pull back opinion effects towards 0.
+            playerCompany.ForgetOpinionEvents();
+            foreach (AICompany aic in data.otherCompanies) {
+                aic.ForgetOpinionEvents();
+            }
+
+            yield return new WaitForSeconds(elapsedTime);
+        }
+    }
+
 }

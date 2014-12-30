@@ -28,6 +28,13 @@ namespace UnityTest
                 data.company.cash.baseValue     = 100000000;
                 data.company.ResearchCzar       = researchCzar;
                 data.company.OpinionCzar        = opinionCzar;
+                data.company.opinion.baseValue  = 200;
+                data.company.forgettingRate     = 10;
+
+                OpinionEvent oe = new OpinionEvent(100);
+                EffectSet es = new EffectSet();
+                es.opinionEvents.Add(oe);
+                data.company.ApplyEffectSet(es);
 
                 for (int i=0;i<5;i++) {
                     Worker worker = CreateWorker("WORKER"+i, i*10);
@@ -99,8 +106,14 @@ namespace UnityTest
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.AreEqual(gd.company.research.value,     data.company.research.value);
+            Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
+            Assert.AreEqual(gd.company.forgettingRate,     data.company.forgettingRate);
             CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
             CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);
+
+            for (int i=0;i<gd.company.OpinionEvents.Count;i++) {
+                Assert.AreEqual(data.company.OpinionEvents[i].effect.value, gd.company.OpinionEvents[i].effect.value);
+            }
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);
             for (int i=0;i<gd.company.workers.Count;i++) {
