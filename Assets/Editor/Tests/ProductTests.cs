@@ -20,6 +20,7 @@ namespace UnityTest
         private ProductRecipe pr = null;
         private ProductType pt;
         private List<ProductType> pts;
+        private Company c;
         private Item item;
 
         [SetUp]
@@ -31,10 +32,11 @@ namespace UnityTest
             gd = GameData.New("DEFAULTCORP");
             gm.Load(gd);
 
+            c = new Company("Foo Inc");
             pts = new List<ProductType>() { pt };
 
             p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pts, 0, 0, 0);
+            p.Init(pts, 0, 0, 0, c);
             pr = ProductRecipe.LoadFromTypes(pts);
 
             item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
@@ -73,7 +75,7 @@ namespace UnityTest
 		[Test]
 		public void Revenue_NotLaunched() {
             Assert.AreNotEqual(p.state, Product.State.LAUNCHED);
-            Assert.AreEqual(p.Revenue(10), 0);
+            Assert.AreEqual(p.Revenue(10, c), 0);
         }
 
 		[Test]
@@ -84,7 +86,30 @@ namespace UnityTest
 
             p.Launch();
 
-            Assert.IsTrue(p.Revenue(4) > 0);
+            Assert.IsTrue(p.Revenue(4, c) > 0);
+        }
+
+		[Test]
+		public void Revenue_PublicOpinion() {
+            float rev;
+            float rev_;
+
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
+
+            p.Launch();
+
+            rev = p.Revenue(4, c);
+            Assert.IsTrue(rev > 0);
+
+            c.opinion.baseValue = -1000;
+            rev_ = p.Revenue(4, c);
+            Assert.IsTrue(rev_ < rev);
+
+            c.opinion.baseValue = 1000;
+            rev_ = p.Revenue(4, c);
+            Assert.IsTrue(rev_ > rev);
         }
 
 		[Test]
@@ -95,7 +120,7 @@ namespace UnityTest
 
             p.Launch();
 
-            float zeroRev = p.Revenue(4);
+            float zeroRev = p.Revenue(4, c);
 
             // You still make a little money.
             Assert.IsTrue(zeroRev > 0);
@@ -108,7 +133,7 @@ namespace UnityTest
 
             p.Launch();
 
-            Assert.IsTrue(p.Revenue(4) > zeroRev);
+            Assert.IsTrue(p.Revenue(4, c) > zeroRev);
         }
 
 		[Test]
@@ -132,7 +157,7 @@ namespace UnityTest
             pt__.difficulty = 2f;
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0);
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0, c);
 
             Assert.AreEqual(prod.difficulty, 1.5);
         }
@@ -148,7 +173,7 @@ namespace UnityTest
             pt__.requiredVerticals = new List<Vertical>() { vert__ };
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0);
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0, c);
 
             Assert.AreEqual(prod.requiredVerticals, new List<Vertical>() { vert_, vert__ });
         }
@@ -166,7 +191,7 @@ namespace UnityTest
             pt__.requiredInfrastructure = i__;
 
             Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0);
+            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0, c);
 
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 10;

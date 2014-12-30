@@ -115,17 +115,14 @@ public class Product : HasStats {
     public Stat marketing;
     public Stat engineering;
 
-    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_, Company c = null) {
+    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_, Company c) {
         productTypes = pts;
 
         design =      new Stat("Design",      (float)design_);
         marketing =   new Stat("Marketing",   (float)marketing_);
         engineering = new Stat("Engineering", (float)engineering_);
 
-        if (c != null)
-            requiredProgress = TotalProgressRequired(c);
-        else
-            requiredProgress = 1;
+        requiredProgress = TotalProgressRequired(c);
 
         recipe = ProductRecipe.LoadFromTypes(pts);
 
@@ -274,7 +271,7 @@ public class Product : HasStats {
         _state = State.LAUNCHED;
     }
 
-    public float Revenue(float elapsedTime) {
+    public float Revenue(float elapsedTime, Company company) {
         //time /= 3600; // adjusting time scale
 
         timeSinceLaunch += elapsedTime;
@@ -308,6 +305,9 @@ public class Product : HasStats {
             // Bonus, event, and economy's impacts.
             revenuePercent += bonus + event_c;
             revenuePercent *= GameManager.Instance.economyMultiplier;
+
+            // Public opinion's impact.
+            revenuePercent += company.opinion.value;
         }
 
         //Debug.Log("REVENUE%:" + revenuePercent);

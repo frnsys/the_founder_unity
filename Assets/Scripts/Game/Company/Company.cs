@@ -269,7 +269,7 @@ public class Company : HasStats {
 
         float newRevenue = 0;
         foreach (Product product in launched) {
-            newRevenue += product.Revenue(elapsedTime);
+            newRevenue += product.Revenue(elapsedTime, this);
         }
         cash.baseValue += newRevenue;
         lastMonthRevenue += newRevenue;

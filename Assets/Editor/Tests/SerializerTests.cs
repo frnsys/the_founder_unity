@@ -244,7 +244,7 @@ namespace UnityTest
             List<ProductType> pts = new List<ProductType>() { pt };
 
             Product product = ScriptableObject.CreateInstance<Product>();
-            product.Init(pts, 0, 0, 0);
+            product.Init(pts, 0, 0, 0, data.company);
             product.requiredProgress = 100000;
 
             product.Develop(RandFloat());
@@ -252,7 +252,7 @@ namespace UnityTest
             float r = Random.Range(0,1);
             if (r > 0.33) {
                 product.Launch();
-                product.Revenue(5);
+                product.Revenue(5, data.company);
             } else if (r > 0.66) {
                 product.Shutdown();
             }
