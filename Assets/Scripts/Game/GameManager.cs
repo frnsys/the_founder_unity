@@ -20,6 +20,13 @@ public class GameManager : Singleton<GameManager> {
     public Company playerCompany {
         get { return data.company; }
     }
+    public List<Company> allCompanies {
+        get {
+            List<Company> allCos = new List<Company>(data.otherCompanies.Cast<Company>());
+            allCos.Add(playerCompany);
+            return allCos;
+        }
+    }
     public UnlockSet unlocked {
         get { return data.unlocked; }
     }
@@ -272,6 +279,9 @@ public class GameManager : Singleton<GameManager> {
             // Add a bit of randomness to give things
             // a more "natural" feel.
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
+
+            MarketManager.CalculateMarketShares(allCompanies);
+
             playerCompany.HarvestProducts(elapsedTime);
 
             foreach (AICompany aic in data.otherCompanies) {

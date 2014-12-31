@@ -22,14 +22,15 @@ namespace UnityTest
             // Initialize new game stuff.
             data.company  = new Company("TESTINGCORP");
                 data.company.founders.Add(CreateFounder("STEVE", 100));
-                data.company.baseSizeLimit      = 17;
-                data.company.lastMonthRevenue   = 28517;
-                data.company.lastMonthCosts     = 14789;
-                data.company.cash.baseValue     = 100000000;
-                data.company.ResearchCzar       = researchCzar;
-                data.company.OpinionCzar        = opinionCzar;
-                data.company.opinion.baseValue  = 200;
-                data.company.forgettingRate     = 10;
+                data.company.baseSizeLimit       = 17;
+                data.company.lastMonthRevenue    = 28517;
+                data.company.lastMonthCosts      = 14789;
+                data.company.cash.baseValue      = 100000000;
+                data.company.ResearchCzar        = researchCzar;
+                data.company.OpinionCzar         = opinionCzar;
+                data.company.opinion.baseValue   = 200;
+                data.company.forgettingRate      = 10;
+                data.company.publicity.baseValue = 300;
 
                 OpinionEvent oe = new OpinionEvent(100);
                 EffectSet es = new EffectSet();
@@ -107,6 +108,7 @@ namespace UnityTest
             Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.AreEqual(gd.company.research.value,     data.company.research.value);
             Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
+            Assert.AreEqual(gd.company.publicity.value,    data.company.publicity.value);
             Assert.AreEqual(gd.company.forgettingRate,     data.company.forgettingRate);
             CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
             CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);

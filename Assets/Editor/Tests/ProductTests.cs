@@ -97,6 +97,9 @@ namespace UnityTest
 
             p.Launch();
 
+            // Fake market share.
+            p.marketShare = 1;
+
             Assert.IsTrue(p.Revenue(4, c) > 0);
         }
 
@@ -111,6 +114,9 @@ namespace UnityTest
 
             p.Launch();
 
+            // Fake market share.
+            p.marketShare = 1;
+
             rev = p.Revenue(4, c);
             Assert.IsTrue(rev > 0);
 
@@ -124,12 +130,32 @@ namespace UnityTest
         }
 
 		[Test]
+		public void Revenue_MarketShare() {
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
+
+            p.Launch();
+
+            p.marketShare = 1;
+            float r = p.Revenue(4, c);
+
+            p.marketShare = 2;
+            float r_ = p.Revenue(4, c);
+
+            Assert.IsTrue(r_ > r);
+        }
+
+		[Test]
 		public void Revenue_ZeroStats() {
             p.design.baseValue = 0;
             p.marketing.baseValue = 0;
             p.engineering.baseValue = 0;
 
             p.Launch();
+
+            // Fake market share.
+            p.marketShare = 1;
 
             float zeroRev = p.Revenue(4, c);
 

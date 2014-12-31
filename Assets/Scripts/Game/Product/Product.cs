@@ -31,6 +31,10 @@ public class Product : HasStats {
         get { return _progress/requiredProgress; }
     }
 
+
+    public float marketScore = 0;
+    public float marketShare = 0;
+
     public float requiredProgress;
 
     [SerializeField]
@@ -79,6 +83,9 @@ public class Product : HasStats {
     // this ProductType combination does.
     [SerializeField]
     private ProductRecipe recipe;
+    public ProductRecipe Recipe {
+        get { return recipe; }
+    }
 
     // The difficulty of a product is the average of its product types' difficulties.
     public float difficulty {
@@ -277,17 +284,10 @@ public class Product : HasStats {
     }
 
     public float Revenue(float elapsedTime, Company company) {
-        //time /= 3600; // adjusting time scale
-
         timeSinceLaunch += elapsedTime;
 
         float revenuePercent = 0;
         if (state == State.LAUNCHED && !disabled) {
-
-            // TO DO
-            // To be replaced by real values...
-            float bonus = 0;
-            float event_c = 0;
 
             // Start
             if (timeSinceLaunch < start_mu) {
@@ -307,12 +307,13 @@ public class Product : HasStats {
                 //Debug.Log("PLATEAU FUNC");
             }
 
-            // Bonus, event, and economy's impacts.
-            revenuePercent += bonus + event_c;
+            // Economy's impacts.
             revenuePercent *= GameManager.Instance.economyMultiplier;
 
             // Public opinion's impact.
             revenuePercent += company.opinion.value;
+
+            revenuePercent *= marketShare;
         }
 
         //Debug.Log("REVENUE%:" + revenuePercent);

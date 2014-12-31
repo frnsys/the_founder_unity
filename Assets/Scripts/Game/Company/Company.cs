@@ -33,6 +33,7 @@ public class Company : HasStats {
         }
     }
     public Stat opinion;
+    public Stat publicity;
     public float forgettingRate;
     private List<OpinionEvent> opinionEvents;
     public ReadOnlyCollection<OpinionEvent> OpinionEvents {
@@ -61,6 +62,7 @@ public class Company : HasStats {
         baseSizeLimit = 5;
         _items = new List<Item>();
 
+        products = new List<Product>();
         founders = new List<Founder>();
         _workers = new List<Worker>();
         _locations = new List<Location>();
@@ -78,6 +80,7 @@ public class Company : HasStats {
         forgettingRate = 1;
         opinion = new Stat("Opinion", 1);
         opinionEvents = new List<OpinionEvent>();
+        publicity = new Stat("Publicity", 0);
 
         // Keep track for a year.
         PerfHistory = new PerformanceHistory(12);
@@ -214,7 +217,7 @@ public class Company : HasStats {
     // Product Management ============================
     // ===============================================
 
-    public List<Product> products = new List<Product>();
+    public List<Product> products;
     public List<Product> activeProducts {
         get {
             return products.FindAll(p => p.state == Product.State.LAUNCHED);
