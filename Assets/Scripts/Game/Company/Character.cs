@@ -10,12 +10,17 @@ public class Character : ScriptableObject {
     }
 
     public static List<Character> LoadAll() {
-        // Load workers as _copies_ so any changes don't get saved to the actual resources.
+        // Load characters as _copies_ so any changes don't get saved to the actual resources.
         return Resources.LoadAll<Character>("Characters").ToList().Select(w => Instantiate(w) as Character).ToList();
     }
 
     public Type type;
     public Stat relationship;
+    public EffectSet effects;
+
+    public bool isFriend {
+        get { return relationship.value >= 90; }
+    }
 
     public void Init(string name_, Type type_) {
         name = name_;
