@@ -25,6 +25,10 @@ internal class LocationInspector : Editor {
         EditorGUILayout.LabelField("Description");
         i.description = EditorGUILayout.TextArea(i.description, GUILayout.Height(50));
 
+        EditorGUILayout.LabelField("Market Region");
+        i.market = (MarketManager.Market)EditorGUILayout.EnumPopup(i.market);
+        EditorGUILayout.Space();
+
         EditorGUILayout.LabelField("Infrastructure Capacity");
 
         foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
