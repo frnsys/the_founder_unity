@@ -312,9 +312,12 @@ public class GameManager : Singleton<GameManager> {
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
 
             // Pull back opinion effects towards 0.
+            // Advance promos.
             playerCompany.ForgetOpinionEvents();
+            playerCompany.DevelopPromo();
             foreach (AICompany aic in data.otherCompanies) {
                 aic.ForgetOpinionEvents();
+                aic.DevelopPromo();
             }
 
             yield return new WaitForSeconds(elapsedTime);

@@ -444,20 +444,23 @@ namespace UnityTest
 
         [Test]
         public void OpinionEvents() {
-            c.opinion.baseValue = 200;
-            c.forgettingRate    = 10;
+            c.opinion.baseValue   = 200;
+            c.publicity.baseValue = 100;
+            c.forgettingRate      = 10;
 
-            OpinionEvent oe = new OpinionEvent(100);
+            OpinionEvent oe = new OpinionEvent(100, 400);
             EffectSet es = new EffectSet();
             es.opinionEvents.Add(oe);
 
             c.ApplyEffectSet(es);
 
             Assert.AreEqual(c.opinion.value, 300);
+            Assert.AreEqual(c.publicity.value, 500);
 
             c.ForgetOpinionEvents();
 
             Assert.AreEqual(c.opinion.value, 290);
+            Assert.AreEqual(c.publicity.value, 500);
         }
     }
 }

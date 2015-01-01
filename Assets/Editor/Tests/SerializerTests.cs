@@ -32,7 +32,7 @@ namespace UnityTest
                 data.company.forgettingRate      = 10;
                 data.company.publicity.baseValue = 300;
 
-                OpinionEvent oe = new OpinionEvent(100);
+                OpinionEvent oe = new OpinionEvent(100, 400);
                 EffectSet es = new EffectSet();
                 es.opinionEvents.Add(oe);
                 data.company.ApplyEffectSet(es);
@@ -114,7 +114,8 @@ namespace UnityTest
             CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);
 
             for (int i=0;i<gd.company.OpinionEvents.Count;i++) {
-                Assert.AreEqual(data.company.OpinionEvents[i].effect.value, gd.company.OpinionEvents[i].effect.value);
+                Assert.AreEqual(data.company.OpinionEvents[i].opinion.value, gd.company.OpinionEvents[i].opinion.value);
+                Assert.AreEqual(data.company.OpinionEvents[i].publicity.value, gd.company.OpinionEvents[i].publicity.value);
             }
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);

@@ -286,6 +286,20 @@ public class Company : HasStats {
         }
     }
 
+    public Promo developingPromo;
+    public void DevelopPromo() {
+        if (developingPromo != null && opinionCzar != null) {
+            bool completed = developingPromo.Develop(opinionCzar.productivity.value);
+            if (completed) {
+                OpinionEvent oe = developingPromo.opinionEvent;
+                opinion.ApplyBuff(oe.opinion);
+                publicity.ApplyBuff(oe.publicity);
+                opinionEvents.Add(oe);
+                developingPromo = null;
+            }
+        }
+    }
+
     public void HarvestProducts(float elapsedTime) {
         List<Product> launched = products.FindAll(p => p.state == Product.State.LAUNCHED);
 
@@ -339,7 +353,8 @@ public class Company : HasStats {
 
         // Apply opinion events.
         foreach (OpinionEvent oe in es.opinionEvents) {
-            opinion.ApplyBuff(oe.effect);
+            opinion.ApplyBuff(oe.opinion);
+            publicity.ApplyBuff(oe.publicity);
             opinionEvents.Add(oe);
         }
     }
