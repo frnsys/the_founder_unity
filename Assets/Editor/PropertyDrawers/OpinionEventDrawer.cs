@@ -4,26 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 
 [CustomPropertyDrawer(typeof(OpinionEvent))]
-class OpinionEventDrawer : PropertyDrawer {
+class OpinionEventDrawer : SuperPropertyDrawer {
 
     // Draw the property inside the given rect
-    public override void OnGUI (Rect position, SerializedProperty property, GUIContent label) {
-        EditorGUI.BeginProperty(position, label, property);
+    public override Rect Edit(Rect position, SerializedProperty property) {
 
-        // Draw label
-        position = EditorGUI.PrefixLabel(position, label);
-
-        // Don't make child fields be indented
-        var indent = EditorGUI.indentLevel;
-        EditorGUI.indentLevel = 0;
-
-        EditorGUI.PropertyField(position, property.FindPropertyRelative("name"), true);
-
+        EditorGUI.LabelField(position, "Opinion Event");
         position.y += 20;
-        EditorGUI.PropertyField(position, property.FindPropertyRelative("effect").FindPropertyRelative("value"), true);
-
-        // Set indent back to what it was
-        EditorGUI.indentLevel = indent;
-        EditorGUI.EndProperty();
+        EditorGUI.LabelField(position, "Name");
+        position.y += 20;
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("name"), GUIContent.none);
+        position.y += 20;
+        EditorGUI.LabelField(position, "Opinion Effect");
+        position.y += 20;
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("opinion").FindPropertyRelative("value"), GUIContent.none);
+        position.y += 20;
+        EditorGUI.LabelField(position, "Publicity Effect");
+        position.y += 20;
+        EditorGUI.PropertyField(position, property.FindPropertyRelative("publicity").FindPropertyRelative("value"), GUIContent.none);
+        position.y += 20;
+        return position;
     }
 }

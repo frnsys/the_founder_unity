@@ -17,7 +17,6 @@ class ProductEffectDrawer : SuperPropertyDrawer {
             position = DrawReorderableList(position, property, property.FindPropertyRelative(key));
         }
 
-
         EditorGUI.PropertyField(position, property.FindPropertyRelative("buff"), GUIContent.none);
         position.y += EditorGUI.GetPropertyHeight(property.FindPropertyRelative("buff"), GUIContent.none, true);
 

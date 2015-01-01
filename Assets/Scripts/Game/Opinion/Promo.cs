@@ -8,10 +8,14 @@ public class Promo : ScriptableObject {
     public float cost;
     public float requiredProgress;
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private float _progress = 0;
     public float progress {
         get { return _progress/requiredProgress; }
+    }
+
+    void Awake() {
+        opinionEvent = new OpinionEvent(0, 0);
     }
 
     static public event System.Action<Promo> Completed;
