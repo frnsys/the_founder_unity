@@ -17,6 +17,7 @@ public class UnlockSet {
     public List<Location> locations = new List<Location>();
     public List<Vertical> verticals = new List<Vertical>();
     public List<Character> characters = new List<Character>();
+    public List<Promo> promos = new List<Promo>();
 
     // This "unlocks" an UnlockSet by
     // adding the input UnlockSet's values
@@ -30,6 +31,7 @@ public class UnlockSet {
         locations.AddRange(us.locations);
         verticals.AddRange(us.verticals);
         characters.AddRange(us.characters);
+        promos.AddRange(us.promos);
     }
 
     // Apply a prereq set and see if it unlocks the set.
