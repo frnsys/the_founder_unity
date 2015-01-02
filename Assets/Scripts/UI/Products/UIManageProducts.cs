@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -25,6 +26,9 @@ public class UIManageProducts : MonoBehaviour {
 
                 displayedProducts.Add(p);
             }
+
+            int childIdx = displayedProducts.IndexOf(p);
+            productsGrid.transform.GetChild(childIdx).Find("Disabled").gameObject.SetActive(p.disabled);
         }
         productsGridGrid.Reposition();
     }
