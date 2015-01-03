@@ -7,7 +7,9 @@
 
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager> {
     private GameManager gm;
@@ -25,6 +27,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject annualReportPrefab;
     public GameObject researchCompletedAlertPrefab;
     public GameObject productCompletedAlertPrefab;
+    public GameObject selectWorkerPopupPrefab;
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -136,6 +139,18 @@ public class UIManager : Singleton<UIManager> {
         email.SetHeaders(from, to, subject);
         email.bodyText = message;
         return email;
+    }
+
+    public void WorkerSelectionPopup(string title, Action<Worker> confirm, Func<Worker, bool> filter) {
+        IEnumerable<Worker> workers;
+        if (filter != null) {
+            workers = GameManager.Instance.playerCompany.workers.Where(w => filter(w));
+        } else {
+            workers = GameManager.Instance.playerCompany.workers;
+        }
+
+        UISelectWorkerPopup p = NGUITools.AddChild(alertsPanel, selectWorkerPopupPrefab).GetComponent<UISelectWorkerPopup>();
+        p.SetData(title, workers, confirm);
     }
 }
 

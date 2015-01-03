@@ -8,6 +8,7 @@ public class UIResearchOverview : MonoBehaviour {
 
     public UILabel techLabel;
     public UILabel investmentLabel;
+    public UILabel czarLabel;
     public UIProgressBar progress;
 
     void OnEnable() {
@@ -21,6 +22,10 @@ public class UIResearchOverview : MonoBehaviour {
         } else {
             techLabel.text = rm.technology.name;
         }
+        if (playerCompany.ResearchCzar == null)
+            czarLabel.text = "No Head of Research appointed.";
+        else
+            czarLabel.text = playerCompany.ResearchCzar.name;
         investmentLabel.text = "$" + playerCompany.researchInvestment;
         progress.value = rm.progress;
     }
@@ -43,5 +48,16 @@ public class UIResearchOverview : MonoBehaviour {
         playerCompany.researchInvestment -= 1000000;
         if (playerCompany.researchInvestment < 0)
             playerCompany.researchInvestment = 0;
+    }
+
+    public void AppointCzar() {
+        Action<Worker> select = delegate(Worker w) {
+            playerCompany.ResearchCzar = w;
+        };
+        Func<Worker, bool> filter = delegate(Worker w) {
+            return playerCompany.ResearchCzar != w;
+        };
+
+        UIManager.Instance.WorkerSelectionPopup("Appoint a new Head of Research", select, filter);
     }
 }
