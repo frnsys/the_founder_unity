@@ -3,13 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UISelectWorkerPopup : UIPopup {
-    public GameObject window;
+public class UISelectWorkerPopup : UISelectPopup {
     public UILabel titleLabel;
-    public UITexture overlay;
-    public UICenteredGrid grid;
-    public UIScrollView scrollView;
-    public GameObject workerItemPrefab;
     private Worker selected;
     private GameObject selectedItem;
     private Action<Worker> onConfirm;
@@ -21,7 +16,7 @@ public class UISelectWorkerPopup : UIPopup {
         workerMap = new Dictionary<int, Worker>();
 
         foreach (Worker w in workers) {
-            GameObject item = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
+            GameObject item = NGUITools.AddChild(grid.gameObject, itemPrefab);
             item.GetComponent<UIDragScrollView>().scrollView = scrollView;
             UIEventListener.Get(item).onClick += Select;
             workerMap[item.GetInstanceID()] = w;
@@ -43,31 +38,5 @@ public class UISelectWorkerPopup : UIPopup {
         obj.transform.Find("Highlight").gameObject.SetActive(true);
         selectedItem = obj;
         selected = workerMap[obj.GetInstanceID()];
-    }
-
-    // ---
-
-    private float overlayAlpha = 0.3f;
-
-    void OnEnable() {
-        Show();
-    }
-
-    public void Show() {
-        StartCoroutine(FadeOverlay(0f, overlayAlpha));
-        base.Show(window);
-    }
-
-    public void Close_() {
-        StartCoroutine(FadeOverlay(overlayAlpha, 0f));
-        Hide(window);
-    }
-
-    private IEnumerator FadeOverlay(float from, float to) {
-        float step = 0.1f;
-        for (float f = 0f; f <= 1f + step; f += step) {
-            overlay.alpha = Mathf.Lerp(from, to, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
     }
 }
