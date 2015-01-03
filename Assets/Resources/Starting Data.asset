@@ -37,6 +37,11 @@ MonoBehaviour:
     verticals:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+    characters: []
+    promos:
+    - {fileID: 11400000, guid: 225af2c0fa20e42e0b70d44148c1f1cb, type: 2}
+    - {fileID: 11400000, guid: 6ac41f3f32e0e44be96e7daa37b15b67, type: 2}
+  maxProductTypes: 0
   technology: {fileID: 0}
   research: 0
   otherCompanies: []

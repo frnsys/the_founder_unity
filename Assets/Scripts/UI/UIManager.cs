@@ -28,6 +28,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject researchCompletedAlertPrefab;
     public GameObject productCompletedAlertPrefab;
     public GameObject selectWorkerPopupPrefab;
+    public GameObject selectPromoPopupPrefab;
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -141,6 +142,7 @@ public class UIManager : Singleton<UIManager> {
         return email;
     }
 
+    // Show a worker selection popup.
     public void WorkerSelectionPopup(string title, Action<Worker> confirm, Func<Worker, bool> filter) {
         IEnumerable<Worker> workers;
         if (filter != null) {
@@ -151,6 +153,12 @@ public class UIManager : Singleton<UIManager> {
 
         UISelectWorkerPopup p = NGUITools.AddChild(alertsPanel, selectWorkerPopupPrefab).GetComponent<UISelectWorkerPopup>();
         p.SetData(title, workers, confirm);
+    }
+
+    // Show a promo selection popup.
+    public void PromoSelectionPopup(Action<Promo> confirm) {
+        UISelectPromoPopup p = NGUITools.AddChild(alertsPanel, selectPromoPopupPrefab).GetComponent<UISelectPromoPopup>();
+        p.SetData(GameManager.Instance.unlocked.promos, confirm);
     }
 }
 
