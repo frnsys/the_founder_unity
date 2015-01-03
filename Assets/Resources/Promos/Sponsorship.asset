@@ -15,14 +15,15 @@ MonoBehaviour:
     name: Sponsorship
     opinion:
       name: Opinion
-      value: 25
+      value: 400
       duration: 0
       type: 0
     publicity:
       name: Publicity
-      value: 25
+      value: 400
       duration: 0
       type: 0
   cost: 25000
   requiredProgress: 5000
+  difficulty: 1
   _progress: 0

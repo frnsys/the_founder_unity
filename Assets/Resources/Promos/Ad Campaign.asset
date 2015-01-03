@@ -15,14 +15,15 @@ MonoBehaviour:
     name: Ad Campaign
     opinion:
       name: Opinion
-      value: 30
+      value: 50
       duration: 0
       type: 0
     publicity:
       name: Publicity
-      value: 30
+      value: 50
       duration: 0
       type: 0
   cost: 30000
   requiredProgress: 5000
+  difficulty: 1
   _progress: 0

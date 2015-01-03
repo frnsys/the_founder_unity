@@ -15,14 +15,15 @@ MonoBehaviour:
     name: DENT Talk
     opinion:
       name: Opinion
-      value: 100
+      value: 200
       duration: 0
       type: 0
     publicity:
       name: Publicity
-      value: 80
+      value: 100
       duration: 0
       type: 0
   cost: 60000
   requiredProgress: 9000
+  difficulty: 1
   _progress: 0

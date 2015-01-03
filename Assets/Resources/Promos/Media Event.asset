@@ -15,14 +15,15 @@ MonoBehaviour:
     name: Media Event
     opinion:
       name: Opinion
-      value: 40
+      value: 400
       duration: 0
       type: 0
     publicity:
       name: Publicity
-      value: 40
+      value: 200
       duration: 0
       type: 0
   cost: 50000
   requiredProgress: 8000
+  difficulty: 1
   _progress: 0

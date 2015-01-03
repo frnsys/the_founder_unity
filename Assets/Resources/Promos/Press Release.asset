@@ -15,14 +15,15 @@ MonoBehaviour:
     name: Press Release
     opinion:
       name: Opinion
-      value: 10
+      value: 20
       duration: 0
       type: 0
     publicity:
       name: Publicity
-      value: 10
+      value: 20
       duration: 0
       type: 0
   cost: 5000
-  requiredProgress: 2000
-  _progress: 0
+  requiredProgress: 20
+  difficulty: 1
+  _progress: 76

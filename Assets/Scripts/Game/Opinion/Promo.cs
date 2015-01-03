@@ -24,8 +24,8 @@ public class Promo : ScriptableObject {
     public bool Develop(float amount, float skill) {
         _progress += amount;
         if (progress >= 1) {
+            opinionEvent.opinion.value *= CalculateResult(skill);
             if (Completed != null)
-                opinionEvent.opinion.value *= CalculateResult(skill);
                 Completed(this);
             return true;
         }

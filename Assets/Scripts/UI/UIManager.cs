@@ -39,12 +39,14 @@ public class UIManager : Singleton<UIManager> {
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
+        Promo.Completed += OnPromoCompleted;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
         ResearchManager.Completed -= OnResearchCompleted;
         Product.Completed -= OnProductCompleted;
+        Promo.Completed -= OnPromoCompleted;
     }
 
     public void ToggleMenu() {
@@ -71,6 +73,10 @@ public class UIManager : Singleton<UIManager> {
     void OnProductCompleted(Product p) {
         GameObject popup = NGUITools.AddChild(alertsPanel, productCompletedAlertPrefab);
         popup.GetComponent<UIProductCompletedAlert>().product = p;
+    }
+
+    void OnPromoCompleted(Promo p) {
+        Alert(p.name + " completed.");
     }
 
     [HideInInspector]

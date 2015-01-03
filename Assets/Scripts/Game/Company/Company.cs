@@ -284,7 +284,9 @@ public class Company : HasStats {
 
     public Promo developingPromo;
     public void DevelopPromo() {
+        Debug.Log("DEVELOPING PROMO");
         if (developingPromo != null && opinionCzar != null) {
+            Debug.Log("opinion czar productivity: " + opinionCzar.productivity.value.ToString());
             bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
 
             if (completed) {

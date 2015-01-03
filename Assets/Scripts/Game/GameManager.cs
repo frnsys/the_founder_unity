@@ -100,6 +100,7 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ProductDevelopmentCycle());
         StartCoroutine(ProductRevenueCycle());
         StartCoroutine(ResearchCycle());
+        StartCoroutine(OpinionCycle());
 
         // TESTing hello from your mentor!
         //narrativeManager.MentorMessage("A message from your mentor", "Welcome to The Founder!");
