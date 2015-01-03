@@ -7,7 +7,6 @@ public class UIManageCompany : UIFullScreenPager {
 
     public GameObject locationPrefab;
     public GameObject verticalPrefab;
-    public GameObject infrastructureView;
     public GameObject locationVerticalView;
 
     private Color activeColor = new Color(1f,1f,1f,1f);
@@ -31,17 +30,14 @@ public class UIManageCompany : UIFullScreenPager {
         switch(button.gameObject.name) {
             case "Locations Button":
                 locationVerticalView.SetActive(true);
-                infrastructureView.SetActive(false);
                 LoadLocations();
                 break;
             case "Verticals Button":
                 locationVerticalView.SetActive(true);
-                infrastructureView.SetActive(false);
                 LoadVerticals();
                 break;
             default:
                 locationVerticalView.SetActive(false);
-                infrastructureView.SetActive(true);
                 break;
         }
 

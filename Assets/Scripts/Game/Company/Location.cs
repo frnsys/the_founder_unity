@@ -9,5 +9,14 @@ public class Location : ScriptableObject {
     public MarketManager.Market market = MarketManager.Market.NorthAmerica;
 
     public Infrastructure capacity = new Infrastructure();
+    public Infrastructure infrastructure = new Infrastructure();
     public EffectSet effects = new EffectSet();
+
+    public Infrastructure availableInfrastructureCapacity {
+        get { return capacity - infrastructure; }
+    }
+
+    public bool HasCapacityFor(Infrastructure i) {
+        return availableInfrastructureCapacity >= i;
+    }
 }

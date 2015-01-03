@@ -69,13 +69,8 @@ public class Company : HasStats {
         _verticals = new List<Vertical>() {
             Vertical.Load("Information")
         };
-        _infrastructure = new Infrastructure();
         technologies = new List<Technology>();
         markets = new List<MarketManager.Market>();
-
-        baseInfrastructureCapacity = new Infrastructure();
-        baseInfrastructureCapacity[Infrastructure.Type.Datacenter] = 4;
-        baseInfrastructureCapacity[Infrastructure.Type.Studio]     = 1;
 
         forgettingRate = 1;
         opinion = new Stat("Opinion", 1);
@@ -100,7 +95,8 @@ public class Company : HasStats {
     public int baseSizeLimit;
     public int sizeLimit {
         // You can manage 5 employees at your HQ, other locations are managed by one employee.
-        get { return baseSizeLimit + locations.Count; }
+        // -1 to account for the starting location.
+        get { return baseSizeLimit + locations.Count - 1; }
     }
     public List<Founder> founders;
 
@@ -477,12 +473,14 @@ public class Company : HasStats {
     // ===============================================
 
     [SerializeField]
-    private Infrastructure _infrastructure;
     public Infrastructure infrastructure {
-        get { return _infrastructure; }
+        get {
+            IEnumerable<Infrastructure> locationInfra = locations.Select(i => i.infrastructure);
+            if (locationInfra.Count() > 0)
+                return locationInfra.Aggregate((x,y) => x + y);
+            return new Infrastructure();
+        }
     }
-
-    public Infrastructure baseInfrastructureCapacity;
 
     // Infrastructure which is available for new products.
     public Infrastructure availableInfrastructure {
@@ -509,8 +507,8 @@ public class Company : HasStats {
         get {
             IEnumerable<Infrastructure> locationCapacities = locations.Select(i => i.capacity);
             if (locationCapacities.Count() > 0)
-                return baseInfrastructureCapacity + locationCapacities.Aggregate((x,y) => x + y);
-            return baseInfrastructureCapacity;
+                return locationCapacities.Aggregate((x,y) => x + y);
+            return new Infrastructure();
         }
     }
 
@@ -521,21 +519,23 @@ public class Company : HasStats {
         }
     }
 
-    public bool BuyInfrastructure(Infrastructure i) {
-        if (HasCapacityFor(i) && Pay(i.cost)) {
-            _infrastructure += i;
+    public bool BuyInfrastructure(Infrastructure i, Location loc) {
+        if (loc.HasCapacityFor(i) && Pay(i.cost)) {
+            loc.infrastructure += i;
             UpdateProductStatuses();
             return true;
         }
         return false;
     }
 
-    public void DestroyInfrastructure(Infrastructure i) {
-        _infrastructure -= i;
+    public void DestroyInfrastructure(Infrastructure i, Location loc) {
+        loc.infrastructure -= i;
         UpdateProductStatuses();
     }
 
     private void UpdateProductStatuses() {
+        Infrastructure inf = infrastructure;
+
         // Get all products which are currently using infrastructure.
         List<Product> supportedProducts = products.FindAll(p => p.state != Product.State.RETIRED);
 
@@ -548,7 +548,7 @@ public class Company : HasStats {
         // Figure out which infrastructure types are overloaded.
         List<Infrastructure.Type> overloadedTypes = new List<Infrastructure.Type>();
         foreach (Infrastructure.Type t in Infrastructure.Types) {
-            if (allInf[t] > _infrastructure[t]) {
+            if (allInf[t] > inf[t]) {
                 overloadedTypes.Add(t);
             }
         }

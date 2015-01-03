@@ -13,11 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: This is the hot spot. Not quite Silicon Valley, but young, talented
     engineers are easier to find here.
-  cost: 1e+06
+  cost: 10
   market: 0
   capacity:
     keys: 00000000010000000200000003000000
     values: 04000000000000000100000000000000
+  infrastructure:
+    keys: 00000000010000000200000003000000
+    values: 00000000000000000000000000000000
   effects:
     products: []
     workers: []

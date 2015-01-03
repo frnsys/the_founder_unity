@@ -20,6 +20,7 @@ namespace UnityTest
         private Company c;
         private Worker worker;
         private Item item;
+        private Location startLoc;
 
         private List<ProductType> pts;
 
@@ -31,6 +32,14 @@ namespace UnityTest
             gm.Load(gd);
 
             c = new Company("Foo Inc");
+
+            // Create a starting location with some infrastructure capacity.
+            startLoc = ScriptableObject.CreateInstance<Location>();
+            startLoc.cost = 0;
+            startLoc.capacity = new Infrastructure();
+            startLoc.capacity[Infrastructure.Type.Datacenter] = 1;
+            startLoc.capacity[Infrastructure.Type.Factory]    = 1;
+            c.ExpandToLocation(startLoc);
 
             pts = new List<ProductType>() {
                 ProductType.Load("Social Network")
@@ -214,7 +223,7 @@ namespace UnityTest
 
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 1;
-            c.BuyInfrastructure(i);
+            c.BuyInfrastructure(i, startLoc);
 
             Location loc = ScriptableObject.CreateInstance<Location>();
             loc.cost = 100;
@@ -234,30 +243,34 @@ namespace UnityTest
 
         [Test]
         public void ManageInfrastructure() {
-            int baseDatacenterCapacity = c.baseInfrastructureCapacity[Infrastructure.Type.Datacenter];
+            int baseDatacenterCapacity = startLoc.capacity[Infrastructure.Type.Datacenter];
             Infrastructure zeroInf = new Infrastructure();
 
-            // The only capacity should be the base capacity,
-            // and it should all be available.
+            // All capacity should be available.
             // No infrastructure is currently being used.
-            Assert.IsTrue(c.infrastructureCapacity.Equals(c.baseInfrastructureCapacity));
             Assert.IsTrue(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
             Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
 
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = baseDatacenterCapacity + 1;
 
+            Location newLoc = ScriptableObject.CreateInstance<Location>();
+            newLoc.cost = 0;
+            newLoc.capacity = new Infrastructure();
+            newLoc.capacity[Infrastructure.Type.Datacenter] = 1;
+            c.ExpandToLocation(newLoc);
+
             // Can't buy the infrastructure, not enough cash.
             c.cash.baseValue = 0;
-            Assert.IsFalse(c.BuyInfrastructure(i));
+            Assert.IsFalse(c.BuyInfrastructure(i, newLoc));
 
             // Can't buy the infrastructure, not enough capacity.
             c.cash.baseValue = i.cost;
-            Assert.IsFalse(c.BuyInfrastructure(i));
+            Assert.IsFalse(c.BuyInfrastructure(i, newLoc));
 
             // Can buy the infrastructure: enough cash + capacity.
-            i[Infrastructure.Type.Datacenter] = baseDatacenterCapacity;
-            Assert.IsTrue(c.BuyInfrastructure(i));
+            i[Infrastructure.Type.Datacenter] = 1;
+            Assert.IsTrue(c.BuyInfrastructure(i, newLoc));
 
             // The available capacity should now be less than the total capacity.
             Assert.IsFalse(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
@@ -288,6 +301,8 @@ namespace UnityTest
             Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
             Assert.IsTrue(c.availableInfrastructure.Equals(c.infrastructure));
 
+            int oldDatacenterCapacity = c.infrastructureCapacity[Infrastructure.Type.Datacenter];
+
             Location loc = ScriptableObject.CreateInstance<Location>();
             Infrastructure cap = new Infrastructure();
             cap[Infrastructure.Type.Datacenter] = 10;
@@ -296,9 +311,9 @@ namespace UnityTest
             c.ExpandToLocation(loc);
 
             // Adding a location should have increased the capacity by the amount the location gives.
-            Assert.AreEqual(c.infrastructureCapacity[Infrastructure.Type.Datacenter], c.baseInfrastructureCapacity[Infrastructure.Type.Datacenter] + 10);
+            Assert.AreEqual(c.infrastructureCapacity[Infrastructure.Type.Datacenter], oldDatacenterCapacity + 10);
 
-            c.DestroyInfrastructure(i);
+            c.DestroyInfrastructure(i, newLoc);
 
             // Destroying the infrastructure we had should have cleared up all capacity.
             // No infrastructure should be available now.
@@ -320,7 +335,7 @@ namespace UnityTest
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 1;
             i[Infrastructure.Type.Factory] = 1;
-            c.BuyInfrastructure(i);
+            c.BuyInfrastructure(i, startLoc);
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];

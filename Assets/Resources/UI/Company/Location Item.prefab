@@ -163,6 +163,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400020}
+  - 114: {fileID: 11400026}
+  - 114: {fileID: 11400024}
+  m_Layer: 8
+  m_Name: Infrastructure
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -240,6 +257,7 @@ Transform:
   - {fileID: 400006}
   - {fileID: 400008}
   - {fileID: 400016}
+  - {fileID: 400020}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400012
@@ -292,6 +310,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400006}
   m_RootOrder: 1
+--- !u!4 &400020
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -340, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400010}
+  m_RootOrder: 3
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -382,6 +412,9 @@ MonoBehaviour:
   capacity: {fileID: 11400004}
   description: {fileID: 11400022}
   expandButton: {fileID: 100016}
+  infrastructureItemPrefab: {fileID: 100008, guid: e6a747430ac8d4a56beb0f918eafabeb,
+    type: 2}
+  grid: {fileID: 11400024}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -907,6 +940,64 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c4de3b4b6fe9045b059ee627c100df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrangement: 0
+  sorting: 0
+  pivot: 4
+  maxPerLine: 0
+  cellWidth: 180
+  cellHeight: 140
+  animateSmoothly: 0
+  hideInactive: 0
+  keepWithinPanel: 0
+  sorted: 0
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400010}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 400010}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 400010}
+    relative: 0
+    absolute: -32
+  topAnchor:
+    target: {fileID: 400010}
+    relative: 0
+    absolute: 32
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 618
+  mHeight: 64
+  mDepth: 258
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 17.6571426
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

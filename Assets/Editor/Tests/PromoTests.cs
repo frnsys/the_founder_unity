@@ -20,10 +20,10 @@ namespace UnityTest
 
             float result = p.CalculateResult(creativity);
 
-            p.difficulty = 2;
+            p.difficulty = 100;
             Assert.IsTrue(result > p.CalculateResult(creativity));
 
-            p.difficulty = 0.5f;
+            p.difficulty = 0.0001f;
             Assert.IsTrue(result < p.CalculateResult(creativity));
 		}
     }
