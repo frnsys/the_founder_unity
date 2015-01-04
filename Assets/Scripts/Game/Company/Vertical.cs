@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Vertical : Resource<Vertical> {
+public class Vertical : SharedResource<Vertical> {
     public float cost = 10000000;
     public string description;
 

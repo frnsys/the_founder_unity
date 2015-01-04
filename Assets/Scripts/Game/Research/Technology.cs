@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Technology : Resource<Technology> {
+public class Technology : SharedResource<Technology> {
     public string description;
 
     public float requiredResearch = 1000;

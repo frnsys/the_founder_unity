@@ -177,6 +177,7 @@ public class Company : HasStats {
 
     public bool ExpandToLocation(Location l) {
         if (Pay(l.cost)) {
+            l = l.Clone();
             _locations.Add(l);
 
             // The location's market region is now available.
@@ -284,9 +285,7 @@ public class Company : HasStats {
 
     public Promo developingPromo;
     public void DevelopPromo() {
-        Debug.Log("DEVELOPING PROMO");
         if (developingPromo != null && opinionCzar != null) {
-            Debug.Log("opinion czar productivity: " + opinionCzar.productivity.value.ToString());
             bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
 
             if (completed) {
@@ -301,7 +300,7 @@ public class Company : HasStats {
     }
 
     public void StartPromo(Promo promo) {
-        developingPromo = promo;
+        developingPromo = promo.Clone();
     }
 
     public void HarvestProducts(float elapsedTime) {
@@ -442,6 +441,7 @@ public class Company : HasStats {
     }
 
     public bool BuyItem(Item item) {
+        item = item.Clone();
         if (Pay(item.cost)) {
             _items.Add(item);
 

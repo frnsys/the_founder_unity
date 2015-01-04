@@ -6,7 +6,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Item : ScriptableObject {
+public class Item : TemplateResource<Item> {
     public float cost = 1000;
     public float duration = 0;
     public string description;

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Location : ScriptableObject {
+public class Location : TemplateResource<Location> {
     public string description;
 
     public float cost = 1000000;

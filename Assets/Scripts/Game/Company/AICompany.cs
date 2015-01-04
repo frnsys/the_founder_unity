@@ -77,8 +77,7 @@ public class AICompany : Company {
 
     // The stuff the company has access to, including
     // product aspects, workers, discoveries, etc...
-    [SerializeField]
-    private UnlockSet unlocked;
+    public UnlockSet unlocked;
 
     void OnEnable() {
         // Load up all the specialty product aspects.

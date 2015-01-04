@@ -62,7 +62,7 @@ public class Serializer {
 
         // If this object is a resource, we need only serialize its name,
         // and skip everything else.
-        if (IsResource(type)) {
+        if (IsSharedResource(type)) {
             replica.Add("name", type.GetProperty("name").GetValue(obj, null), typeof(string));
             return replica;
         }
@@ -81,7 +81,7 @@ public class Serializer {
                 // If this field references a resource,
                 // we don't want to serialize the entire resource.
                 // Just enough data (name and type) so that we can reload it on deserialization.
-                if (IsResource(ft)) {
+                if (IsSharedResource(ft)) {
                     ScriptableObject resource = (ScriptableObject)val;
                     replica.Add(name, resource.name, ft);
 
@@ -166,7 +166,7 @@ public class Serializer {
         Type type = obj.GetType();
 
         // If this object is a resource, we just reload it.
-        if (IsResource(type)) {
+        if (IsSharedResource(type)) {
             string resourceName = (string)replica.map["name"];
             return type.GetMethod("Load").Invoke(null, new object[] { resourceName });
         }
@@ -179,7 +179,7 @@ public class Serializer {
 
                 // If this field references a resource,
                 // reload it based on the name and type.
-                if (IsResource(ft)) {
+                if (IsSharedResource(ft)) {
                     string resourceName = (string)val;
                     fi.SetValue(obj, ft.GetMethod("Load").Invoke(null, new object[] { resourceName }));
 
@@ -245,8 +245,8 @@ public class Serializer {
                (fi.GetCustomAttributes(typeof(SerializeField), true).Length > 0 && fi.IsPrivate);
     }
 
-    private static bool IsResource(Type type) {
-        return IsSubclassOfRawGeneric(typeof(Resource<>), type);
+    private static bool IsSharedResource(Type type) {
+        return IsSubclassOfRawGeneric(typeof(SharedResource<>), type);
     }
 
     // https://gist.github.com/jonathanconway/3330614
@@ -284,10 +284,22 @@ public class Serializer {
     //public class Resource : System.Attribute {}
 }
 
-// Resources are not serialized/deserialized,
-// the resource name is remembered and then they are just reloaded.
-public class Resource<T> : ScriptableObject where T : UnityEngine.Object {
+// SharedResources are resources/assets which are never modified and should only have
+// one instance in play.
+// They are not serialized/deserialized; since they are never modified,
+// the resource name is remembered and then they are just reloaded from scratch.
+// This ensures that only one instance is created.
+public class SharedResource<T> : ScriptableObject where T : UnityEngine.Object {
     public static T Load(string name) {
         return Resources.Load<T>(name);
+    }
+}
+
+public class TemplateResource<T> : ScriptableObject where T : UnityEngine.Object {
+    public T Clone() {
+        // Create a new instance which can be safely modified.
+        T t = Instantiate(this) as T;
+        t.name = name;
+        return t;
     }
 }

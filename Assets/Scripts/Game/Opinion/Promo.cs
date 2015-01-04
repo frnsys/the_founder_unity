@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Promo : ScriptableObject {
+public class Promo : TemplateResource<Promo> {
     public OpinionEvent opinionEvent;
     public float cost;
     public float requiredProgress;
