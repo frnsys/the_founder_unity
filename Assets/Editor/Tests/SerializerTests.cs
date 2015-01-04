@@ -10,11 +10,20 @@ namespace UnityTest
 	[TestFixture]
 	internal class SerializerTests
 	{
+        private GameObject gameObj;
+        private GameManager gm;
+        private WorkerManager wm;
         private GameData data = null;
 
         [SetUp]
         public void SetUp() {
             data = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestingGameData.asset", typeof(GameData)) as GameData;
+
+
+            gameObj = new GameObject("Game Manager");
+            gm = gameObj.AddComponent<GameManager>();
+            gm.Load(data);
+            wm = gm.workerManager;
 
             Worker researchCzar = CreateWorker("RESEARCHER", 1000);
             Worker opinionCzar  = CreateWorker("OPINIONER",  2000);
@@ -41,7 +50,7 @@ namespace UnityTest
                     Worker worker = CreateWorker("WORKER"+i, i*10);
                     worker.offMarketTime = i;
                     worker.recentPlayerOffers = i;
-                    data.company.HireWorker(worker);
+                    wm.HireWorker(worker);
                 }
 
                 for (int i=0;i<5;i++) {

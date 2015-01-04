@@ -55,3 +55,23 @@ This is great, but when serialization happens, this shared reference might be br
 
 The `Serializer` included with _The Founder_ can automatically preserve these shared references so long as the resource in question inherits from the `SharedResource<T>` class.
 The serializer will recognize this inheritance and attempt to load the resource directly from its asset, as demonstrated above.
+
+#### Special case: Workers
+
+Workers are a special case since they are both templates (they are modified throughout the game) and shared (there is a "canonical" instance for each worker). So they can't simply be reloaded from
+their source asset because they may have changes. And we can't create a new instance for each company as we do with template resources, since there is only supposed to be one instance of a given worker.
+
+For workers, we accept multiple instances for a single worker but have some rules which let us find the "canonical" instance:
+
+- If a worker is employed at a company, the employed instance is canonical.
+- If the worker is not employed, the instance in `data.unemployed` is canonical.
+
+We don't eliminate extraneous references. Instead, all other instances, such as those held by `UnlockSet`s, are only for reference - we never use them directly. We lookup the canonical worker with the same name and just use that instance.
+
+A `WorkerManager` on the `GameManager` keeps track of these canonical instances, so always move workers around (i.e. hire and fire them) through the `WorkerManager`:
+
+    // Defaults to the player company.
+    GameManager.Instance.workerManager.HireWorker(worker<, company>);
+    GameManager.Instance.workerManager.FireWorker(worker<, company>);
+
+The `WorkerManager` makes sure workers are not employed at multiple places and removes/adds them to the `data.unemployed` list as necessary.

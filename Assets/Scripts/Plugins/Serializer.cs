@@ -296,10 +296,15 @@ public class SharedResource<T> : ScriptableObject where T : UnityEngine.Object {
 }
 
 public class TemplateResource<T> : ScriptableObject where T : UnityEngine.Object {
+    // Create a new instance which can be safely modified.
     public T Clone() {
-        // Create a new instance which can be safely modified.
-        T t = Instantiate(this) as T;
-        t.name = name;
-        return t;
+        T res = Instantiate(this) as T;
+        res.name = name;
+        return res;
+    }
+
+    // Find a matching instance for the given instance.
+    public static T Find(T res, IEnumerable<T> reses) {
+        return reses.Where(r => r.name == res.name).First();
     }
 }

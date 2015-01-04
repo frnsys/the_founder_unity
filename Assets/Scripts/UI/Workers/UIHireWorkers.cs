@@ -63,7 +63,7 @@ public class UIHireWorkers : UIFullScreenPager {
         UIEventListener.Get(ic.noButton).onClick += noAction;
     }
     private void HireWorker_() {
-        GameManager.Instance.playerCompany.HireWorker(currentWorker);
+        GameManager.Instance.workerManager.HireWorker(currentWorker);
 
         RemoveWorker(currentWorker);
 
@@ -82,7 +82,6 @@ public class UIHireWorkers : UIFullScreenPager {
         // Re-wrap the grid to reset the wrapped items.
         Adjust();
 
-        Debug.Log(availableWorkers.Count);
         if (availableWorkers.Count == 0) {
             hireButton.gameObject.SetActive(false);
             noWorkersNotice.SetActive(true);
@@ -98,7 +97,7 @@ public class UIHireWorkers : UIFullScreenPager {
 
     private void LoadWorkers() {
         ClearGrid();
-        foreach (Worker w in GameManager.Instance.availableWorkers) {
+        foreach (Worker w in GameManager.Instance.workerManager.AvailableWorkers) {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
             workerItem.GetComponent<UIWorker>().SetFuzzyWorker(w);

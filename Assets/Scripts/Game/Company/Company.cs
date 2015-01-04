@@ -137,7 +137,6 @@ public class Company : HasStats {
             worker.RemoveItem(item);
         }
 
-        // Reset the salary.
         worker.salary = 0;
 
         _workers.Remove(worker);
@@ -459,6 +458,7 @@ public class Company : HasStats {
     }
 
     public void RemoveItem(Item item) {
+        item = Item.Find(item, _items);
         _items.Remove(item);
 
         foreach (ProductEffect pe in item.effects.products) {
@@ -522,6 +522,7 @@ public class Company : HasStats {
     }
 
     public bool BuyInfrastructure(Infrastructure i, Location loc) {
+        loc = Location.Find(loc, locations);
         if (loc.HasCapacityFor(i) && Pay(i.cost)) {
             loc.infrastructure += i;
             UpdateProductStatuses();
@@ -531,6 +532,7 @@ public class Company : HasStats {
     }
 
     public void DestroyInfrastructure(Infrastructure i, Location loc) {
+        loc = Location.Find(loc, locations);
         loc.infrastructure -= i;
         UpdateProductStatuses();
     }
