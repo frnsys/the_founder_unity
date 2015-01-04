@@ -44,6 +44,7 @@ public class AICompany : Company {
         base.Awake();
 
         // Initialize stuff.
+        unlocked = new UnlockSet();
         bonuses = new EffectSet();
         specialtyProductTypes = new List<ProductType>();
         specialtyVerticals = new List<Vertical>();
@@ -77,8 +78,7 @@ public class AICompany : Company {
 
     // The stuff the company has access to, including
     // product aspects, workers, discoveries, etc...
-    [SerializeField]
-    private UnlockSet unlocked;
+    public UnlockSet unlocked;
 
     void OnEnable() {
         // Load up all the specialty product aspects.
@@ -94,7 +94,7 @@ public class AICompany : Company {
         }
 
         // TO DO we may need to manage the base unlocks on the game manager separately from the player company's unlocks, so that the AI companies don't just get everything the player has unlocked too.
-        unlocked = bonuses.unlocks;
+        unlocked.Unlock(bonuses.unlocks);
     }
 
     // Each turn the AI calculates the utility of all possible actions and does the one with the highest utility, provided it is above some threshold (?).
@@ -279,7 +279,7 @@ public class AICompany : Company {
             }
 
             // Also consider any worker in the job market.
-            foreach (Worker w in GameManager.Instance.availableWorkers) {
+            foreach (Worker w in GameManager.Instance.workerManager.AvailableWorkers) {
                 if (CanAffordWorker(w, expectedMonthlyProfits) &&
                     WorkerROI(w) > 1.2) { // this value could be anything
                     candidates.Add(w);
@@ -294,7 +294,7 @@ public class AICompany : Company {
                 if (workers.Count < sizeLimit &&
                     CanAffordWorker(w, expectedMonthlyProfits - newMonthlyCosts)) {
                     Debug.Log(name + " is hiring a worker...");
-                    HireWorker(w);
+                    GameManager.Instance.workerManager.HireWorker(w, this);
                     newMonthlyCosts += w.salary;
                 }
             }

@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class ProductRecipe : Resource<ProductRecipe> {
+public class ProductRecipe : SharedResource<ProductRecipe> {
     // Naming convention:
     // ProductType.ProductType.<etc>.asset
 

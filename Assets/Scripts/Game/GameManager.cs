@@ -47,26 +47,25 @@ public class GameManager : Singleton<GameManager> {
     public NarrativeManager narrativeManager;
 
     [HideInInspector]
+    public WorkerManager workerManager;
+
+    [HideInInspector]
     public EventManager eventManager;
 
     [HideInInspector]
     public GameConfig config;
 
-    public List<Worker> availableWorkers {
-        get {
-            return data.unlocked.workers.Where(w => !playerCompany.workers.Contains(w) && w.offMarketTime == 0).ToList();
-        }
-    }
-
     // Load existing game data.
     public void Load(GameData d) {
-        researchManager = gameObject.AddComponent<ResearchManager>();
+        researchManager  = gameObject.AddComponent<ResearchManager>();
         narrativeManager = gameObject.AddComponent<NarrativeManager>();
-        eventManager = gameObject.AddComponent<EventManager>();
+        workerManager    = gameObject.AddComponent<WorkerManager>();
+        eventManager     = gameObject.AddComponent<EventManager>();
 
         data = d;
         researchManager.Load(d);
         eventManager.Load(d);
+        workerManager.Load(d);
     }
 
     void Awake() {

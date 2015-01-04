@@ -137,7 +137,6 @@ public class Company : HasStats {
             worker.RemoveItem(item);
         }
 
-        // Reset the salary.
         worker.salary = 0;
 
         _workers.Remove(worker);
@@ -177,6 +176,7 @@ public class Company : HasStats {
 
     public bool ExpandToLocation(Location l) {
         if (Pay(l.cost)) {
+            l = l.Clone();
             _locations.Add(l);
 
             // The location's market region is now available.
@@ -284,9 +284,7 @@ public class Company : HasStats {
 
     public Promo developingPromo;
     public void DevelopPromo() {
-        Debug.Log("DEVELOPING PROMO");
         if (developingPromo != null && opinionCzar != null) {
-            Debug.Log("opinion czar productivity: " + opinionCzar.productivity.value.ToString());
             bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
 
             if (completed) {
@@ -301,7 +299,7 @@ public class Company : HasStats {
     }
 
     public void StartPromo(Promo promo) {
-        developingPromo = promo;
+        developingPromo = promo.Clone();
     }
 
     public void HarvestProducts(float elapsedTime) {
@@ -442,6 +440,7 @@ public class Company : HasStats {
     }
 
     public bool BuyItem(Item item) {
+        item = item.Clone();
         if (Pay(item.cost)) {
             _items.Add(item);
 
@@ -459,6 +458,7 @@ public class Company : HasStats {
     }
 
     public void RemoveItem(Item item) {
+        item = Item.Find(item, _items);
         _items.Remove(item);
 
         foreach (ProductEffect pe in item.effects.products) {
@@ -522,6 +522,7 @@ public class Company : HasStats {
     }
 
     public bool BuyInfrastructure(Infrastructure i, Location loc) {
+        loc = Location.Find(loc, locations);
         if (loc.HasCapacityFor(i) && Pay(i.cost)) {
             loc.infrastructure += i;
             UpdateProductStatuses();
@@ -531,6 +532,7 @@ public class Company : HasStats {
     }
 
     public void DestroyInfrastructure(Infrastructure i, Location loc) {
+        loc = Location.Find(loc, locations);
         loc.infrastructure -= i;
         UpdateProductStatuses();
     }

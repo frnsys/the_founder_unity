@@ -57,6 +57,9 @@ public class GameData : ScriptableObject {
     // Economy health
     public float economyMultiplier;
 
+    // The canonical pool of workers not at companies.
+    public List<Worker> unemployed;
+
 
     // ===============================================
     // Management ====================================
@@ -84,6 +87,7 @@ public class GameData : ScriptableObject {
         data.company  = new Company(companyName);
         data.board    = new TheBoard();
         data.research = 0;
+        data.unemployed = Worker.LoadAll();
 
         data.month = Month.January;
         data.year  = 1;

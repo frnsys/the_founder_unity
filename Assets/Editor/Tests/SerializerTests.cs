@@ -10,11 +10,20 @@ namespace UnityTest
 	[TestFixture]
 	internal class SerializerTests
 	{
+        private GameObject gameObj;
+        private GameManager gm;
+        private WorkerManager wm;
         private GameData data = null;
 
         [SetUp]
         public void SetUp() {
             data = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestingGameData.asset", typeof(GameData)) as GameData;
+
+
+            gameObj = new GameObject("Game Manager");
+            gm = gameObj.AddComponent<GameManager>();
+            gm.Load(data);
+            wm = gm.workerManager;
 
             Worker researchCzar = CreateWorker("RESEARCHER", 1000);
             Worker opinionCzar  = CreateWorker("OPINIONER",  2000);
@@ -41,7 +50,7 @@ namespace UnityTest
                     Worker worker = CreateWorker("WORKER"+i, i*10);
                     worker.offMarketTime = i;
                     worker.recentPlayerOffers = i;
-                    data.company.HireWorker(worker);
+                    wm.HireWorker(worker);
                 }
 
                 for (int i=0;i<5;i++) {
@@ -77,6 +86,34 @@ namespace UnityTest
         [TearDown]
         public void TearDown() {
             data = null;
+        }
+
+        [Test]
+        public void TestResourcesResolveCorrectly() {
+            // Just a sanity check to ensure that resources are loaded once.
+            ProductType pt = ProductType.Load("Social Network");
+            ProductType pt_ = ProductType.Load("Social Network");
+            Assert.AreEqual(pt.GetInstanceID(), pt_.GetInstanceID());
+
+            // Another sanity check.
+            ProductType pt__ = data.unlocked.productTypes[0];
+            Assert.AreEqual(pt.GetInstanceID(), pt__.GetInstanceID());
+
+            // Create an AI company who also has this product type.
+            AICompany oc = ScriptableObject.CreateInstance<AICompany>();
+            oc.unlocked.productTypes.Add(pt);
+            data.otherCompanies.Add(oc);
+
+            // Save and re-load.
+            string filepath = "/tmp/the_founder_test_saving.dat";
+            GameData.Save(data, filepath);
+            GameData gd = GameData.Load(filepath);
+
+            // The two product types should be the same instance.
+            ProductType pt_ai = gd.otherCompanies[0].unlocked.productTypes[0];
+            ProductType pt_hu = gd.unlocked.productTypes[0];
+            Assert.AreEqual(pt_ai.GetInstanceID(), pt_hu.GetInstanceID());
+            Assert.AreEqual(pt_ai.GetInstanceID(), data.unlocked.productTypes[0].GetInstanceID());
         }
 
 		[Test]

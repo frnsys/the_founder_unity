@@ -209,7 +209,7 @@ namespace UnityTest
 
             c.cash.baseValue = 2000;
             Assert.IsTrue(c.ExpandToLocation(loc));
-            Assert.IsTrue(c.locations.Contains(loc));
+            Assert.IsTrue(c.locations.Select(l => l.name).Contains(loc.name));
             Assert.IsTrue(c.markets.Contains(loc.market));
             Assert.AreEqual(c.cash.value, 5000);
         }
