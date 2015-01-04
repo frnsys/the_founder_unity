@@ -279,7 +279,7 @@ public class AICompany : Company {
             }
 
             // Also consider any worker in the job market.
-            foreach (Worker w in GameManager.Instance.workerManager.AvailableWorkers) {
+            foreach (Worker w in GameManager.Instance.workerManager.AvailableWorkersForAICompany(this)) {
                 if (CanAffordWorker(w, expectedMonthlyProfits) &&
                     WorkerROI(w) > 1.2) { // this value could be anything
                     candidates.Add(w);

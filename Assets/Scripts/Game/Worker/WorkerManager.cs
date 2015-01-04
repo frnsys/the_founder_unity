@@ -48,18 +48,16 @@ public class WorkerManager : MonoBehaviour {
     }
 
     public bool HireWorker(Worker w, Company c) {
+        Company employer = EmployerForWorker(w);
         if (c.HireWorker(w)) {
             if (data.unemployed.Contains(w)) {
                 data.unemployed.Remove(w);
-            } else {
-                Company employer = EmployerForWorker(w);
-                if (employer != null) {
-                    // Need to juggle the salary, b/c
-                    // firing a worker resets it to 0.
-                    float salary = w.salary;
-                    employer.FireWorker(w);
-                    w.salary = salary;
-                }
+            } else if (employer != null) {
+                // Need to juggle the salary, b/c
+                // firing a worker resets it to 0.
+                float salary = w.salary;
+                employer.FireWorker(w);
+                w.salary = salary;
             }
             return true;
         }
