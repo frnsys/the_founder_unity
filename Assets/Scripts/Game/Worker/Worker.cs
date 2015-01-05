@@ -27,6 +27,7 @@ public class Worker : HasStats {
     public float salary;
     public string bio;
     public string description;
+    public string title;
     public float baseMinSalary;
     public float minSalary {
         get {

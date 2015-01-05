@@ -14,6 +14,7 @@ internal class WorkerInspector : Editor {
 
         EditorStyles.textField.wordWrap = true;
         w.name = EditorGUILayout.TextField("Name", w.name);
+        w.title = EditorGUILayout.TextField("Title", w.title);
         EditorGUILayout.LabelField("Bio (auto-generated, changes not saved)");
         EditorGUILayout.TextArea(w.bio, GUILayout.Height(60));
         EditorGUILayout.LabelField("Description");

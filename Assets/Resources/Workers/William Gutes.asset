@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   salary: 0
-  bio: He's really good with computers.
+  bio: William Gutes is not very imaginative but is dedicated. William Gutes is a
+    real bummer but is absolutely brilliant. William Gutes is very awkward.
+  description: A brilliant technical mind, with a keen business sense to boot.
+  title: Technical Wizard
   baseMinSalary: 20000
   offMarketTime: 0
   recentPlayerOffers: 0
@@ -30,5 +33,5 @@ MonoBehaviour:
     baseValue: 4
     _buffs: []
   cleverness:
-    baseValue: 9
+    baseValue: 10
     _buffs: []

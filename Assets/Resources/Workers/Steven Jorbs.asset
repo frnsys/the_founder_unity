@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   salary: 45000
-  bio: He's an idea guy.
+  bio: Steven Jorbs is technically gifted and is artistic but brings everyone down.
+    Steven Jorbs is easy to talk to and multitasks very effectively.
+  description: The entrepreneur behind one of the most successful companies in history.
+  title: Creative Genius
   baseMinSalary: 40000
   offMarketTime: 0
   recentPlayerOffers: 0
@@ -21,7 +24,7 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   productivity:
-    baseValue: 4
+    baseValue: 10
     _buffs: []
   charisma:
     baseValue: 8
