@@ -112,7 +112,7 @@ public class Worker : HasStats {
     private static Dictionary<string, Dictionary<string, string[]>> bioMap = new Dictionary<string, Dictionary<string, string[]>> {
         {
             "Creativity", new Dictionary<string, string[]> {
-                { "low", new string[] {"is not very imaginative"} },
+                { "low", new string[] {"is not very imaginative", "is often completely uninspiring"} },
                 { "mid", new string[] {"is artistic", "has an eye for trends", "can be quite original"} },
                 { "high", new string[] {"is a genius", "is a visionary", "is extremely talented"} }
             }
@@ -120,7 +120,7 @@ public class Worker : HasStats {
         {
             "Cleverness", new Dictionary<string, string[]> {
                 { "low", new string[] {"is quite dim", "isn't the sharpest tool in the shed", "isn't the brightest bulb of the bunch"} },
-                { "mid", new string[] {"is an adept problem solver", "is technically gifted", "solves problems well", "is inventive"} },
+                { "mid", new string[] {"is an adept problem solver", "is technically gifted", "solves problems well", "is inventive", "can wear many hats"} },
                 { "high", new string[] {"has a beautiful mind", "is absolutely brilliant", "is always on the cutting edge"} }
             }
         },
@@ -128,20 +128,20 @@ public class Worker : HasStats {
             "Charisma", new Dictionary<string, string[]> {
                 { "low", new string[] {"is alienating", "is hard to be around", "has a weird smell", "is very awkward", "creeps me out"} },
                 { "mid", new string[] {"is fun to be around", "can be charming", "is easy to talk to", "is friendly"} },
-                { "high", new string[] {"has a magnetic personality", "is hypnotic", "is a natural-born leader"} }
+                { "high", new string[] {"has a magnetic personality", "is hypnotic", "is a natural-born leader", "can be very persuasive", "is capable of rallying people to anything"} }
             }
         },
         {
             "Productivity", new Dictionary<string, string[]> {
-                { "low", new string[] {"is kind of lazy", "needs a lot of motivation"} },
+                { "low", new string[] {"is kind of lazy", "needs a lot of motivation", "slacks off from time to time"} },
                 { "mid", new string[] {"is a diligent worker", "is dedicated", "works hard", "is efficient with time"} },
                 { "high", new string[] {"is really 'heads-down'", "multitasks very effectively", "gets a lot done in a short time"} }
             }
         },
         {
             "Happiness", new Dictionary<string, string[]> {
-                { "low", new string[] {"is a real bummer", "brings everyone down", "reminds me of Eeyore"} },
-                { "mid", new string[] {"brightens up the office", "cheers everyone up"} },
+                { "low", new string[] {"is a real bummer", "brings everyone down", "reminds me of Eeyore", "can be very tempermental"} },
+                { "mid", new string[] {"brightens up the office", "cheers everyone up", "is very nice"} },
                 { "high", new string[] {"would be a great cultural fit", "is a real pleasure to work with", "has an infectious energy"} }
             }
         }
