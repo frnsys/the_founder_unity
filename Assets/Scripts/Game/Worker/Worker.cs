@@ -12,7 +12,11 @@ using System.Collections.Generic;
 public class Worker : HasStats {
     public static List<Worker> LoadAll() {
         // Load workers as _copies_ so any changes don't get saved to the actual resources.
-        return Resources.LoadAll<Worker>("Workers").ToList().Select(w => Instantiate(w) as Worker).ToList();
+        return Resources.LoadAll<Worker>("Workers").ToList().Select(w => {
+                Worker worker = Instantiate(w) as Worker;
+                worker.name = w.name;
+                return worker;
+        }).ToList();
     }
 
     private Levels levels;
@@ -22,6 +26,7 @@ public class Worker : HasStats {
 
     public float salary;
     public string bio;
+    public string description;
     public float baseMinSalary;
     public float minSalary {
         get {
@@ -102,6 +107,95 @@ public class Worker : HasStats {
                 return null;
         }
     }
+
+    private static Dictionary<string, Dictionary<string, string[]>> bioMap = new Dictionary<string, Dictionary<string, string[]>> {
+        {
+            "Creativity", new Dictionary<string, string[]> {
+                { "low", new string[] {"is not very imaginative"} },
+                { "mid", new string[] {"is artistic", "has an eye for trends", "can be quite original"} },
+                { "high", new string[] {"is a genius", "is a visionary", "is extremely talented"} }
+            }
+        },
+        {
+            "Cleverness", new Dictionary<string, string[]> {
+                { "low", new string[] {"is quite dim", "isn't the sharpest tool in the shed", "isn't the brightest bulb of the bunch"} },
+                { "mid", new string[] {"is an adept problem solver", "is technically gifted", "solves problems well", "is inventive"} },
+                { "high", new string[] {"has a beautiful mind", "is absolutely brilliant", "is always on the cutting edge"} }
+            }
+        },
+        {
+            "Charisma", new Dictionary<string, string[]> {
+                { "low", new string[] {"is alienating", "is hard to be around", "has a weird smell", "is very awkward", "creeps me out"} },
+                { "mid", new string[] {"is fun to be around", "can be charming", "is easy to talk to", "is friendly"} },
+                { "high", new string[] {"has a magnetic personality", "is hypnotic", "is a natural-born leader"} }
+            }
+        },
+        {
+            "Productivity", new Dictionary<string, string[]> {
+                { "low", new string[] {"is kind of lazy", "needs a lot of motivation"} },
+                { "mid", new string[] {"is a diligent worker", "is dedicated", "works hard", "is efficient with time"} },
+                { "high", new string[] {"is really 'heads-down'", "multitasks very effectively", "gets a lot done in a short time"} }
+            }
+        },
+        {
+            "Happiness", new Dictionary<string, string[]> {
+                { "low", new string[] {"is a real bummer", "brings everyone down", "reminds me of Eeyore"} },
+                { "mid", new string[] {"brightens up the office", "cheers everyone up"} },
+                { "high", new string[] {"would be a great cultural fit", "is a real pleasure to work with", "has an infectious energy"} }
+            }
+        }
+    };
+
+    public static string BuildBio(Worker w) {
+        // Randomize order of stats.
+        string[] stats = new string[] {"Creativity", "Cleverness", "Charisma", "Productivity", "Happiness"};
+        stats = stats.OrderBy(x => Random.value).ToArray();
+
+        float prevVal = -1;
+        int maxConj = 3;
+        List<string> conjs = new List<string>() {};
+        List<string> bio = new List<string> { w.name };
+
+        foreach (string stat in stats) {
+            float val = w.StatByName(stat).baseValue;
+            string level = SkillLevel(val);
+
+            if (prevVal >= 0) {
+                string conj;
+                if (System.Math.Abs(val - prevVal) >= 4) {
+                    conj = "but";
+                } else {
+                    conj = "and";
+                }
+
+                if (conjs.Count >= maxConj || (conjs.Count > 0 && conjs[conjs.Count - 1] == conj)) {
+                    bio[bio.Count - 1] += ".";
+                    bio.Add(w.name);
+                    conjs.Clear();
+                } else {
+                    bio.Add(conj);
+                    conjs.Add(conj);
+                }
+            }
+
+            string[] descs = bioMap[stat][level];
+            int idx = Random.Range(0,(descs.Length - 1));
+            bio.Add(descs[idx]);
+            prevVal = val;
+        }
+        return string.Join(" ", bio.ToArray()) + ".";
+    }
+
+    private static string SkillLevel(float val) {
+        if (val <= 4)
+            return "low";
+        if (val <= 8)
+            return "mid";
+        else
+            return "high";
+    }
+
+
 }
 
 

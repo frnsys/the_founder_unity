@@ -12,8 +12,12 @@ internal class WorkerInspector : Editor {
     public override void OnInspectorGUI() {
         w = target as Worker;
 
+        EditorStyles.textField.wordWrap = true;
         w.name = EditorGUILayout.TextField("Name", w.name);
-        w.bio = EditorGUILayout.TextField("Bio", w.bio);
+        EditorGUILayout.LabelField("Bio (auto-generated, changes not saved)");
+        EditorGUILayout.TextArea(w.bio, GUILayout.Height(60));
+        EditorGUILayout.LabelField("Description");
+        w.description = EditorGUILayout.TextArea(w.description, GUILayout.Height(60));
         w.productivity.baseValue = EditorGUILayout.FloatField("Productivity", w.productivity.baseValue);
         w.happiness.baseValue = EditorGUILayout.FloatField("Happiness", w.happiness.baseValue);
         w.charisma.baseValue = EditorGUILayout.FloatField("Charisma", w.charisma.baseValue);
@@ -26,6 +30,7 @@ internal class WorkerInspector : Editor {
 
         if (GUI.changed) {
             EditorUtility.SetDirty(target);
+            w.bio = Worker.BuildBio(w);
 
             // Update asset filename.
             string path = AssetDatabase.GetAssetPath(target);
