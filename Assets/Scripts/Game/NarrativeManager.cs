@@ -8,6 +8,8 @@ using System.Linq;
 using System.Collections.Generic;
 
 public class NarrativeManager : Singleton<NarrativeManager> {
+    private GameData data;
+    private OnboardingState ob;
 
     // Disable the constructor.
     protected NarrativeManager() {}
@@ -22,21 +24,29 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         cofounders = new List<Founder>(Resources.LoadAll<Founder>("Founders/Cofounders"));
     }
 
+    public void Load(GameData d) {
+        data = d;
+        ob = d.onboardingState;
+    }
+
     // A message from your mentor.
-    public UIMentor MentorMessage(string message) {
+    public UIMentor MentorMessage(string message, bool interrupt = false) {
         UIEventListener.VoidDelegate callback = delegate(GameObject obj) {
             obj.GetComponent<UIMentor>().Hide();
         };
-        return MentorMessage(message, callback);
+        return MentorMessage(message, callback, interrupt);
     }
 
     // A message from your mentor with a callback after tap.
-    public UIMentor MentorMessage(string message, UIEventListener.VoidDelegate callback) {
+    public UIMentor MentorMessage(string message, UIEventListener.VoidDelegate callback, bool interrupt = false) {
         GameObject alerts = UIRoot.list[0].transform.Find("Alerts").gameObject;
 
         GameObject msg = NGUITools.AddChild(alerts, mentorMessagePrefab);
         UIMentor mentor = msg.GetComponent<UIMentor>();
         mentor.message = message;
+
+        if (interrupt)
+            mentor.Interrupt();
 
         UIEventListener.Get(mentor.box).onClick += delegate(GameObject obj) {
             callback(msg);
@@ -46,15 +56,15 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     // A list of messages to be shown in sequence (on tap).
-    public void MentorMessages(List<string> messages) {
+    public void MentorMessages(string[] messages, bool interrupt = false) {
         UIEventListener.VoidDelegate callback = delegate(GameObject obj) {};
-        MentorMessages(messages, callback);
+        MentorMessages(messages, callback, interrupt);
     }
 
-    public void MentorMessages(List<string> messages, UIEventListener.VoidDelegate callback) {
+    public void MentorMessages(string[] messages, UIEventListener.VoidDelegate callback, bool interrupt = false) {
         int i = 0;
         UIEventListener.VoidDelegate afterEach = delegate(GameObject obj) {
-            if (i < messages.Count - 1) {
+            if (i < messages.Length - 1) {
                 i++;
                 obj.GetComponent<UIMentor>().message = messages[i];
             } else {
@@ -62,7 +72,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 callback(obj);
             }
         };
-        MentorMessage(messages[0], afterEach);
+        MentorMessage(messages[0], afterEach, interrupt);
     }
 
     public AICompany SelectCofounder(Founder cofounder) {
@@ -77,5 +87,16 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         aic.name = "RIVAL CORP.";
         aic.founders = cofounders.Where(c => c != cofounder).ToList();
         return aic;
+    }
+
+    // Onboarding
+    public void OpenedProducts() {
+        if (!ob.PRODUCTS_OPENED) {
+            ob.PRODUCTS_OPENED = true;
+            MentorMessages(new string[] {
+                "This window is where you manage products and their development.",
+                "Jump over to the 'New' view to start creating a new product."
+            }, true);
+        }
     }
 }

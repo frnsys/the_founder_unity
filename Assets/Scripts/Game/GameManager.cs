@@ -67,9 +67,10 @@ public class GameManager : Singleton<GameManager> {
         eventManager     = gameObject.AddComponent<EventManager>();
 
         data = d;
-        researchManager.Load(d);
         eventManager.Load(d);
         workerManager.Load(d);
+        researchManager.Load(d);
+        narrativeManager.Load(d);
     }
 
     void Awake() {
@@ -106,7 +107,7 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(OpinionCycle());
 
         // TESTing hello from your mentor!
-        //narrativeManager.MentorMessage("A message from your mentor", "Welcome to The Founder!");
+        narrativeManager.MentorMessage("Welcome to The Founder!");
     }
 
     void OnEvent(GameEvent e) {

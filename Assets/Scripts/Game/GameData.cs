@@ -41,6 +41,9 @@ public class GameData : ScriptableObject {
     public TheBoard board;
     public UnlockSet unlocked;
 
+    // Onboarding progress.
+    public OnboardingState onboardingState;
+
     // The state of various universal effects.
     public WorkerInsight workerInsight;
 

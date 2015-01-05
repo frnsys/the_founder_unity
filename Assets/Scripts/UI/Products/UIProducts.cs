@@ -18,6 +18,10 @@ public class UIProducts : UIWindow {
         playerCompany = GameManager.Instance.playerCompany;
     }
 
+    protected override void Setup(GameObject obj) {
+        GameManager.Instance.narrativeManager.OpenedProducts();
+    }
+
     void Update() {
         Infrastructure infra = playerCompany.infrastructure;
         Infrastructure used = playerCompany.usedInfrastructure;

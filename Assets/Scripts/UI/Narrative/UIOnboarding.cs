@@ -14,7 +14,7 @@ public class UIOnboarding : MonoBehaviour {
     private Founder selectedCofounder;
 
     void OnEnable() {
-        List<string> messages = new List<string> {
+        string[] messages = new string[] {
             "Picking the cofounder is one of the most important decisions for a business.",
             "Here are some of the people in your network who could be good."
         };
