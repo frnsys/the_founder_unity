@@ -32,6 +32,11 @@ public class UIWorker : MonoBehaviour {
         }
     }
 
+    public void SetBasicWorker(Worker w) {
+        SetFuzzyWorker(w);
+        quantObj.SetActive(false);
+    }
+
     // Imprecise worker info.
     public void SetFuzzyWorker(Worker w) {
         worker = w;
@@ -40,6 +45,13 @@ public class UIWorker : MonoBehaviour {
         cleverness.text = "Cleverness: " + FuzzyStat(worker_.cleverness.value).ToString();
         productivity.text = "Productivity: " + FuzzyStat(worker_.productivity.value).ToString();
         happiness.text = "Happiness: " + FuzzyStat(worker_.happiness.value).ToString();
+        credit.text += ". Disclaimer: This is a beta, expect some margin of error.";
+        quantObj.SetActive(true);
+    }
+
+    public void SetQuantWorker(Worker w) {
+        worker = w;
+        quantObj.SetActive(true);
     }
 
     private int FuzzyStat(float value) {
@@ -55,6 +67,9 @@ public class UIWorker : MonoBehaviour {
     public UILabel cleverness;
     public UILabel productivity;
     public UILabel happiness;
+    public UILabel credit;
+
+    public GameObject quantObj;
 }
 
 

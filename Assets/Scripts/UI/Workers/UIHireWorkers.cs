@@ -97,10 +97,22 @@ public class UIHireWorkers : UIFullScreenPager {
 
     private void LoadWorkers() {
         ClearGrid();
+        WorkerInsight wi = GameManager.Instance.workerInsight;
         foreach (Worker w in GameManager.Instance.workerManager.AvailableWorkers) {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
-            workerItem.GetComponent<UIWorker>().SetFuzzyWorker(w);
+
+            switch (wi) {
+                case WorkerInsight.Basic:
+                    workerItem.GetComponent<UIWorker>().SetBasicWorker(w);
+                    break;
+                case WorkerInsight.Fuzzy:
+                    workerItem.GetComponent<UIWorker>().SetFuzzyWorker(w);
+                    break;
+                case WorkerInsight.Quant:
+                    workerItem.GetComponent<UIWorker>().SetQuantWorker(w);
+                    break;
+            }
         }
         Adjust();
     }

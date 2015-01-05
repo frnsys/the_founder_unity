@@ -39,6 +39,10 @@ public class GameManager : Singleton<GameManager> {
         get { return data.maxProductTypes; }
     }
 
+    public WorkerInsight workerInsight {
+        get { return data.workerInsight; }
+    }
+
     // Other managers.
     [HideInInspector]
     public ResearchManager researchManager;

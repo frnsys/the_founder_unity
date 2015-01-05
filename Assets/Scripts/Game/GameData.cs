@@ -22,6 +22,14 @@ public enum Month {
     December
 }
 
+public enum WorkerInsight {
+    Basic,
+    Fuzzy,
+    Quant,
+    Detailed,
+    Precise
+}
+
 [System.Serializable]
 public class GameData : ScriptableObject {
 
@@ -32,6 +40,9 @@ public class GameData : ScriptableObject {
     public Company company;
     public TheBoard board;
     public UnlockSet unlocked;
+
+    // The state of various universal effects.
+    public WorkerInsight workerInsight;
 
     // Maximum product types that can be combined.
     // Initially this is just 1.
@@ -88,6 +99,8 @@ public class GameData : ScriptableObject {
         data.board    = new TheBoard();
         data.research = 0;
         data.unemployed = Worker.LoadAll();
+
+        data.workerInsight = WorkerInsight.Basic;
 
         data.month = Month.January;
         data.year  = 1;
