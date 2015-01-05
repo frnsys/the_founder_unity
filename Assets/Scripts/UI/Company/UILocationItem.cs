@@ -16,7 +16,8 @@ public class UILocationItem : MonoBehaviour {
         label.text = location_.name;
         description.text = location_.description;
 
-        if (playerCompany.locations.Contains(location_)) {
+        if (playerCompany.HasLocation(location_)) {
+            location_ = Location.Find(location_, playerCompany.locations);
             cost.text = "owned";
             expandButton.SetActive(false);
             grid.gameObject.SetActive(true);

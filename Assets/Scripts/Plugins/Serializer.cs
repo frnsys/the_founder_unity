@@ -305,6 +305,6 @@ public class TemplateResource<T> : ScriptableObject where T : UnityEngine.Object
 
     // Find a matching instance for the given instance.
     public static T Find(T res, IEnumerable<T> reses) {
-        return reses.Where(r => r.name == res.name).First();
+        return reses.Where(r => r.name == res.name).SingleOrDefault();
     }
 }

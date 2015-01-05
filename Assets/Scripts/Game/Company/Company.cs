@@ -174,6 +174,10 @@ public class Company : HasStats {
         get { return _locations.AsReadOnly(); }
     }
 
+    public bool HasLocation(Location loc) {
+        return Location.Find(loc, locations) != null;
+    }
+
     public bool ExpandToLocation(Location l) {
         if (Pay(l.cost)) {
             l = l.Clone();
