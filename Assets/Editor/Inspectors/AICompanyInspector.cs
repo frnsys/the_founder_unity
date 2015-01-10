@@ -83,6 +83,7 @@ internal class AICompanyInspector : Editor {
 
         if (GUI.changed) {
             EditorUtility.SetDirty(target);
+            serializedObject.ApplyModifiedProperties();
 
             // Update asset filename.
             string path = AssetDatabase.GetAssetPath(target);

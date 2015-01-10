@@ -9,12 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
-  m_Name: yeyeye
+  m_Name: Steven Weynor
   m_EditorClassIdentifier: 
-  tier: 0
-  texture: {fileID: 2800000, guid: fcbafde840ab042658503d5071775645, type: 3}
+  texture: {fileID: 0}
   salary: 0
   bio: 
+  description: 
+  title: 
+  baseMinSalary: 0
+  offMarketTime: 0
+  recentPlayerOffers: 0
   happiness:
     baseValue: 0
     _buffs: []
@@ -37,19 +41,19 @@ MonoBehaviour:
     unlocks:
       prereqs:
         productTypes: []
-        industries: []
-        markets: []
+        verticals: []
         workers: []
         events: []
         items: []
         stores: 
-        consultancies: []
         researchPoints: 0
       productTypes: []
-      industries: []
-      markets: []
       workers: []
       events: []
       items: []
       stores: 
-      consultancies: []
+      locations: []
+      verticals: []
+      characters: []
+      promos: []
+    opinionEvents: []
