@@ -29,7 +29,7 @@ namespace UnityTest
             Worker opinionCzar  = CreateWorker("OPINIONER",  2000);
 
             // Initialize new game stuff.
-            data.company  = new Company("TESTINGCORP");
+            data.company  = new Company("TESTINGCORP").Init();
                 data.company.founders.Add(CreateFounder("STEVE", 100));
                 data.company.baseSizeLimit       = 17;
                 data.company.lastMonthRevenue    = 28517;
@@ -102,7 +102,7 @@ namespace UnityTest
             Assert.AreEqual(pt.GetInstanceID(), pt__.GetInstanceID());
 
             // Create an AI company who also has this product type.
-            AICompany oc = ScriptableObject.CreateInstance<AICompany>();
+            AICompany oc = ScriptableObject.CreateInstance<AICompany>().Init();
             oc.unlocked.productTypes.Add(pt);
             data.otherCompanies.Add(oc);
 

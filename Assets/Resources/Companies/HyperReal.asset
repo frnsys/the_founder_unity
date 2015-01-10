@@ -27,6 +27,7 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   forgettingRate: 1
+  opinionEvents: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -66,15 +67,18 @@ MonoBehaviour:
         items: []
         stores: 
         researchPoints: 0
-      productTypes: []
+      productTypes:
+      - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
       workers: []
       events: []
       items: []
       stores: 
       locations: []
       verticals:
-      - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+      - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
       - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
+      - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+      - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
       characters: []
       promos: []
     opinionEvents: []
@@ -83,7 +87,7 @@ MonoBehaviour:
   aggression: 0
   cooperativeness: 0
   luck: 0
-  description: Cutting edge entertainment and experience design.
+  description: Cutting edge information and media technologies.
   unlocked:
     prereqs:
       productTypes: []
@@ -99,6 +103,18 @@ MonoBehaviour:
     items: []
     stores: 
     locations: []
-    verticals: []
+    verticals:
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
+    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
+    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
+    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
     characters: []
     promos: []

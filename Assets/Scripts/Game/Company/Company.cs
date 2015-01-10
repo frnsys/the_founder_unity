@@ -35,6 +35,8 @@ public class Company : HasStats {
     public Stat opinion;
     public Stat publicity;
     public float forgettingRate;
+
+    [SerializeField]
     private List<OpinionEvent> opinionEvents;
     public ReadOnlyCollection<OpinionEvent> OpinionEvents {
         get { return opinionEvents.AsReadOnly(); }
@@ -53,7 +55,7 @@ public class Company : HasStats {
 
     public List<Technology> technologies;
 
-    public virtual void Awake() {
+    public Company Init() {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
@@ -85,6 +87,8 @@ public class Company : HasStats {
 
         // Keep track for 10 years.
         AnnualPerfHistory = new PerformanceHistory(10);
+
+        return this;
     }
 
 

@@ -94,14 +94,14 @@ public class GameData : ScriptableObject {
         if (data == null) {
             data = ScriptableObject.CreateInstance<GameData>();
             data.unlocked = new UnlockSet();
-            data.otherCompanies = new List<AICompany>();
         }
 
         // Initialize new game stuff.
-        data.company  = new Company(companyName);
+        data.company  = new Company(companyName).Init();
         data.board    = new TheBoard();
         data.research = 0;
         data.unemployed = Worker.LoadAll();
+        data.otherCompanies = AICompany.LoadAll();
 
         data.workerInsight = WorkerInsight.Basic;
 

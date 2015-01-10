@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Praeta Industries
   m_EditorClassIdentifier: 
   cash:
-    baseValue: 5e+06
+    baseValue: 100000
     _buffs: []
   researchCzar: {fileID: 0}
   research:
@@ -27,6 +27,7 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   forgettingRate: 1
+  opinionEvents: []
   markets: 
   technologies: []
   baseSizeLimit: 5

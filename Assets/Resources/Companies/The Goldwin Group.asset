@@ -27,6 +27,7 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   forgettingRate: 1
+  opinionEvents: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -73,7 +74,6 @@ MonoBehaviour:
       stores: 
       locations: []
       verticals:
-      - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
       - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
       characters: []
       promos: []

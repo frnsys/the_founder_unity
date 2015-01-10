@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
+  m_Name: Megan Moore
+  m_EditorClassIdentifier: 
+  texture: {fileID: 0}
+  salary: 0
+  bio: 
+  description: 
+  title: 
+  baseMinSalary: 0
+  offMarketTime: 0
+  recentPlayerOffers: 0
+  happiness:
+    baseValue: 0
+    _buffs: []
+  productivity:
+    baseValue: 0
+    _buffs: []
+  charisma:
+    baseValue: 0
+    _buffs: []
+  creativity:
+    baseValue: 0
+    _buffs: []
+  cleverness:
+    baseValue: 0
+    _buffs: []
+  bonuses:
+    products: []
+    workers: []
+    company: []
+    unlocks:
+      prereqs:
+        productTypes: []
+        verticals: []
+        workers: []
+        events: []
+        items: []
+        stores: 
+        researchPoints: 0
+      productTypes: []
+      workers: []
+      events: []
+      items: []
+      stores: 
+      locations: []
+      verticals: []
+      characters: []
+      promos: []
+    opinionEvents: []

@@ -27,6 +27,7 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   forgettingRate: 1
+  opinionEvents: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -99,6 +100,16 @@ MonoBehaviour:
     items: []
     stores: 
     locations: []
-    verticals: []
+    verticals:
+    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
+    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
+    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
+    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
+    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
+    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
+    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
+    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
+    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
+    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
     characters: []
     promos: []

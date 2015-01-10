@@ -21,7 +21,6 @@ public class FixedSizeQueue<T> : Queue<T>, ISerializationCallbackReceiver {
     }
 
     public void OnAfterDeserialize() {
-        this.Clear();
         for(int i = 0; i < values.Count; i++)
             this.Enqueue(values[i]);
     }

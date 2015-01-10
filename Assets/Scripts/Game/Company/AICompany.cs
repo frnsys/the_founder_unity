@@ -32,6 +32,15 @@ public class AICompany : Company {
         name = name_;
     }
 
+    public static List<AICompany> LoadAll() {
+        // Load companies as _copies_ so any changes don't get saved to the actual resources.
+        return Resources.LoadAll<AICompany>("Companies").ToList().Select(c => {
+                AICompany company = Instantiate(c) as AICompany;
+                company.name = c.name;
+                return company;
+        }).ToList();
+    }
+
     // Bonuses the company gets for particular verticals.
     public EffectSet bonuses;
     private List<ProductType> specialtyProductTypes;
@@ -40,8 +49,8 @@ public class AICompany : Company {
     public List<Worker> startWorkers;
     public List<Product> startProducts;
 
-    public override void Awake() {
-        base.Awake();
+    public AICompany Init() {
+        base.Init();
 
         // Initialize stuff.
         unlocked = new UnlockSet();
@@ -56,6 +65,8 @@ public class AICompany : Company {
         PerfHistory = new PerformanceHistory(24);
         ProductPerfHistory = new PerformanceHistory(24);
         WorkerPerfHistory = new PerformanceHistory(24);
+
+        return this;
     }
 
     // Influences how hostile they are against others.

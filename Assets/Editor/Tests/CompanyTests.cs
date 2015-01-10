@@ -31,7 +31,7 @@ namespace UnityTest
             gd = GameData.New("DEFAULTCORP");
             gm.Load(gd);
 
-            c = new Company("Foo Inc");
+            c = new Company("Foo Inc").Init();
 
             // Create a starting location with some infrastructure capacity.
             startLoc = ScriptableObject.CreateInstance<Location>();

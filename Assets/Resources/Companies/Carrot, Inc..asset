@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Carrot, Inc.
   m_EditorClassIdentifier: 
   cash:
-    baseValue: 5e+06
+    baseValue: 100000
     _buffs: []
   researchCzar: {fileID: 0}
   research:
@@ -27,6 +27,7 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   forgettingRate: 1
+  opinionEvents: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -73,9 +74,9 @@ MonoBehaviour:
       stores: 
       locations: []
       verticals:
+      - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
       - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
       - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-      - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
       characters: []
       promos: []
     opinionEvents: []
@@ -100,6 +101,9 @@ MonoBehaviour:
     items: []
     stores: 
     locations: []
-    verticals: []
+    verticals:
+    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
     characters: []
     promos: []

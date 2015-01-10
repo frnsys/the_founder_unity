@@ -13,8 +13,8 @@ namespace UnityTest
 	{
 		[Test]
 		public void MarketShareCalculation() {
-            Company c  = ScriptableObject.CreateInstance<Company>();
-            Company c_ = ScriptableObject.CreateInstance<Company>();
+            Company c  = ScriptableObject.CreateInstance<Company>().Init();
+            Company c_ = ScriptableObject.CreateInstance<Company>().Init();
 
             c.publicity.baseValue  = 10;
             c_.publicity.baseValue = 20;

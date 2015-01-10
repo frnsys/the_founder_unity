@@ -61,6 +61,16 @@ public class GameManager : Singleton<GameManager> {
 
     // Load existing game data.
     public void Load(GameData d) {
+        // Clean up existing managers, if any.
+        if (researchManager != null)
+            Destroy(researchManager);
+        if (narrativeManager != null)
+            Destroy(narrativeManager);
+        if (workerManager != null)
+            Destroy(workerManager);
+        if (eventManager != null)
+            Destroy(eventManager);
+
         researchManager  = gameObject.AddComponent<ResearchManager>();
         narrativeManager = gameObject.AddComponent<NarrativeManager>();
         workerManager    = gameObject.AddComponent<WorkerManager>();
@@ -105,9 +115,6 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ProductRevenueCycle());
         StartCoroutine(ResearchCycle());
         StartCoroutine(OpinionCycle());
-
-        // TESTing hello from your mentor!
-        narrativeManager.MentorMessage("Welcome to The Founder!");
     }
 
     void OnEvent(GameEvent e) {

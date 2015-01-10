@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: B&C
   m_EditorClassIdentifier: 
   cash:
-    baseValue: 100000
+    baseValue: 200000
     _buffs: []
   researchCzar: {fileID: 0}
   research:
@@ -27,6 +27,7 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   forgettingRate: 1
+  opinionEvents: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -99,6 +100,10 @@ MonoBehaviour:
     items: []
     stores: 
     locations: []
-    verticals: []
+    verticals:
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
     characters: []
     promos: []

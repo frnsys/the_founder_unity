@@ -12,6 +12,10 @@ public class OpinionEvent {
     public StatBuff opinion;
     public StatBuff publicity;
 
+    public OpinionEvent() {
+        opinion   = new StatBuff("Opinion", 0, 0);
+        publicity = new StatBuff("Publicity", 0, 0);
+    }
     public OpinionEvent(float o, float p) {
         opinion   = new StatBuff("Opinion", o, 0);
         publicity = new StatBuff("Publicity", p, 0);

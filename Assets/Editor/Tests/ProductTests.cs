@@ -32,7 +32,7 @@ namespace UnityTest
             gd = GameData.New("DEFAULTCORP");
             gm.Load(gd);
 
-            c = new Company("Foo Inc");
+            c = new Company("Foo Inc").Init();
             pts = new List<ProductType>() { pt };
 
             p = ScriptableObject.CreateInstance<Product>();
