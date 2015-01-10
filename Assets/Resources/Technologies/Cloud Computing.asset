@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
   m_Name: Cloud Computing
   m_EditorClassIdentifier: 
-  description: Right now everyone is managing their own information, but what if we
-    convinced everyone to let us hold on to it for them? Convenient, right?
+  description: Right now everyone is managing their own information, but it would
+    be so much more convenient if we held it on to it for them.
   requiredResearch: 1000
   effects:
     products: []
@@ -34,5 +34,8 @@ MonoBehaviour:
       stores: 
       locations: []
       verticals: []
+      characters: []
+      promos: []
+    opinionEvents: []
   requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredTechnologies: []
