@@ -16,7 +16,6 @@ public class UnlockSet {
     public List<Store> stores = new List<Store>();
     public List<Location> locations = new List<Location>();
     public List<Vertical> verticals = new List<Vertical>();
-    public List<Character> characters = new List<Character>();
     public List<Promo> promos = new List<Promo>();
 
     // This "unlocks" an UnlockSet by
@@ -30,7 +29,6 @@ public class UnlockSet {
         stores.AddRange(us.stores);
         locations.AddRange(us.locations);
         verticals.AddRange(us.verticals);
-        characters.AddRange(us.characters);
         promos.AddRange(us.promos);
     }
 

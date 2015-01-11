@@ -16,7 +16,6 @@ class UnlockSetDrawer : SuperPropertyDrawer {
         "items",
         "stores",
         "locations",
-        "characters",
         "promos"
     };
 
