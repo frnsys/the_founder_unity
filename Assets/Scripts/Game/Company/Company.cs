@@ -295,14 +295,16 @@ public class Company : HasStats {
             bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
 
             if (completed) {
-                OpinionEvent oe = developingPromo.opinionEvent;
-                opinion.ApplyBuff(oe.opinion);
-                publicity.ApplyBuff(oe.publicity);
-                opinionEvents.Add(oe);
-
+                ApplyOpinionEvent(developingPromo.opinionEvent);
                 developingPromo = null;
             }
         }
+    }
+
+    public void ApplyOpinionEvent(OpinionEvent oe) {
+        opinion.ApplyBuff(oe.opinion);
+        publicity.ApplyBuff(oe.publicity);
+        opinionEvents.Add(oe);
     }
 
     public void StartPromo(Promo promo) {

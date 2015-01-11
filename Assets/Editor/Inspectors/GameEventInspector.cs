@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -29,8 +28,11 @@ internal class GameEventInspector : Editor {
         ge.repeatable = EditorGUILayout.Toggle("Repeatable", ge.repeatable);
         EditorGUILayout.Space();
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"));
+        if (ge.effects.effects == null)
+            ge.effects.effects = new List<IEffect>();
+        EffectSetRenderer.RenderEffectSet(ge, ge.effects);
         EditorGUILayout.Space();
+
 
         // Actions
         // Have to handle this one specially cause nested lists are tricky...if not impossible.
@@ -74,8 +76,8 @@ internal class GameEventInspector : Editor {
         {
             rect.height = 16;
             rect.y += 2;
-            EditorGUI.PropertyField(rect, 
-                list.serializedProperty.GetArrayElementAtIndex(index), 
+            EditorGUI.PropertyField(rect,
+                list.serializedProperty.GetArrayElementAtIndex(index),
                 GUIContent.none);
         };
         return list;

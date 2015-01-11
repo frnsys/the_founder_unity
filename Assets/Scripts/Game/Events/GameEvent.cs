@@ -59,7 +59,6 @@ public class GameEvent : ScriptableObject {
     public Stat probability;
 
     public EffectSet effects = new EffectSet();
-
     public List<EventAction> actions = new List<EventAction>();
 
     public GameEvent(string name_, float probability_, bool repeatable_) {
