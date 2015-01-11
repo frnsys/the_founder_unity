@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: GenoMe
   m_EditorClassIdentifier: 
   cash:
-    baseValue: 100000
+    baseValue: 2e+07
     _buffs: []
   researchCzar: {fileID: 0}
   research:
@@ -67,7 +67,9 @@ MonoBehaviour:
         items: []
         stores: 
         researchPoints: 0
-      productTypes: []
+      productTypes:
+      - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+      - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
       workers: []
       events: []
       items: []
@@ -80,6 +82,9 @@ MonoBehaviour:
     opinionEvents: []
   startWorkers: []
   startProducts: []
+  startLocations:
+  - {fileID: 11400000, guid: f86eeac89cb544f81a5f9c6a0392d39f, type: 2}
+  - {fileID: 11400000, guid: ae259c9c620bc4513afb0726a125afc1, type: 2}
   aggression: 0
   cooperativeness: 0
   luck: 0
@@ -93,13 +98,20 @@ MonoBehaviour:
       items: []
       stores: 
       researchPoints: 0
-    productTypes: []
+    productTypes:
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers: []
     events: []
     items: []
     stores: 
     locations: []
     verticals:
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+    - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
     - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
     characters: []
     promos: []

@@ -169,6 +169,8 @@ public class GameManager : Singleton<GameManager> {
         Time.timeScale = 1;
     }
 
+    static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> YearEnded;
+    static public event System.Action<Company> GameLost;
     IEnumerator Yearly() {
         int yearTime = weekTime*4*12;
         yield return new WaitForSeconds(yearTime);
@@ -181,24 +183,12 @@ public class GameManager : Singleton<GameManager> {
             PerformanceDict deltas = annualData[1];
             data.board.EvaluatePerformance(deltas);
 
-            UIManager.Instance.AnnualReport(results, deltas, data.board);
+            if (YearEnded != null)
+                YearEnded(data.year, results, deltas, data.board);
 
             // Lose condition:
             if (data.board.happiness < -20)
-                // TO DO this should be a proper "lose game"
-                UIManager.Instance.Alert("YOU LOSE");
-
-            // Anniversary/birthday alert!
-            int age = 25 + data.year;
-            int lastDigit = age % 10;
-            string ending = "th";
-            if (lastDigit == 1)
-                ending = "st";
-            else if (lastDigit == 2)
-                ending = "nd";
-            else if (lastDigit == 3)
-                ending = "rd";
-            UIManager.Instance.Alert("Happy " + data.year + ending + " birthday!");
+                GameLost(playerCompany);
 
             yield return new WaitForSeconds(yearTime);
         }

@@ -5,6 +5,8 @@
  */
 
 using UnityEngine;
+using System;
+using System.Linq;
 
 [System.Serializable]
 public class PerformanceDict : SerializableDictionary<string, float> {
@@ -30,5 +32,14 @@ public class PerformanceHistory : FixedSizeQueue<PerformanceDict> {
             str += d.ToString() + " | ";
         }
         return str.Substring(0, str.Length - 3);
+    }
+
+    // Since the actual queue is not exposed,
+    // expose the methods we need.
+    public float Sum(Func<PerformanceDict, float> selector) {
+        return q.Sum(selector);
+    }
+    public float Average(Func<PerformanceDict, float> selector) {
+        return q.Average(selector);
     }
 }

@@ -19,11 +19,11 @@ public class Simulator : MonoBehaviour {
     private List<CompanyInfo> companyInfos;
 
     private struct CompanyInfo {
-        public UILabel label;
+        public Transform t;
         public AICompany company;
 
-        public CompanyInfo(AICompany company_, UILabel label_) {
-            label = label_;
+        public CompanyInfo(AICompany company_, Transform t_) {
+            t = t_;
             company = company_;
         }
     }
@@ -40,7 +40,7 @@ public class Simulator : MonoBehaviour {
         companyInfos = new List<CompanyInfo>();
         foreach (AICompany ac in gd.otherCompanies) {
             GameObject go = NGUITools.AddChild(companiesGrid.gameObject, companyPrefab);
-            CompanyInfo ci = new CompanyInfo(ac, go.GetComponent<UILabel>());
+            CompanyInfo ci = new CompanyInfo(ac, go.transform);
             companyInfos.Add(ci);
         }
         companiesGrid.Reposition();
@@ -48,7 +48,17 @@ public class Simulator : MonoBehaviour {
 
     void Update() {
         foreach (CompanyInfo ci in companyInfos) {
-            ci.label.text = ci.company.name + ": $" + ci.company.cash.value.ToString() + " | #P" + ci.company.products.Count.ToString();
+            SetText(ci.t, "Name", ci.company.name);
+            SetText(ci.t, "Cash", "$" + ci.company.cash.value.ToString());
+            SetText(ci.t, "Active Products", "In-Market Products: " + ci.company.activeProducts.Count.ToString());
+            SetText(ci.t, "Infrastructure Capacity", "Inf Cap: " + ci.company.infrastructureCapacity.ToString());
+            SetText(ci.t, "Available Infrastructure", "Av Inf: " + ci.company.availableInfrastructure.ToString());
+            SetText(ci.t, "Lifetime Revenue", "Lifetime Rev: $" + ci.company.lifetimeRevenue.ToString());
+            SetText(ci.t, "Locations", "Locations: " + ci.company.locations.Count.ToString());
         }
+    }
+
+    void SetText(Transform t, string name, string text) {
+        t.Find(name).GetComponent<UILabel>().text = text;
     }
 }

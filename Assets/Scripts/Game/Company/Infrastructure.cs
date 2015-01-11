@@ -44,6 +44,16 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         }
     }
 
+    public bool isEmpty {
+        get {
+            foreach(KeyValuePair<Type, int> item in this) {
+                if (item.Value > 0)
+                    return false;
+            }
+            return true;
+        }
+    }
+
     public override string ToString() {
         string repr = "";
         foreach(KeyValuePair<Type, int> item in this) {
@@ -61,6 +71,24 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         return true;
     }
 
+    // Gets the intersection of two infrastructures.
+    public Infrastructure Intersection(Infrastructure right) {
+        Infrastructure result = new Infrastructure();
+        foreach(KeyValuePair<Type, int> item in this) {
+            result[item.Key] = Math.Min(item.Value, right[item.Key]);
+        }
+        return result;
+    }
+
+    // Returns true if _any_ values in this is greater than the corresponding value in `right`.
+    public bool AnyGreater(Infrastructure right) {
+        foreach(KeyValuePair<Type, int> item in this) {
+            if (item.Value > right[item.Key])
+                return true;
+        }
+        return false;
+    }
+
     public static bool operator <=(Infrastructure left, Infrastructure right) {
         foreach(KeyValuePair<Type, int> item in left) {
             if (item.Value > right[item.Key])
@@ -72,6 +100,22 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
     public static bool operator >=(Infrastructure left, Infrastructure right) {
         foreach(KeyValuePair<Type, int> item in left) {
             if (item.Value < right[item.Key])
+                return false;
+        }
+        return true;
+    }
+
+    public static bool operator >(Infrastructure left, Infrastructure right) {
+        foreach(KeyValuePair<Type, int> item in left) {
+            if (item.Value <= right[item.Key])
+                return false;
+        }
+        return true;
+    }
+
+    public static bool operator <(Infrastructure left, Infrastructure right) {
+        foreach(KeyValuePair<Type, int> item in left) {
+            if (item.Value >= right[item.Key])
                 return false;
         }
         return true;

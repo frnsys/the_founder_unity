@@ -48,6 +48,10 @@ public class Product : HasStats {
     // A disabled product generates no revenue and does not continue developing.
     public bool disabled = false;
 
+    // If the product was ever released (even if it has been shutdown),
+    // this is true.
+    public bool released = false;
+
     // Infrastructure, in points, used by the product.
     public int points {
         get { return productTypes.Sum(p => p.points); }

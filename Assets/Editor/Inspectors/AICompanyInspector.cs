@@ -81,6 +81,21 @@ internal class AICompanyInspector : Editor {
                 c.startProducts.Add(newProduct);
         }
 
+        // Locations
+        EditorGUILayout.LabelField("Starting Locations");
+        for (int i=0; i < c.startLocations.Count; i++) {
+            EditorGUILayout.BeginHorizontal();
+            c.startLocations[i] = (Location)EditorGUILayout.ObjectField(c.startLocations[i], typeof(Location));
+            if (GUILayout.Button("Delete")) {
+                c.startLocations.Remove(c.startLocations[i]);
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        Location newLocation = (Location)EditorGUILayout.ObjectField(null, typeof(Location));
+        if (newLocation != null)
+            c.startLocations.Add(newLocation);
+
         if (GUI.changed) {
             EditorUtility.SetDirty(target);
             serializedObject.ApplyModifiedProperties();

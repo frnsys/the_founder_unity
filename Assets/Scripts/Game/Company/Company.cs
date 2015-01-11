@@ -83,7 +83,6 @@ public class Company : HasStats {
         PerfHistory = new PerformanceHistory(12);
         ProductPerfHistory = new PerformanceHistory(12);
         WorkerPerfHistory = new PerformanceHistory(12);
-        ProductsReleased = new List<Product>();
 
         // Keep track for 10 years.
         AnnualPerfHistory = new PerformanceHistory(10);
@@ -319,6 +318,7 @@ public class Company : HasStats {
         }
         cash.baseValue += newRevenue;
         lastMonthRevenue += newRevenue;
+        lifetimeRevenue += newRevenue;
     }
 
     public void DevelopProduct(Product product) {
@@ -331,7 +331,7 @@ public class Company : HasStats {
 
         bool completed = product.Develop(progress);
         if (completed) {
-            ProductsReleased.Add(product);
+            product.released = true;
 
             // The product's effects are applied by the GameManager.
         }
@@ -405,6 +405,7 @@ public class Company : HasStats {
     // Keep track of each month's costs.
     public float lastMonthCosts;
     public float lastMonthRevenue;
+    public float lifetimeRevenue;
     public void PayMonthly() {
         float toPay = 0;
         foreach (Worker worker in workers) {
@@ -610,7 +611,11 @@ public class Company : HasStats {
     protected PerformanceHistory WorkerPerfHistory;
     [SerializeField]
     protected PerformanceHistory AnnualPerfHistory;
-    protected List<Product> ProductsReleased;
+    protected List<Product> ProductsReleased {
+        get {
+            return products.Where(p => p.released).ToList();
+        }
+    }
 
     // These data are sampled every month.
     private PerformanceDict SamplePerformance() {

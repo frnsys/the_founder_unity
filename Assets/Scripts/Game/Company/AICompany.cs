@@ -6,16 +6,18 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-// TO DO this should be rehauled to calculate by necessary infrastructure, not points.
 // For convenience...
 public class ProductCombo {
     public List<ProductType> pts;
 
-    // The number of product points this product requires.
-    // TO DO this will be replaced by infrastructure requirements instead
-    public int points {
-        // temp
-        get { return 0; }
+    // The infrastructure this combo requires.
+    public Infrastructure requiredInfrastructure {
+        get {
+            IEnumerable<Infrastructure> infras = pts.Select(i => i.requiredInfrastructure);
+            if (infras.Count() > 0)
+                return infras.Aggregate((x,y) => x + y);
+            return new Infrastructure();
+        }
     }
 
     public ProductCombo(List<ProductType> pts_) {
@@ -37,6 +39,7 @@ public class AICompany : Company {
         return Resources.LoadAll<AICompany>("Companies").ToList().Select(c => {
                 AICompany company = Instantiate(c) as AICompany;
                 company.name = c.name;
+                company.Setup();
                 return company;
         }).ToList();
     }
@@ -48,18 +51,19 @@ public class AICompany : Company {
 
     public List<Worker> startWorkers;
     public List<Product> startProducts;
+    public List<Location> startLocations;
 
+    // Call `Init()` if creating a new AICompany from scratch.
     public AICompany Init() {
         base.Init();
 
         // Initialize stuff.
         unlocked = new UnlockSet();
         bonuses = new EffectSet();
-        specialtyProductTypes = new List<ProductType>();
-        specialtyVerticals = new List<Vertical>();
 
         startWorkers = new List<Worker>();
         startProducts = new List<Product>();
+        startLocations = new List<Location>();
 
         // Keep track of data for 2 years.
         PerfHistory = new PerformanceHistory(24);
@@ -67,6 +71,26 @@ public class AICompany : Company {
         WorkerPerfHistory = new PerformanceHistory(24);
 
         return this;
+    }
+
+    // Call `Setup()` if instantiating an AICompany from an asset.
+    public void Setup() {
+        foreach (Worker w in startWorkers) {
+            // Give the company enough to hire them.
+            // Make sure to define the salary on the worker asset!
+            cash.baseValue += w.salary;
+            HireWorker(w);
+        }
+
+        foreach (Product p in startProducts) {
+            // TO DO setup existing products
+        }
+
+        foreach (Location l in startLocations) {
+            // Give the company enough to open them.
+            cash.baseValue += l.cost;
+            ExpandToLocation(l);
+        }
     }
 
     // Influences how hostile they are against others.
@@ -84,7 +108,6 @@ public class AICompany : Company {
     // >1 = a bonus to luck
     public float luck;
 
-
     public string description;
 
     // The stuff the company has access to, including
@@ -92,6 +115,9 @@ public class AICompany : Company {
     public UnlockSet unlocked;
 
     void OnEnable() {
+        specialtyProductTypes = new List<ProductType>();
+        specialtyVerticals = new List<Vertical>();
+
         // Load up all the specialty product aspects.
         foreach (ProductEffect pe in bonuses.products) {
             foreach (ProductType i in pe.productTypes) {
@@ -110,22 +136,22 @@ public class AICompany : Company {
 
     // Each turn the AI calculates the utility of all possible actions and does the one with the highest utility, provided it is above some threshold (?).
     public void Decide() {
-        Debug.Log("AI Company " + name + " has " + cash.value.ToString() + " cash.");
-        Debug.Log("AI Company " + name + " is deciding...");
+        //Debug.Log("AI Company " + name + " has " + cash.value.ToString() + " cash.");
 
         // Only decide if there's enough history to act off of.
         if (PerfHistory.Count > 5) {
+            Debug.Log("AI Company " + name + " is deciding...");
+
             // Decide which products to shutdown or sell.
             DecideShutdownProducts();
             DecideNewProducts();
 
             // Decide what to do with workers.
-            ReviewWorkers();
-            DecideHireWorkers();
+            //ReviewWorkers();
+            //DecideHireWorkers();
         }
 
     }
-
 
 
     // ===============================================
@@ -133,11 +159,13 @@ public class AICompany : Company {
     // ===============================================
 
     private void DecideNewProducts() {
-        // 3 is the min. PP required for a new product.
-        // TEMP
-        int availableProductPoints = 4;
-        if (availableProductPoints > 3) {
+        // Cache this value since we'll be re-using it a lot.
+        // We include available _capacity_ since the company may want to purchase extra infrastructure
+        // for the purpose of creating a new product.
+        Infrastructure avInf = availableInfrastructure + availableInfrastructureCapacity;
 
+        // If any available infrastructure...
+        if (!avInf.isEmpty) {
             // The more aggressive the company, the more likely they are
             // to try and edge into a competitor's territory.
             if (Random.value < aggression) {
@@ -150,7 +178,7 @@ public class AICompany : Company {
                     foreach (Product p in c.products) {
                         // Ignore if the product isn't doing well
                         // or if the company already has this kind of product.
-                        if (availableProductPoints > p.points &&
+                        if (avInf >= p.requiredInfrastructure &&
                             ProductROI(p) > 1.2 && // this threshold value can really be anything. how to best determine it?
                             FindMatchingProducts(p.productTypes).Count == 0) {
                             candidates.Add(p);
@@ -160,47 +188,76 @@ public class AICompany : Company {
 
                 // Rank the candidates.
                 foreach (Product p in candidates.OrderBy(p => ScoreProduct(p))) {
+                    // Be greedy ~ Create as many as possible.
+                    if (p.requiredInfrastructure <= avInf) {
+                        // Purchase new infrastructure if needed.
+                        DecidePurchaseInfrastructure(p.requiredInfrastructure);
 
-                    // Create as many as possible.
-                    if (p.points <= availableProductPoints) {
                         Debug.Log(name + " is starting a new competing product...");
                         // TO DO these should be actual design, marketing, engineering values.
-                        StartNewProduct(p.productTypes, 0, 0, 0);
+                        StartNewProduct(p.productTypes, 3, 3, 3);
+
+                        // Update this value, it has changed now that a new product was started.
+                        avInf = availableInfrastructure + availableInfrastructureCapacity;
                     }
                 }
 
             }
 
             // Less aggressive companies try to build products according to their strengths.
-            // TO DO: this should be handled better to optimize PP usage
+            // TO DO: this should be handled better to optimize infrastructure usage
             // and avoid creating duplicate products.
-            while (true) {
-                ProductCombo pc = RandomSpecialtyProduct();
-                if (pc.points <= availableProductPoints) {
-                    Debug.Log(name + " is starting a new product...");
+            ProductCombo pc = RandomSpecialtyProduct();
+            if (pc.requiredInfrastructure <= avInf) {
+                // Purchase new infrastructure if needed.
+                DecidePurchaseInfrastructure(pc.requiredInfrastructure);
 
-                    // TO DO these should be actual design, marketing, engineering values.
-                    StartNewProduct(pc.pts, 0, 0, 0);
-                } else {
-                    break;
-                }
+                Debug.Log(name + " is starting a new product...");
+
+                // TO DO these should be actual design, marketing, engineering values.
+                StartNewProduct(pc.pts, 3, 3, 3);
+
+                // Update this value, it has changed now that a new product was started.
+                avInf = availableInfrastructure + availableInfrastructureCapacity;
             }
         }
     }
 
-    private void DecideShutdownProducts() {
-        float historicalAvgROI = ProductPerfHistory.Average(x => x["Average ROI"]);
-        foreach (Product p in activeProducts) {
-            // Some minimum amount of time a product is kept in market before considering shutdown.
-            // TO DO tweak this value.
-            if (p.timeSinceLaunch > 1000) {
+    private void DecidePurchaseInfrastructure(Infrastructure inf) {
+        Infrastructure avInf = availableInfrastructure;
+        if (inf.AnyGreater(avInf)) {
+            Infrastructure neededInf = inf - avInf;
+            PurchaseInfrastructure(neededInf);
+        }
+    }
 
-                // If this product is not generating any more revenue or
-                // is performing less than 1/3 of average, shutdown.
-                // TO DO this should maybe look at standard deviations instead?
-                if (p.lastRevenue == 0 || ProductROI(p) < historicalAvgROI * 0.33) {
-                    Debug.Log(name + " is shutting down a product...");
-                    p.Shutdown();
+    // Buys infrastructure for locations that have space.
+    private void PurchaseInfrastructure(Infrastructure inf) {
+        Debug.Log(name + " is purchasing new infrastructure...");
+        foreach (Location l in locations) {
+            Infrastructure canPurchase = inf.Intersection(l.availableInfrastructureCapacity);
+            BuyInfrastructure(canPurchase, l);
+            inf = inf - canPurchase;
+
+            if (inf.isEmpty)
+                break;
+        }
+    }
+
+    private void DecideShutdownProducts() {
+        if (activeProducts.Count > 0) {
+            float historicalAvgROI = ProductPerfHistory.Average(x => x["Average ROI"]);
+            foreach (Product p in activeProducts) {
+                // Some minimum amount of time a product is kept in market before considering shutdown.
+                if (p.timeSinceLaunch > 40) {
+
+                    // If this product is not generating any more revenue or
+                    // is performing less than 1/3 of average, shutdown.
+                    // TO DO this should maybe look at standard deviations instead?
+                    if (p.lastRevenue == 0 || ProductROI(p) < historicalAvgROI * 0.33) {
+                        Debug.Log(name + " is shutting down a product...");
+                        p.Shutdown();
+                    }
                 }
             }
         }

@@ -15,24 +15,24 @@ MonoBehaviour:
   salary: 0
   bio: 
   description: 
-  title: 
+  title: Founder & CEO
   baseMinSalary: 0
   offMarketTime: 0
   recentPlayerOffers: 0
   happiness:
-    baseValue: 0
+    baseValue: 10
     _buffs: []
   productivity:
-    baseValue: 0
+    baseValue: 10
     _buffs: []
   charisma:
-    baseValue: 0
+    baseValue: 10
     _buffs: []
   creativity:
-    baseValue: 0
+    baseValue: 10
     _buffs: []
   cleverness:
-    baseValue: 0
+    baseValue: 4
     _buffs: []
   bonuses:
     products: []

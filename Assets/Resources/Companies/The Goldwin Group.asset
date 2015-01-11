@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: The Goldwin Group
   m_EditorClassIdentifier: 
   cash:
-    baseValue: 100000
+    baseValue: 2e+07
     _buffs: []
   researchCzar: {fileID: 0}
   research:
@@ -67,7 +67,9 @@ MonoBehaviour:
         items: []
         stores: 
         researchPoints: 0
-      productTypes: []
+      productTypes:
+      - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+      - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
       workers: []
       events: []
       items: []
@@ -80,6 +82,10 @@ MonoBehaviour:
     opinionEvents: []
   startWorkers: []
   startProducts: []
+  startLocations:
+  - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
+  - {fileID: 11400000, guid: ae259c9c620bc4513afb0726a125afc1, type: 2}
+  - {fileID: 11400000, guid: d3210efca70014e1fb03a93ffc12038d, type: 2}
   aggression: 0
   cooperativeness: 0
   luck: 0
@@ -94,12 +100,19 @@ MonoBehaviour:
       items: []
       stores: 
       researchPoints: 0
-    productTypes: []
+    productTypes:
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers: []
     events: []
     items: []
     stores: 
     locations: []
-    verticals: []
+    verticals:
+    - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
+    - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
+    - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
+    - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
     characters: []
     promos: []

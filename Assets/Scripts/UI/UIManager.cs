@@ -40,6 +40,8 @@ public class UIManager : Singleton<UIManager> {
         ResearchManager.Completed += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
         Promo.Completed += OnPromoCompleted;
+        GameManager.YearEnded += OnYearEnded;
+        GameManager.GameLost += OnGameLost;
     }
 
     void OnDisable() {
@@ -47,6 +49,8 @@ public class UIManager : Singleton<UIManager> {
         ResearchManager.Completed -= OnResearchCompleted;
         Product.Completed -= OnProductCompleted;
         Promo.Completed -= OnPromoCompleted;
+        GameManager.YearEnded -= OnYearEnded;
+        GameManager.GameLost -= OnGameLost;
     }
 
     public void ToggleMenu() {
@@ -77,6 +81,27 @@ public class UIManager : Singleton<UIManager> {
 
     void OnPromoCompleted(Promo p) {
         Alert(p.name + " completed.");
+    }
+
+    void OnYearEnded(int year, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+        AnnualReport(results, deltas, board);
+
+        // Anniversary/birthday alert!
+        int age = 25 + year;
+        int lastDigit = age % 10;
+        string ending = "th";
+        if (lastDigit == 1)
+            ending = "st";
+        else if (lastDigit == 2)
+            ending = "nd";
+        else if (lastDigit == 3)
+            ending = "rd";
+        UIManager.Instance.Alert("Happy " + year + ending + " birthday!");
+    }
+
+    void OnGameLost(Company company) {
+        // TO DO this should be a proper "lose game"
+        Alert("YOU LOSE");
     }
 
     [HideInInspector]
