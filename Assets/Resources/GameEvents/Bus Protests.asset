@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Bus Protests
+  m_EditorClassIdentifier: 
+  description: A bunch of leeches with too much free time have started harassing our
+    employees on their way to work. What is wrong with these low lifes?
+  repeatable: 1
+  probability:
+    baseValue: .100000001
+    _buffs: []
+  effects:
+    products: []
+    workers: []
+    company: []
+    unlocks:
+      prereqs:
+        productTypes: []
+        verticals: []
+        workers: []
+        events: []
+        items: []
+        stores: 
+        researchPoints: 0
+      productTypes: []
+      workers: []
+      events: []
+      items: []
+      stores: 
+      locations: []
+      verticals: []
+      characters: []
+      promos: []
+    opinionEvents:
+    - name: Bus Protests
+      opinion:
+        name: 
+        value: -30
+        duration: 0
+        type: 0
+      publicity:
+        name: 
+        value: 20
+        duration: 0
+        type: 0
+  actions: []
