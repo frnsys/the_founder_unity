@@ -25,7 +25,10 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         pt_o = productTypes.Select(i => i.ToString()).ToArray();
 
         EditorGUILayout.LabelField("ProductTypes");
+        target.name = EditorGUILayout.TextField("Name", target.name);
         EditorGUI.indentLevel = 1;
+        if (target.productTypes == null)
+            target.productTypes = new List<ProductType>();
         for (int i=0; i < target.productTypes.Count; i++) {
             EditorGUILayout.BeginHorizontal();
             int pt_i = EditorGUILayout.Popup(Array.IndexOf(pt_o, target.productTypes[i].ToString()), pt_o);

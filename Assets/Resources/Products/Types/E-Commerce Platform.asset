@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
-  m_Name: Search Engine
+  m_Name: E-Commerce Platform
   m_EditorClassIdentifier: 
   description: 
   progressRequired: 1000
@@ -18,4 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
-    values: 02000000000000000000000000000000
+    values: 03000000000000000000000000000000

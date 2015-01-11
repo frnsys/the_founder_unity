@@ -29,6 +29,8 @@ public class ProductTypeManager : ManagerWindow<ProductType> {
         target.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", target.difficulty);
 
         EditorGUILayout.LabelField("Required Verticals");
+        if (target.requiredVerticals == null)
+            target.requiredVerticals = new List<Vertical>();
         for (int i=0; i < target.requiredVerticals.Count; i++) {
             EditorGUILayout.BeginHorizontal();
             target.requiredVerticals[i] = (Vertical)EditorGUILayout.ObjectField(target.requiredVerticals[i], typeof(Vertical));

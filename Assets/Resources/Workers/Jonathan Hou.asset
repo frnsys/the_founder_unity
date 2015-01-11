@@ -9,29 +9,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
-  m_Name: Steven Jorbs
+  m_Name: Jonathan Hou
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
-  salary: 45000
-  bio: Steven Jorbs is technically gifted and is artistic but brings everyone down.
-    Steven Jorbs is easy to talk to and multitasks very effectively.
-  description: The entrepreneur behind one of the most successful companies in history.
-  title: Creative Genius
+  salary: 0
+  bio: Jonathan Hou is a real pleasure to work with and is dedicated. Jonathan Hou
+    is a genius but has a weird smell. Jonathan Hou has a beautiful mind.
+  description: 
+  title: Frontend Developer
   baseMinSalary: 40000
   offMarketTime: 0
   recentPlayerOffers: 0
   happiness:
-    baseValue: 0
-    _buffs: []
-  productivity:
     baseValue: 10
     _buffs: []
-  charisma:
+  productivity:
     baseValue: 8
+    _buffs: []
+  charisma:
+    baseValue: 4
     _buffs: []
   creativity:
-    baseValue: 8
+    baseValue: 9
     _buffs: []
   cleverness:
-    baseValue: 6
+    baseValue: 9
     _buffs: []

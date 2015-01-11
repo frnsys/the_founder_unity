@@ -9,29 +9,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
-  m_Name: William Gutes
+  m_Name: Bill Malone
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   salary: 0
-  bio: William Gutes would be a great cultural fit but is alienating and is not very
-    imaginative but is absolutely brilliant. William Gutes works hard.
+  bio: Bill Malone is really 'heads-down' and can be charming. Bill Malone would be
+    a great cultural fit and has an eye for trends. Bill Malone is technically gifted.
   description: 
-  title: Backend Developer
-  baseMinSalary: 80000
+  title: UX Designer
+  baseMinSalary: 40000
   offMarketTime: 0
   recentPlayerOffers: 0
   happiness:
     baseValue: 10
     _buffs: []
   productivity:
-    baseValue: 8
+    baseValue: 10
     _buffs: []
   charisma:
-    baseValue: 4
+    baseValue: 8
     _buffs: []
   creativity:
-    baseValue: 4
+    baseValue: 8
     _buffs: []
   cleverness:
-    baseValue: 10
+    baseValue: 6
     _buffs: []

@@ -9,13 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
-  m_Name: Search Engine
+  m_Name: Streaming Entertainment
   m_EditorClassIdentifier: 
   description: 
   progressRequired: 1000
-  difficulty: 2
+  difficulty: 4
   requiredVerticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+  - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
-    values: 02000000000000000000000000000000
+    values: 04000000000000000200000000000000

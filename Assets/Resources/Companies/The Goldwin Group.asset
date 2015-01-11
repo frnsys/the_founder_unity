@@ -41,6 +41,7 @@ MonoBehaviour:
   developingPromo: {fileID: 0}
   lastMonthCosts: 0
   lastMonthRevenue: 0
+  lifetimeRevenue: 0
   _items: []
   PerfHistory:
     Size: 24
@@ -70,6 +71,7 @@ MonoBehaviour:
       productTypes:
       - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
       - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
+      - {fileID: 11400000, guid: 36896ff72616c4e739fd3a93ab1d96a3, type: 2}
       workers: []
       events: []
       items: []
@@ -77,6 +79,7 @@ MonoBehaviour:
       locations: []
       verticals:
       - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
+      - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
       characters: []
       promos: []
     opinionEvents: []
@@ -104,6 +107,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
+    - {fileID: 11400000, guid: 36896ff72616c4e739fd3a93ab1d96a3, type: 2}
     workers: []
     events: []
     items: []
@@ -114,5 +122,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
     - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
     - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
+    - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
+    - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     characters: []
     promos: []

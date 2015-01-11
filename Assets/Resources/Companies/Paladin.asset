@@ -41,6 +41,7 @@ MonoBehaviour:
   developingPromo: {fileID: 0}
   lastMonthCosts: 0
   lastMonthRevenue: 0
+  lifetimeRevenue: 0
   _items: []
   PerfHistory:
     Size: 24
@@ -105,12 +106,16 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+    - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
     workers: []
     events: []
     items: []
     stores: 
     locations: []
     verticals:
+    - {fileID: 11400000, guid: b5546f34178bd404b9b4bcc7cae92505, type: 2}
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: b5546f34178bd404b9b4bcc7cae92505, type: 2}
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: b5546f34178bd404b9b4bcc7cae92505, type: 2}

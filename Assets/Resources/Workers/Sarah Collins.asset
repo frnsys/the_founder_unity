@@ -9,15 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
-  m_Name: William Gutes
+  m_Name: Sarah Collins
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   salary: 0
-  bio: William Gutes would be a great cultural fit but is alienating and is not very
-    imaginative but is absolutely brilliant. William Gutes works hard.
+  bio: Sarah Collins is a real pleasure to work with and is a genius but solves problems
+    well. Sarah Collins can be very persuasive and works hard.
   description: 
-  title: Backend Developer
-  baseMinSalary: 80000
+  title: Visual Designer
+  baseMinSalary: 30000
   offMarketTime: 0
   recentPlayerOffers: 0
   happiness:
@@ -27,11 +27,11 @@ MonoBehaviour:
     baseValue: 8
     _buffs: []
   charisma:
-    baseValue: 4
+    baseValue: 9
     _buffs: []
   creativity:
-    baseValue: 4
+    baseValue: 9
     _buffs: []
   cleverness:
-    baseValue: 10
+    baseValue: 5
     _buffs: []

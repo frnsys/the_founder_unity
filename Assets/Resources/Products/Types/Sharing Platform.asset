@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
-  m_Name: Search Engine
+  m_Name: Sharing Platform
   m_EditorClassIdentifier: 
   description: 
   progressRequired: 1000
-  difficulty: 2
+  difficulty: 3
   requiredVerticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredInfrastructure:

@@ -9,18 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Social Network
+  m_Name: Smartphone
   m_EditorClassIdentifier: 
   productTypes: []
-  names: Friendbook, Palster, Lets Connect, Digibuds
-  design_W: 1
+  names: ePhone, Smartie, cyPhone
+  design_W: 2
   marketing_W: 1
-  engineering_W: 1
+  engineering_W: 2
   design_I: 100
   marketing_I: 100
   engineering_I: 100
   maxLongevity: 1000
-  maxRevenue: 1000
+  maxRevenue: 1e+09
   effects:
     products: []
     workers: []
