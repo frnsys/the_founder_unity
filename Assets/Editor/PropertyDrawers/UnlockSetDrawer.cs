@@ -12,7 +12,6 @@ class UnlockSetDrawer : SuperPropertyDrawer {
         "productTypes",
         "verticals",
         "workers",
-        "events",
         "items",
         "stores",
         "locations",
