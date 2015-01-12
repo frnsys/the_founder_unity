@@ -31,6 +31,7 @@ public class Serializer {
     public class Replica {
         // Matches field names to data.
         public Dictionary<string, object> map;
+        public Type type;
 
         // Although typeRef is never used for deserialization,
         // it's nice to have on hand in case something changes.
@@ -59,6 +60,7 @@ public class Serializer {
     public static Replica Serialize(object obj) {
         Replica replica = new Replica();
         Type type = obj.GetType();
+        replica.type = type;
 
         // If this object is a resource, we need only serialize its name,
         // and skip everything else.
@@ -202,7 +204,7 @@ public class Serializer {
                             Type genericListType = typeof(List<>).MakeGenericType(g);
                             IList l = (IList)Activator.CreateInstance(genericListType);
                             foreach (Replica r in (List<Replica>)val) {
-                                l.Add(Deserialize(r, g));
+                                l.Add(Deserialize(r, r.type));
                             }
                             fi.SetValue(obj, Convert.ChangeType(l, ft));
                         }
