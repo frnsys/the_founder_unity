@@ -7,11 +7,8 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class UnlockSet {
-    public PrereqSet prereqs;
-
     public List<ProductType> productTypes = new List<ProductType>();
     public List<Worker> workers = new List<Worker>();
-    public List<GameEvent> events = new List<GameEvent>();
     public List<Item> items = new List<Item>();
     public List<Store> stores = new List<Store>();
     public List<Location> locations = new List<Location>();
@@ -24,16 +21,10 @@ public class UnlockSet {
     public void Unlock(UnlockSet us) {
         productTypes.AddRange(us.productTypes);
         workers.AddRange(us.workers);
-        events.AddRange(us.events);
         items.AddRange(us.items);
         stores.AddRange(us.stores);
         locations.AddRange(us.locations);
         verticals.AddRange(us.verticals);
         promos.AddRange(us.promos);
-    }
-
-    // Apply a prereq set and see if it unlocks the set.
-    public bool SatisfyPrereqs(PrereqSet ps) {
-        return prereqs.Satisfy(ps);
     }
 }

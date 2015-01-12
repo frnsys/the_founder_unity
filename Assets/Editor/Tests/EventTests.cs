@@ -28,7 +28,7 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            gE = new GameEvent("Some event", 1f, false);
+            gE = new GameEvent("Some event", 1f);
         }
 
         [TearDown]

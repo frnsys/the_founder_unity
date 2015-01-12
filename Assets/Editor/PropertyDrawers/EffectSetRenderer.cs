@@ -62,6 +62,28 @@ public class EffectSetRenderer {
                 cash_ef.cash =  EditorGUILayout.FloatField(cash_ef.cash);
                 return cash_ef;
 
+            case "ResearchEffect":
+                ResearchEffect r_ef = (ResearchEffect)ef;
+                if (r_ef.buff == null)
+                    r_ef.buff = new StatBuff("Research", 0);
+                r_ef.buff.value = EditorGUILayout.FloatField(r_ef.buff.value);
+                return r_ef;
+
+            case "OpinionEffect":
+                OpinionEffect oe_ef = (OpinionEffect)ef;
+                if (oe_ef.opinionEvent == null)
+                    oe_ef.opinionEvent = new OpinionEvent();
+                oe_ef.opinionEvent.opinion.value = EditorGUILayout.FloatField("Opinion", oe_ef.opinionEvent.opinion.value);
+                oe_ef.opinionEvent.publicity.value = EditorGUILayout.FloatField("Publicity", oe_ef.opinionEvent.publicity.value);
+                return oe_ef;
+
+            case "EventEffect":
+                EventEffect e_ef = (EventEffect)ef;
+                e_ef.delay = EditorGUILayout.FloatField("Delay", e_ef.delay);
+                e_ef.probability = EditorGUILayout.FloatField("Probability", e_ef.probability);
+                e_ef.gameEvent = (GameEvent)EditorGUILayout.ObjectField(e_ef.gameEvent, typeof(GameEvent));
+                return e_ef;
+
             case "ProductEffect":
                 ProductEffect pef = (ProductEffect)ef;
 

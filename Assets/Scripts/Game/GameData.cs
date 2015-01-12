@@ -74,6 +74,9 @@ public class GameData : ScriptableObject {
     // The canonical pool of workers not at companies.
     public List<Worker> unemployed;
 
+    // Events which are waiting to resolve.
+    public List<GameEvent> specialEventsPool;
+    public List<GameEvent> eventsPool;
 
     // ===============================================
     // Management ====================================
@@ -102,6 +105,9 @@ public class GameData : ScriptableObject {
         data.research = 0;
         data.unemployed = Worker.LoadAll();
         data.otherCompanies = AICompany.LoadAll();
+
+        data.specialEventsPool = GameEvent.LoadSpecialEvents();
+        data.eventsPool = new List<GameEvent>();
 
         data.workerInsight = WorkerInsight.Basic;
 

@@ -21,11 +21,8 @@ internal class GameEventInspector : Editor {
         ge.description = EditorGUILayout.TextArea(ge.description, GUILayout.Height(50));
         EditorGUILayout.Space();
 
-        ge.probability.baseValue = EditorGUILayout.FloatField("Probability", ge.probability.baseValue);
-        ge.probability.baseValue = Mathf.Clamp(ge.probability.baseValue, 0, 1);
-        EditorGUILayout.Space();
-
-        ge.repeatable = EditorGUILayout.Toggle("Repeatable", ge.repeatable);
+        ge.probability = EditorGUILayout.FloatField("Probability", ge.probability);
+        ge.probability = Mathf.Clamp(ge.probability, 0, 1);
         EditorGUILayout.Space();
 
         if (ge.effects.effects == null)
