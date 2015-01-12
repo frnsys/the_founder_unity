@@ -16,24 +16,6 @@ MonoBehaviour:
   description: 
   store: 0
   effects:
-    products:
-    - productTypes: []
-      verticals: []
-      buff:
-        name: Design
-        value: 10
-        duration: 0
-        type: 0
-    workers:
-    - name: Happiness
-      value: 10
-      duration: 0
-      type: 0
-    - name: Productivity
-      value: 20
-      duration: 0
-      type: 0
-    company: []
     unlocks:
       prereqs:
         productTypes: []
@@ -52,3 +34,5 @@ MonoBehaviour:
       locations: []
       verticals:
       - {fileID: 0}
+      promos: []
+    effects: []

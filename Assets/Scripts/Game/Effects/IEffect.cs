@@ -1,4 +1,5 @@
-public interface IEffect {
-    void Apply(Company company);
-    void Remove(Company company);
+[System.Serializable]
+public class IEffect {
+    public virtual void Apply(Company company) {}
+    public virtual void Remove(Company company) {}
 }

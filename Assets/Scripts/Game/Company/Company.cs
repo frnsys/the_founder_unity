@@ -124,10 +124,10 @@ public class Company : HasStats {
 
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit && Pay(worker.salary)) {
-            // TO DO
-            //foreach (Item item in _items) {
-                //worker.ApplyItem(item);
-            //}
+            // Apply existing worker effects.
+            foreach (WorkerEffect we in activeEffects.ofType<WorkerEffect>()) {
+                we.Apply(worker);
+            }
 
             _workers.Add(worker);
 
@@ -141,10 +141,10 @@ public class Company : HasStats {
         return false;
     }
     public void FireWorker(Worker worker) {
-        // TO DO
-        //foreach (Item item in _items) {
-            //worker.RemoveItem(item);
-        //}
+        // Remove existing worker effects.
+        foreach (WorkerEffect we in activeEffects.ofType<WorkerEffect>()) {
+            we.Remove(worker);
+        }
 
         worker.salary = 0;
 
@@ -330,14 +330,21 @@ public class Company : HasStats {
         if (completed) {
             product.released = true;
 
-            // TO DO apply relevant effects to the product
+            // Apply relevant effects to the product
+            foreach (ProductEffect pe in activeEffects.ofType<ProductEffect>()) {
+                pe.Apply(product);
+            }
 
             // The product's effects are applied by the GameManager.
         }
     }
 
     public void ShutdownProduct(Product product) {
-        // TO DO remove effects from this product
+        // Remove relevant effects from the product
+        foreach (ProductEffect pe in activeEffects.ofType<ProductEffect>()) {
+            pe.Remove(product);
+        }
+
         product.Shutdown();
     }
 

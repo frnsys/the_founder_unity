@@ -11,11 +11,19 @@ public class ProductEffect : IEffect {
     public List<Vertical> verticals = new List<Vertical>();
     public StatBuff buff;
 
-    public void Apply(Company company) {
+    public override void Apply(Company company) {
         // to do
     }
 
-    public void Remove(Company company) {
+    public override void Remove(Company company) {
+        // to do
+    }
+
+    public void Apply(Product product) {
+        // to do
+    }
+
+    public void Remove(Product product) {
         // to do
     }
 }

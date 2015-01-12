@@ -12,13 +12,13 @@ public class EffectSet : IEffect {
     public UnlockSet unlocks                = new UnlockSet();
 
     public List<IEffect> effects = new List<IEffect>();
-    public void Apply(Company company) {
+    public override void Apply(Company company) {
         foreach (IEffect e in effects) {
             company.activeEffects.Add(e);
             e.Apply(company);
         }
     }
-    public void Remove(Company company) {
+    public override void Remove(Company company) {
         foreach (IEffect e in effects) {
             company.activeEffects.Remove(e);
             e.Remove(company);
