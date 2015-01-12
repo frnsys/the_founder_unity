@@ -202,7 +202,9 @@ namespace UnityTest
             loc.market = MarketManager.Market.Antarctica;
 
             EffectSet es = new EffectSet();
-            es.company.Add( new StatBuff("Cash", 5000) );
+            CashEffect ce = new CashEffect();
+            ce.cash = 5000;
+            es.Add(ce);
             loc.effects = es;
 
             Assert.IsFalse(c.ExpandToLocation(loc));
@@ -463,11 +465,12 @@ namespace UnityTest
             c.publicity.baseValue = 100;
             c.forgettingRate      = 10;
 
-            OpinionEvent oe = new OpinionEvent(100, 400);
             EffectSet es = new EffectSet();
-            es.opinionEvents.Add(oe);
+            OpinionEffect oe = new OpinionEffect();
+            oe.opinionEvent = new OpinionEvent(100, 400);
+            es.Add(oe);
 
-            c.ApplyEffectSet(es);
+            es.Apply(c);
 
             Assert.AreEqual(c.opinion.value, 300);
             Assert.AreEqual(c.publicity.value, 500);

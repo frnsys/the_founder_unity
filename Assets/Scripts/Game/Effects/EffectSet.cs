@@ -4,25 +4,39 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
 public class EffectSet : IEffect {
-    public List<ProductEffect> products     = new List<ProductEffect>();
-    public List<StatBuff> workers           = new List<StatBuff>();
-    public List<StatBuff> company           = new List<StatBuff>();
     public UnlockSet unlocks                = new UnlockSet();
-    public List<OpinionEvent> opinionEvents = new List<OpinionEvent>();
 
     public List<IEffect> effects = new List<IEffect>();
     public void Apply(Company company) {
         foreach (IEffect e in effects) {
+            company.activeEffects.Add(e);
             e.Apply(company);
         }
     }
     public void Remove(Company company) {
         foreach (IEffect e in effects) {
+            company.activeEffects.Remove(e);
             e.Remove(company);
         }
+    }
+
+    // Convenience methods for accessing the underlying effects list.
+    public void Add(IEffect e) {
+        effects.Add(e);
+    }
+    public void Remove(IEffect e) {
+        effects.Remove(e);
+    }
+    public IEffect this[int index] {
+        get { return effects[index]; }
+    }
+
+    public List<T> ofType<T>() {
+        return effects.Where(e => e.GetType() == typeof(T)).Cast<T>().ToList();
     }
 }

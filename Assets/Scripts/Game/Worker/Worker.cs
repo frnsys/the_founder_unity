@@ -99,14 +99,6 @@ public class Worker : HasStats {
         //print("Leveled");
     }
 
-    public void ApplyItem(Item item) {
-        ApplyBuffs(item.effects.workers);
-    }
-
-    public void RemoveItem(Item item) {
-        RemoveBuffs(item.effects.workers);
-    }
-
     public override Stat StatByName(string name) {
         switch (name) {
             case "Happiness":

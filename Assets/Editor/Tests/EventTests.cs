@@ -46,7 +46,9 @@ namespace UnityTest
         [Test]
         public void EffectEvents()
         {
-            gE.effects.company.Add(new StatBuff("Cash", 1000f));
+            CashEffect ce = new CashEffect();
+            ce.cash = 1000f;
+            gE.effects.Add(ce);
 
             // Our test listener to listen for and capture the event.
             TestEventListener eL = new TestEventListener();
@@ -56,7 +58,7 @@ namespace UnityTest
 
             // Check if the event was captured.
             Assert.AreEqual(eL.triggeredEvent, gE);
-            Assert.AreEqual(eL.triggeredEvent.effects.company[0].value, 1000f);
+            Assert.AreEqual(eL.triggeredEvent.effects.ofType<CashEffect>()[0].cash, 1000f);
         }
     }
 }

@@ -47,6 +47,8 @@ public class Company : HasStats {
         }
     }
 
+    public EffectSet activeEffects;
+
     public List<MarketManager.Market> markets;
 
     public Company(string name_) {
@@ -78,6 +80,8 @@ public class Company : HasStats {
         opinion = new Stat("Opinion", 1);
         opinionEvents = new List<OpinionEvent>();
         publicity = new Stat("Publicity", 0);
+
+        activeEffects = new EffectSet();
 
         // Keep track for a year.
         PerfHistory = new PerformanceHistory(12);
@@ -120,9 +124,10 @@ public class Company : HasStats {
 
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit && Pay(worker.salary)) {
-            foreach (Item item in _items) {
-                worker.ApplyItem(item);
-            }
+            // TO DO
+            //foreach (Item item in _items) {
+                //worker.ApplyItem(item);
+            //}
 
             _workers.Add(worker);
 
@@ -136,9 +141,10 @@ public class Company : HasStats {
         return false;
     }
     public void FireWorker(Worker worker) {
-        foreach (Item item in _items) {
-            worker.RemoveItem(item);
-        }
+        // TO DO
+        //foreach (Item item in _items) {
+            //worker.RemoveItem(item);
+        //}
 
         worker.salary = 0;
 
@@ -191,7 +197,7 @@ public class Company : HasStats {
                 markets.Add(l.market);
 
             // Note this doesn't apply unlock effects...for now assuming locations don't have those.
-            ApplyEffectSet(l.effects);
+            l.effects.Apply(this);
             return true;
         }
         return false;
@@ -253,17 +259,6 @@ public class Company : HasStats {
     public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();
         product.Init(pts, design, marketing, engineering, this);
-
-        // Apply any applicable items to the new product.
-        // TO DO: should this be held off until after the product is completed?
-        foreach (Item item in _items) {
-            foreach (ProductEffect pe in item.effects.products) {
-                if (IsEligibleForEffect(product, pe)) {
-                    product.ApplyBuff(pe.buff);
-                }
-            }
-        }
-
         products.Add(product);
     }
 
@@ -335,40 +330,15 @@ public class Company : HasStats {
         if (completed) {
             product.released = true;
 
+            // TO DO apply relevant effects to the product
+
             // The product's effects are applied by the GameManager.
         }
     }
 
     public void ShutdownProduct(Product product) {
-        foreach (Item item in _items) {
-            foreach (ProductEffect pe in item.effects.products) {
-                if (IsEligibleForEffect(product, pe)) {
-                    product.RemoveBuff(pe.buff);
-                }
-            }
-        }
+        // TO DO remove effects from this product
         product.Shutdown();
-    }
-
-    public void ApplyEffectSet(EffectSet es) {
-        ApplyBuffs(es.company);
-
-        // TO DO this needs to apply bonuses to new workers as well.
-        foreach (Worker worker in workers) {
-            worker.ApplyBuffs(es.workers);
-        }
-
-        // TO DO this needs to apply bonuses to new products as well.
-        foreach (ProductEffect pe in es.products) {
-            ApplyProductEffect(pe);
-        }
-
-        // Apply opinion events.
-        foreach (OpinionEvent oe in es.opinionEvents) {
-            opinion.ApplyBuff(oe.opinion);
-            publicity.ApplyBuff(oe.publicity);
-            opinionEvents.Add(oe);
-        }
     }
 
     public void ApplyProductEffect(ProductEffect effect) {
@@ -454,15 +424,7 @@ public class Company : HasStats {
         item = item.Clone();
         if (Pay(item.cost)) {
             _items.Add(item);
-
-            foreach (ProductEffect pe in item.effects.products) {
-                ApplyProductEffect(pe);
-            }
-
-            foreach (Worker worker in _workers) {
-                worker.ApplyItem(item);
-            }
-
+            item.effects.Apply(this);
             return true;
         }
         return false;
@@ -471,14 +433,7 @@ public class Company : HasStats {
     public void RemoveItem(Item item) {
         item = Item.Find(item, _items);
         _items.Remove(item);
-
-        foreach (ProductEffect pe in item.effects.products) {
-            RemoveProductEffect(pe);
-        }
-
-        foreach (Worker worker in _workers) {
-            worker.RemoveItem(item);
-        }
+        item.effects.Remove(this);
     }
 
     // ===============================================

@@ -136,7 +136,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void ApplyEffectSet(EffectSet es) {
-        playerCompany.ApplyEffectSet(es);
+        es.Apply(playerCompany);
         data.unlocked.Unlock(es.unlocks);
     }
 

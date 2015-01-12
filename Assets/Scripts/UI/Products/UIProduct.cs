@@ -9,6 +9,7 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 
 public class UIProduct : MonoBehaviour {
@@ -104,16 +105,17 @@ public class UIProduct : MonoBehaviour {
     }
 
     private void RenderBuffEffects(EffectSet es) {
-        foreach (StatBuff buff in es.workers) {
+        foreach (StatBuff buff in es.ofType<WorkerEffect>().Select(w => w.buff)) {
             RenderBuffEffect(buff, "workers");
         }
-        foreach (StatBuff buff in es.company) {
-            RenderBuffEffect(buff, "the company");
-        }
+        // TO DO
+        //foreach (StatBuff buff in es.ofType<CashEffect>().Select(c => c.cash)) {
+            //RenderBuffEffect(buff, "the company");
+        //}
     }
 
     private void RenderProductEffects(EffectSet es) {
-        foreach (ProductEffect pe in es.products) {
+        foreach (ProductEffect pe in es.ofType<ProductEffect>()) {
             GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
             effectObj.GetComponent<UIProductEffect>().Set(pe);
             effectObj.GetComponent<UIWidget>().leftAnchor.Set(description.transform, 0, 0);
