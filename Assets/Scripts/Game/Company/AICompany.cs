@@ -118,7 +118,7 @@ public class AICompany : Company {
 
     void OnEnable() {
         // TO DO we may need to manage the base unlocks on the game manager separately from the player company's unlocks, so that the AI companies don't just get everything the player has unlocked too.
-        unlocked.Unlock(bonuses.unlocks);
+        //unlocked.Unlock(bonuses.unlocks);
     }
 
     // Each turn the AI calculates the utility of all possible actions and does the one with the highest utility, provided it is above some threshold (?).

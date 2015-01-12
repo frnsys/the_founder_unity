@@ -25,8 +25,8 @@ internal class ItemInspector : Editor {
         i.store = (Store)EditorGUILayout.EnumPopup(i.store);
         EditorGUILayout.Space();
 
-        if (i.effects.effects == null)
-            i.effects.effects = new List<IEffect>();
+        if (i.effects == null)
+            i.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(i, i.effects);
         EditorGUILayout.Space();
 

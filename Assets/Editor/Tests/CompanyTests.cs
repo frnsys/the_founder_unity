@@ -349,9 +349,10 @@ namespace UnityTest
             // Assure the progress is properly set when the company starts the product.
             Assert.AreEqual(p.requiredProgress, p.TotalProgressRequired(c));
 
-            // Creating a new product should apply existing items.
             Assert.AreEqual(c.products.Count, 1);
-            Assert.AreEqual(p.design.value, 10);
+
+            // Creating a new product should not apply existing items.
+            Assert.AreEqual(p.design.value, 0);
         }
 
 		[Test]
@@ -402,6 +403,9 @@ namespace UnityTest
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
+            p.requiredProgress = 0;
+            c.DevelopProduct(p);
+            Assert.AreEqual(c.activeProducts[0], p);
             Assert.AreEqual(p.design.value, 10);
 
             c.ShutdownProduct(p);
