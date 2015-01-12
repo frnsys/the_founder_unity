@@ -4,21 +4,22 @@
  */
 
 using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class EffectSet : IEffect {
-    public UnlockSet unlocks                = new UnlockSet();
+public class EffectSet {
+    public UnlockSet unlocks = new UnlockSet();
 
     public List<IEffect> effects = new List<IEffect>();
-    public override void Apply(Company company) {
+    public void Apply(Company company) {
         foreach (IEffect e in effects) {
             company.activeEffects.Add(e);
             e.Apply(company);
         }
     }
-    public override void Remove(Company company) {
+    public void Remove(Company company) {
         foreach (IEffect e in effects) {
             company.activeEffects.Remove(e);
             e.Remove(company);

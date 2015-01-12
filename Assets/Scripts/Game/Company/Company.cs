@@ -262,21 +262,6 @@ public class Company : HasStats {
         products.Add(product);
     }
 
-    private bool IsEligibleForEffect(Product p, ProductEffect pe) {
-        // If the product effect is indiscriminate (i.e. doesn't specify any product types or verticals), it applies to every product.
-        // Otherwise, a product must contain at least one of the specified effect's product types or verticals.
-        if (pe.verticals.Count == 0 && pe.productTypes.Count == 0)
-            return true;
-        else if (pe.verticals.Count == 0 && pe.productTypes.Intersect(p.productTypes).Any())
-            return true;
-        else if (pe.productTypes.Count == 0 && pe.verticals.Intersect(p.requiredVerticals).Any())
-            return true;
-        else if (pe.productTypes.Intersect(p.productTypes).Any() && pe.verticals.Intersect(p.requiredVerticals).Any())
-            return true;
-        else
-            return false;
-    }
-
     public void DevelopProducts() {
         List<Product> inDevelopment = products.FindAll(p => p.state == Product.State.DEVELOPMENT);
         foreach (Product product in inDevelopment) {
@@ -348,23 +333,9 @@ public class Company : HasStats {
         product.Shutdown();
     }
 
-    public void ApplyProductEffect(ProductEffect effect) {
-        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes);
-        foreach (Product product in matchingProducts) {
-            product.ApplyBuff(effect.buff);
-        }
-    }
-    public void RemoveProductEffect(ProductEffect effect) {
-        List<Product> matchingProducts = FindMatchingProducts(effect.productTypes);
-        foreach (Product product in matchingProducts) {
-            product.RemoveBuff(effect.buff);
-        }
-    }
-
-
     // Given an item, find the list of currently active products that
     // match at least one of the item's product types.
-    protected List<Product> FindMatchingProducts(List<ProductType> productTypes) {
+    public List<Product> FindMatchingProducts(List<ProductType> productTypes) {
         // Items which have no product specifications apply to all products.
         if (productTypes.Count == 0) {
             return products;
