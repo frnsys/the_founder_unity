@@ -46,7 +46,9 @@ internal class TechnologyInspector : Editor {
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Effects");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"), GUIContent.none);
+        if (d.effects == null)
+            d.effects = new EffectSet();
+        EffectSetRenderer.RenderEffectSet(d, d.effects);
         EditorGUILayout.Space();
 
         if (GUI.changed) {

@@ -36,7 +36,9 @@ internal class LocationInspector : Editor {
         }
 
         EditorGUILayout.Space();
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"));
+        if (i.effects == null)
+            i.effects = new EffectSet();
+        EffectSetRenderer.RenderEffectSet(i, i.effects);
         EditorGUILayout.Space();
 
         if (GUI.changed) {
