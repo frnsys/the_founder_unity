@@ -9,8 +9,11 @@ using System.Collections.Generic;
 [System.Serializable]
 public class GameEvent : ScriptableObject {
     public static List<GameEvent> LoadSpecialEvents() {
-        // TO DO replace with actual loading
-        return new List<GameEvent>();
+        return Resources.LoadAll<GameEvent>("SpecialEvents").ToList().Select(ev => {
+                GameEvent gameEvent = Instantiate(ev) as GameEvent;
+                gameEvent.name = ev.name;
+                return gameEvent;
+        }).ToList();
     }
 
     public string description;
