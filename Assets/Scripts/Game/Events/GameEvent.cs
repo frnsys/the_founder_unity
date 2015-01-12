@@ -14,11 +14,14 @@ public class GameEvent : ScriptableObject {
     }
 
     public string description;
-    public float probability;
+
+    [HideInInspector]
     public float delay;
+    public float probability;
 
     public EffectSet effects = new EffectSet();
     public List<EventAction> actions = new List<EventAction>();
+    public List<Condition> conditions = new List<Condition>();
 
     public GameEvent(string name_, float probability_) {
         name = name_;
@@ -33,6 +36,14 @@ public class GameEvent : ScriptableObject {
             // Broadcast the event.
             EventTriggered(ge);
         }
+    }
+
+    public bool ConditionsSatisfied(Company company) {
+        foreach (Condition c in conditions) {
+            if (!c.Evaluate(company))
+                return false;
+        }
+        return true;
     }
 }
 

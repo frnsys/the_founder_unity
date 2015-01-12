@@ -34,7 +34,8 @@ public class EventManager : MonoBehaviour {
                 GameEvent.Trigger(ev);
             data.eventsPool.Remove(ev);
 
-        // If there are more,
+        // If there are more, randomly pick events until one is triggered
+        // or none are left.
         } else if (toResolve.Count > 1) {
             while (toResolve.Count > 0) {
                 ev = toResolve[Random.Range(0, toResolve.Count)];
@@ -52,6 +53,16 @@ public class EventManager : MonoBehaviour {
             // we can try again later.
             for (int i=0; i < toResolve.Count; i++) {
                 toResolve[i].delay = Random.Range(4, 20);
+            }
+        }
+    }
+
+    // Evaluate special events to see if conditions have been met.
+    public void EvaluateSpecialEvents() {
+        foreach (GameEvent ev in data.specialEventsPool) {
+            if (ev.ConditionsSatisfied(data.company)) {
+                GameEvent.Trigger(ev);
+                data.specialEventsPool.Remove(ev);
             }
         }
     }
