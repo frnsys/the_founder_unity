@@ -13,42 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: A bunch of leeches with too much free time have started harassing our
     employees on their way to work. What is wrong with these low lifes?
-  repeatable: 1
-  probability:
-    baseValue: .100000001
-    _buffs: []
+  delay: 0
+  probability: 0
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents:
-    - name: Bus Protests
-      opinion:
-        name: 
-        value: -30
-        duration: 0
-        type: 0
-      publicity:
-        name: 
-        value: 20
-        duration: 0
-        type: 0
+    effects: []
   actions: []
+  conditions: []

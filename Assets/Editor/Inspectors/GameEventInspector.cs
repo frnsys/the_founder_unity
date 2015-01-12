@@ -30,6 +30,11 @@ internal class GameEventInspector : Editor {
         EffectSetRenderer.RenderEffectSet(ge, ge.effects);
         EditorGUILayout.Space();
 
+        if (ge.conditions == null)
+            ge.conditions = new List<Condition>();
+        ConditionsRenderer.RenderConditions(ge, ge.conditions);
+        EditorGUILayout.Space();
+
 
         // Actions
         // Have to handle this one specially cause nested lists are tricky...if not impossible.

@@ -11,7 +11,10 @@ public class EffectSetRenderer {
     static List<Type> types = new List<Type> {
         typeof(WorkerEffect),
         typeof(CashEffect),
-        typeof(ProductEffect)
+        typeof(ProductEffect),
+        typeof(ResearchEffect),
+        typeof(OpinionEffect),
+        typeof(EventEffect)
     };
     static string[] type_names = types.Select(t => t.ToString()).ToArray();
 

@@ -271,6 +271,7 @@ public class GameManager : Singleton<GameManager> {
         yield return new WaitForSeconds(weekTime);
         while(true) {
             eventManager.Tick();
+            eventManager.EvaluateSpecialEvents();
 
             // Add a bit of randomness to give things
             // a more "natural" feel.
