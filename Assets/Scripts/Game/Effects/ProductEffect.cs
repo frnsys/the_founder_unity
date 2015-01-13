@@ -15,14 +15,16 @@ public class ProductEffect : IEffect {
     public override void Apply(Company company) {
         List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
         foreach (Product product in matchingProducts) {
-            product.ApplyBuff(buff);
+            if (!product.developing)
+                product.ApplyBuff(buff);
         }
     }
 
     public override void Remove(Company company) {
         List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
         foreach (Product product in matchingProducts) {
-            product.RemoveBuff(buff);
+            if (!product.developing)
+                product.RemoveBuff(buff);
         }
     }
 

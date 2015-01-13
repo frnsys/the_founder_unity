@@ -54,11 +54,11 @@ public class Worker : HasStats {
     void Start() {
         Init("Default Worker");
     }
-    public void Init(string name_) {
-        Init(name_, "Associate", 30000, 0, 0, 0, 0, 0);
+    public Worker Init(string name_) {
+        return Init(name_, "Associate", 30000, 0, 0, 0, 0, 0);
     }
 
-    public void Init(
+    public Worker Init(
             string name_,
             string title_,
             float baseMinSalary_,
@@ -82,6 +82,7 @@ public class Worker : HasStats {
         //levels     = this.gameObject.GetComponent<Levels>();
 
         bio = Worker.BuildBio(this);
+        return this;
     }
 
     public void OnEnable() {

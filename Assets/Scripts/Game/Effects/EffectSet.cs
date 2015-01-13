@@ -6,10 +6,11 @@
 using UnityEngine;
 using System;
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class EffectSet {
+public class EffectSet : IEnumerable {
     public UnlockSet unlocks = new UnlockSet();
 
     public List<IEffect> effects = new List<IEffect>();
@@ -33,8 +34,14 @@ public class EffectSet {
     public void Remove(IEffect e) {
         effects.Remove(e);
     }
+    public bool Contains(IEffect e) {
+        return effects.Contains(e);
+    }
     public IEffect this[int index] {
         get { return effects[index]; }
+    }
+    IEnumerator IEnumerable.GetEnumerator() {
+        return effects.GetEnumerator();
     }
 
     public List<T> ofType<T>() {

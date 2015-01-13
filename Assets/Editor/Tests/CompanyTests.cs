@@ -323,6 +323,14 @@ namespace UnityTest
             Assert.IsTrue(c.availableInfrastructure.Equals(zeroInf));
         }
 
+        [Test]
+        public void ActiveEffects() {
+            c.BuyItem(item);
+
+            foreach (IEffect ef in item.effects) {
+                Assert.IsTrue(c.activeEffects.Contains(ef));
+            }
+        }
 
 
         // ===============================================

@@ -1,6 +1,6 @@
 [System.Serializable]
 public class OpinionEffect : IEffect {
-    public OpinionEvent opinionEvent;
+    public OpinionEvent opinionEvent = new OpinionEvent();
 
     public override void Apply(Company company) {
         company.ApplyOpinionEvent(opinionEvent);
