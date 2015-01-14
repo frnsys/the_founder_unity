@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour {
         foreach (GameEvent ev_ in data.eventsPool) {
             ev_.delay -= 1;
 
-            if (ev_.delay == 0)
+            if (ev_.delay <= 0)
                 toResolve.Add(ev_);
         }
 
@@ -59,11 +59,16 @@ public class EventManager : MonoBehaviour {
 
     // Evaluate special events to see if conditions have been met.
     public void EvaluateSpecialEvents() {
+        List<GameEvent> toRemove = new List<GameEvent>();
         foreach (GameEvent ev in data.specialEventsPool) {
             if (ev.ConditionsSatisfied(data.company)) {
                 GameEvent.Trigger(ev);
-                data.specialEventsPool.Remove(ev);
+                toRemove.Add(ev);
             }
+        }
+
+        foreach (GameEvent ev in toRemove) {
+            data.specialEventsPool.Remove(ev);
         }
     }
 }

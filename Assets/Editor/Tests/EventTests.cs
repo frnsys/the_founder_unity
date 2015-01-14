@@ -24,16 +24,27 @@ namespace UnityTest
 	[TestFixture]
 	internal class EventTests
 	{
+        private GameObject gameObj;
+        private GameData gd;
+        private EventManager em;
+
         private GameEvent gE = null;
 
         [SetUp]
         public void SetUp() {
             gE = new GameEvent("Some event", 1f);
+
+            gameObj = new GameObject("Event Manager");
+            em = gameObj.AddComponent<EventManager>();
+            gd = GameData.New("DEFAULTCORP");
+            em.Load(gd);
         }
 
         [TearDown]
         public void TearDown() {
+            UnityEngine.Object.DestroyImmediate(gameObj);
             gE = null;
+            em = null;
         }
 
 		[Test]
@@ -59,6 +70,107 @@ namespace UnityTest
             // Check if the event was captured.
             Assert.AreEqual(eL.triggeredEvent, gE);
             Assert.AreEqual(eL.triggeredEvent.effects.ofType<CashEffect>()[0].cash, 1000f);
+        }
+
+        [Test]
+        public void Tick() {
+            gE.delay = 10;
+            em.Add(gE);
+
+            em.Tick();
+
+            Assert.AreEqual(gE.delay, 9);
+        }
+
+        [Test]
+        public void TickResolve() {
+            gE.delay = 1;
+            gE.probability = 1;
+            em.Add(gE);
+
+            // Our test listener to listen for and capture the event.
+            TestEventListener eL = new TestEventListener();
+
+            em.Tick();
+
+            Assert.AreEqual(eL.triggeredEvent, gE);
+            Assert.IsFalse(gd.eventsPool.Contains(gE));
+        }
+
+        [Test]
+        public void TickResolveMultiple() {
+            gE.delay = 1;
+            gE.probability = 1;
+            em.Add(gE);
+
+            GameEvent gE_ = new GameEvent("Some event", 1f);
+            gE_.delay = 1;
+            gE_.probability = 1;
+            em.Add(gE_);
+
+            Assert.AreEqual(gd.eventsPool.Count, 2);
+
+            // Our test listener to listen for and capture the event.
+            TestEventListener eL = new TestEventListener();
+
+            em.Tick();
+
+            // One of the events should have been triggered.
+            List<GameEvent> ges = new List<GameEvent>() { gE, gE_ };
+            Assert.IsTrue(ges.Contains(eL.triggeredEvent));
+
+            // There should only be one event left.
+            Assert.AreEqual(gd.eventsPool.Count, 1);
+
+            // That event should have an increased delay.
+            Assert.IsTrue(gd.eventsPool[0].delay > 0);
+        }
+
+        [Test]
+        public void Conditions() {
+            PublicityCondition pc = new PublicityCondition();
+            pc.value = 20;
+            gE.conditions.Add(pc);
+
+            PublicityCondition pc_ = new PublicityCondition();
+            pc_.value = 40;
+            gE.conditions.Add(pc_);
+
+            Company c = new Company("Foo Inc").Init();
+            c.publicity.baseValue = 0;
+
+            Assert.IsFalse(gE.ConditionsSatisfied(c));
+
+            c.publicity.baseValue = 30;
+            Assert.IsFalse(gE.ConditionsSatisfied(c));
+
+            c.publicity.baseValue = 50;
+            Assert.IsTrue(gE.ConditionsSatisfied(c));
+        }
+
+        [Test]
+        public void SpecialEvents() {
+            PublicityCondition pc = new PublicityCondition();
+            pc.value = 20;
+            gE.conditions.Add(pc);
+
+            gd.specialEventsPool.Add(gE);
+            gd.company = new Company("Foo Inc").Init();
+
+            em.EvaluateSpecialEvents();
+
+            // Our test listener to listen for and capture the event.
+            TestEventListener eL = new TestEventListener();
+
+            Assert.AreEqual(eL.triggeredEvent, null);
+            Assert.IsTrue(gd.specialEventsPool.Contains(gE));
+
+            gd.company.publicity.baseValue = 40;
+
+            em.EvaluateSpecialEvents();
+
+            Assert.AreEqual(eL.triggeredEvent, gE);
+            Assert.IsFalse(gd.specialEventsPool.Contains(gE));
         }
     }
 }
