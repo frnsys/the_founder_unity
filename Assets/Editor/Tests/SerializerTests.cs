@@ -67,6 +67,12 @@ namespace UnityTest
             data.research  = 500;
             data.technology = Technology.Load("3D Printing");
 
+            GameEvent ev = new GameEvent("TESTEVENT", 1f);
+            data.eventsPool.Add(ev);
+
+            GameEvent sev = new GameEvent("TESTSPECIALEVENT", 1f);
+            data.specialEventsPool.Add(sev);
+
             // TO DO AI companies
             data.unlocked = new UnlockSet();
                 ProductType pt = ProductType.Load("Social Network");
@@ -152,6 +158,9 @@ namespace UnityTest
             Assert.AreEqual(gd.company.forgettingRate,     data.company.forgettingRate);
             CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
             CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);
+
+            Assert.AreEqual(gd.eventsPool[0].name,         data.eventsPool[0].name);
+            Assert.AreEqual(gd.specialEventsPool[0].name,  data.specialEventsPool[0].name);
 
             for (int i=0;i<gd.company.OpinionEvents.Count;i++) {
                 Assert.AreEqual(data.company.OpinionEvents[i].opinion.value, gd.company.OpinionEvents[i].opinion.value);
