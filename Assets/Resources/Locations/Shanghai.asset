@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
-  m_Name: Beijing
+  m_Name: Shanghai
   m_EditorClassIdentifier: 
   description: 
   cost: 1e+06
-  market: 0
+  market: 2
   capacity:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
@@ -21,24 +21,12 @@ MonoBehaviour:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
       promos: []
-    opinionEvents: []
+    effects: []

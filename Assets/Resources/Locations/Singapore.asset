@@ -21,24 +21,12 @@ MonoBehaviour:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
       promos: []
-    opinionEvents: []
+    effects: []
