@@ -15,14 +15,6 @@ MonoBehaviour:
   board:
     happiness: 10
   unlocked:
-    prereqs:
-      productTypes: []
-      verticals: []
-      workers: []
-      events: []
-      items: []
-      stores: 
-      researchPoints: 0
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers:
@@ -33,11 +25,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 63bc6ccc8a01c4365a0f3c0f281a7f07, type: 2}
     - {fileID: 11400000, guid: f843503f4516344a99912fb1a3bf129e, type: 2}
     - {fileID: 11400000, guid: 1c8d25a4cfb594d418d287394e5469f1, type: 2}
-    events: []
     items: []
     stores: 00000000
     locations:
     - {fileID: 11400000, guid: ae259c9c620bc4513afb0726a125afc1, type: 2}
+    - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
     verticals:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     promos:
@@ -58,3 +50,5 @@ MonoBehaviour:
   lifetimeWeek: 0
   economyMultiplier: 0
   unemployed: []
+  specialEventsPool: []
+  eventsPool: []

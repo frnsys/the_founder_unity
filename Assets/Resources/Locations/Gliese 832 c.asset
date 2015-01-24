@@ -9,15 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
-  m_Name: San Francisco
+  m_Name: Gliese 832 c
   m_EditorClassIdentifier: 
   description: 
   cost: 1e+06
   market: 0
-  image: {fileID: 2800000, guid: 46214b6926ccc4b399f31a8096eff35c, type: 3}
+  image: {fileID: 2800000, guid: 97ca2a031e8224d5685696ef260d7aee, type: 3}
   capacity:
     keys: 00000000010000000200000003000000
-    values: 04000000000000000000000000000000
+    values: 00000000000000000000000000000000
   infrastructure:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
@@ -31,4 +31,3 @@ MonoBehaviour:
       verticals: []
       promos: []
     effects: []
-  rotation: {x: -42.9000015, y: 157.600006, z: 0}

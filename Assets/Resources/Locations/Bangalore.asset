@@ -14,6 +14,7 @@ MonoBehaviour:
   description: 
   cost: 1e+06
   market: 0
+  image: {fileID: 2800000, guid: 5c69a01b39302499783496b75a563983, type: 3}
   capacity:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
@@ -21,24 +22,13 @@ MonoBehaviour:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
       promos: []
-    opinionEvents: []
+    effects: []
+  rotation: {x: 0, y: 0, z: 0}

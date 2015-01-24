@@ -19,4 +19,11 @@ public class Location : TemplateResource<Location> {
     public bool HasCapacityFor(Infrastructure i) {
         return availableInfrastructureCapacity >= i;
     }
+
+    public Vector3 rotation;
+
+    public static Location Load(string name) {
+        Location loc = Resources.Load<Location>("Locations/" + name) as Location;
+        return loc.Clone();
+    }
 }

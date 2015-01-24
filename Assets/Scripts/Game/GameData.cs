@@ -130,6 +130,11 @@ public class GameData : ScriptableObject {
 
         data.lifetimeWeek = (int)((month_ - data.lifetimeMonth) * 4);
 
+        // The starting location is San Francisco.
+        Location startingLocation = Location.Load("San Francisco");
+        startingLocation.cost = 0;
+        data.company.ExpandToLocation(startingLocation);
+
         return data;
     }
 

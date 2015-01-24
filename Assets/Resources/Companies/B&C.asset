@@ -28,6 +28,16 @@ MonoBehaviour:
     _buffs: []
   forgettingRate: 1
   opinionEvents: []
+  activeEffects:
+    unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+    effects: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -41,6 +51,7 @@ MonoBehaviour:
   developingPromo: {fileID: 0}
   lastMonthCosts: 0
   lastMonthRevenue: 0
+  lifetimeRevenue: 0
   _items: []
   PerfHistory:
     Size: 24
@@ -55,50 +66,30 @@ MonoBehaviour:
     Size: 10
     values: []
   bonuses:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes:
       - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
       - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals:
       - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
       - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
+  specialtyVerticals: []
+  specialtyProductTypes: []
   startWorkers: []
   startProducts: []
   startLocations:
-  - {fileID: 11400000, guid: f5834c468f0534d279e1243add57a820, type: 2}
   - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
   aggression: 0
   cooperativeness: 0
   luck: 0
   description: A distracting company whose strengths lie in biotech and entertainment.
   unlocked:
-    prereqs:
-      productTypes: []
-      verticals: []
-      workers: []
-      events: []
-      items: []
-      stores: 
-      researchPoints: 0
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
@@ -111,7 +102,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
     workers: []
-    events: []
     items: []
     stores: 
     locations: []
@@ -140,5 +130,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
     - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
     - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-    characters: []
     promos: []

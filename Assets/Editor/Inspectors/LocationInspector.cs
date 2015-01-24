@@ -29,6 +29,9 @@ internal class LocationInspector : Editor {
         i.market = (MarketManager.Market)EditorGUILayout.EnumPopup(i.market);
         EditorGUILayout.Space();
 
+        i.rotation = (Vector3)EditorGUILayout.Vector3Field("Coordinates RotXYZ", i.rotation);
+        EditorGUILayout.Space();
+
         EditorGUILayout.LabelField("Infrastructure Capacity");
 
         foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
