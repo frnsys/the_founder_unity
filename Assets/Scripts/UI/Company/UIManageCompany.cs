@@ -9,6 +9,8 @@ public class UIManageCompany : UIFullScreenPager {
     public GameObject verticalPrefab;
     public GameObject locationVerticalView;
 
+    public GameObject earthObject;
+
     private Color activeColor = new Color(1f,1f,1f,1f);
     private Color inactiveColor = new Color(1f,1f,1f,0.75f);
 
@@ -45,16 +47,34 @@ public class UIManageCompany : UIFullScreenPager {
     }
 
     private void LoadLocations() {
+        earthObject.SetActive(true);
+        gridCenter.onFinished = OnCenter;
+
+        UIEarth earth = earthObject.GetComponent<UIEarth>();
+
         foreach (Location l in gm.unlocked.locations) {
             GameObject locationItem = NGUITools.AddChild(grid.gameObject, locationPrefab);
             locationItem.GetComponent<UILocationItem>().location = l;
+
+            earth.SetLocationMarker(l);
         }
+        earth.location = grid.transform.GetChild(0).GetComponent<UILocationItem>().location;
     }
 
     private void LoadVerticals() {
+        earthObject.SetActive(false);
+        gridCenter.onFinished = null;
+
         foreach (Vertical l in gm.unlocked.verticals) {
             GameObject verticalItem = NGUITools.AddChild(grid.gameObject, verticalPrefab);
             verticalItem.GetComponent<UIVerticalItem>().vertical = l;
+        }
+    }
+
+    private void OnCenter() {
+        UILocationItem item = gridCenter.centeredObject.GetComponent<UILocationItem>();
+        if (item != null) {
+            earthObject.GetComponent<UIEarth>().location = item.location;
         }
     }
 

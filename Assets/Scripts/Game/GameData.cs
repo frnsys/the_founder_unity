@@ -74,6 +74,9 @@ public class GameData : ScriptableObject {
     // The canonical pool of workers not at companies.
     public List<Worker> unemployed;
 
+    // Events which are waiting to resolve.
+    public List<GameEvent> specialEventsPool;
+    public List<GameEvent> eventsPool;
 
     // ===============================================
     // Management ====================================
@@ -103,6 +106,9 @@ public class GameData : ScriptableObject {
         data.unemployed = Worker.LoadAll();
         data.otherCompanies = AICompany.LoadAll();
 
+        data.specialEventsPool = GameEvent.LoadSpecialEvents();
+        data.eventsPool = new List<GameEvent>();
+
         data.workerInsight = WorkerInsight.Basic;
 
         data.month = Month.January;
@@ -123,6 +129,11 @@ public class GameData : ScriptableObject {
         data.lifetimeMonth = (int)month_;
 
         data.lifetimeWeek = (int)((month_ - data.lifetimeMonth) * 4);
+
+        // The starting location is San Francisco.
+        Location startingLocation = Location.Load("San Francisco");
+        startingLocation.cost = 0;
+        data.company.ExpandToLocation(startingLocation);
 
         return data;
     }

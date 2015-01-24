@@ -41,7 +41,10 @@ internal class AICompanyInspector : Editor {
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Bonuses and Unlocks");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("bonuses"), GUIContent.none);
+        if (c.bonuses == null)
+            c.bonuses = new EffectSet();
+        EffectSetRenderer.RenderEffectSet(c, c.bonuses);
+        EditorGUILayout.Space();
 
         EditorGUILayout.Space();
 

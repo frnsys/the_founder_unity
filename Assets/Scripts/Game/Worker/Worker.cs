@@ -54,19 +54,35 @@ public class Worker : HasStats {
     void Start() {
         Init("Default Worker");
     }
-    public void Init(string name_) {
+    public Worker Init(string name_) {
+        return Init(name_, "Associate", 30000, 0, 0, 0, 0, 0);
+    }
+
+    public Worker Init(
+            string name_,
+            string title_,
+            float baseMinSalary_,
+            float happiness_,
+            float productivity_,
+            float charisma_,
+            float creativity_,
+            float cleverness_ ) {
         name          = name_;
+        title         = title_;
         salary        = 0;
-        baseMinSalary = 30000;
-        happiness     = new Stat("Happiness",    0);
-        productivity  = new Stat("Productivity", 0);
-        charisma      = new Stat("Charisma",     0);
-        creativity    = new Stat("Creativity",   0);
-        cleverness    = new Stat("Cleverness",   0);
+        baseMinSalary = baseMinSalary_;
+        happiness     = new Stat("Happiness",    happiness_);
+        productivity  = new Stat("Productivity", productivity_);
+        charisma      = new Stat("Charisma",     charisma_);
+        creativity    = new Stat("Creativity",   creativity_);
+        cleverness    = new Stat("Cleverness",   cleverness_);
 
         offMarketTime = 0;
         recentPlayerOffers = 0;
         //levels     = this.gameObject.GetComponent<Levels>();
+
+        bio = Worker.BuildBio(this);
+        return this;
     }
 
     public void OnEnable() {
@@ -82,14 +98,6 @@ public class Worker : HasStats {
 
     void LeveledUp(int level) {
         //print("Leveled");
-    }
-
-    public void ApplyItem(Item item) {
-        ApplyBuffs(item.effects.workers);
-    }
-
-    public void RemoveItem(Item item) {
-        RemoveBuffs(item.effects.workers);
     }
 
     public override Stat StatByName(string name) {

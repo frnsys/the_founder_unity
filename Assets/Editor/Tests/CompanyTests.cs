@@ -202,7 +202,9 @@ namespace UnityTest
             loc.market = MarketManager.Market.Antarctica;
 
             EffectSet es = new EffectSet();
-            es.company.Add( new StatBuff("Cash", 5000) );
+            CashEffect ce = new CashEffect();
+            ce.cash = 5000;
+            es.Add(ce);
             loc.effects = es;
 
             Assert.IsFalse(c.ExpandToLocation(loc));
@@ -321,6 +323,14 @@ namespace UnityTest
             Assert.IsTrue(c.availableInfrastructure.Equals(zeroInf));
         }
 
+        [Test]
+        public void ActiveEffects() {
+            c.BuyItem(item);
+
+            foreach (IEffect ef in item.effects) {
+                Assert.IsTrue(c.activeEffects.Contains(ef));
+            }
+        }
 
 
         // ===============================================
@@ -347,9 +357,10 @@ namespace UnityTest
             // Assure the progress is properly set when the company starts the product.
             Assert.AreEqual(p.requiredProgress, p.TotalProgressRequired(c));
 
-            // Creating a new product should apply existing items.
             Assert.AreEqual(c.products.Count, 1);
-            Assert.AreEqual(p.design.value, 10);
+
+            // Creating a new product should not apply existing items.
+            Assert.AreEqual(p.design.value, 0);
         }
 
 		[Test]
@@ -400,6 +411,9 @@ namespace UnityTest
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
+            p.requiredProgress = 0;
+            c.DevelopProduct(p);
+            Assert.AreEqual(c.activeProducts[0], p);
             Assert.AreEqual(p.design.value, 10);
 
             c.ShutdownProduct(p);
@@ -463,11 +477,12 @@ namespace UnityTest
             c.publicity.baseValue = 100;
             c.forgettingRate      = 10;
 
-            OpinionEvent oe = new OpinionEvent(100, 400);
             EffectSet es = new EffectSet();
-            es.opinionEvents.Add(oe);
+            OpinionEffect oe = new OpinionEffect();
+            oe.opinionEvent = new OpinionEvent(100, 400);
+            es.Add(oe);
 
-            c.ApplyEffectSet(es);
+            es.Apply(c);
 
             Assert.AreEqual(c.opinion.value, 300);
             Assert.AreEqual(c.publicity.value, 500);

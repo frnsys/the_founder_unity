@@ -8,38 +8,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ff6a8bdef60740f5ba4b4f19ead6a63, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: Buenos Aires
   m_EditorClassIdentifier: 
-  description: ??
-  cost: 50000
-  market: 1
+  description: 
+  cost: 1e+06
+  market: 0
+  image: {fileID: 2800000, guid: 5a526fa71016442419fed36052a41e67, type: 3}
   capacity:
     keys: 00000000010000000200000003000000
-    values: 04000000000000000100000001000000
+    values: 00000000000000000000000000000000
   infrastructure:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []

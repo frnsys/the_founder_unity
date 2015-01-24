@@ -28,6 +28,16 @@ MonoBehaviour:
     _buffs: []
   forgettingRate: 1
   opinionEvents: []
+  activeEffects:
+    unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+    effects: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -56,32 +66,21 @@ MonoBehaviour:
     Size: 10
     values: []
   bonuses:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes:
       - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
       - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals:
       - {fileID: 11400000, guid: b5546f34178bd404b9b4bcc7cae92505, type: 2}
       - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
+  specialtyVerticals: []
+  specialtyProductTypes: []
   startWorkers: []
   startProducts: []
   startLocations:
@@ -94,14 +93,6 @@ MonoBehaviour:
   description: An elusive corporation known for its vast data processing capabilities
     and military contracts.
   unlocked:
-    prereqs:
-      productTypes: []
-      verticals: []
-      workers: []
-      events: []
-      items: []
-      stores: 
-      researchPoints: 0
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
@@ -109,7 +100,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
     workers: []
-    events: []
     items: []
     stores: 
     locations: []
@@ -124,5 +114,4 @@ MonoBehaviour:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: b5546f34178bd404b9b4bcc7cae92505, type: 2}
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    characters: []
     promos: []

@@ -53,21 +53,6 @@ namespace UnityTest
         }
 
         [Test]
-        public void ApplyItem() {
-            worker.ApplyItem(item);
-            Assert.AreEqual(worker.happiness.value, 10);
-            Assert.AreEqual(worker.productivity.value, 20);
-        }
-
-        [Test]
-        public void RemoveItem() {
-            worker.ApplyItem(item);
-            worker.RemoveItem(item);
-            Assert.AreEqual(worker.happiness.value, 0);
-            Assert.AreEqual(worker.productivity.value, 0);
-        }
-
-        [Test]
         public void MinimumSalary() {
             worker.baseMinSalary = 1;
 

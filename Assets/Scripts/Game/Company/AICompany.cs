@@ -46,8 +46,8 @@ public class AICompany : Company {
 
     // Bonuses the company gets for particular verticals.
     public EffectSet bonuses;
-    private List<ProductType> specialtyProductTypes;
-    private List<Vertical> specialtyVerticals;
+    public List<Vertical> specialtyVerticals;
+    public List<ProductType> specialtyProductTypes;
 
     public List<Worker> startWorkers;
     public List<Product> startProducts;
@@ -64,6 +64,8 @@ public class AICompany : Company {
         startWorkers = new List<Worker>();
         startProducts = new List<Product>();
         startLocations = new List<Location>();
+        specialtyVerticals = new List<Vertical>();
+        specialtyProductTypes = new List<ProductType>();
 
         // Keep track of data for 2 years.
         PerfHistory = new PerformanceHistory(24);
@@ -115,23 +117,8 @@ public class AICompany : Company {
     public UnlockSet unlocked;
 
     void OnEnable() {
-        specialtyProductTypes = new List<ProductType>();
-        specialtyVerticals = new List<Vertical>();
-
-        // Load up all the specialty product aspects.
-        foreach (ProductEffect pe in bonuses.products) {
-            foreach (ProductType i in pe.productTypes) {
-                if (!specialtyProductTypes.Contains(i))
-                    specialtyProductTypes.Add(i);
-            }
-            foreach (Vertical i in pe.verticals) {
-                if (!specialtyVerticals.Contains(i))
-                    specialtyVerticals.Add(i);
-            }
-        }
-
         // TO DO we may need to manage the base unlocks on the game manager separately from the player company's unlocks, so that the AI companies don't just get everything the player has unlocked too.
-        unlocked.Unlock(bonuses.unlocks);
+        //unlocked.Unlock(bonuses.unlocks);
     }
 
     // Each turn the AI calculates the utility of all possible actions and does the one with the highest utility, provided it is above some threshold (?).

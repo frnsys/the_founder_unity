@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,15 +21,20 @@ internal class GameEventInspector : Editor {
         ge.description = EditorGUILayout.TextArea(ge.description, GUILayout.Height(50));
         EditorGUILayout.Space();
 
-        ge.probability.baseValue = EditorGUILayout.FloatField("Probability", ge.probability.baseValue);
-        ge.probability.baseValue = Mathf.Clamp(ge.probability.baseValue, 0, 1);
+        ge.probability = EditorGUILayout.FloatField("Probability", ge.probability);
+        ge.probability = Mathf.Clamp(ge.probability, 0, 1);
         EditorGUILayout.Space();
 
-        ge.repeatable = EditorGUILayout.Toggle("Repeatable", ge.repeatable);
+        if (ge.effects.effects == null)
+            ge.effects.effects = new List<IEffect>();
+        EffectSetRenderer.RenderEffectSet(ge, ge.effects);
         EditorGUILayout.Space();
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"));
+        if (ge.conditions == null)
+            ge.conditions = new List<Condition>();
+        ConditionsRenderer.RenderConditions(ge, ge.conditions);
         EditorGUILayout.Space();
+
 
         // Actions
         // Have to handle this one specially cause nested lists are tricky...if not impossible.
@@ -74,8 +78,8 @@ internal class GameEventInspector : Editor {
         {
             rect.height = 16;
             rect.y += 2;
-            EditorGUI.PropertyField(rect, 
-                list.serializedProperty.GetArrayElementAtIndex(index), 
+            EditorGUI.PropertyField(rect,
+                list.serializedProperty.GetArrayElementAtIndex(index),
                 GUIContent.none);
         };
         return list;

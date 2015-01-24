@@ -15,30 +15,30 @@ MonoBehaviour:
   board:
     happiness: 10
   unlocked:
-    prereqs:
-      productTypes: []
-      verticals: []
-      workers: []
-      events: []
-      items: []
-      stores: 
-      researchPoints: 0
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers:
     - {fileID: 11400000, guid: ab147395ddb924b6bbb72fc291176108, type: 2}
     - {fileID: 11400000, guid: def0cbbde04104d19823162e38dee52b, type: 2}
-    events: []
+    - {fileID: 11400000, guid: 57eebfa1c4c5b48b795785ff4d84918d, type: 2}
+    - {fileID: 11400000, guid: 7713e534ffbb44517884b17adc11adf7, type: 2}
+    - {fileID: 11400000, guid: 63bc6ccc8a01c4365a0f3c0f281a7f07, type: 2}
+    - {fileID: 11400000, guid: f843503f4516344a99912fb1a3bf129e, type: 2}
+    - {fileID: 11400000, guid: 1c8d25a4cfb594d418d287394e5469f1, type: 2}
     items: []
     stores: 00000000
     locations:
     - {fileID: 11400000, guid: ae259c9c620bc4513afb0726a125afc1, type: 2}
+    - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
+    - {fileID: 11400000, guid: f86eeac89cb544f81a5f9c6a0392d39f, type: 2}
     verticals:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    characters: []
     promos:
     - {fileID: 11400000, guid: 6ac41f3f32e0e44be96e7daa37b15b67, type: 2}
     - {fileID: 11400000, guid: 225af2c0fa20e42e0b70d44148c1f1cb, type: 2}
+  onboardingState:
+    PRODUCTS_OPENED: 0
+  workerInsight: 0
   maxProductTypes: 0
   technology: {fileID: 0}
   research: 0
@@ -51,3 +51,5 @@ MonoBehaviour:
   lifetimeWeek: 0
   economyMultiplier: 0
   unemployed: []
+  specialEventsPool: []
+  eventsPool: []

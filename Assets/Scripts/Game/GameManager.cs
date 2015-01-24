@@ -115,16 +115,11 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ProductRevenueCycle());
         StartCoroutine(ResearchCycle());
         StartCoroutine(OpinionCycle());
+        StartCoroutine(EventCycle());
     }
 
     void OnEvent(GameEvent e) {
         ApplyEffectSet(e.effects);
-
-        // If this event is not repeatable,
-        // remove it from the candidate event pool.
-        if (!e.repeatable) {
-            data.unlocked.events.Remove(e);
-        }
     }
 
     void OnResearchCompleted(Technology t) {
@@ -136,7 +131,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void ApplyEffectSet(EffectSet es) {
-        playerCompany.ApplyEffectSet(es);
+        es.Apply(playerCompany);
         data.unlocked.Unlock(es.unlocks);
     }
 
@@ -266,12 +261,21 @@ public class GameManager : Singleton<GameManager> {
                 aic.DevelopProducts();
             }
 
-            // TO DO Temporarily placed here
-            GameEvent.Roll(data.unlocked.events);
-
             // Add a bit of randomness to give things
             // a more "natural" feel.
             yield return new WaitForSeconds(cycleTime * Random.Range(0.4f, 1.4f));
+        }
+    }
+
+    IEnumerator EventCycle() {
+        yield return new WaitForSeconds(weekTime);
+        while(true) {
+            eventManager.Tick();
+            eventManager.EvaluateSpecialEvents();
+
+            // Add a bit of randomness to give things
+            // a more "natural" feel.
+            yield return new WaitForSeconds(weekTime * Random.Range(0.9f, 1.6f));
         }
     }
 
