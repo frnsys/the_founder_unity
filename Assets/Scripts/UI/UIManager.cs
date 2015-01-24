@@ -27,6 +27,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject annualReportPrefab;
     public GameObject researchCompletedAlertPrefab;
     public GameObject productCompletedAlertPrefab;
+    public GameObject competitorProductCompletedAlertPrefab;
     public GameObject selectWorkerPopupPrefab;
     public GameObject selectPromoPopupPrefab;
 
@@ -74,9 +75,17 @@ public class UIManager : Singleton<UIManager> {
     }
 
     // Show a "product completed" alert.
-    void OnProductCompleted(Product p) {
-        GameObject popup = NGUITools.AddChild(alertsPanel, productCompletedAlertPrefab);
-        popup.GetComponent<UIProductCompletedAlert>().product = p;
+    void OnProductCompleted(Product p, Company c) {
+        // For the player's products, show the product completed alert.
+        if (c == gm.playerCompany) {
+            GameObject popup = NGUITools.AddChild(alertsPanel, productCompletedAlertPrefab);
+            popup.GetComponent<UIProductCompletedAlert>().product = p;
+
+        // If it is a competitor's product, show it as an "ad".
+        } else {
+            GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);
+            popup.GetComponent<UIProductAdAlert>().SetProductAndCompany(p, c);
+        }
     }
 
     void OnPromoCompleted(Promo p) {

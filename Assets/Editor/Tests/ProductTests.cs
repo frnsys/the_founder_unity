@@ -66,7 +66,7 @@ namespace UnityTest
             Assert.AreEqual(p.state, Product.State.DEVELOPMENT);
             Assert.AreEqual(p.progress, 0);
 
-            p.Develop(100000);
+            p.Develop(100000, c);
 
             Assert.AreEqual(p.progress, 100000/p.requiredProgress);
             Assert.AreEqual(p.state, Product.State.LAUNCHED);
@@ -78,7 +78,7 @@ namespace UnityTest
             Assert.AreEqual(p.progress, 0);
 
             p.disabled = true;
-            p.Develop(100000);
+            p.Develop(100000, c);
 
             Assert.AreEqual(p.progress, 0);
         }

@@ -107,6 +107,9 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void Start() {
+        // The red button
+        //Time.timeScale = 100;
+
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
         StartCoroutine(Yearly());
@@ -126,7 +129,7 @@ public class GameManager : Singleton<GameManager> {
         ApplyEffectSet(t.effects);
     }
 
-    void OnProductCompleted(Product p) {
+    void OnProductCompleted(Product p, Company c) {
         ApplyEffectSet(p.effects);
     }
 

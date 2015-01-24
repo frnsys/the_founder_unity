@@ -321,7 +321,7 @@ public class Company : HasStats {
             progress += worker.productivity.value * Random.Range(0.90f, 1.05f);
         }
 
-        bool completed = product.Develop(progress);
+        bool completed = product.Develop(progress, this);
         if (completed) {
             product.released = true;
 

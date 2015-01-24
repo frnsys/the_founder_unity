@@ -166,9 +166,9 @@ public class Product : HasStats {
     }
 
 
-    static public event System.Action<Product> Completed;
+    static public event System.Action<Product, Company> Completed;
 
-    public bool Develop(float newProgress) {
+    public bool Develop(float newProgress, Company company) {
         if (state == State.DEVELOPMENT && !disabled) {
             _progress += newProgress;
 
@@ -177,7 +177,7 @@ public class Product : HasStats {
 
                 // Trigger completed event.
                 if (Completed != null) {
-                    Completed(this);
+                    Completed(this, company);
                 }
                 return true;
             }
