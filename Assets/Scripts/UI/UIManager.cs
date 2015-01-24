@@ -174,7 +174,7 @@ public class UIManager : Singleton<UIManager> {
     }
 
     // Show a worker selection popup.
-    public void WorkerSelectionPopup(string title, Action<Worker> confirm, Func<Worker, bool> filter) {
+    public void WorkerSelectionPopup(string title, Action<Worker> confirm, Func<Worker, bool> filter, Worker selected) {
         IEnumerable<Worker> workers;
         if (filter != null) {
             workers = GameManager.Instance.playerCompany.workers.Where(w => filter(w));
@@ -183,7 +183,7 @@ public class UIManager : Singleton<UIManager> {
         }
 
         UISelectWorkerPopup p = NGUITools.AddChild(alertsPanel, selectWorkerPopupPrefab).GetComponent<UISelectWorkerPopup>();
-        p.SetData(title, workers, confirm);
+        p.SetData(title, workers, confirm, selected);
     }
 
     // Show a promo selection popup.

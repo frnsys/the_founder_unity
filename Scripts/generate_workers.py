@@ -54,7 +54,7 @@ class Worker():
         elif 'creativity' in top:
             return random.choice(['Visual Designer', 'Designer'])
         elif 'cleverness' in top:
-            return random.choice(['Hardware Engineer', 'Software Engineer', 'Developer'])
+            return random.choice(['Hardware Engineer', 'Software Engineer', 'Developer', 'Researcher'])
         elif 'charisma' in top:
             return random.choice(['Sales Associate', 'Public Relations Associate'])
         return 'Associate'

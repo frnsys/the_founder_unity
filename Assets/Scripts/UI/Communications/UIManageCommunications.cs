@@ -64,10 +64,6 @@ public class UIManageCommunications : MonoBehaviour {
         Action<Worker> select = delegate(Worker w) {
             playerCompany.OpinionCzar = w;
         };
-        Func<Worker, bool> filter = delegate(Worker w) {
-            return playerCompany.OpinionCzar != w;
-        };
-
-        UIManager.Instance.WorkerSelectionPopup("Appoint a new Head of Communications", select, filter);
+        UIManager.Instance.WorkerSelectionPopup("Appoint a new Head of Communications", select, null, playerCompany.OpinionCzar);
     }
 }

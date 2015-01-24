@@ -54,10 +54,6 @@ public class UIResearchOverview : MonoBehaviour {
         Action<Worker> select = delegate(Worker w) {
             playerCompany.ResearchCzar = w;
         };
-        Func<Worker, bool> filter = delegate(Worker w) {
-            return playerCompany.ResearchCzar != w;
-        };
-
-        UIManager.Instance.WorkerSelectionPopup("Appoint a new Head of Research", select, filter);
+        UIManager.Instance.WorkerSelectionPopup("Appoint a new Head of Research", select, null, playerCompany.ResearchCzar);
     }
 }

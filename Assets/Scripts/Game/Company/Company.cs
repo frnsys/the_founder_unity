@@ -17,7 +17,12 @@ public class Company : HasStats {
         get { return researchCzar; }
         set {
             researchCzar = value;
-            research.baseValue = researchCzar.cleverness.value;
+
+            if (value != null) {
+                research.baseValue = researchCzar.cleverness.value;
+            } else {
+                research.baseValue = 0;
+            }
         }
     }
     public Stat research;
@@ -29,7 +34,12 @@ public class Company : HasStats {
         get { return opinionCzar; }
         set {
             opinionCzar = value;
-            opinion.baseValue = opinionCzar.charisma.value;
+
+            if (value != null) {
+                opinion.baseValue = opinionCzar.charisma.value;
+            } else {
+                opinion.baseValue = 0;
+            }
         }
     }
     public Stat opinion;
