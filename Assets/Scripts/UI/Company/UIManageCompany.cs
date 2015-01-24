@@ -50,11 +50,15 @@ public class UIManageCompany : UIFullScreenPager {
         earthObject.SetActive(true);
         gridCenter.onFinished = OnCenter;
 
+        UIEarth earth = earthObject.GetComponent<UIEarth>();
+
         foreach (Location l in gm.unlocked.locations) {
             GameObject locationItem = NGUITools.AddChild(grid.gameObject, locationPrefab);
             locationItem.GetComponent<UILocationItem>().location = l;
+
+            earth.SetLocationMarker(l);
         }
-        earthObject.GetComponent<UIEarth>().location = grid.transform.GetChild(0).GetComponent<UILocationItem>().location;
+        earth.location = grid.transform.GetChild(0).GetComponent<UILocationItem>().location;
     }
 
     private void LoadVerticals() {

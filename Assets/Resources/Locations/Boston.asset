@@ -14,7 +14,6 @@ MonoBehaviour:
   description: 
   cost: 1e+06
   market: 0
-  image: {fileID: 0}
   capacity:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
@@ -31,3 +30,4 @@ MonoBehaviour:
       verticals: []
       promos: []
     effects: []
+  rotation: {x: -50.2999992, y: -167.899994, z: 0}

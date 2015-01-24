@@ -1242,8 +1242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c65594b3abda433986314dbc79ce9a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ownedMaterial: {fileID: 2100000, guid: 08d9ddc1b74e64b82b90bed786cd8f03, type: 2}
   activeMaterial: {fileID: 2100000, guid: b2d7585fd6bd94d1492d7f5ac9952eb4, type: 2}
-  inactiveMaterial: {fileID: 2100000, guid: 08d9ddc1b74e64b82b90bed786cd8f03, type: 2}
+  unownedMaterial: {fileID: 2100000, guid: 89055ba5d757943ff8bfc75f0eee9c1c, type: 2}
   rotationSpeed: .00999999978
 --- !u!114 &11400004
 MonoBehaviour:

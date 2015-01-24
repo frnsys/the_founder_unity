@@ -1,16 +1,17 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
 public class UIEarth : MonoBehaviour {
+    private GameManager gm;
 
     private Location location_;
     public Location location {
         set {
             if (location_ != null) {
-                // Find the marker representing the old location.
-                GameObject oldMarker = transform.Find(location_.name).gameObject;
-                oldMarker.renderer.material = inactiveMaterial;
+                // Set the marker representing the old location.
+                SetLocationMarker(location_);
             }
 
             location_ = value;
@@ -27,8 +28,30 @@ public class UIEarth : MonoBehaviour {
         }
     }
 
+    void OnEnable() {
+        gm = GameManager.Instance;
+
+        // Hide all locations which are not yet unlocked.
+        IEnumerable<string> locs = gm.unlocked.locations.Select(l => l.name);
+        foreach (Transform child in transform) {
+            if (!locs.Contains(child.name)) {
+                child.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void SetLocationMarker(Location loc) {
+        GameObject marker = transform.Find(loc.name).gameObject;
+        if (gm.playerCompany.HasLocation(loc)) {
+            marker.renderer.material = ownedMaterial;
+        } else {
+            marker.renderer.material = unownedMaterial;
+        }
+    }
+
+    public Material ownedMaterial;
     public Material activeMaterial;
-    public Material inactiveMaterial;
+    public Material unownedMaterial;
     public float rotationSpeed = 0.1f;
 
     private IEnumerator RotateToLocation(Quaternion from, Quaternion to) {
