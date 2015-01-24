@@ -17,6 +17,8 @@ folder.
 - HUD uses 10-20
 - alerts & notifications use 400+
 
+`GameEvent` images must be 800x440px.
+
 ### Resources
 
 There are many different assets in this game which have to managed carefully.
