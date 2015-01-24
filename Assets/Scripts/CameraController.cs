@@ -37,9 +37,11 @@ public class CameraController : MonoBehaviour {
         Vector3 direction = Camera.main.ScreenToWorldPoint(current_position) - Camera.main.ScreenToWorldPoint(hit_position);
 
         // Invert direction so that terrain appears to move with the mouse.
+        direction.y *= -1f;
+
         // Multiply it by a scalar to increase the speed of camera movement
         // (really, how much a drag moves the camera).
-        direction = direction * -1f * 4f;
+        direction *= 4f;
 
         Vector3 position = camera_position + direction;
 
