@@ -11,8 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
   m_Name: Bus Protests
   m_EditorClassIdentifier: 
-  description: A bunch of leeches with too much free time have started harassing our
-    employees on their way to work. What is wrong with these low lifes?
+  type: 1
+  description: Protesters have begun targeting the buses of <PLAYERCOMPANY>, whose
+    presence has contributed to escalating rent and increasing financial troubles
+    for workers in other industries.
+  from: Punda Daily
+  image: {fileID: 2800000, guid: 3ecaf14b23a214f7d8c350ad4807b7a6, type: 3}
   delay: 0
   probability: 0
   effects:
@@ -24,6 +28,7 @@ MonoBehaviour:
       locations: []
       verticals: []
       promos: []
-    effects: []
+    effects:
+    - {fileID: 0}
   actions: []
   conditions: []

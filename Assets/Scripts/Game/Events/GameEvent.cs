@@ -8,6 +8,11 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class GameEvent : ScriptableObject {
+    public enum Type {
+        Email,
+        News
+    }
+
     public static List<GameEvent> LoadSpecialEvents() {
         return Resources.LoadAll<GameEvent>("SpecialEvents").ToList().Select(ev => {
                 GameEvent gameEvent = Instantiate(ev) as GameEvent;
@@ -16,7 +21,10 @@ public class GameEvent : ScriptableObject {
         }).ToList();
     }
 
+    public Type type;
     public string description;
+    public string from;
+    public Texture image;
 
     [HideInInspector]
     public float delay;

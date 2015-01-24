@@ -18,7 +18,8 @@ public class UIManager : Singleton<UIManager> {
     public GameObject windowsPanel;
     public GameObject alertsPanel;
 
-    public GameObject gameEventNotificationPrefab;
+    public GameObject gameEventNotificationEmailPrefab;
+    public GameObject gameEventNotificationNewsPrefab;
 
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
@@ -64,7 +65,13 @@ public class UIManager : Singleton<UIManager> {
 
     // Show an event notification.
     void OnEvent(GameEvent e) {
-        UIGameEventNotification gameEventNotification = NGUITools.AddChild(alertsPanel, gameEventNotificationPrefab).GetComponent<UIGameEventNotification>();
+        GameObject prefab;
+        if (e.type == GameEvent.Type.Email) {
+            prefab = gameEventNotificationEmailPrefab;
+        } else {
+            prefab = gameEventNotificationNewsPrefab;
+        }
+        UIGameEventNotification gameEventNotification = NGUITools.AddChild(alertsPanel, prefab).GetComponent<UIGameEventNotification>();
         gameEventNotification.gameEvent = e;
     }
 

@@ -21,6 +21,16 @@ internal class GameEventInspector : Editor {
         ge.description = EditorGUILayout.TextArea(ge.description, GUILayout.Height(50));
         EditorGUILayout.Space();
 
+        ge.from = EditorGUILayout.TextField("From (Email or Publication)", ge.from);
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField("Type");
+        ge.type = (GameEvent.Type)EditorGUILayout.EnumPopup(ge.type);
+        EditorGUILayout.Space();
+
+        ge.image = (Texture)EditorGUILayout.ObjectField(ge.image, typeof(Texture));
+        EditorGUILayout.Space();
+
         ge.probability = EditorGUILayout.FloatField("Probability", ge.probability);
         ge.probability = Mathf.Clamp(ge.probability, 0, 1);
         EditorGUILayout.Space();

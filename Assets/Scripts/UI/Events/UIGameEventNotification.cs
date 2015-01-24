@@ -4,6 +4,8 @@ using System.Collections;
 public class UIGameEventNotification: UIEffectAlert {
     public UIWidget title;
     public UILabel titleLabel;
+    public UILabel fromLabel;
+    public UILabel toLabel;
     public UIGrid actionGrid;
     public UITexture image;
 
@@ -14,8 +16,19 @@ public class UIGameEventNotification: UIEffectAlert {
         get { return gameEvent_; }
         set {
             gameEvent_ = value;
+
+            string companyName = GameManager.Instance.playerCompany.name;
+
             titleLabel.text = gameEvent_.name;
-            bodyLabel.text = gameEvent_.description;
+            bodyLabel.text = gameEvent_.description.Replace("<PLAYERCOMPANY>", companyName);
+            fromLabel.text = gameEvent_.from.Replace("<PLAYERCOMPANY>", companyName);
+
+            if (toLabel != null)
+                toLabel.text = "founder@" + companyName + ".com";
+
+            if (gameEvent_.image != null)
+                image.mainTexture = gameEvent_.image;
+
             Extend(bodyLabel.height);
 
             RenderActions();
