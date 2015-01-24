@@ -3,6 +3,7 @@ using System.Collections;
 
 // Adapted from: http://stackoverflow.com/a/11497674/1097920
 public class CameraController : MonoBehaviour {
+    Camera camera;
     Vector3 hit_position = Vector3.zero;
     Vector3 current_position = Vector3.zero;
     Vector3 camera_position = Vector3.zero;
@@ -15,7 +16,12 @@ public class CameraController : MonoBehaviour {
     private float tBound = 4f;
     private float bBound = 1.5f;
 
+    void Start() {
+        camera = GetComponent<Camera>();
+    }
+
     void Update(){
+        // Drag to pan.
         if(Input.GetMouseButtonDown(0)){
             hit_position = Input.mousePosition;
             camera_position = transform.position;
@@ -25,6 +31,9 @@ public class CameraController : MonoBehaviour {
             current_position = Input.mousePosition;
             LeftMouseDrag();
         }
+
+        // Pinch to zoom.
+        PinchZoom();
     }
 
     void LeftMouseDrag(){
@@ -59,5 +68,30 @@ public class CameraController : MonoBehaviour {
         }
 
         transform.position = position;
+    }
+
+    private float touchDelta = 0.0F;
+    private Vector2 prevDist = new Vector2(0,0);
+    private Vector2 curDist = new Vector2(0,0);
+    void PinchZoom() {
+        if (Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved) {
+            curDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //current distance between finger touches
+            prevDist = ((Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition) - (Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition)); //difference in previous locations using delta positions
+            touchDelta = curDist.magnitude - prevDist.magnitude;
+
+            // Flip directions, since pinch is zooming out and pulling is zooming.
+            touchDelta *= -1f;
+
+            // Apply speed modification.
+            touchDelta *= 0.05f;
+
+            float newSize = camera.orthographicSize += touchDelta;
+            if (newSize < 1) {
+                newSize = 1;
+            } else if (newSize > 6) {
+                newSize = 6;
+            }
+            camera.orthographicSize = newSize;
+        }
     }
 }
