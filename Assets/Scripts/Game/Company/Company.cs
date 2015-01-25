@@ -379,9 +379,12 @@ public class Company : HasStats {
 
         foreach (Location loc in locations) {
             toPay += loc.cost;
+
+            // We have to add up location infrastructure cost in this way,
+            // so we incorporate the cost of the infrastructure for the location.
+            toPay += loc.infrastructure.cost;
         }
 
-        toPay += infrastructure.cost;
         toPay += researchInvestment;
 
         cash.baseValue -= toPay;

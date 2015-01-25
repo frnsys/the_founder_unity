@@ -20,13 +20,19 @@ public class UIProducts : UIWindow {
     }
 
     void Update() {
+        // Update the status of used/available infrastructure.
         Infrastructure infra = playerCompany.infrastructure;
-        Infrastructure used = playerCompany.usedInfrastructure;
-
-        // Update the status of used vs usedable infrastructure.
-        string infStatus = "Used Infrastructure => ";
-        foreach (Infrastructure.Type t in Infrastructure.Types) {
-            infStatus += t.ToString() + ": " + used[t].ToString() + "/" + infra[t].ToString() + " ";
+        string infStatus;
+        if (currentScreen_ == manageProducts) {
+            infStatus = "Used INF :: ";
+            foreach (Infrastructure.Type t in Infrastructure.Types) {
+                infStatus += t.ToString() + ": " + playerCompany.usedInfrastructure[t].ToString() + "/" + infra[t].ToString() + " ";
+            }
+        } else {
+            infStatus = "Available INF :: ";
+            foreach (Infrastructure.Type t in Infrastructure.Types) {
+                infStatus += t.ToString() + ": " + playerCompany.availableInfrastructure[t].ToString() + " ";
+            }
         }
         infrastructureLabel.text = infStatus;
     }
