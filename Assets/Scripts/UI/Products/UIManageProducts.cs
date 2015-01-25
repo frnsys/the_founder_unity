@@ -49,10 +49,4 @@ public class UIManageProducts : MonoBehaviour {
         else
             UIManager.Instance.Confirm("Are you sure want to stop shutdown " + product.name + "? Its effects will become inactive.", yes, null);
     }
-
-    void OnDisable() {
-        foreach (Transform child in productsGrid.transform) {
-            UIEventListener.Get(child.Find("Shutdown Button").gameObject).onClick -= ShutdownProduct;
-        }
-    }
 }
