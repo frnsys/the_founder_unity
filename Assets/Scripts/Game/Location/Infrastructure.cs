@@ -12,6 +12,17 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         Lab
     }
 
+    // Set the cost per type of infrastructure.
+    [System.Serializable]
+    public class Cost : SerializableDictionary<Infrastructure.Type, int> {
+        public Cost() {
+            // Initialize each infrastructure type.
+            foreach (Type t in Enum.GetValues(typeof(Type))) {
+                Add(t, 1000);
+            }
+        }
+    }
+
     public static Type[] Types {
         get { return Enum.GetValues(typeof(Type)) as Type[]; }
     }
@@ -30,15 +41,14 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         }
     }
 
+    public Cost baseCosts = new Cost();
+
     // Returns the cost for this set of infrastructure.
     public int cost {
         get {
-            // TO DO
-            // All infrastructure costs the same. Should it?
-            int baseCost = 10000;
             int cost = 0;
             foreach(KeyValuePair<Type, int> item in this) {
-                cost += item.Value * baseCost;
+                cost += item.Value * baseCosts[item.Key];
             }
             return cost;
         }

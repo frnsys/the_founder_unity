@@ -68,6 +68,7 @@ public class UILocationItem : MonoBehaviour {
                 Infrastructure.Type t = i.Key;
                 GameObject item = NGUITools.AddChild(grid.gameObject, infrastructureItemPrefab);
                 item.transform.Find("Label").GetComponent<UILabel>().text = t.ToString();
+                item.transform.Find("Cost").GetComponent<UILabel>().text = "$" + location.capacity.baseCosts[t].ToString() + "/mo each";
 
                 // Setup button actions.
                 Infrastructure.Type lT = t;
