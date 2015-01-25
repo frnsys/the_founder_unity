@@ -49,6 +49,7 @@ public class UIManageCompany : UIFullScreenPager {
     private void LoadLocations() {
         earthObject.SetActive(true);
         gridCenter.onFinished = OnCenter;
+        ClearGrid();
 
         UIEarth earth = earthObject.GetComponent<UIEarth>();
 
@@ -64,6 +65,7 @@ public class UIManageCompany : UIFullScreenPager {
     private void LoadVerticals() {
         earthObject.SetActive(false);
         gridCenter.onFinished = null;
+        ClearGrid();
 
         foreach (Vertical l in gm.unlocked.verticals) {
             GameObject verticalItem = NGUITools.AddChild(grid.gameObject, verticalPrefab);

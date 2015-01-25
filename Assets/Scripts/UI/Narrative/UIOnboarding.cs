@@ -70,6 +70,10 @@ public class UIOnboarding : MonoBehaviour {
     }
 
     public void ConfirmSelection() {
+        if (selectedCofounder == null) {
+            return;
+        }
+
         // Add the cofounder.
         GameManager.Instance.narrativeManager.SelectCofounder(selectedCofounder);
 
