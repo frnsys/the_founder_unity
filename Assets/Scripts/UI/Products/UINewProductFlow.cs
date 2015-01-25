@@ -238,12 +238,22 @@ public class UINewProductFlow : MonoBehaviour {
     private void UpdateProgressRequired(GameObject obj, string feature, int points) {
         int estimatedTime = product.EstimatedCompletionTime(feature, points, gm.playerCompany);
         UILabel label = obj.transform.Find("Progress Required").gameObject.GetComponent<UILabel>();
-        label.text = "about " + estimatedTime.ToString() + " seconds";
+        if (estimatedTime > 100000 || estimatedTime < 0) {
+            label.text = "will take forever";
+        } else {
+            label.text = "about " + estimatedTime.ToString() + " seconds";
+        }
     }
 
     public void BeginProductDevelopment() {
         int totalTime = product.EstimatedCompletionTime(gm.playerCompany);
-        UIManager.Instance.Confirm("Are you happy with this product configuration? It will take about " + totalTime.ToString() + " seconds to develop.", BeginProductDevelopment_, null);
+        string time;
+        if (totalTime > 100000 || totalTime < 0) {
+            time = "forever";
+        } else {
+            time = "about " + totalTime.ToString() + " seconds";
+        }
+        UIManager.Instance.Confirm("Are you happy with this product configuration? It will take " + time + " to develop.", BeginProductDevelopment_, null);
     }
 
     private void BeginProductDevelopment_() {
