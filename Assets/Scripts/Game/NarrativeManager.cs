@@ -37,9 +37,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     public void Load(GameData d) {
         data = d;
         ob = d.onboardingState;
-
-        // Comment this out if you want to skip onboarding (for dev purposes).
-        InitializeOnboarding();
     }
 
     // A message from your mentor.
@@ -132,7 +129,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     private OBS obs = OBS.START;
 
     // Setup the starting game state for onboarding.
-    void InitializeOnboarding() {
+    public void InitializeOnboarding() {
         obs = OBS.START;
 
         // Some menu items start out as hidden.

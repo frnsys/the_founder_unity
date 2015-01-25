@@ -94,6 +94,13 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
+    void OnLevelWasLoaded(int level) {
+        // See Build Settings to get the number for levels/scenes.
+        if (level == 2) {
+            StartGame();
+        }
+    }
+
     void OnEnable() {
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
@@ -110,6 +117,11 @@ public class GameManager : Singleton<GameManager> {
         // The red button
         //Time.timeScale = 100;
 
+        // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
+        // StartGame();
+    }
+
+    void StartGame() {
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
         StartCoroutine(Yearly());
@@ -119,6 +131,8 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ResearchCycle());
         StartCoroutine(OpinionCycle());
         StartCoroutine(EventCycle());
+
+        narrativeManager.InitializeOnboarding();
     }
 
     void OnEvent(GameEvent e) {
