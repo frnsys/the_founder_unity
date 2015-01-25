@@ -162,7 +162,7 @@ public class Product : HasStats {
         }
 
         // Fallback to a rather generic name.
-        return string.Join(" ", productTypes.Select(pt => pt.name).ToArray());
+        return genericName;
     }
 
 
@@ -346,9 +346,11 @@ public class Product : HasStats {
 
     // Product death
     public void Shutdown() {
-        // TO DO
-        // ...
-        // Modify product-related event probabilities, etc.
+        if (_state == State.DEVELOPMENT) {
+            // Give it a basic name; incomplete products aren't christened!
+            name = genericName;
+        }
+
         _state = State.RETIRED;
     }
 
