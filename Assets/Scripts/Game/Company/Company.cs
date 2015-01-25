@@ -132,6 +132,7 @@ public class Company : HasStats {
         get { return _workers.Concat(founders.Cast<Worker>()).Where(w => w != researchCzar && w != opinionCzar); }
     }
 
+    static public event System.Action<Worker, Company> WorkerHired;
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit && Pay(worker.salary)) {
             // Apply existing worker effects.
@@ -144,6 +145,10 @@ public class Company : HasStats {
             // Update the progress required for developing products.
             foreach (Product p in developingProducts) {
                 p.requiredProgress = p.TotalProgressRequired(this);
+            }
+
+            if (WorkerHired != null) {
+                WorkerHired(worker, this);
             }
 
             return true;

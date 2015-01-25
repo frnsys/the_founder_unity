@@ -39,7 +39,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         ob = d.onboardingState;
 
         // Comment this out if you want to skip onboarding (for dev purposes).
-        //InitializeOnboarding();
+        InitializeOnboarding();
     }
 
     // A message from your mentor.
@@ -147,6 +147,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         // Listen to some events.
         Product.Completed += OnProductCompleted;
         GameEvent.EventTriggered += OnEvent;
+        Company.WorkerHired += OnWorkerHired;
 
         // Show the game intro.
         Intro();
@@ -161,6 +162,38 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             }, true);
             ShowMenuItem("Communications");
             ob.COMMS_UNLOCKED = true;
+        }
+    }
+
+    void OnWorkerHired(Worker w, Company c) {
+        if (c == data.company) {
+            if (!ob.FIRST_WORKER_HIRED) {
+                MentorMessages(new string[] {
+                    "You've hired your first employee! Employees help you develop better products by contributing their skills.",
+                    "Employees also have a level of happiness and productivity, which are interrelated. Generally, happy employees are more productive.",
+                    "More productive employees help you build products faster. You should maintain peak efficiency!"
+                }, true);
+                ob.FIRST_WORKER_HIRED = true;
+
+            } else if (c.workers.Count > 3 && !ob.MARKET_UNLOCKED) {
+                MentorMessages(new string[] {
+                    "Now that your office is buzzing with a few employees, you should try to keep them as happy and productive as possible.",
+                    "You also want to cultivate an office environment and CULTURE that is attractive to future employees.",
+                    "You can purchase perks and equipment to keep your employees efficient and satisfied in The Market."
+                }, true);
+                ShowMenuItem("The Market");
+                ob.MARKET_UNLOCKED = true;
+
+            } else if (c.remainingSpace == 0 && !ob.WORKER_LIMIT_REACHED) {
+                MentorMessages(new string[] {
+                    "It looks like you're running out of space for more employees.",
+                    "It might be time to expand to another location.",
+                    "New locations provide room for more employees and infrastructure, access to new markets, and sometimes other bonuses as well.",
+                    "You can expand to new locations in the 'Company' window.",
+                    "More locations will become available over time."
+                }, true);
+                ob.WORKER_LIMIT_REACHED = true;
+            }
         }
     }
 
