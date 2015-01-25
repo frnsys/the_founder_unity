@@ -16,6 +16,7 @@ public class UIProducts : UIWindow {
 
     void Awake() {
         playerCompany = GameManager.Instance.playerCompany;
+        currentScreen_ = manageProducts;
     }
 
     void Update() {

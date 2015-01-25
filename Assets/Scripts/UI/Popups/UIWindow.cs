@@ -14,9 +14,7 @@ public class UIWindow : UIPopup {
     protected GameObject currentScreen_;
     public GameObject currentScreen {
         set {
-            if (currentScreen_ != null)
-                currentScreen_.SetActive(false);
-
+            currentScreen_.SetActive(false);
             value.SetActive(true);
             currentScreen_ = value;
         }
