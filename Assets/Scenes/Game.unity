@@ -249,19 +249,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 1985176123}
+    target: {fileID: 0}
     relative: 0
     absolute: -60
   topAnchor:
-    target: {fileID: 1985176123}
+    target: {fileID: 0}
     relative: 1
     absolute: -60
   updateAnchors: 1
@@ -1459,19 +1459,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 9091723}
+    target: {fileID: 0}
     relative: 0
     absolute: -60
   topAnchor:
-    target: {fileID: 9091723}
+    target: {fileID: 0}
     relative: 1
     absolute: -60
   updateAnchors: 1
@@ -1652,19 +1652,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 874887488}
+    target: {fileID: 0}
     relative: 0
     absolute: -60
   topAnchor:
-    target: {fileID: 874887488}
+    target: {fileID: 0}
     relative: 1
     absolute: -60
   updateAnchors: 1
@@ -1831,19 +1831,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 845749120}
-    relative: 1
+    target: {fileID: 0}
+    relative: 0
     absolute: -70
   topAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -40
   updateAnchors: 1
@@ -2365,6 +2365,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 845749120}
   - 114: {fileID: 845749121}
+  - 114: {fileID: 845749122}
   m_Layer: 8
   m_Name: Menu List
   m_TagString: Untagged
@@ -2379,7 +2380,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 845749119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -219.555557, y: -267.5, z: 0}
+  m_LocalPosition: {x: -220, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 638777186}
@@ -2409,7 +2410,7 @@ MonoBehaviour:
   rightAnchor:
     target: {fileID: 1545792664}
     relative: 1
-    absolute: 0
+    absolute: 118
   bottomAnchor:
     target: {fileID: 0}
     relative: 0
@@ -2417,10 +2418,10 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 2031260218}
     relative: 1
-    absolute: -32
+    absolute: -96
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
+  mPivot: 1
   mWidth: 441
   mHeight: 425
   mDepth: 0
@@ -2428,6 +2429,27 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .65818584
+--- !u!114 &845749122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 845749119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c4de3b4b6fe9045b059ee627c100df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrangement: 1
+  sorting: 0
+  pivot: 2
+  maxPerLine: 0
+  cellWidth: 200
+  cellHeight: 60
+  animateSmoothly: 0
+  hideInactive: 1
+  keepWithinPanel: 0
+  sorted: 0
 --- !u!1 &862090770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,19 +2622,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 524457352}
+    target: {fileID: 0}
     relative: 0
     absolute: -60
   topAnchor:
-    target: {fileID: 524457352}
+    target: {fileID: 0}
     relative: 1
     absolute: -60
   updateAnchors: 1
@@ -4215,19 +4237,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 597187450}
+    target: {fileID: 0}
     relative: 0
     absolute: -60
   topAnchor:
-    target: {fileID: 597187450}
+    target: {fileID: 0}
     relative: 1
     absolute: -60
   updateAnchors: 1
@@ -5963,19 +5985,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 845749120}
+    target: {fileID: 0}
     relative: 1
     absolute: -20
   bottomAnchor:
-    target: {fileID: 638777186}
+    target: {fileID: 0}
     relative: 0
     absolute: -60
   topAnchor:
-    target: {fileID: 638777186}
+    target: {fileID: 0}
     relative: 1
     absolute: -60
   updateAnchors: 1
@@ -6139,7 +6161,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2031260217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.9638748, y: -47, z: 0}
+  m_LocalPosition: {x: -43.5038719, y: -47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1545792664}

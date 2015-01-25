@@ -18,10 +18,6 @@ public class UIProducts : UIWindow {
         playerCompany = GameManager.Instance.playerCompany;
     }
 
-    protected override void Setup(GameObject obj) {
-        GameManager.Instance.narrativeManager.OpenedProducts();
-    }
-
     void Update() {
         Infrastructure infra = playerCompany.infrastructure;
         Infrastructure used = playerCompany.usedInfrastructure;
@@ -35,18 +31,14 @@ public class UIProducts : UIWindow {
     }
 
     public void ShowNewProductFlow() {
-        newProduct.SetActive(true);
+        SelectTab(newProduct);
         newProductButton.defaultColor = activeColor;
-
-        manageProducts.SetActive(false);
         manageProductsButton.defaultColor = inactiveColor;
     }
 
     public void ShowManageProducts() {
-        newProduct.SetActive(false);
+        SelectTab(manageProducts);
         newProductButton.defaultColor = inactiveColor;
-
-        manageProducts.SetActive(true);
         manageProductsButton.defaultColor = activeColor;
     }
 }

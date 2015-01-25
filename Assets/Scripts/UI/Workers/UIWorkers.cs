@@ -15,6 +15,7 @@ public class UIWorkers : UIWindow {
 
     void Start() {
         playerCompany = GameManager.Instance.playerCompany;
+        currentScreen_ = manageWorkers;
     }
 
     void Update() {
@@ -22,18 +23,14 @@ public class UIWorkers : UIWindow {
     }
 
     public void ShowHireWorkers() {
-        hireWorkers.SetActive(true);
+        SelectTab(hireWorkers);
         hireWorkersButton.defaultColor = activeColor;
-
-        manageWorkers.SetActive(false);
         manageWorkersButton.defaultColor = inactiveColor;
     }
 
     public void ShowManageWorkers() {
-        hireWorkers.SetActive(false);
+        SelectTab(manageWorkers);
         hireWorkersButton.defaultColor = inactiveColor;
-
-        manageWorkers.SetActive(true);
         manageWorkersButton.defaultColor = activeColor;
     }
 }

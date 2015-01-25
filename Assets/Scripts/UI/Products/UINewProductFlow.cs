@@ -125,6 +125,10 @@ public class UINewProductFlow : MonoBehaviour {
         productTypeSelectionView.SetActive(false);
         pointAllocationView.SetActive(true);
 
+        // Not very elegant, but ping the narrative manager
+        // to see if anything needs to be displayed.
+        gm.narrativeManager.ProgressOnboarding();
+
         // Create a dummy product with the new product types.
         product = new Product();
         product.Init(productTypes, 0, 0, 0, gm.playerCompany);
@@ -245,6 +249,10 @@ public class UINewProductFlow : MonoBehaviour {
     private void BeginProductDevelopment_() {
         gm.playerCompany.StartNewProduct(productTypes, design, marketing, engineering);
         SendMessageUpwards("Close");
+
+        // Not very elegant, but ping the narrative manager
+        // to see if anything needs to be displayed.
+        gm.narrativeManager.ProgressOnboarding();
     }
 }
 

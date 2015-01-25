@@ -60,6 +60,7 @@ public class UIManager : Singleton<UIManager> {
             menu.SetActive(false);
         } else {
             menu.SetActive(true);
+            menu.GetComponent<UIGrid>().Reposition();
         }
     }
 

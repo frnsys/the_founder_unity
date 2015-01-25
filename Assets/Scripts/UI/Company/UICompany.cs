@@ -11,15 +11,17 @@ public class UICompany : UIWindow {
     private Color activeColor = new Color(1f,1f,1f,1f);
     private Color inactiveColor = new Color(1f,1f,1f,0.75f);
 
+    void Awake() {
+        currentScreen_ = overviewView;
+    }
+
     public void ShowManageView() {
-        manageView.SetActive(true);
-        overviewView.SetActive(false);
+        SelectTab(manageView);
         manageButton.defaultColor = activeColor;
         overviewButton.defaultColor = inactiveColor;
     }
     public void ShowOverviewView() {
-        manageView.SetActive(false);
-        overviewView.SetActive(true);
+        SelectTab(overviewView);
         manageButton.defaultColor = inactiveColor;
         overviewButton.defaultColor = activeColor;
     }

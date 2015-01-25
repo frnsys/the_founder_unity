@@ -7,10 +7,15 @@ using UnityEngine;
 using System.Collections;
 
 public class UIWindow : UIPopup {
-    private GameObject currentScreen_;
+    // An event that fires when a window is opened.
+    static public event System.Action<string> WindowOpened;
+    static public event System.Action<string> TabOpened;
+
+    protected GameObject currentScreen_;
     public GameObject currentScreen {
         set {
-            currentScreen_.SetActive(false);
+            if (currentScreen_ != null)
+                currentScreen_.SetActive(false);
 
             value.SetActive(true);
             currentScreen_ = value;
@@ -19,10 +24,14 @@ public class UIWindow : UIPopup {
 
     public void SelectTab(GameObject screen) {
         currentScreen = screen;
+        if (TabOpened != null)
+            TabOpened(screen.name.Replace("(Clone)", ""));
     }
 
     void OnEnable() {
         Show(gameObject);
+        if (WindowOpened != null)
+            WindowOpened(gameObject.name.Replace("(Clone)", ""));
     }
 
     public void Close() {
