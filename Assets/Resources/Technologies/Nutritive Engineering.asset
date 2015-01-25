@@ -12,29 +12,17 @@ MonoBehaviour:
   m_Name: Nutritive Engineering
   m_EditorClassIdentifier: 
   description: 
+  icon: {fileID: 2800000, guid: 4477d0af03ecb4346a628f836c1b4e2b, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
   requiredTechnologies: []

@@ -31,6 +31,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject competitorProductCompletedAlertPrefab;
     public GameObject selectWorkerPopupPrefab;
     public GameObject selectPromoPopupPrefab;
+    public GameObject selectResearchPopupPrefab;
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -201,6 +202,12 @@ public class UIManager : Singleton<UIManager> {
 
         UISelectWorkerPopup p = NGUITools.AddChild(alertsPanel, selectWorkerPopupPrefab).GetComponent<UISelectWorkerPopup>();
         p.SetData(title, workers, confirm, selected);
+    }
+
+    // Show a research selection popup.
+    public void ResearchSelectionPopup(string title, IEnumerable<Technology> techs, Action<Technology> confirm, Technology selected) {
+        UISelectResearchPopup p = NGUITools.AddChild(alertsPanel, selectResearchPopupPrefab).GetComponent<UISelectResearchPopup>();
+        p.SetData(title, techs, confirm, selected);
     }
 
     // Show a promo selection popup.

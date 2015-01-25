@@ -13,26 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: I'm telling you - wearable computing is going to be the next big thing!
     Computers are now small enough that we can fit them in a watch or a pair of glasses.
+  icon: {fileID: 2800000, guid: fa1d8f50b64494f76b8f657b5114e7af, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
+      promos: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
   requiredTechnologies: []

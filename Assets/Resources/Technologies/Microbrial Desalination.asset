@@ -12,31 +12,17 @@ MonoBehaviour:
   m_Name: Microbrial Desalination
   m_EditorClassIdentifier: 
   description: 
+  icon: {fileID: 2800000, guid: 6857654ecb1f04ba3a6f0bc51fe7f427, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 5cd3880e255e944f79a46287f8fc55a3, type: 2}
-  - {fileID: 11400000, guid: 8382a8489406146d080408fc4c1bdc1b, type: 2}
+  requiredTechnologies: []

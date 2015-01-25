@@ -13,27 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: We have a ton of information to process now! We should try to make
     sense of it - We may find some valuable insights.
+  icon: {fileID: 2800000, guid: bb98b551ca8d94ae883bbe8916df0445, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
+      promos: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 393b9abda4e6e42f7a9f3bd48644f65e, type: 2}
+  requiredTechnologies: []

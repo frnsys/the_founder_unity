@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Technology : SharedResource<Technology> {
     public string description;
+    public Texture icon;
 
     public float requiredResearch = 1000;
 
@@ -26,6 +27,9 @@ public class Technology : SharedResource<Technology> {
     }
 
     public bool isAvailable(Company company) {
+        if (company.technologies.Contains(this))
+            return false;
+
         // The technology's vertical must be active on the company.
         if (!company.verticals.Contains(requiredVertical))
             return false;

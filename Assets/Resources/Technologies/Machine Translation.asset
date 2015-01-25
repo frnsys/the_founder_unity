@@ -13,27 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: We've indexed so much text that, when running it through our deep neural
     nets, we were able to translate between human languages with stunning accuracy.
+  icon: {fileID: 2800000, guid: 113e4f48f085e4d7ab2899ea99d7fda9, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
+      promos: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-  requiredTechnologies:
-  - {fileID: 11400000, guid: f731bf70ebace485585b6b508f9d3fcd, type: 2}
+  requiredTechnologies: []

@@ -12,30 +12,17 @@ MonoBehaviour:
   m_Name: Brain-Computer Interfaces
   m_EditorClassIdentifier: 
   description: 
+  icon: {fileID: 2800000, guid: b58eb71c23fac4d748207e92c20924a7, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 040f20076aa8a4f03a70780f71152615, type: 2}
+  requiredTechnologies: []

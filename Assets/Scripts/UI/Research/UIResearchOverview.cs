@@ -9,6 +9,7 @@ public class UIResearchOverview : MonoBehaviour {
     public UILabel techLabel;
     public UILabel investmentLabel;
     public UILabel czarLabel;
+    public UITexture techIcon;
     public UIProgressBar progress;
 
     void OnEnable() {
@@ -19,8 +20,10 @@ public class UIResearchOverview : MonoBehaviour {
     void Update() {
         if (rm.technology == null) {
             techLabel.text = "No current research.";
+            techIcon.mainTexture = null;
         } else {
             techLabel.text = rm.technology.name;
+            techIcon.mainTexture = rm.technology.icon;
         }
         if (playerCompany.ResearchCzar == null)
             czarLabel.text = "No Head of Research appointed.";
@@ -55,5 +58,18 @@ public class UIResearchOverview : MonoBehaviour {
             playerCompany.ResearchCzar = w;
         };
         UIManager.Instance.WorkerSelectionPopup("Appoint a new Head of Research", select, null, playerCompany.ResearchCzar);
+    }
+
+    public void SelectTechnology() {
+        Action<Technology> select = delegate(Technology t) {
+            if (rm.technology != null && rm.technology != t) {
+                UIManager.Instance.Confirm("Are you sure want to change what you're researching? You will lose accumulated progress for the current technology.", delegate() {
+                    rm.BeginResearch(t);
+                }, null);
+            } else {
+                rm.BeginResearch(t);
+            }
+        };
+        UIManager.Instance.ResearchSelectionPopup("Select something to research", rm.AvailableTechnologies(), select, rm.technology);
     }
 }

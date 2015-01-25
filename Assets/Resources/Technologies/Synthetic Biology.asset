@@ -12,30 +12,17 @@ MonoBehaviour:
   m_Name: Synthetic Biology
   m_EditorClassIdentifier: 
   description: 
+  icon: {fileID: 2800000, guid: cbd79ea2e2db5406fa2f2946684797a9, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 5cd3880e255e944f79a46287f8fc55a3, type: 2}
+  requiredTechnologies: []

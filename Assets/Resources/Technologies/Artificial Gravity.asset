@@ -12,29 +12,17 @@ MonoBehaviour:
   m_Name: Artificial Gravity
   m_EditorClassIdentifier: 
   description: 
+  icon: {fileID: 2800000, guid: e6c06bf1e9d4041729c9b24b8043e5ea, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
   requiredTechnologies: []

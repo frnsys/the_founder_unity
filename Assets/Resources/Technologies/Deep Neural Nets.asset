@@ -13,29 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: The most sophisticated deep learning neural network algorithms from
     the depths of academia are finally ready for production.
+  icon: {fileID: 2800000, guid: d02dd1c63c53e4afd9c9a46c7f924749, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredTechnologies: []

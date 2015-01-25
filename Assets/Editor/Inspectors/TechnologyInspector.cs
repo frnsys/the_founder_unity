@@ -22,6 +22,10 @@ internal class TechnologyInspector : Editor {
         d.description = EditorGUILayout.TextArea(d.description, GUILayout.Height(50));
         EditorGUILayout.Space();
 
+        EditorGUILayout.LabelField("Icon");
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("icon"), GUIContent.none);
+        EditorGUILayout.Space();
+
         EditorGUILayout.LabelField("Research Needed");
         EditorGUILayout.PropertyField(serializedObject.FindProperty("requiredResearch"), GUIContent.none);
         EditorGUILayout.Space();

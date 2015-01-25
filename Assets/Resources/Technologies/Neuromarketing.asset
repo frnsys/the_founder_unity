@@ -12,29 +12,17 @@ MonoBehaviour:
   m_Name: Neuromarketing
   m_EditorClassIdentifier: 
   description: 
+  icon: {fileID: 2800000, guid: 894bb054172a5480eb2a1499314fe7a1, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
   requiredTechnologies: []

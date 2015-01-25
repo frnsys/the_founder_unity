@@ -3,6 +3,7 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -46,6 +47,8 @@ public class ResearchManager : MonoBehaviour {
 
     static public event System.Action<Technology> Completed;
     public void BeginResearch(Technology d) {
+        // Research resets for new technologies.
+        data.research = 0;
         data.technology = d;
     }
     public void EndResearch() {
@@ -62,6 +65,10 @@ public class ResearchManager : MonoBehaviour {
 
     public void Load(GameData d) {
         data = d;
+    }
+
+    public IEnumerable<Technology> AvailableTechnologies() {
+        return Technology.LoadAll().Where(t => t.isAvailable(data.company));
     }
 }
 

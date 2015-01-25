@@ -13,29 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Right now everyone is managing their own information, but it would
     be so much more convenient if we held it on to it for them.
+  icon: {fileID: 2800000, guid: 1f48f83d4620d4e26afb2d9869031007, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredTechnologies: []

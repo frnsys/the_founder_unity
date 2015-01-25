@@ -13,26 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Trusting people is hard. What if we didn't have to trust anyone? Let
     computers do the trusting for us!
+  icon: {fileID: 2800000, guid: c2caf35981a5d4fcc9ac113d5191a9d0, type: 3}
   requiredResearch: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
+      promos: []
+    effects: []
   requiredVertical: {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredTechnologies: []
