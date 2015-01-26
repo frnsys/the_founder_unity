@@ -3440,6 +3440,7 @@ Transform:
   - {fileID: 1635992662}
   - {fileID: 1453662939}
   - {fileID: 2054914623}
+  - {fileID: 1669706672}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!114 &1278708170
@@ -3916,7 +3917,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0666666701
+  aspectRatio: 8.64999962
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -4066,7 +4067,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .290625006
 --- !u!1 &1562105877
 GameObject:
   m_ObjectHideFlags: 0
@@ -4600,7 +4601,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .569196403
 --- !u!114 &1635992664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4680,6 +4681,97 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 3.42857146
+--- !u!1 &1669706671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1669706672}
+  - 114: {fileID: 1669706673}
+  - 65: {fileID: 1669706674}
+  - 114: {fileID: 1669706675}
+  m_Layer: 8
+  m_Name: Office Camera Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1669706672
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669706671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1278708169}
+  m_RootOrder: 6
+--- !u!114 &1669706673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669706671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 1278708169}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 1278708169}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 1278708169}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 1278708169}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 2
+  mHeight: 2
+  mDepth: 1
+  autoResizeBoxCollider: 1
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: .582291663
+--- !u!65 &1669706674
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669706671}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1669706675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669706671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f849c0260334f3cb2b0112039c4c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  officeCamera: {fileID: 428045958}
 --- !u!1 &1687328360
 GameObject:
   m_ObjectHideFlags: 0
@@ -6163,7 +6255,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2031260217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.9476929, y: -47, z: 0}
+  m_LocalPosition: {x: -12.8832493, y: -47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1545792664}
