@@ -35,6 +35,25 @@ public class Product : HasStats {
     public float marketScore = 0;
     public float marketShare = 0;
 
+    public Mesh mesh {
+        get {
+            if (recipe.mesh)
+                return recipe.mesh;
+
+            // Fallback to first product type's mesh.
+            return productTypes[0].mesh;
+        }
+    }
+    public Texture texture {
+        get {
+            if (recipe.texture)
+                return recipe.texture;
+
+            // Fallback to first product type's texture.
+            return productTypes[0].texture;
+        }
+    }
+
     public float requiredProgress;
 
     [SerializeField]

@@ -22,6 +22,9 @@ internal class ProductTypeInspector : Editor {
         p.name = EditorGUILayout.TextField("Name", p.name);
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
 
+        p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh));
+        p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture));
+
         p.progressRequired = EditorGUILayout.FloatField("Progress Required", p.progressRequired);
         p.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", p.difficulty);
 

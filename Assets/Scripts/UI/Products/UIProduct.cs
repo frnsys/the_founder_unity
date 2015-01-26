@@ -29,11 +29,15 @@ public class UIProduct : MonoBehaviour {
     private Product.State state;
 
     void Update() {
-        if (product_ != null)
+        if (product_ != null) {
             // These things only need to update if product the state has changed.
             if (state != product_.state)
                 UpdateState();
             SetData();
+
+            // Rotate the product, fancy.
+            productObject.transform.Rotate(0,0,-50*Time.deltaTime);
+        }
     }
 
     private void UpdateState() {
@@ -41,11 +45,17 @@ public class UIProduct : MonoBehaviour {
             name.text = product_.genericName;
             status.text = "Developing...";
             description.gameObject.SetActive(false);
+            productObject.SetActive(false);
         }
         else {
             name.text = product_.name;
             progress.gameObject.SetActive(false);
             description.gameObject.SetActive(true);
+
+            productObject.GetComponent<MeshFilter>().mesh = product.mesh;
+            productObject.GetComponent<MeshRenderer>().material.mainTexture = product.texture;
+            productObject.SetActive(true);
+
             RenderEffects(product_.effects);
             AdjustEffectsHeight();
         }
@@ -77,6 +87,7 @@ public class UIProduct : MonoBehaviour {
     public UIButton shutdown;
     public UIProgressBar progress;
     public UIGrid effectGrid;
+    public GameObject productObject;
 
     public GameObject buffEffectPrefab;
     public GameObject unlockEffectPrefab;

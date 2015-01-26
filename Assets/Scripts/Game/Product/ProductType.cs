@@ -13,6 +13,10 @@ public class ProductType : SharedResource<ProductType> {
     // The difficulty modifier for this product type.
     public float difficulty;
 
+    // For the physical representation of the product.
+    public Mesh mesh;
+    public Texture texture;
+
     public override string ToString() {
         return name;
     }

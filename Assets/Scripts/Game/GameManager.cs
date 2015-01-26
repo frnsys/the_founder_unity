@@ -98,6 +98,7 @@ public class GameManager : Singleton<GameManager> {
         // See Build Settings to get the number for levels/scenes.
         if (level == 2) {
             StartGame();
+            narrativeManager.InitializeOnboarding();
         }
     }
 
@@ -118,7 +119,10 @@ public class GameManager : Singleton<GameManager> {
         //Time.timeScale = 100;
 
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
-        // StartGame();
+        StartGame();
+
+        // Uncomment this if you want to start the game with onboarding.
+        // narrativeManager.InitializeOnboarding();
     }
 
     void StartGame() {
@@ -131,8 +135,6 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ResearchCycle());
         StartCoroutine(OpinionCycle());
         StartCoroutine(EventCycle());
-
-        narrativeManager.InitializeOnboarding();
     }
 
     void OnEvent(GameEvent e) {

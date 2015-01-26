@@ -15,6 +15,10 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
 
     public List<ProductType> productTypes;
 
+    // For the physical representation of the product.
+    public Mesh mesh;
+    public Texture texture;
+
     // Comma-delimited list of names.
     public string names;
 
