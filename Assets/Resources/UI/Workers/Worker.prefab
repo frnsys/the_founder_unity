@@ -668,7 +668,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   mPivot: 4
-  mWidth: 293
+  mWidth: 294
   mHeight: 24
   mDepth: 4
   autoResizeBoxCollider: 0
@@ -860,7 +860,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.20833325
+  aspectRatio: 2.86702132
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
@@ -1096,7 +1096,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: ffde25049ff3a424db4d7c39955562d7, type: 3}
+  mTexture: {fileID: 2800000, guid: e7cec613131244642963f56d350e8f63, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 293.5
+  aspectRatio: 2.48728824
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   mPivot: 4
-  mWidth: 293
+  mWidth: 294
   mHeight: 24
   mDepth: 4
   autoResizeBoxCollider: 0
@@ -1397,7 +1397,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.71759248
+  aspectRatio: 2.48728824
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1455,7 +1455,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.71759248
+  aspectRatio: 2.48728824
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
