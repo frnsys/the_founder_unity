@@ -9,13 +9,20 @@ public class UIProductType : MonoBehaviour {
             productType_ = value;
             label.text = productType_.name;
             infrastructure.text =productType_.requiredInfrastructure.ToString();
-            // TO DO this should be required infrastructure
-            //points.text = productType_.points.ToString() + "PP";
+
+            productObject.GetComponent<MeshFilter>().mesh = productType_.mesh;
+            productObject.GetComponent<MeshRenderer>().material.mainTexture = productType_.texture;
         }
+    }
+
+    void Update() {
+        // Rotate the product, fancy.
+        productObject.transform.Rotate(0,0,-50*Time.deltaTime);
     }
 
     public UILabel label;
     public UILabel infrastructure;
+    public GameObject productObject;
 }
 
 

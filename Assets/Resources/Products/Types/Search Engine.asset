@@ -14,8 +14,13 @@ MonoBehaviour:
   description: 
   progressRequired: 1000
   difficulty: 2
+  mesh: {fileID: 0}
+  texture: {fileID: 0}
   requiredVerticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
     values: 02000000000000000000000000000000
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
