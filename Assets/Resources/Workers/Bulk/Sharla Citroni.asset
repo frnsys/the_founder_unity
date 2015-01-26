@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Sharla Citroni
+  m_EditorClassIdentifier: 
+  texture: {fileID: 0}
+  salary: 0
+  bio: Sharla Citroni is alienating and brings everyone down. Sharla Citroni is not
+    very imaginative and is kind of lazy. Sharla Citroni is quite dim.
+  description: 
+  title: Public Relations Associate
+  baseMinSalary: 30000
+  offMarketTime: 0
+  recentPlayerOffers: 0
+  happiness:
+    baseValue: 1
+    _buffs: []
+  productivity:
+    baseValue: 4
+    _buffs: []
+  charisma:
+    baseValue: 3
+    _buffs: []
+  creativity:
+    baseValue: 3
+    _buffs: []
+  cleverness:
+    baseValue: 1
+    _buffs: []

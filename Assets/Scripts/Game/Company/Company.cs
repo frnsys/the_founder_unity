@@ -134,7 +134,7 @@ public class Company : HasStats {
 
     static public event System.Action<Worker, Company> WorkerHired;
     public bool HireWorker(Worker worker) {
-        if (_workers.Count < sizeLimit && Pay(worker.salary)) {
+        if (_workers.Count < sizeLimit && Pay(worker.salary * 0.1f)) {
             // Apply existing worker effects.
             foreach (WorkerEffect we in activeEffects.ofType<WorkerEffect>()) {
                 we.Apply(worker);
@@ -374,7 +374,7 @@ public class Company : HasStats {
     public void PayMonthly() {
         float toPay = 0;
         foreach (Worker worker in workers) {
-            toPay += worker.salary;
+            toPay += worker.salary/12;
         }
 
         foreach (Location loc in locations) {

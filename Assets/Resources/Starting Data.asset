@@ -18,13 +18,13 @@ MonoBehaviour:
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers:
-    - {fileID: 11400000, guid: ab147395ddb924b6bbb72fc291176108, type: 2}
-    - {fileID: 11400000, guid: def0cbbde04104d19823162e38dee52b, type: 2}
-    - {fileID: 11400000, guid: 57eebfa1c4c5b48b795785ff4d84918d, type: 2}
-    - {fileID: 11400000, guid: 7713e534ffbb44517884b17adc11adf7, type: 2}
-    - {fileID: 11400000, guid: 63bc6ccc8a01c4365a0f3c0f281a7f07, type: 2}
-    - {fileID: 11400000, guid: f843503f4516344a99912fb1a3bf129e, type: 2}
-    - {fileID: 11400000, guid: 1c8d25a4cfb594d418d287394e5469f1, type: 2}
+    - {fileID: 11400000, guid: 5dac42fec526449cfba84bb31ba15627, type: 2}
+    - {fileID: 11400000, guid: fa75f5977b6044ac490fc038d3cd66ed, type: 2}
+    - {fileID: 11400000, guid: 84fe8544c28594126ad40ab02d4f4c8c, type: 2}
+    - {fileID: 11400000, guid: 01eaff63868d4491389e240353da620b, type: 2}
+    - {fileID: 11400000, guid: f34293193c60b4313bd2ba956f4811dc, type: 2}
+    - {fileID: 11400000, guid: 9439961fbd6d542c2a0788ea973c2ba8, type: 2}
+    - {fileID: 11400000, guid: 1d77c8b44067f4bb7b1de77a9de91599, type: 2}
     items: []
     stores: 00000000
     locations:
@@ -37,7 +37,15 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6ac41f3f32e0e44be96e7daa37b15b67, type: 2}
     - {fileID: 11400000, guid: 225af2c0fa20e42e0b70d44148c1f1cb, type: 2}
   onboardingState:
-    PRODUCTS_OPENED: 0
+    FIRST_PRODUCT_LAUNCHED: 0
+    FIRST_WORKER_HIRED: 0
+    MARKET_UNLOCKED: 0
+    RESEARCH_UNLOCKED: 0
+    PRODUCT_COMBOS_UNLOCKED: 0
+    RESEARCH_OPENED: 0
+    COMMS_UNLOCKED: 0
+    VERTICALS_UNLOCKED: 0
+    WORKER_LIMIT_REACHED: 0
   workerInsight: 0
   maxProductTypes: 0
   technology: {fileID: 0}

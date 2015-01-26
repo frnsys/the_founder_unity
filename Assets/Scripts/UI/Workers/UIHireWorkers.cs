@@ -29,7 +29,7 @@ public class UIHireWorkers : UIFullScreenPager {
     public void HireWorker() {
         UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
         ic.bodyText = "Make an offer for " + currentWorker.name + ".";
-        ic.offer = 20000;
+        ic.offer = 5000;
 
         UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
             ic.Close_();
