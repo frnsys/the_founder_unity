@@ -116,13 +116,7 @@ public class GameManager : Singleton<GameManager> {
 
     void Start() {
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
-        //StartGame();
-
-        //Debug.Log("TESTING RECIPE");
-        //ProductRecipe recipe = ProductRecipe.Load("Social Network");
-        //foreach (IEffect ef in recipe.effects.effects) {
-            //Debug.Log(ef);
-        //}
+        StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
