@@ -57,7 +57,7 @@ public class Company : HasStats {
         }
     }
 
-    public EffectSet activeEffects;
+    public List<EffectSet> activeEffects;
 
     public List<MarketManager.Market> markets;
 
@@ -91,7 +91,7 @@ public class Company : HasStats {
         opinionEvents = new List<OpinionEvent>();
         publicity = new Stat("Publicity", 0);
 
-        activeEffects = new EffectSet();
+        activeEffects = new List<EffectSet>();
 
         // Keep track for a year.
         PerfHistory = new PerformanceHistory(12);
@@ -134,10 +134,10 @@ public class Company : HasStats {
 
     static public event System.Action<Worker, Company> WorkerHired;
     public bool HireWorker(Worker worker) {
-        if (_workers.Count < sizeLimit && Pay(worker.salary * 0.1f)) {
+        if (_workers.Count < sizeLimit && Pay(worker.hiringFee)) {
             // Apply existing worker effects.
-            foreach (WorkerEffect we in activeEffects.ofType<WorkerEffect>()) {
-                we.Apply(worker);
+            foreach (EffectSet es in activeEffects) {
+                es.Apply(worker);
             }
 
             _workers.Add(worker);
@@ -157,8 +157,8 @@ public class Company : HasStats {
     }
     public void FireWorker(Worker worker) {
         // Remove existing worker effects.
-        foreach (WorkerEffect we in activeEffects.ofType<WorkerEffect>()) {
-            we.Remove(worker);
+        foreach (EffectSet es in activeEffects) {
+            es.Remove(worker);
         }
 
         worker.salary = 0;
@@ -331,8 +331,8 @@ public class Company : HasStats {
             product.released = true;
 
             // Apply relevant effects to the product
-            foreach (ProductEffect pe in activeEffects.ofType<ProductEffect>()) {
-                pe.Apply(product);
+            foreach (EffectSet es in activeEffects) {
+                es.Apply(product);
             }
 
             // The product's effects are applied by the GameManager.
@@ -341,8 +341,8 @@ public class Company : HasStats {
 
     public void ShutdownProduct(Product product) {
         // Remove relevant effects from the product
-        foreach (ProductEffect pe in activeEffects.ofType<ProductEffect>()) {
-            pe.Remove(product);
+        foreach (EffectSet es in activeEffects) {
+            es.Remove(product);
         }
 
         product.Shutdown();
@@ -374,7 +374,7 @@ public class Company : HasStats {
     public void PayMonthly() {
         float toPay = 0;
         foreach (Worker worker in workers) {
-            toPay += worker.salary/12;
+            toPay += worker.monthlyPay;
         }
 
         foreach (Location loc in locations) {

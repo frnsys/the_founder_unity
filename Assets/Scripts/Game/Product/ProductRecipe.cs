@@ -13,6 +13,8 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     // Naming convention:
     // ProductType.ProductType.<etc>.asset
 
+    public string description;
+
     public List<ProductType> productTypes;
 
     // For the physical representation of the product.

@@ -7,12 +7,20 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class ProductEffect : IEffect {
+public class ProductEffect {
     public List<ProductType> productTypes = new List<ProductType>();
     public List<Vertical> verticals = new List<Vertical>();
     public StatBuff buff;
 
-    public override void Apply(Company company) {
+    public ProductEffect() {
+        buff = new StatBuff("Design", 0);
+    }
+
+    public ProductEffect(string name) {
+        buff = new StatBuff(name, 0);
+    }
+
+    public void Apply(Company company) {
         List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
         foreach (Product product in matchingProducts) {
             if (!product.developing)
@@ -20,7 +28,7 @@ public class ProductEffect : IEffect {
         }
     }
 
-    public override void Remove(Company company) {
+    public void Remove(Company company) {
         List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
         foreach (Product product in matchingProducts) {
             if (!product.developing)
@@ -51,5 +59,28 @@ public class ProductEffect : IEffect {
             return true;
         else
             return false;
+    }
+
+    public bool Equals(ProductEffect pe) {
+        if (productTypes.Count != pe.productTypes.Count)
+            return false;
+
+        if (verticals.Count != pe.verticals.Count)
+            return false;
+
+        if (!buff.Equals(pe.buff))
+            return false;
+
+        for (int i=0; i<productTypes.Count; i++) {
+            if (productTypes[i] != pe.productTypes[i])
+                return false;
+        }
+
+        for (int i=0; i<verticals.Count; i++) {
+            if (verticals[i] != pe.verticals[i])
+                return false;
+        }
+
+        return true;
     }
 }

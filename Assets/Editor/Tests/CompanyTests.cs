@@ -202,9 +202,7 @@ namespace UnityTest
             loc.market = MarketManager.Market.Antarctica;
 
             EffectSet es = new EffectSet();
-            CashEffect ce = new CashEffect();
-            ce.cash = 5000;
-            es.Add(ce);
+            es.cash = 5000;
             loc.effects = es;
 
             Assert.IsFalse(c.ExpandToLocation(loc));
@@ -235,7 +233,7 @@ namespace UnityTest
 
             // Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
             // Same for infrastructure and worker salary.
-            float paid = worker.salary + worker.salary + c.researchInvestment + i.cost + i.cost + loc.cost + loc.cost;
+            float paid = worker.hiringFee + worker.monthlyPay + c.researchInvestment + i.cost + i.cost + loc.cost + loc.cost;
 
             c.HireWorker(worker);
 
@@ -257,6 +255,7 @@ namespace UnityTest
             i[Infrastructure.Type.Datacenter] = baseDatacenterCapacity + 1;
 
             Location newLoc = ScriptableObject.CreateInstance<Location>();
+            newLoc.name = "Belize";
             newLoc.cost = 0;
             newLoc.capacity = new Infrastructure();
             newLoc.capacity[Infrastructure.Type.Datacenter] = 1;
@@ -325,11 +324,10 @@ namespace UnityTest
 
         [Test]
         public void ActiveEffects() {
-            c.BuyItem(item);
+            Assert.IsTrue(c.BuyItem(item));
 
-            foreach (IEffect ef in item.effects) {
-                Assert.IsTrue(c.activeEffects.Contains(ef));
-            }
+            int last = c.activeEffects.Count - 1;
+            Assert.IsTrue(c.activeEffects[last].Equals(item.effects));
         }
 
 
@@ -434,6 +432,8 @@ namespace UnityTest
             c.cash.baseValue = 2000;
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
+            p.Launch();
+
             c.HireWorker(worker);
 
             Assert.IsTrue(c.BuyItem(item));
@@ -478,10 +478,7 @@ namespace UnityTest
             c.forgettingRate      = 10;
 
             EffectSet es = new EffectSet();
-            OpinionEffect oe = new OpinionEffect();
-            oe.opinionEvent = new OpinionEvent(100, 400);
-            es.Add(oe);
-
+            es.opinionEvent = new OpinionEvent(100, 400);
             es.Apply(c);
 
             Assert.AreEqual(c.opinion.value, 300);

@@ -46,7 +46,7 @@ public class UIEffectAlert : UIAlert {
     }
 
     private void RenderBuffEffects(EffectSet es) {
-        foreach (StatBuff buff in es.ofType<WorkerEffect>().Select(w => w.buff)) {
+        foreach (StatBuff buff in es.workerEffects) {
             RenderBuffEffect(buff, "workers");
         }
         // TO DO
@@ -56,7 +56,7 @@ public class UIEffectAlert : UIAlert {
     }
 
     private void RenderProductEffects(EffectSet es) {
-        foreach (ProductEffect pe in es.ofType<ProductEffect>()) {
+        foreach (ProductEffect pe in es.productEffects) {
             GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
             effectObj.GetComponent<UIProductEffect>().Set(pe);
         }

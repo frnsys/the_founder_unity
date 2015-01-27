@@ -26,14 +26,5 @@ MonoBehaviour:
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000
-  effects:
-    unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    effects: []
+  effects: {fileID: 0}
   rotation: {x: 0, y: 0, z: 0}

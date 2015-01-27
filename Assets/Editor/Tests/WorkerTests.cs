@@ -67,18 +67,18 @@ namespace UnityTest
 
         [Test]
         public void AvailableWorkers() {
-            Assert.AreEqual(wm.AvailableWorkers.Count(), 1);
+            int startingCount = wm.AvailableWorkers.Count();
 
             Worker w = ScriptableObject.CreateInstance<Worker>();
             w.Init("Sammy");
             gd.unemployed.Add(w);
 
             // Should still be 1 since this worker is not yet unlocked.
-            Assert.AreEqual(wm.AvailableWorkers.Count(), 1);
+            Assert.AreEqual(wm.AvailableWorkers.Count(), startingCount);
 
             // After unlocking it the new worker should be available.
             gm.unlocked.workers.Add(w);
-            Assert.AreEqual(wm.AvailableWorkers.Count(), 2);
+            Assert.AreEqual(wm.AvailableWorkers.Count(), startingCount + 1);
         }
 
         [Test]
@@ -89,22 +89,23 @@ namespace UnityTest
             gd.unemployed.Add(w);
             gm.unlocked.workers.Add(w);
 
-            Assert.AreEqual(wm.AvailableWorkers.Count(), 2);
+            int startingCount = wm.AvailableWorkers.Count();
 
             wm.HireWorker(w, c);
             Assert.IsTrue(c.workers.Contains(w));
 
-            // Should be 1 now that the other worker is hired.
-            Assert.AreEqual(wm.AvailableWorkers.Count(), 1);
+            // Should be -1 now that the other worker is hired.
+            Assert.AreEqual(wm.AvailableWorkers.Count(), startingCount - 1);
             Assert.IsFalse(gd.unemployed.Contains(w));
 
             Company c_ = ScriptableObject.CreateInstance<Company>();
+            c_.Init();
             w.salary = 333333;
             c_.cash.baseValue = 333333;
             wm.HireWorker(w, c_);
 
             // These should not have changed.
-            Assert.AreEqual(wm.AvailableWorkers.Count(), 1);
+            Assert.AreEqual(wm.AvailableWorkers.Count(), startingCount - 1);
             Assert.IsFalse(gd.unemployed.Contains(w));
 
             // The worker should now be gone from the first company.
@@ -116,7 +117,7 @@ namespace UnityTest
 
             wm.FireWorker(w, c_);
 
-            Assert.AreEqual(wm.AvailableWorkers.Count(), 2);
+            Assert.AreEqual(wm.AvailableWorkers.Count(), startingCount);
             Assert.IsTrue(gd.unemployed.Contains(w));
             Assert.IsFalse(c.workers.Contains(w));
             Assert.IsFalse(c_.workers.Contains(w));

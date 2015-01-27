@@ -11,7 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
   m_Name: Social Network
   m_EditorClassIdentifier: 
+  description: People are going to love this. I guarantee it.
   productTypes: []
+  mesh: {fileID: 0}
+  texture: {fileID: 0}
   names: Friendbook, Palster, Lets Connect, Digibuds
   design_W: 1
   marketing_W: 1
@@ -22,25 +25,13 @@ MonoBehaviour:
   maxLongevity: 1000
   maxRevenue: 1000
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    effects:
+    - {fileID: 0}

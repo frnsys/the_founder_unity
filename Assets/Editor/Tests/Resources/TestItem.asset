@@ -24,7 +24,41 @@ MonoBehaviour:
       locations: []
       verticals: []
       promos: []
-    effects:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    cash: 0
+    research:
+      name: DEFAULTNAME
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects:
+    - productTypes: []
+      verticals: []
+      buff:
+        name: Design
+        value: 10
+        duration: 0
+        type: 0
+    workerEffects:
+    - name: Happiness
+      value: 10
+      duration: 0
+      type: 0
+    - name: Productivity
+      value: 20
+      duration: 0
+      type: 0

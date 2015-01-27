@@ -29,15 +29,8 @@ MonoBehaviour:
   forgettingRate: 1
   opinionEvents: []
   activeEffects:
-    unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    effects: []
+  - {fileID: 0}
+  - {fileID: 0}
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -65,26 +58,13 @@ MonoBehaviour:
   AnnualPerfHistory:
     Size: 10
     values: []
-  bonuses:
-    unlocks:
-      productTypes:
-      - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-      - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
-      workers: []
-      items: []
-      stores: 
-      locations: []
-      verticals:
-      - {fileID: 11400000, guid: b5546f34178bd404b9b4bcc7cae92505, type: 2}
-      - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-      promos: []
-    effects: []
+  bonuses: {fileID: 0}
   specialtyVerticals: []
   specialtyProductTypes: []
   startWorkers: []
   startProducts: []
   startLocations:
-  - {fileID: 11400000, guid: ae259c9c620bc4513afb0726a125afc1, type: 2}
+  - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
   - {fileID: 11400000, guid: e73d28c378b23405781243ce9d6ca154, type: 2}
   - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
   aggression: 0

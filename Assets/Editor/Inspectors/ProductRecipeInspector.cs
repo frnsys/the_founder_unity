@@ -52,6 +52,10 @@ internal class ProductRecipeInspector : Editor {
         EditorGUILayout.LabelField("Names (comma-delimited)");
         p.names = EditorGUILayout.TextArea(p.names);
 
+        EditorGUILayout.LabelField("Description");
+        p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
+        EditorGUILayout.Space();
+
         p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);
         p.marketing_W = EditorGUILayout.FloatField("Marketing Weight", p.marketing_W);
         p.engineering_W = EditorGUILayout.FloatField("Engineering Weight", p.engineering_W);
@@ -67,7 +71,10 @@ internal class ProductRecipeInspector : Editor {
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Effects");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"), GUIContent.none);
+        if (p.effects == null)
+            p.effects = new EffectSet();
+        EffectSetRenderer.RenderEffectSet(p, p.effects);
+        EditorGUILayout.Space();
 
         // Let Unity know to save on changes.
         if (GUI.changed) {

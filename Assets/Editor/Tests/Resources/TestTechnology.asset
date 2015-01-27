@@ -12,26 +12,39 @@ MonoBehaviour:
   m_Name: TestTechnology
   m_EditorClassIdentifier: 
   description: This is a test technology
+  icon: {fileID: 0}
   requiredResearch: 100
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
       stores: 
       locations: []
       verticals: []
+      promos: []
+    cash: 0
+    research:
+      name: DEFAULTNAME
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
   requiredVertical: {fileID: 11400000, guid: 801736dea036a4cba8e4c03a8d5c7ec0, type: 2}
   requiredTechnologies: []

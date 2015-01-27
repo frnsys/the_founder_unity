@@ -11,12 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: San Francisco
   m_EditorClassIdentifier: 
-  description: This is a test description
+  description: 
   cost: 1e+06
   market: 0
   capacity:
     keys: 00000000010000000200000003000000
-    values: 04000000000000000000000000000000
+    values: 00000000000000000000000000000000
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000
@@ -26,14 +26,5 @@ MonoBehaviour:
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000
-  effects:
-    unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    effects: []
-  rotation: {x: -42.9000015, y: 157.600006, z: 0}
+  effects: {fileID: 0}
+  rotation: {x: 0, y: 0, z: 0}
