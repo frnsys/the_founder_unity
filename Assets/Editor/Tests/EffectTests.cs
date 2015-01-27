@@ -17,6 +17,7 @@ namespace UnityTest
         private GameManager gm;
 
         private Company c;
+        private EffectSet e;
 
         [SetUp]
         public void SetUp() {
@@ -26,6 +27,7 @@ namespace UnityTest
             gm.Load(gd);
 
             c = new Company("Foo Inc").Init();
+            e = new EffectSet();
         }
 
         [TearDown]
@@ -37,7 +39,6 @@ namespace UnityTest
 
         [Test]
         public void Cash() {
-            CashEffect e = new CashEffect();
             e.cash = 2000;
 
             float start = c.cash.baseValue;
@@ -47,17 +48,16 @@ namespace UnityTest
 
         [Test]
         public void Research() {
-            ResearchEffect e = new ResearchEffect();
-            e.buff.value = 2000;
+            e.research = new StatBuff("Research", 2000);
 
             float start = c.research.value;
             e.Apply(c);
-            Assert.AreEqual(c.research.value, start + e.buff.value);
+            Assert.AreEqual(c.research.value, start + e.research.value);
         }
 
         [Test]
         public void Opinion() {
-            OpinionEffect e = new OpinionEffect();
+            e.opinionEvent = new OpinionEvent();
             e.opinionEvent.opinion.value   = 2000;
             e.opinionEvent.publicity.value = 4000;
 
@@ -70,24 +70,23 @@ namespace UnityTest
 
         [Test]
         public void Event() {
-            EventEffect e = new EventEffect();
             GameEvent ev  = ScriptableObject.CreateInstance<GameEvent>();
             ev.name       = "TESTEVENT";
             e.gameEvent   = ev;
-            e.delay       = 2000;
-            e.probability = 0.5f;
+            e.eventDelay  = 2000;
+            e.eventProbability = 0.5f;
 
             e.Apply(c);
             GameEvent ev_ = gd.eventsPool.Where(evn => evn.name == ev.name).First();
             Assert.AreEqual(ev_.name, ev.name);
-            Assert.AreEqual(ev_.delay, e.delay);
-            Assert.AreEqual(ev_.probability, e.probability);
+            Assert.AreEqual(ev_.delay, e.eventDelay);
+            Assert.AreEqual(ev_.probability, e.eventProbability);
         }
 
         [Test]
         public void Worker() {
-            WorkerEffect e = new WorkerEffect();
-            e.buff = new StatBuff("Happiness", 100);
+            e.workerEffects = new List<StatBuff>();
+            e.workerEffects.Add(new StatBuff("Happiness", 100));
 
             Worker w = ScriptableObject.CreateInstance<Worker>().Init("TESTWORKER");
             c.HireWorker(w);
@@ -96,13 +95,16 @@ namespace UnityTest
             float start = w.happiness.value;
 
             e.Apply(c);
-            Assert.AreEqual(w.happiness.value, start + e.buff.value);
+            Assert.AreEqual(w.happiness.value, start + e.workerEffects[0].value);
         }
 
         [Test]
         public void Product() {
-            ProductEffect e = new ProductEffect();
-            e.buff = new StatBuff("Design", 100);
+            ProductEffect pe = new ProductEffect("Design");
+            pe.buff = new StatBuff("Design", 100);
+
+            e.productEffects = new List<ProductEffect>();
+            e.productEffects.Add(pe);
 
             ProductType pt = ScriptableObject.CreateInstance<ProductType>();
             List<ProductType> pts = new List<ProductType>() { pt };
@@ -115,10 +117,6 @@ namespace UnityTest
 
             e.Apply(c);
 
-            // Have to manually add it to active effects,
-            // this is normally handled by the EffectSet the effect is a part of.
-            c.activeEffects.Add(e);
-
             // The effect should not apply until the product is launched.
             Assert.IsTrue(p.developing);
             Assert.AreEqual(start, p.design.value);
@@ -127,16 +125,17 @@ namespace UnityTest
 
             // The effect should after the product is launched.
             Assert.IsTrue(p.launched);
-            Assert.AreEqual(p.design.value, start + e.buff.value);
+            Assert.AreEqual(p.design.value, start + pe.buff.value);
 
             // Test applying the effect to an already launched product.
-            e = new ProductEffect();
-            e.buff = new StatBuff("Engineering", 100);
+            pe = new ProductEffect("Engineering");
+            pe.buff.value = 100;
+            e.productEffects[0] = pe;
 
             start = p.engineering.value;
 
             e.Apply(c);
-            Assert.AreEqual(p.engineering.value, start + e.buff.value);
+            Assert.AreEqual(p.engineering.value, start + pe.buff.value);
         }
     }
 }

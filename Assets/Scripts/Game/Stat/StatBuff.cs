@@ -27,4 +27,16 @@ public class StatBuff {
         duration = 0;
         type = BuffType.ADD;
     }
+
+    public bool Equals(StatBuff sb) {
+        if (name != sb.name)
+            return false;
+        else if (value != sb.value)
+            return false;
+        else if (duration != sb.duration)
+            return false;
+        else if (type != sb.type)
+            return false;
+        return true;
+    }
 }

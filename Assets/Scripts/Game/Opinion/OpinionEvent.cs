@@ -37,4 +37,14 @@ public class OpinionEvent {
                 opinion.value = 0;
         }
     }
+
+    public bool Equals(OpinionEvent oe) {
+        if (name != name)
+            return false;
+        if (!opinion.Equals(oe.opinion))
+            return false;
+        if (!publicity.Equals(oe.publicity))
+            return false;
+        return true;
+    }
 }

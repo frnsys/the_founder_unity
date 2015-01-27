@@ -25,6 +25,13 @@ public class Worker : HasStats {
     public Texture texture;
 
     public float salary;
+    public float hiringFee {
+        get { return salary * 0.1f; }
+    }
+    public float monthlyPay {
+        get { return salary/12; }
+    }
+
     public string bio;
     public string description;
     public string title;

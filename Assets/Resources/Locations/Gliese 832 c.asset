@@ -14,20 +14,17 @@ MonoBehaviour:
   description: 
   cost: 1e+06
   market: 0
-  image: {fileID: 2800000, guid: 97ca2a031e8224d5685696ef260d7aee, type: 3}
   capacity:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
   infrastructure:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
-  effects:
-    unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    effects: []
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
+  effects: {fileID: 0}
+  rotation: {x: 0, y: 0, z: 0}

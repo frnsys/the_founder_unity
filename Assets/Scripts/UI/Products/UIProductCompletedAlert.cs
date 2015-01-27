@@ -6,20 +6,31 @@ using System.Collections.Generic;
 public class UIProductCompletedAlert: UIEffectAlert {
     public UILabel nameLabel;
     public UILabel aspectsLabel;
+    public GameObject productObject;
 
     public Product product {
         set {
             nameLabel.text = value.name;
             bodyLabel.text = value.description;
+
+            productObject.GetComponent<MeshFilter>().mesh = value.mesh;
+            productObject.GetComponent<MeshRenderer>().material.mainTexture = value.texture;
+
             aspectsLabel.text = string.Join(" & ", value.productTypes.Select(pt => pt.name).ToArray());
             Extend(bodyLabel.height);
 
-            // TO DO add product effects
-            //RenderEffects(product.effects);
+            RenderEffects(value.effects);
 
             // -1 because by default there is space for about 1 effect.
-            //Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
+            Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
         }
+    }
+
+
+    void Update() {
+        // Rotate the product, fancy.
+        float rotation = productObject.transform.rotation.z;
+        productObject.transform.Rotate(0,0,rotation - 1.5f);
     }
 }
 

@@ -41,10 +41,8 @@ namespace UnityTest
                 data.company.forgettingRate      = 10;
                 data.company.publicity.baseValue = 300;
 
-                OpinionEffect oe = new OpinionEffect();
-                oe.opinionEvent = new OpinionEvent(100, 400);
                 EffectSet es = new EffectSet();
-                es.Add(oe);
+                es.opinionEvent = new OpinionEvent(100, 400);
                 es.Apply(data.company);
 
                 for (int i=0;i<5;i++) {
@@ -241,31 +239,21 @@ namespace UnityTest
 		}
 
         private void CompareEffectSets(EffectSet es, EffectSet es_) {
-            Assert.AreEqual(es.effects.Count, es_.effects.Count);
-
-            List<WorkerEffect> wes = es.ofType<WorkerEffect>();
-            List<WorkerEffect> wes_ = es_.ofType<WorkerEffect>();
+            List<StatBuff> wes = es.workerEffects;
+            List<StatBuff> wes_ = es_.workerEffects;
             Assert.AreEqual(wes.Count, wes_.Count);
             for (int j=0;j<wes.Count;j++) {
-                StatBuff sb  = wes[j].buff;
-                StatBuff sb_ = wes_[j].buff;
+                StatBuff sb  = wes[j];
+                StatBuff sb_ = wes_[j];
 
                 Assert.AreEqual(sb.name,  sb_.name);
                 Assert.AreEqual(sb.value, sb_.value);
             }
 
-            List<CashEffect> ces = es.ofType<CashEffect>();
-            List<CashEffect> ces_ = es_.ofType<CashEffect>();
-            Assert.AreEqual(ces.Count, ces_.Count);
-            for (int j=0;j<ces.Count;j++) {
-                float sb  = ces[j].cash;
-                float sb_ = ces_[j].cash;
+            Assert.AreEqual(es.cash, es_.cash);
 
-                Assert.AreEqual(sb, sb_);
-            }
-
-            List<ProductEffect> pes = es.ofType<ProductEffect>();
-            List<ProductEffect> pes_ = es_.ofType<ProductEffect>();
+            List<ProductEffect> pes = es.productEffects;
+            List<ProductEffect> pes_ = es_.productEffects;
             Assert.AreEqual(pes.Count, pes_.Count);
             for (int j=0;j<pes.Count;j++) {
                 ProductEffect pe  = pes[j];
@@ -341,27 +329,25 @@ namespace UnityTest
         private EffectSet CreateEffectSet() {
             EffectSet e = new EffectSet();
 
-            CashEffect ce = new CashEffect();
-            ce.cash = RandFloat();
-            e.Add(ce);
+            e.cash = RandFloat();
 
-            WorkerEffect we = new WorkerEffect();
-            we.buff = new StatBuff("Happiness", RandFloat());
-            e.Add(we);
+            e.workerEffects = new List<StatBuff>();
+            StatBuff wb = new StatBuff("Happiness", RandFloat());
+            e.workerEffects.Add(wb);
 
-            WorkerEffect we_ = new WorkerEffect();
-            we_.buff = new StatBuff("Productivity", RandFloat());
-            e.Add(we);
+            StatBuff wb_ = new StatBuff("Productivity", RandFloat());
+            e.workerEffects.Add(wb_);
 
             ProductType pt = ProductType.Load("Social Network");
             Vertical v     = Vertical.Load("Information");
             e.unlocks.productTypes.Add(pt);
             e.unlocks.verticals.Add(v);
 
-            ProductEffect pe = new ProductEffect();
+            e.productEffects = new List<ProductEffect>();
+            ProductEffect pe = new ProductEffect("Design");
             pe.productTypes.Add(pt);
             pe.buff = new StatBuff("Design", RandFloat());
-            e.Add(pe);
+            e.productEffects.Add(pe);
 
             return e;
         }

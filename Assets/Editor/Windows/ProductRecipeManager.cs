@@ -52,6 +52,10 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         EditorGUILayout.LabelField("Names (comma-delimited)");
         target.names = EditorGUILayout.TextArea(target.names);
 
+        EditorGUILayout.LabelField("Description");
+        target.description = EditorGUILayout.TextArea(target.description, GUILayout.Height(50));
+        EditorGUILayout.Space();
+
         target.design_W = EditorGUILayout.FloatField("Design Weight", target.design_W);
         target.marketing_W = EditorGUILayout.FloatField("Marketing Weight", target.marketing_W);
         target.engineering_W = EditorGUILayout.FloatField("Engineering Weight", target.engineering_W);
@@ -67,6 +71,9 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Effects");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects"), GUIContent.none);
+        if (target.effects == null)
+            target.effects = new EffectSet();
+        EffectSetRenderer.RenderEffectSet(target, target.effects);
+        EditorGUILayout.Space();
     }
 }

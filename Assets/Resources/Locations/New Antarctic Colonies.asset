@@ -17,28 +17,14 @@ MonoBehaviour:
   capacity:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
   infrastructure:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
-  effects:
-    products: []
-    workers: []
-    company: []
-    unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
-      productTypes: []
-      workers: []
-      events: []
-      items: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    opinionEvents: []
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
+  effects: {fileID: 0}
+  rotation: {x: 0, y: 0, z: 0}

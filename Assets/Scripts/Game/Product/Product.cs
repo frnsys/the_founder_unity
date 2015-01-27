@@ -15,8 +15,14 @@ public class Product : HasStats {
     private static string[] prefixes;
     private static string[] endings;
 
-    // TO DO this should come from the product recipe.
-    public string description;
+    public string description {
+        get {
+            if (recipe.description != null)
+                return recipe.description;
+            else
+                return "There's not a lot to say about this product.";
+        }
+    }
 
     // A generic name just based on the product types.
     public string genericName {
@@ -408,7 +414,9 @@ public class Product : HasStats {
         reqProgress += ProgressRequired("Design",      (int)design.baseValue, c);
         reqProgress += ProgressRequired("Engineering", (int)engineering.baseValue, c);
         reqProgress += ProgressRequired("Marketing",   (int)marketing.baseValue, c);
-        return reqProgress;
+
+        // Required progress can't be 0, so set to 1 if it is.
+        return Mathf.Max(1, reqProgress);
     }
 
     public int EstimatedCompletionTime(Company c) {

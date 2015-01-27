@@ -118,6 +118,12 @@ public class GameManager : Singleton<GameManager> {
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
         //StartGame();
 
+        //Debug.Log("TESTING RECIPE");
+        //ProductRecipe recipe = ProductRecipe.Load("Social Network");
+        //foreach (IEffect ef in recipe.effects.effects) {
+            //Debug.Log(ef);
+        //}
+
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
     }
@@ -143,7 +149,9 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void OnProductCompleted(Product p, Company c) {
-        ApplyEffectSet(p.effects);
+        // TO DO this should apply to the AI company as well.
+        if (c == data.company)
+            ApplyEffectSet(p.effects);
     }
 
     public void ApplyEffectSet(EffectSet es) {

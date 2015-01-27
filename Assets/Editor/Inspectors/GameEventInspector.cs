@@ -35,8 +35,8 @@ internal class GameEventInspector : Editor {
         ge.probability = Mathf.Clamp(ge.probability, 0, 1);
         EditorGUILayout.Space();
 
-        if (ge.effects.effects == null)
-            ge.effects.effects = new List<IEffect>();
+        if (ge.effects == null)
+            ge.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(ge, ge.effects);
         EditorGUILayout.Space();
 
