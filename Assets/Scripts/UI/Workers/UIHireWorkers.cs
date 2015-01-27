@@ -6,6 +6,7 @@ public class UIHireWorkers : UIFullScreenPager {
     public GameObject workerItemPrefab;
     public GameObject offerPrefab;
     public GameObject noWorkersNotice;
+    public Company company;
 
     public UIButton hireButton;
 
@@ -14,6 +15,7 @@ public class UIHireWorkers : UIFullScreenPager {
 
     void OnEnable() {
         gridCenter.onFinished = OnCenter;
+        company = GameManager.Instance.playerCompany;
 
         LoadWorkers();
     }
@@ -27,40 +29,45 @@ public class UIHireWorkers : UIFullScreenPager {
     }
 
     public void HireWorker() {
-        UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
-        ic.bodyText = "Make an offer for " + currentWorker.name + ".";
-        ic.offer = 5000;
+        if (company.remainingSpace > 0) {
+            UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
+            ic.bodyText = "Make an offer for " + currentWorker.name + ".";
+            ic.offer = 5000;
 
-        UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
-            ic.Close_();
-            if (ic.offer >= currentWorker.minSalary) {
-                // Set the worker's salary to the offer.
-                // Reset the player offer counter.
-                // Hire the worker!
-                currentWorker.salary = ic.offer;
-                currentWorker.recentPlayerOffers = 0;
-                HireWorker_();
-            } else {
-                if (++currentWorker.recentPlayerOffers >= 3) {
-                    // If you make too many failed offers,
-                    // the worker goes off the market for a bit.
-                    currentWorker.offMarketTime = 4;
-
-                    UIManager.Instance.Alert("Your offers were too low. I've decided to take a position somewhere else.");
-
-                    RemoveWorker(currentWorker);
+            UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
+                ic.Close_();
+                if (ic.offer >= currentWorker.minSalary) {
+                    // Set the worker's salary to the offer.
+                    // Reset the player offer counter.
+                    // Hire the worker!
+                    currentWorker.salary = ic.offer;
+                    currentWorker.recentPlayerOffers = 0;
+                    HireWorker_();
                 } else {
-                    UIManager.Instance.Alert("That's way too low. I can't work for that much.");
+                    if (++currentWorker.recentPlayerOffers >= 3) {
+                        // If you make too many failed offers,
+                        // the worker goes off the market for a bit.
+                        currentWorker.offMarketTime = 4;
+
+                        UIManager.Instance.Alert("Your offers were too low. I've decided to take a position somewhere else.");
+
+                        RemoveWorker(currentWorker);
+                    } else {
+                        UIManager.Instance.Alert("That's way too low. I can't work for that much.");
+                    }
                 }
-            }
-        };
+            };
 
-        UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
-            ic.Close_();
-        };
+            UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
+                ic.Close_();
+            };
 
-        UIEventListener.Get(ic.yesButton).onClick += yesAction;
-        UIEventListener.Get(ic.noButton).onClick += noAction;
+            UIEventListener.Get(ic.yesButton).onClick += yesAction;
+            UIEventListener.Get(ic.noButton).onClick += noAction;
+
+        } else {
+            UIManager.Instance.Alert("You don't have any space for new workers. Considering laying some people off or expanding to a new location.");
+        }
     }
     private void HireWorker_() {
         GameManager.Instance.workerManager.HireWorker(currentWorker);
@@ -68,7 +75,7 @@ public class UIHireWorkers : UIFullScreenPager {
         RemoveWorker(currentWorker);
 
         // TO DO make this fancier
-        UIManager.Instance.Alert("It's been my lifelong dream to work for " + GameManager.Instance.playerCompany.name + "!!");
+        UIManager.Instance.Alert("It's been my lifelong dream to work for " + company.name + "!!");
     }
 
     private void RemoveWorker(Worker worker) {
