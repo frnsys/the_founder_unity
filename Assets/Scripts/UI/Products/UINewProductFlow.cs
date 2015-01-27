@@ -81,6 +81,10 @@ public class UINewProductFlow : MonoBehaviour {
             GameObject productType = NGUITools.AddChild(selectedGrid.gameObject, selectedProductTypePrefab);
 
             productType.transform.Find("Label").GetComponent<UILabel>().text = pt.name;
+            Transform po = productType.transform.Find("Product Object");
+            po.GetComponent<MeshFilter>().mesh = pt.mesh;
+            po.GetComponent<MeshRenderer>().material.mainTexture = pt.texture;
+
             UIEventListener.Get(productType.transform.Find("Remove").gameObject).onClick += delegate(GameObject go) {
                 NGUITools.Destroy(productType);
                 productTypes.Remove(pt);
