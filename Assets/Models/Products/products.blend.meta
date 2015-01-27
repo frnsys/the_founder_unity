@@ -1,44 +1,49 @@
 fileFormatVersion: 2
-guid: cee8ba29408d64dc2aa35e8da0298f89
+guid: 81d5dea76fef9443ca29d821043cfbae
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: Computer
-    100002: Fitness_Tracker
-    100004: Laptop
-    100006: //RootNode
-    100008: Smartphone
-    100010: Smartwatch
-    100012: Tablet
-    400000: Computer
-    400002: Fitness_Tracker
-    400004: Laptop
-    400006: //RootNode
-    400008: Smartphone
-    400010: Smartwatch
-    400012: Tablet
-    2300000: Computer
-    2300002: Fitness_Tracker
-    2300004: Laptop
-    2300006: Smartphone
-    2300008: Smartwatch
-    2300010: Tablet
-    3300000: Computer
-    3300002: Fitness_Tracker
-    3300004: Laptop
-    3300006: Smartphone
-    3300008: Smartwatch
-    3300010: Tablet
-    4300000: Tablet
-    4300002: Smartwatch
-    4300004: Fitness_Tracker
-    4300006: Smartphone
-    4300008: Laptop
-    4300010: Computer
+    100000: Browser
+    100002: Computer
+    100004: Fitness_Tracker
+    100006: Laptop
+    100008: //RootNode
+    100010: Smartphone
+    100012: Smartwatch
+    100014: Tablet
+    400000: Browser
+    400002: Computer
+    400004: Fitness_Tracker
+    400006: Laptop
+    400008: //RootNode
+    400010: Smartphone
+    400012: Smartwatch
+    400014: Tablet
+    2300000: Browser
+    2300002: Computer
+    2300004: Fitness_Tracker
+    2300006: Laptop
+    2300008: Smartphone
+    2300010: Smartwatch
+    2300012: Tablet
+    3300000: Browser
+    3300002: Computer
+    3300004: Fitness_Tracker
+    3300006: Laptop
+    3300008: Smartphone
+    3300010: Smartwatch
+    3300012: Tablet
+    4300000: Browser
+    4300002: Tablet
+    4300004: Smartwatch
+    4300006: Fitness_Tracker
+    4300008: Smartphone
+    4300010: Laptop
+    4300012: Computer
     7400000: Default Take
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -88,6 +93,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   additionalBone: 0
   userData: 

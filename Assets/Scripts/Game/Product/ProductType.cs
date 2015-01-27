@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class ProductType : SharedResource<ProductType> {
     public string description;
 
+    // TO DO i don't think this is being used anymore.
     // The base amount of progress necessary for finishing the product.
     public float progressRequired = 1000;
 

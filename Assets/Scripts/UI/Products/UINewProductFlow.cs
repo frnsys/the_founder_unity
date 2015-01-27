@@ -152,8 +152,8 @@ public class UINewProductFlow : MonoBehaviour {
     private int design = 0;
     private int marketing = 0;
     private int engineering = 0;
-    private Color activeColor = new Color(1f, 0.49f, 0.49f, 1f);
-    private Color inactiveColor = new Color(1f, 0.76f, 0.76f, 1f);
+    public Color activeColor = new Color(1f, 0.49f, 0.49f, 1f);
+    public Color inactiveColor = new Color(1f, 0.76f, 0.76f, 1f);
 
     public void IncreaseFeature(GameObject obj) {
         int points = 0;

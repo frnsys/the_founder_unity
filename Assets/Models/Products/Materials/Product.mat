@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Computer
+  m_Name: Product
   m_Shader: {fileID: 4800000, guid: 51b6c0077fa6f4a6ebf3826c6cf8b252, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -17,7 +17,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 8946f431dbeaf4aec8e7b0fd4b63ed97, type: 3}
+          m_Texture: {fileID: 2800000, guid: b80adadab7ad5480aabf5b6003ebd9dd, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
