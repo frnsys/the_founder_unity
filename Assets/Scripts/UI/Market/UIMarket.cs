@@ -24,17 +24,13 @@ public class UIMarket : UIWindow {
             // Render each unlocked item for this store.
             GameObject itemGrid = storePage.transform.Find("Content Scroll/Items Grid").gameObject;
             foreach (Item item in gm.unlocked.items.FindAll(i => i.store == store)) {
-                // TO DO
-                // This for loop is just for testing a bunch of items in the grid layout.
-                for (int i =0; i< 20; i++) {
-                    GameObject itemItem = NGUITools.AddChild(itemGrid, itemItemPrefab);
-                    itemItem.GetComponent<UIMarketItem>().item = item;
-                    UIEventListener.Get(itemItem).onClick += ShowItemDetail;
+                GameObject itemItem = NGUITools.AddChild(itemGrid, itemItemPrefab);
+                itemItem.GetComponent<UIMarketItem>().item = item;
+                UIEventListener.Get(itemItem).onClick += ShowItemDetail;
 
-                    // Unfortunately, we must have a UIDragScrollView on every item
-                    // so that you can both click them as a button and drag on them to scroll the page.
-                    itemItem.GetComponent<UIDragScrollView>().scrollView = storePage.transform.Find("Content Scroll").GetComponent<UIScrollView>();
-                }
+                // Unfortunately, we must have a UIDragScrollView on every item
+                // so that you can both click them as a button and drag on them to scroll the page.
+                itemItem.GetComponent<UIDragScrollView>().scrollView = storePage.transform.Find("Content Scroll").GetComponent<UIScrollView>();
             }
             itemGrids.Add(itemGrid.GetComponent<UISimpleGrid>());
         }

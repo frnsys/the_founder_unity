@@ -62,8 +62,8 @@ public class EffectSetRenderer {
         es.gameEvent = (GameEvent)EditorGUILayout.ObjectField(es.gameEvent, typeof(GameEvent));
         if (es.gameEvent != null) {
             EditorGUILayout.BeginHorizontal();
-            es.eventDelay = EditorGUILayout.FloatField("Delay", es.eventDelay);
-            es.eventProbability = EditorGUILayout.FloatField("Probability", es.eventProbability);
+            es.eventDelay = EditorGUILayout.FloatField("Delay (~weeks)", es.eventDelay);
+            es.eventProbability = EditorGUILayout.FloatField("Probability (0-1)", es.eventProbability);
             if (GUILayout.Button("Delete")) {
                 es.gameEvent = null;
                 es.eventDelay = 0;
