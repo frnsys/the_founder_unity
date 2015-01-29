@@ -74,6 +74,7 @@ public class Company : HasStats {
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
         baseSizeLimit = 5;
+        perks = new List<Perk>();
         _items = new List<Item>();
 
         products = new List<Product>();
@@ -385,11 +386,6 @@ public class Company : HasStats {
             toPay += loc.infrastructure.cost;
         }
 
-        // Perks are paid monthly as well.
-        foreach (Item perk in _items.Where(i => i.store == Store.Perks)) {
-            toPay += perk.cost;
-        }
-
         toPay += researchInvestment;
 
         cash.baseValue -= toPay;
@@ -410,6 +406,41 @@ public class Company : HasStats {
         return false;
     }
 
+    // ===============================================
+    // Perk Management ===============================
+    // ===============================================
+    public List<Perk> perks;
+
+    public bool BuyPerk(Perk perk) {
+        perk = perk.Clone();
+        if (Pay(perk.cost)) {
+            perks.Add(perk);
+            perk.upgradeLevel = 0;
+            perk.effects.Apply(this);
+            return true;
+        }
+        return false;
+    }
+
+    public bool UpgradePerk(Perk perk) {
+        perk = Perk.Find(perk, perks);
+        if (Pay(perk.next.cost)) {
+            // First unapply the previous upgrade's effects.
+            perk.effects.Remove(this);
+
+            // Upgrade.
+            perk.upgradeLevel++;
+            perk.effects.Apply(this);
+            return true;
+        }
+        return false;
+    }
+
+    public void RemovePerk(Perk perk) {
+        perk = Perk.Find(perk, perks);
+        perks.Remove(perk);
+        perk.effects.Remove(this);
+    }
 
 
     // ===============================================
@@ -420,6 +451,7 @@ public class Company : HasStats {
     public ReadOnlyCollection<Item> items {
         get { return _items.AsReadOnly(); }
     }
+
 
     public bool BuyItem(Item item) {
         item = item.Clone();

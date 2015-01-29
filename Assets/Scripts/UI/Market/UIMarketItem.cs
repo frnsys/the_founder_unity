@@ -15,6 +15,20 @@ public class UIMarketItem : MonoBehaviour {
         }
     }
 
+    // Cheating a little, but make this also work with Perks.
+    private Perk perk_;
+    public Perk perk {
+        get { return perk_; }
+        set {
+            perk_ = value;
+            nameLabel.text = perk_.name;
+            priceLabel.text = "$" + perk_.cost.ToString();
+
+            itemObj.GetComponent<MeshFilter>().mesh = perk_.mesh;
+            itemObj.GetComponent<MeshRenderer>().material.mainTexture = perk_.texture;
+        }
+    }
+
     public UILabel nameLabel;
     public UILabel priceLabel;
     public GameObject itemObj;

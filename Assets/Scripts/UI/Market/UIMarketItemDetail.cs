@@ -9,50 +9,38 @@ public class UIMarketItemDetail : UIEffectAlert {
             item_ = value;
             nameLabel.text = item.name;
             descLabel.text = item.description;
-            UpdateTotal();
+            totalLabel.text = string.Format("${0:n}", item.cost);
 
             RenderEffects(item.effects);
             AdjustEffectsHeight();
         }
     }
 
-    private int quantity_ = 1;
-    private int quantity {
-        get { return quantity_; }
+    // Cheating a little, but make this also work with Perks.
+    private Perk perk_;
+    public Perk perk {
+        get { return perk_; }
         set {
-            quantity_ = value;
-            quantityLabel.text = quantity.ToString();
-            UpdateTotal();
+            perk_ = value;
+            nameLabel.text = perk.name;
+            descLabel.text = perk.description;
+            totalLabel.text = string.Format("${0:n}", perk.cost);
+
+            RenderEffects(perk.effects);
+            AdjustEffectsHeight();
         }
     }
 
     // UI
-    public UILabel quantityLabel;
     public UILabel totalLabel;
     public UILabel nameLabel;
     public UILabel descLabel;
 
-    public void AddItem() {
-        if (quantity < 99) {
-            quantity++;
-        }
-    }
-    public void SubtractItem() {
-        if (quantity > 1) {
-            quantity--;
-        }
-    }
-    public void UpdateTotal() {
-        if (item) {
-            totalLabel.text = string.Format("${0:n}", quantity * item.cost);
-        } else {
-            totalLabel.text = string.Format("${0:n}", 0);
-        }
-    }
-
     public void Buy() {
-        for (int i=0; i<quantity; i++) {
+        if (perk != null)
+            GameManager.Instance.playerCompany.BuyPerk(perk);
+        else
             GameManager.Instance.playerCompany.BuyItem(item);
-        }
+        Close_();
     }
 }

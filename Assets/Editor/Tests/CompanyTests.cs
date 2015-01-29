@@ -20,6 +20,7 @@ namespace UnityTest
         private Company c;
         private Worker worker;
         private Item item;
+        private Perk perk;
         private Location startLoc;
 
         private List<ProductType> pts;
@@ -49,6 +50,7 @@ namespace UnityTest
             worker.Init("Franklin");
 
             item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
+            perk = (Perk)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestPerk.asset", typeof(Perk)));
         }
 
         [TearDown]
@@ -421,7 +423,38 @@ namespace UnityTest
             Assert.AreEqual(c.availableInfrastructure, c.infrastructure);
         }
 
+        // ===============================================
+        // Perk Management ===============================
+        // ===============================================
 
+		[Test]
+		public void BuyPerk_CanAfford() {
+            c.cash.baseValue = perk.cost;
+            float startCash = c.cash.value;
+            float startResearch = c.research.value;
+
+
+            Assert.IsTrue(c.BuyPerk(perk));
+
+            Assert.AreEqual(c.cash.baseValue, startCash - perk.cost);
+            Assert.AreEqual(c.perks.Count, 1);
+            Assert.AreEqual(c.perks[0].upgradeLevel, 0);
+            Assert.AreEqual(c.research.value, startResearch + perk.effects.research.value);
+        }
+
+		[Test]
+		public void UpgradePerk_CanAfford() {
+            c.cash.baseValue = perk.cost;
+            Assert.IsTrue(c.BuyPerk(perk));
+
+            c.cash.baseValue = perk.next.cost;
+            float startCash = c.cash.value;
+            float startResearch = c.research.value;
+            Assert.IsTrue(c.UpgradePerk(perk));
+            Assert.AreEqual(c.perks.Count, 1);
+            Assert.AreEqual(c.perks[0].upgradeLevel, 1);
+            Assert.AreEqual(c.research.value, startResearch + perk.effects.research.value);
+        }
 
         // ===============================================
         // Item Management ===============================

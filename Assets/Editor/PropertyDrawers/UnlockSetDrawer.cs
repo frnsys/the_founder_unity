@@ -13,6 +13,7 @@ class UnlockSetDrawer : SuperPropertyDrawer {
         "verticals",
         "workers",
         "items",
+        "perks",
         "stores",
         "locations",
         "promos"

@@ -91,7 +91,7 @@ public class EffectSet {
 
         // If the event is repeatable, we remove it.
         // Otherwise, let it resolve eventually.
-        if (gameEvent.repeatable)
+        if (gameEvent != null && gameEvent.repeatable)
             GameManager.Instance.eventManager.Remove(gameEvent);
 
         // Cash effects don't have a reverse.

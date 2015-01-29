@@ -10,6 +10,7 @@ public class UnlockSet {
     public List<ProductType> productTypes = new List<ProductType>();
     public List<Worker> workers = new List<Worker>();
     public List<Item> items = new List<Item>();
+    public List<Perk> perks = new List<Perk>();
     public List<Store> stores = new List<Store>();
     public List<Location> locations = new List<Location>();
     public List<Vertical> verticals = new List<Vertical>();
@@ -22,6 +23,7 @@ public class UnlockSet {
         productTypes.AddRange(us.productTypes);
         workers.AddRange(us.workers);
         items.AddRange(us.items);
+        perks.AddRange(us.perks);
         stores.AddRange(us.stores);
         locations.AddRange(us.locations);
         verticals.AddRange(us.verticals);

@@ -25,20 +25,6 @@ internal class ItemInspector : Editor {
         i.store = (Store)EditorGUILayout.EnumPopup(i.store);
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("Upgradable");
-        bool upgradable = EditorGUILayout.Toggle(i.tier == Item.Tier.Cheap);
-        if (upgradable) {
-            i.tier = Item.Tier.Cheap;
-        } else {
-            i.tier = Item.Tier.None;
-        }
-        EditorGUILayout.Space();
-
-        if (i.tier == Item.Tier.Cheap) {
-            EditorGUILayout.LabelField("Good & Best Names ('|' delimited)");
-            i.upgradeNames = EditorGUILayout.TextField(i.upgradeNames);
-        }
-
         i.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", i.mesh, typeof(Mesh));
         i.texture = (Texture)EditorGUILayout.ObjectField("Texture", i.texture, typeof(Texture));
 

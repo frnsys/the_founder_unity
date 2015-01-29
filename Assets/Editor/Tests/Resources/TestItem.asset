@@ -15,11 +15,14 @@ MonoBehaviour:
   duration: 0
   description: 
   store: 0
+  mesh: {fileID: 0}
+  texture: {fileID: 0}
   effects:
     unlocks:
       productTypes: []
       workers: []
       items: []
+      perks: []
       stores: 
       locations: []
       verticals: []
