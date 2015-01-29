@@ -34,6 +34,7 @@ Shader "UI/ClippedUnlitModel"
             sampler2D _MainTex;
             float4 _PanelOffsetAndSharpness;
             float _PanelSizeX, _PanelSizeY;
+            float _Alpha;
 
             struct appdata_t
             {
@@ -84,6 +85,7 @@ Shader "UI/ClippedUnlitModel"
 
                 // Sample the texture
                 half4 col = tex2D(_MainTex, IN.texcoord) * IN.color;
+                col.a = _Alpha;
                 col.a *= clamp( min(factor.x, factor.y), 0.0, 1.0);
 
                 return col;

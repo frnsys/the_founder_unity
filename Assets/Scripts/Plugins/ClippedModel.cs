@@ -13,6 +13,10 @@ public class ClippedModel : MonoBehaviour
     private float _virtualScreenWidth;
     private float _virtualScreenHeight;
 
+    private int _alphaProperty;
+
+    public float alpha = 1f;
+
     void Start()
     {
         _panel = UIPanel.Find(transform);
@@ -21,6 +25,7 @@ public class ClippedModel : MonoBehaviour
         _virtualScreenWidth = UIRoot.GetPixelSizeAdjustment(gameObject) * Screen.width;
         _virtualScreenHeight = UIRoot.GetPixelSizeAdjustment(gameObject) * Screen.height;
 
+        _alphaProperty = Shader.PropertyToID("_Alpha");
         _panelSizeXProperty = Shader.PropertyToID("_PanelSizeX");
         _panelSizeYProperty = Shader.PropertyToID("_PanelSizeY");
         _panelOffsetAndSharpnessProperty = Shader.PropertyToID("_PanelOffsetAndSharpness");
@@ -58,5 +63,7 @@ public class ClippedModel : MonoBehaviour
             _material.SetFloat(_panelSizeYProperty, _panel.baseClipRegion.w / _virtualScreenHeight);
             _material.SetVector(_panelOffsetAndSharpnessProperty, panelOffsetAndSharpness);
         }
+
+        _material.SetFloat(_alphaProperty, alpha);
     }
 }
