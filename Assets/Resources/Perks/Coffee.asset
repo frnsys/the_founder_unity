@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdffd9aed3bdb4b6c87f71d624c66640, type: 3}
+  m_Name: Coffee
+  m_EditorClassIdentifier: 
+  upgradeLevel: 0
+  upgrades:
+  - name: Coffee
+    cost: 5000
+    description: People are hooked on this stuff. Keep up the supply!
+    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 9b95f701258674bbf87ba7eb5f34eefc, type: 3}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects:
+      - name: Happiness
+        value: 2
+        duration: 0
+        type: 0
+      - name: Productivity
+        value: 5
+        duration: 0
+        type: 0
+    requiredTechnologies: []
+  - name: Coffee + Butter
+    cost: 10000
+    description: This magical concoction has 10x the potency and clarity of regular
+      coffee. It's science.
+    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: ef87f01ef071843b2914eb2d4839b452, type: 3}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects:
+      - name: Happiness
+        value: 4
+        duration: 0
+        type: 0
+      - name: Productivity
+        value: 8
+        duration: 0
+        type: 0
+    requiredTechnologies: []
+  - name: Modafinil
+    cost: 15000
+    description: This is the drug that Airforce pilots use to stay alert.
+    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 13a649b7753e7432ebd8557008571ed4, type: 3}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects: []
+    requiredTechnologies: []

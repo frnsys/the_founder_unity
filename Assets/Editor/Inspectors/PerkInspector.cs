@@ -15,7 +15,8 @@ internal class PerkInspector : Editor {
     }
 
     public override void OnInspectorGUI() {
-        foreach (Perk.Upgrade upgrade in i.upgrades) {
+        for (int k=0; k<i.upgrades.Count; k++) {
+            Perk.Upgrade upgrade = i.upgrades[k];
             upgrade.name = EditorGUILayout.TextField("Name", upgrade.name);
             upgrade.description = EditorGUILayout.TextField("Description", upgrade.description);
             upgrade.cost = EditorGUILayout.FloatField("Cost", upgrade.cost);
@@ -39,6 +40,11 @@ internal class PerkInspector : Editor {
             if (upgrade.effects == null)
                 upgrade.effects = new EffectSet();
             EffectSetRenderer.RenderEffectSet(i, upgrade.effects);
+
+            if (GUILayout.Button("Delete")) {
+                i.upgrades.Remove(upgrade);
+                EditorUtility.SetDirty(target);
+            }
 
             EditorGUILayout.Space();
             EditorGUILayout.Space();

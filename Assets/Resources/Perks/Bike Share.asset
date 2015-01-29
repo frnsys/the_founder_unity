@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdffd9aed3bdb4b6c87f71d624c66640, type: 3}
+  m_Name: Bike Share
+  m_EditorClassIdentifier: 
+  upgradeLevel: 0
+  upgrades:
+  - name: Bike Sharing
+    cost: 50000
+    description: On our big campuses, there's a lot of time spent getting from building
+      to building. Why walk when you can bike?
+    mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: c3cc158c6fd8f4f93ba0e36293234d04, type: 3}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects:
+      - name: Happiness
+        value: 2
+        duration: 0
+        type: 0
+      - name: Productivity
+        value: 10
+        duration: 0
+        type: 0
+    requiredTechnologies: []
