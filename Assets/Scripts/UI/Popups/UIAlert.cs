@@ -26,6 +26,8 @@ public class UIAlert : UIPopup {
         if (GameManager.hasInstance)
             GameManager.Instance.Resume();
 
+        ClippedModel.hideAll = false;
+
         StartCoroutine(FadeOverlay(overlayAlpha, 0f));
         Hide(window);
     }
@@ -35,6 +37,11 @@ public class UIAlert : UIPopup {
 
     public void Show() {
         StartCoroutine(FadeOverlay(0f, overlayAlpha));
+
+        // This is hacky, but a temporary solution.
+        // Just hide all clipped models when an overlay comes on.
+        ClippedModel.hideAll = true;
+
         base.Show(window);
 
         if (GameManager.hasInstance)

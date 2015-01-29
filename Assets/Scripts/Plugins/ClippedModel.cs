@@ -17,6 +17,8 @@ public class ClippedModel : MonoBehaviour
 
     public float alpha = 1f;
 
+    public static bool hideAll;
+
     void Start()
     {
         _panel = UIPanel.Find(transform);
@@ -64,6 +66,10 @@ public class ClippedModel : MonoBehaviour
             _material.SetVector(_panelOffsetAndSharpnessProperty, panelOffsetAndSharpness);
         }
 
-        _material.SetFloat(_alphaProperty, alpha);
+        if (hideAll) {
+            _material.SetFloat(_alphaProperty, 0);
+        } else {
+            _material.SetFloat(_alphaProperty, alpha);
+        }
     }
 }
