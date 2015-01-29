@@ -16,6 +16,8 @@ MonoBehaviour:
   description: On our big campuses, there's a lot of time spent getting from building
     to building. Why walk when you can bike?
   store: 1
+  mesh: {fileID: 0}
+  texture: {fileID: 0}
   effects:
     unlocks:
       productTypes: []
@@ -56,3 +58,5 @@ MonoBehaviour:
       value: 4
       duration: 0
       type: 0
+  upgradeNames: 
+  tier: 0
