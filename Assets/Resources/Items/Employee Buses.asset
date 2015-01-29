@@ -16,6 +16,8 @@ MonoBehaviour:
   description: Employees are driving to work and getting stuck in traffic - this is
     more efficient.
   store: 1
+  mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+  texture: {fileID: 2800000, guid: c3cc158c6fd8f4f93ba0e36293234d04, type: 3}
   effects:
     unlocks:
       productTypes: []

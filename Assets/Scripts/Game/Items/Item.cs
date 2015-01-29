@@ -12,6 +12,10 @@ public class Item : TemplateResource<Item> {
     public string description;
     public Store store;
 
+    // For the physical representation of the product.
+    public Mesh mesh;
+    public Texture texture;
+
     public EffectSet effects = new EffectSet();
 }
 

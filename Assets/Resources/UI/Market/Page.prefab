@@ -381,7 +381,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3006
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
@@ -402,11 +402,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400002}
+    target: {fileID: 400006}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 400002}
+    target: {fileID: 400006}
     relative: 1
     absolute: 0
   bottomAnchor:
@@ -421,12 +421,12 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
   mWidth: 510
-  mHeight: 556
+  mHeight: 563
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .91726619
+  aspectRatio: .905861437
   childSize: {x: 240, y: 240}
   OnReposition: []
 --- !u!1001 &100100000

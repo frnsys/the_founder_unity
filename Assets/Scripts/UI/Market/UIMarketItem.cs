@@ -7,8 +7,20 @@ public class UIMarketItem : MonoBehaviour {
         get { return item_; }
         set {
             item_ = value;
-            transform.Find("Name").GetComponent<UILabel>().text = item_.name;
-            transform.Find("Price").GetComponent<UILabel>().text = "$" + item_.cost.ToString();
+            nameLabel.text = item_.name;
+            priceLabel.text = "$" + item_.cost.ToString();
+
+            itemObj.GetComponent<MeshFilter>().mesh = item_.mesh;
+            itemObj.GetComponent<MeshRenderer>().material.mainTexture = item_.texture;
         }
+    }
+
+    public UILabel nameLabel;
+    public UILabel priceLabel;
+    public GameObject itemObj;
+
+    void Update() {
+        // Rotate the product, fancy.
+        itemObj.transform.Rotate(0,0,-50*Time.deltaTime);
     }
 }
