@@ -54,15 +54,16 @@ namespace UnityTest
 
         [Test]
         public void MinimumSalary() {
+            // TO DO fix this test
             worker.baseMinSalary = 1;
 
-            Assert.AreEqual(worker.minSalary, worker.baseMinSalary);
+            Assert.AreEqual(worker.MinSalaryForCompany(gd.company), worker.baseMinSalary);
 
             worker.salary = 10000;
             worker.happiness.baseValue = 10;
 
             // The happiness factor should be 1 + (10-5)/10 = 1.5
-            Assert.AreEqual(worker.minSalary, 15000);
+            Assert.AreEqual(worker.MinSalaryForCompany(gd.company), 15000);
         }
 
         [Test]

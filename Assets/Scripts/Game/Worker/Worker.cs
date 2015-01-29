@@ -40,22 +40,36 @@ public class Worker : HasStats {
         // If the employee is currently hired, i.e. has a salary > 0,
         // their minimum acceptable salary depends on their happiness at their current company.
         if (salary > 0) {
-            // First calculate the effect the current company has on their happiness.
-            float current = happiness.baseValue - happiness.value;
+            float adjustedDiff = 0;
+            if (c.workers.Count > 0) {
+                // First calculate the effect the current company has on their happiness.
+                float current = happiness.baseValue - happiness.value;
 
-            // Get the average happiness at the hiring company.
-            float avgHappiness = c.AggregateWorkerStat("Happiness")/c.workers.Count;
+                // Get the average happiness at the hiring company.
+                float avgHappiness = c.AggregateWorkerStat("Happiness")/c.workers.Count;
 
-            // Estimate how much happier this employee would be at the hiring company.
-            float diff = (avgHappiness - happiness.baseValue) - current;
+                // Estimate how much happier this employee would be at the hiring company.
+                float diff = (avgHappiness - happiness.baseValue) - current;
 
-            // It's difficult changing jobs, so slightly lower the expected happiness.
-            float adjustedDiff = diff - 10;
+                // It's difficult changing jobs, so slightly lower the expected happiness.
+                adjustedDiff = diff - 10;
+            }
 
             // TO DO tweak this.
-            return Mathf.Max(0, salary * (-diff/10 * 1000));
+            return Mathf.Max(0, salary * (-adjustedDiff/10 * 1000));
         }
         return baseMinSalary;
+    }
+
+    public Stat bestStat {
+        get {
+            Stat max = charisma;
+            if (creativity.value > max.value)
+                max = creativity;
+            if (cleverness.value > max.value)
+                max = cleverness;
+            return max;
+        }
     }
 
     // How many weeks the worker is off the job market for.

@@ -325,6 +325,33 @@ public class Company : HasStats {
         foreach (Worker worker in allWorkers) {
             // A bit of randomness to make things more interesting.
             progress += worker.productivity.value * Random.Range(0.90f, 1.05f);
+
+            // Workers have a chance of making a "breakthrough" depending on their
+            // happiness. Each point of happiness = 1/10% more of a chance.
+            // The chance is weighted by the number of workers at the company as well,
+            // so you can't mass-hire to get greater cumulative probabilities of breakthroughs.
+            // TO DO this may need to be tweaked.
+            float breakthroughChance = worker.happiness.value/10/workers.Count/100;
+
+            // If the breakthrough happens,
+            // the product gets a boost for the feature associated with
+            // the worker's best stat, based on the value of that stat.
+            if (Random.value < breakthroughChance) {
+                Stat bestStat = worker.bestStat;
+                switch (bestStat.name) {
+                    case "Charisma":
+                        product.marketing.baseValue += bestStat.value/100;
+                        break;
+                    case "Cleverness":
+                        product.engineering.baseValue += bestStat.value/100;
+                        break;
+                    case "Creativity":
+                        product.design.baseValue += bestStat.value/100;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         bool completed = product.Develop(progress, this);
