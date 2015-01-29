@@ -16,13 +16,19 @@ public class EventManager : MonoBehaviour {
         data.eventsPool.Add(ev);
     }
 
+    public void Remove(GameEvent ev) {
+        // Remove a given event by name.
+        int idx = data.eventsPool.FindIndex(e => e.name == ev.name);
+        data.eventsPool.RemoveAt(idx);
+    }
+
     public void Tick() {
         List<GameEvent> toResolve = new List<GameEvent>();
 
         foreach (GameEvent ev_ in data.eventsPool) {
-            ev_.delay -= 1;
+            ev_.countdown -= 1;
 
-            if (ev_.delay <= 0)
+            if (ev_.countdown <= 0)
                 toResolve.Add(ev_);
         }
 
@@ -41,7 +47,14 @@ public class EventManager : MonoBehaviour {
                 ev = toResolve[Random.Range(0, toResolve.Count)];
 
                 toResolve.Remove(ev);
-                data.eventsPool.Remove(ev);
+
+                // Repeatable events remain in the pool.
+                if (!ev.repeatable) {
+                    data.eventsPool.Remove(ev);
+                } else {
+                    // Reset the delay/countdown.
+                    ev.countdown = ev.delay;
+                }
 
                 if (Random.value <= ev.probability) {
                     GameEvent.Trigger(ev);
@@ -49,10 +62,10 @@ public class EventManager : MonoBehaviour {
                 }
             }
 
-            // Any events we didn't get to, up their delay so
+            // Any events we didn't get to, up their countdown so
             // we can try again later.
             for (int i=0; i < toResolve.Count; i++) {
-                toResolve[i].delay = Random.Range(4, 20);
+                toResolve[i].countdown = Random.Range(4, 20);
             }
         }
     }

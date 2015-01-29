@@ -17,8 +17,10 @@ MonoBehaviour:
     for workers in other industries.
   from: Punda Daily
   image: {fileID: 2800000, guid: 3ecaf14b23a214f7d8c350ad4807b7a6, type: 3}
-  delay: 0
+  _delay: 0
+  countdown: 0
   probability: 0
+  repeatable: 1
   effects:
     unlocks:
       productTypes: []
@@ -28,7 +30,28 @@ MonoBehaviour:
       locations: []
       verticals: []
       promos: []
-    effects:
-    - {fileID: 0}
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
   actions: []
   conditions: []

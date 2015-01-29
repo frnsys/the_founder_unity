@@ -21,6 +21,10 @@ internal class GameEventInspector : Editor {
         ge.description = EditorGUILayout.TextArea(ge.description, GUILayout.Height(50));
         EditorGUILayout.Space();
 
+        EditorGUILayout.LabelField("Repeatable");
+        ge.repeatable = EditorGUILayout.Toggle(ge.repeatable);
+        EditorGUILayout.Space();
+
         ge.from = EditorGUILayout.TextField("From (Email or Publication)", ge.from);
         EditorGUILayout.Space();
 

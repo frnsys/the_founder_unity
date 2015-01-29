@@ -27,8 +27,18 @@ public class GameEvent : ScriptableObject {
     public Texture image;
 
     [HideInInspector]
-    public float delay;
+    public float delay {
+        get { return _delay; }
+        set {
+            _delay = value;
+            countdown = value;
+        }
+    }
+    [SerializeField]
+    private float _delay;
+    public float countdown;
     public float probability;
+    public bool repeatable;
 
     public EffectSet effects = new EffectSet();
     public List<EventAction> actions = new List<EventAction>();

@@ -89,10 +89,14 @@ public class EffectSet {
             }
         }
 
+        // If the event is repeatable, we remove it.
+        // Otherwise, let it resolve eventually.
+        if (gameEvent.repeatable)
+            GameManager.Instance.eventManager.Remove(gameEvent);
+
         // Cash effects don't have a reverse.
         // No removing of opinion events,
         // they degrade naturally via "forgetting".
-        // Events can't be removed, but should that be possible?
     }
 
     public void Apply(Worker worker) {
