@@ -36,15 +36,26 @@ public class Worker : HasStats {
     public string description;
     public string title;
     public float baseMinSalary;
-    public float minSalary {
-        get {
-            // If the employee is currently hired, i.e. has a salary > 0,
-            // their minimum acceptable salary depends on their happiness at their current company.
-            // If happiness is below 5, the employee will actually accept a lower salary to move.
-            if (salary > 0)
-                return salary * (1 + (happiness.value - 5)/10);
-            return baseMinSalary;
+    public float MinSalaryForCompany(Company c) {
+        // If the employee is currently hired, i.e. has a salary > 0,
+        // their minimum acceptable salary depends on their happiness at their current company.
+        if (salary > 0) {
+            // First calculate the effect the current company has on their happiness.
+            float current = happiness.baseValue - happiness.value;
+
+            // Get the average happiness at the hiring company.
+            float avgHappiness = c.AggregateWorkerStat("Happiness")/c.workers.Count;
+
+            // Estimate how much happier this employee would be at the hiring company.
+            float diff = (avgHappiness - happiness.baseValue) - current;
+
+            // It's difficult changing jobs, so slightly lower the expected happiness.
+            float adjustedDiff = diff - 10;
+
+            // TO DO tweak this.
+            return Mathf.Max(0, salary * (-diff/10 * 1000));
         }
+        return baseMinSalary;
     }
 
     // How many weeks the worker is off the job market for.
