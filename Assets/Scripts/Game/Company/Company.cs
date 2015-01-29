@@ -385,6 +385,11 @@ public class Company : HasStats {
             toPay += loc.infrastructure.cost;
         }
 
+        // Perks are paid monthly as well.
+        foreach (Item perk in _items.Where(i => i.store == Store.Perks)) {
+            toPay += perk.cost;
+        }
+
         toPay += researchInvestment;
 
         cash.baseValue -= toPay;
