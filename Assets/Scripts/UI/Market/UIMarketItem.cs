@@ -21,7 +21,7 @@ public class UIMarketItem : MonoBehaviour {
         get { return perk_; }
         set {
             perk_ = value;
-            nameLabel.text = perk_.name;
+            nameLabel.text = perk_.current.name;
             priceLabel.text = "$" + perk_.cost.ToString();
 
             itemObj.GetComponent<MeshFilter>().mesh = perk_.mesh;

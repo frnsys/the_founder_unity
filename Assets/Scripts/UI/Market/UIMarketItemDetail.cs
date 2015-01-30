@@ -22,19 +22,29 @@ public class UIMarketItemDetail : UIEffectAlert {
         get { return perk_; }
         set {
             perk_ = value;
-            nameLabel.text = perk.name;
+            nameLabel.text = perk.current.name;
             descLabel.text = perk.description;
             totalLabel.text = string.Format("${0:n}", perk.cost);
+
+            itemObj.GetComponent<MeshFilter>().mesh = perk.mesh;
+            itemObj.GetComponent<MeshRenderer>().material.mainTexture = perk.texture;
 
             RenderEffects(perk.effects);
             AdjustEffectsHeight();
         }
     }
 
+    void Update() {
+        // Rotate the product, fancy.
+        float rotation = itemObj.transform.rotation.z;
+        itemObj.transform.Rotate(0,0,rotation - 1.5f);
+    }
+
     // UI
     public UILabel totalLabel;
     public UILabel nameLabel;
     public UILabel descLabel;
+    public GameObject itemObj;
 
     public void Buy() {
         if (perk != null)

@@ -7,7 +7,7 @@ public class UIPerk : MonoBehaviour {
         get { return _perk; }
         set {
             _perk = value;
-            nameLabel.text = _perk.name;
+            nameLabel.text = _perk.current.name;
             descLabel.text = _perk.description;
 
             perkObj.GetComponent<MeshFilter>().mesh = _perk.mesh;

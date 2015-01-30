@@ -17,7 +17,7 @@ MonoBehaviour:
     cost: 5000
     description: People are hooked on this stuff. Keep up the supply!
     mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 9b95f701258674bbf87ba7eb5f34eefc, type: 3}
+    texture: {fileID: 2800000, guid: 8026e8bb9256849f3a0c655c9119e244, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -64,8 +64,8 @@ MonoBehaviour:
     cost: 10000
     description: This magical concoction has 10x the potency and clarity of regular
       coffee. It's science.
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: ef87f01ef071843b2914eb2d4839b452, type: 3}
+    mesh: {fileID: 4300022, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 8026e8bb9256849f3a0c655c9119e244, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -111,8 +111,8 @@ MonoBehaviour:
   - name: Modafinil
     cost: 15000
     description: This is the drug that Airforce pilots use to stay alert.
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 13a649b7753e7432ebd8557008571ed4, type: 3}
+    mesh: {fileID: 4300020, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: e4d766791087c4fee9a7f939fed349aa, type: 3}
     effects:
       unlocks:
         productTypes: []
