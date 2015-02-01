@@ -75,7 +75,6 @@ GameObject:
   - 4: {fileID: 400008}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400006}
   m_Layer: 10
   m_Name: The Object
   m_TagString: Untagged
@@ -516,7 +515,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 20586a2c564d24c9a815a761d1c4ceee, type: 2}
+  - {fileID: 2100000, guid: a9dfec60a1b5a44c6bc7999cd7c5527b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -709,7 +708,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: .522058845, b: .531947374, a: 1}
+  mColor: {r: 1, g: .41911763, b: .41911763, a: 1}
   mPivot: 4
   mWidth: 400
   mHeight: 160
@@ -739,18 +738,6 @@ MonoBehaviour:
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc597016cd83b400a9112c20a7850ffc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alpha: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1483,8 +1470,8 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   softBorderPadding: 1
-  renderQueue: 0
-  startingRenderQueue: 3005
+  renderQueue: 1
+  startingRenderQueue: 5000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

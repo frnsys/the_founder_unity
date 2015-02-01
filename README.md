@@ -22,6 +22,14 @@ folder.
 When importing textures for the Browser mesh into Unity, make sure filtering is set to bilinear,
 and maximize the aniso level. This is so that these flat-object textures look ok when rotating.
 
+For incorporating 3D objects into the NGUI UI, we are using [the render queue approach](http://spaceandtim.es/posts/clipping-3d-objects-in-ngui).
+
+The following values are rules of thumb, you may need to tweak them for the particular use case.
+The `UIPanel` with the 3D objects should have its Render Q set to Start At 3200.
+The 3D objects should have the `SetRenderQueue.cs` script attached, with the render queue set to 4000, use the Self-Illumin/Diffuse material, and be on the PlayArea layer.
+If the `UIPanel` hosting the 3D objects has a parent `UIPanel`, e.g. the window with the header/navigation items, the header panel (or the parent panel itself) should have its Render Q set to Start At 4000.
+All alerts/popups should have their `UIPanel` Render Q set to Start At 5000.
+
 ### Resources
 
 There are many different assets in this game which have to managed carefully.

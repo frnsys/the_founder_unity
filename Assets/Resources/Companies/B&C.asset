@@ -29,8 +29,70 @@ MonoBehaviour:
   forgettingRate: 1
   opinionEvents: []
   activeEffects:
-  - {fileID: 0}
-  - {fileID: 0}
+  - unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      perks: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
+  - unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      perks: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
   markets: 
   technologies: []
   baseSizeLimit: 5
@@ -45,6 +107,7 @@ MonoBehaviour:
   lastMonthCosts: 0
   lastMonthRevenue: 0
   lifetimeRevenue: 0
+  perks: []
   _items: []
   PerfHistory:
     Size: 24
@@ -58,7 +121,39 @@ MonoBehaviour:
   AnnualPerfHistory:
     Size: 10
     values: []
-  bonuses: {fileID: 0}
+  bonuses:
+    unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      perks: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
   specialtyVerticals: []
   specialtyProductTypes: []
   startWorkers: []
@@ -83,6 +178,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
     workers: []
     items: []
+    perks: []
     stores: 
     locations: []
     verticals:

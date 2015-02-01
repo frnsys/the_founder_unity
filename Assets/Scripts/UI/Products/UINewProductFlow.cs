@@ -69,9 +69,6 @@ public class UINewProductFlow : MonoBehaviour {
             bool capacity = HasCapacityFor(pt);
             productType.GetComponent<UIButton>().isEnabled = capacity;
             productType.transform.Find("Overlay").gameObject.SetActive(!capacity);
-
-            float alpha = capacity ? 1f : 0.6f;
-            productType.transform.Find("Product Object").GetComponent<ClippedModel>().alpha = alpha;
         }
         grid.Reposition();
     }
@@ -113,9 +110,6 @@ public class UINewProductFlow : MonoBehaviour {
             bool capacity = HasCapacityFor(pt);
             item.GetComponent<UIButton>().isEnabled = capacity;
             item.transform.Find("Overlay").gameObject.SetActive(!capacity);
-
-            float alpha = capacity ? 1f : 0.6f;
-            item.transform.Find("Product Object").GetComponent<ClippedModel>().alpha = alpha;
         }
     }
 

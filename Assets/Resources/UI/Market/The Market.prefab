@@ -1314,8 +1314,8 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   softBorderPadding: 1
-  renderQueue: 0
-  startingRenderQueue: 3004
+  renderQueue: 1
+  startingRenderQueue: 4000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1569,7 +1569,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3006
+  startingRenderQueue: 4002
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -2425,8 +2425,8 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   softBorderPadding: 1
-  renderQueue: 0
-  startingRenderQueue: 3004
+  renderQueue: 1
+  startingRenderQueue: 3200
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3

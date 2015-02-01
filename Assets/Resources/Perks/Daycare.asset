@@ -14,7 +14,7 @@ MonoBehaviour:
   upgradeLevel: 0
   upgrades:
   - name: Daycare
-    cost: 50000
+    cost: 10000
     description: Workers with children shouldn't need to waste precious time caring
       for them.
     mesh: {fileID: 4300012, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
@@ -65,8 +65,8 @@ MonoBehaviour:
     cost: 100000
     description: We lose a lot of employees because of plans for raising families.
       But we have the technology to allow them to delay that urge.
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: ef87f01ef071843b2914eb2d4839b452, type: 3}
+    mesh: {fileID: 4300004, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 675f90b361b804fa481b8c3187b85e2a, type: 3}
     effects:
       unlocks:
         productTypes: []

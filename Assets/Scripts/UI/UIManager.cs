@@ -92,8 +92,9 @@ public class UIManager : Singleton<UIManager> {
 
         // If it is a competitor's product, show it as an "ad".
         } else {
-            GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);
-            popup.GetComponent<UIProductAdAlert>().SetProductAndCompany(p, c);
+            // Temporary disabling since it's annoying.
+            //GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);
+            //popup.GetComponent<UIProductAdAlert>().SetProductAndCompany(p, c);
         }
     }
 

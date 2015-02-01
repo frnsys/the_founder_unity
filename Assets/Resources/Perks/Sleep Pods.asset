@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeLevel: 0
   upgrades:
-  - name: Sleep Pods
+  - name: Couches
     cost: 50000
-    description: So much time is lost commuting to and from the office.
+    description: Give the employees some places to crash after all-night work sessions.
     mesh: {fileID: 4300010, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     texture: {fileID: 2800000, guid: 488ab69919e8d4bb281cadc15efb453c, type: 3}
     effects:
@@ -60,12 +60,11 @@ MonoBehaviour:
         duration: 0
         type: 0
     requiredTechnologies: []
-  - name: Dream Pod Workstations
+  - name: Sleep Pods
     cost: 100000
-    description: Our dream publishing technology allows employees to literally work
-      in their sleep. There is no "off-the-clock".
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: ef87f01ef071843b2914eb2d4839b452, type: 3}
+    description: So much time is lost commuting to and from the office.
+    mesh: {fileID: 4300010, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 488ab69919e8d4bb281cadc15efb453c, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -107,4 +106,44 @@ MonoBehaviour:
         value: 18
         duration: 0
         type: 0
+    requiredTechnologies: []
+  - name: Dream Pod Workstations
+    cost: 1000
+    description: Our dream publishing technology allows employees to literally work
+      in their sleep. There is no "off-the-clock".
+    mesh: {fileID: 0}
+    texture: {fileID: 0}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects: []
     requiredTechnologies: []

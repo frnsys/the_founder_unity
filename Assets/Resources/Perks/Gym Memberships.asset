@@ -17,8 +17,8 @@ MonoBehaviour:
     cost: 50000
     description: We can subsidize gym memberships. We'll save money on health insurance
       and have sharper-thinking employees.
-    mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: c3cc158c6fd8f4f93ba0e36293234d04, type: 3}
+    mesh: {fileID: 4300026, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: b0425410eaf434178a39a9b121836686, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -65,6 +65,46 @@ MonoBehaviour:
     cost: 20000
     description: Gym memberships are nice but waste time if the gyms aren't on-site.
       We can build gyms by the office to shorten that diversion.
+    mesh: {fileID: 0}
+    texture: {fileID: 0}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects: []
+    requiredTechnologies: []
+  - name: Personal Trainers
+    cost: 1000
+    description: In addition to our state-of-the-art gym facilities, our employees
+      get their own trainers to optimize their fitness routines.
     mesh: {fileID: 0}
     texture: {fileID: 0}
     effects:

@@ -16,8 +16,8 @@ MonoBehaviour:
   - name: Ping-Pong
     cost: 50000
     description: Some game time helps employees unwind and work through problems.
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 9b95f701258674bbf87ba7eb5f34eefc, type: 3}
+    mesh: {fileID: 4300028, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 20236499e729a4276b7c62aab3c0109e, type: 3}
     effects:
       unlocks:
         productTypes: []

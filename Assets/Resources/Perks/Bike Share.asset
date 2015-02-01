@@ -17,8 +17,8 @@ MonoBehaviour:
     cost: 50000
     description: On our big campuses, there's a lot of time spent getting from building
       to building. Why walk when you can bike?
-    mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: c3cc158c6fd8f4f93ba0e36293234d04, type: 3}
+    mesh: {fileID: 4300030, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: c4730e969d0d84eaba2f8c43672b1d18, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -60,4 +60,82 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+    requiredTechnologies: []
+  - name: Segways
+    cost: 1000
+    description: Move quicker and without expending any precious energy.
+    mesh: {fileID: 0}
+    texture: {fileID: 0}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects: []
+    requiredTechnologies: []
+  - name: Hovercarts
+    cost: 1000
+    description: Smooth, quick rides
+    mesh: {fileID: 0}
+    texture: {fileID: 0}
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        items: []
+        perks: []
+        stores: 
+        locations: []
+        verticals: []
+        promos: []
+      cash: 0
+      research:
+        name: Research
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: Opinion
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: Publicity
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      productEffects: []
+      workerEffects: []
     requiredTechnologies: []

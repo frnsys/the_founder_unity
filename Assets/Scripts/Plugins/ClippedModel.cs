@@ -67,7 +67,7 @@ public class ClippedModel : MonoBehaviour
         }
 
         if (hideAll) {
-            _material.SetFloat(_alphaProperty, 0);
+            //_material.SetFloat(_alphaProperty, 0);
         } else {
             _material.SetFloat(_alphaProperty, alpha);
         }

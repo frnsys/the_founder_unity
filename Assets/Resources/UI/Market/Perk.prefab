@@ -142,8 +142,8 @@ GameObject:
   - 4: {fileID: 400032}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400040}
-  m_Layer: 10
+  - 114: {fileID: 11400008}
+  m_Layer: 8
   m_Name: The Perk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,6 +469,18 @@ MonoBehaviour:
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9998be0d09d42918716e850d450779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderQueue: 4000
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -804,18 +816,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &11400040
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc597016cd83b400a9112c20a7850ffc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alpha: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
