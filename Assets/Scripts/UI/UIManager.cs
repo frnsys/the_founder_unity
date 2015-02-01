@@ -44,6 +44,7 @@ public class UIManager : Singleton<UIManager> {
         Product.Completed += OnProductCompleted;
         Promo.Completed += OnPromoCompleted;
         GameManager.YearEnded += OnYearEnded;
+        GameManager.PerformanceReport += OnPerformanceReport;
         GameManager.GameLost += OnGameLost;
     }
 
@@ -53,6 +54,7 @@ public class UIManager : Singleton<UIManager> {
         Product.Completed -= OnProductCompleted;
         Promo.Completed -= OnPromoCompleted;
         GameManager.YearEnded -= OnYearEnded;
+        GameManager.PerformanceReport -= OnPerformanceReport;
         GameManager.GameLost -= OnGameLost;
     }
 
@@ -102,8 +104,11 @@ public class UIManager : Singleton<UIManager> {
         Alert(p.name + " completed.");
     }
 
-    void OnYearEnded(int year, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
-        AnnualReport(results, deltas, board);
+    void OnPerformanceReport(int quarter, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+        PerformanceReport(results, deltas, board);
+    }
+
+    void OnYearEnded(int year) {
 
         // Anniversary/birthday alert!
         int age = 25 + year;
@@ -178,8 +183,8 @@ public class UIManager : Singleton<UIManager> {
     }
 
     // Create an annual report.
-    public UIAnnualReport AnnualReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
-        UIAnnualReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIAnnualReport>();
+    public UIPerformanceReport PerformanceReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+        UIPerformanceReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIPerformanceReport>();
         report.BuildReport(results, deltas, board);
         return report;
     }

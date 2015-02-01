@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIAnnualReport : UIAlert {
+public class UIPerformanceReport : UIAlert {
     public void BuildReport(PerformanceDict results, PerformanceDict deltas, TheBoard board){
 
         GetLabel("Revenue").text       = "$" + results["Annual Revenue"].ToString();

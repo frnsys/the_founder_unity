@@ -94,13 +94,13 @@ public class Company : HasStats {
 
         activeEffects = new List<EffectSet>();
 
-        // Keep track for a year.
-        PerfHistory = new PerformanceHistory(12);
-        ProductPerfHistory = new PerformanceHistory(12);
-        WorkerPerfHistory = new PerformanceHistory(12);
+        // Keep track for a quarter.
+        PerfHistory = new PerformanceHistory(3);
+        ProductPerfHistory = new PerformanceHistory(3);
+        WorkerPerfHistory = new PerformanceHistory(3);
 
-        // Keep track for 10 years.
-        AnnualPerfHistory = new PerformanceHistory(10);
+        // Keep track for 10 quarters.
+        QuarterlyPerfHistory = new PerformanceHistory(10);
 
         return this;
     }
@@ -627,7 +627,7 @@ public class Company : HasStats {
     [SerializeField]
     protected PerformanceHistory WorkerPerfHistory;
     [SerializeField]
-    protected PerformanceHistory AnnualPerfHistory;
+    protected PerformanceHistory QuarterlyPerfHistory;
     protected List<Product> ProductsReleased {
         get {
             return products.Where(p => p.released).ToList();
@@ -642,11 +642,11 @@ public class Company : HasStats {
         };
     }
 
-    // Annually, aggregate data for the past year is collected.
-    public List<PerformanceDict> CollectAnnualPerformanceData() {
+    // Collect aggregate data for the past quarter.
+    public List<PerformanceDict> CollectQuarterlyPerformanceData() {
         PerformanceDict results = new PerformanceDict();
-        results["Annual Revenue"] = PerfHistory.Sum(x => x["Month Revenue"]);
-        results["Annual Costs"] = PerfHistory.Sum(x => x["Month Costs"]);
+        results["Quarterly Revenue"] = PerfHistory.Sum(x => x["Month Revenue"]);
+        results["Quarterly Costs"] = PerfHistory.Sum(x => x["Month Costs"]);
 
         float avgPROI = 0;
         foreach (Product p in ProductsReleased) {
@@ -654,19 +654,19 @@ public class Company : HasStats {
             avgPROI += p.revenueEarned/p.points;
         }
         results["Product ROI"] = avgPROI/ProductsReleased.Count;
-        AnnualPerfHistory.Enqueue(results);
+        QuarterlyPerfHistory.Enqueue(results);
 
-        // Reset the products released for the new year.
+        // Reset the products released for the new quarter.
         ProductsReleased.Clear();
 
-        // Compare this year's performance to last years (if available).
+        // Compare this quarter's performance to last quarter's (if available).
         PerformanceDict deltas = new PerformanceDict();
-        if (AnnualPerfHistory.Count > 1) {
-            // Last year is the second to last element.
-            PerformanceDict lastYear = (PerformanceDict)AnnualPerfHistory.Skip(AnnualPerfHistory.Count - 2).Take(1);
+        if (QuarterlyPerfHistory.Count > 1) {
+            // Last quarter is the second to last element.
+            PerformanceDict lastQuarter = (PerformanceDict)QuarterlyPerfHistory.Skip(QuarterlyPerfHistory.Count - 2).Take(1);
 
             foreach (string key in results.Keys) {
-                deltas[key] = results[key]/lastYear[key] - 1f;
+                deltas[key] = results[key]/lastQuarter[key] - 1f;
             }
 
         // Otherwise, everything improved by 100%!!!

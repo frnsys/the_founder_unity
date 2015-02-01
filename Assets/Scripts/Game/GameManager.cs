@@ -182,31 +182,22 @@ public class GameManager : Singleton<GameManager> {
         Time.timeScale = 1;
     }
 
-    static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> YearEnded;
-    static public event System.Action<Company> GameLost;
+    static public event System.Action<int> YearEnded;
     IEnumerator Yearly() {
         int yearTime = weekTime*4*12;
         yield return new WaitForSeconds(yearTime);
         while(true) {
             data.year++;
 
-            // Get the annual performance data and generate the report.
-            List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
-            PerformanceDict results = annualData[0];
-            PerformanceDict deltas = annualData[1];
-            data.board.EvaluatePerformance(deltas);
-
             if (YearEnded != null)
-                YearEnded(data.year, results, deltas, data.board);
-
-            // Lose condition:
-            if (data.board.happiness < -20)
-                GameLost(playerCompany);
+                YearEnded(data.year);
 
             yield return new WaitForSeconds(yearTime);
         }
     }
 
+    static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> PerformanceReport;
+    static public event System.Action<Company> GameLost;
     IEnumerator Monthly() {
         int monthTime = weekTime*4;
         yield return new WaitForSeconds(monthTime);
@@ -229,6 +220,24 @@ public class GameManager : Singleton<GameManager> {
 
             playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
+
+            if ((int)data.month % 4 == 0) {
+                // Get the quarterly performance data and generate the report.
+                List<PerformanceDict> quarterData = playerCompany.CollectQuarterlyPerformanceData();
+                PerformanceDict results = quarterData[0];
+                PerformanceDict deltas = quarterData[1];
+                data.board.EvaluatePerformance(deltas);
+
+                if (PerformanceReport != null) {
+                    int quarter = (int)data.month/4 + 1;
+                    PerformanceReport(quarter, results, deltas, data.board);
+                }
+
+                // Lose condition:
+                if (data.board.happiness < -20)
+                    GameLost(playerCompany);
+            }
+
             yield return new WaitForSeconds(monthTime);
         }
     }
