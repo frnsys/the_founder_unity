@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Name: Information
   m_EditorClassIdentifier: 
   cost: 100000
-  description: Information is *everywhere*. It's a cheap industry to break into; anyone
-    with a computer and some savvy can make their way in.
+  description: The internet is the future! Websites and data-based services are what
+    people want! No -- it's what they need.
+  texture: {fileID: 2800000, guid: 5cd97b066259e4854b79d2b18d2e3461, type: 3}
+  mesh: {fileID: 4300000, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}

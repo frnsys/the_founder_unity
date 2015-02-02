@@ -7,6 +7,9 @@ public class Vertical : SharedResource<Vertical> {
     public float cost = 10000000;
     public string description;
 
+    public Texture texture;
+    public Mesh mesh;
+
     public bool isAvailable(Company company) {
         if (company.verticals.Count < company.locations.Count)
             return true;

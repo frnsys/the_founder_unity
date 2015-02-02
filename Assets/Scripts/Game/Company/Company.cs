@@ -226,8 +226,9 @@ public class Company : HasStats {
 
     [SerializeField]
     private List<Vertical> _verticals;
-    public ReadOnlyCollection<Vertical> verticals {
-        get { return _verticals.AsReadOnly(); }
+    public List<Vertical> verticals {
+        get { return _verticals; }
+        set { _verticals = value; }
     }
 
     public bool ExpandToVertical(Vertical v) {

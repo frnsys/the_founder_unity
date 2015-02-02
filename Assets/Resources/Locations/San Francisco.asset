@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: San Francisco
   m_EditorClassIdentifier: 
-  description: 
+  description: San Francisco has been the hotbed for many aspiring tech companies.
+    Datacenters are plentiful and cheap here.
   cost: 1e+06
   market: 0
   capacity:
@@ -31,6 +32,7 @@ MonoBehaviour:
       productTypes: []
       workers: []
       items: []
+      perks: []
       stores: 
       locations: []
       verticals: []

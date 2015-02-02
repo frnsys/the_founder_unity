@@ -14,7 +14,8 @@ MonoBehaviour:
   texture: {fileID: 2800000, guid: 089735455424641f8bf3145cfea1b416, type: 3}
   salary: 0
   bio: 
-  description: 
+  description: A brilliant product engineer. Creative and clever. Great for product-focused
+    companies.
   title: 
   baseMinSalary: 0
   offMarketTime: 0
@@ -23,37 +24,47 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   productivity:
-    baseValue: 0
+    baseValue: 30
     _buffs: []
   charisma:
-    baseValue: 0
+    baseValue: 2
     _buffs: []
   creativity:
-    baseValue: 0
+    baseValue: 15
     _buffs: []
   cleverness:
-    baseValue: 0
+    baseValue: 15
     _buffs: []
   bonuses:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
       workers: []
-      events: []
       items: []
+      perks: []
       stores: 
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []

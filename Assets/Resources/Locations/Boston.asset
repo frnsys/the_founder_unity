@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: Boston
   m_EditorClassIdentifier: 
-  description: 
+  description: Cutting-edge products are borne within the top-tier campuses in the
+    Boston area. Brilliant engineering talent for both information and hardware are
+    abound.
   cost: 1e+06
   market: 0
   capacity:
@@ -26,5 +28,37 @@ MonoBehaviour:
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000
-  effects: {fileID: 0}
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      perks: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
   rotation: {x: -50.2999992, y: -167.899994, z: 0}

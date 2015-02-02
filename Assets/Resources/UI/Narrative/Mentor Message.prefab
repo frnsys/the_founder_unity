@@ -285,7 +285,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -259.000366, y: -273.821838, z: 1}
+  m_LocalPosition: {x: -259, y: -197, z: 200}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 400012}
@@ -299,7 +299,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: -328.000061, z: 0}
+  m_LocalPosition: {x: 4, y: -4, z: 0}
   m_LocalScale: {x: 1.00014007, y: 1.00014007, z: 1.00014007}
   m_Children: []
   m_Father: {fileID: 400020}
@@ -311,7 +311,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -324.000031, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -355,7 +355,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 400, y: 140, z: 0}
+  m_Size: {x: 400, y: 400, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500002
 BoxCollider:
@@ -415,17 +415,17 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 346
-  mHeight: 100
+  mHeight: 360
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.46000004
+  aspectRatio: .961111128
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
   mText: Picking the cofounder is one of the most important decisions for a business.
-  mFontSize: 20
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -477,7 +477,7 @@ MonoBehaviour:
   mColor: {r: .0220588446, g: .0220588446, b: .0220588446, a: .192156866}
   mPivot: 4
   mWidth: 400
-  mHeight: 140
+  mHeight: 400
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -525,22 +525,22 @@ MonoBehaviour:
     absolute: 200
   bottomAnchor:
     target: {fileID: 400020}
-    relative: 0
-    absolute: 80
+    relative: .5
+    absolute: -200
   topAnchor:
     target: {fileID: 400020}
-    relative: 0
-    absolute: 220
+    relative: .5
+    absolute: 200
   updateAnchors: 1
   mColor: {r: .240376323, g: .680731833, b: .860294104, a: 1}
   mPivot: 4
   mWidth: 400
-  mHeight: 140
+  mHeight: 400
   mDepth: 1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.85714293
+  aspectRatio: 1.81818187
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -597,8 +597,8 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   softBorderPadding: 1
-  renderQueue: 0
-  startingRenderQueue: 3004
+  renderQueue: 1
+  startingRenderQueue: 5000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
