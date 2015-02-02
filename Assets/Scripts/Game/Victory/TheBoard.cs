@@ -9,7 +9,7 @@ public class TheBoard {
     public float happiness = 10;
 
     public void EvaluatePerformance(PerformanceDict deltas) {
-        float revenueDelta = deltas["Annual Revenue"];
+        float revenueDelta = deltas["Quarterly Revenue"];
 
         // >12% makes the board happier.
         if (revenueDelta > 0.12) {
