@@ -32,8 +32,6 @@ public class UILocationItem : MonoBehaviour {
     }
 
     void Awake() {
-        gridItems = new List<GameObject>();
-        types = new List<Infrastructure.Type>();
         playerCompany = GameManager.Instance.playerCompany;
     }
 
@@ -57,18 +55,16 @@ public class UILocationItem : MonoBehaviour {
     public GameObject expandButton;
 
     public GameObject infrastructureItemPrefab;
+    public List<UIInfrastructureItem> infItems;
     public UIGrid grid;
     private Company playerCompany;
-    private List<GameObject> gridItems;
-    private List<Infrastructure.Type> types;
     private void ShowInfrastructure() {
-        // Create an item for each infrastructure type supported by the location.
-        foreach(KeyValuePair<Infrastructure.Type, int> i in location.capacity) {
-            if (i.Value > 0) {
-                Infrastructure.Type t = i.Key;
-                GameObject item = NGUITools.AddChild(grid.gameObject, infrastructureItemPrefab);
-                item.transform.Find("Label").GetComponent<UILabel>().text = t.ToString();
-                item.transform.Find("Cost").GetComponent<UILabel>().text = "$" + location.capacity.baseCosts[t].ToString() + "/mo each";
+        foreach (UIInfrastructureItem infItem in infItems) {
+            Infrastructure.Type t = infItem.type;
+            if (location.capacity[t] == 0) {
+                infItem.gameObject.SetActive(false);
+            } else {
+                infItem.costLabel.text = "$" + location.capacity.baseCosts[t].ToString() + "/mo each";
 
                 // Setup button actions.
                 Infrastructure.Type lT = t;
@@ -86,16 +82,11 @@ public class UILocationItem : MonoBehaviour {
                 };
 
                 // Bind actions to buttons.
-                GameObject buyButton = item.transform.Find("Buy Button").gameObject;
-                UIEventListener.Get(buyButton).onClick += buyInf;
-
-                GameObject desButton = item.transform.Find("Destroy Button").gameObject;
-                UIEventListener.Get(desButton).onClick += desInf;
-
-                gridItems.Add(item);
-                types.Add(t);
+                UIEventListener.Get(infItem.buyButton.gameObject).onClick += buyInf;
+                UIEventListener.Get(infItem.desButton.gameObject).onClick += desInf;
             }
         }
+
         UpdateButtons();
         grid.Reposition();
     }
@@ -105,10 +96,9 @@ public class UILocationItem : MonoBehaviour {
         Infrastructure infra    = location.infrastructure;
 
         // Update the amount of infrastructure against the total capacity.
-        for (int i=0; i<gridItems.Count; i++) {
-            GameObject item = gridItems[i];
-            Infrastructure.Type t = types[i];
-            item.transform.Find("Used and Capacity").GetComponent<UILabel>().text = infra[t].ToString() + "/" +  capacity[t].ToString();
+        foreach (UIInfrastructureItem infItem in infItems) {
+            Infrastructure.Type t = infItem.type;
+            infItem.usedAndCapacityLabel.text = infra[t].ToString() + "/" +  capacity[t].ToString();
         }
     }
 
@@ -117,16 +107,11 @@ public class UILocationItem : MonoBehaviour {
         Infrastructure infra    = location.infrastructure;
 
         // Update the buy/destroy buttons for infrastructure (disable/enable them).
-        for (int i=0; i<gridItems.Count; i++) {
-            GameObject item = gridItems[i];
-            Infrastructure.Type t = types[i];
-
-            GameObject buyButton = item.transform.Find("Buy Button").gameObject;
-            GameObject desButton = item.transform.Find("Destroy Button").gameObject;
-
+        foreach (UIInfrastructureItem infItem in infItems) {
+            Infrastructure.Type t = infItem.type;
             Infrastructure inf = Infrastructure.ForType(t);
-            buyButton.GetComponent<UIButton>().isEnabled = playerCompany.HasCapacityFor(inf);
-            desButton.GetComponent<UIButton>().isEnabled = !(infra[t] == 0);
+            infItem.buyButton.isEnabled = playerCompany.HasCapacityFor(inf);
+            infItem.desButton.isEnabled = !(infra[t] == 0);
         }
     }
 }

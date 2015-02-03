@@ -116,7 +116,7 @@ public class GameManager : Singleton<GameManager> {
 
     void Start() {
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
-        //StartGame();
+        StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();

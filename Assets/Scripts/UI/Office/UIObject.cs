@@ -6,11 +6,9 @@ public class UIObject : MonoBehaviour {
     public Color colorStart = Color.white;
     public Color colorEnd = Color.green;
     public float duration = 1.0F;
-    public bool enabled;
 
     void OnClick() {
-        if (enabled)
-            UIManager.Instance.OpenPopup(window);
+        UIManager.Instance.OpenPopup(window);
     }
 
     void Update() {

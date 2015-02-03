@@ -4,8 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIEarth : MonoBehaviour {
-    private GameManager gm;
-
     private Location location_;
     public Location location {
         set {
@@ -29,10 +27,8 @@ public class UIEarth : MonoBehaviour {
     }
 
     void OnEnable() {
-        gm = GameManager.Instance;
-
         // Hide all locations which are not yet unlocked.
-        IEnumerable<string> locs = gm.unlocked.locations.Select(l => l.name);
+        IEnumerable<string> locs = GameManager.Instance.unlocked.locations.Select(l => l.name);
         foreach (Transform child in transform) {
             if (!locs.Contains(child.name)) {
                 child.gameObject.SetActive(false);
@@ -42,7 +38,7 @@ public class UIEarth : MonoBehaviour {
 
     public void SetLocationMarker(Location loc) {
         GameObject marker = transform.Find(loc.name).gameObject;
-        if (gm.playerCompany.HasLocation(loc)) {
+        if (GameManager.Instance.playerCompany.HasLocation(loc)) {
             marker.renderer.material = ownedMaterial;
         } else {
             marker.renderer.material = unownedMaterial;
