@@ -1,69 +1,41 @@
 using UnityEngine;
-using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
-public class UIManageCommunications : MonoBehaviour {
-    private Company playerCompany;
+public class UIManageCommunications : UIFullScreenPager {
+    private GameManager gm;
+    private Company company;
 
+    public GameObject promoPrefab;
     public UILabel promoLabel;
-    public UILabel investmentLabel;
-    public UILabel czarLabel;
-    public GameObject newPromoButton;
+    public UITexture promoIcon;
     public UIProgressBar progress;
 
     void OnEnable() {
-        playerCompany = GameManager.Instance.playerCompany;
+        gm = GameManager.Instance;
+        company = gm.playerCompany;
+        LoadPromos();
+    }
+
+    private void LoadPromos() {
+        ClearGrid();
+        foreach (Promo p in gm.unlocked.promos.Where(p => p != company.developingPromo)) {
+            GameObject promoItem = NGUITools.AddChild(grid.gameObject, promoPrefab);
+            promoItem.GetComponent<UIPromo>().promo = p;
+        }
+        Adjust();
     }
 
     void Update() {
-        if (playerCompany.developingPromo == null) {
-            promoLabel.text = "";
-            newPromoButton.SetActive(true);
+        if (company.developingPromo == null) {
+            promoLabel.text = "No current promotion.";
+            promoIcon.mainTexture = null;
             progress.value = 0;
         } else {
-            promoLabel.text = playerCompany.developingPromo.name;
-            newPromoButton.SetActive(false);
-            progress.value = playerCompany.developingPromo.progress;
+            promoLabel.text = company.developingPromo.name;
+            promoIcon.mainTexture = company.developingPromo.icon;
+            progress.value = company.developingPromo.progress;
         }
-        if (playerCompany.OpinionCzar == null)
-            czarLabel.text = "No Director of Communications appointed.";
-        else
-            czarLabel.text = playerCompany.OpinionCzar.name;
-        //investmentLabel.text = "$" + playerCompany.researchInvestment;
-    }
-
-    public void SelectNewPromo() {
-        Action<Promo> select = delegate(Promo p) {
-            playerCompany.StartPromo(p);
-        };
-
-        UIManager.Instance.PromoSelectionPopup(select);
-    }
-
-    public void IncreaseInvestment() {
-        playerCompany.researchInvestment += 10000;
-    }
-
-    public void PlusIncreaseInvestment() {
-        playerCompany.researchInvestment += 1000000;
-    }
-
-    public void DecreaseInvestment() {
-        playerCompany.researchInvestment -= 10000;
-        if (playerCompany.researchInvestment < 0)
-            playerCompany.researchInvestment = 0;
-    }
-
-    public void PlusDecreaseInvestment() {
-        playerCompany.researchInvestment -= 1000000;
-        if (playerCompany.researchInvestment < 0)
-            playerCompany.researchInvestment = 0;
-    }
-
-    public void AppointCzar() {
-        Action<Worker> select = delegate(Worker w) {
-            playerCompany.OpinionCzar = w;
-        };
-        UIManager.Instance.WorkerSelectionPopup("Appoint a new Head of Communications", select, null, playerCompany.OpinionCzar);
     }
 }

@@ -75,7 +75,7 @@ GameObject:
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
   m_Layer: 8
-  m_Name: Technology Item
+  m_Name: Promo Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: b6eb491d1524c4de5bd267a7f72c788d, type: 3}
   mFont: {fileID: 0}
-  mText: 'technology
+  mText: 'promo
 
     name'
   mFontSize: 24
@@ -380,7 +380,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 94
+  aspectRatio: 1.17499995
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,7 +417,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 80
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11d6be674eea84af5b69a21c4a2fabc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d2fa1c76504a4c39b5d850e481fc1de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 11400002}
@@ -516,7 +516,7 @@ MonoBehaviour:
   pixelSnap: 0
   onClick:
   - mTarget: {fileID: 11400010}
-    mMethodName: SelectTech
+    mMethodName: SelectPromo
     mParameters: []
     oneShot: 0
 --- !u!114 &11400014
@@ -559,7 +559,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: Research
+  mText: Begin
   mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
@@ -617,7 +617,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 33.3333321
+  aspectRatio: 2.77777767
   mType: 0
   mFillDirection: 4
   mFillAmount: 1

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Promo : TemplateResource<Promo> {
     public OpinionEvent opinionEvent;
+    public Texture icon;
+    public string description;
     public float cost;
     public float requiredProgress;
     public float difficulty;
