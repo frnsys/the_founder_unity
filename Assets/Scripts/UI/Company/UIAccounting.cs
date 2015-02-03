@@ -44,9 +44,8 @@ public class UIAccounting : MonoBehaviour {
     }
 
     void Update() {
-        PerformanceDict snapshot = company.quarterSnapshot;
-        float revs = snapshot["Revenue"];
-        float cost = snapshot["Costs"];
+        float revs = company.quarterRevenue;
+        float cost = company.quarterCosts;
         currentRevenue.text = "Revenue: " + string.Format("${0:n}", revs);
         currentProfit.text = "Profit: " + string.Format("${0:n}", revs-cost);
 

@@ -73,6 +73,8 @@ public class Company : HasStats {
         research = new Stat("Research", 1);
         lastMonthCosts = 0;
         lastMonthRevenue = 0;
+        quarterRevenue = 0;
+        quarterCosts = 0;
         baseSizeLimit = 5;
         perks = new List<Perk>();
         _items = new List<Item>();
@@ -317,6 +319,7 @@ public class Company : HasStats {
         }
         cash.baseValue += newRevenue;
         lastMonthRevenue += newRevenue;
+        quarterRevenue += newRevenue;
         lifetimeRevenue += newRevenue;
     }
 
@@ -399,6 +402,8 @@ public class Company : HasStats {
     // Keep track of each month's costs.
     public float lastMonthCosts;
     public float lastMonthRevenue;
+    public float quarterRevenue;
+    public float quarterCosts;
     public float lifetimeRevenue;
     public void PayMonthly() {
         float toPay = 0;
@@ -420,6 +425,7 @@ public class Company : HasStats {
 
         // Reset month's costs with this month's costs.
         lastMonthCosts = toPay;
+        quarterCosts += toPay;
 
         // Also reset month's revenues.
         lastMonthRevenue = 0;
@@ -429,6 +435,7 @@ public class Company : HasStats {
         if (cash.baseValue - cost >= 0) {
             cash.baseValue -= cost;
             lastMonthCosts += cost;
+            quarterCosts += cost;
             return true;
         }
         return false;
@@ -643,22 +650,9 @@ public class Company : HasStats {
             return null;
         }
     }
-    public int monthsIntoQuarter;
-    public PerformanceDict quarterSnapshot {
-        get {
-            int count = PerfHistory.Count;
-            IEnumerable<PerformanceDict> quarterPerf = PerfHistory.Skip(Mathf.Max(0, count - monthsIntoQuarter)).Take(monthsIntoQuarter);
-
-            PerformanceDict results = new PerformanceDict();
-            results["Revenue"] = quarterPerf.Sum(x => x["Month Revenue"]) + lastMonthRevenue;
-            results["Costs"] = quarterPerf.Sum(x => x["Month Costs"]) + lastMonthCosts;
-            return results;
-        }
-    }
 
     // These data are sampled every month.
     private PerformanceDict SamplePerformance() {
-        monthsIntoQuarter++;
         return new PerformanceDict {
             {"Month Revenue", lastMonthRevenue},
             {"Month Costs", lastMonthCosts}
@@ -667,11 +661,9 @@ public class Company : HasStats {
 
     // Collect aggregate data for the past quarter.
     public List<PerformanceDict> CollectQuarterlyPerformanceData() {
-        // Reset months into quarter.
-        monthsIntoQuarter = 0;
         PerformanceDict results = new PerformanceDict();
-        results["Quarterly Revenue"] = PerfHistory.Sum(x => x["Month Revenue"]);
-        results["Quarterly Costs"] = PerfHistory.Sum(x => x["Month Costs"]);
+        results["Quarterly Revenue"] = quarterRevenue;
+        results["Quarterly Costs"] = quarterCosts;
 
         float avgPROI = 0;
         foreach (Product p in ProductsReleased) {
@@ -700,6 +692,11 @@ public class Company : HasStats {
                 deltas[key] = 1f;
             }
         }
+
+        // Reset values.
+        quarterRevenue = 0;
+        quarterCosts = 0;
+
         return new List<PerformanceDict> { results, deltas };
     }
 

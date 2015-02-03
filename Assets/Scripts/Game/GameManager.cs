@@ -39,6 +39,10 @@ public class GameManager : Singleton<GameManager> {
         get { return data.maxProductTypes; }
     }
 
+    public float revenueTarget {
+        get { return data.board.revenueTarget; }
+    }
+
     public WorkerInsight workerInsight {
         get { return data.workerInsight; }
     }
@@ -230,7 +234,7 @@ public class GameManager : Singleton<GameManager> {
                 List<PerformanceDict> quarterData = playerCompany.CollectQuarterlyPerformanceData();
                 PerformanceDict results = quarterData[0];
                 PerformanceDict deltas = quarterData[1];
-                data.board.EvaluatePerformance(deltas);
+                data.board.EvaluatePerformance(results["Quarterly Revenue"]);
 
                 if (PerformanceReport != null) {
                     int quarter = (int)data.month/4 + 1;

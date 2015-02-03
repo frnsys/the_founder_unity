@@ -7,7 +7,6 @@ using System.Collections;
 
 public class OfficeCameraController : MonoBehaviour {
     public Camera officeCamera;
-    public UIOfficeViewManager viewManager;
 
     // TO DO These are hardcoded for now,
     // but eventually should be generated from the office layout.
@@ -40,9 +39,6 @@ public class OfficeCameraController : MonoBehaviour {
             }
 
             officeCamera.transform.position = position;
-
-            // Update the current view.
-            viewManager.CheckView();
         }
 
         if (Input.touchCount > 1) {
