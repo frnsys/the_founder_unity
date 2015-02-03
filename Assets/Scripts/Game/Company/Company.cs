@@ -634,9 +634,31 @@ public class Company : HasStats {
             return products.Where(p => p.released).ToList();
         }
     }
+    public PerformanceDict lastQuarterPerformance {
+        get {
+            int count = QuarterlyPerfHistory.Count;
+            if (count > 0) {
+                return QuarterlyPerfHistory.Last();
+            }
+            return null;
+        }
+    }
+    public int monthsIntoQuarter;
+    public PerformanceDict quarterSnapshot {
+        get {
+            int count = PerfHistory.Count;
+            IEnumerable<PerformanceDict> quarterPerf = PerfHistory.Skip(Mathf.Max(0, count - monthsIntoQuarter)).Take(monthsIntoQuarter);
+
+            PerformanceDict results = new PerformanceDict();
+            results["Revenue"] = quarterPerf.Sum(x => x["Month Revenue"]) + lastMonthRevenue;
+            results["Costs"] = quarterPerf.Sum(x => x["Month Costs"]) + lastMonthCosts;
+            return results;
+        }
+    }
 
     // These data are sampled every month.
     private PerformanceDict SamplePerformance() {
+        monthsIntoQuarter++;
         return new PerformanceDict {
             {"Month Revenue", lastMonthRevenue},
             {"Month Costs", lastMonthCosts}
@@ -645,6 +667,8 @@ public class Company : HasStats {
 
     // Collect aggregate data for the past quarter.
     public List<PerformanceDict> CollectQuarterlyPerformanceData() {
+        // Reset months into quarter.
+        monthsIntoQuarter = 0;
         PerformanceDict results = new PerformanceDict();
         results["Quarterly Revenue"] = PerfHistory.Sum(x => x["Month Revenue"]);
         results["Quarterly Costs"] = PerfHistory.Sum(x => x["Month Costs"]);

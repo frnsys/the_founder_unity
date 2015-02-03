@@ -51,4 +51,8 @@ public class FixedSizeQueue<T> : ISerializationCallbackReceiver {
      public IEnumerator GetEnumerator() {
          return q.GetEnumerator();
      }
+
+     public T Last() {
+         return q.Last();
+     }
  }
