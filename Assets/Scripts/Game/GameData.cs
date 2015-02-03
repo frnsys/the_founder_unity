@@ -58,6 +58,11 @@ public class GameData : ScriptableObject {
     // Other companies in the world.
     public List<AICompany> otherCompanies;
 
+    // Office areas.
+    public bool LabsAccessible;
+    public bool CommsAccessible;
+    public bool MarketAccessible;
+
     // Time
     public Month month;
     public int week;
@@ -110,6 +115,10 @@ public class GameData : ScriptableObject {
         data.eventsPool = new List<GameEvent>();
 
         data.workerInsight = WorkerInsight.Basic;
+
+        data.LabsAccessible = false;
+        data.CommsAccessible = false;
+        data.MarketAccessible = false;
 
         data.month = Month.January;
         data.year  = 1;

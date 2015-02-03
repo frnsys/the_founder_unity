@@ -81,6 +81,8 @@ public class GameManager : Singleton<GameManager> {
         workerManager.Load(d);
         researchManager.Load(d);
         narrativeManager.Load(d);
+
+        UIOfficeViewManager.Instance.Load(d);
     }
 
     void Awake() {

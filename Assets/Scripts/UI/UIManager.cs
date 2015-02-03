@@ -33,6 +33,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject selectPromoPopupPrefab;
     public GameObject selectResearchPopupPrefab;
 
+
     void Awake() {
         DontDestroyOnLoad(gameObject);
     }
@@ -131,6 +132,9 @@ public class UIManager : Singleton<UIManager> {
     [HideInInspector]
     public GameObject currentPopup;
     public void OpenPopup(GameObject popupPrefab) {
+        if (currentPopup != null)
+            return;
+
         currentPopup = NGUITools.AddChild(windowsPanel, popupPrefab);
 
         // Set to be full screen.

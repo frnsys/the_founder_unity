@@ -176,6 +176,7 @@ GameObject:
   - 54: {fileID: 5400004}
   - 114: {fileID: 11400022}
   - 114: {fileID: 11400024}
+  - 65: {fileID: 6500020}
   m_Layer: 8
   m_Name: Research
   m_TagString: Untagged
@@ -1412,6 +1413,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 110, y: 38, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6500020
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2113,7 +2126,7 @@ MonoBehaviour:
   mWidth: 535
   mHeight: 960
   mDepth: 0
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .557291687

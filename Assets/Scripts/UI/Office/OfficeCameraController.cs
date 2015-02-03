@@ -7,13 +7,14 @@ using System.Collections;
 
 public class OfficeCameraController : MonoBehaviour {
     public Camera officeCamera;
+    public UIOfficeViewManager viewManager;
 
     // TO DO These are hardcoded for now,
     // but eventually should be generated from the office layout.
-    private float lBound = 4f;
-    private float rBound = -4f;
-    private float tBound = 4f;
-    private float bBound = 1.5f;
+    private float lBound = 8f;
+    private float rBound = -8f;
+    private float tBound = 8f;
+    private float bBound = 0f;
 
     void OnDrag(Vector2 delta) {
         if (!Input.touchSupported || Input.touchCount == 1) {
@@ -22,7 +23,7 @@ public class OfficeCameraController : MonoBehaviour {
 
             // Apply speed modification. When the camera is closer (lower orthographic size),
             // it should pan more slowly.
-            Vector3 delta3 = delta *= 0.001f * officeCamera.orthographicSize;
+            Vector3 delta3 = delta *= 0.005f * officeCamera.orthographicSize;
             Vector3 position = officeCamera.transform.position + delta3;
 
             // Bounding
@@ -39,6 +40,9 @@ public class OfficeCameraController : MonoBehaviour {
             }
 
             officeCamera.transform.position = position;
+
+            // Update the current view.
+            viewManager.CheckView();
         }
 
         if (Input.touchCount > 1) {
