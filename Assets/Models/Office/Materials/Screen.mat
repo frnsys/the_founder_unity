@@ -78,12 +78,16 @@ Material:
         second: 1
       data:
         first:
-          name: _Outline_Width
-        second: .0199999996
-      data:
-        first:
           name: _Pulse_Speed
         second: 3
+      data:
+        first:
+          name: _Fresnel_Width
+        second: 2.875
+      data:
+        first:
+          name: _Outline_Width
+        second: .0199999996
       data:
         first:
           name: _Specular_Power
@@ -92,10 +96,6 @@ Material:
         first:
           name: _Normal_Intensity
         second: 1
-      data:
-        first:
-          name: _Fresnel_Width
-        second: 2.875
       data:
         first:
           name: _Pan_Speed_Y
@@ -115,13 +115,13 @@ Material:
         second: {r: 0, g: 1, b: .379310369, a: 1}
       data:
         first:
+          name: _Fresnel_Color
+        second: {r: .647058845, g: .456747413, b: .456747413, a: 1}
+      data:
+        first:
           name: _Outline_Color
         second: {r: 1, g: .492647052, b: .492647052, a: 1}
       data:
         first:
           name: _Highlight_Color
         second: {r: 1, g: .492647052, b: .492647052, a: 1}
-      data:
-        first:
-          name: _Fresnel_Color
-        second: {r: .647058845, g: .456747413, b: .456747413, a: 1}

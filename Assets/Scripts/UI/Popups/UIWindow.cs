@@ -35,6 +35,12 @@ public class UIWindow : UIPopup {
     }
 
     public void Close() {
-        Hide(gameObject);
+        // no scaling animation
+        // Hide(gameObject);
+        NGUITools.DestroyImmediate(gameObject);
+    }
+
+    void Show(GameObject target) {
+        // no scaling animation
     }
 }

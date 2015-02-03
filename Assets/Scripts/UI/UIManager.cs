@@ -128,7 +128,8 @@ public class UIManager : Singleton<UIManager> {
         currentPopup = NGUITools.AddChild(windowsPanel, popupPrefab);
 
         // Set to be full screen.
-        currentPopup.transform.localScale = Vector3.zero;
+        // (no scaling)
+        // currentPopup.transform.localScale = Vector3.zero;
         currentPopup.GetComponent<UIWidget>().SetAnchor(windowsPanel.gameObject, 0, 0, 0, 0);
     }
     public void ClosePopup() {
