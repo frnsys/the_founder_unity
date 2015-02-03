@@ -1,6 +1,6 @@
 /*
  * Handles persistent UI elements, such
- * as the menu, manages popups, and coordinates
+ * as popups and coordinates
  * other UI elements.
  *
  */
@@ -14,7 +14,6 @@ using System.Collections.Generic;
 public class UIManager : Singleton<UIManager> {
     private GameManager gm;
 
-    public GameObject menu;
     public GameObject windowsPanel;
     public GameObject alertsPanel;
 
@@ -57,15 +56,6 @@ public class UIManager : Singleton<UIManager> {
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
         GameManager.GameLost -= OnGameLost;
-    }
-
-    public void ToggleMenu() {
-        if (menu.activeInHierarchy) {
-            menu.SetActive(false);
-        } else {
-            menu.SetActive(true);
-            menu.GetComponent<UIGrid>().Reposition();
-        }
     }
 
     // Show an event notification.
@@ -140,7 +130,6 @@ public class UIManager : Singleton<UIManager> {
         // Set to be full screen.
         currentPopup.transform.localScale = Vector3.zero;
         currentPopup.GetComponent<UIWidget>().SetAnchor(windowsPanel.gameObject, 0, 0, 0, 0);
-        menu.SetActive(false);
     }
     public void ClosePopup() {
         NGUITools.DestroyImmediate(currentPopup);

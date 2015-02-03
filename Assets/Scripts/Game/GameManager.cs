@@ -81,8 +81,6 @@ public class GameManager : Singleton<GameManager> {
         workerManager.Load(d);
         researchManager.Load(d);
         narrativeManager.Load(d);
-
-        UIOfficeViewManager.Instance.Load(d);
     }
 
     void Awake() {
@@ -118,7 +116,7 @@ public class GameManager : Singleton<GameManager> {
 
     void Start() {
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
-        StartGame();
+        //StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
@@ -134,6 +132,10 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(ResearchCycle());
         StartCoroutine(OpinionCycle());
         StartCoroutine(EventCycle());
+
+        // We only load this here because the UIOfficeViewManager
+        // doesn't exist until the game starts.
+        UIOfficeViewManager.Instance.Load(data);
     }
 
     void OnEvent(GameEvent e) {

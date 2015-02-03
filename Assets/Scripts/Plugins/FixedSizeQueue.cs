@@ -21,7 +21,12 @@ public class FixedSizeQueue<T> : ISerializationCallbackReceiver {
     private List<T> values = new List<T>();
 
     public void OnBeforeSerialize() {
+        if (values == null)
+            values = new List<T>();
         values.Clear();
+
+        if (q == null)
+            q = new Queue<T>();
         foreach(T value in q) {
             values.Add(value);
         }

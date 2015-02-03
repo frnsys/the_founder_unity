@@ -132,15 +132,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     public void InitializeOnboarding() {
         obs = OBS.START;
 
-        // Some menu items start out as hidden.
-        Transform menuList = UIManager.Instance.menu.transform;
-        menuList.Find("Company").gameObject.SetActive(false);
-        menuList.Find("Employees").gameObject.SetActive(false);
-        menuList.Find("The Market").gameObject.SetActive(false);
-        menuList.Find("Innovation Labs").gameObject.SetActive(false);
-        menuList.Find("Communications").gameObject.SetActive(false);
-        menuList.gameObject.GetComponent<UIGrid>().Reposition();
-
         // Listen to some events.
         Product.Completed += OnProductCompleted;
         GameEvent.EventTriggered += OnEvent;
@@ -157,7 +148,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 "Fortunately, we have the techniques of PUBLIC RELATIONS to fend off egregious defamatory remarks.",
                 "We can run our own promotions and advertisements to spin public opinion. You can manage these in the 'Communications' window."
             }, true);
-            ShowMenuItem("Communications");
             ob.COMMS_UNLOCKED = true;
         }
     }
@@ -178,7 +168,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "You also want to cultivate an office environment and CULTURE that is attractive to future employees.",
                     "You can purchase perks and equipment to keep your employees efficient and satisfied in The Market."
                 }, true);
-                ShowMenuItem("The Market");
                 ob.MARKET_UNLOCKED = true;
 
             } else if (c.remainingSpace == 0 && !ob.WORKER_LIMIT_REACHED) {
@@ -225,7 +214,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "We can use these earth-shattering technologies to create even more paradigm-shifting products.",
                     "Check it out when you get the chance."
                 }, true);
-                ShowMenuItem("Innovation Labs");
                 ob.RESEARCH_UNLOCKED = true;
             }
 
@@ -242,11 +230,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 ob.VERTICALS_UNLOCKED = true;
             }
         }
-    }
-
-    void ShowMenuItem(string name) {
-        Transform menuList = UIManager.Instance.menu.transform;
-        menuList.Find(name).gameObject.SetActive(true);
     }
 
     public void CofounderIntro() {
@@ -317,7 +300,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "This development could be faster. Let's hire an employee to help us out. From the menu, select 'Employees'."
                     }, true);
 
-                    ShowMenuItem("Employees");
                 }
                 break;
 
@@ -333,7 +315,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Let's close this window and open up the 'Company' window from the menu."
                     }, true);
 
-                    ShowMenuItem("Company");
 
                 } else if (Stage(OBS.OPENED_NEW_PRODUCT_W_INFRA)) {
                     MentorMessages(new string[] {

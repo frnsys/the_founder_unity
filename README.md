@@ -30,6 +30,33 @@ The 3D objects should have the `SetRenderQueue.cs` script attached, with the ren
 If the `UIPanel` hosting the 3D objects has a parent `UIPanel`, e.g. the window with the header/navigation items, the header panel (or the parent panel itself) should have its Render Q set to Start At 4000.
 All alerts/popups should have their `UIPanel` Render Q set to Start At 5000.
 
+### The Office UI
+
+Most of the UI is accessed through the office environment.
+
+It's (probably too) complicated -- here are some notes about how it is set up.
+
+There is:
+
+- the `Office UI`: this manages the NGUI buttons displayed on top of the office environment.
+- the `Office Area Manager`: this manages which areas are accessible (unlocked) and is where you configure the camera coordinates which defines each office area.
+- the `Office Camera Controller`: this is what allows the user to pan around and zoom in and out of the office.
+- `Office Areas`: this is a grouping of the 3D objects which form the office areas.
+
+#### Adding an interactive office object
+
+Office objects which can be interacted with (i.e., can be touched to bring up a menu) should have the `UIObject` script attached. There you can specify the window prefab to launch on touch. You should check "Enabled" so that it is true. You'll also need to add a `MeshCollider` with "Is Trigger" checked.
+
+Then you will also want to create an NGUI button/label which tracks the object. However, you don't want it directly tracking the object itself since it may not be positioned how you like. So create an empty game object as a child to the office object (I have been naming them "UI Target") and position that where you want the label to be.
+
+The NGUI button/label should be created as a child to `Office UI`  Set the `UIFollowTarget` script's target to the "UI Target" you just created. Also, configure the "On Click" method to your needs.
+
+#### Creating a locked area
+
+Creating a locked area is pretty involved.
+
+You need to attach the `OfficeArea` script to the group which defines the office area and configure it properly. The group should have a "Lock Box" (a semi-transparent dark box surrounding the area). The `Office UI` group will need a button that can unlock the area. Unlocking the area is accomplished through the `Office Area Manager` (see the current methods there) and that area's unlock status is managed by the `GameData`.
+
 ### Resources
 
 There are many different assets in this game which have to managed carefully.

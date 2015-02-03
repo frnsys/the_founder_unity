@@ -14,7 +14,7 @@ public class OfficeCameraController : MonoBehaviour {
     private float lBound = 8f;
     private float rBound = -8f;
     private float tBound = 8f;
-    private float bBound = 0f;
+    private float bBound = -8f;
 
     void OnDrag(Vector2 delta) {
         if (!Input.touchSupported || Input.touchCount == 1) {
