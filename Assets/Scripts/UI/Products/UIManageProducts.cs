@@ -4,21 +4,23 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UIManageProducts : MonoBehaviour {
+public class UIManageProducts : UIFullScreenPager {
+    private Company company;
+    private GameManager gm;
     public GameObject productItemPrefab;
-    public GameObject productsGrid;
-    public UICenteredGrid productsGridGrid;
+
 
     void OnEnable() {
-        productsGridGrid.fullWidth = true;
+        gm = GameManager.Instance;
+        company = gm.playerCompany;
     }
 
     private List<Product> displayedProducts = new List<Product>();
     void Update() {
-        foreach (Product p in GameManager.Instance.playerCompany.products) {
+        foreach (Product p in company.products) {
             // If we aren't already displaying this product, display it.
             if (!displayedProducts.Contains(p)) {
-                GameObject productItem = NGUITools.AddChild(productsGrid, productItemPrefab);
+                GameObject productItem = NGUITools.AddChild(grid.gameObject, productItemPrefab);
                 UIProduct uip = productItem.GetComponent<UIProduct>();
                 uip.product = p;
 
@@ -28,9 +30,9 @@ public class UIManageProducts : MonoBehaviour {
             }
 
             int childIdx = displayedProducts.IndexOf(p);
-            productsGrid.transform.GetChild(childIdx).Find("Disabled").gameObject.SetActive(p.disabled);
+            grid.transform.GetChild(childIdx).Find("Disabled").gameObject.SetActive(p.disabled);
         }
-        productsGridGrid.Reposition();
+        Adjust();
     }
 
     public void ShutdownProduct(GameObject obj) {
@@ -41,7 +43,7 @@ public class UIManageProducts : MonoBehaviour {
             product.Shutdown();
             displayedProducts.Remove(product);
             UnityEngine.Object.DestroyImmediate(productItem);
-            productsGridGrid.Reposition();
+            Adjust();
         };
 
         if (product.developing)

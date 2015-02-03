@@ -20,7 +20,7 @@ public class UINewProductFlow : MonoBehaviour {
     public GameObject pointAllocationView;
     public List<GameObject> productTypeItems;
     public UIGrid selectedGrid;
-    public UISimpleGrid grid;
+    public UIGrid grid;
     public UIButton confirmSelectionButton;
 
     public GameObject blackout;
@@ -58,7 +58,6 @@ public class UINewProductFlow : MonoBehaviour {
 
     // Load product types into the grid.
     private void LoadProductTypes() {
-        grid.Clear();
         productTypeItems.Clear();
         foreach (ProductType pt in gm.unlocked.productTypes) {
             GameObject productType = NGUITools.AddChild(grid.gameObject, productTypePrefab);
