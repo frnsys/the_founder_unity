@@ -305,6 +305,17 @@ public class Company : HasStats {
         }
     }
 
+    public Recruitment developingRecruitment;
+    public void DevelopRecruitment() {
+        if (developingRecruitment != null) {
+            bool completed = developingRecruitment.Develop();
+
+            if (completed) {
+                developingRecruitment = null;
+            }
+        }
+    }
+
     public void ApplyOpinionEvent(OpinionEvent oe) {
         opinion.ApplyBuff(oe.opinion);
         publicity.ApplyBuff(oe.publicity);
@@ -313,6 +324,10 @@ public class Company : HasStats {
 
     public void StartPromo(Promo promo) {
         developingPromo = promo.Clone();
+    }
+
+    public void StartRecruitment(Recruitment recruitment) {
+        developingRecruitment = recruitment.Clone();
     }
 
     public void HarvestProducts(float elapsedTime) {

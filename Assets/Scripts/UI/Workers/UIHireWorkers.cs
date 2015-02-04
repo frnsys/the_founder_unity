@@ -15,7 +15,6 @@ public class UIHireWorkers : UIFullScreenPager {
     void OnEnable() {
         gm = GameManager.Instance;
         company = gm.playerCompany;
-        LoadWorkers();
     }
 
     public void HireWorker(Worker worker) {
@@ -83,10 +82,10 @@ public class UIHireWorkers : UIFullScreenPager {
         }
     }
 
-    private void LoadWorkers() {
+    public void LoadWorkers(IEnumerable<Worker> workers) {
         ClearGrid();
         WorkerInsight wi = GameManager.Instance.workerInsight;
-        foreach (Worker w in GameManager.Instance.workerManager.AvailableWorkers) {
+        foreach (Worker w in workers) {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
 

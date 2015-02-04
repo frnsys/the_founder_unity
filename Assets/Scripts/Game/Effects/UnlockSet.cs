@@ -15,6 +15,7 @@ public class UnlockSet {
     public List<Location> locations = new List<Location>();
     public List<Vertical> verticals = new List<Vertical>();
     public List<Promo> promos = new List<Promo>();
+    public List<Recruitment> recruitments = new List<Recruitment>();
 
     // This "unlocks" an UnlockSet by
     // adding the input UnlockSet's values
@@ -28,5 +29,6 @@ public class UnlockSet {
         locations.AddRange(us.locations);
         verticals.AddRange(us.verticals);
         promos.AddRange(us.promos);
+        recruitments.AddRange(us.recruitments);
     }
 }

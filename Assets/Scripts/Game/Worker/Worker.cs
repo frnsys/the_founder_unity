@@ -34,6 +34,15 @@ public class Worker : HasStats {
     public float monthlyPay {
         get { return salary/12; }
     }
+    public float score {
+        get {
+            return cleverness.value +
+                   creativity.value +
+                   charisma.value +
+                   productivity.value +
+                   happiness.value;
+        }
+    }
 
     public string bio;
     public string description;

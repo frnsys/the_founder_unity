@@ -37,6 +37,14 @@ public class WorkerManager : MonoBehaviour {
         }
     }
 
+    public IEnumerable<Worker> WorkersForRecruitment(Recruitment r) {
+        // This randomly sorts the available workers,
+        // takes the first 10, and then randomly selects them based on their
+        // scores and the recruitment strategy's target score.
+        return AvailableWorkers.OrderBy(i => Random.value).Take(10)
+            .Where(w => Random.value < 1 - Mathf.Abs(w.score - r.targetScore)/r.targetScore);
+    }
+
     // If a worker is at a company,
     // that instance is considered the canonical one.
     public IEnumerable<Worker> Employed {

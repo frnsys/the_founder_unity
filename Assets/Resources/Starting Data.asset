@@ -14,6 +14,9 @@ MonoBehaviour:
   company: {fileID: 0}
   board:
     happiness: 10
+    revenueTarget: 20000
+    lastQuarterRevenue: 0
+    desiredGrowth: .119999997
   unlocked:
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
@@ -62,6 +65,9 @@ MonoBehaviour:
     promos:
     - {fileID: 11400000, guid: 6ac41f3f32e0e44be96e7daa37b15b67, type: 2}
     - {fileID: 11400000, guid: 225af2c0fa20e42e0b70d44148c1f1cb, type: 2}
+    recruitments:
+    - {fileID: 11400000, guid: 913f70547464646c69428c350a227b8e, type: 2}
+  economy: 0
   onboardingState:
     FIRST_PRODUCT_LAUNCHED: 0
     FIRST_WORKER_HIRED: 0
@@ -72,18 +78,22 @@ MonoBehaviour:
     COMMS_UNLOCKED: 0
     VERTICALS_UNLOCKED: 0
     WORKER_LIMIT_REACHED: 0
+    BAILOUT_RECEIVED: 0
+    BONUS_INVESTMENT: 0
   workerInsight: 0
   maxProductTypes: 0
   technology: {fileID: 0}
   research: 0
   otherCompanies: []
+  LabsAccessible: 0
+  CommsAccessible: 0
+  MarketAccessible: 0
   month: 0
   week: 0
   year: 0
   lifetimeYear: 0
   lifetimeMonth: 0
   lifetimeWeek: 0
-  economyMultiplier: 0
   unemployed: []
   specialEventsPool: []
   eventsPool: []

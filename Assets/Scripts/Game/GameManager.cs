@@ -34,6 +34,9 @@ public class GameManager : Singleton<GameManager> {
     public float economyMultiplier {
         get { return economyManager.economyMultiplier; }
     }
+    public Economy economy {
+        get { return data.economy; }
+    }
 
     public int maxProductTypes {
         get { return data.maxProductTypes; }
@@ -327,6 +330,7 @@ public class GameManager : Singleton<GameManager> {
         yield return new WaitForSeconds(cycleTime);
         while(true) {
             playerCompany.DevelopProducts();
+            playerCompany.DevelopRecruitment();
 
             foreach (AICompany aic in data.otherCompanies) {
                 aic.DevelopProducts();

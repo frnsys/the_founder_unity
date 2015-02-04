@@ -10,8 +10,6 @@ public class UIPromo : MonoBehaviour {
             label.text = promo_.name;
             description.text = promo_.description;
             image.mainTexture = promo_.icon;
-
-            // TO DO Show effects?
         }
     }
 

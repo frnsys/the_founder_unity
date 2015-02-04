@@ -19,6 +19,7 @@ public class UIManager : Singleton<UIManager> {
 
     public GameObject gameEventNotificationEmailPrefab;
     public GameObject gameEventNotificationNewsPrefab;
+    public GameObject hiringPrefab;
 
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
@@ -40,7 +41,7 @@ public class UIManager : Singleton<UIManager> {
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
-        Promo.Completed += OnPromoCompleted;
+        Recruitment.Completed += OnRecruitmentCompleted;
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
         GameManager.GameLost += OnGameLost;
@@ -50,7 +51,7 @@ public class UIManager : Singleton<UIManager> {
         GameEvent.EventTriggered -= OnEvent;
         ResearchManager.Completed -= OnResearchCompleted;
         Product.Completed -= OnProductCompleted;
-        Promo.Completed -= OnPromoCompleted;
+        Recruitment.Completed -= OnRecruitmentCompleted;
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
         GameManager.GameLost -= OnGameLost;
@@ -89,8 +90,12 @@ public class UIManager : Singleton<UIManager> {
         }
     }
 
-    void OnPromoCompleted(Promo p) {
-        Alert(p.name + " completed.");
+    void OnRecruitmentCompleted(Recruitment r) {
+        IEnumerable<Worker> workers = GameManager.Instance.workerManager.WorkersForRecruitment(r);
+        Alert("Our recruiting has finished. We had " + workers.Count().ToString() + " applicants. Here is the info we have on them.");
+        GameObject window = NGUITools.AddChild(windowsPanel, hiringPrefab);
+        window.GetComponent<UIWidget>().SetAnchor(windowsPanel.gameObject, 0, 0, 0, 0);
+        window.GetComponent<UIHireWorkers>().LoadWorkers(workers);
     }
 
     void OnPerformanceReport(int quarter, PerformanceDict results, PerformanceDict deltas, TheBoard board) {

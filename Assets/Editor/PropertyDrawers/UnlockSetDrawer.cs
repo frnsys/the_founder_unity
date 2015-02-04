@@ -16,7 +16,8 @@ class UnlockSetDrawer : SuperPropertyDrawer {
         "perks",
         "stores",
         "locations",
-        "promos"
+        "promos",
+        "recruitments"
     };
 
     public override Rect Edit(Rect position, SerializedProperty property) {
