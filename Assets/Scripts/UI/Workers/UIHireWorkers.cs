@@ -17,9 +17,33 @@ public class UIHireWorkers : UIFullScreenPager {
         company = gm.playerCompany;
     }
 
+    public void HireRobotWorker(Worker worker) {
+        if (company.remainingSpace > 0) {
+            UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
+            ic.SetRobotWorker("The " + worker.name + " model costs:", worker.baseMinSalary);
+
+            UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
+                ic.Close_();
+                GameManager.Instance.workerManager.HireWorker(worker);
+                UIManager.Instance.Alert("BOOT SEQUENCE COMPLETE. READY TO SERVE " + company.name + ".");
+            };
+
+            UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
+                ic.Close_();
+            };
+
+            UIEventListener.Get(ic.yesButton).onClick += yesAction;
+            UIEventListener.Get(ic.noButton).onClick += noAction;
+
+        } else {
+            UIManager.Instance.Alert("You don't have any space for new workers. Consider laying some people off or expanding to a new location.");
+        }
+    }
+
     public void HireWorker(Worker worker) {
         if (company.remainingSpace > 0) {
             UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
+
             ic.bodyText = "Make an offer for " + worker.name + ".";
             ic.offer = 5000;
 
@@ -91,20 +115,29 @@ public class UIHireWorkers : UIFullScreenPager {
 
             UIWorker uiw = workerItem.GetComponent<UIWorker>();
             Worker worker = w;
+
             UIEventListener.Get(uiw.button.gameObject).onClick += delegate(GameObject obj) {
-                HireWorker(worker);
+                if (worker.robot) {
+                    HireRobotWorker(worker);
+                } else {
+                    HireWorker(worker);
+                }
             };
 
-            switch (wi) {
-                case WorkerInsight.Basic:
-                    uiw.SetBasicWorker(w);
-                    break;
-                case WorkerInsight.Fuzzy:
-                    uiw.SetFuzzyWorker(w);
-                    break;
-                case WorkerInsight.Quant:
-                    uiw.SetQuantWorker(w);
-                    break;
+            if (worker.robot) {
+                uiw.worker = worker;
+            } else {
+                switch (wi) {
+                    case WorkerInsight.Basic:
+                        uiw.SetBasicWorker(w);
+                        break;
+                    case WorkerInsight.Fuzzy:
+                        uiw.SetFuzzyWorker(w);
+                        break;
+                    case WorkerInsight.Quant:
+                        uiw.SetQuantWorker(w);
+                        break;
+                }
             }
         }
         Adjust();

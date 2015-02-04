@@ -6,6 +6,7 @@ public class UIOffer : UIConfirm {
     public UILabel offerLabel;
     public UILabel monthlyCostLabel;
     public UILabel hiringFeeLabel;
+    public GameObject humanUI;
 
     private int offer_;
     public int offer {
@@ -32,5 +33,11 @@ public class UIOffer : UIConfirm {
         offer -= 5000;
         if (offer < 0)
             offer = 0;
+    }
+
+    public void SetRobotWorker(string text, float cost) {
+        offerLabel.text = "$" + cost.ToString();
+        bodyText = text;
+        humanUI.SetActive(false);
     }
 }

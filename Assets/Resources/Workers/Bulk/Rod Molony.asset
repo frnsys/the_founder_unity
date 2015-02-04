@@ -11,11 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Rod Molony
   m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
   texture: {fileID: 0}
+  robot: 1
   salary: 0
-  bio: Rod Molony is very awkward and is not very imaginative. Rod Molony needs a
-    lot of motivation and isn't the sharpest tool in the shed. Rod Molony reminds
-    me of Eeyore.
+  bio: Rod Molony is not very imaginative and needs a lot of motivation. Rod Molony
+    is very awkward and reminds me of Eeyore. Rod Molony isn't the sharpest tool in
+    the shed.
   description: 
   title: Programmer
   baseMinSalary: 18000

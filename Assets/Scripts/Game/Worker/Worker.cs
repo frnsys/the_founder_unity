@@ -27,9 +27,17 @@ public class Worker : HasStats {
     // Each worker has their own style!
     public Texture texture;
 
+    // Later on, there are robotic workers.
+    public bool robot = false;
+
     public float salary;
     public float hiringFee {
-        get { return salary * 0.1f; }
+        get {
+            // For robots, the baseMinSalary is the one-time cost.
+            if (robot)
+                return baseMinSalary;
+            return salary * 0.1f;
+        }
     }
     public float monthlyPay {
         get { return salary/12; }
@@ -47,6 +55,7 @@ public class Worker : HasStats {
     public string bio;
     public string description;
     public string title;
+
     public float baseMinSalary;
     public float MinSalaryForCompany(Company c) {
         // If the employee is currently hired, i.e. has a salary > 0,

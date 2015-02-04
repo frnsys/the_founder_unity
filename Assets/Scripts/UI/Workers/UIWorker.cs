@@ -24,6 +24,12 @@ public class UIWorker : MonoBehaviour {
             else
                 title.text = worker_.title;
 
+            if (worker_.robot) {
+                bioLabel.text = "Description";
+                statLabel.text = "Specifications";
+                credit.gameObject.SetActive(false);
+            }
+
             creativity.text = "Creativity: " + worker_.creativity;
             charisma.text = "Charisma: " + worker_.charisma;
             cleverness.text = "Cleverness: " + worker_.cleverness;
@@ -69,6 +75,10 @@ public class UIWorker : MonoBehaviour {
     public UILabel happiness;
     public UILabel credit;
     public UIButton button;
+
+    // These change for robots.
+    public UILabel bioLabel;
+    public UILabel statLabel;
 
     public GameObject quantObj;
 }
