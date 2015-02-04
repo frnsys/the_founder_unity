@@ -56,4 +56,7 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
   actions: []
-  conditions: []
+  conditions:
+  - value: 0
+    greater: 0
+    type: 2

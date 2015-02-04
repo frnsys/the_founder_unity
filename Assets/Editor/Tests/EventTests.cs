@@ -126,13 +126,17 @@ namespace UnityTest
 
         [Test]
         public void Conditions() {
-            PublicityCondition pc = new PublicityCondition();
+            GameEvent.Condition pc = new GameEvent.Condition();
             pc.value = 20;
-            gE.conditions.Add(pc);
+            pc.greater = true;
+            pc.type = GameEvent.Condition.Type.Publicity;
 
-            PublicityCondition pc_ = new PublicityCondition();
+            GameEvent.Condition pc_ = new GameEvent.Condition();
             pc_.value = 40;
-            gE.conditions.Add(pc_);
+            pc_.greater = true;
+            pc_.type = GameEvent.Condition.Type.Publicity;
+
+            gE.conditions = new GameEvent.Condition[] { pc, pc_ };
 
             Company c = new Company("Foo Inc").Init();
             c.publicity.baseValue = 0;
@@ -148,9 +152,11 @@ namespace UnityTest
 
         [Test]
         public void SpecialEvents() {
-            PublicityCondition pc = new PublicityCondition();
+            GameEvent.Condition pc = new GameEvent.Condition();
             pc.value = 20;
-            gE.conditions.Add(pc);
+            pc.greater = true;
+            pc.type = GameEvent.Condition.Type.Publicity;
+            gE.conditions = new GameEvent.Condition[] { pc };
 
             gd.specialEventsPool.Add(gE);
             gd.company = new Company("Foo Inc").Init();

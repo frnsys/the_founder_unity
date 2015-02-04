@@ -248,12 +248,6 @@ public class GameManager : Singleton<GameManager> {
                     PerformanceReport(quarter, results, deltas, data.board);
                 }
 
-                if (growth >= data.board.desiredGrowth && !data.onboardingState.BONUS_INVESTMENT) {
-                    GameEvent ev = GameEvent.LoadSpecialEvent("Bonus Investment");
-                    GameEvent.Trigger(ev);
-                    data.onboardingState.BONUS_INVESTMENT = true;
-                }
-
                 // Schedule a news story about the growth (if it warrants one).
                 StartCoroutine(PerformanceNews(growth));
 
@@ -279,6 +273,7 @@ public class GameManager : Singleton<GameManager> {
         } else if (growth <= target * 0.6) {
             ev = GameEvent.LoadSpecialEvent("Slower Growth");
         }
+        Debug.Log("PERFORMANCE NEWS");
         GameEvent.Trigger(ev);
     }
 
@@ -297,13 +292,6 @@ public class GameManager : Singleton<GameManager> {
                 (int)data.month > data.lifetimeMonth &&
                 data.week > data.lifetimeWeek) {
                 UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
-            }
-
-            // Check the company's cash reserves.
-            if (data.company.cash.value < 0 && !data.onboardingState.BAILOUT_RECEIVED) {
-                GameEvent ev = GameEvent.LoadSpecialEvent("Bailout");
-                GameEvent.Trigger(ev);
-                data.onboardingState.BAILOUT_RECEIVED = true;
             }
 
             // Make other AI company moves.

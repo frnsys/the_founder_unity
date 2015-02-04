@@ -10,6 +10,4 @@ public class OnboardingState {
     public bool COMMS_UNLOCKED = false;
     public bool VERTICALS_UNLOCKED = false;
     public bool WORKER_LIMIT_REACHED = false;
-    public bool BAILOUT_RECEIVED = false;
-    public bool BONUS_INVESTMENT = false;
 }

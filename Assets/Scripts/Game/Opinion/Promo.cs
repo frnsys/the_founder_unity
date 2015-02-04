@@ -34,7 +34,7 @@ public class Promo : TemplateResource<Promo> {
     }
 
     public OpinionEvent CalculateResult(float skill) {
-        GameEvent ev = GameEvent.LoadSpecialEvent("Promo Success");
+        GameEvent ev = GameEvent.LoadNoticeEvent("Promo Success");
         float pp = skill/difficulty;
         float majorSuccessProb = Mathf.Max(0, pp - 1);
         float roll = Random.value;
@@ -50,14 +50,14 @@ public class Promo : TemplateResource<Promo> {
             result.opinion.value *= multiplier;
             result.publicity.value *= multiplier;
 
-            ev = GameEvent.LoadSpecialEvent("Promo Major Success");
+            ev = GameEvent.LoadNoticeEvent("Promo Major Success");
             num_people = 10000 * result.publicity.value;
 
         // Failure
         } else if (roll > pp) {
             result.opinion.value *= 0;
             result.publicity.value *= 0.1f;
-            ev = GameEvent.LoadSpecialEvent("Promo Failure");
+            ev = GameEvent.LoadNoticeEvent("Promo Failure");
             num_people = 1000 * result.publicity.value;
         }
 
