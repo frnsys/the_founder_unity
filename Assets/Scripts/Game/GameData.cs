@@ -22,6 +22,13 @@ public enum Month {
     December
 }
 
+public enum Economy {
+    Depression,
+    Recession,
+    Neutral,
+    Expansion
+}
+
 public enum WorkerInsight {
     Basic,
     Fuzzy,
@@ -40,6 +47,7 @@ public class GameData : ScriptableObject {
     public Company company;
     public TheBoard board;
     public UnlockSet unlocked;
+    public Economy economy;
 
     // Onboarding progress.
     public OnboardingState onboardingState;
@@ -72,9 +80,6 @@ public class GameData : ScriptableObject {
     public int lifetimeYear;
     public int lifetimeMonth;
     public int lifetimeWeek;
-
-    // Economy health
-    public float economyMultiplier;
 
     // The canonical pool of workers not at companies.
     public List<Worker> unemployed;
@@ -110,6 +115,7 @@ public class GameData : ScriptableObject {
         data.research = 0;
         data.unemployed = Worker.LoadAll();
         data.otherCompanies = AICompany.LoadAll();
+        data.economy = Economy.Neutral;
 
         data.specialEventsPool = GameEvent.LoadSpecialEvents();
         data.eventsPool = new List<GameEvent>();
@@ -125,7 +131,6 @@ public class GameData : ScriptableObject {
         data.week  = 0;
 
         data.maxProductTypes   = 1;
-        data.economyMultiplier = 1;
 
         // You start your business at 25,
         // so the amount of time you have really ranges from 40-60.

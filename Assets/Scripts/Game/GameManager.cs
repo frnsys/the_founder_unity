@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public float economyMultiplier {
-        get { return data.economyMultiplier; }
+        get { return economyManager.economyMultiplier; }
     }
 
     public int maxProductTypes {
@@ -55,6 +55,9 @@ public class GameManager : Singleton<GameManager> {
     public NarrativeManager narrativeManager;
 
     [HideInInspector]
+    public EconomyManager economyManager;
+
+    [HideInInspector]
     public WorkerManager workerManager;
 
     [HideInInspector]
@@ -74,15 +77,19 @@ public class GameManager : Singleton<GameManager> {
             Destroy(workerManager);
         if (eventManager != null)
             Destroy(eventManager);
+        if (economyManager != null)
+            Destroy(economyManager);
 
         researchManager  = gameObject.AddComponent<ResearchManager>();
         narrativeManager = gameObject.AddComponent<NarrativeManager>();
         workerManager    = gameObject.AddComponent<WorkerManager>();
         eventManager     = gameObject.AddComponent<EventManager>();
+        economyManager   = gameObject.AddComponent<EconomyManager>();
 
         data = d;
         eventManager.Load(d);
         workerManager.Load(d);
+        economyManager.Load(d);
         researchManager.Load(d);
         narrativeManager.Load(d);
     }
@@ -222,9 +229,6 @@ public class GameManager : Singleton<GameManager> {
                 aic.CollectPerformanceData();
                 aic.PayMonthly();
             }
-
-            // See how the economy is.
-            data.economyMultiplier = Utils.RandomGaussian(1f, 0.2f);
 
             playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();

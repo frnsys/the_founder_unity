@@ -21,6 +21,13 @@ public class GameEvent : ScriptableObject {
         }).ToList();
     }
 
+    public static GameEvent LoadSpecialEvent(string name) {
+        GameEvent ev = Resources.Load<GameEvent>("GameEvents/Special/" + name);
+        GameEvent clone = Instantiate(ev) as GameEvent;
+        clone.name = ev.name;
+        return clone;
+    }
+
     public Type type;
     public string description;
     public string from;

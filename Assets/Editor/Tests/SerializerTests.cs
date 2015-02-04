@@ -84,8 +84,6 @@ namespace UnityTest
             data.lifetimeYear  = 100;
             data.lifetimeMonth = 6;
             data.lifetimeWeek  = 1;
-
-            data.economyMultiplier  = 2f;
         }
 
         [TearDown]
@@ -140,8 +138,6 @@ namespace UnityTest
             Assert.AreEqual(gd.lifetimeYear,               data.lifetimeYear);
             Assert.AreEqual(gd.lifetimeMonth,              data.lifetimeMonth);
             Assert.AreEqual(gd.lifetimeWeek,               data.lifetimeWeek);
-
-            Assert.AreEqual(gd.economyMultiplier,          data.economyMultiplier);
 
             Assert.AreEqual(gd.company.name,               data.company.name);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
