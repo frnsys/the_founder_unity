@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Bailout
+  m_EditorClassIdentifier: 
+  type: 0
+  description: Your burn rate is too fast - you need to keep some cash on hand to
+    expand your operations. This time I've managed to get you some emergency funds
+    to keep you going - but this can't happen again.
+  from: mentor@<PLAYERCOMPANY>.com
+  image: {fileID: 0}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 0
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      perks: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+    cash: 200000
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
+  actions: []
+  conditions: []

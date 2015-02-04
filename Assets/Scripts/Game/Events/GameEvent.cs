@@ -22,7 +22,7 @@ public class GameEvent : ScriptableObject {
     }
 
     public static GameEvent LoadSpecialEvent(string name) {
-        GameEvent ev = Resources.Load<GameEvent>("GameEvents/Special/" + name);
+        GameEvent ev = Resources.Load<GameEvent>("SpecialEvents/" + name);
         GameEvent clone = Instantiate(ev) as GameEvent;
         clone.name = ev.name;
         return clone;

@@ -25,7 +25,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject confirmPrefab;
     public GameObject emailPrefab;
     public GameObject effectAlertPrefab;
-    public GameObject annualReportPrefab;
+    public GameObject quarterlyReportPrefab;
     public GameObject researchCompletedAlertPrefab;
     public GameObject productCompletedAlertPrefab;
     public GameObject competitorProductCompletedAlertPrefab;
@@ -181,7 +181,7 @@ public class UIManager : Singleton<UIManager> {
 
     // Create an annual report.
     public UIPerformanceReport PerformanceReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
-        UIPerformanceReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIPerformanceReport>();
+        UIPerformanceReport report = NGUITools.AddChild(alertsPanel, quarterlyReportPrefab).GetComponent<UIPerformanceReport>();
         report.BuildReport(results, deltas, board);
         return report;
     }
