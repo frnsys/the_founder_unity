@@ -16,15 +16,17 @@ namespace UnityTest
             Promo p = ScriptableObject.CreateInstance<Promo>();
 
             p.difficulty = 1;
+            p.opinionEvent.opinion.value = 4;
+            p.opinionEvent.publicity.value = 4;
             float creativity = 10;
 
-            float result = p.CalculateResult(creativity);
+            OpinionEvent result = p.CalculateResult(creativity);
 
             p.difficulty = 100;
-            Assert.IsTrue(result > p.CalculateResult(creativity));
+            Assert.IsTrue(result.opinion.value > p.CalculateResult(creativity).opinion.value);
 
             p.difficulty = 0.0001f;
-            Assert.IsTrue(result < p.CalculateResult(creativity));
+            Assert.IsTrue(result.opinion.value < p.CalculateResult(creativity).opinion.value);
 		}
     }
 }

@@ -233,17 +233,26 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
 
-            if ((int)data.month % 4 == 0) {
+            if ((int)data.month % 3 == 0) {
                 // Get the quarterly performance data and generate the report.
                 List<PerformanceDict> quarterData = playerCompany.CollectQuarterlyPerformanceData();
                 PerformanceDict results = quarterData[0];
                 PerformanceDict deltas = quarterData[1];
-                data.board.EvaluatePerformance(results["Quarterly Revenue"]);
+                float growth = data.board.EvaluatePerformance(results["Quarterly Revenue"]);
 
                 if (PerformanceReport != null) {
                     int quarter = (int)data.month/4 + 1;
                     PerformanceReport(quarter, results, deltas, data.board);
                 }
+
+                if (growth >= data.board.desiredGrowth && !data.onboardingState.BONUS_INVESTMENT) {
+                    GameEvent ev = GameEvent.LoadSpecialEvent("Bonus Investment");
+                    GameEvent.Trigger(ev);
+                    data.onboardingState.BONUS_INVESTMENT = true;
+                }
+
+                // Schedule a news story about the growth (if it warrants one).
+                StartCoroutine(PerformanceNews(growth));
 
                 // Lose condition:
                 if (data.board.happiness < -20)
@@ -252,6 +261,22 @@ public class GameManager : Singleton<GameManager> {
 
             yield return new WaitForSeconds(monthTime);
         }
+    }
+
+    IEnumerator PerformanceNews(float growth) {
+        yield return new WaitForSeconds(weekTime);
+        GameEvent ev = null;
+        float target = data.board.desiredGrowth;
+        if (growth >= target * 2) {
+            ev = GameEvent.LoadSpecialEvent("Faster Growth");
+        } else if (growth >= target * 1.2) {
+            ev = GameEvent.LoadSpecialEvent("Fast Growth");
+        } else if (growth <= target * 0.8) {
+            ev = GameEvent.LoadSpecialEvent("Slow Growth");
+        } else if (growth <= target * 0.6) {
+            ev = GameEvent.LoadSpecialEvent("Slower Growth");
+        }
+        GameEvent.Trigger(ev);
     }
 
     IEnumerator Weekly() {
@@ -269,6 +294,13 @@ public class GameManager : Singleton<GameManager> {
                 (int)data.month > data.lifetimeMonth &&
                 data.week > data.lifetimeWeek) {
                 UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
+            }
+
+            // Check the company's cash reserves.
+            if (data.company.cash.value < 0 && !data.onboardingState.BAILOUT_RECEIVED) {
+                GameEvent ev = GameEvent.LoadSpecialEvent("Bailout");
+                GameEvent.Trigger(ev);
+                data.onboardingState.BAILOUT_RECEIVED = true;
             }
 
             // Make other AI company moves.

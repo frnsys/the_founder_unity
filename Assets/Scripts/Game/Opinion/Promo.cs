@@ -23,40 +23,46 @@ public class Promo : TemplateResource<Promo> {
     }
 
     static public event System.Action<Promo> Completed;
-    public bool Develop(float amount, float skill) {
+    public OpinionEvent Develop(float amount, float skill) {
         _progress += amount;
         if (progress >= 1) {
-            opinionEvent.opinion.value *= CalculateResult(skill);
             if (Completed != null)
                 Completed(this);
-            return true;
+            return CalculateResult(skill);
         }
-        return false;
+        return null;
     }
 
-    public float CalculateResult(float skill) {
-        // You always get the same publicity,
-        // but the opinion resulting from the Promo varies
-        // depending on the skill put into it.
-        float successFactor = SuccessProbability(skill);
+    public OpinionEvent CalculateResult(float skill) {
+        GameEvent ev = GameEvent.LoadSpecialEvent("Promo Success");
+        float pp = skill/difficulty;
+        float majorSuccessProb = Mathf.Max(0, pp - 1);
+        float roll = Random.value;
+        float num_people = 1000 * opinionEvent.publicity.value;
+        OpinionEvent result = new OpinionEvent(
+                opinionEvent.opinion.value,
+                opinionEvent.publicity.value);
 
-        // If successful,
-        // you get positive public opinion.
-        // You also get a random bonus related to the skill involved.
-        if (Random.value <= successFactor) {
-            return Random.Range(1, 1 + successFactor);
+        // A major success has bonuses.
+        if (roll < majorSuccessProb) {
+            // Even higher skill levels yield extra bonuses.
+            float multiplier = 1.2f + Mathf.Max(0, pp - 2)/10;
+            result.opinion.value *= multiplier;
+            result.publicity.value *= multiplier;
 
-        // If the promo fails, you get some negative public opinion.
-        } else {
-            return successFactor - 1;
+            ev = GameEvent.LoadSpecialEvent("Promo Major Success");
+            num_people = 10000 * result.publicity.value;
+
+        // Failure
+        } else if (roll > pp) {
+            result.opinion.value *= 0;
+            result.publicity.value *= 0.1f;
+            ev = GameEvent.LoadSpecialEvent("Promo Failure");
+            num_people = 1000 * result.publicity.value;
         }
-    }
 
-    private float SuccessProbability(float skill) {
-        float x = skill * 1/difficulty;
-
-        // This is a function with an asymptote at y=1,
-        // so the success probability can never be 1, but it can get very close.
-        return 1 - (1/(x+1));
+        ev.description = ev.description.Replace("<NUM_PEOPLE>", string.Format("{0:n}", num_people));
+        GameEvent.Trigger(ev);
+        return result;
     }
 }

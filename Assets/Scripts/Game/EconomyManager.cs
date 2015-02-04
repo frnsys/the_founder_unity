@@ -41,13 +41,13 @@ public class EconomyManager : Singleton<EconomyManager> {
         string eventName = null;
         if (roll < 1) {
             newEconomy = Economy.Depression;
-            eventName = "Economy Depression";
+            eventName = "Economic Depression";
         } else if (roll < 0.15) {
             newEconomy = Economy.Recession;
-            eventName = "Economy Recession";
+            eventName = "Economic Recession";
         } else if (roll < 0.20) {
             newEconomy = Economy.Expansion;
-            eventName = "Economy Expansion";
+            eventName = "Economic Expansion";
         } else {
             newEconomy = Economy.Neutral;
         }
@@ -57,7 +57,7 @@ public class EconomyManager : Singleton<EconomyManager> {
 
             // Economic recovery is a special case.
             if ((data.economy == Economy.Recession || data.economy == Economy.Depression) && (newEconomy == Economy.Expansion || newEconomy == Economy.Neutral)) {
-                eventName = "Economy Recovery";
+                eventName = "Economic Recovery";
             }
 
             if (eventName != null) {

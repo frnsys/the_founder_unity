@@ -11,8 +11,12 @@ public class TheBoard {
     public float lastQuarterRevenue = 0;
     public float desiredGrowth = 0.12f;
 
-    public void EvaluatePerformance(float revenue) {
+    public float EvaluatePerformance(float revenue) {
         float growth = revenue/lastQuarterRevenue - 1;
+
+        // If the target is exceeded, the board is really happy.
+        if (growth >= desiredGrowth * 2)
+            happiness += growth * 12;
 
         // If the target is met, the board is happy.
         if (growth >= desiredGrowth) {
@@ -30,6 +34,8 @@ public class TheBoard {
         // Set the new target.
         revenueTarget *= 1 + desiredGrowth;
         lastQuarterRevenue = revenue;
+
+        return growth;
     }
 
     // TO DO these should become emoji!

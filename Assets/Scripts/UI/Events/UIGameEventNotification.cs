@@ -17,7 +17,8 @@ public class UIGameEventNotification: UIEffectAlert {
         set {
             gameEvent_ = value;
 
-            string companyName = GameManager.Instance.playerCompany.name;
+            Company c = GameManager.Instance.playerCompany;
+            string companyName = c.name;
 
             titleLabel.text = gameEvent_.name;
             bodyLabel.text = gameEvent_.description.Replace("<PLAYERCOMPANY>", companyName);

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Fast Growth
+  m_EditorClassIdentifier: 
+  type: 1
+  description: <PLAYERCOMPANY> beat analysts' predictions this quarter, expanding
+    revenue more than expected. Investors, keep your eye on <PLAYERCOMPANY>.
+  from: The Financial Journal
+  image: {fileID: 2800000, guid: 1bdfc4682af28463ea1d47b39c43fc8e, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 0
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      items: []
+      perks: []
+      stores: 
+      locations: []
+      verticals: []
+      promos: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
+  actions: []
+  conditions: []

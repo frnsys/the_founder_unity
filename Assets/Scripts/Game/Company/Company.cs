@@ -296,10 +296,10 @@ public class Company : HasStats {
     public Promo developingPromo;
     public void DevelopPromo() {
         if (developingPromo != null && opinionCzar != null) {
-            bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
+            OpinionEvent result = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
 
-            if (completed) {
-                ApplyOpinionEvent(developingPromo.opinionEvent);
+            if (result != null) {
+                ApplyOpinionEvent(result);
                 developingPromo = null;
             }
         }
