@@ -21,6 +21,9 @@ public class Worker : HasStats {
 
     private Levels levels;
 
+    // The worker's avatar in the game world.
+    public GameObject avatar;
+
     // Each worker has their own style!
     public Texture texture;
 

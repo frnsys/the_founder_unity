@@ -3,55 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIHireWorkers : UIFullScreenPager {
+    private Company company;
+    private GameManager gm;
+
     public GameObject workerItemPrefab;
     public GameObject offerPrefab;
     public GameObject noWorkersNotice;
-    public Company company;
 
-    public UIButton hireButton;
-
-    private Worker currentWorker;
     private List<Worker> availableWorkers = new List<Worker>();
 
     void OnEnable() {
-        gridCenter.onFinished = OnCenter;
-        company = GameManager.Instance.playerCompany;
-
+        gm = GameManager.Instance;
+        company = gm.playerCompany;
         LoadWorkers();
     }
 
-    void Update() {
-        if (scrollView.isDragging) {
-            // Disable the buttons
-            // while dragging.
-            hireButton.isEnabled = false;
-        }
-    }
-
-    public void HireWorker() {
+    public void HireWorker(Worker worker) {
         if (company.remainingSpace > 0) {
             UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
-            ic.bodyText = "Make an offer for " + currentWorker.name + ".";
+            ic.bodyText = "Make an offer for " + worker.name + ".";
             ic.offer = 5000;
 
             UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
                 ic.Close_();
-                if (ic.offer >= currentWorker.MinSalaryForCompany(company)) {
+                if (ic.offer >= worker.MinSalaryForCompany(company)) {
                     // Set the worker's salary to the offer.
                     // Reset the player offer counter.
                     // Hire the worker!
-                    currentWorker.salary = ic.offer;
-                    currentWorker.recentPlayerOffers = 0;
-                    HireWorker_();
+                    worker.salary = ic.offer;
+                    worker.recentPlayerOffers = 0;
+                    HireWorker_(worker);
                 } else {
-                    if (++currentWorker.recentPlayerOffers >= 3) {
+                    if (++worker.recentPlayerOffers >= 3) {
                         // If you make too many failed offers,
                         // the worker goes off the market for a bit.
-                        currentWorker.offMarketTime = 4;
+                        worker.offMarketTime = 4;
 
                         UIManager.Instance.Alert("Your offers were too low. I've decided to take a position somewhere else.");
 
-                        RemoveWorker(currentWorker);
+                        RemoveWorker(worker);
                     } else {
                         UIManager.Instance.Alert("That's way too low. I can't work for that much.");
                     }
@@ -66,13 +56,12 @@ public class UIHireWorkers : UIFullScreenPager {
             UIEventListener.Get(ic.noButton).onClick += noAction;
 
         } else {
-            UIManager.Instance.Alert("You don't have any space for new workers. Considering laying some people off or expanding to a new location.");
+            UIManager.Instance.Alert("You don't have any space for new workers. Consider laying some people off or expanding to a new location.");
         }
     }
-    private void HireWorker_() {
-        GameManager.Instance.workerManager.HireWorker(currentWorker);
-
-        RemoveWorker(currentWorker);
+    private void HireWorker_(Worker worker) {
+        GameManager.Instance.workerManager.HireWorker(worker);
+        RemoveWorker(worker);
 
         // TO DO make this fancier
         UIManager.Instance.Alert("It's been my lifelong dream to work for " + company.name + "!!");
@@ -90,16 +79,8 @@ public class UIHireWorkers : UIFullScreenPager {
         Adjust();
 
         if (availableWorkers.Count == 0) {
-            hireButton.gameObject.SetActive(false);
             noWorkersNotice.SetActive(true);
         }
-    }
-
-    private void OnCenter() {
-        // Re-enable the buttons
-        // when centering the item after a swipe is complete.
-        hireButton.isEnabled = true;
-        currentWorker = gridCenter.centeredObject.GetComponent<UIWorker>().worker as Worker;
     }
 
     private void LoadWorkers() {
@@ -109,19 +90,24 @@ public class UIHireWorkers : UIFullScreenPager {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
 
+            UIWorker uiw = workerItem.GetComponent<UIWorker>();
+            Worker worker = w;
+            UIEventListener.Get(uiw.button.gameObject).onClick += delegate(GameObject obj) {
+                HireWorker(worker);
+            };
+
             switch (wi) {
                 case WorkerInsight.Basic:
-                    workerItem.GetComponent<UIWorker>().SetBasicWorker(w);
+                    uiw.SetBasicWorker(w);
                     break;
                 case WorkerInsight.Fuzzy:
-                    workerItem.GetComponent<UIWorker>().SetFuzzyWorker(w);
+                    uiw.SetFuzzyWorker(w);
                     break;
                 case WorkerInsight.Quant:
-                    workerItem.GetComponent<UIWorker>().SetQuantWorker(w);
+                    uiw.SetQuantWorker(w);
                     break;
             }
         }
         Adjust();
     }
-
 }

@@ -136,6 +136,7 @@ public class Company : HasStats {
     }
 
     static public event System.Action<Worker, Company> WorkerHired;
+    static public event System.Action<Worker, Company> WorkerFired;
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit && Pay(worker.hiringFee)) {
             // Apply existing worker effects.
@@ -171,6 +172,10 @@ public class Company : HasStats {
         // Update the progress required for developing products.
         foreach (Product p in developingProducts) {
             p.requiredProgress = p.TotalProgressRequired(this);
+        }
+
+        if (WorkerFired != null) {
+            WorkerFired(worker, this);
         }
     }
 

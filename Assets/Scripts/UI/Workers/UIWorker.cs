@@ -68,6 +68,7 @@ public class UIWorker : MonoBehaviour {
     public UILabel productivity;
     public UILabel happiness;
     public UILabel credit;
+    public UIButton button;
 
     public GameObject quantObj;
 }

@@ -3,46 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIManageWorkers : UIFullScreenPager {
+    private Company company;
+    private GameManager gm;
+
     public GameObject workerItemPrefab;
 
-    public UIButton fireButton;
-    public UIButton upgradeButton;
-
-    private Worker currentWorker;
     private List<Worker> workers = new List<Worker>();
+    private Color buttonColor = new Color(1f, 0f, 0f);
 
     void OnEnable() {
-        gridCenter.onFinished = OnCenter;
-
+        gm = GameManager.Instance;
+        company = gm.playerCompany;
         LoadWorkers();
     }
 
-    void Update() {
-        if (scrollView.isDragging) {
-            // Disable the buttons
-            // while dragging.
-            fireButton.isEnabled = false;
-            upgradeButton.isEnabled = false;
+    private void LoadWorkers() {
+        ClearGrid();
+        foreach (Worker w in company.workers) {
+            GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
+            UIWorker uiw = workerItem.GetComponent<UIWorker>();
+            uiw.worker = w;
+
+            workers.Add(w);
+
+            // Setup the fire button.
+            Worker worker = w;
+            UIEventListener.Get(uiw.button.gameObject).onClick += delegate(GameObject obj) {
+                FireWorker(worker);
+            };
+            uiw.button.transform.Find("Label").GetComponent<UILabel>().text = "Let Go";
+            uiw.button.defaultColor = buttonColor;
+            uiw.button.pressed = buttonColor;
+            uiw.button.hover = buttonColor;
         }
+        Adjust();
     }
 
-    private void OnCenter() {
-        // Re-enable the buttons
-        // when centering the item after a swipe is complete.
-        fireButton.isEnabled = true;
-        upgradeButton.isEnabled = true;
-        currentWorker = gridCenter.centeredObject.GetComponent<UIWorker>().worker as Worker;
+    public void FireWorker(Worker worker) {
+        UIManager.Instance.Confirm("Are you sure want to fire " + worker.name + "?", delegate {
+                FireWorker_(worker);
+        } , null);
     }
+    private void FireWorker_(Worker worker) {
+        GameManager.Instance.playerCompany.FireWorker(worker);
 
-
-    public void FireWorker() {
-        UIManager.Instance.Confirm("Are you sure want to fire " + currentWorker.name + "?", FireWorker_, null);
-    }
-    private void FireWorker_() {
-        GameManager.Instance.playerCompany.FireWorker(currentWorker);
-
-        int i = workers.IndexOf(currentWorker);
-        workers.Remove(currentWorker);
+        int i = workers.IndexOf(worker);
+        workers.Remove(worker);
 
         // Remove the worker item.
         GameObject workerItem = grid.gameObject.transform.GetChild(i).gameObject;
@@ -53,21 +59,5 @@ public class UIManageWorkers : UIFullScreenPager {
 
         // TO DO make this fancier
         UIManager.Instance.Alert("Your company is shit!!!1!");
-    }
-
-    public void UpgradeWorker() {
-        UIManager.Instance.Confirm("Are you sure want to promote " + currentWorker.name + "?", UpgradeWorker_, null);
-    }
-    private void UpgradeWorker_() {
-        // TO DO Upgrade worker
-    }
-
-    private void LoadWorkers() {
-        foreach (Worker w in GameManager.Instance.playerCompany.workers) {
-            workers.Add(w);
-            GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
-            workerItem.GetComponent<UIWorker>().worker = w;
-        }
-        Adjust();
     }
 }
