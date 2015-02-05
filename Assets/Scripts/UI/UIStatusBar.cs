@@ -30,9 +30,9 @@ public class UIStatusBar : MonoBehaviour {
     }
 
     void Update() {
-        cashLabel.text = "$" + gm.playerCompany.cash;
+        cashLabel.text = string.Format("{0:C0}", gm.playerCompany.cash.value);
         yearLabel.text = gm.year.ToString();
-        monthLabel.text = gm.month.ToString().ToUpper();
+        monthLabel.text = gm.month.ToUpper();
 
         switch (gm.economy) {
             case Economy.Depression:

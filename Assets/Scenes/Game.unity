@@ -690,7 +690,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.58333302
+  aspectRatio: .0333333351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -1700,8 +1700,8 @@ GameObject:
   - 4: {fileID: 254699183}
   - 33: {fileID: 254699185}
   - 23: {fileID: 254699184}
-  - 64: {fileID: 254699187}
   - 114: {fileID: 254699186}
+  - 65: {fileID: 254699187}
   m_Layer: 11
   m_Name: Posterboard
   m_TagString: Untagged
@@ -1764,8 +1764,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 29751b6952957443281c5d084d7d87c9, type: 2}
   duration: 1
---- !u!64 &254699187
-MeshCollider:
+--- !u!65 &254699187
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1774,9 +1774,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300002, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
+  m_Size: {x: 1.33372796, y: .0832381546, z: 2.00000072}
+  m_Center: {x: 1.1920929e-07, y: -3.81469727e-06, z: -2.86102295e-06}
 --- !u!1 &264071009
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,7 +2113,7 @@ GameObject:
   - 33: {fileID: 357579838}
   - 23: {fileID: 357579837}
   - 114: {fileID: 357579839}
-  - 64: {fileID: 357579840}
+  - 65: {fileID: 357579840}
   m_Layer: 11
   m_Name: Whiteboard
   m_TagString: Untagged
@@ -2177,8 +2176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: b761c7bd27f4f4d168be99fc8e92bcd3, type: 2}
   duration: 1
---- !u!64 &357579840
-MeshCollider:
+--- !u!65 &357579840
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2187,9 +2186,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
+  m_Size: {x: 2, y: .115533978, z: 1.35207176}
+  m_Center: {x: 0, y: 9.53674316e-07, z: 0}
 --- !u!1 &370781334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,7 +2617,7 @@ GameObject:
   - 33: {fileID: 452134745}
   - 23: {fileID: 452134744}
   - 114: {fileID: 452134743}
-  - 64: {fileID: 452134742}
+  - 65: {fileID: 452134742}
   m_Layer: 11
   m_Name: Whiteboard
   m_TagString: Untagged
@@ -2640,8 +2638,8 @@ Transform:
   - {fileID: 915853591}
   m_Father: {fileID: 614215373}
   m_RootOrder: 0
---- !u!64 &452134742
-MeshCollider:
+--- !u!65 &452134742
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2650,9 +2648,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
+  m_Size: {x: 2, y: .115534171, z: 1.35207176}
+  m_Center: {x: 1.90734863e-06, y: 9.53674316e-07, z: 3.27825546e-07}
 --- !u!114 &452134743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4041,7 +4038,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.58333302
+  aspectRatio: .0333333351
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -4509,8 +4506,8 @@ GameObject:
   - 4: {fileID: 812569480}
   - 33: {fileID: 812569482}
   - 23: {fileID: 812569481}
-  - 64: {fileID: 812569483}
   - 114: {fileID: 812569484}
+  - 65: {fileID: 812569483}
   m_Layer: 11
   m_Name: Screen
   m_TagString: Untagged
@@ -4560,8 +4557,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 812569479}
   m_Mesh: {fileID: 4300064, guid: 28b4b6bf945d342d981536799c56ca6c, type: 3}
---- !u!64 &812569483
-MeshCollider:
+--- !u!65 &812569483
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -4570,9 +4567,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300064, guid: 28b4b6bf945d342d981536799c56ca6c, type: 3}
+  m_Size: {x: 0, y: 0, z: 0}
+  m_Center: {x: 4.17232513e-06, y: 3.81469727e-06, z: 2.38418579e-07}
 --- !u!114 &812569484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4989,7 +4985,7 @@ GameObject:
   - 33: {fileID: 864235691}
   - 23: {fileID: 864235690}
   - 114: {fileID: 864235693}
-  - 64: {fileID: 864235694}
+  - 65: {fileID: 864235694}
   m_Layer: 11
   m_Name: Chair
   m_TagString: Untagged
@@ -5052,8 +5048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: fdbe47fe85b4340ae9f097b88fc087b1, type: 2}
   duration: 1
---- !u!64 &864235694
-MeshCollider:
+--- !u!65 &864235694
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -5062,9 +5058,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300012, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
+  m_Size: {x: 1.19080722, y: 1.30800664, z: 2.56799078}
+  m_Center: {x: -.500952899, y: -.00289259641, z: -.613921881}
 --- !u!1 &882919184
 GameObject:
   m_ObjectHideFlags: 0
@@ -6165,7 +6160,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .536458313
+  aspectRatio: 1
 --- !u!1 &1107399996
 GameObject:
   m_ObjectHideFlags: 0
@@ -8509,7 +8504,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 7.91666651
+  aspectRatio: .0333333351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -11089,7 +11084,7 @@ GameObject:
   - 33: {fileID: 1906524165}
   - 23: {fileID: 1906524164}
   - 114: {fileID: 1906524163}
-  - 64: {fileID: 1906524166}
+  - 65: {fileID: 1906524166}
   m_Layer: 11
   m_Name: Map
   m_TagString: Untagged
@@ -11152,8 +11147,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1906524161}
   m_Mesh: {fileID: 4300000, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
---- !u!64 &1906524166
-MeshCollider:
+--- !u!65 &1906524166
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -11162,9 +11157,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
+  m_Size: {x: 2, y: .115534015, z: 1.35207212}
+  m_Center: {x: 0, y: -1.90734863e-06, z: 1.1920929e-07}
 --- !u!1 &1915194694
 GameObject:
   m_ObjectHideFlags: 0
@@ -11998,8 +11992,8 @@ GameObject:
   - 4: {fileID: 1997362987}
   - 33: {fileID: 1997362989}
   - 23: {fileID: 1997362988}
-  - 64: {fileID: 1997362991}
   - 114: {fileID: 1997362990}
+  - 65: {fileID: 1997362991}
   m_Layer: 11
   m_Name: Computer
   m_TagString: Untagged
@@ -12062,8 +12056,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 188dea6bd0cd641539845c68ffe2de78, type: 2}
   duration: 1
---- !u!64 &1997362991
-MeshCollider:
+--- !u!65 &1997362991
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -12072,9 +12066,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300018, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
+  m_Size: {x: .689139843, y: .625335932, z: .836037934}
+  m_Center: {x: 1.91530376e-06, y: -.0673600137, z: -.147108793}
 --- !u!1 &1998601183
 GameObject:
   m_ObjectHideFlags: 0
@@ -12258,7 +12251,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .2734375
+  aspectRatio: 1
 --- !u!114 &2013164179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12290,8 +12283,8 @@ GameObject:
   - 4: {fileID: 2015701257}
   - 33: {fileID: 2015701259}
   - 23: {fileID: 2015701258}
-  - 64: {fileID: 2015701261}
   - 114: {fileID: 2015701260}
+  - 65: {fileID: 2015701261}
   m_Layer: 11
   m_Name: Computer
   m_TagString: Untagged
@@ -12354,8 +12347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 617403e4ec408431880eb6fffd8b03a1, type: 2}
   duration: 1
---- !u!64 &2015701261
-MeshCollider:
+--- !u!65 &2015701261
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -12364,9 +12357,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 4300018, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
+  m_Size: {x: .68914032, y: .625336409, z: .836038232}
+  m_Center: {x: -1.14511959e-05, y: -.0673600286, z: -.147109494}
 --- !u!1 &2044322816
 GameObject:
   m_ObjectHideFlags: 0
@@ -12520,8 +12512,6 @@ GameObject:
   - 4: {fileID: 2057252234}
   - 33: {fileID: 2057252236}
   - 23: {fileID: 2057252235}
-  - 65: {fileID: 2057252238}
-  - 114: {fileID: 2057252237}
   m_Layer: 11
   m_Name: Posterboard
   m_TagString: Untagged
@@ -12570,47 +12560,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2057252233}
   m_Mesh: {fileID: 4300002, guid: 6b95c9a1d8f3a4bffb695526e7b0015e, type: 3}
---- !u!114 &2057252237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2057252233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 2057252233}
-  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
-  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
-  disabledColor: {r: .5, g: .5, b: .5, a: 1}
-  duration: .200000003
-  dragHighlight: 0
-  hoverSprite: 
-  pressedSprite: 
-  disabledSprite: 
-  hoverSprite2D: {fileID: 0}
-  pressedSprite2D: {fileID: 0}
-  disabledSprite2D: {fileID: 0}
-  pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 2088398874}
-    mMethodName: TestClick
-    mParameters: []
-    oneShot: 0
---- !u!65 &2057252238
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2057252233}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.33372831, y: .0832384005, z: 2.00000072}
-  m_Center: {x: 3.81469727e-06, y: 9.53674316e-07, z: 2.38418579e-07}
 --- !u!1 &2069542146
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,7 +181,7 @@ public class GameManager : Singleton<GameManager> {
         get { return cycleTime; }
     }
     public string month {
-        get { return data.month.ToString(); }
+        get { return Month.GetName(typeof(Month), data.month); }
     }
     public int year {
         get { return 2000 + data.year; }
