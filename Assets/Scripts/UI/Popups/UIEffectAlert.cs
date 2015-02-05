@@ -58,10 +58,22 @@ public class UIEffectAlert : UIAlert {
         foreach (StatBuff buff in es.workerEffects) {
             RenderBuffEffect(buff, "workers");
         }
-        // TO DO
-        //foreach (StatBuff buff in es.ofType<CashEffect>().Select(c => c.cash)) {
-            //RenderBuffEffect(buff, "the company");
-        //}
+
+        if (es.research.value != 0) {
+            RenderBuffEffect(es.research, null);
+        }
+
+        if (es.cash != 0) {
+            RenderBuffEffect(new StatBuff("Cash", es.cash), null);
+        }
+
+        if (es.opinionEvent.opinion.value != 0) {
+            RenderBuffEffect(es.opinionEvent.opinion, null);
+        }
+
+        if (es.opinionEvent.publicity.value != 0) {
+            RenderBuffEffect(es.opinionEvent.publicity, null);
+        }
     }
 
     private void RenderProductEffects(EffectSet es) {

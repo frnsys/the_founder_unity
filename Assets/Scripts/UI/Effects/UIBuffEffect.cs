@@ -23,7 +23,9 @@ public class UIBuffEffect : MonoBehaviour {
         }
 
         buffText += " to " + buff.name;
-        buffText += " for " + target;
+
+        if (target != null)
+            buffText += " for " + target;
 
         label.text = buffText;
     }
