@@ -19,7 +19,7 @@ internal class MiniCompanyInspector : Editor {
         i.name = EditorGUILayout.TextField("Name", i.name);
         i.description = EditorGUILayout.TextField("Description", i.description);
         i.logo = (Texture)EditorGUILayout.ObjectField("Texture", i.logo, typeof(Texture), false);
-        i.cost = EditorGUILayout.FloatField("Cost", i.cost);
+        i.baseCost = EditorGUILayout.FloatField("Base Cost", i.baseCost);
         i.revenue = EditorGUILayout.FloatField("Revenue", i.revenue);
 
         if (i.effects == null)
