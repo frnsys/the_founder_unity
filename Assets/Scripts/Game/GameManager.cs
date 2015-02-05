@@ -130,7 +130,7 @@ public class GameManager : Singleton<GameManager> {
 
     void Start() {
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
-        //StartGame();
+        StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
@@ -352,6 +352,7 @@ public class GameManager : Singleton<GameManager> {
             MarketManager.CalculateMarketShares(allCompanies);
 
             playerCompany.HarvestProducts(elapsedTime);
+            playerCompany.HarvestCompanies();
 
             foreach (AICompany aic in data.otherCompanies) {
                 aic.HarvestProducts(elapsedTime);

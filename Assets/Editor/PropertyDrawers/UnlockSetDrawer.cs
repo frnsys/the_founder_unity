@@ -12,12 +12,11 @@ class UnlockSetDrawer : SuperPropertyDrawer {
         "productTypes",
         "verticals",
         "workers",
-        "items",
         "perks",
-        "stores",
         "locations",
         "promos",
-        "recruitments"
+        "recruitments",
+        "companies"
     };
 
     public override Rect Edit(Rect position, SerializedProperty property) {

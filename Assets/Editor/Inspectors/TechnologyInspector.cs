@@ -53,6 +53,7 @@ internal class TechnologyInspector : Editor {
         if (d.effects == null)
             d.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(d, d.effects);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects").FindPropertyRelative("unlocks"), GUIContent.none);
         EditorGUILayout.Space();
 
         if (GUI.changed) {

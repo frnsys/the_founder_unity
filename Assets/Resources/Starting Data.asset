@@ -34,7 +34,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f34293193c60b4313bd2ba956f4811dc, type: 2}
     - {fileID: 11400000, guid: 9439961fbd6d542c2a0788ea973c2ba8, type: 2}
     - {fileID: 11400000, guid: 1d77c8b44067f4bb7b1de77a9de91599, type: 2}
-    items: []
     perks:
     - {fileID: 11400000, guid: 0112d99a7129143ef9178ed9f33ce048, type: 2}
     - {fileID: 11400000, guid: 50b2b26e601574a46944c475a25712eb, type: 2}
@@ -53,7 +52,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 535c90829d4474d84b83feacee4fc8ef, type: 2}
     - {fileID: 11400000, guid: a44b9fb2172024dbb87633cf652562f1, type: 2}
     - {fileID: 11400000, guid: 5e85a010eb0b94cc1b1dbb416ccee805, type: 2}
-    stores: 01000000
     locations:
     - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
     - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
@@ -67,6 +65,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 225af2c0fa20e42e0b70d44148c1f1cb, type: 2}
     recruitments:
     - {fileID: 11400000, guid: 913f70547464646c69428c350a227b8e, type: 2}
+    companies:
+    - {fileID: 11400000, guid: 68928279bf98d4bda9ca343d2f7ce33b, type: 2}
   economy: 0
   onboardingState:
     FIRST_PRODUCT_LAUNCHED: 0
@@ -78,8 +78,6 @@ MonoBehaviour:
     COMMS_UNLOCKED: 0
     VERTICALS_UNLOCKED: 0
     WORKER_LIMIT_REACHED: 0
-    BAILOUT_RECEIVED: 0
-    BONUS_INVESTMENT: 0
   workerInsight: 0
   maxProductTypes: 0
   technology: {fileID: 0}

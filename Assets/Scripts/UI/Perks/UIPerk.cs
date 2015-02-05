@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIPerk : MonoBehaviour {
+public class UIPerk : UIEffectItem {
     private Perk _perk;
     public Perk perk {
         get { return _perk; }
@@ -40,6 +40,9 @@ public class UIPerk : MonoBehaviour {
         descLabel.text = _perk.description;
         perkObj.GetComponent<MeshFilter>().mesh = _perk.mesh;
         perkObj.GetComponent<MeshRenderer>().material.mainTexture = _perk.texture;
+
+        RenderEffects(_perk.effects);
+        AdjustEffectsHeight();
     }
 
     void SetupUnownedPerk() {

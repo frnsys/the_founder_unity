@@ -42,6 +42,7 @@ internal class GameEventInspector : Editor {
         if (ge.effects == null)
             ge.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(ge, ge.effects);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects").FindPropertyRelative("unlocks"), GUIContent.none);
         EditorGUILayout.Space();
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("conditions"), true);

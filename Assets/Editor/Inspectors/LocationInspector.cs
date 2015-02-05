@@ -43,6 +43,7 @@ internal class LocationInspector : Editor {
         if (i.effects == null)
             i.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(i, i.effects);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects").FindPropertyRelative("unlocks"), GUIContent.none);
         EditorGUILayout.Space();
 
         if (GUI.changed) {

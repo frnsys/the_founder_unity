@@ -95,6 +95,8 @@ public class Company : HasStats {
 
         activeEffects = new List<EffectSet>();
 
+        companies = new List<MiniCompany>();
+
         // Keep track for a quarter.
         PerfHistory = new PerformanceHistory(3);
         ProductPerfHistory = new PerformanceHistory(3);
@@ -458,6 +460,31 @@ public class Company : HasStats {
             return true;
         }
         return false;
+    }
+
+    // ===============================================
+    // Acquisition Management ========================
+    // ===============================================
+    public List<MiniCompany> companies;
+
+    public bool BuyCompany(MiniCompany company) {
+        if (Pay(company.cost)) {
+            companies.Add(company);
+            company.effects.Apply(this);
+            return true;
+        }
+        return false;
+    }
+
+    public void HarvestCompanies() {
+        float newRevenue = 0;
+        for (int i=0; i < companies.Count; i++) {
+            newRevenue += companies[i].revenue;
+        }
+        cash.baseValue += newRevenue;
+        lastMonthRevenue += newRevenue;
+        quarterRevenue += newRevenue;
+        lifetimeRevenue += newRevenue;
     }
 
     // ===============================================
