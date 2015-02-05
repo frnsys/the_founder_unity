@@ -48,6 +48,7 @@ public class EffectSetRenderer {
                 EditorUtility.SetDirty(target);
             }
         } else {
+            es.opinionEvent.name = EditorGUILayout.TextField("Name", es.opinionEvent.name);
             EditorGUILayout.BeginHorizontal();
             es.opinionEvent.opinion.value = EditorGUILayout.FloatField("Opinion", es.opinionEvent.opinion.value);
             es.opinionEvent.publicity.value = EditorGUILayout.FloatField("Publicity", es.opinionEvent.publicity.value);
