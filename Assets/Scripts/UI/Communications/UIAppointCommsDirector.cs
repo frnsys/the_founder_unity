@@ -5,12 +5,14 @@ using System.Collections.Generic;
 
 public class UIAppointCommsDirector : UIFullScreenPager {
     private Company company;
+    private UIDirectorCandidate currentDirectorItem;
 
     public GameObject candidatePrefab;
     public GameObject currentDirector;
 
     void OnEnable() {
         company = GameManager.Instance.playerCompany;
+        currentDirectorItem = GetComponent<UIDirectorCandidate>();
         LoadCandidates();
     }
 
@@ -34,7 +36,7 @@ public class UIAppointCommsDirector : UIFullScreenPager {
             currentDirector.SetActive(false);
         } else {
             currentDirector.SetActive(true);
-            GetComponent<UIDirectorCandidate>().worker = company.OpinionCzar;
+            currentDirectorItem.worker = company.OpinionCzar;
         }
     }
 }
