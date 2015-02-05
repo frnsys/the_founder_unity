@@ -4,7 +4,6 @@ using System.Collections;
 
 public class UIEffectItem : MonoBehaviour {
     public UIGrid effectGrid;
-    public GameObject anchorTarget;
 
     public GameObject buffEffectPrefab;
     public GameObject unlockEffectPrefab;
@@ -19,6 +18,7 @@ public class UIEffectItem : MonoBehaviour {
         RenderUnlockEffects(es);
         RenderBuffEffects(es);
         RenderProductEffects(es);
+        effectGrid.Reposition();
     }
 
     public void AdjustEffectsHeight() {
@@ -70,8 +70,6 @@ public class UIEffectItem : MonoBehaviour {
         foreach (ProductEffect pe in es.productEffects) {
             GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
             effectObj.GetComponent<UIProductEffect>().Set(pe);
-            effectObj.GetComponent<UIWidget>().leftAnchor.Set(anchorTarget.transform, 0, 0);
-            effectObj.GetComponent<UIWidget>().rightAnchor.Set(anchorTarget.transform, 0, 0);
         }
     }
 
@@ -83,8 +81,6 @@ public class UIEffectItem : MonoBehaviour {
     private void RenderBuffEffect(StatBuff buff, string target) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
         effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
-        effectObj.GetComponent<UIWidget>().leftAnchor.Set(anchorTarget.transform, 0, 0);
-        effectObj.GetComponent<UIWidget>().rightAnchor.Set(anchorTarget.transform, 0, 0);
     }
 
     public void Extend(int amount) {

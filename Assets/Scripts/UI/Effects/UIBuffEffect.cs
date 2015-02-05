@@ -2,26 +2,18 @@ using UnityEngine;
 
 public class UIBuffEffect : MonoBehaviour {
     public UILabel label;
-    public UILabel typeLabel;
-    public UITexture typeIcon;
-    public Texture buffTexture;
-    public Texture debuffTexture;
-
-    // TO DO
-    // make icon public and replaceable.
+    public Color debuffColor;
+    public Color buffColor;
+    public Color disabledColor;
 
     public void Set(StatBuff buff, string target) {
         string buffText = "";
 
         if (buff.value <= 0) {
-            typeLabel.text = "DEBUFF";
-            typeLabel.color = new Color(0.99f, 0.05f, 0.11f, 1f);
-            typeIcon.mainTexture = debuffTexture;
+            label.color = debuffColor;
         } else {
-            typeLabel.text = "BUFF";
             buffText += "+";
-            typeLabel.color = new Color(0.18f, 0.67f, 0.23f, 1f);
-            typeIcon.mainTexture = buffTexture;
+            label.color = buffColor;
         }
 
         if (buff.type == BuffType.ADD) {
@@ -37,12 +29,8 @@ public class UIBuffEffect : MonoBehaviour {
     }
 
     // Grey out this effect to indicate that it is inactive.
-    private Color disabledColor = new Color(0.75f, 0.75f, 0.75f, 1f);
-    private Color disabledTextureColor = new Color(1f, 1f, 1f, 0.15f);
     public void Disable() {
-        label.color     = disabledColor;
-        typeLabel.color = disabledColor;
-        typeIcon.color  = disabledTextureColor;
+        label.color = disabledColor;
     }
 }
 

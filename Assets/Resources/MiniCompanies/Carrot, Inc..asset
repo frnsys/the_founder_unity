@@ -47,7 +47,15 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
-    productEffects: []
+    productEffects:
+    - productTypes: []
+      verticals:
+      - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+      buff:
+        name: Design
+        value: 20
+        duration: 0
+        type: 0
     workerEffects:
     - name: Happiness
       value: 200
