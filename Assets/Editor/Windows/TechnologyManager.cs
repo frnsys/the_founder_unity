@@ -42,7 +42,7 @@ public class TechnologyManager : ManagerWindow<Technology> {
         EditorGUILayout.LabelField("Required Technologies");
         for (int i=0; i < target.requiredTechnologies.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            target.requiredTechnologies[i] = (Technology)EditorGUILayout.ObjectField(target.requiredTechnologies[i], typeof(Technology));
+            target.requiredTechnologies[i] = (Technology)EditorGUILayout.ObjectField(target.requiredTechnologies[i], typeof(Technology), false);
             if (GUILayout.Button("Delete")) {
                 target.requiredTechnologies.Remove(target.requiredTechnologies[i]);
             }

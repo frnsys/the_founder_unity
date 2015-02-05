@@ -33,7 +33,7 @@ public class ProductTypeManager : ManagerWindow<ProductType> {
             target.requiredVerticals = new List<Vertical>();
         for (int i=0; i < target.requiredVerticals.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            target.requiredVerticals[i] = (Vertical)EditorGUILayout.ObjectField(target.requiredVerticals[i], typeof(Vertical));
+            target.requiredVerticals[i] = (Vertical)EditorGUILayout.ObjectField(target.requiredVerticals[i], typeof(Vertical), false);
             if (GUILayout.Button("Delete")) {
                 target.requiredVerticals.Remove(target.requiredVerticals[i]);
             }

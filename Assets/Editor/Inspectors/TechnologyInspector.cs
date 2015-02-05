@@ -37,7 +37,7 @@ internal class TechnologyInspector : Editor {
         EditorGUILayout.LabelField("Required Technologies");
         for (int i=0; i < d.requiredTechnologies.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            d.requiredTechnologies[i] = (Technology)EditorGUILayout.ObjectField(d.requiredTechnologies[i], typeof(Technology));
+            d.requiredTechnologies[i] = (Technology)EditorGUILayout.ObjectField(d.requiredTechnologies[i], typeof(Technology), false);
             if (GUILayout.Button("Delete")) {
                 d.requiredTechnologies.Remove(d.requiredTechnologies[i]);
             }

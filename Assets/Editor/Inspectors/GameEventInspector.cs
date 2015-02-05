@@ -32,7 +32,7 @@ internal class GameEventInspector : Editor {
         ge.type = (GameEvent.Type)EditorGUILayout.EnumPopup(ge.type);
         EditorGUILayout.Space();
 
-        ge.image = (Texture)EditorGUILayout.ObjectField(ge.image, typeof(Texture));
+        ge.image = (Texture)EditorGUILayout.ObjectField(ge.image, typeof(Texture), false);
         EditorGUILayout.Space();
 
         ge.probability = EditorGUILayout.FloatField("Probability", ge.probability);

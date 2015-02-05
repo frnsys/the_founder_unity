@@ -448,7 +448,6 @@ namespace UnityTest
             Assert.IsTrue(c.BuyPerk(perk));
 
             c.cash.baseValue = perk.next.cost;
-            float startCash = c.cash.value;
             float startResearch = c.research.value;
             Assert.IsTrue(c.UpgradePerk(perk));
             Assert.AreEqual(c.perks.Count, 1);

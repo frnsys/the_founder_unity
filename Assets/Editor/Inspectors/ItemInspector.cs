@@ -25,8 +25,8 @@ internal class ItemInspector : Editor {
         i.store = (Store)EditorGUILayout.EnumPopup(i.store);
         EditorGUILayout.Space();
 
-        i.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", i.mesh, typeof(Mesh));
-        i.texture = (Texture)EditorGUILayout.ObjectField("Texture", i.texture, typeof(Texture));
+        i.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", i.mesh, typeof(Mesh), false);
+        i.texture = (Texture)EditorGUILayout.ObjectField("Texture", i.texture, typeof(Texture), false);
 
         if (i.effects == null)
             i.effects = new EffectSet();

@@ -299,6 +299,7 @@ namespace UnityTest
         private Product CreateProduct() {
             ProductType pt = ProductType.Load("Social Network");
             Vertical v     = Vertical.Load("Information");
+            pt.requiredVerticals = new List<Vertical>() { v };
             List<ProductType> pts = new List<ProductType>() { pt };
 
             Product product = ScriptableObject.CreateInstance<Product>();

@@ -59,7 +59,7 @@ public class EffectSetRenderer {
         }
 
         EditorGUILayout.LabelField("Game Event");
-        es.gameEvent = (GameEvent)EditorGUILayout.ObjectField(es.gameEvent, typeof(GameEvent));
+        es.gameEvent = (GameEvent)EditorGUILayout.ObjectField(es.gameEvent, typeof(GameEvent), false);
         if (es.gameEvent != null) {
             EditorGUILayout.BeginHorizontal();
             es.eventDelay = EditorGUILayout.FloatField("Delay (~weeks)", es.eventDelay);
@@ -109,14 +109,14 @@ public class EffectSetRenderer {
                 EditorGUILayout.LabelField("Product Types");
                 for (int j=0; j < pef.productTypes.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
-                    pef.productTypes[j] = (ProductType)EditorGUILayout.ObjectField(pef.productTypes[j], typeof(ProductType));
+                    pef.productTypes[j] = (ProductType)EditorGUILayout.ObjectField(pef.productTypes[j], typeof(ProductType), false);
                     if (GUILayout.Button("Delete")) {
                         pef.productTypes.Remove(pef.productTypes[j]);
                     }
                     EditorGUILayout.EndHorizontal();
                 }
 
-                ProductType newProductType = (ProductType)EditorGUILayout.ObjectField(null, typeof(ProductType));
+                ProductType newProductType = (ProductType)EditorGUILayout.ObjectField(null, typeof(ProductType), false);
                 if (newProductType != null)
                     pef.productTypes.Add(newProductType);
 
@@ -124,14 +124,14 @@ public class EffectSetRenderer {
                 EditorGUILayout.LabelField("Verticals");
                 for (int j=0; j < pef.verticals.Count; j++) {
                     EditorGUILayout.BeginHorizontal();
-                    pef.verticals[j] = (Vertical)EditorGUILayout.ObjectField(pef.verticals[j], typeof(Vertical));
+                    pef.verticals[j] = (Vertical)EditorGUILayout.ObjectField(pef.verticals[j], typeof(Vertical), false);
                     if (GUILayout.Button("Delete")) {
                         pef.verticals.Remove(pef.verticals[j]);
                     }
                     EditorGUILayout.EndHorizontal();
                 }
 
-                Vertical newVertical = (Vertical)EditorGUILayout.ObjectField(null, typeof(Vertical));
+                Vertical newVertical = (Vertical)EditorGUILayout.ObjectField(null, typeof(Vertical), false);
                 if (newVertical != null)
                     pef.verticals.Add(newVertical);
 
