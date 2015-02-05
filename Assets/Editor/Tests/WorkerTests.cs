@@ -18,7 +18,6 @@ namespace UnityTest
         private WorkerManager wm;
 
         private Worker worker;
-        private Item item;
 
         [SetUp]
         public void SetUp() {
@@ -32,7 +31,6 @@ namespace UnityTest
 
             worker = ScriptableObject.CreateInstance<Worker>();
             worker.Init("Franklin");
-            item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
 
             gd.unemployed.Add(worker);
             gm.unlocked.workers.Add(worker);

@@ -77,7 +77,6 @@ public class Company : HasStats {
         quarterCosts = 0;
         baseSizeLimit = 5;
         perks = new List<Perk>();
-        _items = new List<Item>();
 
         products = new List<Product>();
         founders = new List<Founder>();
@@ -499,32 +498,6 @@ public class Company : HasStats {
 
 
     // ===============================================
-    // Item Management ===============================
-    // ===============================================
-
-    public List<Item> _items;
-    public ReadOnlyCollection<Item> items {
-        get { return _items.AsReadOnly(); }
-    }
-
-
-    public bool BuyItem(Item item) {
-        item = item.Clone();
-        if (Pay(item.cost)) {
-            _items.Add(item);
-            item.effects.Apply(this);
-            return true;
-        }
-        return false;
-    }
-
-    public void RemoveItem(Item item) {
-        item = Item.Find(item, _items);
-        _items.Remove(item);
-        item.effects.Remove(this);
-    }
-
-    // ===============================================
     // Infrastructure Management =====================
     // ===============================================
 
@@ -740,7 +713,7 @@ public class Company : HasStats {
     protected float ProductROI(Product p) {
         // TO DO tweak this
         // this should maybe also take into account cash invested
-        // (e.g. rent, salaries, etc) and value of items that contributed (normalized for their lifetime)
+        // (e.g. rent, salaries, etc)
         return (p.revenueEarned/p.timeSinceLaunch)/p.points;
     }
 
