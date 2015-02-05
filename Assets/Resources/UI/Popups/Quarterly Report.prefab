@@ -1047,13 +1047,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f69064fef97a4beabaca00568f6ef7a, type: 3}
+  m_Script: {fileID: 11500000, guid: eea6337a21519472ca0de8f2767a3cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100016}
   overlay: {fileID: 11400026}
   body: {fileID: 11400022}
-  bodyLabel: {fileID: 0}
+  bodyLabel: {fileID: 11400016}
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
