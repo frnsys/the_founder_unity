@@ -108,14 +108,6 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    void OnLevelWasLoaded(int level) {
-        // See Build Settings to get the number for levels/scenes.
-        if (level == 2) {
-            StartGame();
-            narrativeManager.InitializeOnboarding();
-        }
-    }
-
     void OnEnable() {
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
@@ -128,9 +120,17 @@ public class GameManager : Singleton<GameManager> {
         Product.Completed -= OnProductCompleted;
     }
 
+    void OnLevelWasLoaded(int level) {
+        // See Build Settings to get the number for levels/scenes.
+        if (level == 2) {
+            StartGame();
+            narrativeManager.InitializeOnboarding();
+        }
+    }
+
     void Start() {
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
-        StartGame();
+        //StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();

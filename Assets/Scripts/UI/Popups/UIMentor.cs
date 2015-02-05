@@ -15,15 +15,6 @@ public class UIMentor : UIPopup {
     void OnEnable() {
         Show(box);
         Show(shadow);
-
-        // TO DO animate in the mentor model
-
-        // Position the model.
-        Vector3 modelPos = box.transform.localPosition;
-        float modelWidth =  model.transform.localScale.x * model.transform.Find("Cone").GetComponent<SkinnedMeshRenderer>().localBounds.size.x;
-        modelPos.y -= box.GetComponent<UIWidget>().height/2;
-        modelPos.x -= box.GetComponent<UIWidget>().width/2 + modelWidth;
-        model.transform.localPosition = modelPos;
     }
 
     public void Interrupt() {
