@@ -24,13 +24,13 @@ public class UIManageProducts : UIFullScreenPager {
                 UIProduct uip = productItem.GetComponent<UIProduct>();
                 uip.product = p;
 
-                UIEventListener.Get(productItem.transform.Find("Shutdown Button").gameObject).onClick += ShutdownProduct;
+                UIEventListener.Get(productItem.transform.Find("Background/Shutdown Button").gameObject).onClick += ShutdownProduct;
 
                 displayedProducts.Add(p);
             }
 
             int childIdx = displayedProducts.IndexOf(p);
-            grid.transform.GetChild(childIdx).Find("Disabled").gameObject.SetActive(p.disabled);
+            grid.transform.GetChild(childIdx).Find("Background/Disabled").gameObject.SetActive(p.disabled);
         }
         Adjust();
     }
