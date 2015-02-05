@@ -7,79 +7,99 @@ using System.Collections.Generic;
 // and research progress.
 public class UIHUD : MonoBehaviour {
     private GameManager gm;
+    private Company company;
 
+    public UIGrid grid;
     public GameObject activeProductPrefab;
-    private GameObject productsIndicator;
-    private GameObject developmentIndicator;
-    private GameObject researchIndicator;
-    private GameObject productsGrid;
-    private UIProgressBar researchProgressBar;
-    private UIProgressBar developmentProgressBar;
+
+    public GameObject promoIndicator;
+    public GameObject productIndicator;
+    public GameObject researchIndicator;
+    public GameObject recruitingIndicator;
+
+    public UIProgressBar promoProgressBar;
+    public UIProgressBar productProgressBar;
+    public UIProgressBar researchProgressBar;
+    public UIProgressBar recruitingProgressBar;
 
     void OnEnable() {
         gm = GameManager.Instance;
+        company = gm.playerCompany;
 
-        productsIndicator      = transform.Find("Products").gameObject;
-        developmentIndicator   = transform.Find("Development").gameObject;
-        researchIndicator      = transform.Find("Research").gameObject;
-        researchProgressBar    = researchIndicator.transform.Find("Indicator/Progress Bar").gameObject.GetComponent<UIProgressBar>();
-        developmentProgressBar = developmentIndicator.transform.Find("Indicator/Progress Bar").gameObject.GetComponent<UIProgressBar>();
-        productsGrid           = productsIndicator.transform.Find("Indicator").gameObject;
+        StartCoroutine(UpdateHUD());
     }
 
     // Keep track of which products are already displayed so we don't create redundant ones.
+    // Cache other stuff too so we don't need to constantly look for it.
     private List<Product> displayedProducts = new List<Product>();
+    private List<GameObject> productObjects = new List<GameObject>();
+    private List<UILabel> revenueLabels = new List<UILabel>();
 
-    void Update() {
-        Vector3 pos = Vector3.zero;
-        float height = 0;
+    IEnumerator UpdateHUD() {
+        while (true) {
+            for (int i=0; i < displayedProducts.Count; i++) {
+                // Cleanup shutdown products.
+                if (displayedProducts[i].retired) {
+                    NGUITools.Destroy(productObjects[i]);
+                    revenueLabels.RemoveAt(i);
+                    productObjects.RemoveAt(i);
+                    displayedProducts.RemoveAt(i);
 
-        // In-market product info.
-        if (gm.playerCompany.activeProducts.Count > 0) {
-            productsIndicator.SetActive(true);
-            productsIndicator.transform.localPosition = pos;
-
-            foreach (Product p in gm.playerCompany.activeProducts) {
-                if (!displayedProducts.Contains(p)) {
-                    GameObject productItem = NGUITools.AddChild(productsGrid, activeProductPrefab);
-                    productItem.transform.Find("Product Name").GetComponent<UILabel>().text = p.name;
-                    productItem.transform.Find("Product Revenue").GetComponent<UILabel>().text = "$" + p.revenueEarned.ToString();
-                    displayedProducts.Add(p);
+                // Update revenue label otherwise.
                 } else {
-                    int i = displayedProducts.IndexOf(p);
-                    productsGrid.transform.GetChild(i).Find("Product Revenue").GetComponent<UILabel>().text = "$" + ((int)p.revenueEarned).ToString();
+                    revenueLabels[i].text = string.Format("{0:C0}", displayedProducts[i].revenueEarned);
                 }
             }
 
-            productsGrid.GetComponent<UICenteredGrid>().Reposition();
-            height = productsIndicator.GetComponent<UIWidget>().CalculateBounds().size.y;
-            pos.y += height;
-        } else {
-            productsIndicator.SetActive(false);
-        }
+            // Show in-market products.
+            foreach (Product p in gm.playerCompany.activeProducts) {
+                if (!displayedProducts.Contains(p)) {
+                    GameObject productItem = NGUITools.AddChild(grid.gameObject, activeProductPrefab);
+                    productItem.transform.Find("Name").GetComponent<UILabel>().text = p.name;
 
+                    UILabel revenueLabel = productItem.transform.Find("Revenue").GetComponent<UILabel>();
+                    revenueLabel.text = string.Format("{0:C0}", p.revenueEarned);
 
-        // Developing product info.
-        if (gm.playerCompany.developingProducts.Count > 0) {
-            developmentIndicator.SetActive(true);
-            developmentIndicator.transform.localPosition = pos;
+                    displayedProducts.Add(p);
+                    productObjects.Add(productItem);
+                    revenueLabels.Add(revenueLabel);
+                }
+            }
 
-            // TO DO this should create a progress bar for each developing product.
-            developmentProgressBar.value = gm.playerCompany.developingProducts[0].progress;
-            height = developmentIndicator.GetComponent<UIWidget>().CalculateBounds().size.y;
-            pos.y += height;
-        } else {
-            developmentIndicator.SetActive(false);
-        }
+            // Developing product info.
+            if (company.developingProducts.Count > 0) {
+                productIndicator.SetActive(true);
+                productProgressBar.value = company.developingProducts[0].progress;
+            } else {
+                productIndicator.SetActive(false);
+            }
 
+            // Research info.
+            if (gm.researchManager.researching) {
+                researchIndicator.SetActive(true);
+                researchProgressBar.value = gm.researchManager.progress;
+            } else {
+                researchIndicator.SetActive(false);
+            }
 
-        // Research info.
-        if (gm.researchManager.researching) {
-            researchIndicator.SetActive(true);
-            researchIndicator.transform.localPosition = pos;
-            researchProgressBar.value = gm.researchManager.progress;
-        } else {
-            researchIndicator.SetActive(false);
+            // Promo info.
+            if (company.developingPromo != null) {
+                promoIndicator.SetActive(true);
+                promoProgressBar.value = company.developingPromo.progress;
+            } else {
+                promoIndicator.SetActive(false);
+            }
+
+            // Recruiting info.
+            if (company.developingRecruitment != null) {
+                recruitingIndicator.SetActive(true);
+                recruitingProgressBar.value = company.developingRecruitment.progress;
+            } else {
+                recruitingIndicator.SetActive(false);
+            }
+
+            grid.Reposition();
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

@@ -44,9 +44,7 @@ internal class GameEventInspector : Editor {
         EffectSetRenderer.RenderEffectSet(ge, ge.effects);
         EditorGUILayout.Space();
 
-        if (ge.conditions == null)
-            ge.conditions = new List<Condition>();
-        ConditionsRenderer.RenderConditions(ge, ge.conditions);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("conditions"), true);
         EditorGUILayout.Space();
 
 

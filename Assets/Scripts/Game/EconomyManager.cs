@@ -61,7 +61,7 @@ public class EconomyManager : Singleton<EconomyManager> {
             }
 
             if (eventName != null) {
-                GameEvent ev = GameEvent.LoadSpecialEvent(eventName);
+                GameEvent ev = GameEvent.LoadNoticeEvent(eventName);
                 GameEvent.Trigger(ev);
             }
             UpdateEconomyChangeProbability();

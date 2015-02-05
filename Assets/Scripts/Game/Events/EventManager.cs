@@ -74,14 +74,13 @@ public class EventManager : MonoBehaviour {
     public void EvaluateSpecialEvents() {
         List<GameEvent> toRemove = new List<GameEvent>();
         foreach (GameEvent ev in data.specialEventsPool) {
+            // Only show one event, the next one will
+            // resolve in the following iteration.
             if (ev.ConditionsSatisfied(data.company)) {
                 GameEvent.Trigger(ev);
-                toRemove.Add(ev);
+                data.specialEventsPool.Remove(ev);
+                break;
             }
-        }
-
-        foreach (GameEvent ev in toRemove) {
-            data.specialEventsPool.Remove(ev);
         }
     }
 }
