@@ -73,7 +73,8 @@ public class EffectSet {
             }
         }
 
-        AICompany.Find(aiCompany).disabled = false;
+        if (aiCompany != null)
+            AICompany.Find(aiCompany).disabled = false;
     }
     public void Remove(Company company) {
         company.activeEffects.Remove(this);

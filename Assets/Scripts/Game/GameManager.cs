@@ -50,9 +50,9 @@ public class GameManager : Singleton<GameManager> {
         get { return data.workerInsight; }
     }
 
-    public IEnumerable<AICompany> activeAICompanies {
+    public List<AICompany> activeAICompanies {
         get {
-            return data.otherCompanies.Where(a => !a.disabled);
+            return data.otherCompanies.FindAll(a => !a.disabled);
         }
     }
 
@@ -302,10 +302,8 @@ public class GameManager : Singleton<GameManager> {
                 UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
             }
 
-            // Make other AI company moves.
-            foreach (AICompany aic in activeAICompanies) {
-                aic.Decide();
-            }
+            // A random AI company makes a move.
+            activeAICompanies[Random.Range(0, activeAICompanies.Count())].Decide();
 
             // Update workers' off market times.
             foreach (Worker w in data.unlocked.workers.Where(w => w.offMarketTime > 0)) {
