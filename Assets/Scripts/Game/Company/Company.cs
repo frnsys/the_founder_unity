@@ -442,6 +442,9 @@ public class Company : HasStats {
 
         toPay += researchInvestment;
 
+        // Taxes
+        toPay += lastMonthRevenue * 0.12f;
+
         cash.baseValue -= toPay;
 
         // Reset month's costs with this month's costs.
