@@ -16,7 +16,7 @@ MonoBehaviour:
     founded earlier this year, has high ambitions and expectations of growth. When
     interviewed, other major companies in the industry were unimpressed. "They just
     built a dinky widget," said the CEO of <AICOMPANY>. "They won't last long."
-  from: The Financial Journal
+  from: Techbunch
   image: {fileID: 2800000, guid: b964023f0fdab4969ab5ac2808835d57, type: 3}
   _delay: 0
   countdown: 0
@@ -55,6 +55,7 @@ MonoBehaviour:
     eventProbability: 0
     productEffects: []
     workerEffects: []
+    aiCompany: {fileID: 0}
   actions: []
   conditions:
   - value: 0

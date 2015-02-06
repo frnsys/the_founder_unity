@@ -9,13 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Bonus Investment
+  m_Name: First Contact
   m_EditorClassIdentifier: 
-  type: 0
-  description: We did great this quarter! Some other investors are keen to get in
-    on the deal, so I raised another round of funding for us to fund our expansion.
-  from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 0}
+  type: 1
+  description: Perhaps one of the most significant events in human history has occurred
+    - a <PLAYERCOMPANY> convoy made first contact with an alien civilization. "This
+    feels like the discovery of the New World. We immediately sent market research
+    teams to the sector in order to learn more about the aliens' consumer preferences,"
+    the CEO of <AICOMPANY> remarked.  "<AICOMPANY> will be the first to corner the
+    New Market."
+  from: The Times
+  image: {fileID: 2800000, guid: e8bb087bc775b4ce3a2ef630e52758e9, type: 3}
   _delay: 0
   countdown: 0
   probability: 0
@@ -30,22 +34,22 @@ MonoBehaviour:
       promos: []
       recruitments: []
       companies: []
-    cash: 200000
+    cash: 0
     research:
       name: Research
       value: 0
       duration: 0
       type: 0
     opinionEvent:
-      name: 
+      name: First Contact
       opinion:
         name: Opinion
-        value: 0
+        value: 1000
         duration: 0
         type: 0
       publicity:
         name: Publicity
-        value: 0
+        value: 1000
         duration: 0
         type: 0
     gameEvent: {fileID: 0}
@@ -55,7 +59,4 @@ MonoBehaviour:
     workerEffects: []
     aiCompany: {fileID: 0}
   actions: []
-  conditions:
-  - value: 50000
-    greater: 1
-    type: 3
+  conditions: []

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Bonus Investment
+  m_Name: One of our ships found aliens!
   m_EditorClassIdentifier: 
   type: 0
-  description: We did great this quarter! Some other investors are keen to get in
-    on the deal, so I raised another round of funding for us to fund our expansion.
+  description: Holy shit - one of our convoy ships encountered extraterrestrial life.
+    Do you know what this means? An entire untapped market!
   from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 0}
+  image: {fileID: 2800000, guid: e8bb087bc775b4ce3a2ef630e52758e9, type: 3}
   _delay: 0
   countdown: 0
   probability: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
       promos: []
       recruitments: []
       companies: []
-    cash: 200000
+    cash: 0
     research:
       name: Research
       value: 0
@@ -48,14 +48,11 @@ MonoBehaviour:
         value: 0
         duration: 0
         type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
+    gameEvent: {fileID: 11400000, guid: 1a093e3d09d4446f499e925b2b298c88, type: 2}
+    eventDelay: 1
+    eventProbability: 1
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
   actions: []
-  conditions:
-  - value: 50000
-    greater: 1
-    type: 3
+  conditions: []

@@ -9,13 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Bonus Investment
+  m_Name: Expansion Opportunities
   m_EditorClassIdentifier: 
   type: 0
-  description: We did great this quarter! Some other investors are keen to get in
-    on the deal, so I raised another round of funding for us to fund our expansion.
+  description: We are making money hand-over-fist, and we've already expanded to most
+    of the globe. But we need to keep growing. I bet if we research the Alcubierre
+    Drive, we'll be able to colonize new markets in the stars!
   from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 0}
+  image: {fileID: 2800000, guid: 952ec6562706140938c516421b5ffc05, type: 3}
   _delay: 0
   countdown: 0
   probability: 0
@@ -30,7 +31,7 @@ MonoBehaviour:
       promos: []
       recruitments: []
       companies: []
-    cash: 200000
+    cash: 0
     research:
       name: Research
       value: 0
@@ -56,6 +57,9 @@ MonoBehaviour:
     aiCompany: {fileID: 0}
   actions: []
   conditions:
-  - value: 50000
+  - value: 250000
     greater: 1
     type: 3
+  - value: 14
+    greater: 1
+    type: 6

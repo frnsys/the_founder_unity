@@ -102,6 +102,9 @@ public class GameEvent : ScriptableObject {
             case Condition.Type.ProductsLaunched:
                 comparison = c.launchedProducts.Count;
                 break;
+            case Condition.Type.Locations:
+                comparison = c.locations.Count;
+                break;
         }
 
         if (cond.greater)
@@ -122,7 +125,8 @@ public class GameEvent : ScriptableObject {
             Cash,
             QuarterRevenue,
             Date,
-            ProductsLaunched
+            ProductsLaunched,
+            Locations
         }
     }
 }
