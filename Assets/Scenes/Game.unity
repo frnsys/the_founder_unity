@@ -690,7 +690,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0333333351
+  aspectRatio: 10.4499998
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -1011,6 +1011,7 @@ Transform:
   - {fileID: 1513043833}
   - {fileID: 921502547}
   - {fileID: 189669550}
+  - {fileID: 273724436}
   m_Father: {fileID: 1278708169}
   m_RootOrder: 2
 --- !u!114 &127671520
@@ -1843,6 +1844,71 @@ Prefab:
   m_RootGameObject: {fileID: 355334648}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &273724435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 273724436}
+  - 114: {fileID: 273724437}
+  m_Layer: 8
+  m_Name: Pings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &273724436
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 273724435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .625008106, y: -30.0003872, z: 0}
+  m_LocalScale: {x: .999987006, y: .999987006, z: .999987006}
+  m_Children: []
+  m_Father: {fileID: 127671519}
+  m_RootOrder: 3
+--- !u!114 &273724437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 273724435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 127671519}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 127671519}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 127671519}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 127671519}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 2
+  mHeight: 60
+  mDepth: 1
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 9.80000019
 --- !u!1 &308238124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,7 +4104,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0333333351
+  aspectRatio: 10.4499998
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -6160,7 +6226,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .653124988
 --- !u!1 &1107399996
 GameObject:
   m_ObjectHideFlags: 0
@@ -7104,11 +7170,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowsPanel: {fileID: 1453662938}
   alertsPanel: {fileID: 2054914622}
+  pingsPanel: {fileID: 273724435}
   gameEventNotificationEmailPrefab: {fileID: 100030, guid: 64589c3556b454a738bd670c46f7db20,
     type: 2}
   gameEventNotificationNewsPrefab: {fileID: 100030, guid: 23c36cca315164886992c19f024dd547,
     type: 2}
-  hiringPrefab: {fileID: 100020, guid: 130742e47ccde4724b6f96656fe5c13a, type: 2}
+  pingPrefab: {fileID: 100002, guid: 49336a8557f5f430bbba7a2c0c8742b9, type: 2}
   alertPrefab: {fileID: 100018, guid: f55a8b6a18d6149dca9d7e48ceca10e8, type: 2}
   confirmPrefab: {fileID: 100018, guid: b55794495b527438681764bbd55f3b19, type: 2}
   emailPrefab: {fileID: 100020, guid: 6cee42a8ec60644b3954b96d9ccd2660, type: 2}
@@ -7123,6 +7190,7 @@ MonoBehaviour:
     type: 2}
   selectWorkerPopupPrefab: {fileID: 100022, guid: adaf7bbd39ee24679b372560014490d3,
     type: 2}
+  hiringPrefab: {fileID: 100020, guid: 130742e47ccde4724b6f96656fe5c13a, type: 2}
   currentPopup: {fileID: 0}
 --- !u!1 &1295719299
 GameObject:
@@ -8504,7 +8572,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0333333351
+  aspectRatio: 9.80000019
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -12251,7 +12319,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .337053567
 --- !u!114 &2013164179
 MonoBehaviour:
   m_ObjectHideFlags: 0

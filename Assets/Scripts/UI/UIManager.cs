@@ -16,10 +16,12 @@ public class UIManager : Singleton<UIManager> {
 
     public GameObject windowsPanel;
     public GameObject alertsPanel;
+    public GameObject pingsPanel;
 
     public GameObject gameEventNotificationEmailPrefab;
     public GameObject gameEventNotificationNewsPrefab;
-    public GameObject hiringPrefab;
+    public GameObject pingPrefab;
+    private Queue<Ping> pendingPings;
 
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
@@ -30,7 +32,33 @@ public class UIManager : Singleton<UIManager> {
     public GameObject productCompletedAlertPrefab;
     public GameObject competitorProductCompletedAlertPrefab;
     public GameObject selectWorkerPopupPrefab;
+    public GameObject hiringPrefab;
 
+    private struct Ping {
+        public string note;
+        public Color color;
+        public Ping(string n, Color c) {
+            note = n;
+            color = c;
+        }
+    }
+
+    public void SendPing(string note, Color color) {
+        pendingPings.Enqueue(new Ping(note, color));
+    }
+
+    IEnumerator ShowPings() {
+        while(true) {
+            while (pendingPings.Count > 0) {
+                Ping p = pendingPings.Dequeue();
+                UIPing ping = NGUITools.AddChild(pingsPanel, pingPrefab).GetComponent<UIPing>();
+                ping.Set(p.note, p.color);
+                yield return new WaitForSeconds(2f);
+                NGUITools.Destroy(ping.gameObject);
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -45,6 +73,9 @@ public class UIManager : Singleton<UIManager> {
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
         GameManager.GameLost += OnGameLost;
+
+        pendingPings = new Queue<Ping>();
+        StartCoroutine(ShowPings());
     }
 
     void OnDisable() {

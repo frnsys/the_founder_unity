@@ -428,22 +428,28 @@ public class Company : HasStats {
     public float lifetimeRevenue;
     public void PayMonthly() {
         float toPay = 0;
+        float salaries = 0;
+        float rent = 0;
+
         foreach (Worker worker in workers) {
-            toPay += worker.monthlyPay;
+            salaries += worker.monthlyPay;
         }
+        toPay += salaries;
 
         foreach (Location loc in locations) {
-            toPay += loc.cost;
+            rent += loc.cost;
 
             // We have to add up location infrastructure cost in this way,
             // so we incorporate the cost of the infrastructure for the location.
-            toPay += loc.infrastructure.cost;
+            rent += loc.infrastructure.cost;
         }
+        toPay += rent;
 
         toPay += researchInvestment;
 
         // Taxes
-        toPay += lastMonthRevenue * 0.12f;
+        float taxes = lastMonthRevenue * 0.12f;
+        toPay += taxes;
 
         cash.baseValue -= toPay;
 
@@ -453,6 +459,11 @@ public class Company : HasStats {
 
         // Also reset month's revenues.
         lastMonthRevenue = 0;
+
+        UIManager.Instance.SendPing(string.Format("Paid {0:C0} in salaries.", salaries), Color.red);
+        UIManager.Instance.SendPing(string.Format("Paid {0:C0} in rent.", rent), Color.red);
+        UIManager.Instance.SendPing(string.Format("Paid {0:C0} for research.", researchInvestment), Color.red);
+        UIManager.Instance.SendPing(string.Format("Paid {0:C0} in taxes.", taxes), Color.red);
     }
 
     public bool Pay(float cost) {
