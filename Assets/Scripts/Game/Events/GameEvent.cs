@@ -95,6 +95,9 @@ public class GameEvent : ScriptableObject {
             case Condition.Type.QuarterRevenue:
                 comparison = c.quarterRevenue;
                 break;
+            case Condition.Type.Date:
+                comparison = GameManager.Instance.date;
+                break;
         }
 
         if (cond.greater)
@@ -113,7 +116,8 @@ public class GameEvent : ScriptableObject {
             Publicity,
             Opinion,
             Cash,
-            QuarterRevenue
+            QuarterRevenue,
+            Date
         }
     }
 }

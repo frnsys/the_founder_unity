@@ -189,12 +189,18 @@ public class GameManager : Singleton<GameManager> {
     public string month {
         get { return Month.GetName(typeof(Month), data.month); }
     }
+    public int numMonth {
+        get { return (int)data.month + 1; }
+    }
     public int year {
         get { return 2000 + data.year; }
     }
     [HideInInspector]
     public int week {
         get { return data.week; }
+    }
+    public int date {
+        get { return int.Parse(string.Format("{0}{1}{2}", year, numMonth, week)); }
     }
 
 

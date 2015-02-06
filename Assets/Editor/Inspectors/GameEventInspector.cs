@@ -9,6 +9,11 @@ internal class GameEventInspector : Editor {
 
     GameEvent ge;
 
+    // Convenience for turning year/month/week into a date.
+    int year = 2001;
+    int month = 1;
+    int week = 1;
+
     void OnEnable() {
         ge = target as GameEvent;
     }
@@ -16,38 +21,23 @@ internal class GameEventInspector : Editor {
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
+        GUILayoutOption[] options = { GUILayout.MaxWidth(320.0f), GUILayout.MinWidth(10.0f), GUILayout.ExpandHeight(true) };
         EditorStyles.textField.wordWrap = true;
         EditorGUILayout.LabelField("Description");
-        ge.description = EditorGUILayout.TextArea(ge.description, GUILayout.Height(50));
-        EditorGUILayout.Space();
-
-        EditorGUILayout.LabelField("Repeatable");
-        ge.repeatable = EditorGUILayout.Toggle(ge.repeatable);
-        EditorGUILayout.Space();
-
-        ge.from = EditorGUILayout.TextField("From (Email or Publication)", ge.from);
-        EditorGUILayout.Space();
-
-        EditorGUILayout.LabelField("Type");
-        ge.type = (GameEvent.Type)EditorGUILayout.EnumPopup(ge.type);
-        EditorGUILayout.Space();
-
-        ge.image = (Texture)EditorGUILayout.ObjectField(ge.image, typeof(Texture), false);
-        EditorGUILayout.Space();
-
-        ge.probability = EditorGUILayout.FloatField("Probability", ge.probability);
+        ge.description = EditorGUILayout.TextArea(ge.description, options);
+        ge.repeatable = EditorGUILayout.Toggle("Repeatable", ge.repeatable);
+        ge.from = EditorGUILayout.TextField("From (Email or Publication)", ge.from, options);
+        ge.type = (GameEvent.Type)EditorGUILayout.EnumPopup("Type", ge.type, options);
+        ge.image = (Texture)EditorGUILayout.ObjectField("Image", ge.image, typeof(Texture), false, options);
+        ge.probability = EditorGUILayout.FloatField("Probability", ge.probability, options);
         ge.probability = Mathf.Clamp(ge.probability, 0, 1);
-        EditorGUILayout.Space();
 
         if (ge.effects == null)
             ge.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(ge, ge.effects);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("effects").FindPropertyRelative("unlocks"), GUIContent.none);
-        EditorGUILayout.Space();
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("conditions"), true);
-        EditorGUILayout.Space();
-
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("conditions"), true, options);
 
         // Actions
         // Have to handle this one specially cause nested lists are tricky...if not impossible.
