@@ -26,12 +26,13 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
+  - 195: {fileID: 19500000}
   m_Layer: 11
   m_Name: Employee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -40,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -.493367881, y: -.506544888, z: -.506544888, w: -.493368894}
-  m_LocalPosition: {x: -0, y: 0, z: 3}
+  m_LocalPosition: {x: -.0799999982, y: 3.19000006, z: -.0900000036}
   m_LocalScale: {x: 2.49999905, y: 2.49999928, z: 2.49999905}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -51,7 +52,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: .493367881, y: .506544888, z: .506544888, w: -.493368894}
+  m_LocalRotation: {x: 0, y: .716362655, z: 0, w: -.697728217}
   m_LocalPosition: {x: -3, y: 7, z: 0}
   m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
@@ -105,6 +106,27 @@ MonoBehaviour:
   unhappyColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
   happyColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
   worker: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+--- !u!195 &19500000
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Radius: 2
+  m_Speed: 2
+  m_Acceleration: 6
+  avoidancePriority: 50
+  m_AngularSpeed: 200
+  m_StoppingDistance: .400000006
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.81728601
+  m_BaseOffset: .908643007
+  m_WalkableMask: 5
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

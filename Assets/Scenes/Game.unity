@@ -73,7 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-  m_NavMesh: {fileID: 0}
+  m_NavMesh: {fileID: 19400000, guid: 227956e52a9b849b6a6eb713b98eb982, type: 2}
 --- !u!1 &4178605
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: -449.999969, z: 543.749939, w: 60}
+  mClipRange: {x: 0, y: 30, z: 2, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 10
   mSortingOrder: 0
@@ -177,7 +177,7 @@ GameObject:
   m_Name: UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &11252087
@@ -222,7 +222,7 @@ Transform:
   - {fileID: 655531117}
   - {fileID: 1105589327}
   m_Father: {fileID: 701778265}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!114 &22452601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +649,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 40650247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -449.999969, z: .0009765625}
+  m_LocalPosition: {x: 0, y: 29.9999981, z: .0009765625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4178606}
@@ -684,7 +684,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 544
+  mWidth: 2
   mHeight: 60
   mDepth: 1
   autoResizeBoxCollider: 0
@@ -730,7 +730,7 @@ GameObject:
   m_Name: Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &101219724
@@ -788,7 +788,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &115102945
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: .625, y: 449.999969, z: 503.749939, w: 60}
+  mClipRange: {x: .625, y: -30, z: 2, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 2000
   mSortingOrder: 0
@@ -1109,7 +1109,7 @@ GameObject:
   m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!23 &162315655
@@ -1266,7 +1266,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189669549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -179.253235, y: 450.005798, z: 0}
+  m_LocalPosition: {x: 71.625, y: -30.0003872, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children:
   - {fileID: 893560091}
@@ -1560,7 +1560,7 @@ GameObject:
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &226249083
@@ -1857,7 +1857,7 @@ GameObject:
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &308238125
@@ -2118,7 +2118,7 @@ GameObject:
   m_Name: Whiteboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &357579836
@@ -2200,7 +2200,7 @@ GameObject:
   m_Name: UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &370781335
@@ -2229,7 +2229,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &389470039
@@ -2376,7 +2376,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &409715666
 Transform:
@@ -2388,13 +2388,12 @@ Transform:
   m_LocalPosition: {x: .199001938, y: -2.77756691, z: .305715561}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1965168277}
   - {fileID: 538748851}
   - {fileID: 682343353}
   - {fileID: 1227819919}
   - {fileID: 1961744437}
   m_Father: {fileID: 701778265}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &412541574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,7 +2621,7 @@ GameObject:
   m_Name: Whiteboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &452134741
@@ -2706,7 +2705,7 @@ GameObject:
   m_Name: Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &496150757
@@ -2944,7 +2943,7 @@ GameObject:
   m_Name: Couch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &522933727
@@ -3003,7 +3002,7 @@ GameObject:
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &538748851
@@ -3017,7 +3016,7 @@ Transform:
   m_LocalScale: {x: 6.07916069, y: .600000024, z: 1.61000001}
   m_Children: []
   m_Father: {fileID: 409715666}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!23 &538748852
 Renderer:
   m_ObjectHideFlags: 0
@@ -3221,7 +3220,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &573693270
@@ -3279,7 +3278,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &575753594
@@ -3337,7 +3336,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &609496831
@@ -3395,7 +3394,7 @@ GameObject:
   m_Name: Easel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &614215373
@@ -3750,7 +3749,7 @@ GameObject:
   m_Name: Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &667999223
@@ -3808,7 +3807,7 @@ GameObject:
   m_Name: Outside Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &682343353
@@ -3822,7 +3821,7 @@ Transform:
   m_LocalScale: {x: 6.07138968, y: .599999368, z: 16.3155518}
   m_Children: []
   m_Father: {fileID: 409715666}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!23 &682343354
 Renderer:
   m_ObjectHideFlags: 0
@@ -3965,6 +3964,7 @@ Transform:
   m_LocalPosition: {x: .301460713, y: 2.37193489, z: 13.2074165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1965168277}
   - {fileID: 409715666}
   - {fileID: 1687328361}
   - {fileID: 882919185}
@@ -3997,7 +3997,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 703249029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -449.999969, z: .0009765625}
+  m_LocalPosition: {x: 0, y: 29.9999981, z: .0009765625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4178606}
@@ -4032,7 +4032,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   mPivot: 4
-  mWidth: 544
+  mWidth: 2
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -4074,7 +4074,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &715911062
@@ -4338,7 +4338,7 @@ GameObject:
   m_Name: Wall (Windowed)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &749270525
@@ -4512,7 +4512,7 @@ GameObject:
   m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &812569480
@@ -4596,7 +4596,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &818691466
@@ -4753,7 +4753,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &829960965
@@ -5090,7 +5090,7 @@ Transform:
   - {fileID: 1295719300}
   - {fileID: 1820807806}
   m_Father: {fileID: 701778265}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &882919186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5238,7 +5238,7 @@ GameObject:
   m_Name: Accounting UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &915853591
@@ -5276,7 +5276,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 921502546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -89.2555771, y: 450.011658, z: 0}
+  m_LocalPosition: {x: 161.625916, y: -30.0007744, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children: []
   m_Father: {fileID: 127671519}
@@ -5707,7 +5707,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &967145821
@@ -6122,7 +6122,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 544, y: 960, z: 0}
+  m_Size: {x: 2, y: 2, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1105655471
 MonoBehaviour:
@@ -6154,8 +6154,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 544
-  mHeight: 960
+  mWidth: 2
+  mHeight: 2
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -6175,7 +6175,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1107399997
@@ -6263,7 +6263,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1153769104
 Transform:
@@ -6318,7 +6318,7 @@ GameObject:
   m_Name: Posterboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1154213391
@@ -6635,7 +6635,7 @@ Transform:
   - {fileID: 1463642868}
   - {fileID: 2133838571}
   m_Father: {fileID: 701778265}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1214719623
 GameObject:
   m_ObjectHideFlags: 0
@@ -6763,7 +6763,7 @@ GameObject:
   m_Name: Outside Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1227819919
@@ -6777,7 +6777,7 @@ Transform:
   m_LocalScale: {x: 3.21771288, y: .599999011, z: 16.3155518}
   m_Children: []
   m_Father: {fileID: 409715666}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!23 &1227819920
 Renderer:
   m_ObjectHideFlags: 0
@@ -7293,7 +7293,7 @@ GameObject:
   m_Name: UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1341222628
@@ -7616,7 +7616,7 @@ GameObject:
   m_Name: Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1386293765
@@ -7852,7 +7852,7 @@ GameObject:
   m_Name: UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1452721023
@@ -7954,7 +7954,7 @@ GameObject:
   m_Name: Posterboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1463642868
@@ -8281,7 +8281,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1478626716
@@ -8463,7 +8463,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1513043832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .625, y: 450.005798, z: 0}
+  m_LocalPosition: {x: .625008106, y: -30.0003872, z: 0}
   m_LocalScale: {x: .999986947, y: .999986947, z: .999986947}
   m_Children: []
   m_Father: {fileID: 127671519}
@@ -8498,7 +8498,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   mPivot: 4
-  mWidth: 504
+  mWidth: 2
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -8910,7 +8910,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1541578730
@@ -9058,7 +9058,7 @@ GameObject:
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1562313888
@@ -9206,7 +9206,7 @@ GameObject:
   m_Name: Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1568059190
@@ -9794,7 +9794,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1673873641
@@ -9872,7 +9872,7 @@ Transform:
   - {fileID: 715911062}
   - {fileID: 1107399997}
   m_Father: {fileID: 701778265}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1726990941
 GameObject:
   m_ObjectHideFlags: 0
@@ -9975,7 +9975,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1745918710
 Transform:
@@ -10283,7 +10283,7 @@ Transform:
   - {fileID: 357579836}
   - {fileID: 1906524162}
   m_Father: {fileID: 701778265}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1793096430
 GameObject:
   m_ObjectHideFlags: 0
@@ -10411,7 +10411,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1797530699
@@ -11089,7 +11089,7 @@ GameObject:
   m_Name: Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1906524162
@@ -11261,7 +11261,7 @@ GameObject:
   m_Name: UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1924338865
@@ -11290,7 +11290,7 @@ GameObject:
   m_Name: Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1932194621
@@ -11562,7 +11562,7 @@ GameObject:
   m_Name: Wall (Combo)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1961744437
@@ -11580,7 +11580,7 @@ Transform:
   - {fileID: 226249083}
   - {fileID: 1562313888}
   m_Father: {fileID: 409715666}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &1965168276
 GameObject:
   m_ObjectHideFlags: 0
@@ -11605,10 +11605,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1965168276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.10000002, y: -.25999999, z: 6.92000008}
+  m_LocalPosition: {x: -.900998116, y: -3.0375669, z: 7.22571564}
   m_LocalScale: {x: 3.22660685, y: 2.98360109, z: 8.85000038}
   m_Children: []
-  m_Father: {fileID: 409715666}
+  m_Father: {fileID: 701778265}
   m_RootOrder: 0
 --- !u!23 &1965168278
 Renderer:
@@ -11907,7 +11907,7 @@ Transform:
   - {fileID: 1336367146}
   - {fileID: 1419076106}
   m_Father: {fileID: 701778265}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!114 &1989188391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11941,7 +11941,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1996851486
 Transform:
@@ -11998,7 +11998,7 @@ GameObject:
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1997362987
@@ -12080,7 +12080,7 @@ GameObject:
   m_Name: UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1998601184
@@ -12206,7 +12206,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2013164176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -259.874969, y: 415.999969, z: 0}
+  m_LocalPosition: {x: 12, y: -64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1597615473}
@@ -12245,8 +12245,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
-  mWidth: 260
-  mHeight: 896
+  mWidth: 2
+  mHeight: 2
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -12289,7 +12289,7 @@ GameObject:
   m_Name: Computer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2015701257
@@ -12516,7 +12516,7 @@ GameObject:
   m_Name: Posterboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2057252234
@@ -12574,7 +12574,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2069542147
@@ -12632,7 +12632,7 @@ GameObject:
   m_Name: Desk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2077602017
@@ -12980,7 +12980,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: -449.999969, z: 543.749939, w: 60}
+  mClipRange: {x: 0, y: 30, z: 2, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 1
   mSortingOrder: 0
@@ -13046,7 +13046,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2121461060
@@ -13104,7 +13104,7 @@ GameObject:
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2125131542
@@ -13365,7 +13365,7 @@ GameObject:
   m_Name: Posterboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2133838571

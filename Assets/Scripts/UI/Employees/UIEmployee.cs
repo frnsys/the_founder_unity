@@ -11,11 +11,23 @@ public class UIEmployee : MonoBehaviour {
     public Color unhappyColor;
     public Color happyColor;
     public Worker worker;
+    private NavMeshAgent agent;
+
+    public Vector3 target;
 
     void Start() {
-        StartCoroutine(MoveTo(RandomLocation()));
-
         StartCoroutine(Working());
+
+        agent = GetComponent<NavMeshAgent>();
+        target = RandomLocation();
+    }
+
+    void Update() {
+        agent.SetDestination(target);
+        // Check if we've reached the destination
+        if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
+            target = RandomLocation();
+        }
     }
 
     void OnDestroy() {
@@ -25,8 +37,8 @@ public class UIEmployee : MonoBehaviour {
     // Temporary, to get employees moving about the office.
     Vector3 RandomLocation() {
         // TO DO don't hardcode these values.
-        float x = Random.value * 12 - 7.5f;
-        float z = Random.value * 4.5f - 3.5f;
+        float x = Random.value * 9f - 5f;
+        float z = Random.value * 20f + 10f;
         return new Vector3(x, 7f, z);
     }
 
@@ -59,20 +71,5 @@ public class UIEmployee : MonoBehaviour {
 
             yield return new WaitForSeconds(2 * Random.value);
         }
-    }
-
-    IEnumerator MoveTo(Vector3 to) {
-        Vector3 from = transform.localPosition;
-
-        float step = 0.003f;
-
-        for (float f = 0f; f <= 1f + step; f += step) {
-            // SmoothStep gives us a bit of easing.
-            transform.localPosition = Vector3.Lerp(from, to, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-
-        // Move back and forth, for testing purposes.
-        yield return StartCoroutine(MoveTo(RandomLocation()));
     }
 }
