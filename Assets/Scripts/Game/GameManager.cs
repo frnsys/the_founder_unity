@@ -155,9 +155,9 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(OpinionCycle());
         StartCoroutine(EventCycle());
 
-        // We only load this here because the UIOfficeViewManager
+        // We only load this here because the UIOfficeManager
         // doesn't exist until the game starts.
-        UIOfficeViewManager.Instance.Load(data);
+        UIOfficeManager.Instance.Load(data);
     }
 
     void OnEvent(GameEvent e) {
