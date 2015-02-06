@@ -56,7 +56,7 @@ public class GameEvent : ScriptableObject {
     public bool repeatable;
 
     public EffectSet effects = new EffectSet();
-    public List<EventAction> actions = new List<EventAction>();
+    public Action[] actions;
     public Condition[] conditions;
 
     public GameEvent(string name_, float probability_) {
@@ -128,6 +128,12 @@ public class GameEvent : ScriptableObject {
             ProductsLaunched,
             Locations
         }
+    }
+
+    [System.Serializable]
+    public struct Action {
+        public string name;
+        public EffectSet effects;
     }
 }
 

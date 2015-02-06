@@ -9,14 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Expansion Opportunities
+  m_Name: The NSA insists
   m_EditorClassIdentifier: 
-  type: 0
-  description: We are making money hand-over-fist, and we've already expanded to most
-    of the globe. But we need to keep growing. I bet if we research the Closed Ecologies,
-    we'll be able to terraform nearby planets and develop new market-colonies there!
-  from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 2800000, guid: 952ec6562706140938c516421b5ffc05, type: 3}
+  type: 1
+  description: You've denied our request for data access, but we are legally allowed
+    to force compliance. All your data are belong to us.
+  from: classified@classified.classified
+  image: {fileID: 2800000, guid: 3ec47e4e0536243adbb92992cef1625a, type: 3}
   _delay: 0
   countdown: 0
   probability: 0
@@ -49,17 +48,11 @@ MonoBehaviour:
         value: 0
         duration: 0
         type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
+    gameEvent: {fileID: 11400000, guid: fca41fa58ef3e4126b61a2b9c736acde, type: 2}
+    eventDelay: 24
+    eventProbability: 1
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
   actions: []
-  conditions:
-  - value: 250000
-    greater: 1
-    type: 3
-  - value: 14
-    greater: 1
-    type: 6
+  conditions: []

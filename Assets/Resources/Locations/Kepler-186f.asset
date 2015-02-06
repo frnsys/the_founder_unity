@@ -26,5 +26,38 @@ MonoBehaviour:
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000
-  effects: {fileID: 0}
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 11400000, guid: 61ff4b44c85014a35b21a752a0f1d2da, type: 2}
+    eventDelay: 12
+    eventProbability: 1
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
   rotation: {x: 0, y: 0, z: 0}

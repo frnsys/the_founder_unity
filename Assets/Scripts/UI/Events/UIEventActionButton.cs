@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class UIEventActionButton : MonoBehaviour {
-    private EventAction action_;
-    public EventAction action {
+    private GameEvent.Action action_;
+    public GameEvent.Action action {
         get { return action_; }
         set {
             action_ = value;
@@ -14,9 +14,7 @@ public class UIEventActionButton : MonoBehaviour {
     public UILabel titleLabel;
 
     void OnClick() {
-        if (action_ != null) {
-            action_.Execute();
-        }
+        action_.effects.Apply(GameManager.Instance.playerCompany);
     }
 }
 

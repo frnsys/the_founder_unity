@@ -38,20 +38,7 @@ internal class GameEventInspector : Editor {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("effects").FindPropertyRelative("unlocks"), GUIContent.none);
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("conditions"), true, options);
-
-        // Actions
-        // Have to handle this one specially cause nested lists are tricky...if not impossible.
-        EditorGUILayout.LabelField("Actions");
-        EditorGUI.indentLevel += 1;
-        if (ge.actions == null) {
-            ge.actions = new List<EventAction>();
-        }
-        DrawCustomList<EventAction>(ge.actions, "actions");
-        if (GUILayout.Button("Add New Action")) {
-            ge.actions.Add(new EventAction("Some Action Name", new List<GameEvent>(), 0));
-            EditorUtility.SetDirty(target);
-        }
-        EditorGUI.indentLevel -= 1;
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("actions"), true, options);
 
         if (GUI.changed) {
             EditorUtility.SetDirty(target);
