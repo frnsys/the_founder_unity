@@ -143,7 +143,6 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnYearEnded(int year) {
-
         // Anniversary/birthday alert!
         int age = 25 + year;
         int lastDigit = age % 10;
@@ -154,7 +153,10 @@ public class UIManager : Singleton<UIManager> {
             ending = "nd";
         else if (lastDigit == 3)
             ending = "rd";
-        UIManager.Instance.Alert("Happy " + year + ending + " birthday!");
+
+        UIManager.Instance.Alert(
+            string.Format("Happy {0}{1} birthday! The doctor estimates you'll live another {2}-{3} years.", age, ending, 40-age, 60-age)
+        );
     }
 
     void OnGameLost(Company company) {

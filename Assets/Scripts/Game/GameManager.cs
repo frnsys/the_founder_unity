@@ -281,7 +281,6 @@ public class GameManager : Singleton<GameManager> {
         } else if (growth <= target * 0.6) {
             ev = GameEvent.LoadSpecialEvent("Slower Growth");
         }
-        Debug.Log("PERFORMANCE NEWS");
         GameEvent.Trigger(ev);
     }
 
@@ -294,12 +293,16 @@ public class GameManager : Singleton<GameManager> {
                 data.week++;
             }
 
-            // TO DO this should be a proper "lose game"
-            // Do you die?
             if (data.year > data.lifetimeYear &&
                 (int)data.month > data.lifetimeMonth &&
                 data.week > data.lifetimeWeek) {
-                UIManager.Instance.Alert("YOU DIE YOUR EMPIRE IS IN RUINS");
+                GameEvent ev = GameEvent.LoadNoticeEvent("Death");
+                GameEvent.Trigger(ev);
+
+                // Pay inheritance tax.
+                float tax = playerCompany.cash.value * 0.3f;
+                playerCompany.Pay(tax);
+                UIManager.Instance.SendPing(string.Format("Paid {0:C0} in inheritance taxes.", tax), Color.red);
             }
 
             // A random AI company makes a move.
