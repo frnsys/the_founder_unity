@@ -9,6 +9,7 @@ public class MiniCompany : SharedResource<MiniCompany> {
     public Texture logo;
     public float revenue;
     public EffectSet effects = new EffectSet();
+    public AICompany aiCompany = null;
 
     public float cost {
         get { return baseCost * GameManager.Instance.economyMultiplier; }

@@ -21,6 +21,7 @@ internal class AICompanyInspector : Editor {
         EditorGUILayout.LabelField("Description");
         c.description = EditorGUILayout.TextArea(c.description, GUILayout.Height(50));
         c.baseSizeLimit = EditorGUILayout.IntField("Worker Size Limit", c.baseSizeLimit);
+        c.productLimit = EditorGUILayout.IntField("In-Market Product Limit", c.productLimit);
         c.cash.baseValue  = EditorGUILayout.FloatField("Starting Cash", c.cash.baseValue);
 
         EditorGUILayout.LabelField("Founder/CEO");
@@ -33,13 +34,6 @@ internal class AICompanyInspector : Editor {
 
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("Personality");
-        c.aggression = EditorGUILayout.FloatField("Aggression", c.aggression);
-        c.cooperativeness = EditorGUILayout.FloatField("Cooperativeness", c.cooperativeness);
-        c.luck = EditorGUILayout.FloatField("Luck", c.luck);
-
-        EditorGUILayout.Space();
-
         EditorGUILayout.LabelField("Bonuses and Unlocks");
         if (c.bonuses == null)
             c.bonuses = new EffectSet();
@@ -48,44 +42,8 @@ internal class AICompanyInspector : Editor {
 
         EditorGUILayout.Space();
 
-        // Workers
-        EditorGUILayout.LabelField("Starting Workers");
-        for (int i=0; i < c.startWorkers.Count; i++) {
-            EditorGUILayout.BeginHorizontal();
-            c.startWorkers[i] = (Worker)EditorGUILayout.ObjectField(c.startWorkers[i], typeof(Worker), false);
-            if (GUILayout.Button("Delete")) {
-                c.startWorkers.Remove(c.startWorkers[i]);
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        if (c.startWorkers.Count < c.sizeLimit) {
-            Worker newWorker = (Worker)EditorGUILayout.ObjectField(null, typeof(Worker), false);
-            if (newWorker != null)
-                c.startWorkers.Add(newWorker);
-        }
-
-        EditorGUILayout.Space();
-
-        // Products
-        EditorGUILayout.LabelField("Starting Products");
-        for (int i=0; i < c.startProducts.Count; i++) {
-            EditorGUILayout.BeginHorizontal();
-            c.startProducts[i] = (Product)EditorGUILayout.ObjectField(c.startProducts[i], typeof(Product), false);
-            if (GUILayout.Button("Delete")) {
-                c.startProducts.Remove(c.startProducts[i]);
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        if (c.startProducts.Count < c.sizeLimit) {
-            Product newProduct = (Product)EditorGUILayout.ObjectField(null, typeof(Product), false);
-            if (newProduct != null)
-                c.startProducts.Add(newProduct);
-        }
-
         // Locations
-        EditorGUILayout.LabelField("Starting Locations");
+        EditorGUILayout.LabelField("Locations");
         for (int i=0; i < c.startLocations.Count; i++) {
             EditorGUILayout.BeginHorizontal();
             c.startLocations[i] = (Location)EditorGUILayout.ObjectField(c.startLocations[i], typeof(Location), false);

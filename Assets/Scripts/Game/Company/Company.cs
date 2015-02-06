@@ -483,6 +483,11 @@ public class Company : HasStats {
 
     public bool BuyCompany(MiniCompany company) {
         if (Pay(company.cost)) {
+            // Check if there is an AI company which needs to be disabled.
+            if (company.aiCompany != null) {
+                AICompany.Find(company.aiCompany).disabled = true;
+            }
+
             companies.Add(company);
             company.effects.Apply(this);
             return true;
