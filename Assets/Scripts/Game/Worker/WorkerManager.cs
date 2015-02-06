@@ -22,8 +22,8 @@ public class WorkerManager : MonoBehaviour {
     }
     public IEnumerable<Worker> AvailableWorkersForAICompany(AICompany c) {
         // Off market time doesn't matter for AI companies.
-        IEnumerable<string> unlockedWorkerNames = c.unlocked.workers.Select(w => w.name);
-        return AllWorkers.Where(w => !c.workers.Contains(w) && unlockedWorkerNames.Contains(w.name));
+        // AI Companies have access to all workers.
+        return AllWorkers.Where(w => !c.workers.Contains(w));
     }
 
     public Company EmployerForWorker(Worker w) {
@@ -60,6 +60,8 @@ public class WorkerManager : MonoBehaviour {
         if (c.HireWorker(w)) {
             if (data.unemployed.Contains(w)) {
                 data.unemployed.Remove(w);
+
+            // Poached employee.
             } else if (employer != null) {
                 // Need to juggle the salary, b/c
                 // firing a worker resets it to 0.

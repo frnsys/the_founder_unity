@@ -50,6 +50,12 @@ public class GameManager : Singleton<GameManager> {
         get { return data.workerInsight; }
     }
 
+    public IEnumerable<AICompany> activeAICompanies {
+        get {
+            return data.otherCompanies.Where(a => !a.disabled);
+        }
+    }
+
     // Other managers.
     [HideInInspector]
     public ResearchManager researchManager;
@@ -227,12 +233,6 @@ public class GameManager : Singleton<GameManager> {
                 data.month++;
             }
 
-            // AI companies gather business intelligence!!
-            foreach (AICompany aic in data.otherCompanies) {
-                aic.CollectPerformanceData();
-                aic.PayMonthly();
-            }
-
             playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
 
@@ -295,7 +295,7 @@ public class GameManager : Singleton<GameManager> {
             }
 
             // Make other AI company moves.
-            foreach (AICompany aic in data.otherCompanies) {
+            foreach (AICompany aic in activeAICompanies) {
                 aic.Decide();
             }
 
@@ -320,7 +320,7 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.DevelopProducts();
             playerCompany.DevelopRecruitment();
 
-            foreach (AICompany aic in data.otherCompanies) {
+            foreach (AICompany aic in activeAICompanies) {
                 aic.DevelopProducts();
             }
 
@@ -354,7 +354,7 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.HarvestProducts(elapsedTime);
             playerCompany.HarvestCompanies();
 
-            foreach (AICompany aic in data.otherCompanies) {
+            foreach (AICompany aic in activeAICompanies) {
                 aic.HarvestProducts(elapsedTime);
             }
 
@@ -385,10 +385,6 @@ public class GameManager : Singleton<GameManager> {
             // Advance promos.
             playerCompany.ForgetOpinionEvents();
             playerCompany.DevelopPromo();
-            foreach (AICompany aic in data.otherCompanies) {
-                aic.ForgetOpinionEvents();
-                aic.DevelopPromo();
-            }
 
             yield return new WaitForSeconds(elapsedTime);
         }
