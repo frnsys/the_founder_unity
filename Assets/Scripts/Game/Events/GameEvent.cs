@@ -10,7 +10,8 @@ using System.Collections.Generic;
 public class GameEvent : ScriptableObject {
     public enum Type {
         Email,
-        News
+        News,
+        Personal
     }
 
     public static List<GameEvent> LoadSpecialEvents() {

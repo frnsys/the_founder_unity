@@ -18,14 +18,14 @@ public class UIManager : Singleton<UIManager> {
     public GameObject alertsPanel;
     public GameObject pingsPanel;
 
-    public GameObject gameEventNotificationEmailPrefab;
-    public GameObject gameEventNotificationNewsPrefab;
+    public GameObject eventPersonalPrefab;
+    public GameObject eventEmailPrefab;
+    public GameObject eventNewsPrefab;
     public GameObject pingPrefab;
     private Queue<Ping> pendingPings;
 
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
-    public GameObject emailPrefab;
     public GameObject effectAlertPrefab;
     public GameObject quarterlyReportPrefab;
     public GameObject researchCompletedAlertPrefab;
@@ -91,10 +91,19 @@ public class UIManager : Singleton<UIManager> {
     // Show an event notification.
     void OnEvent(GameEvent e) {
         GameObject prefab;
-        if (e.type == GameEvent.Type.Email) {
-            prefab = gameEventNotificationEmailPrefab;
-        } else {
-            prefab = gameEventNotificationNewsPrefab;
+        switch (e.type) {
+            case (GameEvent.Type.Email):
+                prefab = eventEmailPrefab;
+                break;
+            case (GameEvent.Type.Personal):
+                prefab = eventPersonalPrefab;
+                break;
+            case (GameEvent.Type.News):
+                prefab = eventNewsPrefab;
+                break;
+            default:
+                prefab = eventNewsPrefab;
+                break;
         }
         UIGameEventNotification gameEventNotification = NGUITools.AddChild(alertsPanel, prefab).GetComponent<UIGameEventNotification>();
         gameEventNotification.gameEvent = e;
@@ -215,14 +224,6 @@ public class UIManager : Singleton<UIManager> {
         UIPerformanceReport report = NGUITools.AddChild(alertsPanel, quarterlyReportPrefab).GetComponent<UIPerformanceReport>();
         report.BuildReport(results, deltas, board);
         return report;
-    }
-
-    // Create an email.
-    public UIEmail Email(string from, string to, string subject, string message) {
-        UIEmail email = NGUITools.AddChild(alertsPanel, emailPrefab).GetComponent<UIEmail>();
-        email.SetHeaders(from, to, subject);
-        email.bodyText = message;
-        return email;
     }
 
     // Show a worker selection popup.

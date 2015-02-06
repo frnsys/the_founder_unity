@@ -7171,14 +7171,12 @@ MonoBehaviour:
   windowsPanel: {fileID: 1453662938}
   alertsPanel: {fileID: 2054914622}
   pingsPanel: {fileID: 273724435}
-  gameEventNotificationEmailPrefab: {fileID: 100030, guid: 64589c3556b454a738bd670c46f7db20,
-    type: 2}
-  gameEventNotificationNewsPrefab: {fileID: 100030, guid: 23c36cca315164886992c19f024dd547,
-    type: 2}
+  eventPersonalPrefab: {fileID: 100030, guid: 64589c3556b454a738bd670c46f7db20, type: 2}
+  eventEmailPrefab: {fileID: 100030, guid: 64589c3556b454a738bd670c46f7db20, type: 2}
+  eventNewsPrefab: {fileID: 100030, guid: 23c36cca315164886992c19f024dd547, type: 2}
   pingPrefab: {fileID: 100002, guid: 49336a8557f5f430bbba7a2c0c8742b9, type: 2}
   alertPrefab: {fileID: 100018, guid: f55a8b6a18d6149dca9d7e48ceca10e8, type: 2}
   confirmPrefab: {fileID: 100018, guid: b55794495b527438681764bbd55f3b19, type: 2}
-  emailPrefab: {fileID: 100020, guid: 6cee42a8ec60644b3954b96d9ccd2660, type: 2}
   effectAlertPrefab: {fileID: 100020, guid: cec3234e520374deb96a9fd8ebac2e06, type: 2}
   quarterlyReportPrefab: {fileID: 100020, guid: a93de7468f6494d90bbcd18e7abb5fcb,
     type: 2}
