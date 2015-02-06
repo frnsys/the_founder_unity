@@ -101,6 +101,8 @@ public class GameManager : Singleton<GameManager> {
         economyManager.Load(d);
         researchManager.Load(d);
         narrativeManager.Load(d);
+
+        AICompany.companies = data.otherCompanies;
     }
 
     void Awake() {

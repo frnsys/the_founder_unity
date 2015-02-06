@@ -267,6 +267,11 @@ public class Company : HasStats {
             return products.FindAll(p => p.state == Product.State.RETIRED);
         }
     }
+    public List<Product> launchedProducts {
+        get {
+            return products.FindAll(p => p.state != Product.State.DEVELOPMENT);
+        }
+    }
 
     // Products grouped by state.
     public List<Product> sortedProducts {

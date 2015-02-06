@@ -3,6 +3,7 @@
  */
 
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour {
@@ -77,10 +78,17 @@ public class EventManager : MonoBehaviour {
             // Only show one event, the next one will
             // resolve in the following iteration.
             if (ev.ConditionsSatisfied(data.company)) {
-                GameEvent.Trigger(ev);
-                data.specialEventsPool.Remove(ev);
+                // Trigger the event, with a delay.
+                StartCoroutine(TriggerSpecialEvent(ev));
                 break;
             }
         }
+    }
+
+    // Trigger special events with a delay.
+    IEnumerator TriggerSpecialEvent(GameEvent ev) {
+        yield return new WaitForSeconds(45f);
+        GameEvent.Trigger(ev);
+        data.specialEventsPool.Remove(ev);
     }
 }

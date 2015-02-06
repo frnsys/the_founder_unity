@@ -99,6 +99,9 @@ public class GameEvent : ScriptableObject {
             case Condition.Type.Date:
                 comparison = GameManager.Instance.date;
                 break;
+            case Condition.Type.ProductsLaunched:
+                comparison = c.launchedProducts.Count;
+                break;
         }
 
         if (cond.greater)
@@ -118,7 +121,8 @@ public class GameEvent : ScriptableObject {
             Opinion,
             Cash,
             QuarterRevenue,
-            Date
+            Date,
+            ProductsLaunched
         }
     }
 }

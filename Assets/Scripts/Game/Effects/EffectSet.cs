@@ -41,6 +41,8 @@ public class EffectSet {
     public List<ProductEffect> productEffects;
     public List<StatBuff> workerEffects;
 
+    public AICompany aiCompany;
+
     public void Apply(Company company) {
         company.activeEffects.Add(this);
 
@@ -70,6 +72,8 @@ public class EffectSet {
                 worker.ApplyBuffs(workerEffects);
             }
         }
+
+        AICompany.Find(aiCompany).disabled = false;
     }
     public void Remove(Company company) {
         company.activeEffects.Remove(this);

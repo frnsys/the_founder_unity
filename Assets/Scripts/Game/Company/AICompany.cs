@@ -48,7 +48,7 @@ public class AICompany : Company {
     public List<Location> startLocations;
     private Company playerCompany;
 
-    // To easily keep track of all (active) AI companies.
+    // To easily keep track of all AI companies.
     public static List<AICompany> companies = new List<AICompany>();
 
     public static List<AICompany> LoadAll() {
@@ -134,6 +134,7 @@ public class AICompany : Company {
                 // TO DO these should be actual design, marketing, engineering values.
                 // TO DO should these just instantly launch?
                 StartNewProduct(p.productTypes, 3, 3, 3);
+                return;
             }
 
         // If no candidates,

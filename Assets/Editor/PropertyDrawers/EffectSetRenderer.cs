@@ -59,6 +59,9 @@ public class EffectSetRenderer {
             }
         }
 
+        EditorGUILayout.LabelField("Awakens AI Company");
+        es.aiCompany = (AICompany)EditorGUILayout.ObjectField(es.aiCompany, typeof(AICompany), false);
+
         EditorGUILayout.LabelField("Game Event");
         es.gameEvent = (GameEvent)EditorGUILayout.ObjectField(es.gameEvent, typeof(GameEvent), false);
         if (es.gameEvent != null) {
