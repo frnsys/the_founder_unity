@@ -12,10 +12,12 @@ public class UIEmployee : MonoBehaviour {
     public Color happyColor;
     public Worker worker;
     private NavMeshAgent agent;
+    private Company company;
 
     public Vector3 target;
 
     void Start() {
+        company = GameManager.Instance.playerCompany;
         StartCoroutine(Working());
 
         agent = GetComponent<NavMeshAgent>();
@@ -25,6 +27,7 @@ public class UIEmployee : MonoBehaviour {
     void Update() {
         agent.SetDestination(target);
         // Check if we've reached the destination
+        // For this to work, the stoppingDistance has to be about 1.
         if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
             target = RandomLocation();
         }
@@ -62,11 +65,14 @@ public class UIEmployee : MonoBehaviour {
                 happinessLabel.color = unhappyColor;
             }
 
-            // Breakthrough!
-            if (Random.value < 0.4) {
-                hudtext.Add("BRK!", breakthroughColor, 0f);
-            } else {
-                hudtext.Add(worker.productivity.value, workColor, 0f);
+            if (company.developing) {
+                // Breakthrough!
+                // TO DO this should be based on employee happiness
+                if (Random.value < 0.4) {
+                    hudtext.Add("BRK!", breakthroughColor, 0f);
+                } else {
+                    hudtext.Add(worker.productivity.value, workColor, 0f);
+                }
             }
 
             yield return new WaitForSeconds(2 * Random.value);
