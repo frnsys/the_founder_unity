@@ -5,33 +5,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-[CustomEditor(typeof(Item))]
-internal class ItemInspector : Editor {
+[CustomEditor(typeof(MiniCompany))]
+internal class MiniCompanyInspector : Editor {
 
-    Item i;
+    MiniCompany i;
+    bool foldout = false;
 
     void OnEnable() {
-        i = target as Item;
+        i = target as MiniCompany;
     }
 
     public override void OnInspectorGUI() {
-
         i.name = EditorGUILayout.TextField("Name", i.name);
         i.description = EditorGUILayout.TextField("Description", i.description);
-        i.cost = EditorGUILayout.FloatField("Cost", i.cost);
-        i.duration = EditorGUILayout.FloatField("Duration", i.duration);
-
-        EditorGUILayout.LabelField("Store");
-        i.store = (Store)EditorGUILayout.EnumPopup(i.store);
-        EditorGUILayout.Space();
-
-        i.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", i.mesh, typeof(Mesh));
-        i.texture = (Texture)EditorGUILayout.ObjectField("Texture", i.texture, typeof(Texture));
+        i.logo = (Texture)EditorGUILayout.ObjectField("Texture", i.logo, typeof(Texture), false);
+        i.baseCost = EditorGUILayout.FloatField("Base Cost", i.baseCost);
+        i.revenue = EditorGUILayout.FloatField("Revenue", i.revenue);
 
         if (i.effects == null)
             i.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(i, i.effects);
-        EditorGUILayout.Space();
+        foldout = EditorGUILayout.Foldout(foldout, "Unlocks");
+        if (foldout)
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("effects").FindPropertyRelative("unlocks"), GUIContent.none);
 
         if (GUI.changed) {
             EditorUtility.SetDirty(target);

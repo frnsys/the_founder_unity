@@ -124,13 +124,13 @@ public class GameManager : Singleton<GameManager> {
         // See Build Settings to get the number for levels/scenes.
         if (level == 2) {
             StartGame();
-            narrativeManager.InitializeOnboarding();
+            //narrativeManager.InitializeOnboarding();
         }
     }
 
     void Start() {
         // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
-        //StartGame();
+        StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
@@ -181,7 +181,7 @@ public class GameManager : Singleton<GameManager> {
         get { return cycleTime; }
     }
     public string month {
-        get { return data.month.ToString(); }
+        get { return Month.GetName(typeof(Month), data.month); }
     }
     public int year {
         get { return 2000 + data.year; }
@@ -352,6 +352,7 @@ public class GameManager : Singleton<GameManager> {
             MarketManager.CalculateMarketShares(allCompanies);
 
             playerCompany.HarvestProducts(elapsedTime);
+            playerCompany.HarvestCompanies();
 
             foreach (AICompany aic in data.otherCompanies) {
                 aic.HarvestProducts(elapsedTime);

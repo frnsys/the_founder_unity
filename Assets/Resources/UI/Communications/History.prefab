@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400014}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400020}
   m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
@@ -162,7 +163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 277, y: 0, z: 0}
+  m_LocalPosition: {x: 219, y: 0, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -225,7 +226,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .841125488, y: 398, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
@@ -455,7 +456,7 @@ MonoBehaviour:
   pivot: 0
   maxPerLine: 0
   cellWidth: 320
-  cellHeight: 80
+  cellHeight: 40
   animateSmoothly: 0
   hideInactive: 0
   keepWithinPanel: 0
@@ -490,13 +491,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .198529422, g: .198529422, b: .198529422, a: 1}
   mPivot: 4
-  mWidth: 606
+  mWidth: 490
   mHeight: 60
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 10.1000004
+  aspectRatio: 8.16666698
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -565,13 +566,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .658682942, g: .963235319, b: .923938215, a: 1}
   mPivot: 4
-  mWidth: 631
+  mWidth: 515
   mHeight: 60
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 10.5166664
+  aspectRatio: 8.58333302
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -629,7 +630,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -699,6 +700,43 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .643750012
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858a20c1b21a3f94bb5b2d3b901c9aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400016}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 400016}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 400016}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 400016}
+    relative: 1
+    absolute: -82
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 1
+  mWidth: 618
+  mHeight: 878
+  mDepth: 0
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: .64915967
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -799,7 +837,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4

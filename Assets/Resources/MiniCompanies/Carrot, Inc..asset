@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4bc42b501ad4dcd8f5f0552975166c, type: 3}
+  m_Name: Carrot, Inc.
+  m_EditorClassIdentifier: 
+  cost: 10
+  description: The leading force in modern entertainment and media.
+  logo: {fileID: 0}
+  revenue: 1e+06
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals:
+      - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects:
+    - productTypes: []
+      verticals:
+      - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+      buff:
+        name: Design
+        value: 20
+        duration: 0
+        type: 0
+    workerEffects:
+    - name: Happiness
+      value: 200
+      duration: 0
+      type: 0

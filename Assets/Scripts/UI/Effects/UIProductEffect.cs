@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIProductEffect : UIBuffEffect {
-    // TO DO
-    // make icon public and replaceable.
-
     public void Set(ProductEffect pe) {
         List<string> targets = new List<string>();
         foreach (ProductType x in pe.productTypes) {

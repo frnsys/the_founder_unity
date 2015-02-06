@@ -77,7 +77,6 @@ public class Company : HasStats {
         quarterCosts = 0;
         baseSizeLimit = 5;
         perks = new List<Perk>();
-        _items = new List<Item>();
 
         products = new List<Product>();
         founders = new List<Founder>();
@@ -95,6 +94,8 @@ public class Company : HasStats {
         publicity = new Stat("Publicity", 0);
 
         activeEffects = new List<EffectSet>();
+
+        companies = new List<MiniCompany>();
 
         // Keep track for a quarter.
         PerfHistory = new PerformanceHistory(3);
@@ -462,6 +463,31 @@ public class Company : HasStats {
     }
 
     // ===============================================
+    // Acquisition Management ========================
+    // ===============================================
+    public List<MiniCompany> companies;
+
+    public bool BuyCompany(MiniCompany company) {
+        if (Pay(company.cost)) {
+            companies.Add(company);
+            company.effects.Apply(this);
+            return true;
+        }
+        return false;
+    }
+
+    public void HarvestCompanies() {
+        float newRevenue = 0;
+        for (int i=0; i < companies.Count; i++) {
+            newRevenue += companies[i].revenue;
+        }
+        cash.baseValue += newRevenue;
+        lastMonthRevenue += newRevenue;
+        quarterRevenue += newRevenue;
+        lifetimeRevenue += newRevenue;
+    }
+
+    // ===============================================
     // Perk Management ===============================
     // ===============================================
     public List<Perk> perks;
@@ -497,32 +523,6 @@ public class Company : HasStats {
         perk.effects.Remove(this);
     }
 
-
-    // ===============================================
-    // Item Management ===============================
-    // ===============================================
-
-    public List<Item> _items;
-    public ReadOnlyCollection<Item> items {
-        get { return _items.AsReadOnly(); }
-    }
-
-
-    public bool BuyItem(Item item) {
-        item = item.Clone();
-        if (Pay(item.cost)) {
-            _items.Add(item);
-            item.effects.Apply(this);
-            return true;
-        }
-        return false;
-    }
-
-    public void RemoveItem(Item item) {
-        item = Item.Find(item, _items);
-        _items.Remove(item);
-        item.effects.Remove(this);
-    }
 
     // ===============================================
     // Infrastructure Management =====================
@@ -740,7 +740,7 @@ public class Company : HasStats {
     protected float ProductROI(Product p) {
         // TO DO tweak this
         // this should maybe also take into account cash invested
-        // (e.g. rent, salaries, etc) and value of items that contributed (normalized for their lifetime)
+        // (e.g. rent, salaries, etc)
         return (p.revenueEarned/p.timeSinceLaunch)/p.points;
     }
 

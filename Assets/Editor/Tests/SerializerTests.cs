@@ -56,9 +56,6 @@ namespace UnityTest
                     data.company.products.Add(CreateProduct());
                 }
 
-                Item item = CreateItem();
-                data.company.BuyItem(item);
-
             data.board    = new TheBoard();
                 data.board.happiness = 20;
 
@@ -210,21 +207,6 @@ namespace UnityTest
                 CompareEffectSets(f.bonuses, f_.bonuses);
             }
 
-            Assert.AreEqual(gd.company.items.Count, data.company.items.Count);
-            for (int i=0;i<gd.company.items.Count;i++) {
-                Item m  = data.company.items[i];
-                Item m_ = gd.company.items[i];
-
-                Assert.AreEqual(m.name,                     m_.name);
-                Assert.AreEqual(m.cost,                     m_.cost);
-                Assert.AreEqual(m.description,              m_.description);
-                Assert.AreEqual(m.duration,                 m_.duration);
-                Assert.AreEqual(m.store,                    m_.store);
-
-                CompareEffectSets(m.effects, m_.effects);
-            }
-
-
             CompareUnlockSets(gd.unlocked,               data.unlocked);
 
             Assert.AreEqual(gd.board.happiness,          data.board.happiness);
@@ -299,6 +281,7 @@ namespace UnityTest
         private Product CreateProduct() {
             ProductType pt = ProductType.Load("Social Network");
             Vertical v     = Vertical.Load("Information");
+            pt.requiredVerticals = new List<Vertical>() { v };
             List<ProductType> pts = new List<ProductType>() { pt };
 
             Product product = ScriptableObject.CreateInstance<Product>();
@@ -346,12 +329,6 @@ namespace UnityTest
             e.productEffects.Add(pe);
 
             return e;
-        }
-
-        private Item CreateItem() {
-            Item item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
-            item.effects = CreateEffectSet();
-            return item;
         }
 
         private float RandFloat() {

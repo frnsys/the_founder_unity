@@ -25,10 +25,10 @@ internal class AICompanyInspector : Editor {
 
         EditorGUILayout.LabelField("Founder/CEO");
         if (c.founders.Count == 0) {
-            Founder founder = (Founder)EditorGUILayout.ObjectField(null, typeof(Founder));
+            Founder founder = (Founder)EditorGUILayout.ObjectField(null, typeof(Founder), false);
             c.founders.Add(founder);
         } else {
-            c.founders[0] = (Founder)EditorGUILayout.ObjectField(c.founders[0], typeof(Founder));
+            c.founders[0] = (Founder)EditorGUILayout.ObjectField(c.founders[0], typeof(Founder), false);
         }
 
         EditorGUILayout.Space();
@@ -52,7 +52,7 @@ internal class AICompanyInspector : Editor {
         EditorGUILayout.LabelField("Starting Workers");
         for (int i=0; i < c.startWorkers.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            c.startWorkers[i] = (Worker)EditorGUILayout.ObjectField(c.startWorkers[i], typeof(Worker));
+            c.startWorkers[i] = (Worker)EditorGUILayout.ObjectField(c.startWorkers[i], typeof(Worker), false);
             if (GUILayout.Button("Delete")) {
                 c.startWorkers.Remove(c.startWorkers[i]);
             }
@@ -60,7 +60,7 @@ internal class AICompanyInspector : Editor {
         }
 
         if (c.startWorkers.Count < c.sizeLimit) {
-            Worker newWorker = (Worker)EditorGUILayout.ObjectField(null, typeof(Worker));
+            Worker newWorker = (Worker)EditorGUILayout.ObjectField(null, typeof(Worker), false);
             if (newWorker != null)
                 c.startWorkers.Add(newWorker);
         }
@@ -71,7 +71,7 @@ internal class AICompanyInspector : Editor {
         EditorGUILayout.LabelField("Starting Products");
         for (int i=0; i < c.startProducts.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            c.startProducts[i] = (Product)EditorGUILayout.ObjectField(c.startProducts[i], typeof(Product));
+            c.startProducts[i] = (Product)EditorGUILayout.ObjectField(c.startProducts[i], typeof(Product), false);
             if (GUILayout.Button("Delete")) {
                 c.startProducts.Remove(c.startProducts[i]);
             }
@@ -79,7 +79,7 @@ internal class AICompanyInspector : Editor {
         }
 
         if (c.startProducts.Count < c.sizeLimit) {
-            Product newProduct = (Product)EditorGUILayout.ObjectField(null, typeof(Product));
+            Product newProduct = (Product)EditorGUILayout.ObjectField(null, typeof(Product), false);
             if (newProduct != null)
                 c.startProducts.Add(newProduct);
         }
@@ -88,14 +88,14 @@ internal class AICompanyInspector : Editor {
         EditorGUILayout.LabelField("Starting Locations");
         for (int i=0; i < c.startLocations.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            c.startLocations[i] = (Location)EditorGUILayout.ObjectField(c.startLocations[i], typeof(Location));
+            c.startLocations[i] = (Location)EditorGUILayout.ObjectField(c.startLocations[i], typeof(Location), false);
             if (GUILayout.Button("Delete")) {
                 c.startLocations.Remove(c.startLocations[i]);
             }
             EditorGUILayout.EndHorizontal();
         }
 
-        Location newLocation = (Location)EditorGUILayout.ObjectField(null, typeof(Location));
+        Location newLocation = (Location)EditorGUILayout.ObjectField(null, typeof(Location), false);
         if (newLocation != null)
             c.startLocations.Add(newLocation);
 

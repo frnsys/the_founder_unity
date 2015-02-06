@@ -19,7 +19,6 @@ namespace UnityTest
 
         private Company c;
         private Worker worker;
-        private Item item;
         private Perk perk;
         private Location startLoc;
 
@@ -49,7 +48,6 @@ namespace UnityTest
             worker = ScriptableObject.CreateInstance<Worker>();
             worker.Init("Franklin");
 
-            item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
             perk = (Perk)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestPerk.asset", typeof(Perk)));
         }
 
@@ -59,7 +57,6 @@ namespace UnityTest
             gm = null;
             worker = null;
             c = null;
-            item = null;
         }
 
 		[Test]
@@ -91,11 +88,9 @@ namespace UnityTest
           Assert.AreEqual(c.workers.Count, 0);
 
           c.cash.baseValue = 2000;
-          c.BuyItem(item);
           c.baseSizeLimit = 10;
           c.HireWorker(worker);
           Assert.AreEqual(c.workers.Count, 1);
-          Assert.AreEqual(c.workers[0].happiness.value, 10);
 
           // The total progress required should be different now,
           // and it should be reflected on the product.
@@ -326,10 +321,10 @@ namespace UnityTest
 
         [Test]
         public void ActiveEffects() {
-            Assert.IsTrue(c.BuyItem(item));
+            //Assert.IsTrue(c.BuyItem(item));
 
-            int last = c.activeEffects.Count - 1;
-            Assert.IsTrue(c.activeEffects[last].Equals(item.effects));
+            //int last = c.activeEffects.Count - 1;
+            //Assert.IsTrue(c.activeEffects[last].Equals(item.effects));
         }
 
 
@@ -339,9 +334,6 @@ namespace UnityTest
 
         [Test]
         public void StartNewProduct() {
-            c.cash.baseValue = 2000;
-            c.BuyItem(item);
-
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 1;
             i[Infrastructure.Type.Factory] = 1;
@@ -359,8 +351,8 @@ namespace UnityTest
 
             Assert.AreEqual(c.products.Count, 1);
 
-            // Creating a new product should not apply existing items.
-            Assert.AreEqual(p.design.value, 0);
+            // Creating a new product should not apply existing effects.
+            //Assert.AreEqual(p.design.value, 0);
         }
 
 		[Test]
@@ -407,14 +399,14 @@ namespace UnityTest
         [Test]
         public void ShutdownProduct() {
             c.cash.baseValue = 2000;
-            c.BuyItem(item);
+            //c.BuyItem(item);
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             p.requiredProgress = 0;
             c.DevelopProduct(p);
             Assert.AreEqual(c.activeProducts[0], p);
-            Assert.AreEqual(p.design.value, 10);
+            //Assert.AreEqual(p.design.value, 10);
 
             c.ShutdownProduct(p);
 
@@ -448,60 +440,11 @@ namespace UnityTest
             Assert.IsTrue(c.BuyPerk(perk));
 
             c.cash.baseValue = perk.next.cost;
-            float startCash = c.cash.value;
             float startResearch = c.research.value;
             Assert.IsTrue(c.UpgradePerk(perk));
             Assert.AreEqual(c.perks.Count, 1);
             Assert.AreEqual(c.perks[0].upgradeLevel, 1);
             Assert.AreEqual(c.research.value, startResearch + perk.effects.research.value);
-        }
-
-        // ===============================================
-        // Item Management ===============================
-        // ===============================================
-
-		[Test]
-		public void BuyItem_CanAfford() {
-            c.cash.baseValue = 2000;
-            c.StartNewProduct(pts, 0, 0, 0);
-            Product p = c.products[0];
-            p.Launch();
-
-            c.HireWorker(worker);
-
-            Assert.IsTrue(c.BuyItem(item));
-            Assert.AreEqual(c.cash.baseValue, 1500);
-            Assert.AreEqual(c.items.Count, 1);
-            Assert.AreEqual(p.design.value, 10);
-            Assert.AreEqual(worker.happiness.value, 10);
-            Assert.AreEqual(worker.productivity.value, 20);
-
-            // Item should be removed from worker.
-            c.FireWorker(worker);
-            Assert.AreEqual(worker.happiness.value, 0);
-            Assert.AreEqual(worker.productivity.value, 0);
-        }
-
-		[Test]
-		public void BuyItem_CannotAfford() {
-            c.cash.baseValue = 200;
-            Assert.IsFalse(c.BuyItem(item));
-            Assert.AreEqual(c.cash.baseValue, 200);
-        }
-
-        [Test]
-        public void RemoveItem() {
-            c.cash.baseValue = 2000;
-            c.StartNewProduct(pts, 0, 0, 0);
-            Product p = c.products[0];
-            c.HireWorker(worker);
-
-            c.BuyItem(item);
-            c.RemoveItem(item);
-
-            Assert.AreEqual(c.items.Count, 0);
-            Assert.AreEqual(p.design.value, 0);
-            Assert.AreEqual(worker.happiness.value, 0);
         }
 
         [Test]

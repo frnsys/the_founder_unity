@@ -24,7 +24,7 @@ internal class PerkInspector : Editor {
             EditorGUILayout.LabelField("Required Technologies");
             for (int j=0; j < upgrade.requiredTechnologies.Count; j++) {
                 EditorGUILayout.BeginHorizontal();
-                upgrade.requiredTechnologies[j] = (Technology)EditorGUILayout.ObjectField(upgrade.requiredTechnologies[j], typeof(Technology));
+                upgrade.requiredTechnologies[j] = (Technology)EditorGUILayout.ObjectField(upgrade.requiredTechnologies[j], typeof(Technology), false);
                 if (GUILayout.Button("Delete")) {
                     upgrade.requiredTechnologies.Remove(upgrade.requiredTechnologies[j]);
                 }
@@ -34,8 +34,8 @@ internal class PerkInspector : Editor {
                 upgrade.requiredTechnologies.Add(null);
             }
 
-            upgrade.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", upgrade.mesh, typeof(Mesh));
-            upgrade.texture = (Texture)EditorGUILayout.ObjectField("Texture", upgrade.texture, typeof(Texture));
+            upgrade.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", upgrade.mesh, typeof(Mesh), false);
+            upgrade.texture = (Texture)EditorGUILayout.ObjectField("Texture", upgrade.texture, typeof(Texture), false);
 
             if (upgrade.effects == null)
                 upgrade.effects = new EffectSet();

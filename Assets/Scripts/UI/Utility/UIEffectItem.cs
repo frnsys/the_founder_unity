@@ -2,14 +2,12 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-// A text alert popup which supports rendering effects.
-public class UIEffectAlert : UIAlert {
+public class UIEffectItem : MonoBehaviour {
     public UIGrid effectGrid;
 
     public GameObject buffEffectPrefab;
     public GameObject unlockEffectPrefab;
     public GameObject productEffectPrefab;
-
     public void RenderEffects(EffectSet es) {
         // Clear out existing effect elements.
         while (effectGrid.transform.childCount > 0) {
@@ -20,11 +18,37 @@ public class UIEffectAlert : UIAlert {
         RenderUnlockEffects(es);
         RenderBuffEffects(es);
         RenderProductEffects(es);
+        effectGrid.Reposition();
     }
 
     public void AdjustEffectsHeight() {
-        // -1 because by default there is space for about 1 effect.
-        Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
+        int count = effectGrid.GetChildList().Count;
+
+        // If there are effects, expand the height for them.
+        if (count > 0)
+            Extend((int)((count + 1) * effectGrid.cellHeight));
+    }
+
+    private void RenderBuffEffects(EffectSet es) {
+        foreach (StatBuff buff in es.workerEffects) {
+            RenderBuffEffect(buff, "workers");
+        }
+
+        if (es.research.value != 0) {
+            RenderBuffEffect(es.research, null);
+        }
+
+        if (es.cash != 0) {
+            RenderBuffEffect(new StatBuff("Cash", es.cash), null);
+        }
+
+        if (es.opinionEvent.opinion.value != 0) {
+            RenderBuffEffect(es.opinionEvent.opinion, null);
+        }
+
+        if (es.opinionEvent.publicity.value != 0) {
+            RenderBuffEffect(es.opinionEvent.publicity, null);
+        }
     }
 
     private void RenderUnlockEffects(EffectSet es) {
@@ -54,28 +78,6 @@ public class UIEffectAlert : UIAlert {
         }
     }
 
-    private void RenderBuffEffects(EffectSet es) {
-        foreach (StatBuff buff in es.workerEffects) {
-            RenderBuffEffect(buff, "workers");
-        }
-
-        if (es.research.value != 0) {
-            RenderBuffEffect(es.research, null);
-        }
-
-        if (es.cash != 0) {
-            RenderBuffEffect(new StatBuff("Cash", es.cash), null);
-        }
-
-        if (es.opinionEvent.opinion.value != 0) {
-            RenderBuffEffect(es.opinionEvent.opinion, null);
-        }
-
-        if (es.opinionEvent.publicity.value != 0) {
-            RenderBuffEffect(es.opinionEvent.publicity, null);
-        }
-    }
-
     private void RenderProductEffects(EffectSet es) {
         foreach (ProductEffect pe in es.productEffects) {
             GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
@@ -94,10 +96,9 @@ public class UIEffectAlert : UIAlert {
     }
 
     public void Extend(int amount) {
-        amount = (amount/2) + 8;
-        int currentBottom = body.bottomAnchor.absolute;
-        int currentTop = body.topAnchor.absolute;
-        body.bottomAnchor.Set(window.transform, 0, currentBottom-amount);
-        body.topAnchor.Set(window.transform, 0, currentTop+amount);
+        gameObject.GetComponent<UIWidget>().height += amount;
     }
+
 }
+
+

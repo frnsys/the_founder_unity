@@ -8,60 +8,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cafa5a17c45495a9e18fca7cdaadae, type: 3}
-  m_Name: TestItem
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Protests
   m_EditorClassIdentifier: 
-  cost: 500
-  duration: 0
-  description: 
-  store: 0
-  mesh: {fileID: 0}
-  texture: {fileID: 0}
+  type: 1
+  description: Locals have been protesting the presence of <PLAYERCOMPANY> in their
+    cities ~ (This is a test event)
+  from: The Times
+  image: {fileID: 2800000, guid: 3ecaf14b23a214f7d8c350ad4807b7a6, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 0
   effects:
     unlocks:
       productTypes: []
       workers: []
-      items: []
       perks: []
-      stores: 
       locations: []
       verticals: []
       promos: []
-    cash: 0
+      recruitments: []
+      companies: []
+    cash: 200000
     research:
       name: DEFAULTNAME
       value: 0
       duration: 0
       type: 0
     opinionEvent:
-      name: 
+      name: Protests
       opinion:
         name: Opinion
-        value: 0
+        value: -40
         duration: 0
         type: 0
       publicity:
         name: Publicity
-        value: 0
+        value: 10
         duration: 0
         type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
-    productEffects:
-    - productTypes: []
-      verticals: []
-      buff:
-        name: Design
-        value: 10
-        duration: 0
-        type: 0
-    workerEffects:
-    - name: Happiness
-      value: 10
-      duration: 0
-      type: 0
-    - name: Productivity
-      value: 20
-      duration: 0
-      type: 0
+    productEffects: []
+    workerEffects: []
+  actions: []
+  conditions:
+  - value: 0
+    greater: 1
+    type: 2

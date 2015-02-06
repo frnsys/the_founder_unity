@@ -21,7 +21,6 @@ namespace UnityTest
         private ProductType pt;
         private List<ProductType> pts;
         private Company c;
-        private Item item;
 
         [SetUp]
         public void SetUp() {
@@ -38,8 +37,6 @@ namespace UnityTest
             p = ScriptableObject.CreateInstance<Product>();
             p.Init(pts, 0, 0, 0, c);
             pr = ProductRecipe.LoadFromTypes(pts);
-
-            item = (Item)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestItem.asset", typeof(Item)));
         }
 
         [TearDown]
@@ -50,7 +47,6 @@ namespace UnityTest
             pr = null;
             pt = null;
             pts = null;
-            item = null;
         }
 
 		[Test]

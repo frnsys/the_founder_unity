@@ -172,15 +172,21 @@ public class Product : HasStats {
             recipe = ProductRecipe.LoadDefault();
         }
 
-        name = GenerateName();
+        name = GenerateName(c);
     }
 
     // Generate a product name.
-    private string GenerateName() {
+    private string GenerateName(Company c) {
         if (recipe.names != null) {
+            // If the company already has products of this recipe,
+            // use "versioning" for the product name.
+            IEnumerable<Product> existing = c.products.Where(p => p.Recipe == recipe);
+            int version = existing.Count();
+            if (version > 0)
+                return string.Format("{0} {1}.0", existing.First().name, version + 1);
+
+
             // TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
-            // make sure companies can't have products of the same name. Subsequent products of the same product type combination
-            // use the existing name but at "2.0" etc at the end.
             string[] names = recipe.names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
             if (names.Length > 0)
                 return names[Random.Range(0, names.Length-1)];

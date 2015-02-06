@@ -22,8 +22,8 @@ internal class ProductTypeInspector : Editor {
         p.name = EditorGUILayout.TextField("Name", p.name);
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
 
-        p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh));
-        p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture));
+        p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
+        p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture), false);
 
         p.progressRequired = EditorGUILayout.FloatField("Progress Required", p.progressRequired);
         p.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", p.difficulty);
@@ -31,7 +31,7 @@ internal class ProductTypeInspector : Editor {
         EditorGUILayout.LabelField("Required Verticals");
         for (int i=0; i < p.requiredVerticals.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            p.requiredVerticals[i] = (Vertical)EditorGUILayout.ObjectField(p.requiredVerticals[i], typeof(Vertical));
+            p.requiredVerticals[i] = (Vertical)EditorGUILayout.ObjectField(p.requiredVerticals[i], typeof(Vertical), false);
             if (GUILayout.Button("Delete")) {
                 p.requiredVerticals.Remove(p.requiredVerticals[i]);
             }

@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 public class UIManageLocations : UIFullScreenPager {
     private GameManager gm;
+    private UIEarth earth;
 
     public GameObject locationPrefab;
     public GameObject earthObject;
 
     void OnEnable() {
         gm = GameManager.Instance;
+        earth = earthObject.GetComponent<UIEarth>();
         LoadLocations();
     }
 
     private void LoadLocations() {
         gridCenter.onFinished = OnCenter;
         ClearGrid();
-
-        UIEarth earth = earthObject.GetComponent<UIEarth>();
 
         foreach (Location l in gm.unlocked.locations) {
             GameObject locationItem = NGUITools.AddChild(grid.gameObject, locationPrefab);
@@ -33,7 +33,7 @@ public class UIManageLocations : UIFullScreenPager {
     private void OnCenter() {
         UILocationItem item = gridCenter.centeredObject.GetComponent<UILocationItem>();
         if (item != null) {
-            earthObject.GetComponent<UIEarth>().location = item.location;
+            earth.location = item.location;
         }
     }
 }

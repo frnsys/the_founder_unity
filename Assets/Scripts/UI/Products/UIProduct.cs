@@ -12,7 +12,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
-public class UIProduct : MonoBehaviour {
+public class UIProduct : UIEffectItem {
     private Product product_;
     public Product product {
         get { return product_; }
@@ -86,65 +86,7 @@ public class UIProduct : MonoBehaviour {
     public UILabel description;
     public UIButton shutdown;
     public UIProgressBar progress;
-    public UIGrid effectGrid;
     public GameObject productObject;
-
-    public GameObject buffEffectPrefab;
-    public GameObject unlockEffectPrefab;
-    public GameObject productEffectPrefab;
-    private void RenderEffects(EffectSet es) {
-        // Clear out existing effect elements.
-        while (effectGrid.transform.childCount > 0) {
-            GameObject go = effectGrid.transform.GetChild(0).gameObject;
-            NGUITools.DestroyImmediate(go);
-        }
-
-        // Note that we do not render unlock effects because they are permanent.
-        // They show up in the product completion alert.
-        // This way we can grey out these other effects without confusing the player as to
-        // whether unlocked things have become re-locked.
-        RenderBuffEffects(es);
-        RenderProductEffects(es);
-    }
-
-    public void AdjustEffectsHeight() {
-        int count = effectGrid.GetChildList().Count;
-
-        // If there are effects, expand the height for them.
-        if (count > 0)
-            Extend((int)((count + 1) * effectGrid.cellHeight));
-    }
-
-    private void RenderBuffEffects(EffectSet es) {
-        foreach (StatBuff buff in es.workerEffects) {
-            RenderBuffEffect(buff, "workers");
-        }
-        // TO DO
-        //foreach (StatBuff buff in es.ofType<CashEffect>().Select(c => c.cash)) {
-            //RenderBuffEffect(buff, "the company");
-        //}
-    }
-
-    private void RenderProductEffects(EffectSet es) {
-        foreach (ProductEffect pe in es.productEffects) {
-            GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
-            effectObj.GetComponent<UIProductEffect>().Set(pe);
-            effectObj.GetComponent<UIWidget>().leftAnchor.Set(description.transform, 0, 0);
-            effectObj.GetComponent<UIWidget>().rightAnchor.Set(description.transform, 0, 0);
-        }
-    }
-
-    private void RenderBuffEffect(StatBuff buff, string target) {
-        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
-        effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
-        effectObj.GetComponent<UIWidget>().leftAnchor.Set(description.transform, 0, 0);
-        effectObj.GetComponent<UIWidget>().rightAnchor.Set(description.transform, 0, 0);
-    }
-
-    public void Extend(int amount) {
-        gameObject.GetComponent<UIWidget>().height += amount;
-    }
-
 }
 
 

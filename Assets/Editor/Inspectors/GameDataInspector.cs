@@ -25,13 +25,13 @@ internal class GameDataInspector : Editor {
 
         for (int i=0; i < gd.otherCompanies.Count; i++) {
             EditorGUILayout.BeginHorizontal();
-            gd.otherCompanies[i] = (AICompany)EditorGUILayout.ObjectField(gd.otherCompanies[i], typeof(AICompany));
+            gd.otherCompanies[i] = (AICompany)EditorGUILayout.ObjectField(gd.otherCompanies[i], typeof(AICompany), false);
             if (GUILayout.Button("Delete")) {
                 gd.otherCompanies.Remove(gd.otherCompanies[i]);
             }
             EditorGUILayout.EndHorizontal();
         }
-        AICompany newOtherCompany = (AICompany)EditorGUILayout.ObjectField(null, typeof(AICompany));
+        AICompany newOtherCompany = (AICompany)EditorGUILayout.ObjectField(null, typeof(AICompany), false);
         if (newOtherCompany != null)
             gd.otherCompanies.Add(newOtherCompany);
 

@@ -32,7 +32,7 @@ internal class GameEventInspector : Editor {
         ge.type = (GameEvent.Type)EditorGUILayout.EnumPopup(ge.type);
         EditorGUILayout.Space();
 
-        ge.image = (Texture)EditorGUILayout.ObjectField(ge.image, typeof(Texture));
+        ge.image = (Texture)EditorGUILayout.ObjectField(ge.image, typeof(Texture), false);
         EditorGUILayout.Space();
 
         ge.probability = EditorGUILayout.FloatField("Probability", ge.probability);
@@ -42,6 +42,7 @@ internal class GameEventInspector : Editor {
         if (ge.effects == null)
             ge.effects = new EffectSet();
         EffectSetRenderer.RenderEffectSet(ge, ge.effects);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("effects").FindPropertyRelative("unlocks"), GUIContent.none);
         EditorGUILayout.Space();
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("conditions"), true);
