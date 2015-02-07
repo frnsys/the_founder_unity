@@ -81,6 +81,7 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+  slogan: Making your information accessible. To everyone.
   _workers: []
   founders:
   - {fileID: 11400000, guid: 7a24a2d119ca144fb80a9566a69cdab0, type: 2}
@@ -119,7 +120,6 @@ MonoBehaviour:
   disabled: 1
   productLimit: 0
   description: The space for your digital face.
-  slogan: 
   unlocked:
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}

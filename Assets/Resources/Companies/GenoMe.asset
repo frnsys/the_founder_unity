@@ -14,11 +14,91 @@ MonoBehaviour:
   cash:
     baseValue: 2e+07
     _buffs: []
-  researchCzar: {fileID: 0}
-  research:
-    baseValue: 1
-    _buffs: []
-  researchInvestment: 0
+  activeEffects:
+  - unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+  - unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+  slogan: 
+  _workers: []
+  founders:
+  - {fileID: 11400000, guid: d6a0fa26876e74dcaaf5308b7500a518, type: 2}
+  baseSizeLimit: 5
+  _locations: []
+  markets: 
+  _verticals:
+  - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+  products: []
+  developingPromo: {fileID: 0}
+  developingRecruitment: {fileID: 0}
+  lastMonthRevenue: 0
+  quarterRevenue: 0
+  quarterCosts: 0
+  lifetimeRevenue: 0
+  companies: []
+  perks: []
   opinionCzar: {fileID: 0}
   opinion:
     baseValue: 1
@@ -28,142 +108,17 @@ MonoBehaviour:
     _buffs: []
   forgettingRate: 1
   opinionEvents: []
-  activeEffects:
-  - unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      perks: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-      duration: 0
-      type: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-        duration: 0
-        type: 0
-      publicity:
-        name: Publicity
-        value: 0
-        duration: 0
-        type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    productEffects: []
-    workerEffects: []
-  - unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      perks: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-      duration: 0
-      type: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-        duration: 0
-        type: 0
-      publicity:
-        name: Publicity
-        value: 0
-        duration: 0
-        type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    productEffects: []
-    workerEffects: []
-  markets: 
+  researchCzar: {fileID: 0}
+  research:
+    baseValue: 1
+    _buffs: []
+  researchInvestment: 0
   technologies: []
-  baseSizeLimit: 5
-  founders:
-  - {fileID: 11400000, guid: d6a0fa26876e74dcaaf5308b7500a518, type: 2}
-  _workers: []
-  _locations: []
-  _verticals:
-  - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-  products: []
-  developingPromo: {fileID: 0}
-  lastMonthCosts: 0
-  lastMonthRevenue: 0
-  lifetimeRevenue: 0
-  perks: []
-  _items: []
-  PerfHistory:
-    Size: 24
+  QuarterlyPerfHistory:
+    Size: 0
     values: []
-  ProductPerfHistory:
-    Size: 24
-    values: []
-  WorkerPerfHistory:
-    Size: 24
-    values: []
-  AnnualPerfHistory:
-    Size: 10
-    values: []
-  bonuses:
-    unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      perks: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-      duration: 0
-      type: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-        duration: 0
-        type: 0
-      publicity:
-        name: Publicity
-        value: 0
-        duration: 0
-        type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    productEffects: []
-    workerEffects: []
-  specialtyVerticals: []
-  specialtyProductTypes: []
-  startWorkers: []
-  startProducts: []
-  startLocations:
-  - {fileID: 11400000, guid: f86eeac89cb544f81a5f9c6a0392d39f, type: 2}
-  - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
-  aggression: 0
-  cooperativeness: 0
-  luck: 0
+  disabled: 0
+  productLimit: 0
   description: A titan of biotechnology.
   unlocked:
     productTypes:
@@ -171,9 +126,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers: []
-    items: []
     perks: []
-    stores: 
     locations: []
     verticals:
     - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
@@ -182,3 +135,44 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
     - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
     promos: []
+    recruitments: []
+    companies: []
+  bonuses:
+    unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+  specialtyVerticals: []
+  specialtyProductTypes: []
+  startLocations:
+  - {fileID: 11400000, guid: f86eeac89cb544f81a5f9c6a0392d39f, type: 2}
+  - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}

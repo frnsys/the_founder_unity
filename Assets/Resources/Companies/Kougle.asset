@@ -81,6 +81,7 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+  slogan: 
   _workers: []
   founders:
   - {fileID: 11400000, guid: 0ab767c1bb4844094941e8183d595fe4, type: 2}
@@ -119,7 +120,6 @@ MonoBehaviour:
   disabled: 0
   productLimit: 0
   description: A powerful information retrieval and search company.
-  slogan: 
   unlocked:
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}

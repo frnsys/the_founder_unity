@@ -5,7 +5,6 @@ using System.Collections;
 // world that should launch a window.
 public class UIOfficeObject : MonoBehaviour {
     public GameObject window;
-    public float duration = 1.0F;
 
     void OnClick() {
         UIManager.Instance.OpenPopup(window);

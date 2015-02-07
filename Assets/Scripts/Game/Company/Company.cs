@@ -441,12 +441,16 @@ public class Company : HasStats {
     // ===============================================
     public List<Perk> perks;
 
+    static public event System.Action<Perk> PerkBought;
     public bool BuyPerk(Perk perk) {
         perk = perk.Clone();
         if (Pay(perk.cost)) {
             perks.Add(perk);
             perk.upgradeLevel = 0;
             perk.effects.Apply(this);
+
+            if (PerkBought != null)
+                PerkBought(perk);
             return true;
         }
         return false;
@@ -461,6 +465,9 @@ public class Company : HasStats {
             // Upgrade.
             perk.upgradeLevel++;
             perk.effects.Apply(this);
+
+            if (PerkBought != null)
+                PerkBought(perk);
             return true;
         }
         return false;
