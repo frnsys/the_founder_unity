@@ -79,6 +79,10 @@ public class EventManager : MonoBehaviour {
             if (ev.ConditionsSatisfied(data.company)) {
                 // Trigger the event, with a delay.
                 StartCoroutine(TriggerSpecialEvent(ev));
+
+                // Remove it now though so that it doesn't re-trigger.
+                if (!ev.repeatable)
+                    data.specialEventsPool.Remove(ev);
                 break;
             }
         }
@@ -88,6 +92,5 @@ public class EventManager : MonoBehaviour {
     IEnumerator TriggerSpecialEvent(GameEvent ev) {
         yield return new WaitForSeconds(45f);
         GameEvent.Trigger(ev);
-        data.specialEventsPool.Remove(ev);
     }
 }

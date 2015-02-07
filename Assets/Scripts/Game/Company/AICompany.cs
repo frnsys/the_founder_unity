@@ -189,11 +189,12 @@ public class AICompany : Company {
             avgROI = workers.Average(w => WorkerROI(w));
 
             // Review all hired workers (this should not include the founder(s)).
-            foreach (Worker w in workers) {
-                float ROI = WorkerROI(w);
+            List<Worker> toFire = new List<Worker>();
+            for (int i = workers.Count - 1; i >= 0; i--) {
+                float ROI = WorkerROI(workers[i]);
                 if (ROI < avgROI * 0.8f) {
-                    Debug.Log(name + " is firing a worker...");
-                    FireWorker(w);
+                    Debug.Log(string.Format("{0} is firing {1}...", name, workers[i].name));
+                    FireWorker(workers[i]);
                 }
             }
         }

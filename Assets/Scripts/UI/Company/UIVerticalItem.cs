@@ -17,7 +17,7 @@ public class UIVerticalItem : MonoBehaviour {
                 cost.text = "operating in this vertical";
                 expandButton.SetActive(false);
             } else {
-                cost.text = string.Format("{0:C0", vertical_.cost);
+                cost.text = string.Format("{0:C0}", vertical_.cost);
             }
         }
     }
