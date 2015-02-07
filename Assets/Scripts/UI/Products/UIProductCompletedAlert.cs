@@ -29,8 +29,7 @@ public class UIProductCompletedAlert: UIEffectAlert {
 
     void Update() {
         // Rotate the product, fancy.
-        float rotation = productObject.transform.rotation.z;
-        productObject.transform.Rotate(0,0,rotation - 1.5f);
+        productObject.transform.Rotate(0,0,0.5f);
     }
 }
 

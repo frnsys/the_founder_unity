@@ -21,6 +21,7 @@ internal class MiniCompanyInspector : Editor {
         i.logo = (Texture)EditorGUILayout.ObjectField("Texture", i.logo, typeof(Texture), false);
         i.baseCost = EditorGUILayout.FloatField("Base Cost", i.baseCost);
         i.revenue = EditorGUILayout.FloatField("Revenue", i.revenue);
+        i.aiCompany = (AICompany)EditorGUILayout.ObjectField("Associated AI Company", i.aiCompany, typeof(AICompany), false);
 
         if (i.effects == null)
             i.effects = new EffectSet();

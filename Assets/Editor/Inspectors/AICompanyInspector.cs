@@ -19,8 +19,9 @@ internal class AICompanyInspector : Editor {
         EditorStyles.textField.wordWrap = true;
         c.name = EditorGUILayout.TextField("Name", c.name);
         EditorGUILayout.LabelField("Description");
-        c.disabled = EditorGUILayout.Toggle("Starts Disabled", c.disabled);
         c.description = EditorGUILayout.TextArea(c.description, GUILayout.Height(50));
+        c.slogan = EditorGUILayout.TextField("Slogan", c.slogan);
+        c.disabled = EditorGUILayout.Toggle("Starts Disabled", c.disabled);
         c.baseSizeLimit = EditorGUILayout.IntField("Worker Size Limit", c.baseSizeLimit);
         c.productLimit = EditorGUILayout.IntField("In-Market Product Limit", c.productLimit);
         c.cash.baseValue  = EditorGUILayout.FloatField("Starting Cash", c.cash.baseValue);

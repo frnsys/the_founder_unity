@@ -130,9 +130,8 @@ public class UIManager : Singleton<UIManager> {
 
         // If it is a competitor's product, show it as an "ad".
         } else {
-            // Temporary disabling since it's annoying.
-            //GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);
-            //popup.GetComponent<UIProductAdAlert>().SetProductAndCompany(p, c);
+            GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);
+            popup.GetComponent<UIProductAdAlert>().SetProductAndCompany(p, c);
         }
     }
 
@@ -166,7 +165,8 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnGameLost(Company company) {
-        Alert("Appalled by your inability to maintain the growth they are legally entitled to, the board has forced your resignation. You lose. But you don't really lose. Because you have secured your place in a class shielded from any real consequence or harm. You'll be fine. You could always found another company.");
+        Alert("Appalled by your inability to maintain the growth they are legally entitled to, the board has forced your resignation. You lose.");
+        Alert("But you don't really lose. Because you have secured your place in a class shielded from any real consequence or harm. You'll be fine. You could always found another company.");
     }
 
     [HideInInspector]

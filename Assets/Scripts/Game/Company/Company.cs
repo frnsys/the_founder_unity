@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 public class Company : HasStats {
     public Stat cash;
     public List<EffectSet> activeEffects;
+    public string slogan;
 
     public Company(string name_) {
         name = name_;

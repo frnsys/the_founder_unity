@@ -28,8 +28,7 @@ public class UIUpgradePerk : UIEffectAlert {
 
     void Update() {
         // Rotate the product, fancy.
-        float rotation = perkObj.transform.rotation.z;
-        perkObj.transform.Rotate(0,0,rotation - 1.5f);
+        perkObj.transform.Rotate(0,0,0.5f);
     }
 
     public Action callback;

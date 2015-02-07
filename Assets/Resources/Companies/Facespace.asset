@@ -14,20 +14,6 @@ MonoBehaviour:
   cash:
     baseValue: 2e+07
     _buffs: []
-  researchCzar: {fileID: 0}
-  research:
-    baseValue: 1
-    _buffs: []
-  researchInvestment: 0
-  opinionCzar: {fileID: 0}
-  opinion:
-    baseValue: 1
-    _buffs: []
-  publicity:
-    baseValue: 0
-    _buffs: []
-  forgettingRate: 1
-  opinionEvents: []
   activeEffects:
   - unlocks:
       productTypes: []
@@ -95,40 +81,45 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
-  markets: 
-  technologies: []
-  baseSizeLimit: 5
+  _workers: []
   founders:
   - {fileID: 11400000, guid: 7a24a2d119ca144fb80a9566a69cdab0, type: 2}
-  _workers: []
+  baseSizeLimit: 5
   _locations: []
+  markets: 
   _verticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   products: []
   developingPromo: {fileID: 0}
   developingRecruitment: {fileID: 0}
-  lastMonthCosts: 0
   lastMonthRevenue: 0
   quarterRevenue: 0
   quarterCosts: 0
   lifetimeRevenue: 0
   companies: []
   perks: []
-  PerfHistory:
-    Size: 24
-    values: []
-  ProductPerfHistory:
-    Size: 24
-    values: []
-  WorkerPerfHistory:
-    Size: 24
-    values: []
+  opinionCzar: {fileID: 0}
+  opinion:
+    baseValue: 1
+    _buffs: []
+  publicity:
+    baseValue: 0
+    _buffs: []
+  forgettingRate: 1
+  opinionEvents: []
+  researchCzar: {fileID: 0}
+  research:
+    baseValue: 1
+    _buffs: []
+  researchInvestment: 0
+  technologies: []
   QuarterlyPerfHistory:
     Size: 0
     values: []
   disabled: 1
   productLimit: 0
   description: The space for your digital face.
+  slogan: 
   unlocked:
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}

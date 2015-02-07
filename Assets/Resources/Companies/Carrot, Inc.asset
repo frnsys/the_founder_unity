@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2caad3cadff8c41b9bbabba4ad7e0d5b, type: 3}
-  m_Name: Carrot, Inc.
+  m_Name: Carrot, Inc
   m_EditorClassIdentifier: 
   cash:
     baseValue: 2e+07
@@ -81,6 +81,7 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+  slogan: Our products will change your life. And you'll change the world
   _workers: []
   founders:
   - {fileID: 11400000, guid: b0c61bd457c02476e8f7ef70478326b1, type: 2}
