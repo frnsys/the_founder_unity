@@ -72,9 +72,6 @@ public class GameManager : Singleton<GameManager> {
     [HideInInspector]
     public EventManager eventManager;
 
-    [HideInInspector]
-    public GameConfig config;
-
     // Load existing game data.
     public void Load(GameData d) {
         // Clean up existing managers, if any.
@@ -107,9 +104,6 @@ public class GameManager : Singleton<GameManager> {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
-
-        // Load internal config.
-        config = Resources.Load("GameConfig") as GameConfig;
 
         if (data == null) {
             Load(GameData.New("DEFAULTCORP"));

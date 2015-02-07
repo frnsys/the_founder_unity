@@ -25,16 +25,6 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-// For convenience...
-public class ProductCombo {
-    public List<ProductType> pts;
-
-    public ProductCombo(List<ProductType> pts_) {
-        pts = pts_;
-    }
-}
-
-
 [System.Serializable]
 public class AICompany : Company {
     public bool disabled = false;
@@ -61,6 +51,8 @@ public class AICompany : Company {
         }).ToList();
     }
 
+    // Convenience method for locating the in-game version
+    // of an AICompany from an asset version.
     public static AICompany Find(AICompany aic) {
         return companies.Where(a => a.name == aic.name).First();
     }
@@ -100,7 +92,6 @@ public class AICompany : Company {
 
     public void Decide() {
         Debug.Log("AI Company " + name + " is deciding...");
-
         DecideProducts();
         DecideWorkers();
     }
@@ -118,17 +109,16 @@ public class AICompany : Company {
         }
 
         // AI companies basically exist to compete with the player.
+        // Ignore products for which the company already has a matching product.
         List<Product> candidates = new List<Product>();
-        foreach (Product p in playerCompany.activeProducts) {
-            // Ignore the company already has this kind of product.
-            if (FindMatchingProducts(p.productTypes).Count == 0) {
+        foreach (Product p in playerCompany.activeProducts
+                .Where(p => FindMatchingProducts(p.productTypes).Count == 0)) {
                 candidates.Add(p);
-            }
         }
 
         // If we found some candidates,
         if (candidates.Count > 0) {
-            // Rank them candidates and pick one.
+            // Rank the candidates and pick one.
             foreach (Product p in candidates.OrderBy(p => ScoreProduct(p))) {
                 Debug.Log(name + " is starting a new competing product...");
                 // TO DO these should be actual design, marketing, engineering values.
@@ -141,11 +131,9 @@ public class AICompany : Company {
         // create a random specialty product.
         } else {
             // TO DO avoid creating duplicate products.
-            ProductCombo pc = RandomSpecialtyProduct();
-            Debug.Log(name + " is starting a new product...");
-
             // TO DO these should be actual design, marketing, engineering values.
-            StartNewProduct(pc.pts, 3, 3, 3);
+            Debug.Log(name + " is starting a new product...");
+            StartNewProduct(RandomSpecialtyProduct(), 3, 3, 3);
         }
 
     }
@@ -165,7 +153,7 @@ public class AICompany : Company {
     }
 
     // Generate a random product combo based on this company's specialties. If no specialties are available for the aspect, a random unlocked one is chosen.
-    private ProductCombo RandomSpecialtyProduct() {
+    private List<ProductType> RandomSpecialtyProduct() {
         List<ProductType> pts = new List<ProductType>();
 
         // Number of product types to use.
@@ -181,7 +169,7 @@ public class AICompany : Company {
             }
         }
 
-        return new ProductCombo(pts);
+        return pts;
     }
 
 
