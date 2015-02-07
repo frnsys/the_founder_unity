@@ -66,7 +66,7 @@ public class UIGameEventNotification: UIEffectAlert {
         }
     }
 
-    public void Extend(int amount) {
+    protected override void Extend(int amount) {
         int current = body.bottomAnchor.absolute;
         body.bottomAnchor.Set(title.transform, 0, current - amount);
 

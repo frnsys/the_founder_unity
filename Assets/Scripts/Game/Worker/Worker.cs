@@ -19,8 +19,6 @@ public class Worker : HasStats {
         }).ToList();
     }
 
-    private Levels levels;
-
     // The worker's avatar in the game world.
     public GameObject avatar;
 
@@ -34,9 +32,7 @@ public class Worker : HasStats {
     public float hiringFee {
         get {
             // For robots, the baseMinSalary is the one-time cost.
-            if (robot)
-                return baseMinSalary;
-            return salary * 0.1f;
+            return robot ? baseMinSalary : salary * 0.1f;
         }
     }
     public float monthlyPay {
@@ -132,25 +128,9 @@ public class Worker : HasStats {
 
         offMarketTime = 0;
         recentPlayerOffers = 0;
-        //levels     = this.gameObject.GetComponent<Levels>();
 
         bio = Worker.BuildBio(this);
         return this;
-    }
-
-    public void OnEnable() {
-        if (levels) {
-            levels.LevelUp += LeveledUp;
-        }
-    }
-    public void OnDisable() {
-        if (levels) {
-            levels.LevelUp -= LeveledUp;
-        }
-    }
-
-    void LeveledUp(int level) {
-        //print("Leveled");
     }
 
     public override Stat StatByName(string name) {

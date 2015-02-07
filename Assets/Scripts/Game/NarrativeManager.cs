@@ -11,6 +11,19 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     private GameData data;
     private OnboardingState ob;
 
+    [System.Serializable]
+    public struct OnboardingState {
+        public bool FIRST_PRODUCT_LAUNCHED;
+        public bool FIRST_WORKER_HIRED;
+        public bool MARKET_UNLOCKED;
+        public bool RESEARCH_UNLOCKED;
+        public bool PRODUCT_COMBOS_UNLOCKED;
+        public bool RESEARCH_OPENED;
+        public bool COMMS_UNLOCKED;
+        public bool VERTICALS_UNLOCKED;
+        public bool WORKER_LIMIT_REACHED;
+    }
+
     // Disable the constructor.
     protected NarrativeManager() {}
 
@@ -36,7 +49,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     public void Load(GameData d) {
         data = d;
-        ob = d.onboardingState;
     }
 
     // A message from your mentor.

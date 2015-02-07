@@ -9,6 +9,8 @@ public class MiniCompany : SharedResource<MiniCompany> {
     public Texture logo;
     public float revenue;
     public EffectSet effects = new EffectSet();
+
+    // MiniCompanies can be associated with AICompanies.
     public AICompany aiCompany = null;
 
     public float cost {

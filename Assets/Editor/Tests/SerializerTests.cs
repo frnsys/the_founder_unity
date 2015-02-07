@@ -33,7 +33,6 @@ namespace UnityTest
                 data.company.founders.Add(CreateFounder("STEVE", 100));
                 data.company.baseSizeLimit       = 17;
                 data.company.lastMonthRevenue    = 28517;
-                data.company.lastMonthCosts      = 14789;
                 data.company.cash.baseValue      = 100000000;
                 data.company.ResearchCzar        = researchCzar;
                 data.company.OpinionCzar         = opinionCzar;
@@ -141,8 +140,6 @@ namespace UnityTest
             Assert.AreEqual(gd.company.baseSizeLimit,      data.company.baseSizeLimit);
             Assert.AreEqual(gd.company.infrastructure,     data.company.infrastructure);
             Assert.AreEqual(gd.company.lastMonthRevenue,   data.company.lastMonthRevenue);
-            Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
-            Assert.AreEqual(gd.company.lastMonthCosts,     data.company.lastMonthCosts);
             Assert.AreEqual(gd.company.research.value,     data.company.research.value);
             Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
             Assert.AreEqual(gd.company.publicity.value,    data.company.publicity.value);

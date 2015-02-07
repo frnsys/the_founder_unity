@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIManageResearch : UIFullScreenPager {
-    private Company company;
     private ResearchManager rm;
 
     public GameObject techPrefab;
@@ -13,7 +12,6 @@ public class UIManageResearch : UIFullScreenPager {
     public UIProgressBar progress;
 
     void OnEnable() {
-        company = GameManager.Instance.playerCompany;
         rm = GameManager.Instance.researchManager;
         LoadTechs();
     }

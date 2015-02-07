@@ -19,7 +19,7 @@ public class UIWorkers : UIWindow {
     }
 
     void Update() {
-        wpLabel.text = playerCompany.workers.Count + "/" + playerCompany.sizeLimit.ToString() + " workers";
+        wpLabel.text = string.Format("{0}/{1} workers", playerCompany.workers.Count, playerCompany.sizeLimit);
     }
 
     public void ShowHireWorkers() {

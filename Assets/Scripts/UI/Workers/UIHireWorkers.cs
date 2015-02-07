@@ -20,7 +20,7 @@ public class UIHireWorkers : UIFullScreenPager {
     public void HireRobotWorker(Worker worker) {
         if (company.remainingSpace > 0) {
             UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
-            ic.SetRobotWorker("The " + worker.name + " model costs:", worker.baseMinSalary);
+            ic.SetRobotWorker(string.Format("The {0} model costs", worker.name), worker.baseMinSalary);
 
             UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
                 ic.Close_();

@@ -39,11 +39,11 @@ public class UIMiniCompany : UIEffectItem {
 
     public void DecideBuy(GameObject obj) {
         UIManager.Instance.Confirm("Acquiring " + _company.name + " will cost you " + costLabel.text, delegate() {
-                if (playerCompany.BuyCompany(_company)) {
-                    company = _company;
-                } else {
-                    UIManager.Instance.Alert("You can't afford to acquire this company.");
-                }
+            if (playerCompany.BuyCompany(_company)) {
+                company = _company;
+            } else {
+                UIManager.Instance.Alert("You can't afford to acquire this company.");
+            }
         }, null);
     }
 }

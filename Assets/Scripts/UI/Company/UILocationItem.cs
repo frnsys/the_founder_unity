@@ -24,7 +24,7 @@ public class UILocationItem : MonoBehaviour {
             capacity.text = "";
             ShowInfrastructure();
         } else {
-            cost.text = "$" + location_.cost.ToString();
+            cost.text = string.Format("{0:C0}", location_.cost);
             expandButton.SetActive(true);
             grid.gameObject.SetActive(false);
             capacity.text = "Adds capacity for:\n" + location_.capacity.ToString();
@@ -64,7 +64,7 @@ public class UILocationItem : MonoBehaviour {
             if (location.capacity[t] == 0) {
                 infItem.gameObject.SetActive(false);
             } else {
-                infItem.costLabel.text = "$" + location.capacity.baseCosts[t].ToString() + "/mo each";
+                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t]);
 
                 // Setup button actions.
                 Infrastructure.Type lT = t;
@@ -98,15 +98,13 @@ public class UILocationItem : MonoBehaviour {
         // Update the amount of infrastructure against the total capacity.
         foreach (UIInfrastructureItem infItem in infItems) {
             Infrastructure.Type t = infItem.type;
-            infItem.usedAndCapacityLabel.text = infra[t].ToString() + "/" +  capacity[t].ToString();
+            infItem.usedAndCapacityLabel.text = string.Format("{0}/{1}", infra[t], capacity[t]);
         }
     }
 
     private void UpdateButtons() {
-        Infrastructure capacity = location.capacity;
-        Infrastructure infra    = location.infrastructure;
-
         // Update the buy/destroy buttons for infrastructure (disable/enable them).
+        Infrastructure infra    = location.infrastructure;
         foreach (UIInfrastructureItem infItem in infItems) {
             Infrastructure.Type t = infItem.type;
             Infrastructure inf = Infrastructure.ForType(t);

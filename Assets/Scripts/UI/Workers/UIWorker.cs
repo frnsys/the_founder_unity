@@ -16,11 +16,15 @@ public class UIWorker : MonoBehaviour {
         set {
             worker_ = value;
             name.text = worker_.name;
-            bio.text = worker_.description + " " + worker_.bio;
+
+            if (worker_.description != "")
+                bio.text = string.Format("{0} {1}", worker_.description, worker_.bio);
+            else
+                bio.text = worker_.bio;
 
             Company employer = GameManager.Instance.workerManager.EmployerForWorker(worker_);
             if (employer != null)
-                title.text = worker_.title + " at " + employer.name;
+                title.text = string.Format("{0} at {1}", worker_.title, employer.name);
             else
                 title.text = worker_.title;
 
@@ -30,11 +34,11 @@ public class UIWorker : MonoBehaviour {
                 credit.gameObject.SetActive(false);
             }
 
-            creativity.text = "Creativity: " + worker_.creativity;
-            charisma.text = "Charisma: " + worker_.charisma;
-            cleverness.text = "Cleverness: " + worker_.cleverness;
-            productivity.text = "Productivity: " + worker_.productivity;
-            happiness.text = "Happiness: " + worker_.happiness;
+            creativity.text = string.Format("Creativity: {0}", worker_.creativity);
+            charisma.text = string.Format("Charisma: {0}", worker_.charisma);
+            cleverness.text = string.Format("Cleverness: ", worker_.cleverness);
+            productivity.text = string.Format("Productivity: ", worker_.productivity);
+            happiness.text = string.Format("Happiness: ", worker_.happiness);
         }
     }
 
@@ -46,11 +50,11 @@ public class UIWorker : MonoBehaviour {
     // Imprecise worker info.
     public void SetFuzzyWorker(Worker w) {
         worker = w;
-        creativity.text = "Creativity: " + FuzzyStat(worker_.creativity.value).ToString();
-        charisma.text = "Charisma: " + FuzzyStat(worker_.charisma.value).ToString();
-        cleverness.text = "Cleverness: " + FuzzyStat(worker_.cleverness.value).ToString();
-        productivity.text = "Productivity: " + FuzzyStat(worker_.productivity.value).ToString();
-        happiness.text = "Happiness: " + FuzzyStat(worker_.happiness.value).ToString();
+        creativity.text = string.Format("Creativity: {0}", FuzzyStat(worker_.creativity));
+        charisma.text = string.Format("Charisma: {0}", FuzzyStat(worker_.charisma));
+        cleverness.text = string.Format("Cleverness: ", FuzzyStat(worker_.cleverness));
+        productivity.text = string.Format("Productivity: ", FuzzyStat(worker_.productivity));
+        happiness.text = string.Format("Happiness: ", FuzzyStat(worker_.happiness));
         credit.text += ". Disclaimer: This is a beta, expect some margin of error.";
         quantObj.SetActive(true);
     }
@@ -60,8 +64,8 @@ public class UIWorker : MonoBehaviour {
         quantObj.SetActive(true);
     }
 
-    private int FuzzyStat(float value) {
-        double fuzzy = (0.6 + Random.value) * value;
+    private int FuzzyStat(Stat stat) {
+        double fuzzy = (0.6 + Random.value) * stat.value;
         return (int)fuzzy;
     }
 

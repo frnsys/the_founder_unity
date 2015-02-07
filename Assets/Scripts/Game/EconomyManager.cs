@@ -26,7 +26,7 @@ public class EconomyManager : Singleton<EconomyManager> {
                 economyChangeProbability = 0.1f;
                 break;
             case Economy.Neutral:
-                economyChangeProbability = 0.05f;
+                economyChangeProbability = 0.005f;
                 break;
             case Economy.Expansion:
                 economyChangeProbability = 0.16f;

@@ -9,11 +9,11 @@ public class UIDirectorCandidate : MonoBehaviour {
             worker_ = value;
             name.text = worker_.name;
 
-            creativity.text = "Creativity: " + worker_.creativity;
-            charisma.text = "Charisma: " + worker_.charisma;
-            cleverness.text = "Cleverness: " + worker_.cleverness;
-            productivity.text = "Productivity: " + worker_.productivity;
-            happiness.text = "Happiness: " + worker_.happiness;
+            creativity.text = string.Format("Creativity: {0}", worker_.creativity);
+            charisma.text = string.Format("Charisma: {0}", worker_.charisma);
+            cleverness.text = string.Format("Cleverness: ", worker_.cleverness);
+            productivity.text = string.Format("Productivity: ", worker_.productivity);
+            happiness.text = string.Format("Happiness: ", worker_.happiness);
         }
     }
 

@@ -51,9 +51,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public List<AICompany> activeAICompanies {
-        get {
-            return data.otherCompanies.FindAll(a => !a.disabled);
-        }
+        get { return data.otherCompanies.FindAll(a => !a.disabled); }
     }
 
     // Other managers.
@@ -71,9 +69,6 @@ public class GameManager : Singleton<GameManager> {
 
     [HideInInspector]
     public EventManager eventManager;
-
-    [HideInInspector]
-    public GameConfig config;
 
     // Load existing game data.
     public void Load(GameData d) {
@@ -102,14 +97,11 @@ public class GameManager : Singleton<GameManager> {
         researchManager.Load(d);
         narrativeManager.Load(d);
 
-        AICompany.companies = data.otherCompanies;
+        AICompany.all = data.otherCompanies;
     }
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
-
-        // Load internal config.
-        config = Resources.Load("GameConfig") as GameConfig;
 
         if (data == null) {
             Load(GameData.New("DEFAULTCORP"));
@@ -155,9 +147,9 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(OpinionCycle());
         StartCoroutine(EventCycle());
 
-        // We only load this here because the UIOfficeViewManager
+        // We only load this here because the UIOfficeManager
         // doesn't exist until the game starts.
-        UIOfficeViewManager.Instance.Load(data);
+        UIOfficeManager.Instance.Load(data);
     }
 
     void OnEvent(GameEvent e) {
@@ -169,7 +161,6 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void OnProductCompleted(Product p, Company c) {
-        // TO DO this should apply to the AI company as well.
         if (c == data.company)
             ApplyEffectSet(p.effects);
     }
@@ -205,8 +196,6 @@ public class GameManager : Singleton<GameManager> {
         get { return int.Parse(string.Format("{0}{1}{2}", year, numMonth, week)); }
     }
 
-
-
     public void Pause() {
         Time.timeScale = 0;
     }
@@ -234,14 +223,12 @@ public class GameManager : Singleton<GameManager> {
         int monthTime = weekTime*4;
         yield return new WaitForSeconds(monthTime);
         while(true) {
-
             if (data.month == Month.December) {
                 data.month = Month.January;
             } else {
                 data.month++;
             }
 
-            playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
 
             if ((int)data.month % 3 == 0) {

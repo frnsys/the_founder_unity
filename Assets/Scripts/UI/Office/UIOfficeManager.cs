@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class UIOfficeViewManager : Singleton<UIOfficeViewManager> {
+public class UIOfficeManager : Singleton<UIOfficeManager> {
     private GameData data;
     private Company company;
 

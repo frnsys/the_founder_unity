@@ -25,7 +25,6 @@ public class UIHUD : MonoBehaviour {
     void OnEnable() {
         gm = GameManager.Instance;
         company = gm.playerCompany;
-
         StartCoroutine(UpdateHUD());
     }
 

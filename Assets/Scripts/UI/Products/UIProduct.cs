@@ -76,7 +76,7 @@ public class UIProduct : UIEffectItem {
         if (product_.developing) {
             progress.value = product_.progress;
         } else {
-            status.text = "$" + ((int)product_.revenueEarned).ToString();
+            status.text = string.Format("{0:C0}", product_.revenueEarned);
         }
     }
 

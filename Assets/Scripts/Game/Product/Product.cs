@@ -11,16 +11,9 @@ public class Product : HasStats {
         RETIRED
     }
 
-    // For generating product names.
-    private static string[] prefixes;
-    private static string[] endings;
-
     public string description {
         get {
-            if (recipe.description != null)
-                return recipe.description;
-            else
-                return "There's not a lot to say about this product.";
+            return recipe.description != null ? recipe.description : "There's not a lot to say about this product.";
         }
     }
 
@@ -37,26 +30,19 @@ public class Product : HasStats {
         get { return _progress/requiredProgress; }
     }
 
-
     public float marketScore = 0;
     public float marketShare = 0;
 
     public Mesh mesh {
         get {
-            if (recipe.mesh)
-                return recipe.mesh;
-
             // Fallback to first product type's mesh.
-            return productTypes[0].mesh;
+            return recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
         }
     }
     public Texture texture {
         get {
-            if (recipe.texture)
-                return recipe.texture;
-
             // Fallback to first product type's texture.
-            return productTypes[0].texture;
+            return recipe.texture != null ? recipe.texture : productTypes[0].texture;
         }
     }
 
@@ -72,10 +58,6 @@ public class Product : HasStats {
     // has less infrastructure than necessary to support it.
     // A disabled product generates no revenue and does not continue developing.
     public bool disabled = false;
-
-    // If the product was ever released (even if it has been shutdown),
-    // this is true.
-    public bool released = false;
 
     // Infrastructure, in points, used by the product.
     public int points {
@@ -200,7 +182,7 @@ public class Product : HasStats {
     static public event System.Action<Product, Company> Completed;
 
     public bool Develop(float newProgress, Company company) {
-        if (state == State.DEVELOPMENT && !disabled) {
+        if (developing && !disabled) {
             _progress += newProgress;
 
             if (_progress >= requiredProgress) {
@@ -283,10 +265,10 @@ public class Product : HasStats {
         // Revenue model params:
 
         // Lower is better (more explosive growth).
-        start_sd = Utils.LimitRange(1/combo, 0.25f, 3.5f);
+        start_sd = LimitRange(1/combo, 0.25f, 3.5f);
 
         // Higher is better (slower decline).
-        end_sd = Utils.LimitRange(combo, 0.25f, 3.5f);
+        end_sd = LimitRange(combo, 0.25f, 3.5f);
 
         // Time where the plateau begins, see comments above for rationale.
         start_mu = 3 * start_sd;
@@ -299,13 +281,13 @@ public class Product : HasStats {
         end_mu = start_mu + longevity;
 
         // Calculate the peak revenue percentage for the plateau.
-        peakRevenuePercent = Utils.Gaussian(start_mu, start_mu, start_sd);
+        peakRevenuePercent = Gaussian(start_mu, start_mu, start_sd);
 
         // Calculate the constant required to vertically shift the
         // end function so that it's peak intersects with the starting peak.
         // We apply an extra downward weight at the end (0.05f*end_mu)
         // to ensure that the end function eventually intersects the x-axis (reaches 0).
-        float endPeak = Utils.Gaussian(end_mu, end_mu, end_sd) - (0.05f * end_mu);
+        float endPeak = Gaussian(end_mu, end_mu, end_sd) - (0.05f * end_mu);
         endFuncAdjustment = peakRevenuePercent - endPeak;
 
         //Debug.Log("START_SD:" + start_sd);
@@ -322,18 +304,18 @@ public class Product : HasStats {
         timeSinceLaunch += elapsedTime;
 
         float revenuePercent = 0;
-        if (state == State.LAUNCHED && !disabled) {
+        if (launched && !disabled) {
 
             // Start
             if (timeSinceLaunch < start_mu) {
-                revenuePercent = Utils.Gaussian(timeSinceLaunch, start_mu, start_sd);
+                revenuePercent = Gaussian(timeSinceLaunch, start_mu, start_sd);
                 //Debug.Log("START FUNC");
 
             // End
             } else if (timeSinceLaunch > end_mu) {
                 // We apply an extra downward weight at the end (0.05f*timeSinceLaunch)
                 // to ensure that the end function eventually intersects the x-axis (reaches 0).
-                revenuePercent = Utils.Gaussian(timeSinceLaunch, end_mu, end_sd) + endFuncAdjustment - (0.05f * timeSinceLaunch);
+                revenuePercent = Gaussian(timeSinceLaunch, end_mu, end_sd) + endFuncAdjustment - (0.05f * timeSinceLaunch);
                 //Debug.Log("END FUNC");
 
             // Plateau
@@ -389,7 +371,7 @@ public class Product : HasStats {
     // Progress required for the nth point.
     public static int baseProgress = 500;
     public float ProgressRequired(string feature, int n, Company c) {
-        float reqProgress = Utils.Fibonacci(n+2) * baseProgress;
+        float reqProgress = Fibonacci(n+2) * baseProgress;
         float aggStat = 0;
         reqProgress *= difficulty;
 
@@ -438,6 +420,22 @@ public class Product : HasStats {
         float aggProductivity = c.AggregateWorkerStat("Productivity");
         float reqProgress = ProgressRequired(feature, n, c);
         return (int)((reqProgress/aggProductivity) * GameManager.CycleTime);
+    }
+
+
+    private static int Fibonacci(int n) {
+        if (n == 0)
+            return 0;
+        else if (n == 1)
+            return 1;
+        else
+            return Fibonacci(n-1) + Fibonacci(n-2);
+    }
+    private static float Gaussian(float x, float mean, float sd) {
+        return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
+    }
+    private static float LimitRange(float value, float min, float max) {
+        return (value < min) ? min : (value > max) ? max : value;
     }
 }
 

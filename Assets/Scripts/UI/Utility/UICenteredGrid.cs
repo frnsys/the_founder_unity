@@ -15,7 +15,6 @@ public class UICenteredGrid : UIWidget {
 
 	[ContextMenu("Execute")]
     public void Reposition() {
-        Bounds bounds = CalculateBounds();
         List<Transform> children = GetChildren(transform);
 
 		for (int i = 0; i < children.Count; ++i) {

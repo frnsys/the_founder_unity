@@ -19,7 +19,7 @@ public class UIFullScreenGrid : UISimpleGrid {
     // z = left
     public Vector4 padding = Vector4.zero;
 
-    void Awake() {
+    protected override void Awake() {
         UICamera.onScreenResize += ScreenSizeChanged;
     }
     void OnDestroy() {
@@ -27,7 +27,7 @@ public class UIFullScreenGrid : UISimpleGrid {
     }
     void ScreenSizeChanged() { SetCells(); }
 
-    void OnEnable() {
+    protected override void OnEnable() {
         SetCells();
     }
 
@@ -75,7 +75,7 @@ public class UIFullScreenGrid : UISimpleGrid {
 		EventDelegate.Execute(OnReposition);
     }
 
-    void Update() {
+    public new void Update() {
         // get rid of base class's update method
     }
 }

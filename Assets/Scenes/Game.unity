@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4178605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd3512bf9471434e85637a9a62f2c57, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d14c087d6a444ac5a67a2abfca8eeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   goalLabel: {fileID: 40650249}
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 127671518}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f1f620707235446aae9160ccfc2e288, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b03b36e779f24085852be07eef9e455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cashLabel: {fileID: 1513043835}
@@ -7023,7 +7023,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1265441294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e4aea8f8873a4d2a8b23d8103996aea, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f1eadd5c2ba44c6fa48b9506f15fe64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 2013164179}
@@ -12988,7 +12988,7 @@ GameObject:
   - 114: {fileID: 2088398873}
   - 114: {fileID: 2088398874}
   m_Layer: 8
-  m_Name: Office Area Manager
+  m_Name: Office Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13059,7 +13059,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2088398871}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f716e790421348f2b86dba952b77c9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 839d51dcfc7fd4285ab02a1c8ccb57f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UICamera: {fileID: 1313245585}

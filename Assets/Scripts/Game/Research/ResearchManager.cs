@@ -26,10 +26,7 @@ public class ResearchManager : MonoBehaviour {
     // Progress towards the technology's completion.
     public float progress {
         get {
-            if (technology != null) {
-                return research / technology.requiredResearch;
-            }
-            return 0;
+            return technology != null ? research / technology.requiredResearch : 0;
         }
     }
 

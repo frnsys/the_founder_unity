@@ -5,13 +5,11 @@ using System.Collections.Generic;
 
 public class UIResearchArchive : UIFullScreenPager {
     private Company company;
-    private ResearchManager rm;
 
     public GameObject techPrefab;
 
     void OnEnable() {
         company = GameManager.Instance.playerCompany;
-        rm = GameManager.Instance.researchManager;
         LoadTechs();
     }
 

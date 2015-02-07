@@ -47,7 +47,7 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
         return string.Join(".", productTypes.Select(pt => pt.name).ToArray());
     }
 
-    public static ProductRecipe Load(string name) {
+    public static new ProductRecipe Load(string name) {
         return Resources.Load("Products/Recipes/" + name) as ProductRecipe;
     }
 

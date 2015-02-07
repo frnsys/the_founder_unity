@@ -16,7 +16,7 @@ public class Vertical : SharedResource<Vertical> {
         return false;
     }
 
-    public static Vertical Load(string name) {
+    public static new Vertical Load(string name) {
         return Resources.Load("Verticals/" + name) as Vertical;
     }
 

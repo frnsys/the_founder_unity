@@ -50,7 +50,7 @@ public class GameData : ScriptableObject {
     public Economy economy;
 
     // Onboarding progress.
-    public OnboardingState onboardingState;
+    public NarrativeManager.OnboardingState onboardingState;
 
     // The state of various universal effects.
     public WorkerInsight workerInsight;

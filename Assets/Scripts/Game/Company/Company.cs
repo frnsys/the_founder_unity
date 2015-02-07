@@ -10,68 +10,16 @@ using System.Collections.ObjectModel;
 [System.Serializable]
 public class Company : HasStats {
     public Stat cash;
-
-    [SerializeField]
-    private Worker researchCzar;
-    public Worker ResearchCzar {
-        get { return researchCzar; }
-        set {
-            researchCzar = value;
-
-            if (value != null) {
-                research.baseValue = researchCzar.cleverness.value;
-            } else {
-                research.baseValue = 0;
-            }
-        }
-    }
-    public Stat research;
-    public float researchInvestment = 1000;
-
-    [SerializeField]
-    private Worker opinionCzar;
-    public Worker OpinionCzar {
-        get { return opinionCzar; }
-        set {
-            opinionCzar = value;
-
-            if (value != null) {
-                opinion.baseValue = opinionCzar.charisma.value;
-            } else {
-                opinion.baseValue = 0;
-            }
-        }
-    }
-    public Stat opinion;
-    public Stat publicity;
-    public float forgettingRate;
-
-    [SerializeField]
-    private List<OpinionEvent> opinionEvents;
-    public ReadOnlyCollection<OpinionEvent> OpinionEvents {
-        get { return opinionEvents.AsReadOnly(); }
-    }
-    public void ForgetOpinionEvents() {
-        foreach (OpinionEvent oe in opinionEvents) {
-            oe.Forget(forgettingRate);
-        }
-    }
-
     public List<EffectSet> activeEffects;
-
-    public List<MarketManager.Market> markets;
 
     public Company(string name_) {
         name = name_;
     }
 
-    public List<Technology> technologies;
-
     public Company Init() {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
-        lastMonthCosts = 0;
         lastMonthRevenue = 0;
         quarterRevenue = 0;
         quarterCosts = 0;
@@ -97,11 +45,6 @@ public class Company : HasStats {
 
         companies = new List<MiniCompany>();
 
-        // Keep track for a quarter.
-        PerfHistory = new PerformanceHistory(3);
-        ProductPerfHistory = new PerformanceHistory(3);
-        WorkerPerfHistory = new PerformanceHistory(3);
-
         // Keep track for 10 quarters.
         QuarterlyPerfHistory = new PerformanceHistory(10);
 
@@ -113,31 +56,28 @@ public class Company : HasStats {
     // Worker Management =============================
     // ===============================================
 
+    [SerializeField]
+    private List<Worker> _workers;
+    public ReadOnlyCollection<Worker> workers {
+        get { return _workers.AsReadOnly(); }
+    }
+    public IEnumerable<Worker> allWorkers {
+        // This does not include czars!
+        get { return _workers.Concat(founders.Cast<Worker>()).Where(w => w != researchCzar && w != opinionCzar); }
+    }
+    public List<Founder> founders;
+
     public int baseSizeLimit;
     public int sizeLimit {
         // You can manage 5 employees at your HQ, other locations are managed by one employee.
         // -1 to account for the starting location.
         get { return baseSizeLimit + locations.Count - 1; }
     }
-    public List<Founder> founders;
-
-    [SerializeField]
-    private List<Worker> _workers;
-
-    public ReadOnlyCollection<Worker> workers {
-        get { return _workers.AsReadOnly(); }
-    }
     public int remainingSpace {
         get { return sizeLimit - _workers.Count; }
     }
 
-    // This does not include czars!
-    public IEnumerable<Worker> allWorkers {
-        get { return _workers.Concat(founders.Cast<Worker>()).Where(w => w != researchCzar && w != opinionCzar); }
-    }
-
     static public event System.Action<Worker, Company> WorkerHired;
-    static public event System.Action<Worker, Company> WorkerFired;
     public bool HireWorker(Worker worker) {
         if (_workers.Count < sizeLimit && Pay(worker.hiringFee)) {
             // Apply existing worker effects.
@@ -160,6 +100,8 @@ public class Company : HasStats {
         }
         return false;
     }
+
+    static public event System.Action<Worker, Company> WorkerFired;
     public void FireWorker(Worker worker) {
         // Remove existing worker effects.
         foreach (EffectSet es in activeEffects) {
@@ -167,7 +109,6 @@ public class Company : HasStats {
         }
 
         worker.salary = 0;
-
         _workers.Remove(worker);
 
         // Update the progress required for developing products.
@@ -206,6 +147,7 @@ public class Company : HasStats {
     public ReadOnlyCollection<Location> locations {
         get { return _locations.AsReadOnly(); }
     }
+    public List<MarketManager.Market> markets;
 
     public bool HasLocation(Location loc) {
         return Location.Find(loc, locations) != null;
@@ -253,37 +195,19 @@ public class Company : HasStats {
 
     public List<Product> products;
     public List<Product> activeProducts {
-        get {
-            return products.FindAll(p => p.state == Product.State.LAUNCHED);
-        }
+        get { return products.FindAll(p => p.launched); }
     }
     public List<Product> developingProducts {
-        get {
-            return products.FindAll(p => p.state == Product.State.DEVELOPMENT);
-        }
+        get { return products.FindAll(p => p.developing); }
     }
     public List<Product> retiredProducts {
-        get {
-            return products.FindAll(p => p.state == Product.State.RETIRED);
-        }
+        get { return products.FindAll(p => p.retired); }
     }
     public List<Product> launchedProducts {
-        get {
-            return products.FindAll(p => p.state != Product.State.DEVELOPMENT);
-        }
+        get { return products.FindAll(p => !p.developing); }
     }
-
-    // Products grouped by state.
-    public List<Product> sortedProducts {
-        get {
-            return developingProducts.Concat(activeProducts).Concat(retiredProducts).ToList();
-        }
-    }
-
     public bool developing {
-        get {
-            return developingProducts.Count > 0;
-        }
+        get { return developingProducts.Count > 0; }
     }
 
     public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
@@ -293,8 +217,7 @@ public class Company : HasStats {
     }
 
     public void DevelopProducts() {
-        List<Product> inDevelopment = products.FindAll(p => p.state == Product.State.DEVELOPMENT);
-        foreach (Product product in inDevelopment) {
+        foreach (Product product in products.Where(p => p.developing)) {
             DevelopProduct(product);
         }
     }
@@ -337,10 +260,8 @@ public class Company : HasStats {
     }
 
     public void HarvestProducts(float elapsedTime) {
-        List<Product> launched = products.FindAll(p => p.state == Product.State.LAUNCHED);
-
         float newRevenue = 0;
-        foreach (Product product in launched) {
+        foreach (Product product in products.Where(p => p.launched)) {
             newRevenue += product.Revenue(elapsedTime, this);
         }
         cash.baseValue += newRevenue;
@@ -386,8 +307,6 @@ public class Company : HasStats {
 
         bool completed = product.Develop(progress, this);
         if (completed) {
-            product.released = true;
-
             // Apply relevant effects to the product
             foreach (EffectSet es in activeEffects) {
                 es.Apply(product);
@@ -426,11 +345,12 @@ public class Company : HasStats {
     // ===============================================
 
     // Keep track of each month's costs.
-    public float lastMonthCosts;
     public float lastMonthRevenue;
     public float quarterRevenue;
     public float quarterCosts;
     public float lifetimeRevenue;
+
+    static public event System.Action<float, string> Paid;
     public void PayMonthly() {
         float toPay = 0;
         float salaries = 0;
@@ -459,22 +379,22 @@ public class Company : HasStats {
         cash.baseValue -= toPay;
 
         // Reset month's costs with this month's costs.
-        lastMonthCosts = toPay;
         quarterCosts += toPay;
 
         // Also reset month's revenues.
         lastMonthRevenue = 0;
 
-        UIManager.Instance.SendPing(string.Format("Paid {0:C0} in salaries.", salaries), Color.red);
-        UIManager.Instance.SendPing(string.Format("Paid {0:C0} in rent.", rent), Color.red);
-        UIManager.Instance.SendPing(string.Format("Paid {0:C0} for research.", researchInvestment), Color.red);
-        UIManager.Instance.SendPing(string.Format("Paid {0:C0} in taxes.", taxes), Color.red);
+        if (Paid != null) {
+            Paid(salaries, "in salaries");
+            Paid(rent, "in rent");
+            Paid(researchInvestment, "for research");
+            Paid(taxes, "in taxes");
+        }
     }
 
     public bool Pay(float cost) {
         if (cash.baseValue - cost >= 0) {
             cash.baseValue -= cost;
-            lastMonthCosts += cost;
             quarterCosts += cost;
             return true;
         }
@@ -509,6 +429,9 @@ public class Company : HasStats {
         lastMonthRevenue += newRevenue;
         quarterRevenue += newRevenue;
         lifetimeRevenue += newRevenue;
+
+        if (Paid != null)
+            Paid(-newRevenue, "from owned companies");
     }
 
     // ===============================================
@@ -552,7 +475,6 @@ public class Company : HasStats {
     // Infrastructure Management =====================
     // ===============================================
 
-    [SerializeField]
     public Infrastructure infrastructure {
         get {
             IEnumerable<Infrastructure> locationInfra = locations.Select(i => i.infrastructure);
@@ -564,19 +486,15 @@ public class Company : HasStats {
 
     // Infrastructure which is available for new products.
     public Infrastructure availableInfrastructure {
-        get {
-            return infrastructure - usedInfrastructure;
-        }
+        get { return infrastructure - usedInfrastructure; }
     }
 
     // Infrastructure which is tied up in existing products.
     public Infrastructure usedInfrastructure {
         get {
             Infrastructure usedInfras = new Infrastructure();
-            foreach (Product p in products) {
-                if (p.state != Product.State.RETIRED) {
-                    usedInfras += p.requiredInfrastructure;
-                }
+            foreach (Product p in products.Where(p => !p.retired)) {
+                usedInfras += p.requiredInfrastructure;
             }
             return usedInfras;
         }
@@ -594,9 +512,7 @@ public class Company : HasStats {
 
     // Infrastructure capacity which is unused.
     public Infrastructure availableInfrastructureCapacity {
-        get {
-            return infrastructureCapacity - infrastructure;
-        }
+        get { return infrastructureCapacity - infrastructure; }
     }
 
     public bool BuyInfrastructure(Infrastructure i, Location loc) {
@@ -615,13 +531,15 @@ public class Company : HasStats {
         UpdateProductStatuses();
     }
 
+    // If you don't have enough infrastructure for your
+    // current products (in-market & developing), they are put on hold.
     private void UpdateProductStatuses() {
         Infrastructure inf = infrastructure;
 
-        // Get all products which are currently using infrastructure.
-        List<Product> supportedProducts = products.FindAll(p => p.state != Product.State.RETIRED);
+        IEnumerable<Product> supportedProducts = products.Where(p => !p.retired);
 
         // Tally up the total infrastructure required to support all products.
+        // Get all products which are currently using infrastructure.
         Infrastructure allInf = new Infrastructure();
         foreach (Product p in supportedProducts) {
             allInf += p.requiredInfrastructure;
@@ -655,52 +573,60 @@ public class Company : HasStats {
 
 
     // ===============================================
+    // Public Opinion ================================
+    // ===============================================
+    [SerializeField]
+    private Worker opinionCzar;
+    public Worker OpinionCzar {
+        get { return opinionCzar; }
+        set {
+            opinionCzar = value;
+            opinion.baseValue = value != null ? opinionCzar.charisma.value : 0;
+        }
+    }
+    public Stat opinion;
+    public Stat publicity;
+    public float forgettingRate;
+
+    [SerializeField]
+    private List<OpinionEvent> opinionEvents;
+    public ReadOnlyCollection<OpinionEvent> OpinionEvents {
+        get { return opinionEvents.AsReadOnly(); }
+    }
+    public void ForgetOpinionEvents() {
+        foreach (OpinionEvent oe in opinionEvents) {
+            oe.Forget(forgettingRate);
+        }
+    }
+
+    // ===============================================
+    // Research ======================================
+    // ===============================================
+    [SerializeField]
+    private Worker researchCzar;
+    public Worker ResearchCzar {
+        get { return researchCzar; }
+        set {
+            researchCzar = value;
+            research.baseValue = value != null ? researchCzar.cleverness.value : 0;
+        }
+    }
+    public Stat research;
+    public float researchInvestment = 1000;
+    public List<Technology> technologies;
+
+
+    // ===============================================
     // Performance Data ==============================
     // ===============================================
 
-    // The Company must surveil its assets to track performance.
-    public void CollectPerformanceData() {
-        Debug.Log(name + " is collecting performance data...");
-
-        PerfHistory.Enqueue(SamplePerformance());
-        ProductPerfHistory.Enqueue(ProductAverages());
-        WorkerPerfHistory.Enqueue(WorkerAverages());
-
-        Debug.Log(PerfHistory);
-        Debug.Log(ProductPerfHistory);
-        Debug.Log(WorkerPerfHistory);
-    }
-
     // Keep track of company performance history as well to try and make decisions.
     [SerializeField]
-    protected PerformanceHistory PerfHistory;
-    [SerializeField]
-    protected PerformanceHistory ProductPerfHistory;
-    [SerializeField]
-    protected PerformanceHistory WorkerPerfHistory;
-    [SerializeField]
     protected PerformanceHistory QuarterlyPerfHistory;
-    protected List<Product> ProductsReleased {
-        get {
-            return products.Where(p => p.released).ToList();
-        }
-    }
     public PerformanceDict lastQuarterPerformance {
         get {
-            int count = QuarterlyPerfHistory.Count;
-            if (count > 0) {
-                return QuarterlyPerfHistory.Last();
-            }
-            return null;
+            return QuarterlyPerfHistory.Count > 0 ? QuarterlyPerfHistory.Last() : null;
         }
-    }
-
-    // These data are sampled every month.
-    private PerformanceDict SamplePerformance() {
-        return new PerformanceDict {
-            {"Month Revenue", lastMonthRevenue},
-            {"Month Costs", lastMonthCosts}
-        };
     }
 
     // Collect aggregate data for the past quarter.
@@ -709,16 +635,7 @@ public class Company : HasStats {
         results["Quarterly Revenue"] = quarterRevenue;
         results["Quarterly Costs"] = quarterCosts;
 
-        float avgPROI = 0;
-        foreach (Product p in ProductsReleased) {
-            // TO DO this could be more detailed.
-            avgPROI += p.revenueEarned/p.points;
-        }
-        results["Product ROI"] = avgPROI/ProductsReleased.Count;
         QuarterlyPerfHistory.Enqueue(results);
-
-        // Reset the products released for the new quarter.
-        ProductsReleased.Clear();
 
         // Compare this quarter's performance to last quarter's (if available).
         PerformanceDict deltas = new PerformanceDict();
@@ -743,66 +660,6 @@ public class Company : HasStats {
 
         return new List<PerformanceDict> { results, deltas };
     }
-
-    private PerformanceDict ProductAverages() {
-        float avgROI = 0;
-
-        if (activeProducts.Count > 0) {
-            foreach (Product p in activeProducts) {
-                avgROI += ProductROI(p);
-            }
-            avgROI /= activeProducts.Count;
-        }
-
-        return new PerformanceDict {
-            {"Average ROI", avgROI}
-        };
-    }
-
-    // Calculate the return on investment for a product,
-    // normalized for time.
-    protected float ProductROI(Product p) {
-        // TO DO tweak this
-        // this should maybe also take into account cash invested
-        // (e.g. rent, salaries, etc)
-        return (p.revenueEarned/p.timeSinceLaunch)/p.points;
-    }
-
-    // Aggregate averages of certain worker stats.
-    private PerformanceDict WorkerAverages() {
-        PerformanceDict results = new PerformanceDict {
-            {"Happiness", 0f},
-            {"Productivity", 0f}
-        };
-        List<string> statNames = results.Keys.ToList();
-
-        if (workers.Count > 0) {
-            float avgROI = 0;
-            foreach (Worker w in workers) {
-                foreach (string stat in statNames) {
-                    results[stat] += w.StatByName(stat).value;
-                }
-                avgROI += WorkerROI(w);
-            }
-
-            foreach (string stat in statNames) {
-                results[stat] /= workers.Count;
-            }
-            results["Average ROI"] = avgROI/workers.Count;
-        } else {
-            results["Average ROI"] = 0;
-        }
-
-        return results;
-    }
-
-    // Calculate the "value" of a worker.
-    protected float WorkerROI(Worker w) {
-        return (w.productivity.value + ((w.charisma.value + w.creativity.value + w.cleverness.value)/3))/(w.salary+w.happiness.value);
-    }
-
-
-
 
     // ===============================================
     // Utility =======================================

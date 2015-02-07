@@ -244,7 +244,7 @@ public class UINewProductFlow : MonoBehaviour {
         if (estimatedTime > 100000 || estimatedTime < 0) {
             label.text = "will take forever";
         } else {
-            label.text = "about " + estimatedTime.ToString() + " seconds";
+            label.text = string.Format("about {0} seconds", estimatedTime);
         }
     }
 
@@ -254,7 +254,7 @@ public class UINewProductFlow : MonoBehaviour {
         if (totalTime > 100000 || totalTime < 0) {
             time = "forever";
         } else {
-            time = "about " + totalTime.ToString() + " seconds";
+            time = string.Format("about {0} seconds", totalTime);
         }
         UIManager.Instance.Confirm("Are you happy with this product configuration? It will take " + time + " to develop.", BeginProductDevelopment_, null);
     }

@@ -7,10 +7,6 @@ using System.Collections.Generic;
 public class ProductType : SharedResource<ProductType> {
     public string description;
 
-    // TO DO i don't think this is being used anymore.
-    // The base amount of progress necessary for finishing the product.
-    public float progressRequired = 1000;
-
     // The difficulty modifier for this product type.
     public float difficulty;
 
@@ -22,7 +18,7 @@ public class ProductType : SharedResource<ProductType> {
         return name;
     }
 
-    public static ProductType Load(string name) {
+    public static new ProductType Load(string name) {
         return Resources.Load("Products/Types/" + name) as ProductType;
     }
 
@@ -30,7 +26,8 @@ public class ProductType : SharedResource<ProductType> {
         return new List<ProductType>(Resources.LoadAll<ProductType>("Products/Types"));
     }
 
-    // Note: we don't have required technologies because a technology is necessary for *unlocking* a product. Technologies don't disappear so it never needs to be checked again after the product is unlocked.
+    // Note: we don't have required technologies because a technology is necessary
+    // for *unlocking* a product. Technologies don't disappear so it never needs to be checked again after the product is unlocked.
     public List<Vertical> requiredVerticals;
     public Infrastructure requiredInfrastructure;
     public bool isAvailable(Company company) {
