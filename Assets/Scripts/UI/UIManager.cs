@@ -73,7 +73,7 @@ public class UIManager : Singleton<UIManager> {
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
         GameManager.GameLost += OnGameLost;
-        Company.Money += OnPaid;
+        Company.Paid += OnPaid;
 
         pendingPings = new Queue<Ping>();
         StartCoroutine(ShowPings());

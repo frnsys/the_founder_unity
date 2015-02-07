@@ -25,7 +25,6 @@ internal class ProductTypeInspector : Editor {
         p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
         p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture), false);
 
-        p.progressRequired = EditorGUILayout.FloatField("Progress Required", p.progressRequired);
         p.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", p.difficulty);
 
         EditorGUILayout.LabelField("Required Verticals");

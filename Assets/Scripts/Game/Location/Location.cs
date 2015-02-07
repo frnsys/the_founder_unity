@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class Location : TemplateResource<Location> {
     public string description;
 
+    // Rotation on the earth.
+    public Vector3 rotation;
     public float cost = 1000000;
     public MarketManager.Market market = MarketManager.Market.NorthAmerica;
 
@@ -19,8 +21,6 @@ public class Location : TemplateResource<Location> {
     public bool HasCapacityFor(Infrastructure i) {
         return availableInfrastructureCapacity >= i;
     }
-
-    public Vector3 rotation;
 
     public static Location Load(string name) {
         Location loc = Resources.Load<Location>("Locations/" + name) as Location;

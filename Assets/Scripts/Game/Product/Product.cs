@@ -30,7 +30,6 @@ public class Product : HasStats {
         get { return _progress/requiredProgress; }
     }
 
-
     public float marketScore = 0;
     public float marketShare = 0;
 
@@ -42,11 +41,8 @@ public class Product : HasStats {
     }
     public Texture texture {
         get {
-            if (recipe.texture)
-                return recipe.texture;
-
             // Fallback to first product type's texture.
-            return productTypes[0].texture;
+            return recipe.texture != null ? recipe.texture : productTypes[0].texture;
         }
     }
 
@@ -186,7 +182,7 @@ public class Product : HasStats {
     static public event System.Action<Product, Company> Completed;
 
     public bool Develop(float newProgress, Company company) {
-        if (state == State.DEVELOPMENT && !disabled) {
+        if (developing && !disabled) {
             _progress += newProgress;
 
             if (_progress >= requiredProgress) {
@@ -308,7 +304,7 @@ public class Product : HasStats {
         timeSinceLaunch += elapsedTime;
 
         float revenuePercent = 0;
-        if (state == State.LAUNCHED && !disabled) {
+        if (launched && !disabled) {
 
             // Start
             if (timeSinceLaunch < start_mu) {
@@ -435,7 +431,6 @@ public class Product : HasStats {
         else
             return Fibonacci(n-1) + Fibonacci(n-2);
     }
-
     private static float Gaussian(float x, float mean, float sd) {
         return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
     }

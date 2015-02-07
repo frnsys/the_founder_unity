@@ -217,8 +217,7 @@ public class Company : HasStats {
     }
 
     public void DevelopProducts() {
-        List<Product> inDevelopment = products.FindAll(p => p.state == Product.State.DEVELOPMENT);
-        foreach (Product product in inDevelopment) {
+        foreach (Product product in products.Where(p => p.developing)) {
             DevelopProduct(product);
         }
     }
@@ -261,10 +260,8 @@ public class Company : HasStats {
     }
 
     public void HarvestProducts(float elapsedTime) {
-        List<Product> launched = products.FindAll(p => p.state == Product.State.LAUNCHED);
-
         float newRevenue = 0;
-        foreach (Product product in launched) {
+        foreach (Product product in products.Where(p => p.launched)) {
             newRevenue += product.Revenue(elapsedTime, this);
         }
         cash.baseValue += newRevenue;
