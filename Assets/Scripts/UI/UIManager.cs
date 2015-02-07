@@ -91,10 +91,7 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnPaid(float amount, string name) {
-        if (amount >= 0)
-            SendPing(string.Format("Paid {0:C0} {1}", amount, name), Color.red);
-        else
-            SendPing(string.Format("Made {0:C0} {1}", -amount, name), Color.green);
+        SendPing(string.Format("Paid {0:C0} {1}", amount, name), Color.red);
     }
 
     // Show an event notification.

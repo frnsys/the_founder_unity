@@ -429,9 +429,6 @@ public class Company : HasStats {
         lastMonthRevenue += newRevenue;
         quarterRevenue += newRevenue;
         lifetimeRevenue += newRevenue;
-
-        if (Paid != null)
-            Paid(-newRevenue, "from owned companies");
     }
 
     // ===============================================
