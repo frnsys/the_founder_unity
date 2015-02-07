@@ -18,7 +18,7 @@ public class Technology : SharedResource<Technology> {
         requiredTechnologies = new List<Technology>();
     }
 
-    public static Technology Load(string name) {
+    public static new Technology Load(string name) {
         return Resources.Load("Technologies/" + name) as Technology;
     }
 

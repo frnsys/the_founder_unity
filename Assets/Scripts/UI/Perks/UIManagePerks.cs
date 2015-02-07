@@ -4,14 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIManagePerks : UIFullScreenPager {
-    private Company company;
     private GameManager gm;
-
     public GameObject perkPrefab;
 
     void OnEnable() {
         gm = GameManager.Instance;
-        company = gm.playerCompany;
         LoadPerks();
     }
 

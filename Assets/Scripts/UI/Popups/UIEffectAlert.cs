@@ -93,7 +93,7 @@ public class UIEffectAlert : UIAlert {
         effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
     }
 
-    public void Extend(int amount) {
+    protected override void Extend(int amount) {
         amount = (amount/2) + 8;
         int currentBottom = body.bottomAnchor.absolute;
         int currentTop = body.topAnchor.absolute;

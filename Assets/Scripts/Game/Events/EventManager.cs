@@ -73,7 +73,6 @@ public class EventManager : MonoBehaviour {
 
     // Evaluate special events to see if conditions have been met.
     public void EvaluateSpecialEvents() {
-        List<GameEvent> toRemove = new List<GameEvent>();
         foreach (GameEvent ev in data.specialEventsPool) {
             // Only show one event, the next one will
             // resolve in the following iteration.

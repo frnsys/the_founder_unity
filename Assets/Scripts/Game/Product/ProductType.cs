@@ -18,7 +18,7 @@ public class ProductType : SharedResource<ProductType> {
         return name;
     }
 
-    public static ProductType Load(string name) {
+    public static new ProductType Load(string name) {
         return Resources.Load("Products/Types/" + name) as ProductType;
     }
 

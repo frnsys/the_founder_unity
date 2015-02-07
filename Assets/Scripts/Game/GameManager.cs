@@ -97,7 +97,7 @@ public class GameManager : Singleton<GameManager> {
         researchManager.Load(d);
         narrativeManager.Load(d);
 
-        AICompany.companies = data.otherCompanies;
+        AICompany.all = data.otherCompanies;
     }
 
     void Awake() {

@@ -4,14 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIAcquisitions : UIFullScreenPager {
-    private Company company;
     private GameManager gm;
-
     public GameObject companyPrefab;
 
     void OnEnable() {
         gm = GameManager.Instance;
-        company = gm.playerCompany;
         LoadCompanies();
     }
 

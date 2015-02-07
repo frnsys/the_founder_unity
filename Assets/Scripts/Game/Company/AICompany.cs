@@ -39,7 +39,7 @@ public class AICompany : Company {
     private Company playerCompany;
 
     // To easily keep track of all AI companies.
-    public static List<AICompany> companies = new List<AICompany>();
+    public static List<AICompany> all = new List<AICompany>();
 
     public static List<AICompany> LoadAll() {
         // Load companies as _copies_ so any changes don't get saved to the actual resources.
@@ -54,7 +54,7 @@ public class AICompany : Company {
     // Convenience method for locating the in-game version
     // of an AICompany from an asset version.
     public static AICompany Find(AICompany aic) {
-        return companies.Where(a => a.name == aic.name).First();
+        return all.Where(a => a.name == aic.name).First();
     }
 
     public AICompany(string name_) : base(name_) {
@@ -66,7 +66,7 @@ public class AICompany : Company {
     }
 
     // Call `Init()` if creating a new AICompany from scratch.
-    public AICompany Init() {
+    public new AICompany Init() {
         base.Init();
 
         // Initialize stuff.
@@ -194,7 +194,7 @@ public class AICompany : Company {
         // to drive up salaries.
         if (workers.Count < sizeLimit) {
             List<Worker> candidates = new List<Worker>();
-            foreach (AICompany c in companies.Where(x => x != this)) {
+            foreach (AICompany c in all.Where(x => x != this)) {
                 foreach (Worker w in c.workers) {
                     if (WorkerROI(w) > avgROI) {
                         candidates.Add(w);

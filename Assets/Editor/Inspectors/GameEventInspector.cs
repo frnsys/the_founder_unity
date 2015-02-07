@@ -9,11 +9,6 @@ internal class GameEventInspector : Editor {
 
     GameEvent ge;
 
-    // Convenience for turning year/month/week into a date.
-    int year = 2001;
-    int month = 1;
-    int week = 1;
-
     void OnEnable() {
         ge = target as GameEvent;
     }

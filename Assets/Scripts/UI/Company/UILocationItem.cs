@@ -103,10 +103,8 @@ public class UILocationItem : MonoBehaviour {
     }
 
     private void UpdateButtons() {
-        Infrastructure capacity = location.capacity;
-        Infrastructure infra    = location.infrastructure;
-
         // Update the buy/destroy buttons for infrastructure (disable/enable them).
+        Infrastructure infra    = location.infrastructure;
         foreach (UIInfrastructureItem infItem in infItems) {
             Infrastructure.Type t = infItem.type;
             Infrastructure inf = Infrastructure.ForType(t);

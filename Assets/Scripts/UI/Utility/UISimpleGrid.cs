@@ -12,7 +12,7 @@ public class UISimpleGrid : UIWidget {
 	public Vector2 childSize = Vector2.zero;
 	public List<EventDelegate> OnReposition;
 
-    void Update() {
+    public new void Update() {
         Reposition();
     }
 
@@ -22,11 +22,9 @@ public class UISimpleGrid : UIWidget {
         List<Transform> children = GetChildren(transform);
 
         int columns = Mathf.FloorToInt(bounds.size.x/childSize.x);
-        int rows = Mathf.CeilToInt(children.Count/(float)columns);
 
         // Calculate the size the grid will have.
         int gridWidth = (int)(columns * childSize.x);
-        int gridHeight = (int)(rows * childSize.y);
 
         // Center the grid horizontally.
         float xShift = childSize.x/2 + (bounds.size.x - gridWidth)/2;
