@@ -17,12 +17,9 @@ public class UIGameEventNotification: UIEffectAlert {
         set {
             gameEvent_ = value;
 
-            Company c = GameManager.Instance.playerCompany;
-            string companyName = c.name;
-
             titleLabel.text = gameEvent_.name;
-            bodyLabel.text = gameEvent_.description.Replace("<PLAYERCOMPANY>", companyName);
-            fromLabel.text = gameEvent_.from.Replace("<PLAYERCOMPANY>", companyName);
+            bodyLabel.text = ProcessText(gameEvent_.description);
+            fromLabel.text = ProcessText(gameEvent_.from);
 
             if (toLabel != null)
                 toLabel.text = "founder@" + companyName + ".com";
@@ -38,6 +35,23 @@ public class UIGameEventNotification: UIEffectAlert {
             // -1 because by default there is space for about 1 effect.
             Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
         }
+    }
+
+    string companyName;
+    string aiCompanyName;
+    string cofounderName;
+    void OnEnable() {
+        GameManager gm = GameManager.Instance;
+        companyName = gm.playerCompany.name;
+        aiCompanyName = gm.activeAICompanies[Random.Range(0, gm.activeAICompanies.Count)].name;
+        cofounderName = gm.playerCompany.founders[0].name;
+    }
+
+    private string ProcessText(string text) {
+        text.Replace("<PLAYERCOMPANY>", companyName);
+        text.Replace("<AICOMPANY>", aiCompanyName);
+        text.Replace("<COFOUNDER>", cofounderName);
+        return text;
     }
 
     private void RenderActions() {

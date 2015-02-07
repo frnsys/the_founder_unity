@@ -293,7 +293,7 @@ public class GameManager : Singleton<GameManager> {
             }
 
             // A random AI company makes a move.
-            activeAICompanies[Random.Range(0, activeAICompanies.Count())].Decide();
+            activeAICompanies[Random.Range(0, activeAICompanies.Count)].Decide();
 
             // Update workers' off market times.
             foreach (Worker w in data.unlocked.workers.Where(w => w.offMarketTime > 0)) {
