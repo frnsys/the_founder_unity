@@ -8,26 +8,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
-  m_Name: New York
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: The World Works For Them
   m_EditorClassIdentifier: 
-  description: New York is hard-working and can play to a variety of industries' needs.
-    Entertainment and information companies are at home here - but at a price.
-  rotation: {x: -53.5999985, y: -166.699997, z: 0}
-  cost: 100
-  market: 0
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 04000000000000000400000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
-  infrastructure:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
+  type: 1
+  description: Latest polls indicate that almost 98% of the world's population is
+    either directly or indirectly employed by <PLAYERCOMPANY>. Analysts are baffled
+    by the economy's continued operation under this arrangement, but they are just
+    grateful to have employment from <PLAYERCOMPANY>.
+  from: The Times
+  image: {fileID: 2800000, guid: b6dbe942444d3409a84c5c0033cbdbda, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 0
   effects:
     unlocks:
       productTypes: []
@@ -62,3 +56,8 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+  actions: []
+  conditions:
+  - value: 1e+10
+    greater: 1
+    type: 7

@@ -29,7 +29,7 @@ public class UIAccounting : MonoBehaviour {
         rent.text = string.Format("{0:C0} per month in rent", monthlyRent);
         inf.text = string.Format("{0:C0} per month in infrastructure costs", monthlyInf);
 
-        numWorkerLocations.text = string.Format("{0} employees across {1} locations", company.workers.Count, company.locations.Count);
+        numWorkerLocations.text = string.Format("{0} employees across {1} locations ({2} employees at HQ)", company.employeesAcrossLocations, company.locations.Count, company.workers.Count);
 
         PerformanceDict lastQuarter = company.lastQuarterPerformance;
         if (lastQuarter == null) {

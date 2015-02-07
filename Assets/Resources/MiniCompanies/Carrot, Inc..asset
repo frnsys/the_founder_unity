@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4bc42b501ad4dcd8f5f0552975166c, type: 3}
   m_Name: Carrot, Inc.
   m_EditorClassIdentifier: 
-  cost: 10
+  baseCost: 100000
   description: The leading force in modern entertainment and media.
   logo: {fileID: 0}
   revenue: 1e+06
@@ -61,3 +61,5 @@ MonoBehaviour:
       value: 200
       duration: 0
       type: 0
+    aiCompany: {fileID: 0}
+  aiCompany: {fileID: 0}
