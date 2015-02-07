@@ -6,16 +6,17 @@ public class UIPerk : UIEffectItem {
     public Perk perk {
         get { return _perk; }
         set {
-            _perk = value;
-            DisplayPerk();
+            _perk = value.Clone();
 
             // Check if the perk is already owned.
-            if (Perk.Find(_perk, company.perks) == null) {
+            Perk ownedPerk = Perk.Find(_perk, company.perks);
+            if (ownedPerk == null) {
                 SetupUnownedPerk();
             } else {
                 SetupOwnedPerk();
             }
 
+            DisplayPerk();
         }
     }
 
@@ -89,6 +90,7 @@ public class UIPerk : UIEffectItem {
 
     void UpgradedPerk() {
         _perk = Perk.Find(_perk, company.perks);
+        SetupOwnedPerk();
         DisplayPerk();
     }
 
