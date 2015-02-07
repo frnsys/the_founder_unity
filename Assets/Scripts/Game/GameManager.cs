@@ -235,7 +235,6 @@ public class GameManager : Singleton<GameManager> {
                 data.month++;
             }
 
-            playerCompany.CollectPerformanceData();
             playerCompany.PayMonthly();
 
             if ((int)data.month % 3 == 0) {

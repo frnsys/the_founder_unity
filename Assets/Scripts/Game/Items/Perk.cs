@@ -31,27 +31,19 @@ public class Perk : TemplateResource<Perk> {
 
     // The index of the currently-active upgrade.
     public int upgradeLevel = 0;
-
     public List<Upgrade> upgrades = new List<Upgrade>();
 
     public Upgrade current {
         get { return upgrades[upgradeLevel]; }
     }
     public Upgrade next {
-        get {
-            if (hasNext) {
-                return upgrades[upgradeLevel + 1];
-            }
-            return null;
-        }
+        get { return hasNext ? upgrades[upgradeLevel + 1] : null; }
     }
     public bool hasNext {
         get { return upgradeLevel < upgrades.Count - 1; }
     }
     public bool NextAvailable(Company c) {
-        if (!hasNext)
-            return false;
-        return next.Available(c);
+        return !hasNext ? false : next.Available(c);
     }
     public float cost {
         get { return current.cost; }

@@ -11,16 +11,9 @@ public class Product : HasStats {
         RETIRED
     }
 
-    // For generating product names.
-    private static string[] prefixes;
-    private static string[] endings;
-
     public string description {
         get {
-            if (recipe.description != null)
-                return recipe.description;
-            else
-                return "There's not a lot to say about this product.";
+            return recipe.description != null ? recipe.description : "There's not a lot to say about this product.";
         }
     }
 
@@ -43,11 +36,8 @@ public class Product : HasStats {
 
     public Mesh mesh {
         get {
-            if (recipe.mesh)
-                return recipe.mesh;
-
             // Fallback to first product type's mesh.
-            return productTypes[0].mesh;
+            return recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
         }
     }
     public Texture texture {
@@ -72,10 +62,6 @@ public class Product : HasStats {
     // has less infrastructure than necessary to support it.
     // A disabled product generates no revenue and does not continue developing.
     public bool disabled = false;
-
-    // If the product was ever released (even if it has been shutdown),
-    // this is true.
-    public bool released = false;
 
     // Infrastructure, in points, used by the product.
     public int points {

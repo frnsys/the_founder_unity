@@ -73,6 +73,7 @@ public class UIManager : Singleton<UIManager> {
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
         GameManager.GameLost += OnGameLost;
+        Company.Money += OnPaid;
 
         pendingPings = new Queue<Ping>();
         StartCoroutine(ShowPings());
@@ -86,6 +87,14 @@ public class UIManager : Singleton<UIManager> {
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
         GameManager.GameLost -= OnGameLost;
+        Company.Paid -= OnPaid;
+    }
+
+    void OnPaid(float amount, string name) {
+        if (amount >= 0)
+            SendPing(string.Format("Paid {0:C0} {1}", amount, name), Color.red);
+        else
+            SendPing(string.Format("Made {0:C0} {1}", -amount, name), Color.green);
     }
 
     // Show an event notification.

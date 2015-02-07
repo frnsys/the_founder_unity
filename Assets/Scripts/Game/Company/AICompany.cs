@@ -227,4 +227,9 @@ public class AICompany : Company {
             }
         }
     }
+
+    // Calculate the "value" of a worker.
+    private float WorkerROI(Worker w) {
+        return (w.productivity.value + ((w.charisma.value + w.creativity.value + w.cleverness.value)/3))/(w.salary+w.happiness.value);
+    }
 }
