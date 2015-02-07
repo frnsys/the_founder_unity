@@ -11,7 +11,7 @@
  * - Similarly, ScriptableObjects must have any setup/initialization manually run.
  *
  *
- * TO DO:
+ * FUTURE:
  * =========================
  * - this does not serialize null values, but that may be useful.
  */
