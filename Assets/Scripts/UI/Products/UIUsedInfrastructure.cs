@@ -22,9 +22,9 @@ public class UIUsedInfrastructure : MonoBehaviour {
 
         Infrastructure usedInf = company.usedInfrastructure;
         Infrastructure infra = company.infrastructure;
-        datacenter.text = usedInf[Infrastructure.Type.Datacenter].ToString() + "/" + infra[Infrastructure.Type.Datacenter].ToString();
-        factory.text = usedInf[Infrastructure.Type.Factory].ToString() + "/" + infra[Infrastructure.Type.Factory].ToString();
-        lab.text = usedInf[Infrastructure.Type.Lab].ToString() + "/" + infra[Infrastructure.Type.Lab].ToString();
-        studio.text = usedInf[Infrastructure.Type.Studio].ToString() + "/" + infra[Infrastructure.Type.Studio].ToString();
+        datacenter.text = string.Format("{0}/{1}", usedInf[Infrastructure.Type.Datacenter], infra[Infrastructure.Type.Datacenter]);
+        factory.text = string.Format("{0}/{1}", usedInf[Infrastructure.Type.Factory], infra[Infrastructure.Type.Factory]);
+        lab.text = string.Format("{0}/{1}", usedInf[Infrastructure.Type.Lab], infra[Infrastructure.Type.Lab]);
+        studio.text = string.Format("{0}/{1}", usedInf[Infrastructure.Type.Studio], infra[Infrastructure.Type.Studio]);
     }
 }

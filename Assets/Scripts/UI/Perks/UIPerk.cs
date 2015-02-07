@@ -7,7 +7,6 @@ public class UIPerk : UIEffectItem {
         get { return _perk; }
         set {
             _perk = value;
-
             DisplayPerk();
 
             // Check if the perk is already owned.

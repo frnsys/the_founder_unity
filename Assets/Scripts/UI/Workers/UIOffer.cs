@@ -13,9 +13,9 @@ public class UIOffer : UIConfirm {
         get { return offer_; }
         set {
             offer_ = value;
-            offerLabel.text = "$" + offer_.ToString();
-            monthlyCostLabel.text = "($" + (offer_/12).ToString() + "/mo)";
-            hiringFeeLabel.text = "$" + (offer_ * 0.1).ToString() + " hiring fee";
+            offerLabel.text = string.Format("{0:C0}", offer_);
+            monthlyCostLabel.text = string.Format("({0:C0}/mo)", offer_/12);
+            hiringFeeLabel.text = string.Format("{0:C0} hiring fee", offer_ * 0.1);
         }
     }
 
@@ -36,7 +36,7 @@ public class UIOffer : UIConfirm {
     }
 
     public void SetRobotWorker(string text, float cost) {
-        offerLabel.text = "$" + cost.ToString();
+        offerLabel.text = string.Format("{0:C0}", cost);
         bodyText = text;
         humanUI.SetActive(false);
     }

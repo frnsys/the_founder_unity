@@ -19,7 +19,7 @@ public class UIGoalBar : MonoBehaviour {
     void Update() {
         string current = string.Format("{0:C0}", company.quarterRevenue);
         string target  = string.Format("{0:C0}", gm.revenueTarget);
-        goalLabel.text = "Quarterly Target: " + current + "/" + target + " revenue";
+        goalLabel.text = string.Format("Quarterly Target: {0}/{1}", current, target);
 
         if (company.quarterRevenue >= gm.revenueTarget) {
             background.color = successColor;

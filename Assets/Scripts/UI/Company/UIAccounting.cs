@@ -15,7 +15,7 @@ public class UIAccounting : MonoBehaviour {
         foreach (Worker worker in company.workers) {
             monthlySalaries += worker.monthlyPay;
         }
-        salaries.text = string.Format("${0:n}", monthlySalaries) + " per month in salaries";
+        salaries.text = string.Format("{0:C0} per month in salaries", monthlySalaries);
 
         float monthlyRent = 0;
         float monthlyInf = 0;
@@ -26,10 +26,10 @@ public class UIAccounting : MonoBehaviour {
             // so we incorporate the cost of the infrastructure for the location.
             monthlyInf += loc.infrastructure.cost;
         }
-        rent.text = string.Format("${0:n}", monthlyRent) + " per month in rent";
-        inf.text = string.Format("${0:n}", monthlyInf) + " per month in infrastructure costs";
+        rent.text = string.Format("{0:C0} per month in rent", monthlyRent);
+        inf.text = string.Format("{0:C0} per month in infrastructure costs", monthlyInf);
 
-        numWorkerLocations.text = company.workers.Count.ToString() + " employees across " + company.locations.Count.ToString() + " locations";
+        numWorkerLocations.text = string.Format("{0} employees across {1} locations", company.workers.Count, company.locations.Count);
 
         PerformanceDict lastQuarter = company.lastQuarterPerformance;
         if (lastQuarter == null) {
@@ -38,17 +38,16 @@ public class UIAccounting : MonoBehaviour {
         } else {
             float revs = lastQuarter["Quarterly Revenue"];
             float cost = lastQuarter["Quarterly Costs"];
-            pastRevenue.text = "Revenue: " + string.Format("${0:n}", revs);
-            pastProfit.text = "Profit: " + string.Format("${0:n}", revs-cost);
+            pastRevenue.text = string.Format("Revenue: {0:C0}", revs);
+            pastProfit.text = string.Format("Profit {0:C0}", revs-cost);
         }
     }
 
     void Update() {
         float revs = company.quarterRevenue;
         float cost = company.quarterCosts;
-        currentRevenue.text = "Revenue: " + string.Format("${0:n}", revs);
-        currentProfit.text = "Profit: " + string.Format("${0:n}", revs-cost);
-
+        currentRevenue.text = string.Format("Revenue {0:C0}", revs);
+        currentProfit.text = string.Format("Profit {0:C0}", revs-cost);
         researchBudget.text = company.researchInvestment.ToString();
     }
 
