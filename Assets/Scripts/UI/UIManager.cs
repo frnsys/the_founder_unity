@@ -166,8 +166,7 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnGameLost(Company company) {
-        // TO DO this should be a proper "lose game"
-        Alert("YOU LOSE");
+        Alert("Appalled by your inability to maintain the growth they are legally entitled to, the board has forced your resignation. You lose. But you don't really lose. Because you have secured your place in a class shielded from any real consequence or harm. You'll be fine. You could always found another company.");
     }
 
     [HideInInspector]
