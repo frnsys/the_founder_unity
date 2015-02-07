@@ -23,7 +23,6 @@ public class Recruitment : TemplateResource<Recruitment> {
     public bool Develop() {
         // TESTING. This should be a lower value.
         _progress += 50;
-        Debug.Log(progress);
         if (progress >= 1) {
             if (Completed != null)
                 Completed(this);

@@ -44,13 +44,18 @@ public class UIGameEventNotification: UIEffectAlert {
         GameManager gm = GameManager.Instance;
         companyName = gm.playerCompany.name;
         aiCompanyName = gm.activeAICompanies[Random.Range(0, gm.activeAICompanies.Count)].name;
-        cofounderName = gm.playerCompany.founders[0].name;
+
+        // If we didn't go through onboarding, there are no founders.
+        if (gm.playerCompany.founders.Count > 0)
+            cofounderName = gm.playerCompany.founders[0].name;
+        else
+            cofounderName = "<testing cofounder>";
     }
 
     private string ProcessText(string text) {
-        text.Replace("<PLAYERCOMPANY>", companyName);
-        text.Replace("<AICOMPANY>", aiCompanyName);
-        text.Replace("<COFOUNDER>", cofounderName);
+        text = text.Replace("<PLAYERCOMPANY>", companyName);
+        text = text.Replace("<AICOMPANY>", aiCompanyName);
+        text = text.Replace("<COFOUNDER>", cofounderName);
         return text;
     }
 

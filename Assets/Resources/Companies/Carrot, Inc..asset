@@ -14,20 +14,6 @@ MonoBehaviour:
   cash:
     baseValue: 2e+07
     _buffs: []
-  researchCzar: {fileID: 0}
-  research:
-    baseValue: 1
-    _buffs: []
-  researchInvestment: 0
-  opinionCzar: {fileID: 0}
-  opinion:
-    baseValue: 1
-    _buffs: []
-  publicity:
-    baseValue: 0
-    _buffs: []
-  forgettingRate: 1
-  opinionEvents: []
   activeEffects:
   - unlocks:
       productTypes: []
@@ -61,6 +47,7 @@ MonoBehaviour:
     eventProbability: 0
     productEffects: []
     workerEffects: []
+    aiCompany: {fileID: 0}
   - unlocks:
       productTypes: []
       workers: []
@@ -93,81 +80,44 @@ MonoBehaviour:
     eventProbability: 0
     productEffects: []
     workerEffects: []
-  markets: 
-  technologies: []
-  baseSizeLimit: 5
+    aiCompany: {fileID: 0}
+  _workers: []
   founders:
   - {fileID: 11400000, guid: b0c61bd457c02476e8f7ef70478326b1, type: 2}
-  _workers: []
+  baseSizeLimit: 5
   _locations: []
+  markets: 
   _verticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   products: []
   developingPromo: {fileID: 0}
   developingRecruitment: {fileID: 0}
-  lastMonthCosts: 0
   lastMonthRevenue: 0
   quarterRevenue: 0
   quarterCosts: 0
   lifetimeRevenue: 0
   companies: []
   perks: []
-  PerfHistory:
-    Size: 24
-    values: []
-  ProductPerfHistory:
-    Size: 24
-    values: []
-  WorkerPerfHistory:
-    Size: 24
-    values: []
+  opinionCzar: {fileID: 0}
+  opinion:
+    baseValue: 1
+    _buffs: []
+  publicity:
+    baseValue: 0
+    _buffs: []
+  forgettingRate: 1
+  opinionEvents: []
+  researchCzar: {fileID: 0}
+  research:
+    baseValue: 1
+    _buffs: []
+  researchInvestment: 0
+  technologies: []
   QuarterlyPerfHistory:
     Size: 0
     values: []
-  bonuses:
-    unlocks:
-      productTypes: []
-      workers: []
-      perks: []
-      locations: []
-      verticals: []
-      promos: []
-      recruitments: []
-      companies: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-      duration: 0
-      type: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-        duration: 0
-        type: 0
-      publicity:
-        name: Publicity
-        value: 0
-        duration: 0
-        type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    productEffects: []
-    workerEffects: []
-  specialtyVerticals: []
-  specialtyProductTypes: []
-  startWorkers: []
-  startProducts: []
-  startLocations:
-  - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
-  - {fileID: 11400000, guid: 0a66020239568409faf039bee96a0101, type: 2}
-  - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
-  aggression: 20
-  cooperativeness: 0
-  luck: 0
+  disabled: 0
+  productLimit: 0
   description: The leading force in modern entertainment and media.
   unlocked:
     productTypes:
@@ -201,3 +151,43 @@ MonoBehaviour:
     promos: []
     recruitments: []
     companies: []
+  bonuses:
+    unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+  specialtyVerticals: []
+  specialtyProductTypes: []
+  startLocations:
+  - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
+  - {fileID: 11400000, guid: 0a66020239568409faf039bee96a0101, type: 2}
+  - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}

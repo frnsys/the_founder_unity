@@ -161,7 +161,7 @@ public class UIManager : Singleton<UIManager> {
             ending = "rd";
 
         UIManager.Instance.Alert(
-            string.Format("Happy {0}{1} birthday! The doctor estimates you'll live another {2}-{3} years.", age, ending, 40-age, 60-age)
+            string.Format("Happy {0}{1} birthday! I called the doctor today - she estimates you'll live another {2}-{3} years.", age, ending, 40-age, 60-age)
         );
     }
 

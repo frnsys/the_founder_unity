@@ -16,9 +16,9 @@ public class GameEvent : ScriptableObject {
 
     public static List<GameEvent> LoadSpecialEvents() {
         return Resources.LoadAll<GameEvent>("SpecialEvents").ToList().Select(ev => {
-                GameEvent gameEvent = Instantiate(ev) as GameEvent;
-                gameEvent.name = ev.name;
-                return gameEvent;
+            GameEvent gameEvent = Instantiate(ev) as GameEvent;
+            gameEvent.name = ev.name;
+            return gameEvent;
         }).ToList();
     }
 

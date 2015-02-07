@@ -14,7 +14,8 @@ public class UIEventActionButton : MonoBehaviour {
     public UILabel titleLabel;
 
     void OnClick() {
-        action_.effects.Apply(GameManager.Instance.playerCompany);
+        if (action.name != null)
+            action_.effects.Apply(GameManager.Instance.playerCompany);
     }
 }
 

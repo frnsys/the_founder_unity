@@ -15,6 +15,14 @@ public class UIHireWorkers : UIFullScreenPager {
     void OnEnable() {
         gm = GameManager.Instance;
         company = gm.playerCompany;
+
+        // Pause the hiring window,
+        // so AI companies aren't hiring candidates you're reviewing.
+        GameManager.Instance.Pause();
+    }
+
+    void OnDisable() {
+        GameManager.Instance.Resume();
     }
 
     public void HireRobotWorker(Worker worker) {

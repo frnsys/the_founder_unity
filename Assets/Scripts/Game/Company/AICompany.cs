@@ -36,7 +36,6 @@ public class AICompany : Company {
     public List<Vertical> specialtyVerticals;
     public List<ProductType> specialtyProductTypes;
     public List<Location> startLocations;
-    private Company playerCompany;
 
     // To easily keep track of all AI companies.
     public static List<AICompany> all = new List<AICompany>();
@@ -61,10 +60,6 @@ public class AICompany : Company {
         name = name_;
     }
 
-    void Start() {
-        playerCompany = GameManager.Instance.playerCompany;
-    }
-
     // Call `Init()` if creating a new AICompany from scratch.
     public new AICompany Init() {
         base.Init();
@@ -73,9 +68,6 @@ public class AICompany : Company {
         unlocked = new UnlockSet();
         bonuses = new EffectSet();
         startLocations = new List<Location>();
-
-        specialtyVerticals = new List<Vertical>();
-        specialtyProductTypes = new List<ProductType>();
 
         return this;
     }
@@ -86,6 +78,19 @@ public class AICompany : Company {
             // Give the company enough to open them.
             cash.baseValue += l.cost;
             ExpandToLocation(l);
+        }
+
+        specialtyVerticals = new List<Vertical>();
+        specialtyProductTypes = new List<ProductType>();
+        foreach (ProductEffect pe in bonuses.productEffects) {
+            foreach (Vertical v in pe.verticals) {
+                if (!specialtyVerticals.Contains(v))
+                    specialtyVerticals.Add(v);
+            }
+            foreach (ProductType pt in pe.productTypes) {
+                if (!specialtyProductTypes.Contains(pt))
+                    specialtyProductTypes.Add(pt);
+            }
         }
     }
 
@@ -111,7 +116,7 @@ public class AICompany : Company {
         // AI companies basically exist to compete with the player.
         // Ignore products for which the company already has a matching product.
         List<Product> candidates = new List<Product>();
-        foreach (Product p in playerCompany.activeProducts
+        foreach (Product p in GameManager.Instance.playerCompany.activeProducts
                 .Where(p => FindMatchingProducts(p.productTypes).Count == 0)) {
                 candidates.Add(p);
         }
@@ -179,14 +184,17 @@ public class AICompany : Company {
 
     private void DecideWorkers() {
         // Get average ROI of all workers.
-        float avgROI = workers.Average(w => WorkerROI(w));
+        float avgROI = 0;
+        if (workers.Count > 0) {
+            avgROI = workers.Average(w => WorkerROI(w));
 
-        // Review all hired workers (this should not include the founder(s)).
-        foreach (Worker w in workers) {
-            float ROI = WorkerROI(w);
-            if (ROI < avgROI * 0.8f) {
-                Debug.Log(name + " is firing a worker...");
-                FireWorker(w);
+            // Review all hired workers (this should not include the founder(s)).
+            foreach (Worker w in workers) {
+                float ROI = WorkerROI(w);
+                if (ROI < avgROI * 0.8f) {
+                    Debug.Log(name + " is firing a worker...");
+                    FireWorker(w);
+                }
             }
         }
 
@@ -218,7 +226,7 @@ public class AICompany : Company {
                     float minSalary = w.MinSalaryForCompany(this);
                     float offer = minSalary * (Random.value + 0.5f);
                     if (offer >= minSalary) {
-                        Debug.Log(name + " is hiring a worker...");
+                        Debug.Log(string.Format("{0} is hiring {1} for {2:C0} (min was {3:C0})...", name, w.name, offer, minSalary));
                         GameManager.Instance.workerManager.HireWorker(w, this);
                     }
                 } else {
