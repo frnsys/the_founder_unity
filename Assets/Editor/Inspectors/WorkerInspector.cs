@@ -19,6 +19,7 @@ internal class WorkerInspector : Editor {
         EditorGUILayout.TextArea(w.bio, GUILayout.Height(60));
         EditorGUILayout.LabelField("Description");
         w.description = EditorGUILayout.TextArea(w.description, GUILayout.Height(60));
+        w.texture = (Texture)EditorGUILayout.ObjectField("Texture", w.texture, typeof(Texture), false);
         w.productivity.baseValue = EditorGUILayout.FloatField("Productivity", w.productivity.baseValue);
         w.happiness.baseValue = EditorGUILayout.FloatField("Happiness", w.happiness.baseValue);
         w.charisma.baseValue = EditorGUILayout.FloatField("Charisma", w.charisma.baseValue);

@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Reed Erspamer
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  avatar: {fileID: 0}
+  texture: {fileID: 2800000, guid: 0ec82e9048c22487e80e0c24e8ec8a3a, type: 3}
+  robot: 0
   salary: 0
-  bio: Reed Erspamer needs a lot of motivation and is alienating. Reed Erspamer is
-    not very imaginative and is quite dim. Reed Erspamer brings everyone down.
+  bio: Reed Erspamer is quite dim and is not very imaginative. Reed Erspamer needs
+    a lot of motivation and reminds me of Eeyore. Reed Erspamer is hard to be around.
   description: 
   title: MBA
   baseMinSalary: 18000

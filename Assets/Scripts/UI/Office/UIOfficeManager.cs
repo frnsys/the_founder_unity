@@ -44,6 +44,8 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
             obj.transform.localPosition = new Vector3(x, 7f, z);
             UIEmployee uie = obj.GetComponent<UIEmployee>();
             uie.worker = w;
+            if (w.texture != null)
+                uie.GetComponent<MeshRenderer>().material.mainTexture = w.texture;
 
             GameObject hud = NGUITools.AddChild(employeeHUDs, employeeHUDPrefab);
 

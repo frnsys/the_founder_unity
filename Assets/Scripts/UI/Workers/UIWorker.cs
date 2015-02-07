@@ -17,6 +17,9 @@ public class UIWorker : MonoBehaviour {
             worker_ = value;
             name.text = worker_.name;
 
+            if (worker_.texture != null)
+                employee.material.mainTexture = worker_.texture;
+
             if (worker_.description != "")
                 bio.text = string.Format("{0} {1}", worker_.description, worker_.bio);
             else
@@ -79,6 +82,7 @@ public class UIWorker : MonoBehaviour {
     public UILabel happiness;
     public UILabel credit;
     public UIButton button;
+    public MeshRenderer employee;
 
     // These change for robots.
     public UILabel bioLabel;

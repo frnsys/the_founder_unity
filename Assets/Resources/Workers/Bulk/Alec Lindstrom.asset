@@ -11,10 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Alec Lindstrom
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  avatar: {fileID: 0}
+  texture: {fileID: 2800000, guid: e46b995deb2644c918602c9f1f5864f5, type: 3}
+  robot: 0
   salary: 0
-  bio: Alec Lindstrom reminds me of Eeyore and is not very imaginative. Alec Lindstrom
-    is quite dim and is kind of lazy. Alec Lindstrom is hard to be around.
+  bio: Alec Lindstrom needs a lot of motivation and isn't the sharpest tool in the
+    shed. Alec Lindstrom is alienating and is not very imaginative. Alec Lindstrom
+    brings everyone down.
   description: 
   title: MBA
   baseMinSalary: 18000

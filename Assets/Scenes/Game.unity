@@ -690,7 +690,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.85000038
+  aspectRatio: .0333333351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -1908,7 +1908,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.1833334
+  aspectRatio: .0333333351
 --- !u!1 &308238124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4104,7 +4104,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.85000038
+  aspectRatio: .0333333351
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -6226,7 +6226,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .553125024
+  aspectRatio: 1
 --- !u!1 &1107399996
 GameObject:
   m_ObjectHideFlags: 0
@@ -6753,7 +6753,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: b6eb491d1524c4de5bd267a7f72c788d, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4288602232
+    rgba: 4287096319
 --- !u!23 &1214719626
 Renderer:
   m_ObjectHideFlags: 0
@@ -6798,8 +6798,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1214719623}
-  hover: {r: .454901963, g: .882352948, b: .611764729, a: 1}
-  pressed: {r: .295144916, g: .757352948, b: .46797052, a: 1}
+  hover: {r: 1, g: .898039222, b: .529411793, a: 1}
+  pressed: {r: .897058845, g: .799676657, b: .40235728, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -8570,7 +8570,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.1833334
+  aspectRatio: .0333333351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -10292,7 +10292,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 10
+  far clip plane: 100
   field of view: 60
   orthographic: 1
   orthographic size: 1
@@ -10405,8 +10405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1793096430}
-  hover: {r: .454901963, g: .882352948, b: .611764729, a: 1}
-  pressed: {r: .288440764, g: .713235259, b: .44727695, a: 1}
+  hover: {r: 1, g: .898039222, b: .529411793, a: 1}
+  pressed: {r: .897058845, g: .799676657, b: .40235728, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -10442,7 +10442,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: b6eb491d1524c4de5bd267a7f72c788d, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4288602232
+    rgba: 4287096319
 --- !u!23 &1793096435
 Renderer:
   m_ObjectHideFlags: 0
@@ -12317,7 +12317,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .283482134
+  aspectRatio: 1
 --- !u!114 &2013164179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13269,8 +13269,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 2126479237}
-  hover: {r: .454901963, g: .882352948, b: .611764729, a: 1}
-  pressed: {r: .288440764, g: .713235259, b: .44727695, a: 1}
+  hover: {r: 1, g: .90196079, b: .501960814, a: 1}
+  pressed: {r: .897058845, g: .799676657, b: .40235728, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -13306,7 +13306,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: b6eb491d1524c4de5bd267a7f72c788d, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4288602232
+    rgba: 4287096319
 --- !u!23 &2126479242
 Renderer:
   m_ObjectHideFlags: 0

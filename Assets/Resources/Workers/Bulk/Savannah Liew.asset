@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Savannah Liew
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  avatar: {fileID: 0}
+  texture: {fileID: 2800000, guid: 0ec82e9048c22487e80e0c24e8ec8a3a, type: 3}
+  robot: 0
   salary: 0
-  bio: Savannah Liew is a real bummer but is really 'heads-down' and is artistic.
-    Savannah Liew is quite dim and has a weird smell.
+  bio: Savannah Liew has an eye for trends but has a weird smell and is quite dim
+    but multitasks very effectively. Savannah Liew reminds me of Eeyore.
   description: 
   title: Designer
   baseMinSalary: 18000
