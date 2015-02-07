@@ -21,6 +21,7 @@ public class Recruitment : TemplateResource<Recruitment> {
 
     static public event System.Action<Recruitment> Completed;
     public bool Develop() {
+        // TESTING. This should be a lower value.
         _progress += 50;
         Debug.Log(progress);
         if (progress >= 1) {

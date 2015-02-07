@@ -32,9 +32,7 @@ public class Worker : HasStats {
     public float hiringFee {
         get {
             // For robots, the baseMinSalary is the one-time cost.
-            if (robot)
-                return baseMinSalary;
-            return salary * 0.1f;
+            return robot ? baseMinSalary : salary * 0.1f;
         }
     }
     public float monthlyPay {
