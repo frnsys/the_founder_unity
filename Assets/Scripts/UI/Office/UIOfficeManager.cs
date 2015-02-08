@@ -9,9 +9,8 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public Camera OfficeCamera;
 
     // TO DO how this works will need to be updated with office upgrades
-    public OfficeArea labs;
-    public OfficeArea comms;
-    public OfficeArea market;
+    public LockedOfficeArea labs;
+    public LockedOfficeArea comms;
 
     public GameObject officeArea;
     public GameObject officeUIPanel;
@@ -160,15 +159,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         if (company.Pay(cost)) {
             data.CommsAccessible = true;
             comms.accessible = true;
-        }
-    }
-
-    public void BuyMarket() {
-        // TO DO don't hardcode this
-        float cost = 20000;
-        if (company.Pay(cost)) {
-            data.MarketAccessible = true;
-            market.accessible = true;
         }
     }
 

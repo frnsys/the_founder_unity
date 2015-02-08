@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class OfficeArea : MonoBehaviour {
+public class LockedOfficeArea : MonoBehaviour {
     // The box which highlights this area as locked.
     public GameObject lockBox;
 

@@ -84,6 +84,10 @@ Creating a locked area is pretty involved.
 
 You need to attach the `OfficeArea` script to the group which defines the office area and configure it properly. The group should have a "Lock Box" (a semi-transparent dark box surrounding the area). The `Office UI` group will need a button that can unlock the area. Unlocking the area is accomplished through the `Office Area Manager` (see the current methods there) and that area's unlock status is managed by the `GameData`.
 
+#### Rearranging the office
+
+If you add or remove objects to the office, make sure you re-bake the nav textures.
+
 ### Resources
 
 There are many different assets in this game which have to managed carefully.
