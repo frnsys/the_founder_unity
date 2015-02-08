@@ -32,20 +32,47 @@ All alerts/popups should have their `UIPanel` Render Q set to Start At 5000.
 
 ### The Office UI
 
-Most of the UI is accessed through the office environment.
-
-It's (probably too) complicated -- here are some notes about how it is set up.
+Most of the UI is accessed through the office environment. Here are some notes about how it is set up.
 
 There is:
 
 - the `Office UI`: this manages the NGUI buttons displayed on top of the office environment.
-- the `Office Area Manager`: this manages which areas are accessible (unlocked) and is where you configure the camera coordinates which defines each office area.
+- the `Office Manager`:
+    - manages the addition and removal of employee "avatars" (their in-office representation)
+        - also manages the employee "HUDs", i.e. the text that floats up from their head
+    - manages what office is currently shown, i.e. apartment, office, campus, etc
+    - manages upgrading of the office, which involves:
+        - removing the old office
+        - instantiating the new office
+        - loading the perks into the new office,
+        - randomly placing employees so that they are within bounds of the new office
+        - sets up the NGUI `Office UI` buttons, linking them with in-office objects to follow
+    - manages the process of an office upgrade becoming available
+- the `Office`:
+    - this script is attached to prefabs which represent certain offices (apartment, office, campus, etc)
+    - it manages the addition of perks in the office environment
+        - which perks can be shown
+        - how those perks are represented (which `GameObject` prefab)
+        - where those representations are placed
+    - has additional information the `Office Manager` needs, such as its bounds and what UI elements are available and what objects they should follow.
 - the `Office Camera Controller`: this is what allows the user to pan around and zoom in and out of the office.
-- `Office Areas`: this is a grouping of the 3D objects which form the office areas.
+- `Office Area`: this just the `GameObject` which functions as the parent of the actual office object group.
+
+#### Office upgrades
+
+The office can be upgraded throughout the game, which provides access to different systems.
+
+For example, in the starting apartment, the player can only build products, hire employees, and buy perks.
+
+But later on they get access to research, public opinion, and all the other systems in the game.
+
+The access is prevented only by not exposing the UI elements which lead to the menus of those systems.
+
+For development, this is pretty annoying if you want to test all the systems - so there's a "Test" office prefab which includes UI for all the systems.
 
 #### Adding an interactive office object
 
-Office objects which can be interacted with (i.e., can be touched to bring up a menu) should have the `UIObject` script attached. There you can specify the window prefab to launch on touch. You should check "Enabled" so that it is true. You'll also need to add a `MeshCollider` with "Is Trigger" checked.
+Office objects which can be interacted with (i.e., can be touched to bring up a menu) should have the `UIOfficeObject` script attached. There you can specify the window prefab to launch on touch. You should check "Enabled" so that it is true. You'll also need to add a `MeshCollider` with "Is Trigger" checked.
 
 Then you will also want to create an NGUI button/label which tracks the object. However, you don't want it directly tracking the object itself since it may not be positioned how you like. So create an empty game object as a child to the office object (I have been naming them "UI Target") and position that where you want the label to be.
 
