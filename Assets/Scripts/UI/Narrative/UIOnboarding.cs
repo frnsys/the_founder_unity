@@ -40,7 +40,7 @@ public class UIOnboarding : MonoBehaviour {
 
     void OnEnable() {
         gm = GameManager.Instance;
-        cofounders = gm.narrativeManager.cofounders;
+        cofounders = new List<Founder>(Resources.LoadAll<Founder>("Founders/Cofounders"));
 
         Intro();
     }
@@ -241,15 +241,7 @@ public class UIOnboarding : MonoBehaviour {
     }
 
     void StartGame(GameObject obj) {
-        // Add the vertical.
-        gm.playerCompany.verticals = new List<Vertical> { selectedVertical };
-
-        // Add the location.
-        selectedLocation.cost = 0;
-        gm.playerCompany.ExpandToLocation(selectedLocation);
-
-        // Add the cofounder.
-        GameManager.Instance.narrativeManager.SelectCofounder(selectedCofounder);
+        gm.InitializeGame(selectedCofounder, selectedLocation, selectedVertical);
 
         // Switch to the game scene.
         Application.LoadLevel("Game");

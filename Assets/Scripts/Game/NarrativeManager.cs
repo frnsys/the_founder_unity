@@ -27,14 +27,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     // Disable the constructor.
     protected NarrativeManager() {}
 
-    // The 3 starting cofounders you can choose from.
-    public List<Founder> cofounders;
-
     private GameObject mentorMessagePrefab;
 
     void Awake() {
         mentorMessagePrefab = Resources.Load("UI/Narrative/Mentor Message") as GameObject;
-        cofounders = new List<Founder>(Resources.LoadAll<Founder>("Founders/Cofounders"));
     }
 
     void OnEnable() {
@@ -96,21 +92,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         };
         MentorMessage(messages[0], afterEach, interrupt);
     }
-
-    public AICompany SelectCofounder(Founder cofounder) {
-        // Add the cofounder to the player's company.
-        data.company.founders.Add(cofounder);
-
-        // Apply their bonuses.
-        GameManager.Instance.ApplyEffectSet(cofounder.bonuses);
-
-        // The cofounders you didn't pick start their own rival company.
-        AICompany aic = ScriptableObject.CreateInstance<AICompany>();
-        aic.name = "RIVAL CORP.";
-        aic.founders = cofounders.Where(c => c != cofounder).ToList();
-        return aic;
-    }
-
 
 
     /*
