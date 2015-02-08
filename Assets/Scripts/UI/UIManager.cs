@@ -245,6 +245,7 @@ public class UIManager : Singleton<UIManager> {
         UISelectWorkerPopup p = NGUITools.AddChild(alertsPanel, selectWorkerPopupPrefab).GetComponent<UISelectWorkerPopup>();
         p.SetData(title, workers, confirm, selected);
     }
+
 }
 
 

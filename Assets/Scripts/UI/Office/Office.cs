@@ -3,22 +3,40 @@ using System;
 using System.Linq;
 using System.Collections;
 
-public class UIOffice : MonoBehaviour {
+public class Office : MonoBehaviour {
     [System.Serializable]
     public struct PerkDisplay {
         public Perk perk;
         public PerkObject[] objects;
     }
-
     [System.Serializable]
     public struct PerkObject {
         public GameObject obj;
         public Vector3 position;
     }
-
     public PerkDisplay[] perkDisplays;
 
+    // The bounds (x1,z1,x2,z2) of the office.
+    public Vector4 bounds;
+
+    // The UI objects (in-office buttons) and
+    // the UI targets the they should follow.
+    // These targets should match by index,
+    // i.e. the i-th object should match with the i-th target.
+    public GameObject[] uiObjects;
+    public Transform[] uiTargets;
+
+    // The cost for upgrading to this office.
+    public float cost;
+
+    // Employees required for this office.
+    public int employeesRequired;
+
+    // The next office after this one.
+    public Office nextOffice;
+
     void OnEnable() {
+        UIOfficeManager.Instance.SetupOfficeUI(uiObjects, uiTargets);
         Company.PerkBought += ShowPerk;
     }
 

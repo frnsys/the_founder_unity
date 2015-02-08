@@ -13,6 +13,13 @@ public class Company : HasStats {
     public List<EffectSet> activeEffects;
     public string slogan;
 
+    public enum OfficeType {
+        Apartment,
+        Office,
+        Campus
+    }
+    public OfficeType office;
+
     public Company(string name_) {
         name = name_;
     }
@@ -26,6 +33,7 @@ public class Company : HasStats {
         quarterCosts = 0;
         baseSizeLimit = 5;
         perks = new List<Perk>();
+        office = OfficeType.Apartment;
 
         products = new List<Product>();
         founders = new List<Founder>();
@@ -137,6 +145,18 @@ public class Company : HasStats {
             default:
                 return 0;
         }
+    }
+
+    // ===============================================
+    // Office Management =============================
+    // ===============================================
+
+    public bool UpgradeOffice(Office o) {
+        if (Pay(o.cost)) {
+            office++;
+            return true;
+        }
+        return false;
     }
 
     // ===============================================
