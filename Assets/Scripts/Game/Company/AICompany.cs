@@ -53,7 +53,10 @@ public class AICompany : Company {
     // Convenience method for locating the in-game version
     // of an AICompany from an asset version.
     public static AICompany Find(AICompany aic) {
-        return all.Where(a => a.name == aic.name).First();
+        return Find(aic.name);
+    }
+    public static AICompany Find(string name) {
+        return all.Where(a => a.name == name).First();
     }
 
     public AICompany(string name_) : base(name_) {

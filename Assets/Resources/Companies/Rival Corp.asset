@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2caad3cadff8c41b9bbabba4ad7e0d5b, type: 3}
-  m_Name: Carrot, Inc
+  m_Name: RIVALCORP
   m_EditorClassIdentifier: 
   cash:
     baseValue: 2e+07
@@ -81,11 +81,11 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
-  slogan: Our products will change your life. And you'll change the world
+  slogan: A better you.
   office: 0
   _workers: []
   founders:
-  - {fileID: 11400000, guid: b0c61bd457c02476e8f7ef70478326b1, type: 2}
+  - {fileID: 0}
   baseSizeLimit: 5
   _locations: []
   markets: 
@@ -120,7 +120,7 @@ MonoBehaviour:
     values: []
   disabled: 0
   productLimit: 0
-  description: The leading force in modern entertainment and media.
+  description: You have scorned us and we will destroy you.
   unlocked:
     productTypes:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}

@@ -148,12 +148,9 @@ public class GameManager : Singleton<GameManager> {
         ApplyEffectSet(cofounder.bonuses);
 
         // The cofounders you didn't pick start their own rival company.
-        AICompany aic = ScriptableObject.CreateInstance<AICompany>();
+        AICompany aic = AICompany.Find("Rival Corp");
         List<Founder> cofounders = Resources.LoadAll<Founder>("Founders/Cofounders").Where(c => c != cofounder).ToList();
-        aic.name = "RIVAL CORP.";
         aic.founders = cofounders;
-        data.otherCompanies.Add(aic);
-        AICompany.all.Add(aic);
     }
 
     void StartGame() {
