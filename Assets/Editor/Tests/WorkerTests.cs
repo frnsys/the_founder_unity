@@ -52,16 +52,45 @@ namespace UnityTest
 
         [Test]
         public void MinimumSalary() {
-            // TO DO fix this test
             worker.baseMinSalary = 1;
 
             Assert.AreEqual(worker.MinSalaryForCompany(gd.company), worker.baseMinSalary);
 
+            // Emulate the worker being hired
             worker.salary = 10000;
             worker.happiness.baseValue = 10;
 
-            // The happiness factor should be 1 + (10-5)/10 = 1.5
-            Assert.AreEqual(worker.MinSalaryForCompany(gd.company), 15000);
+            // The min salary should be higher now.
+            Assert.IsTrue(worker.MinSalaryForCompany(gd.company) > worker.baseMinSalary);
+        }
+
+        [Test]
+        public void MinimumSalaryAgainstCompanyHappiness() {
+            // Create a worker for the company.
+            Worker w = ScriptableObject.CreateInstance<Worker>();
+            w.Init("Dava");
+            gm.playerCompany.HireWorker(w);
+            Assert.AreEqual(gm.playerCompany.workers.Count, 1);
+
+            // Current employee is unhappy.
+            w.happiness.baseValue = 0;
+
+            // Emulate the worker being hired
+            // Happy at current job.
+            worker.baseMinSalary = 1;
+            worker.salary = 1;
+            worker.happiness.baseValue = 10;
+
+            // The min salary should be higher since the worker expects to be
+            // less happy at the new company.
+            Assert.IsTrue(worker.MinSalaryForCompany(gd.company) > worker.baseMinSalary);
+
+            // Current employee is happy.
+            w.happiness.baseValue = 40;
+
+            // The min salary should be lower since the worker expects to be happier
+            // at the new company.
+            Assert.IsTrue(worker.MinSalaryForCompany(gd.company) < worker.baseMinSalary);
         }
 
         [Test]

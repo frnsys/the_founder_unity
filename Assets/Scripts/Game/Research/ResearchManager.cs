@@ -36,9 +36,6 @@ public class ResearchManager : MonoBehaviour {
             // TO DO invested cash shouldn't have as simple a relationship to research.
             data.research += data.company.research.value + data.company.researchInvestment/1000;
 
-            // TESTING purposes
-            data.research += 100000;
-
             if (research >= technology.requiredResearch) {
                 EndResearch();
             }

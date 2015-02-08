@@ -16,6 +16,13 @@ public class Office : MonoBehaviour {
     }
     public PerkDisplay[] perkDisplays;
 
+    public enum Type {
+        Apartment,
+        Office,
+        Campus
+    }
+    public Type type;
+
     // The bounds (x1,z1,x2,z2) of the office.
     public Vector4 bounds;
 

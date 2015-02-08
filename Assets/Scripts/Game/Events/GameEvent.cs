@@ -120,7 +120,7 @@ public class GameEvent : ScriptableObject {
     }
 
     [System.Serializable]
-    public struct Condition {
+    public class Condition {
         public float value;
         public bool greater;
         public Type type;
@@ -136,12 +136,16 @@ public class GameEvent : ScriptableObject {
             Employees,
             OfficeLevel
         }
+
+        public Condition() {}
     }
 
     [System.Serializable]
-    public struct Action {
+    public class Action {
         public string name;
         public EffectSet effects;
+
+        public Action() {}
     }
 }
 

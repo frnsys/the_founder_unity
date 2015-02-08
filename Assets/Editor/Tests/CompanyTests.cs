@@ -465,5 +465,38 @@ namespace UnityTest
             Assert.AreEqual(c.opinion.value, 290);
             Assert.AreEqual(c.publicity.value, 500);
         }
+
+        [Test]
+        public void MiniCompanyAcquisition() {
+            AICompany aic = ScriptableObject.CreateInstance<AICompany>();
+            AICompany.all = new List<AICompany>() { aic };
+
+            Assert.IsFalse(aic.disabled);
+
+            MiniCompany mc = ScriptableObject.CreateInstance<MiniCompany>();
+            mc.baseCost = 10000;
+            mc.aiCompany = aic;
+            mc.revenue = 1;
+
+            EffectSet es = new EffectSet();
+            es.cash = 5000;
+            mc.effects = es;
+
+            c.cash.baseValue = 0;
+            Assert.IsFalse(c.BuyCompany(mc));
+
+            // Cost is affected by health of the economy;
+            float econMult = gm.economyMultiplier;
+            Assert.AreEqual(mc.cost, mc.baseCost * econMult, 0.1);
+
+            c.cash.baseValue = 10000 * econMult;
+            Assert.IsTrue(c.BuyCompany(mc));
+            Assert.IsTrue(c.companies.Contains(mc));
+            Assert.IsTrue(aic.disabled);
+            Assert.AreEqual(c.cash.value, 5000, 0.1f);
+
+            c.HarvestCompanies();
+            Assert.AreEqual(c.cash.value, 5001, 0.1f);
+        }
     }
 }

@@ -16,4 +16,8 @@ public class MiniCompany : SharedResource<MiniCompany> {
     public float cost {
         get { return baseCost * GameManager.Instance.economyMultiplier; }
     }
+
+    public static new MiniCompany Load(string name) {
+        return Resources.Load("MiniCompanies/" + name) as MiniCompany;
+    }
 }

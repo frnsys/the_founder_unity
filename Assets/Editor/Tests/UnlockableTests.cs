@@ -45,6 +45,20 @@ namespace UnityTest
             Assert.AreEqual(unlocked.workers.Count, 1);
 		}
 
+        [Test]
+        public void UnlockSetIgnoresDuplicates() {
+            UnlockSet unlockables = new UnlockSet();
+
+            unlockables.productTypes.Add(LoadTestResource("TestProductType", typeof(ProductType)) as ProductType);
+            Assert.AreEqual(unlocked.productTypes.Count, 0);
+
+            unlocked.Unlock(unlockables);
+            Assert.AreEqual(unlocked.productTypes.Count, 1);
+
+            unlocked.Unlock(unlockables);
+            Assert.AreEqual(unlocked.productTypes.Count, 1);
+        }
+
         private UnityEngine.Object LoadTestResource(string name, Type type) {
             return AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/"+name+".asset", type);
         }

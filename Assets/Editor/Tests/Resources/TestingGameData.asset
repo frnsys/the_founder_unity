@@ -13,38 +13,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   company: {fileID: 0}
   board:
-    happiness: 20
+    happiness: 10
+    revenueTarget: 20000
+    lastQuarterRevenue: 0
+    desiredGrowth: .119999997
   unlocked:
-    prereqs:
-      productTypes: []
-      industries: []
-      markets: []
-      workers: []
-      events: []
-      items: []
-      stores: 
-      consultancies: []
-      researchPoints: 0
     productTypes:
-    - {fileID: 11400000, guid: 4222ff85e6f1c4b8d95bfdcc35abc292, type: 2}
-    industries:
-    - {fileID: 11400000, guid: c478866fbff4841da8541c3c64959f75, type: 2}
-    markets:
-    - {fileID: 11400000, guid: 57be97e3fb0f64e95bfbce92f340c555, type: 2}
+    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     workers: []
-    events: []
-    items: []
-    stores: 
-    consultancies: []
-  discovery: {fileID: 0}
-  research:
-    charisma: 11
-    cleverness: 12
-    creativity: 13
+    perks: []
+    locations: []
+    verticals:
+    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+    promos: []
+    recruitments: []
+    companies: []
+  economy: 0
+  onboardingState:
+    FIRST_PRODUCT_LAUNCHED: 0
+    FIRST_WORKER_HIRED: 0
+    MARKET_UNLOCKED: 0
+    RESEARCH_UNLOCKED: 0
+    PRODUCT_COMBOS_UNLOCKED: 0
+    RESEARCH_OPENED: 0
+    COMMS_UNLOCKED: 0
+    VERTICALS_UNLOCKED: 0
+    WORKER_LIMIT_REACHED: 0
+  workerInsight: 0
+  maxProductTypes: 0
+  technology: {fileID: 0}
+  research: 0
   otherCompanies: []
-  month: 2
-  week: 3
-  year: 14
-  lifetimeYear: 100
-  lifetimeMonth: 6
-  lifetimeWeek: 1
+  LabsAccessible: 0
+  CommsAccessible: 0
+  MarketAccessible: 0
+  month: 0
+  week: 0
+  year: 0
+  lifetimeYear: 0
+  lifetimeMonth: 0
+  lifetimeWeek: 0
+  unemployed: []
+  specialEventsPool: []
+  eventsPool: []

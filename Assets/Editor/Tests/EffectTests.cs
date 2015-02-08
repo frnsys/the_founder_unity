@@ -84,6 +84,17 @@ namespace UnityTest
         }
 
         [Test]
+        public void EnablingAICompanies() {
+            AICompany aic = ScriptableObject.CreateInstance<AICompany>();
+            aic.disabled = true;
+            AICompany.all = new List<AICompany>() { aic };
+
+            e.aiCompany = aic;
+            e.Apply(c);
+            Assert.IsFalse(aic.disabled);
+        }
+
+        [Test]
         public void Worker() {
             e.workerEffects = new List<StatBuff>();
             e.workerEffects.Add(new StatBuff("Happiness", 100));

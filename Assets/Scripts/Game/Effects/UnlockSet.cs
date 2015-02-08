@@ -3,6 +3,7 @@
  */
 
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
@@ -20,13 +21,41 @@ public class UnlockSet {
     // adding the input UnlockSet's values
     // to this one.
     public void Unlock(UnlockSet us) {
-        productTypes.AddRange(us.productTypes);
-        workers.AddRange(us.workers);
-        perks.AddRange(us.perks);
-        locations.AddRange(us.locations);
-        verticals.AddRange(us.verticals);
-        promos.AddRange(us.promos);
-        recruitments.AddRange(us.recruitments);
-        companies.AddRange(us.companies);
+        foreach (ProductType o in us.productTypes) {
+            if (!Duplicate(o, productTypes))
+                productTypes.Add(o);
+        }
+        foreach (Worker o in us.workers) {
+            if (!Duplicate(o, workers))
+                workers.Add(o);
+        }
+        foreach (Perk o in us.perks) {
+            if (!Duplicate(o, perks))
+                perks.Add(o);
+        }
+        foreach (Location o in us.locations) {
+            if (!Duplicate(o, locations))
+                locations.Add(o);
+        }
+        foreach (Vertical o in us.verticals) {
+            if (!Duplicate(o, verticals))
+                verticals.Add(o);
+        }
+        foreach (Promo o in us.promos) {
+            if (!Duplicate(o, promos))
+                promos.Add(o);
+        }
+        foreach (Recruitment o in us.recruitments) {
+            if (!Duplicate(o, recruitments))
+                recruitments.Add(o);
+        }
+        foreach (MiniCompany o in us.companies) {
+            if (!Duplicate(o, companies))
+                companies.Add(o);
+        }
+    }
+
+    private bool Duplicate<T>(T obj, List<T> objs) where T : Object {
+        return objs.FirstOrDefault(o => o.name == obj.name) != null;
     }
 }

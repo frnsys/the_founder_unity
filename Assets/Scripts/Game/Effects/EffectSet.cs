@@ -56,6 +56,7 @@ public class EffectSet {
 
         if (gameEvent != null) {
             GameEvent ge = ScriptableObject.Instantiate(gameEvent) as GameEvent;
+            ge.name = gameEvent.name;
             ge.delay = eventDelay;
             ge.probability = eventProbability;
             GameManager.Instance.eventManager.Add(ge);

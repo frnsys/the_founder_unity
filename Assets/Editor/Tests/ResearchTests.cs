@@ -23,8 +23,6 @@ namespace UnityTest
         public void SetUp() {
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
-            gm.researchManager = gameObj.AddComponent<ResearchManager>();
-
             gd = GameData.New("DEFAULTCORP");
             gm.Load(gd);
 

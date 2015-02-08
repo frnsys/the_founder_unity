@@ -17,7 +17,16 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            data = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestingGameData.asset", typeof(GameData)) as GameData;
+            /*
+             * IMPORTANT NOTE:
+             * - For SharedResources, you *MUST* load from an asset,
+             *   not create a new instance. The serializer checks if
+             *   something is a subclass of SharedResource, and if it
+             *   is, it tries to load directly from the asset. So if
+             *   it doesn't exists, it will throw an exception.
+             */
+
+            data = ScriptableObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestingGameData.asset", typeof(GameData))) as GameData;
 
 
             gameObj = new GameObject("Game Manager");
@@ -33,12 +42,30 @@ namespace UnityTest
                 data.company.founders.Add(CreateFounder("STEVE", 100));
                 data.company.baseSizeLimit       = 17;
                 data.company.lastMonthRevenue    = 28517;
+                data.company.quarterRevenue      = 12489;
+                data.company.quarterCosts        = 184787;
                 data.company.cash.baseValue      = 100000000;
                 data.company.ResearchCzar        = researchCzar;
                 data.company.OpinionCzar         = opinionCzar;
                 data.company.opinion.baseValue   = 200;
                 data.company.forgettingRate      = 10;
                 data.company.publicity.baseValue = 300;
+                data.company.office              = Office.Type.Office;
+
+                data.company.perks               = new List<Perk>() {
+                    CreatePerk(0),
+                    CreatePerk(1)
+                };
+
+                data.company.markets             = new List<MarketManager.Market>() {
+                    MarketManager.Market.Asia,
+                    MarketManager.Market.Europe
+                };
+
+                data.company.companies           = new List<MiniCompany>() {
+                    MiniCompany.Load("The Times"),
+                    MiniCompany.Load("Carrot, Inc")
+                };
 
                 EffectSet es = new EffectSet();
                 es.opinionEvent = new OpinionEvent(100, 400);
@@ -136,23 +163,43 @@ namespace UnityTest
             Assert.AreEqual(gd.lifetimeWeek,               data.lifetimeWeek);
 
             Assert.AreEqual(gd.company.name,               data.company.name);
+            Assert.AreEqual(gd.company.office,             data.company.office);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
             Assert.AreEqual(gd.company.baseSizeLimit,      data.company.baseSizeLimit);
             Assert.AreEqual(gd.company.infrastructure,     data.company.infrastructure);
             Assert.AreEqual(gd.company.lastMonthRevenue,   data.company.lastMonthRevenue);
+            Assert.AreEqual(gd.company.quarterRevenue,     data.company.quarterRevenue);
+            Assert.AreEqual(gd.company.quarterCosts,       data.company.quarterCosts);
             Assert.AreEqual(gd.company.research.value,     data.company.research.value);
             Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
             Assert.AreEqual(gd.company.publicity.value,    data.company.publicity.value);
             Assert.AreEqual(gd.company.forgettingRate,     data.company.forgettingRate);
+            Assert.AreEqual(gd.company.markets,            data.company.markets);
             CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
             CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);
+
+            for (int i=0; i<gd.company.perks.Count; i++) {
+                Perk p = gd.company.perks[i];
+                Perk p_ = data.company.perks[i];
+
+                Assert.AreEqual(p.name, p_.name);
+                Assert.AreEqual(p.upgradeLevel, p_.upgradeLevel);
+            }
+
+            for (int i=0; i<gd.company.companies.Count; i++) {
+                MiniCompany mc = gd.company.companies[i];
+                MiniCompany mc_ = data.company.companies[i];
+
+                Assert.AreEqual(mc.name, mc_.name);
+                Assert.AreEqual(mc.baseCost, mc_.baseCost);
+                Assert.AreEqual(mc.revenue, mc_.revenue);
+            }
 
             Assert.AreEqual(gd.eventsPool[0].name,         data.eventsPool[0].name);
             Assert.AreEqual(gd.specialEventsPool[0].name,  data.specialEventsPool[0].name);
 
             for (int i=0;i<gd.company.OpinionEvents.Count;i++) {
-                Assert.AreEqual(data.company.OpinionEvents[i].opinion.value, gd.company.OpinionEvents[i].opinion.value);
-                Assert.AreEqual(data.company.OpinionEvents[i].publicity.value, gd.company.OpinionEvents[i].publicity.value);
+                CompareOpinionEvent(data.company.OpinionEvents[i], gd.company.OpinionEvents[i]);
             }
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);
@@ -213,6 +260,11 @@ namespace UnityTest
             Assert.IsTrue(gd.research == data.research);
 		}
 
+        private void CompareOpinionEvent(OpinionEvent oe, OpinionEvent oe_) {
+            Assert.AreEqual(oe.opinion.value, oe_.opinion.value);
+            Assert.AreEqual(oe.publicity.value, oe_.publicity.value);
+        }
+
         private void CompareEffectSets(EffectSet es, EffectSet es_) {
             List<StatBuff> wes = es.workerEffects;
             List<StatBuff> wes_ = es_.workerEffects;
@@ -226,6 +278,9 @@ namespace UnityTest
             }
 
             Assert.AreEqual(es.cash, es_.cash);
+            Assert.AreEqual(es.research.value, es_.research.value);
+            Assert.AreEqual(es.aiCompany, es_.aiCompany);
+            Assert.AreEqual(es.gameEvent, es_.gameEvent);
 
             List<ProductEffect> pes = es.productEffects;
             List<ProductEffect> pes_ = es_.productEffects;
@@ -300,6 +355,21 @@ namespace UnityTest
             }
 
             return product;
+        }
+
+        private Perk CreatePerk(int i) {
+            Perk p = ScriptableObject.CreateInstance<Perk>();
+            p.name = string.Format("PERK{0}", i);
+            p.upgradeLevel = i;
+            return p;
+        }
+
+        private MiniCompany CreateMiniCompany(int i) {
+            MiniCompany mc = ScriptableObject.CreateInstance<MiniCompany>();
+            mc.name = string.Format("MC{0}", i);
+            mc.baseCost = i*1000;
+            mc.revenue = i*1000;
+            return mc;
         }
 
         private EffectSet CreateEffectSet() {

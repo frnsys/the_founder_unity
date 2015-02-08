@@ -21,12 +21,14 @@ namespace UnityTest
         }
     }
 
+
 	[TestFixture]
 	internal class EventTests
 	{
         private GameObject gameObj;
         private GameData gd;
         private EventManager em;
+        private GameManager gm;
 
         private GameEvent gE = null;
 
@@ -34,10 +36,11 @@ namespace UnityTest
         public void SetUp() {
             gE = new GameEvent("Some event", 1f);
 
-            gameObj = new GameObject("Event Manager");
-            em = gameObj.AddComponent<EventManager>();
+            gameObj = new GameObject("Game Manager");
+            gm = gameObj.AddComponent<GameManager>();
             gd = GameData.New("DEFAULTCORP");
-            em.Load(gd);
+            gm.Load(gd);
+            em = gm.eventManager;
         }
 
         [TearDown]
@@ -45,6 +48,7 @@ namespace UnityTest
             UnityEngine.Object.DestroyImmediate(gameObj);
             gE = null;
             em = null;
+            gm = null;
         }
 
 		[Test]
@@ -77,7 +81,7 @@ namespace UnityTest
 
             em.Tick();
 
-            Assert.AreEqual(gE.delay, 9);
+            Assert.AreEqual(gE.countdown, 9);
         }
 
         [Test]
@@ -162,19 +166,16 @@ namespace UnityTest
             gd.company = new Company("Foo Inc").Init();
 
             em.EvaluateSpecialEvents();
-
-            // Our test listener to listen for and capture the event.
-            TestEventListener eL = new TestEventListener();
-
-            Assert.AreEqual(eL.triggeredEvent, null);
             Assert.IsTrue(gd.specialEventsPool.Contains(gE));
 
+            // Note we don't test that the event has triggered
+            // because there is a 45s delay.
+            // But the event is removed before it is triggered
+            // so that it doesn't trigger multiple times.
             gd.company.publicity.baseValue = 40;
-
             em.EvaluateSpecialEvents();
-
-            Assert.AreEqual(eL.triggeredEvent, gE);
             Assert.IsFalse(gd.specialEventsPool.Contains(gE));
+
         }
     }
 }

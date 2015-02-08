@@ -73,7 +73,7 @@ public class Worker : HasStats {
             }
 
             // TO DO tweak this.
-            return Mathf.Max(0, salary * (-adjustedDiff/10 * 1000));
+            return Mathf.Max(0, salary + (-adjustedDiff/10 * 1000));
         }
         return baseMinSalary;
     }
