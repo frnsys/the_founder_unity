@@ -108,6 +108,9 @@ public class GameEvent : ScriptableObject {
             case Condition.Type.Employees:
                 comparison = c.employeesAcrossLocations;
                 break;
+            case Condition.Type.OfficeLevel:
+                comparison = (int)c.office;
+                break;
         }
 
         if (cond.greater)
@@ -130,7 +133,8 @@ public class GameEvent : ScriptableObject {
             Date,
             ProductsLaunched,
             Locations,
-            Employees
+            Employees,
+            OfficeLevel
         }
     }
 
