@@ -132,10 +132,9 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     void RandomlyPlaceEmployee(GameObject obj) {
         // Random starting location in the office.
         // x_1 + Random.value*(x_2 - x_1)
-        // Note: x_1=x, x_2=z, z_1=y, z_2=w
         Vector4 bounds = currentOffice.bounds;
-        float x = bounds.x + (bounds.z - bounds.x) * Random.value;
-        float z = bounds.y + (bounds.w - bounds.y) * Random.value;
+        float x = bounds[0] + (bounds[2] - bounds[0]) * Random.value;
+        float z = bounds[1] + (bounds[3] - bounds[1]) * Random.value;
         obj.transform.localPosition = new Vector3(x, 7f, z);
     }
 

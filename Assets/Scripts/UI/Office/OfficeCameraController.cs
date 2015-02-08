@@ -7,13 +7,25 @@ using System.Collections;
 
 public class OfficeCameraController : MonoBehaviour {
     public Camera officeCamera;
+    private UIOfficeManager om;
 
-    // TO DO These are hardcoded for now,
-    // but eventually should be generated from the office layout.
-    private float lBound = 8f;
-    private float rBound = -8f;
-    private float tBound = 8f;
-    private float bBound = -8f;
+    // These bounds are based on the bounds of the current office.
+    private float lBound {
+        get { return om.currentOffice.bounds[3] - 2f; }
+    }
+    private float rBound {
+        get { return om.currentOffice.bounds[0] - 2f; }
+    }
+    private float tBound {
+        get { return om.currentOffice.bounds[2] + 5; }
+    }
+    private float bBound {
+        get { return om.currentOffice.bounds[1] + 5; }
+    }
+
+    void Start() {
+        om = UIOfficeManager.Instance;
+    }
 
     void OnDrag(Vector2 delta) {
         if (!Input.touchSupported || Input.touchCount == 1) {
