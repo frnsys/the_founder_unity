@@ -43,7 +43,9 @@ public class Perk : TemplateResource<Perk> {
         get { return upgradeLevel < upgrades.Count - 1; }
     }
     public bool NextAvailable(Company c) {
-        return !hasNext ? false : next.Available(c);
+        // A perks availability depends on whether or not the company
+        // has the necessary technologies and a high enough office level upgrade.
+        return !hasNext ? false : (int)c.office >= upgradeLevel && next.Available(c);
     }
     public float cost {
         get { return current.cost; }
