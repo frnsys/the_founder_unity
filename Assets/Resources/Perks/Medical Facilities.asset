@@ -14,7 +14,7 @@ MonoBehaviour:
   upgradeLevel: 0
   upgrades:
   - name: On-Site Medical Facilities
-    cost: 50000
+    cost: 1000
     description: If employees aren't feeling well, we need to get them in top-shape
       again as soon as possible.
     mesh: {fileID: 4300024, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
@@ -23,12 +23,12 @@ MonoBehaviour:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -60,23 +60,24 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Gene Therapy Lounges
     cost: 1000
     description: Offer complimentary gene reconfiguration so employees always feel
       at the top of their game.
-    mesh: {fileID: 0}
-    texture: {fileID: 0}
+    mesh: {fileID: 4300042, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 9db28208368034dd99580bd9efaea63b, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -100,4 +101,5 @@ MonoBehaviour:
       eventProbability: 0
       productEffects: []
       workerEffects: []
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

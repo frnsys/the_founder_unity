@@ -14,21 +14,21 @@ MonoBehaviour:
   upgradeLevel: 0
   upgrades:
   - name: Unlimited Vacation
-    cost: 50000
+    cost: 1000
     description: People love the idea of unlimited vacation. Luckily, we know that
       social pressure will keep anyone from fully taking advantage of it :)
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 9b95f701258674bbf87ba7eb5f34eefc, type: 3}
+    mesh: {fileID: 4300040, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 79f6cdd49d98b4ea3a10fb97d4ece50d, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -60,6 +60,7 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Vacation Implants
     cost: 100000
@@ -72,12 +73,12 @@ MonoBehaviour:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -109,4 +110,5 @@ MonoBehaviour:
         value: 18
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

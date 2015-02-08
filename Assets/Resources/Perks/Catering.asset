@@ -14,7 +14,7 @@ MonoBehaviour:
   upgradeLevel: 0
   upgrades:
   - name: Snacks
-    cost: 50000
+    cost: 1000
     description: Snacks to keep everyone energized throughout the day.
     mesh: {fileID: 4300014, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     texture: {fileID: 2800000, guid: 2145c697f186c456998fc49be354a6d9, type: 3}
@@ -22,12 +22,12 @@ MonoBehaviour:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -59,23 +59,24 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Catering
-    cost: 100000
+    cost: 1000
     description: Keep your employees fed at the office so they don't have to leave
       for meals. Working through lunch is a cultural value!
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: ef87f01ef071843b2914eb2d4839b452, type: 3}
+    mesh: {fileID: 4300048, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: d5bae404c0b054e84bb44e6c8d5f9766, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -107,23 +108,24 @@ MonoBehaviour:
         value: 18
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Gourmet Chef
-    cost: 100000
+    cost: 1000
     description: Keep your employees fed at the office so they don't have to leave
       for meals.
-    mesh: {fileID: 0}
-    texture: {fileID: 0}
+    mesh: {fileID: 4300046, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: d5bae404c0b054e84bb44e6c8d5f9766, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -147,4 +149,5 @@ MonoBehaviour:
       eventProbability: 0
       productEffects: []
       workerEffects: []
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

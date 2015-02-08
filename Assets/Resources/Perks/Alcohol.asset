@@ -22,12 +22,12 @@ MonoBehaviour:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -59,22 +59,23 @@ MonoBehaviour:
         value: 5
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Microbrew Beers
-    cost: 10000
+    cost: 1000
     description: Fancier beers
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: ef87f01ef071843b2914eb2d4839b452, type: 3}
+    mesh: {fileID: 4300052, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 2e93003091da740db83d1449e45431c5, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -106,22 +107,23 @@ MonoBehaviour:
         value: 8
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Cocktail Lounge
-    cost: 15000
+    cost: 1000
     description: All out
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 13a649b7753e7432ebd8557008571ed4, type: 3}
+    mesh: {fileID: 4300050, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 9db28208368034dd99580bd9efaea63b, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -145,4 +147,5 @@ MonoBehaviour:
       eventProbability: 0
       productEffects: []
       workerEffects: []
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

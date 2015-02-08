@@ -747,7 +747,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 10.9499998
+  aspectRatio: .0333333351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -773,6 +773,45 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!1 &86153027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 86153029}
+  - 114: {fileID: 86153028}
+  m_Layer: 0
+  m_Name: Benchy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &86153028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86153027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2133502448, guid: ac3087c708d1a4f598ccfe6b8475f4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &86153029
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86153027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &101219723
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +970,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 96, y: 32, z: 0}
+  m_Size: {x: 116, y: 32, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &117180924
 MonoBehaviour:
@@ -1009,13 +1048,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .338235319, b: .338235319, a: 1}
   mPivot: 4
-  mWidth: 96
+  mWidth: 116
   mHeight: 32
   mDepth: 1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3
+  aspectRatio: 3.625
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1733,8 +1772,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b33be20692c47e690fa5f9c4a42dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  window: {fileID: 0}
-  duration: 1
 --- !u!64 &250413107
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1964,7 +2001,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 10.3000002
+  aspectRatio: .0333333351
 --- !u!1 &308238124
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,8 +2818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b33be20692c47e690fa5f9c4a42dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  window: {fileID: 100020, guid: 70c26f31ca6f64b82b52c1d10590b7ca, type: 2}
-  duration: 1
 --- !u!23 &452134744
 Renderer:
   m_ObjectHideFlags: 0
@@ -4165,7 +4200,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 10.9499998
+  aspectRatio: .0333333351
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -6285,7 +6320,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .684374988
+  aspectRatio: 1
 --- !u!1 &1107399996
 GameObject:
   m_ObjectHideFlags: 0
@@ -8628,7 +8663,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 10.3000002
+  aspectRatio: .0333333351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -12373,7 +12408,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .353794634
+  aspectRatio: 1
 --- !u!114 &2013164179
 MonoBehaviour:
   m_ObjectHideFlags: 0
