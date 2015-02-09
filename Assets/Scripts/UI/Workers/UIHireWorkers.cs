@@ -35,6 +35,7 @@ public class UIHireWorkers : UIFullScreenPager {
             UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
                 ic.Close_();
                 GameManager.Instance.workerManager.HireWorker(worker);
+                RemoveWorker(worker);
                 UIManager.Instance.Alert("BOOT SEQUENCE COMPLETE. READY TO SERVE " + company.name + ".");
             };
 

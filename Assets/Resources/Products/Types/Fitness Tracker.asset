@@ -11,10 +11,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
   m_Name: Fitness Tracker
   m_EditorClassIdentifier: 
+  names: 
   description: 
   difficulty: 4
+  design_W: 1
+  marketing_W: 1
+  engineering_W: 1
+  design_I: 100
+  marketing_I: 100
+  engineering_I: 100
+  maxLongevity: 1000
+  maxRevenue: 1000
+  revenueModel:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: .5
+      value: 1.00342464
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .993852437
+      value: -.00342464447
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   mesh: {fileID: 4300006, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   texture: {fileID: 2800000, guid: e3bbd9ed9027445849b563271c444060, type: 3}
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
   requiredVerticals:
   - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
   requiredInfrastructure:

@@ -10,7 +10,7 @@ public class UIMentor : UIPopup {
     public GameObject model;
     public UITexture overlay;
 
-    private float overlayAlpha = 0.3f;
+    private float overlayAlpha = 0.001f;
 
     void OnEnable() {
         Show(box);

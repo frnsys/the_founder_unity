@@ -13,7 +13,7 @@ public class Product : HasStats {
 
     public string description {
         get {
-            return recipe.description != null ? recipe.description : "There's not a lot to say about this product.";
+            return recipe != null && recipe.description != null ? recipe.description : productTypes[0].description;
         }
     }
 
@@ -36,13 +36,13 @@ public class Product : HasStats {
     public Mesh mesh {
         get {
             // Fallback to first product type's mesh.
-            return recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
+            return recipe != null && recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
         }
     }
     public Texture texture {
         get {
             // Fallback to first product type's texture.
-            return recipe.texture != null ? recipe.texture : productTypes[0].texture;
+            return recipe != null && recipe.texture != null ? recipe.texture : productTypes[0].texture;
         }
     }
 

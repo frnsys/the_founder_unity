@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: San Francisco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - 4: {fileID: 400024}
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Shenzhen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - 4: {fileID: 400030}
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300004}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Dublin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - 4: {fileID: 400036}
   - 33: {fileID: 3300006}
   - 23: {fileID: 2300006}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Berlin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - 4: {fileID: 400038}
   - 33: {fileID: 3300008}
   - 23: {fileID: 2300008}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Toronto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - 4: {fileID: 400042}
   - 33: {fileID: 3300010}
   - 23: {fileID: 2300010}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Los Angeles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   - 4: {fileID: 400044}
   - 33: {fileID: 3300012}
   - 23: {fileID: 2300012}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Boston
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - 4: {fileID: 400048}
   - 33: {fileID: 3300014}
   - 23: {fileID: 2300014}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: New York
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - 4: {fileID: 400050}
   - 33: {fileID: 3300016}
   - 23: {fileID: 2300016}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: London
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,8 @@ GameObject:
   - 33: {fileID: 3300018}
   - 23: {fileID: 2300018}
   - 114: {fileID: 11400002}
-  m_Layer: 10
+  - 114: {fileID: 11400010}
+  m_Layer: 8
   m_Name: Earth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +338,7 @@ GameObject:
   - 4: {fileID: 400054}
   - 33: {fileID: 3300020}
   - 23: {fileID: 2300020}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Bangalore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +577,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100052}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 9, y: 270, z: 425}
+  m_LocalPosition: {x: 9, y: 270, z: 200}
   m_LocalScale: {x: 139.9776, y: 139.977585, z: 139.977585}
   m_Children:
   - {fileID: 400050}
@@ -1089,7 +1090,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3002
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1114,6 +1115,18 @@ MonoBehaviour:
   scrollView: {fileID: 11400018}
   locationPrefab: {fileID: 100010, guid: c84620e3fb2924268aa409d7120b6dd5, type: 2}
   earthObject: {fileID: 100052}
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9998be0d09d42918716e850d450779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderQueue: 4000
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1227,7 +1240,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3002
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -1346,7 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 1106
+  itemSize: 1355
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -1467,14 +1480,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1106
-  mHeight: 680
+  mWidth: 1355
+  mHeight: 681
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.62647057
-  childSize: {x: 1106, y: 680}
+  aspectRatio: 1.98972094
+  childSize: {x: 1355, y: 681}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 280}
 --- !u!114 &11400036

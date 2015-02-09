@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
   m_Name: Mark Stanley
   m_EditorClassIdentifier: 
-  texture: {fileID: 2800000, guid: fcbafde840ab042658503d5071775645, type: 3}
+  avatar: {fileID: 0}
+  texture: {fileID: 2800000, guid: e46b995deb2644c918602c9f1f5864f5, type: 3}
+  robot: 0
   salary: 0
   bio: 
   description: 'Can''t really do much of anything, but comes from a loaded family.
@@ -39,12 +41,12 @@ MonoBehaviour:
     unlocks:
       productTypes: []
       workers: []
-      items: []
       perks: []
-      stores: 
       locations: []
       verticals: []
       promos: []
+      recruitments: []
+      companies: []
     cash: 50000
     research:
       name: Research
@@ -66,5 +68,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
+    aiCompany: {fileID: 0}

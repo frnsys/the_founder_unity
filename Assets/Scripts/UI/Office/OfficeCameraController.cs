@@ -25,6 +25,7 @@ public class OfficeCameraController : MonoBehaviour {
 
     void Start() {
         om = UIOfficeManager.Instance;
+        Debug.Log(om);
     }
 
     void OnDrag(Vector2 delta) {

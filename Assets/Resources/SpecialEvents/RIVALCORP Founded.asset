@@ -52,8 +52,13 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
+    aiCompany: {fileID: 11400000, guid: 49092407a7071464bb729bad90a62bd1, type: 2}
   actions: []
   conditions:
   - value: 200182

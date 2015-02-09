@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
   m_Name: Jeffrey Zhou
   m_EditorClassIdentifier: 
-  texture: {fileID: 2800000, guid: 089735455424641f8bf3145cfea1b416, type: 3}
+  avatar: {fileID: 0}
+  texture: {fileID: 2800000, guid: 0ec82e9048c22487e80e0c24e8ec8a3a, type: 3}
+  robot: 0
   salary: 0
   bio: 
   description: A brilliant product engineer. Creative and clever. Great for product-focused
@@ -39,12 +41,12 @@ MonoBehaviour:
     unlocks:
       productTypes: []
       workers: []
-      items: []
       perks: []
-      stores: 
       locations: []
       verticals: []
       promos: []
+      recruitments: []
+      companies: []
     cash: 0
     research:
       name: Research
@@ -66,5 +68,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
+    aiCompany: {fileID: 0}

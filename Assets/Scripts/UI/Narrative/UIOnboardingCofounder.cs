@@ -9,12 +9,14 @@ public class UIOnboardingCofounder : MonoBehaviour {
             cofounder_ = value;
             label.text = cofounder_.name;
             description.text = cofounder_.description;
+            mesh.material.mainTexture = cofounder_.texture;
         }
     }
 
     public UILabel label;
     public UILabel description;
     public UITexture background;
+    public MeshRenderer mesh;
 }
 
 

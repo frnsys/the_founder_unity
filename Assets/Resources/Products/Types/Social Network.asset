@@ -11,16 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
   m_Name: Social Network
   m_EditorClassIdentifier: 
-  names: 
-  description: 
+  names: Friendbook, Palster, Lets Connect, Digibuds
+  description: People are going to love this. I guarantee it.
   difficulty: 2
   design_W: 1
   marketing_W: 1
   engineering_W: 1
-  design_I: 100
-  marketing_I: 100
-  engineering_I: 100
-  maxLongevity: 1000
+  design_I: 1
+  marketing_I: 1
+  engineering_I: 1
+  maxLongevity: 100
   maxRevenue: 1000
   revenueModel:
     serializedVersion: 2
@@ -30,8 +30,13 @@ MonoBehaviour:
       inSlope: 2
       outSlope: 2
       tangentMode: 0
-    - time: 1
-      value: 1
+    - time: .5
+      value: 1.00342464
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .993852437
+      value: -.00342464447
       inSlope: 0
       outSlope: 0
       tangentMode: 0

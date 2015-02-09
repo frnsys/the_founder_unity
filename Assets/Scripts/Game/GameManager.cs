@@ -151,11 +151,11 @@ public class GameManager : Singleton<GameManager> {
 
     void Start() {
         // TESTING start a test game.
-        Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
-        Location location = Location.Load("San Francisco");
-        Vertical vertical = Vertical.Load("Information");
-        InitializeGame(cofounder, location, vertical);
-        StartGame();
+        //Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
+        //Location location = Location.Load("San Francisco");
+        //Vertical vertical = Vertical.Load("Information");
+        //InitializeGame(cofounder, location, vertical);
+        //StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
@@ -339,7 +339,8 @@ public class GameManager : Singleton<GameManager> {
             }
 
             // A random AI company makes a move.
-            activeAICompanies[Random.Range(0, activeAICompanies.Count)].Decide();
+            if (Random.value < 0.2)
+                activeAICompanies[Random.Range(0, activeAICompanies.Count)].Decide();
 
             // Update workers' off market times.
             foreach (Worker w in data.unlocked.workers.Where(w => w.offMarketTime > 0)) {

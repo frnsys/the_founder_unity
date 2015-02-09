@@ -130,7 +130,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: 5.33850653e-08, y: -.707106948, z: -.70710659, w: -5.33850901e-08}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: -1.62920685e-07}
   m_LocalPosition: {x: -120, y: 0, z: 200}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
@@ -189,7 +189,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 3a0751bdeccc64c749dd32fd441f167a, type: 2}
+  - {fileID: 2100000, guid: a8032affc94154eb883a3431cf780b7a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -203,7 +203,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_Mesh: {fileID: 4300000, guid: e56e051a7880c4030af2b98adc3aca53, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 2b66a396691714a92884f42c7cf78340, type: 3}
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -292,6 +292,7 @@ MonoBehaviour:
   label: {fileID: 11400006}
   description: {fileID: 11400000}
   background: {fileID: 11400016}
+  mesh: {fileID: 2300000}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
