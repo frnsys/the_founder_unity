@@ -18,35 +18,8 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         get { return "Assets/Resources/Products/Recipes"; }
     }
 
-    List<ProductType> productTypes;
-    string[] pt_o;
     protected override void DrawInspector() {
-        productTypes = ProductType.LoadAll();
-        pt_o = productTypes.Select(i => i.ToString()).ToArray();
-
-        EditorGUILayout.LabelField("ProductTypes");
-        target.name = EditorGUILayout.TextField("Name", target.name);
-        EditorGUI.indentLevel = 1;
-        if (target.productTypes == null)
-            target.productTypes = new List<ProductType>();
-        for (int i=0; i < target.productTypes.Count; i++) {
-            EditorGUILayout.BeginHorizontal();
-            int pt_i = EditorGUILayout.Popup(Array.IndexOf(pt_o, target.productTypes[i].ToString()), pt_o);
-            target.productTypes[i] = productTypes[pt_i];
-            if (GUILayout.Button("Delete")) {
-                target.productTypes.Remove(target.productTypes[i]);
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        // Maximum two product types for a product.
-        if (target.productTypes.Count <= 2) {
-            if (GUILayout.Button("Add New Product Type")) {
-                target.productTypes.Add(productTypes[0]);
-            }
-        }
-        EditorGUI.indentLevel = 0;
-        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("productTypes"), true);
 
         EditorStyles.textField.wordWrap = true;
         EditorGUILayout.LabelField("Names (comma-delimited)");

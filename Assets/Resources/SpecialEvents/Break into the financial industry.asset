@@ -9,14 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Further Expansion Opportunities
+  m_Name: Break into the financial industry
   m_EditorClassIdentifier: 
   type: 0
-  description: our nearby colonies have allowed us to sustain growth, but even this
-    is not enough. I bet if we research the Alcubierre Drive, we'll be able to colonize
-    new markets in the distant stars!
+  description: 'We''ve been very successful at manufacturing the desire for our products
+    - but people are having a hard time affording our prices. You know, I bet if we
+    found ways to lend them the money, it would be win-win. We would win twice.
+
+'
   from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 2800000, guid: 6d591a76647d84ac0992e5e92fde0365, type: 3}
+  image: {fileID: 2800000, guid: c025eff9cd1cd46db8f71fe9cf51e909, type: 3}
   _delay: 0
   countdown: 0
   probability: 0
@@ -27,7 +29,8 @@ MonoBehaviour:
       workers: []
       perks: []
       locations: []
-      verticals: []
+      verticals:
+      - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
       promos: []
       recruitments: []
       companies: []
@@ -61,9 +64,6 @@ MonoBehaviour:
     aiCompany: {fileID: 0}
   actions: []
   conditions:
-  - value: 250000
+  - value: 100
     greater: 1
-    type: 3
-  - value: 14
-    greater: 1
-    type: 6
+    type: 1

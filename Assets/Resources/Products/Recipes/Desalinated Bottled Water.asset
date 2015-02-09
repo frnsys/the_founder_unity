@@ -8,19 +8,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Further Expansion Opportunities
+  m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
+  m_Name: Desalinated Bottled Water
   m_EditorClassIdentifier: 
-  type: 0
-  description: our nearby colonies have allowed us to sustain growth, but even this
-    is not enough. I bet if we research the Alcubierre Drive, we'll be able to colonize
-    new markets in the distant stars!
-  from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 2800000, guid: 6d591a76647d84ac0992e5e92fde0365, type: 3}
-  _delay: 0
-  countdown: 0
-  probability: 0
-  repeatable: 0
+  description: Declining freshwater supplies? No problem! We've got the solution right
+    here.
+  productTypes:
+  - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
+  mesh: {fileID: 0}
+  texture: {fileID: 0}
+  names: Fresher, Hydra
+  design_W: 2
+  marketing_W: 1
+  engineering_W: 2
+  design_I: 100
+  marketing_I: 100
+  engineering_I: 100
+  maxLongevity: 1000
+  maxRevenue: 1e+09
   effects:
     unlocks:
       productTypes: []
@@ -59,11 +64,3 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
-  actions: []
-  conditions:
-  - value: 250000
-    greater: 1
-    type: 3
-  - value: 14
-    greater: 1
-    type: 6

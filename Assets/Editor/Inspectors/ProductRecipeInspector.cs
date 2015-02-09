@@ -10,43 +10,14 @@ internal class ProductRecipeInspector : Editor {
 
     ProductRecipe p;
 
-    List<ProductType> productTypes;
-    string[] pt_o;
-
     void OnEnable() {
         p = target as ProductRecipe;
-
-        productTypes = ProductType.LoadAll();
-        pt_o = productTypes.Select(i => i.ToString()).ToArray();
-
-        // Defaults
-        if (p.productTypes == null)
-            p.productTypes = new List<ProductType>();
     }
 
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
-        EditorGUILayout.LabelField("ProductTypes");
-        EditorGUI.indentLevel = 1;
-        for (int i=0; i < p.productTypes.Count; i++) {
-            EditorGUILayout.BeginHorizontal();
-            int pt_i = EditorGUILayout.Popup(Array.IndexOf(pt_o, p.productTypes[i].ToString()), pt_o);
-            p.productTypes[i] = productTypes[pt_i];
-            if (GUILayout.Button("Delete")) {
-                p.productTypes.Remove(p.productTypes[i]);
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
-        // Maximum two product types for a product.
-        if (p.productTypes.Count <= 2) {
-            if (GUILayout.Button("Add New Product Type")) {
-                p.productTypes.Add(productTypes[0]);
-            }
-        }
-        EditorGUI.indentLevel = 0;
-        EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("productTypes"), true);
 
         EditorStyles.textField.wordWrap = true;
         EditorGUILayout.LabelField("Names (comma-delimited)");

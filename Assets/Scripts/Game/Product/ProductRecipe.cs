@@ -15,7 +15,7 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
 
     public string description;
 
-    public List<ProductType> productTypes;
+    public ProductType[] productTypes;
 
     // For the physical representation of the product.
     public Mesh mesh;
@@ -44,7 +44,7 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     public EffectSet effects = new EffectSet();
 
     public override string ToString() {
-        return string.Join(".", productTypes.Select(pt => pt.name).ToArray());
+        return string.Join(".", productTypes.Where(pt => pt != null).Select(pt => pt.name).ToArray());
     }
 
     public static new ProductRecipe Load(string name) {
@@ -52,7 +52,7 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     }
 
     public static ProductRecipe LoadFromTypes(List<ProductType> productTypes) {
-        string name = string.Join(".", productTypes.Select(pt => pt.name).ToArray());
+        string name = string.Join(".", productTypes.OrderBy(pt => pt.name).Select(pt => pt.name).ToArray());
         name = name.Replace("(Clone)", "");
         return Load(name);
     }

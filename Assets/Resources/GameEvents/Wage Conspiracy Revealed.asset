@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Wage Conspiracy Revealed
+  m_EditorClassIdentifier: 
+  type: 1
+  description: A leaked email exchange between the CEOs of<AICOMPANY> and <PLAYERCOMPANY>
+    revealed a conspiracy to lower employee salaries through illegal no-compete agreements.
+  from: The Times
+  image: {fileID: 2800000, guid: f40697ade29d84d56b8ca7aa74311ac4, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 1
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: Wage Conspiracy Revealed
+      opinion:
+        name: Opinion
+        value: -40
+        duration: 0
+        type: 0
+      publicity:
+        name: Publicity
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 24
+    eventProbability: 1
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+  actions:
+  - name: 
+    effects:
+      unlocks:
+        productTypes: []
+        workers: []
+        perks: []
+        locations: []
+        verticals: []
+        promos: []
+        recruitments: []
+        companies: []
+      cash: -5000
+      research:
+        name: 
+        value: 0
+        duration: 0
+        type: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: 
+          value: 0
+          duration: 0
+          type: 0
+        publicity:
+          name: 
+          value: 0
+          duration: 0
+          type: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
+      productEffects: []
+      workerEffects:
+      - name: Cleverness
+        value: 5
+        duration: 0
+        type: 0
+      aiCompany: {fileID: 0}
+  conditions: []

@@ -9,14 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Further Expansion Opportunities
+  m_Name: Found our own state
   m_EditorClassIdentifier: 
   type: 0
-  description: our nearby colonies have allowed us to sustain growth, but even this
-    is not enough. I bet if we research the Alcubierre Drive, we'll be able to colonize
-    new markets in the distant stars!
+  description: we've accomplished quite a bit of innovative research, but we could
+    go a lot faster if we were away from ethics boards and other government regulations.
+    you know - we could try establishing our own state offshore, where those regulations
+    can't reach us.
   from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 2800000, guid: 6d591a76647d84ac0992e5e92fde0365, type: 3}
+  image: {fileID: 2800000, guid: f40697ade29d84d56b8ca7aa74311ac4, type: 3}
   _delay: 0
   countdown: 0
   probability: 0
@@ -26,7 +27,8 @@ MonoBehaviour:
       productTypes: []
       workers: []
       perks: []
-      locations: []
+      locations:
+      - {fileID: 11400000, guid: bd977b53f54734b4090a31ddaba092b1, type: 2}
       verticals: []
       promos: []
       recruitments: []
@@ -46,7 +48,7 @@ MonoBehaviour:
         type: 0
       publicity:
         name: Publicity
-        value: 0
+        value: 20
         duration: 0
         type: 0
     gameEvent: {fileID: 0}
@@ -61,9 +63,6 @@ MonoBehaviour:
     aiCompany: {fileID: 0}
   actions: []
   conditions:
-  - value: 250000
+  - value: 0
     greater: 1
-    type: 3
-  - value: 14
-    greater: 1
-    type: 6
+    type: 5

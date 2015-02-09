@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: One of our ships found aliens!
   m_EditorClassIdentifier: 
   type: 0
-  description: Holy shit - one of our convoy ships encountered extraterrestrial life.
-    Do you know what this means? An entire untapped market!
+  description: holy shit - one of our convoy ships encountered extraterrestrial life.
+    do you know what this means? an entire untapped market!
   from: <COFOUNDER>@<PLAYERCOMPANY>.com
   image: {fileID: 2800000, guid: e8bb087bc775b4ce3a2ef630e52758e9, type: 3}
   _delay: 0
@@ -51,6 +51,10 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 1a093e3d09d4446f499e925b2b298c88, type: 2}
     eventDelay: 1
     eventProbability: 1
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

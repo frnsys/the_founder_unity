@@ -8,19 +8,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: Further Expansion Opportunities
+  m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
+  m_Name: Seasteading State
   m_EditorClassIdentifier: 
-  type: 0
-  description: our nearby colonies have allowed us to sustain growth, but even this
-    is not enough. I bet if we research the Alcubierre Drive, we'll be able to colonize
-    new markets in the distant stars!
-  from: <COFOUNDER>@<PLAYERCOMPANY>.com
-  image: {fileID: 2800000, guid: 6d591a76647d84ac0992e5e92fde0365, type: 3}
-  _delay: 0
-  countdown: 0
-  probability: 0
-  repeatable: 0
+  description: A customized state, where you are its sovereign leader. No need to
+    worry about mucky government regulations or ethical committees from slowing down
+    research here!
+  rotation: {x: 0, y: 0, z: 0}
+  cost: 1e+06
+  market: 0
+  capacity:
+    keys: 00000000010000000200000003000000
+    values: 00000000000000000000000000000000
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
+  infrastructure:
+    keys: 00000000010000000200000003000000
+    values: 00000000000000000000000000000000
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
   effects:
     unlocks:
       productTypes: []
@@ -34,7 +42,7 @@ MonoBehaviour:
     cash: 0
     research:
       name: Research
-      value: 0
+      value: 1000
       duration: 0
       type: 0
     opinionEvent:
@@ -59,11 +67,3 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
-  actions: []
-  conditions:
-  - value: 250000
-    greater: 1
-    type: 3
-  - value: 14
-    greater: 1
-    type: 6

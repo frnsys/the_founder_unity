@@ -42,6 +42,22 @@ public class UIEffectItem : MonoBehaviour {
             RenderBuffEffect(new StatBuff("Cash", es.cash), null);
         }
 
+        if (es.forgettingRate != 0) {
+            RenderBuffEffect(new StatBuff("Forgetting Rate", es.forgettingRate), null);
+        }
+
+        if (es.spendingMultiplier != 0) {
+            RenderBuffEffect(new StatBuff("Consumer Spending", es.spendingMultiplier), null);
+        }
+
+        if (es.wageMultiplier != 0) {
+            RenderBuffEffect(new StatBuff("Consumer Spending", es.wageMultiplier), null);
+        }
+
+        if (es.economicStability != 0) {
+            RenderBuffEffect(new StatBuff("Economic Stability", es.economicStability), null);
+        }
+
         if (es.opinionEvent.opinion.value != 0) {
             RenderBuffEffect(es.opinionEvent.opinion, null);
         }
