@@ -14,11 +14,12 @@ MonoBehaviour:
   description: Cutting-edge products are borne within the top-tier campuses in the
     Boston area. Brilliant engineering talent for both information and hardware are
     abound.
+  rotation: {x: -50.2999992, y: -167.899994, z: 0}
   cost: 1e+06
   market: 0
   capacity:
     keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
+    values: 04000000020000000200000004000000
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000
@@ -32,12 +33,12 @@ MonoBehaviour:
     unlocks:
       productTypes: []
       workers: []
-      items: []
       perks: []
-      stores: 
       locations: []
       verticals: []
       promos: []
+      recruitments: []
+      companies: []
     cash: 0
     research:
       name: Research
@@ -59,6 +60,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
-  rotation: {x: -50.2999992, y: -167.899994, z: 0}
+    aiCompany: {fileID: 0}

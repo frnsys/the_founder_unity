@@ -220,7 +220,7 @@ public class AICompany : Company {
                 }
             }
 
-            // Rank the candidates and hire as many as possible.
+            // Rank the candidates and hire one.
             foreach (Worker w in candidates.OrderBy(w => WorkerROI(w))) {
                 if (workers.Count < sizeLimit) {
                     // Fake an offer.
@@ -228,9 +228,10 @@ public class AICompany : Company {
                     // Or it may be too high, in which case wages get driven up.
                     float minSalary = w.MinSalaryForCompany(this);
                     float offer = minSalary * (Random.value + 0.5f);
-                    if (offer >= minSalary) {
+                    if (offer >= minSalary & Random.value < 0.2f) {
                         Debug.Log(string.Format("{0} is hiring {1} for {2:C0} (min was {3:C0})...", name, w.name, offer, minSalary));
                         GameManager.Instance.workerManager.HireWorker(w, this);
+                        break;
                     }
                 } else {
                     break;

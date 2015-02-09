@@ -214,9 +214,10 @@ public class Product : HasStats {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
 
-        float A = design.value;
-        float U = marketing.value;
-        float P = engineering.value;
+        // +1 because the minimum value is 1, not 0.
+        float A = design.value + 1;
+        float U = marketing.value + 1;
+        float P = engineering.value + 1;
 
         // Weights
         float a_w = productTypes.Sum(pt => pt.design_W);
@@ -242,6 +243,13 @@ public class Product : HasStats {
         // Maxmimum lifetime revenue of the product.
         maxRevenue = productTypes.Average(pt => pt.maxRevenue) * score;
 
+        Debug.Log(string.Format("Score {0}", score));
+        Debug.Log(string.Format("Design Value {0}", A));
+        Debug.Log(string.Format("Marketing Value {0}", U));
+        Debug.Log(string.Format("Engineering Value {0}", P));
+        Debug.Log(string.Format("Max Revenue {0}", maxRevenue));
+        Debug.Log(string.Format("Longevity {0}", longevity));
+
         _state = State.LAUNCHED;
     }
 
@@ -250,18 +258,26 @@ public class Product : HasStats {
 
         float t = elapsedTime/longevity;
         float revenue = 0;
+        Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        Debug.Log(string.Format("Time {0}", t));
         if (launched && !disabled) {
             revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
+            Debug.Log(string.Format("Raw revenue: {0}", revenue));
 
-            // Economy's impacts.
+            // Economy's impact.
             revenue *= GameManager.Instance.economyMultiplier;
+            Debug.Log(string.Format("After economy: {0}", revenue));
+
+            // Consumer spending impact.
             revenue *= GameManager.Instance.spendingMultiplier;
+            Debug.Log(string.Format("After consumer spending: {0}", revenue));
 
             // Public opinion's impact.
-            // TO DO this should make sense
-            revenue += company.opinion.value;
+            revenue *= 1 + company.opinion.value/100f;
+            Debug.Log(string.Format("After opinion: {0}", revenue));
 
             revenue *= marketShare;
+            Debug.Log(string.Format("After market share: {0}", revenue));
         }
 
         revenueEarned += revenue;

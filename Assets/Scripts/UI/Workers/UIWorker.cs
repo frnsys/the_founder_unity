@@ -39,9 +39,9 @@ public class UIWorker : MonoBehaviour {
 
             creativity.text = string.Format("Creativity: {0}", worker_.creativity);
             charisma.text = string.Format("Charisma: {0}", worker_.charisma);
-            cleverness.text = string.Format("Cleverness: ", worker_.cleverness);
-            productivity.text = string.Format("Productivity: ", worker_.productivity);
-            happiness.text = string.Format("Happiness: ", worker_.happiness);
+            cleverness.text = string.Format("Cleverness: {0}", worker_.cleverness);
+            productivity.text = string.Format("Productivity: {0}", worker_.productivity);
+            happiness.text = string.Format("Happiness: {0}", worker_.happiness);
         }
     }
 
@@ -55,9 +55,9 @@ public class UIWorker : MonoBehaviour {
         worker = w;
         creativity.text = string.Format("Creativity: {0}", FuzzyStat(worker_.creativity));
         charisma.text = string.Format("Charisma: {0}", FuzzyStat(worker_.charisma));
-        cleverness.text = string.Format("Cleverness: ", FuzzyStat(worker_.cleverness));
-        productivity.text = string.Format("Productivity: ", FuzzyStat(worker_.productivity));
-        happiness.text = string.Format("Happiness: ", FuzzyStat(worker_.happiness));
+        cleverness.text = string.Format("Cleverness: {0}", FuzzyStat(worker_.cleverness));
+        productivity.text = string.Format("Productivity: {0}", FuzzyStat(worker_.productivity));
+        happiness.text = string.Format("Happiness: {0}", FuzzyStat(worker_.happiness));
         credit.text += ". Disclaimer: This is a beta, expect some margin of error.";
         quantObj.SetActive(true);
     }
