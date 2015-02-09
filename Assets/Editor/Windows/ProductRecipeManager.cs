@@ -31,6 +31,10 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         target.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", target.mesh, typeof(Mesh), false);
         target.texture = (Texture)EditorGUILayout.ObjectField("Texture", target.texture, typeof(Texture), false);
 
+        if (target.revenueModel == null)
+            target.revenueModel = new AnimationCurve();
+        target.revenueModel = EditorGUILayout.CurveField("Revenue Model", target.revenueModel, GUILayout.Height(50));
+
         EditorGUILayout.LabelField("Effects");
         if (target.effects == null)
             target.effects = new EffectSet();

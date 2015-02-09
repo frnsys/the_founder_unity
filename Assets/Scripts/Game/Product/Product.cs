@@ -120,12 +120,9 @@ public class Product : HasStats {
     // Revenue earned during the last cycle.
     public float lastRevenue = 0;
 
-    // Maximum revenue you can make off this product.
+    // The revenue model for the product.
     [SerializeField]
-    private float peakRevenuePercent;
-
-    [SerializeField]
-    private float endFuncAdjustment;
+    private AnimationCurve revenueModel;
 
     // How long the product lasts at its peak plateau.
     [SerializeField]
@@ -133,16 +130,6 @@ public class Product : HasStats {
 
     [SerializeField]
     private float maxRevenue;
-
-    // Revenue model parameters.
-    [SerializeField]
-    private float start_mu;
-    [SerializeField]
-    private float start_sd;
-    [SerializeField]
-    private float end_mu;
-    [SerializeField]
-    private float end_sd;
 
     public List<ProductType> productTypes;
 
@@ -168,6 +155,9 @@ public class Product : HasStats {
             if (recipe == null) {
                 recipe = ProductRecipe.LoadDefault();
             }
+            revenueModel = recipe.revenueModel;
+        } else {
+            revenueModel = productTypes[0].revenueModel;
         }
 
         name = GenerateName(c);
@@ -224,46 +214,6 @@ public class Product : HasStats {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
 
-        // We're using a piecewise function consisting of
-        // two normal distributions and one constant.
-        // ------------------------------------------
-        // Product has three life stages:
-        // 1. Start     (normal)
-        // 2. Plateau   (constant)
-        // 3. End       (normal)
-        // |
-        // |          2
-        // | 1   ____________  3
-        // |    /            \
-        // |   /              \
-        // |__/________________\___
-        //
-        // The starting stage can either be slow or exponential growth.
-        // The ending stage can either be slow or exponential decline.
-        //
-        // Parameters:
-        //    mu = mean, mu, µ.
-        //      Positions the peak.
-        //    sd = standard deviation, sigma, σ.
-        //      Controls breadth. Lower sigmas are steeper curves.
-        // Note: Math.Exp(x) = e^x
-
-        // Calculate where to position the graph:
-        // --------------------------------------
-        // We want the graph to have the property of f(0) = 0 so that it starts
-        // at the beginning of the curve when t = 0.
-        // Basically we can calculate t where f(t) = 0 and then use the mean to
-        // shift the graph's position by -t.
-        // 99.7% of the normal distribution's space  is within 3 standard deviations.
-        // Since there is not really a position where f(t) = 0, we can use that
-        // property as an approximation for it, so:
-        // f(t) ≈ 0 for t = mu - 3*sd
-        // Then we can calculate the starting mean with mu - (mu - 3*sd),
-        // i.e. 3*sd.
-
-        // Another useful property is that max(f(t)) == f(mu),
-        // that is, f(t) is at its peak when t = mu.
-
         float A = design.value;
         float U = marketing.value;
         float P = engineering.value;
@@ -278,49 +228,19 @@ public class Product : HasStats {
         float u_i = productTypes.Sum(pt => pt.marketing_I);
         float p_i = productTypes.Sum(pt => pt.engineering_I);
 
-        // Adjusted values, min 0 (no negatives).
-        float A_ = (A/a_i) * a_w;
-        float U_ = (U/u_i) * u_w;
-        float P_ = (P/p_i) * p_w;
-        float combo = A_ + U_ + P_;
+        // Calculate the score, i.e. the percent achieve of the ideal product values.
+        // The maximum score is 1.0. We cap each value individually so that
+        // they don't "bleed over" into others.
+        float A_ = Mathf.Min((A/a_i) * a_w, 1f);
+        float U_ = Mathf.Min((U/u_i) * u_w, 1f);
+        float P_ = Mathf.Min((P/p_i) * p_w, 1f);
+        float score = (A_ + U_ + P_)/(a_w + u_w + p_w);
 
-        // Revenue model params:
-
-        // Lower is better (more explosive growth).
-        start_sd = LimitRange(1/combo, 0.25f, 3.5f);
-
-        // Higher is better (slower decline).
-        end_sd = LimitRange(combo, 0.25f, 3.5f);
-
-        // Time where the plateau begins, see comments above for rationale.
-        start_mu = 3 * start_sd;
-
-        // How long the plateau lasts.
-        // TO DO tweak this to something that makes more sense.
-        longevity = combo/productTypes.Average(pt => pt.maxLongevity);
+        // Revenue model modifications:
+        longevity = productTypes.Average(pt => pt.maxLongevity);
 
         // Maxmimum lifetime revenue of the product.
-        maxRevenue = productTypes.Average(pt => pt.maxRevenue);
-
-        // Time where the plateau ends
-        end_mu = start_mu + longevity;
-
-        // Calculate the peak revenue percentage for the plateau.
-        peakRevenuePercent = Gaussian(start_mu, start_mu, start_sd);
-
-        // Calculate the constant required to vertically shift the
-        // end function so that it's peak intersects with the starting peak.
-        // We apply an extra downward weight at the end (0.05f*end_mu)
-        // to ensure that the end function eventually intersects the x-axis (reaches 0).
-        float endPeak = Gaussian(end_mu, end_mu, end_sd) - (0.05f * end_mu);
-        endFuncAdjustment = peakRevenuePercent - endPeak;
-
-        //Debug.Log("START_SD:" + start_sd);
-        //Debug.Log("START_MU:" + start_mu);
-        //Debug.Log("END_SD:" + end_sd);
-        //Debug.Log("END_MU:" + end_mu);
-        //Debug.Log("PEAK REV:" + peakRevenuePercent);
-        //Debug.Log("ADJ CONST:" + endFuncAdjustment);
+        maxRevenue = productTypes.Average(pt => pt.maxRevenue) * score;
 
         _state = State.LAUNCHED;
     }
@@ -328,42 +248,21 @@ public class Product : HasStats {
     public float Revenue(float elapsedTime, Company company) {
         timeSinceLaunch += elapsedTime;
 
-        float revenuePercent = 0;
+        float t = elapsedTime/longevity;
+        float revenue = 0;
         if (launched && !disabled) {
-
-            // Start
-            if (timeSinceLaunch < start_mu) {
-                revenuePercent = Gaussian(timeSinceLaunch, start_mu, start_sd);
-                //Debug.Log("START FUNC");
-
-            // End
-            } else if (timeSinceLaunch > end_mu) {
-                // We apply an extra downward weight at the end (0.05f*timeSinceLaunch)
-                // to ensure that the end function eventually intersects the x-axis (reaches 0).
-                revenuePercent = Gaussian(timeSinceLaunch, end_mu, end_sd) + endFuncAdjustment - (0.05f * timeSinceLaunch);
-                //Debug.Log("END FUNC");
-
-            // Plateau
-            } else {
-                revenuePercent = peakRevenuePercent;
-                //Debug.Log("PLATEAU FUNC");
-            }
+            revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
 
             // Economy's impacts.
-            revenuePercent *= GameManager.Instance.economyMultiplier;
-            revenuePercent *= GameManager.Instance.spendingMultiplier;
+            revenue *= GameManager.Instance.economyMultiplier;
+            revenue *= GameManager.Instance.spendingMultiplier;
 
             // Public opinion's impact.
-            revenuePercent += company.opinion.value;
+            // TO DO this should make sense
+            revenue += company.opinion.value;
 
-            revenuePercent *= marketShare;
+            revenue *= marketShare;
         }
-
-        //Debug.Log("REVENUE%:" + revenuePercent);
-
-        // Revenue cannot be negative.
-        // Random multiplier for some slight variance.
-        float revenue = System.Math.Max(0, revenuePercent * maxRevenue * Random.Range(0.95f, 1.05f));
 
         revenueEarned += revenue;
         lastRevenue = revenue;
@@ -459,9 +358,6 @@ public class Product : HasStats {
     }
     private static float Gaussian(float x, float mean, float sd) {
         return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
-    }
-    private static float LimitRange(float value, float min, float max) {
-        return (value < min) ? min : (value > max) ? max : value;
     }
 }
 

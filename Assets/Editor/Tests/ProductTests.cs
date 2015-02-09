@@ -164,6 +164,10 @@ namespace UnityTest
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
+            Debug.Log(pt.design_I);
+            Debug.Log(pt.marketing_I);
+            Debug.Log(pt.engineering_I);
+
             p.Launch();
 
             Assert.IsTrue(p.Revenue(4, c) > zeroRev);

@@ -28,6 +28,10 @@ internal class ProductTypeInspector : Editor {
         p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
         p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture), false);
 
+        if (p.revenueModel == null)
+            p.revenueModel = new AnimationCurve();
+        p.revenueModel = EditorGUILayout.CurveField("Revenue Model", p.revenueModel, GUILayout.Height(50));
+
         p.difficulty = EditorGUILayout.FloatField("Difficulty", p.difficulty);
 
         p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);

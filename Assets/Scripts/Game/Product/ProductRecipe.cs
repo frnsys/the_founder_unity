@@ -15,6 +15,7 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     public string description;
 
     public ProductType[] productTypes;
+    public AnimationCurve revenueModel;
 
     // For the physical representation of the product.
     public Mesh mesh;

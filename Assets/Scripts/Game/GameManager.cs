@@ -157,7 +157,6 @@ public class GameManager : Singleton<GameManager> {
         InitializeGame(cofounder, location, vertical);
         StartGame();
 
-
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
     }

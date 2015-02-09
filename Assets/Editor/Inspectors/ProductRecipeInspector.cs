@@ -29,6 +29,10 @@ internal class ProductRecipeInspector : Editor {
         p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
         p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture), false);
 
+        if (p.revenueModel == null)
+            p.revenueModel = new AnimationCurve();
+        p.revenueModel = EditorGUILayout.CurveField("Revenue Model", p.revenueModel, GUILayout.Height(50));
+
         EditorGUILayout.LabelField("Effects");
         if (p.effects == null)
             p.effects = new EffectSet();
