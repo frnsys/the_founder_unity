@@ -24,14 +24,14 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            pt = ProductType.Load("Social Network");
+            pt = ScriptableObject.Instantiate(ProductType.Load("Social Network")) as ProductType;
 
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
             gd = GameData.New("DEFAULTCORP");
             gm.Load(gd);
 
-            c = new Company("Foo Inc").Init();
+            c = gd.company;
             pts = new List<ProductType>() { pt };
 
             p = ScriptableObject.CreateInstance<Product>();
@@ -298,6 +298,30 @@ namespace UnityTest
             // Assure the progress is properly set when the company starts the product.
             gd.company.StartNewProduct(pts, n, n, n);
             Assert.AreEqual(gd.company.products[0].requiredProgress, totalExpected);
+        }
+
+        [Test]
+        public void ProductEffectsApplyOnlyOnce() {
+            EffectSet e = new EffectSet();
+            e.research = new StatBuff("Research", 2000);
+            pt.effects = e;
+            float start = c.research.value;
+
+            Product.Completed += gm.OnProductCompleted;
+
+            // Complete the project so that the effects are applied.
+            c.StartNewProduct(pts, 0, 0, 0);
+            c.products[0].Develop(100000, c);
+            Assert.AreEqual(c.products[0].state, Product.State.LAUNCHED);
+            Assert.AreEqual(c.research.value, start + e.research.value);
+
+            // Complete a duplicate product.
+            c.StartNewProduct(pts, 0, 0, 0);
+            c.products[1].Develop(100000, c);
+            Assert.AreEqual(c.products[1].state, Product.State.LAUNCHED);
+
+            // Effect should have only been applied once.
+            Assert.AreEqual(c.research.value, start + e.research.value);
         }
     }
 }

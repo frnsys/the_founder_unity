@@ -83,7 +83,11 @@ public class Product : HasStats {
         }
     }
     public EffectSet effects {
-        get { return recipe.effects; }
+        get {
+            // If there is a recipe, apply only those effects (don't include the
+            // individual product type effects).
+            return recipe != null ? recipe.effects : productTypes[0].effects;
+        }
     }
 
     public bool launched { get { return _state == State.LAUNCHED; } }
@@ -98,9 +102,14 @@ public class Product : HasStats {
         get { return recipe; }
     }
 
+    // This is identifies what combination of product types
+    // the product is. This is meant for quicker comparisons
+    // between products to see if they are of the same combo.
+    public string comboID;
+
     // The difficulty of a product is the average of its product types' difficulties.
     public float difficulty {
-        get { return productTypes.Sum(pt => pt.difficulty)/productTypes.Count; }
+        get { return productTypes.Average(pt => pt.difficulty); }
     }
 
     public float timeSinceLaunch = 0;
@@ -122,6 +131,9 @@ public class Product : HasStats {
     [SerializeField]
     private float longevity;
 
+    [SerializeField]
+    private float maxRevenue;
+
     // Revenue model parameters.
     [SerializeField]
     private float start_mu;
@@ -140,6 +152,7 @@ public class Product : HasStats {
 
     public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_, Company c) {
         productTypes = pts;
+        comboID = string.Join(".", productTypes.OrderBy(pt => pt.name).Select(pt => pt.name).ToArray());
 
         design =      new Stat("Design",      (float)design_);
         marketing =   new Stat("Marketing",   (float)marketing_);
@@ -147,11 +160,14 @@ public class Product : HasStats {
 
         requiredProgress = TotalProgressRequired(c);
 
-        recipe = ProductRecipe.LoadFromTypes(pts);
+        // Recipes are only relevant for product combos.
+        if (pts.Count > 1) {
+            recipe = ProductRecipe.LoadFromTypes(pts);
 
-        // Load default if we got nothing.
-        if (recipe == null) {
-            recipe = ProductRecipe.LoadDefault();
+            // Load default if we got nothing.
+            if (recipe == null) {
+                recipe = ProductRecipe.LoadDefault();
+            }
         }
 
         name = GenerateName(c);
@@ -159,15 +175,22 @@ public class Product : HasStats {
 
     // Generate a product name.
     private string GenerateName(Company c) {
-        if (recipe.names != null) {
-            // If the company already has products of this recipe,
-            // use "versioning" for the product name.
-            IEnumerable<Product> existing = c.products.Where(p => p.Recipe == recipe);
-            int version = existing.Count();
-            if (version > 0)
-                return string.Format("{0} {1}.0", existing.First().name, version + 1);
+        // If the company already has products of this combo,
+        // use "versioning" for the product name.
+        IEnumerable<Product> existing = c.products.Where(p => p.comboID == comboID);
+        int version = existing.Count();
+        if (version > 0)
+            return string.Format("{0} {1}.0", existing.First().name, version + 1);
 
+        if (recipe == null) {
+            if (productTypes[0].names != null && productTypes[0].names.Length > 0) {
+                // TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
+                string[] names = productTypes[0].names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
+                if (names.Length > 0)
+                    return names[Random.Range(0, names.Length-1)];
+            }
 
+        } else if (recipe.names != null) {
             // TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
             string[] names = recipe.names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
             if (names.Length > 0)
@@ -180,7 +203,6 @@ public class Product : HasStats {
 
 
     static public event System.Action<Product, Company> Completed;
-
     public bool Develop(float newProgress, Company company) {
         if (developing && !disabled) {
             _progress += newProgress;
@@ -247,14 +269,14 @@ public class Product : HasStats {
         float P = engineering.value;
 
         // Weights
-        float a_w = recipe.design_W;
-        float u_w = recipe.marketing_W;
-        float p_w = recipe.engineering_W;
+        float a_w = productTypes.Sum(pt => pt.design_W);
+        float u_w = productTypes.Sum(pt => pt.marketing_W);
+        float p_w = productTypes.Sum(pt => pt.engineering_W);
 
         // Ideals
-        float a_i = recipe.design_I;
-        float u_i = recipe.marketing_I;
-        float p_i = recipe.engineering_I;
+        float a_i = productTypes.Sum(pt => pt.design_I);
+        float u_i = productTypes.Sum(pt => pt.marketing_I);
+        float p_i = productTypes.Sum(pt => pt.engineering_I);
 
         // Adjusted values, min 0 (no negatives).
         float A_ = (A/a_i) * a_w;
@@ -275,7 +297,10 @@ public class Product : HasStats {
 
         // How long the plateau lasts.
         // TO DO tweak this to something that makes more sense.
-        longevity = combo/recipe.maxLongevity;
+        longevity = combo/productTypes.Average(pt => pt.maxLongevity);
+
+        // Maxmimum lifetime revenue of the product.
+        maxRevenue = productTypes.Average(pt => pt.maxRevenue);
 
         // Time where the plateau ends
         end_mu = start_mu + longevity;
@@ -338,7 +363,7 @@ public class Product : HasStats {
 
         // Revenue cannot be negative.
         // Random multiplier for some slight variance.
-        float revenue = System.Math.Max(0, revenuePercent * recipe.maxRevenue * Random.Range(0.95f, 1.05f));
+        float revenue = System.Math.Max(0, revenuePercent * maxRevenue * Random.Range(0.95f, 1.05f));
 
         revenueEarned += revenue;
         lastRevenue = revenue;

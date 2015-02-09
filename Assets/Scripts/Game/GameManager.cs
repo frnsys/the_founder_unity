@@ -203,9 +203,13 @@ public class GameManager : Singleton<GameManager> {
         ApplyEffectSet(t.effects);
     }
 
-    void OnProductCompleted(Product p, Company c) {
-        if (c == data.company)
-            ApplyEffectSet(p.effects);
+    public void OnProductCompleted(Product p, Company c) {
+        if (c == data.company) {
+            // If a product of this type combo already exists,
+            // do not re-apply the effects.
+            if(c.products.Count(p_ => p_.comboID == p.comboID) == 1)
+                ApplyEffectSet(p.effects);
+        }
     }
 
     public void ApplyEffectSet(EffectSet es) {

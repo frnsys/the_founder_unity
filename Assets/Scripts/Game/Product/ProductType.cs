@@ -5,14 +5,35 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class ProductType : SharedResource<ProductType> {
+    // Comma-delimited list of names.
+    public string names;
     public string description;
 
     // The difficulty modifier for this product type.
     public float difficulty;
 
+    // Weights: how important a given feature is to the product's performance.
+    public float design_W = 1;
+    public float marketing_W = 1;
+    public float engineering_W = 1;
+
+    // Ideals: some minimum value a feature must achieve for good performance.
+    public float design_I = 100;
+    public float marketing_I = 100;
+    public float engineering_I = 100;
+
+    // How long this product will be profitable on the market.
+    public float maxLongevity = 1000;
+
+    // The maximum amount of revenue this product can generate.
+    public float maxRevenue = 1000;
+
     // For the physical representation of the product.
     public Mesh mesh;
     public Texture texture;
+
+    // Bonus effects.
+    public EffectSet effects = new EffectSet();
 
     public override string ToString() {
         return name;

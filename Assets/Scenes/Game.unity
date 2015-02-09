@@ -145,7 +145,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: -449.999969, z: 358.749969, w: 60}
+  mClipRange: {x: 0, y: -449.999969, z: 574.999939, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 10
   mSortingOrder: 0
@@ -250,13 +250,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 359
+  mWidth: 575
   mHeight: 60
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.98333311
+  aspectRatio: 9.58333302
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -395,7 +395,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: .625, y: 449.999969, z: 318.749969, w: 60}
+  mClipRange: {x: .625, y: 449.999969, z: 534.999939, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 2000
   mSortingOrder: 0
@@ -518,7 +518,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189669549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -86.7520447, y: 450.005798, z: 0}
+  m_LocalPosition: {x: -194.878448, y: 450.005798, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children:
   - {fileID: 893560091}
@@ -841,13 +841,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 319
+  mWidth: 535
   mHeight: 60
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.3166666
+  aspectRatio: 8.91666698
 --- !u!1 &277101923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,13 +2690,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   mPivot: 4
-  mWidth: 359
+  mWidth: 575
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.98333311
+  aspectRatio: 9.58333302
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -3571,7 +3571,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 921502546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.24681759, y: 450.011658, z: 0}
+  m_LocalPosition: {x: -104.880989, y: 450.011658, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children: []
   m_Father: {fileID: 127671519}
@@ -4218,7 +4218,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 359, y: 960, z: 0}
+  m_Size: {x: 575, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1105655471
 MonoBehaviour:
@@ -4250,13 +4250,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 359
+  mWidth: 575
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .373958319
+  aspectRatio: .598958313
 --- !u!1 &1137378621
 GameObject:
   m_ObjectHideFlags: 0
@@ -5655,13 +5655,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   mPivot: 4
-  mWidth: 319
+  mWidth: 535
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 5.3166666
+  aspectRatio: 8.91666698
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -7477,7 +7477,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2013164176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -167.374985, y: 415.999969, z: 0}
+  m_LocalPosition: {x: -275.499969, y: 415.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1597615473}
@@ -7516,13 +7516,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
-  mWidth: 167
+  mWidth: 275
   mHeight: 896
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .186383933
+  aspectRatio: .306919634
 --- !u!114 &2013164179
 MonoBehaviour:
   m_ObjectHideFlags: 0

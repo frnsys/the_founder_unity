@@ -16,16 +16,33 @@ internal class ProductTypeInspector : Editor {
     public override void OnInspectorGUI() {
         serializedObject.Update();
 
-        EditorStyles.textField.wordWrap = true;
-
-        EditorGUILayout.LabelField("Product Type");
         p.name = EditorGUILayout.TextField("Name", p.name);
+
+        EditorStyles.textField.wordWrap = true;
+        EditorGUILayout.LabelField("Names (comma-delimited)");
+        p.names = EditorGUILayout.TextArea(p.names);
+
+        EditorGUILayout.LabelField("Description");
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
 
         p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
         p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture), false);
 
-        p.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", p.difficulty);
+        p.difficulty = EditorGUILayout.FloatField("Difficulty", p.difficulty);
+
+        p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);
+        p.marketing_W = EditorGUILayout.FloatField("Marketing Weight", p.marketing_W);
+        p.engineering_W = EditorGUILayout.FloatField("Engineering Weight", p.engineering_W);
+        EditorGUILayout.Space();
+
+        p.design_I = EditorGUILayout.FloatField("Design Ideal", p.design_I);
+        p.marketing_I = EditorGUILayout.FloatField("Marketing Ideal", p.marketing_I);
+        p.engineering_I = EditorGUILayout.FloatField("Engineering Ideal", p.engineering_I);
+        EditorGUILayout.Space();
+
+        p.maxLongevity = EditorGUILayout.FloatField("Max Longevity", p.maxLongevity);
+        p.maxRevenue = EditorGUILayout.FloatField("Max Revenue", p.maxRevenue);
+        EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Required Verticals");
         for (int i=0; i < p.requiredVerticals.Count; i++) {
@@ -44,6 +61,12 @@ internal class ProductTypeInspector : Editor {
         foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
             p.requiredInfrastructure[t] = EditorGUILayout.IntField(t.ToString(), p.requiredInfrastructure[t]);
         }
+
+        EditorGUILayout.LabelField("Effects");
+        if (p.effects == null)
+            p.effects = new EffectSet();
+        EffectSetRenderer.RenderEffectSet(p, p.effects);
+        EditorGUILayout.Space();
 
         // Let Unity know to save on changes.
         if (GUI.changed) {

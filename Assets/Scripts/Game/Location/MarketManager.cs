@@ -73,26 +73,26 @@ public class MarketManager {
         foreach (MarketManager.Market m in MarketManager.Markets) {
             float marketSize = SizeForMarket(m);
 
-            // Keep track of recipe totals.
-            Dictionary<ProductRecipe, float> recipeTotals = new Dictionary<ProductRecipe, float>();
+            // Keep track of combo totals.
+            Dictionary<string, float> comboTotals = new Dictionary<string, float>();
 
-            // Keep track of products by recipe.
-            Dictionary<ProductRecipe, List<Product>> recipeProducts = new Dictionary<ProductRecipe, List<Product>>();
+            // Keep track of products by combo.
+            Dictionary<string, List<Product>> comboProducts = new Dictionary<string, List<Product>>();
 
             foreach (Company c in companies.Where(x => x.markets.Contains(m))) {
                 foreach (Product p in c.activeProducts) {
-                    if (!recipeTotals.ContainsKey(p.Recipe)) {
-                        recipeTotals[p.Recipe] = 0;
-                        recipeProducts[p.Recipe] = new List<Product>();
+                    if (!comboTotals.ContainsKey(p.comboID)) {
+                        comboTotals[p.comboID] = 0;
+                        comboProducts[p.comboID] = new List<Product>();
                     }
-                    recipeTotals[p.Recipe] += p.marketScore;
-                    recipeProducts[p.Recipe].Add(p);
+                    comboTotals[p.comboID] += p.marketScore;
+                    comboProducts[p.comboID].Add(p);
                 }
             }
 
-            foreach(KeyValuePair<ProductRecipe, List<Product>> i in recipeProducts) {
+            foreach(KeyValuePair<string, List<Product>> i in comboProducts) {
                 foreach (Product p in i.Value) {
-                    p.marketShare += p.marketScore/recipeTotals[i.Key] * marketSize;
+                    p.marketShare += p.marketScore/comboTotals[i.Key] * marketSize;
                 }
             }
         }

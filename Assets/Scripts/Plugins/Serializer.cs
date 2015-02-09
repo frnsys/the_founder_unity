@@ -84,8 +84,13 @@ public class Serializer {
                 // we don't want to serialize the entire resource.
                 // Just enough data (name and type) so that we can reload it on deserialization.
                 if (IsSharedResource(ft)) {
-                    ScriptableObject resource = (ScriptableObject)val;
-                    replica.Add(name, resource.name, ft);
+                    // Handle shared resource fields with a null value.
+                    if (val != null) {
+                        ScriptableObject resource = (ScriptableObject)val;
+                        replica.Add(name, resource.name, ft);
+                    } else {
+                        replica.Add(name, null, ft);
+                    }
 
                 // If it is a simple type, we can just serialize it as-is.
                 } else if (IsSimpleType(ft)) {

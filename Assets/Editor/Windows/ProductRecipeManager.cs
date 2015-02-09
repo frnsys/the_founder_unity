@@ -27,21 +27,9 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
 
         EditorGUILayout.LabelField("Description");
         target.description = EditorGUILayout.TextArea(target.description, GUILayout.Height(50));
-        EditorGUILayout.Space();
 
-        target.design_W = EditorGUILayout.FloatField("Design Weight", target.design_W);
-        target.marketing_W = EditorGUILayout.FloatField("Marketing Weight", target.marketing_W);
-        target.engineering_W = EditorGUILayout.FloatField("Engineering Weight", target.engineering_W);
-        EditorGUILayout.Space();
-
-        target.design_I = EditorGUILayout.FloatField("Design Ideal", target.design_I);
-        target.marketing_I = EditorGUILayout.FloatField("Marketing Ideal", target.marketing_I);
-        target.engineering_I = EditorGUILayout.FloatField("Engineering Ideal", target.engineering_I);
-        EditorGUILayout.Space();
-
-        target.maxLongevity = EditorGUILayout.FloatField("Max Longevity", target.maxLongevity);
-        target.maxRevenue = EditorGUILayout.FloatField("Max Revenue", target.maxRevenue);
-        EditorGUILayout.Space();
+        target.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", target.mesh, typeof(Mesh), false);
+        target.texture = (Texture)EditorGUILayout.ObjectField("Texture", target.texture, typeof(Texture), false);
 
         EditorGUILayout.LabelField("Effects");
         if (target.effects == null)
