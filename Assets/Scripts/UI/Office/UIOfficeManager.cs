@@ -125,7 +125,10 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
         for (int i=0; i < prefabs.Length; i++) {
             GameObject obj = NGUITools.AddChild(officeUIPanel, prefabs[i]);
-            obj.GetComponent<UIFollowTarget>().target = targets[i];
+            UIFollowTarget uift = obj.GetComponent<UIFollowTarget>();
+            uift.target = targets[i];
+            uift.disableIfInvisible = false;
+            uift.gameCamera = OfficeCamera;
         }
     }
 

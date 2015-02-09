@@ -28,6 +28,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 65: {fileID: 6500000}
+  - 114: {fileID: 11400008}
   m_Layer: 8
   m_Name: Manage Research
   m_TagString: Untagged
@@ -232,6 +233,18 @@ MonoBehaviour:
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f1a404987b543db9b2fedf86335394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  window: {fileID: 100020, guid: 29751b6952957443281c5d084d7d87c9, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
