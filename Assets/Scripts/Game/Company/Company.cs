@@ -34,13 +34,10 @@ public class Company : HasStats {
         founders = new List<Founder>();
         _workers = new List<Worker>();
         _locations = new List<Location>();
-        _verticals = new List<Vertical>() {
-            Vertical.Load("Information")
-        };
+        _verticals = new List<Vertical>();
         technologies = new List<Technology>();
         markets = new List<MarketManager.Market>();
 
-        forgettingRate = 1;
         opinion = new Stat("Opinion", 1);
         opinionEvents = new List<OpinionEvent>();
         publicity = new Stat("Publicity", 0);
@@ -610,7 +607,6 @@ public class Company : HasStats {
     }
     public Stat opinion;
     public Stat publicity;
-    public float forgettingRate;
 
     [SerializeField]
     private List<OpinionEvent> opinionEvents;
@@ -619,7 +615,7 @@ public class Company : HasStats {
     }
     public void ForgetOpinionEvents() {
         foreach (OpinionEvent oe in opinionEvents) {
-            oe.Forget(forgettingRate);
+            oe.Forget(GameManager.Instance.forgettingRate);
         }
     }
 

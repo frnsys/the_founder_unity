@@ -59,6 +59,11 @@ public class EffectSetRenderer {
             }
         }
 
+        es.forgettingRate = EditorGUILayout.FloatField("Forgetting Rate (+/-)", es.forgettingRate);
+        es.spendingMultiplier = EditorGUILayout.FloatField("Spending Multiplier (+/-)", es.spendingMultiplier);
+        es.wageMultiplier = EditorGUILayout.FloatField("Wage Multiplier (+/-)", es.wageMultiplier);
+        es.economicStability = EditorGUILayout.FloatField("Economic Stability (+/-)", es.economicStability);
+
         EditorGUILayout.LabelField("Awakens AI Company");
         es.aiCompany = (AICompany)EditorGUILayout.ObjectField(es.aiCompany, typeof(AICompany), false);
 

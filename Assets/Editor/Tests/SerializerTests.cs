@@ -48,7 +48,6 @@ namespace UnityTest
                 data.company.ResearchCzar        = researchCzar;
                 data.company.OpinionCzar         = opinionCzar;
                 data.company.opinion.baseValue   = 200;
-                data.company.forgettingRate      = 10;
                 data.company.publicity.baseValue = 300;
                 data.company.office              = Office.Type.Office;
 
@@ -87,6 +86,11 @@ namespace UnityTest
 
             data.research  = 500;
             data.technology = Technology.Load("3D Printing");
+
+            data.forgettingRate = 10;
+            data.wageMultiplier = 10;
+            data.spendingMultiplier = 10;
+            data.economicStability = 10;
 
             GameEvent ev = new GameEvent("TESTEVENT", 1f);
             data.eventsPool.Add(ev);
@@ -162,6 +166,11 @@ namespace UnityTest
             Assert.AreEqual(gd.lifetimeMonth,              data.lifetimeMonth);
             Assert.AreEqual(gd.lifetimeWeek,               data.lifetimeWeek);
 
+            Assert.AreEqual(gd.forgettingRate,             data.forgettingRate);
+            Assert.AreEqual(gd.wageMultiplier,             data.wageMultiplier);
+            Assert.AreEqual(gd.spendingMultiplier,         data.spendingMultiplier);
+            Assert.AreEqual(gd.economicStability,          data.economicStability);
+
             Assert.AreEqual(gd.company.name,               data.company.name);
             Assert.AreEqual(gd.company.office,             data.company.office);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
@@ -173,7 +182,6 @@ namespace UnityTest
             Assert.AreEqual(gd.company.research.value,     data.company.research.value);
             Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
             Assert.AreEqual(gd.company.publicity.value,    data.company.publicity.value);
-            Assert.AreEqual(gd.company.forgettingRate,     data.company.forgettingRate);
             Assert.AreEqual(gd.company.markets,            data.company.markets);
             CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
             CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);

@@ -326,6 +326,7 @@ public class Product : HasStats {
 
             // Economy's impacts.
             revenuePercent *= GameManager.Instance.economyMultiplier;
+            revenuePercent *= GameManager.Instance.spendingMultiplier;
 
             // Public opinion's impact.
             revenuePercent += company.opinion.value;

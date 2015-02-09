@@ -38,6 +38,11 @@ public class EffectSet {
     public float eventDelay = 0;
     public float eventProbability = 0;
 
+    public float forgettingRate = 0;
+    public float spendingMultiplier = 0;
+    public float wageMultiplier = 0;
+    public float economicStability = 0;
+
     public List<ProductEffect> productEffects;
     public List<StatBuff> workerEffects;
 
@@ -76,6 +81,13 @@ public class EffectSet {
 
         if (aiCompany != null)
             AICompany.Find(aiCompany).disabled = false;
+
+        // "World" effects.
+        GameManager gm = GameManager.Instance;
+        gm.forgettingRate += forgettingRate;
+        gm.spendingMultiplier += spendingMultiplier;
+        gm.wageMultiplier += wageMultiplier;
+        gm.economicStability += economicStability;
     }
     public void Remove(Company company) {
         company.activeEffects.Remove(this);

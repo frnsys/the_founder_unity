@@ -451,7 +451,7 @@ namespace UnityTest
         public void OpinionEvents() {
             c.opinion.baseValue   = 200;
             c.publicity.baseValue = 100;
-            c.forgettingRate      = 10;
+            gd.forgettingRate     = 10;
 
             EffectSet es = new EffectSet();
             es.opinionEvent = new OpinionEvent(100, 400);

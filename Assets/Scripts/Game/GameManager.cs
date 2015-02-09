@@ -31,11 +31,28 @@ public class GameManager : Singleton<GameManager> {
         get { return data.unlocked; }
     }
 
+    // "World" variables.
+    public Economy economy {
+        get { return data.economy; }
+    }
     public float economyMultiplier {
         get { return economyManager.economyMultiplier; }
     }
-    public Economy economy {
-        get { return data.economy; }
+    public float economicStability {
+        get { return data.economicStability; }
+        set { data.economicStability = value; }
+    }
+    public float spendingMultiplier {
+        get { return data.spendingMultiplier; }
+        set { data.spendingMultiplier = value; }
+    }
+    public float wageMultiplier {
+        get { return data.wageMultiplier; }
+        set { data.wageMultiplier = value; }
+    }
+    public float forgettingRate {
+        get { return data.forgettingRate; }
+        set { data.forgettingRate = value; }
     }
 
     public int maxProductTypes {
@@ -97,7 +114,11 @@ public class GameManager : Singleton<GameManager> {
         researchManager.Load(d);
         narrativeManager.Load(d);
 
+        // Setup all the AI companies.
         AICompany.all = data.otherCompanies;
+        foreach (AICompany aic in AICompany.all) {
+            aic.Setup();
+        }
     }
 
     void Awake() {
@@ -129,8 +150,13 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void Start() {
-        // Uncomment this to start a game directly (i.e. skipping the new game/cofounder selection).
+        // TESTING start a test game.
+        Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
+        Location location = Location.Load("San Francisco");
+        Vertical vertical = Vertical.Load("Information");
+        InitializeGame(cofounder, location, vertical);
         StartGame();
+
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();

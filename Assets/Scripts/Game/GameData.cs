@@ -47,7 +47,13 @@ public class GameData : ScriptableObject {
     public Company company;
     public TheBoard board;
     public UnlockSet unlocked;
+
+    // "World" variables.
     public Economy economy;
+    public float spendingMultiplier;
+    public float wageMultiplier;
+    public float forgettingRate;
+    public float economicStability;
 
     // Onboarding progress.
     public NarrativeManager.OnboardingState onboardingState;
@@ -65,11 +71,6 @@ public class GameData : ScriptableObject {
 
     // Other companies in the world.
     public List<AICompany> otherCompanies;
-
-    // Office areas.
-    public bool LabsAccessible;
-    public bool CommsAccessible;
-    public bool MarketAccessible;
 
     // Time
     public Month month;
@@ -115,16 +116,17 @@ public class GameData : ScriptableObject {
         data.research = 0;
         data.unemployed = Worker.LoadAll();
         data.otherCompanies = AICompany.LoadAll();
+
         data.economy = Economy.Neutral;
+        data.spendingMultiplier = 1f;
+        data.wageMultiplier = 1f;
+        data.forgettingRate = 1f;
+        data.economicStability = 1f;
 
         data.specialEventsPool = GameEvent.LoadSpecialEvents();
         data.eventsPool = new List<GameEvent>();
 
         data.workerInsight = WorkerInsight.Basic;
-
-        data.LabsAccessible = false;
-        data.CommsAccessible = false;
-        data.MarketAccessible = false;
 
         data.month = Month.January;
         data.year  = 1;
@@ -141,13 +143,7 @@ public class GameData : ScriptableObject {
 
         float month_ = (lifetime - data.lifetimeYear) * 12;
         data.lifetimeMonth = (int)month_;
-
         data.lifetimeWeek = (int)((month_ - data.lifetimeMonth) * 4);
-
-        // The starting location is San Francisco.
-        Location startingLocation = Location.Load("San Francisco");
-        startingLocation.cost = 0;
-        data.company.ExpandToLocation(startingLocation);
 
         return data;
     }

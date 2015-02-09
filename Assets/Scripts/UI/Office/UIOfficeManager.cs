@@ -8,10 +8,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public Camera UICamera;
     public Camera OfficeCamera;
 
-    // TO DO how this works will need to be updated with office upgrades
-    public LockedOfficeArea labs;
-    public LockedOfficeArea comms;
-
     public GameObject officeArea;
     public GameObject officeUIPanel;
     public GameObject upgradeButton;
@@ -145,23 +141,4 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         data = d;
         company = d.company;
     }
-
-    public void BuyLabs() {
-        // TO DO don't hardcode this
-        float cost = 20000;
-        if (company.Pay(cost)) {
-            data.LabsAccessible = true;
-            labs.accessible = true;
-        }
-    }
-
-    public void BuyComms() {
-        // TO DO don't hardcode this
-        float cost = 20000;
-        if (company.Pay(cost)) {
-            data.CommsAccessible = true;
-            comms.accessible = true;
-        }
-    }
-
 }

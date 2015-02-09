@@ -54,6 +54,7 @@ public class Worker : HasStats {
 
     public float baseMinSalary;
     public float MinSalaryForCompany(Company c) {
+        float minSalary = baseMinSalary;
         // If the employee is currently hired, i.e. has a salary > 0,
         // their minimum acceptable salary depends on their happiness at their current company.
         if (salary > 0) {
@@ -73,9 +74,9 @@ public class Worker : HasStats {
             }
 
             // TO DO tweak this.
-            return Mathf.Max(0, salary + (-adjustedDiff/10 * 1000));
+            minSalary = Mathf.Max(0, salary + (-adjustedDiff/10 * 1000));
         }
-        return baseMinSalary;
+        return minSalary * GameManager.Instance.wageMultiplier;
     }
 
     public Stat bestStat {

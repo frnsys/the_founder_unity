@@ -45,7 +45,6 @@ public class AICompany : Company {
         return Resources.LoadAll<AICompany>("Companies").ToList().Select(c => {
                 AICompany company = Instantiate(c) as AICompany;
                 company.name = c.name;
-                company.Setup();
                 return company;
         }).ToList();
     }
