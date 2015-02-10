@@ -17,11 +17,11 @@ MonoBehaviour:
   design_W: 1
   marketing_W: 1
   engineering_W: 1
-  design_I: 1
-  marketing_I: 1
-  engineering_I: 1
+  design_I: 4
+  marketing_I: 5
+  engineering_I: 4
   maxLongevity: 100
-  maxRevenue: 1000
+  maxRevenue: 100000
   revenueModel:
     serializedVersion: 2
     m_Curve:

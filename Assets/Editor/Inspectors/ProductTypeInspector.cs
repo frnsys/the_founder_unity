@@ -44,7 +44,7 @@ internal class ProductTypeInspector : Editor {
         p.engineering_I = EditorGUILayout.FloatField("Engineering Ideal", p.engineering_I);
         EditorGUILayout.Space();
 
-        p.maxLongevity = EditorGUILayout.FloatField("Max Longevity", p.maxLongevity);
+        p.maxLongevity = EditorGUILayout.FloatField("Max Longevity (14/week)", p.maxLongevity);
         p.maxRevenue = EditorGUILayout.FloatField("Max Revenue", p.maxRevenue);
         EditorGUILayout.Space();
 

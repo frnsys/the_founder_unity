@@ -11,17 +11,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
   m_Name: Search Engine
   m_EditorClassIdentifier: 
-  names: 
+  names: FetchIt, ShowMeWhere, AskAlfred, AltaVido
   description: 
   difficulty: 2
   design_W: 1
   marketing_W: 1
-  engineering_W: 1
-  design_I: 100
-  marketing_I: 100
-  engineering_I: 100
-  maxLongevity: 1000
-  maxRevenue: 1000
+  engineering_W: 1.60000002
+  design_I: 1
+  marketing_I: 2
+  engineering_I: 8
+  maxLongevity: 100
+  maxRevenue: 100000
   revenueModel:
     serializedVersion: 2
     m_Curve:

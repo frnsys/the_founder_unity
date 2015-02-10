@@ -256,11 +256,11 @@ public class Product : HasStats {
     public float Revenue(float elapsedTime, Company company) {
         timeSinceLaunch += elapsedTime;
 
-        float t = elapsedTime/longevity;
+        float t = timeSinceLaunch/longevity;
         float revenue = 0;
         Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         Debug.Log(string.Format("Time {0}", t));
-        if (launched && !disabled) {
+        if (launched && !disabled && t <= 1f) {
             revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
             Debug.Log(string.Format("Raw revenue: {0}", revenue));
 
@@ -282,7 +282,7 @@ public class Product : HasStats {
 
         revenueEarned += revenue;
         lastRevenue = revenue;
-        return revenue;
+        return Mathf.Max(revenue, 0);
     }
 
     public override Stat StatByName(string name) {

@@ -11,10 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Hunter Stelmach
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  avatar: {fileID: 0}
+  texture: {fileID: 2800000, guid: c0754078843bf4795b57c1be55c6f669, type: 3}
+  robot: 0
   salary: 0
-  bio: Hunter Stelmach is not very imaginative and is quite dim. Hunter Stelmach is
-    alienating and is kind of lazy. Hunter Stelmach reminds me of Eeyore.
+  bio: Hunter Stelmach isn't the sharpest tool in the shed and is kind of lazy. Hunter
+    Stelmach brings everyone down and is not very imaginative. Hunter Stelmach is
+    alienating.
   description: 
   title: Programmer
   baseMinSalary: 18000

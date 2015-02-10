@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Stan Liebhardt
   m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
   texture: {fileID: 0}
+  robot: 0
   salary: 0
   bio: Stan Liebhardt is quite dim but is artistic. Stan Liebhardt needs a lot of
     motivation and cheers everyone up but is very awkward.

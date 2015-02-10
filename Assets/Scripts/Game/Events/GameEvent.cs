@@ -111,6 +111,9 @@ public class GameEvent : ScriptableObject {
             case Condition.Type.OfficeLevel:
                 comparison = (int)c.office;
                 break;
+            case Condition.Type.TechnologiesResearched:
+                comparison = c.technologies.Count;
+                break;
         }
 
         if (cond.greater)
@@ -134,7 +137,8 @@ public class GameEvent : ScriptableObject {
             ProductsLaunched,
             Locations,
             Employees,
-            OfficeLevel
+            OfficeLevel,
+            TechnologiesResearched
         }
 
         public Condition() {}
