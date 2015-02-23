@@ -591,7 +591,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400070}
   m_Layer: 0
-  m_Name: Targets
+  m_Name: UI Targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2187,6 +2187,19 @@ MonoBehaviour:
     objects:
     - obj: {fileID: 100000, guid: 36b5d47de050e4ff6b732dd6766e15db, type: 2}
       position: {x: -.541999996, y: .155000001, z: -1.00699997}
+  validEmployeeTargets:
+  - {fileID: 400042}
+  - {fileID: 400022}
+  - {fileID: 400040}
+  - {fileID: 400038}
+  - {fileID: 400034}
+  - {fileID: 400032}
+  - {fileID: 400026}
+  - {fileID: 400024}
+  - {fileID: 400046}
+  - {fileID: 400044}
+  - {fileID: 400056}
+  - {fileID: 400010}
   type: 0
   bounds: {x: -5, y: 14, z: 3, w: 22}
   cameraBounds: {x: -9, y: 6, z: -.5, w: 8.30000019}

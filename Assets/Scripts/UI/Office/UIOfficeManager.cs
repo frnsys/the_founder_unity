@@ -159,6 +159,11 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         return new Vector3(x, 0f, z);
     }
 
+    public Vector3 RandomTarget() {
+        Transform target = currentOffice.validEmployeeTargets[Random.Range(0, currentOffice.validEmployeeTargets.Length - 1)];
+        return target.position;
+    }
+
     public void Load(GameData d) {
         data = d;
         company = d.company;

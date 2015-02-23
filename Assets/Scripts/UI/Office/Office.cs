@@ -16,6 +16,8 @@ public class Office : MonoBehaviour {
     }
     public PerkDisplay[] perkDisplays;
 
+    public Transform[] validEmployeeTargets;
+
     public enum Type {
         Apartment,
         Office,
