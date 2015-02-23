@@ -74,7 +74,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400080}
   - 114: {fileID: 11400052}
-  - 61: {fileID: 6100000}
+  - 65: {fileID: 6500000}
+  - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
@@ -464,17 +465,18 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_Radius: .639999986
   m_Center: {x: 0, y: 0}
---- !u!61 &6100000
-BoxCollider2D:
+--- !u!65 &6500000
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100080}
-  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 539, y: 960}
-  m_Center: {x: 0, y: 0}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 539, y: 960, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -486,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b58c540d55e545329c05b107ef93ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pucks: 3
+  pucks: 10
   puck: {fileID: 11400108}
   pitchesLabel: {fileID: 11400122}
   scoreLabel: {fileID: 11400002}
@@ -534,7 +536,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.1833334
+  aspectRatio: 20.5333328
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
@@ -599,7 +601,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.72777772
+  aspectRatio: 6.84444427
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
@@ -628,6 +630,18 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cefb52c15ab0140d0bea50aa3306404b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puck: {fileID: 11400108}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -800,7 +814,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3645ffa2c2ffb42579f9aa2612951a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4000
+  speed: 10
+  speedLimit: 500
+  fired: 0
 --- !u!114 &11400110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -895,7 +911,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.72777772
+  aspectRatio: 6.84444427
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
@@ -960,7 +976,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.72777772
+  aspectRatio: 6.84444427
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
@@ -1141,7 +1157,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.72777772
+  aspectRatio: 6.84444427
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
@@ -1206,7 +1222,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.1833334
+  aspectRatio: 20.5333328
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}

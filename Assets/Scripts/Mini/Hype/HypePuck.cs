@@ -4,7 +4,8 @@ public class HypePuck : MonoBehaviour {
     public static event System.Action Completed;
 
     public float speed = 4000f;
-    protected bool fired;
+    public float speedLimit = 4000f;
+    public bool fired;
     protected bool seen;
     protected bool isVisible {
         get { return !(seen && fired && !renderer.isVisible); }
@@ -13,11 +14,6 @@ public class HypePuck : MonoBehaviour {
     void Update() {
         if (renderer.isVisible)
             seen = true;
-
-        if (Input.GetMouseButton(0)) {
-            rigidbody2D.AddForce(new Vector2(0 * speed * Time.deltaTime, 1f * speed * Time.deltaTime));
-            fired = true;
-        }
 
         // If the puck has gone off screen and nothing was hit,
         // the round is over.
@@ -34,6 +30,11 @@ public class HypePuck : MonoBehaviour {
         gameObject.SetActive(true);
         transform.position = new Vector3(0,-0.768f,0);
         rigidbody2D.velocity = Vector3.zero;
+    }
+
+    public void Fire(Vector2 dir) {
+        rigidbody2D.AddForce(Vector2.ClampMagnitude(dir * speed, speedLimit));
+        fired = true;
     }
 
     protected void DoCompleted() {
