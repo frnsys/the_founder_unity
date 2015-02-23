@@ -24,7 +24,13 @@ public class Office : MonoBehaviour {
     public Type type;
 
     // The bounds (x1,z1,x2,z2) of the office.
+    // This should be in world coordinates.
     public Vector4 bounds;
+
+    // The bounds (x1,y1,x2,y2) for the office camera.
+    // This should be in world coordinates and should
+    // be set at an orthographic size of 6.
+    public Vector4 cameraBounds;
 
     // The UI objects (in-office buttons) and
     // the UI targets the they should follow.

@@ -48,6 +48,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

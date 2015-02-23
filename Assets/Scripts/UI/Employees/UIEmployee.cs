@@ -26,11 +26,17 @@ public class UIEmployee : MonoBehaviour {
 
     void Update() {
         agent.SetDestination(target);
+
         // Check if we've reached the destination
         // For this to work, the stoppingDistance has to be about 1.
         if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
             target = RandomLocation();
         }
+    }
+
+    void OnEnable() {
+        // On enable, reset the target.
+        target = RandomLocation();
     }
 
     void OnDestroy() {
@@ -39,10 +45,7 @@ public class UIEmployee : MonoBehaviour {
 
     // Temporary, to get employees moving about the office.
     Vector3 RandomLocation() {
-        // TO DO don't hardcode these values.
-        float x = Random.value * 9f - 5f;
-        float z = Random.value * 20f + 10f;
-        return new Vector3(x, 7f, z);
+        return transform.parent.TransformDirection(UIOfficeManager.Instance.RandomLocation());
     }
 
     IEnumerator Working() {

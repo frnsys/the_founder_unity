@@ -7,6 +7,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
     public Camera UICamera;
     public Camera OfficeCamera;
+    public OfficeCameraController officeCameraController;
 
     public GameObject officeArea;
     public GameObject officeUIPanel;
@@ -38,7 +39,13 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
             GameObject obj = Instantiate(employeePrefab) as GameObject;
             obj.transform.parent = employeeGroup.transform;
 
+            // The employee prefab has to start inactive,
+            // since we can't use the NavMeshAgent's `SetDestination` method
+            // until it is placed on a NavMesh. So we first place the employee,
+            // then activate it.
             RandomlyPlaceEmployee(obj);
+            obj.SetActive(true);
+
             UIEmployee uie = obj.GetComponent<UIEmployee>();
             uie.worker = w;
             w.avatar = obj;
@@ -66,7 +73,8 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
             // Office upgrade is available!
             if (currentOffice.nextOffice != null &&
                 c.workers.Count >= currentOffice.nextOffice.employeesRequired) {
-                GameEvent.Trigger(GameEvent.LoadNoticeEvent("Upgrade the office"));
+                // TESTING, the delay should be longer
+                StartCoroutine(GameEvent.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f));
                 upgradeButton.SetActive(true);
             }
         }
@@ -91,17 +99,25 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     }
     void UpgradeOffice_(Office next) {
         // Destroy the current office.
-        Destroy(currentOffice.gameObject);
+        //Destroy(currentOffice.gameObject);
+
+        // Disable the current office.
+        currentOffice.gameObject.SetActive(false);
 
         // Set up the new office.
-        GameObject obj = Instantiate(next.gameObject) as GameObject;
+        //GameObject obj = Instantiate(next.gameObject) as GameObject;
+        //obj.transform.parent = officeArea.transform;
+        GameObject obj = next.gameObject;
+        obj.SetActive(true);
         currentOffice = obj.GetComponent<Office>();
-        obj.transform.parent = officeArea.transform;
+        officeCameraController.ResetPosition();
 
         // Reposition workers in the new office.
         foreach (Worker w in company.workers) {
             if (w.avatar != null) {
+                w.avatar.SetActive(false);
                 RandomlyPlaceEmployee(w.avatar);
+                w.avatar.SetActive(true);
             }
         }
 
@@ -130,11 +146,15 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
     void RandomlyPlaceEmployee(GameObject obj) {
         // Random starting location in the office.
+        obj.transform.position = RandomLocation();
+    }
+
+    public Vector3 RandomLocation() {
         // x_1 + Random.value*(x_2 - x_1)
         Vector4 bounds = currentOffice.bounds;
         float x = bounds[0] + (bounds[2] - bounds[0]) * Random.value;
         float z = bounds[1] + (bounds[3] - bounds[1]) * Random.value;
-        obj.transform.localPosition = new Vector3(x, 7f, z);
+        return new Vector3(x, 0f, z);
     }
 
     public void Load(GameData d) {

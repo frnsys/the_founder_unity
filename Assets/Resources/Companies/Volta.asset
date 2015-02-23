@@ -45,6 +45,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
@@ -78,10 +82,15 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
   slogan: Getting you further away from where you are.
+  office: 0
   _workers: []
   founders:
   - {fileID: 11400000, guid: 6e62b4dd8396649a9ad1f17a342966c4, type: 2}
@@ -106,7 +115,6 @@ MonoBehaviour:
   publicity:
     baseValue: 0
     _buffs: []
-  forgettingRate: 1
   opinionEvents: []
   researchCzar: {fileID: 0}
   research:
@@ -144,46 +152,46 @@ MonoBehaviour:
     perks: []
     locations: []
     verticals:
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
-    - {fileID: 11400000, guid: 548e715ce909846f0b63c811fb968500, type: 2}
-    - {fileID: 11400000, guid: ce49a288fc853426ebd357fe785ee81f, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     promos: []
     recruitments: []
     companies: []
@@ -218,6 +226,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

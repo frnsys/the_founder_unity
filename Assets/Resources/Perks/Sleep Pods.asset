@@ -16,18 +16,18 @@ MonoBehaviour:
   - name: Couches
     cost: 50000
     description: Give the employees some places to crash after all-night work sessions.
-    mesh: {fileID: 4300010, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 488ab69919e8d4bb281cadc15efb453c, type: 3}
+    mesh: {fileID: 4300034, guid: 0810142d1979f4f64abf84dd52b28953, type: 3}
+    texture: {fileID: 2800000, guid: 13a649b7753e7432ebd8557008571ed4, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -49,6 +49,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -59,6 +63,7 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Sleep Pods
     cost: 100000
@@ -69,12 +74,12 @@ MonoBehaviour:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -96,6 +101,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -106,6 +115,7 @@ MonoBehaviour:
         value: 18
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Dream Pod Workstations
     cost: 1000
@@ -117,12 +127,12 @@ MonoBehaviour:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -144,6 +154,11 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects: []
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

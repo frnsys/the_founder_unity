@@ -11,21 +11,34 @@ public class OfficeCameraController : MonoBehaviour {
 
     // These bounds are based on the bounds of the current office.
     private float lBound {
-        get { return om.currentOffice.bounds[3] - 2f; }
+        get { return om.currentOffice.cameraBounds[2] * BoundAdjustment(); }
     }
     private float rBound {
-        get { return om.currentOffice.bounds[0] - 2f; }
+        get { return om.currentOffice.cameraBounds[0] * BoundAdjustment(); }
     }
     private float tBound {
-        get { return om.currentOffice.bounds[2] + 5; }
+        get { return om.currentOffice.cameraBounds[3] * BoundAdjustment(); }
     }
     private float bBound {
-        get { return om.currentOffice.bounds[1] + 5; }
+        get { return om.currentOffice.cameraBounds[1] * BoundAdjustment(); }
     }
 
     void Start() {
         om = UIOfficeManager.Instance;
-        Debug.Log(om);
+        ResetPosition();
+    }
+
+    public void ResetPosition() {
+        Vector3 position = officeCamera.transform.position;
+        Vector4 camBounds = om.currentOffice.cameraBounds;
+        position.x =  camBounds[0] + (camBounds[2] - camBounds[0])/2;
+        position.y =  camBounds[1] + (camBounds[3] - camBounds[1])/2;
+        officeCamera.transform.position = position;
+    }
+
+    float BoundAdjustment() {
+        // 6 because that is the orthographic size at which the bounds are configured.
+        return Mathf.Sqrt(6/officeCamera.orthographicSize);
     }
 
     void OnDrag(Vector2 delta) {
@@ -35,7 +48,7 @@ public class OfficeCameraController : MonoBehaviour {
 
             // Apply speed modification. When the camera is closer (lower orthographic size),
             // it should pan more slowly.
-            Vector3 delta3 = delta *= 0.005f * officeCamera.orthographicSize;
+            Vector3 delta3 = delta *= 0.0012f * officeCamera.orthographicSize;
             Vector3 position = officeCamera.transform.position + delta3;
 
             // Bounding
@@ -72,13 +85,13 @@ public class OfficeCameraController : MonoBehaviour {
             touchDelta *= -1f;
 
             // Apply speed modification.
-            touchDelta *= 0.005f;
+            touchDelta *= 0.008f;
 
             float newSize = officeCamera.orthographicSize += touchDelta;
-            if (newSize < 1) {
-                newSize = 1;
-            } else if (newSize > 6) {
-                newSize = 6;
+            if (newSize < 4) {
+                newSize = 4;
+            } else if (newSize > 12) {
+                newSize = 12;
             }
             officeCamera.orthographicSize = newSize;
         }

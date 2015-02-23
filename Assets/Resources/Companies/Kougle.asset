@@ -45,6 +45,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
@@ -78,6 +82,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
@@ -107,7 +115,6 @@ MonoBehaviour:
   publicity:
     baseValue: 0
     _buffs: []
-  forgettingRate: 1
   opinionEvents: []
   researchCzar: {fileID: 0}
   research:
@@ -195,6 +202,10 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
