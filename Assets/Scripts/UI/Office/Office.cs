@@ -29,8 +29,15 @@ public class Office : MonoBehaviour {
 
     // The bounds (x1,y1,x2,y2) for the office camera.
     // This should be in world coordinates and should
-    // be set at an orthographic size of 6.
+    // be set at the office's minimimum orthographic size
+    // and at a 16/9 (h/w) aspect ratio.
     public Vector4 cameraBounds;
+
+    // The orthographic size limits of the office camera.
+    public Vector2 cameraSizeLimits;
+
+    // Where the office upgrade button should be positioned.
+    public Vector3 upgradeButtonPosition;
 
     // The UI objects (in-office buttons) and
     // the UI targets the they should follow.

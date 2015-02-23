@@ -7,6 +7,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
     public Camera UICamera;
     public Camera OfficeCamera;
+    public Office currentOffice;
     public OfficeCameraController officeCameraController;
 
     public GameObject officeArea;
@@ -32,7 +33,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         Company.WorkerFired -= OnFired;
     }
 
-    public Office currentOffice;
     void OnHired(Worker w, Company c) {
         if (c == company) {
             // A lot of manual set up, there may be a better way.
@@ -73,8 +73,10 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
             // Office upgrade is available!
             if (currentOffice.nextOffice != null &&
                 c.workers.Count >= currentOffice.nextOffice.employeesRequired) {
-                // TESTING, the delay should be longer
+                // TESTING, the production delay should be longer
                 StartCoroutine(GameEvent.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f));
+
+                upgradeButton.GetComponent<UIFollowTarget>().target.localPosition = currentOffice.upgradeButtonPosition;
                 upgradeButton.SetActive(true);
             }
         }

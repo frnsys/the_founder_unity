@@ -11,16 +11,16 @@ public class OfficeCameraController : MonoBehaviour {
 
     // These bounds are based on the bounds of the current office.
     private float lBound {
-        get { return om.currentOffice.cameraBounds[2] * BoundAdjustment(); }
+        get { return bounds[2]; }
     }
     private float rBound {
-        get { return om.currentOffice.cameraBounds[0] * BoundAdjustment(); }
+        get { return bounds[0]; }
     }
     private float tBound {
-        get { return om.currentOffice.cameraBounds[3] * BoundAdjustment(); }
+        get { return bounds[3]; }
     }
     private float bBound {
-        get { return om.currentOffice.cameraBounds[1] * BoundAdjustment(); }
+        get { return bounds[1]; }
     }
 
     void Start() {
@@ -31,14 +31,37 @@ public class OfficeCameraController : MonoBehaviour {
     public void ResetPosition() {
         Vector3 position = officeCamera.transform.position;
         Vector4 camBounds = om.currentOffice.cameraBounds;
+        Vector2 sizeLimits = om.currentOffice.cameraSizeLimits;
         position.x =  camBounds[0] + (camBounds[2] - camBounds[0])/2;
         position.y =  camBounds[1] + (camBounds[3] - camBounds[1])/2;
         officeCamera.transform.position = position;
+        officeCamera.orthographicSize = sizeLimits[0] + (sizeLimits[1] - sizeLimits[0])/2;
+        UpdateBounds();
     }
 
-    float BoundAdjustment() {
-        // 6 because that is the orthographic size at which the bounds are configured.
-        return Mathf.Sqrt(6/officeCamera.orthographicSize);
+    private Vector4 bounds = new Vector4();
+    void UpdateBounds() {
+        // The bounds should be set at the office's lower camera orthographic size limit at a 16/9 aspect ratio.
+        float delta = officeCamera.orthographicSize - om.currentOffice.cameraSizeLimits[0];
+        float aspect = 16f/9f;
+        float deltaWidth = (delta * 2f/aspect);
+        float deltaHeight = 2*delta;
+        Vector4 camBounds = om.currentOffice.cameraBounds;
+
+        // X
+        bounds[0] = camBounds[0] + deltaWidth/2f;
+        bounds[2] = camBounds[2] - deltaWidth/2f;
+
+        // Y
+        bounds[1] = camBounds[1] + deltaHeight/2f;
+        bounds[3] = camBounds[3] - deltaHeight/2f;
+
+        // Leave some minimal wiggle room along the Y.
+        if (bounds[3] <= bounds[1]) {
+            float mid = camBounds[1] + (camBounds[3] - camBounds[1])/2;
+            bounds[1] = mid - 1f;
+            bounds[3] = mid + 1f;
+        }
     }
 
     void OnDrag(Vector2 delta) {
@@ -88,12 +111,13 @@ public class OfficeCameraController : MonoBehaviour {
             touchDelta *= 0.008f;
 
             float newSize = officeCamera.orthographicSize += touchDelta;
-            if (newSize < 4) {
-                newSize = 4;
-            } else if (newSize > 12) {
-                newSize = 12;
+            if (newSize < om.currentOffice.cameraSizeLimits[0]) {
+                newSize = om.currentOffice.cameraSizeLimits[0];
+            } else if (newSize > om.currentOffice.cameraSizeLimits[1]) {
+                newSize = om.currentOffice.cameraSizeLimits[1];
             }
             officeCamera.orthographicSize = newSize;
+            UpdateBounds();
         }
     }
 }
