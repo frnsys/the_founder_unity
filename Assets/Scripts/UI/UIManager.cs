@@ -14,6 +14,7 @@ using System.Collections.Generic;
 public class UIManager : Singleton<UIManager> {
     private GameManager gm;
 
+    public Camera camera;
     public GameObject windowsPanel;
     public GameObject alertsPanel;
     public GameObject pingsPanel;
@@ -246,6 +247,16 @@ public class UIManager : Singleton<UIManager> {
         p.SetData(title, workers, confirm, selected);
     }
 
+    public GameObject hypeMinigame;
+    public void LaunchHypeMinigame(Promo promo) {
+        GameObject hmg = NGUITools.AddChild(gameObject, hypeMinigame);
+        hmg.GetComponent<HypeMinigame>().Setup(promo);
+
+        foreach (UIFollowTarget uift in hmg.GetComponentsInChildren<UIFollowTarget>()) {
+            uift.gameCamera = camera;
+            uift.uiCamera = camera;
+        }
+    }
 }
 
 

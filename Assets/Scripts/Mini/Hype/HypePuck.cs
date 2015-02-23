@@ -32,7 +32,7 @@ public class HypePuck : MonoBehaviour {
         fired = false;
         seen = false;
         gameObject.SetActive(true);
-        transform.position = new Vector3(0,0,0);
+        transform.position = new Vector3(0,-0.768f,0);
         rigidbody2D.velocity = Vector3.zero;
     }
 

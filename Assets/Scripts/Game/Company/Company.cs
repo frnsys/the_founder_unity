@@ -242,10 +242,10 @@ public class Company : HasStats {
     public Promo developingPromo;
     public void DevelopPromo() {
         if (developingPromo != null && opinionCzar != null) {
-            OpinionEvent result = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
+            bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
 
-            if (result != null) {
-                ApplyOpinionEvent(result);
+            if (completed) {
+                UIManager.Instance.LaunchHypeMinigame(developingPromo);
                 developingPromo = null;
             }
         }

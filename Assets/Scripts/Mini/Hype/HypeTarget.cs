@@ -38,9 +38,9 @@ public class HypeTarget : MonoBehaviour {
             case Function.Linear:
                 return start.y;
             case Function.Sin:
-                return start.y + Mathf.Sin(x);
+                return start.y + Mathf.Sin(x * 0.1f) * 0.5f;
             case Function.Cos:
-                return start.y + Mathf.Cos(x);
+                return start.y + Mathf.Cos(x * 0.1f) * 0.5f;
         }
         return start.y;
     }
@@ -49,6 +49,8 @@ public class HypeTarget : MonoBehaviour {
         start = transform.position;
         rangeDisplay.transform.localScale = Vector2.zero;
         rangeDisplay.GetComponent<SpriteRenderer>().color = cascadeColor;
+
+        model.renderer.material.mainTexture = HypeMinigame.Instance.blebTextures[Random.Range(0, HypeMinigame.Instance.blebTextures.Length - 1)];
 
         StartCoroutine("Move");
     }
@@ -108,7 +110,7 @@ public class HypeTarget : MonoBehaviour {
         // Spawn pucks.
         for (int i=0; i<numPucks; i++) {
             GameObject puckObj = Instantiate(hypeTargetPuckPrefab) as GameObject;
-            puckObj.transform.parent = HypeMinigame.Instance.transform;
+            puckObj.transform.parent = HypeMinigame.Instance.gameBoard;
             puckObj.transform.position = transform.position;
             HypeTargetPuck htp = puckObj.GetComponent<HypeTargetPuck>();
             htp.owner = this;

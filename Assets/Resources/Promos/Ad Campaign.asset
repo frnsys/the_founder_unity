@@ -11,19 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c822bb302384127bfc904445600049, type: 3}
   m_Name: Ad Campaign
   m_EditorClassIdentifier: 
-  opinionEvent:
-    name: Ad Campaign
-    opinion:
-      name: Opinion
-      value: 50
-      duration: 0
-      type: 0
-    publicity:
-      name: Publicity
-      value: 50
-      duration: 0
-      type: 0
+  icon: {fileID: 0}
+  description: 
   cost: 30000
-  requiredProgress: 5000
-  difficulty: 1
+  requiredProgress: 4
+  level: {fileID: 100138, guid: a034a3dd4847b46159207b4e59c5988d, type: 2}
   _progress: 0
