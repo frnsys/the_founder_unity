@@ -19,6 +19,8 @@ folder.
 
 `GameEvent` images must be 800x440px.
 
+In the code, there is a stat called "publicity", but note that this is only used internally. In-game, the term "Hype" is used instead.
+
 When importing textures for the Browser mesh into Unity, make sure filtering is set to bilinear,
 and maximize the aniso level. This is so that these flat-object textures look ok when rotating.
 

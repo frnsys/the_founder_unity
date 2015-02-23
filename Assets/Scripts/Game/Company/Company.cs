@@ -40,7 +40,7 @@ public class Company : HasStats {
 
         opinion = new Stat("Opinion", 1);
         opinionEvents = new List<OpinionEvent>();
-        publicity = new Stat("Publicity", 0);
+        publicity = new Stat("Hype", 0);
 
         activeEffects = new List<EffectSet>();
 
