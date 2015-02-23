@@ -95,7 +95,7 @@ public class HypeTarget : MonoBehaviour {
             }
 
             // should targets be able to be re-triggered? much nicer cascade effect, but there needs to be _some_ limit.
-            enabled = false;
+            //enabled = false;
             Cascade();
         }
     }
