@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   m_Layer: 11
-  m_Name: Coffee Perk
+  m_Name: Coffee Butter Perk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.64099979, y: 2.352, z: 11.6040001}
+  m_LocalPosition: {x: -.541999996, y: .155000001, z: -1.00699997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: -.622152209, y: .336045116, z: .336046159, w: .62215215}
-  m_LocalPosition: {x: -4.34437847, y: -2.05600023, z: -1.30150986}
+  m_LocalPosition: {x: -11.2919998, y: .128999993, z: 11.3330002}
   m_LocalScale: {x: .200000048, y: .199999988, z: .200000003}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: -.622152209, y: .336045116, z: .336046159, w: .62215215}
-  m_LocalPosition: {x: -4.27502537, y: -2.05599999, z: -1.50375271}
+  m_LocalPosition: {x: -11.25, y: .128999993, z: 11.0790005}
   m_LocalScale: {x: .200000048, y: .199999988, z: .200000003}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: -.622151971, y: .336045444, z: .336046398, w: .622152209}
-  m_LocalPosition: {x: -4.05468655, y: -2.05599999, z: -1.36189747}
+  m_LocalPosition: {x: -11.059, y: .128999993, z: 11.0539999}
   m_LocalScale: {x: .200000092, y: .200000077, z: .200000003}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -183,21 +183,21 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+  m_Mesh: {fileID: 4300022, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
 --- !u!33 &3300002
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_Mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+  m_Mesh: {fileID: 4300022, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
 --- !u!33 &3300004
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_Mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+  m_Mesh: {fileID: 4300022, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

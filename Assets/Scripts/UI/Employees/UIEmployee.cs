@@ -32,7 +32,6 @@ public class UIEmployee : MonoBehaviour {
             // Check if we've reached the destination
             // For this to work, the stoppingDistance has to be about 1.
             if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
-                //StartCoroutine(LookAt(target));
                 StartCoroutine(Pause());
                 target = RandomTarget();
             }
@@ -43,18 +42,6 @@ public class UIEmployee : MonoBehaviour {
         idling = true;
         yield return new WaitForSeconds(1f + Random.value * 3f);
         idling = false;
-    }
-
-    IEnumerator LookAt(Vector3 target) {
-        Quaternion newRotation = Quaternion.LookRotation(transform.position - target, Vector3.forward);
-        newRotation.x = 0f;
-        newRotation.z = 0f;
-
-        float step = 0.005f;
-        for (float f = 0f; f <= 1f + step; f += step) {
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
     }
 
     void OnEnable() {
