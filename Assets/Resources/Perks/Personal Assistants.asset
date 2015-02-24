@@ -17,18 +17,18 @@ MonoBehaviour:
     cost: 50000
     description: Contract with some remote assistance to help employees manage day-to-day
       needs.
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 9b95f701258674bbf87ba7eb5f34eefc, type: 3}
+    mesh: {fileID: 4300072, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 0aa31339715f643d5bf7d7a7878d99b3, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -50,6 +50,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -60,23 +64,24 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Personal Assistants
     cost: 1000
     description: Employees spend so much time managing the minutae of their lives.
       Why bother?
-    mesh: {fileID: 0}
-    texture: {fileID: 0}
+    mesh: {fileID: 4300066, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 5f69729ad7f5046a6b00596aa5d17efb, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -98,6 +103,11 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects: []
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

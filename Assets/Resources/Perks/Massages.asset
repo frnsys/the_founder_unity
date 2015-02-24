@@ -17,18 +17,18 @@ MonoBehaviour:
     cost: 50000
     description: Stress builds up when you're as dedicated as our employees are. Let's
       relieve that stress.
-    mesh: {fileID: 4300000, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 9b95f701258674bbf87ba7eb5f34eefc, type: 3}
+    mesh: {fileID: 4300062, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 814ccb662f42f4c61ac38122641171ff, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -50,6 +50,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -60,22 +64,23 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Yoga
     cost: 100000
     description: Everyone likes yoga.
-    mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: c3cc158c6fd8f4f93ba0e36293234d04, type: 3}
+    mesh: {fileID: 4300064, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: c4730e969d0d84eaba2f8c43672b1d18, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -97,6 +102,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -107,4 +116,5 @@ MonoBehaviour:
         value: 18
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

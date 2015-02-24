@@ -17,18 +17,18 @@ MonoBehaviour:
     cost: 50000
     description: Our employees shouldn't have to even think about keeping the workplace
       clean and tidy. We can get others to do that for us.
-    mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: c3cc158c6fd8f4f93ba0e36293234d04, type: 3}
+    mesh: {fileID: 4300068, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 814ccb662f42f4c61ac38122641171ff, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -50,6 +50,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -60,23 +64,24 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: Caretaker Automatons
     cost: 20000
     description: For slightly more, we can get some of those new Caretaker robots
       to do all the menial work for our employees.
-    mesh: {fileID: 0}
-    texture: {fileID: 0}
+    mesh: {fileID: 4300070, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+    texture: {fileID: 2800000, guid: 814ccb662f42f4c61ac38122641171ff, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -98,6 +103,11 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects: []
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
