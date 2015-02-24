@@ -39,7 +39,6 @@ public class UIPerk : UIEffectItem {
         nameLabel.text = _perk.current.name;
         descLabel.text = _perk.description;
         perkObj.GetComponent<MeshFilter>().mesh = _perk.mesh;
-        perkObj.GetComponent<MeshRenderer>().material.mainTexture = _perk.texture;
 
         RenderEffects(_perk.effects);
         AdjustEffectsHeight();

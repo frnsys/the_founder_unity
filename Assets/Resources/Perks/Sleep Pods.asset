@@ -16,8 +16,7 @@ MonoBehaviour:
   - name: Couches
     cost: 50000
     description: Give the employees some places to crash after all-night work sessions.
-    mesh: {fileID: 4300034, guid: 0810142d1979f4f64abf84dd52b28953, type: 3}
-    texture: {fileID: 2800000, guid: 13a649b7753e7432ebd8557008571ed4, type: 3}
+    mesh: {fileID: 4300100, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -69,7 +68,6 @@ MonoBehaviour:
     cost: 100000
     description: So much time is lost commuting to and from the office.
     mesh: {fileID: 4300010, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 488ab69919e8d4bb281cadc15efb453c, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -122,7 +120,6 @@ MonoBehaviour:
     description: Our dream publishing technology allows employees to literally work
       in their sleep. There is no "off-the-clock".
     mesh: {fileID: 4300084, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 814ccb662f42f4c61ac38122641171ff, type: 3}
     effects:
       unlocks:
         productTypes: []

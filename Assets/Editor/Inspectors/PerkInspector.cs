@@ -35,7 +35,6 @@ internal class PerkInspector : Editor {
             }
 
             upgrade.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", upgrade.mesh, typeof(Mesh), false);
-            upgrade.texture = (Texture)EditorGUILayout.ObjectField("Texture", upgrade.texture, typeof(Texture), false);
 
             if (upgrade.effects == null)
                 upgrade.effects = new EffectSet();

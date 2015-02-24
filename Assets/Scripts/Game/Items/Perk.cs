@@ -15,7 +15,6 @@ public class Perk : TemplateResource<Perk> {
 
         // For the physical representation of the product.
         public Mesh mesh;
-        public Texture texture;
 
         public EffectSet effects = new EffectSet();
         public List<Technology> requiredTechnologies = new List<Technology>();
@@ -58,8 +57,5 @@ public class Perk : TemplateResource<Perk> {
     }
     public Mesh mesh  {
         get { return current.mesh; }
-    }
-    public Texture texture  {
-        get { return current.texture; }
     }
 }

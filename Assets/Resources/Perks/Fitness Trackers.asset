@@ -17,8 +17,7 @@ MonoBehaviour:
     cost: 50000
     description: 'Employees will appreciate being able to know every little detail
       about their physical health. We''ll appreciate it too. '
-    mesh: {fileID: 4300006, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
-    texture: {fileID: 2800000, guid: e3bbd9ed9027445849b563271c444060, type: 3}
+    mesh: {fileID: 4300096, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -71,7 +70,6 @@ MonoBehaviour:
     description: It's one thing to help employees maintain peak physical health, but
       what about mental health? That's more valuable.
     mesh: {fileID: 4300086, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: bbc432d7c7546495ba711e32a19d15d3, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -124,7 +122,6 @@ MonoBehaviour:
     description: It's to our benefit if employees can think above and beyond natural
       limits. Let's give them the equipment to do so.
     mesh: {fileID: 4300090, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: bbc432d7c7546495ba711e32a19d15d3, type: 3}
     effects:
       unlocks:
         productTypes: []

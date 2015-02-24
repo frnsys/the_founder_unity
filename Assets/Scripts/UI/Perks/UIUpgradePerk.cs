@@ -14,7 +14,6 @@ public class UIUpgradePerk : UIEffectAlert {
             totalLabel.text = string.Format("${0:n}", _perk.next.cost);
 
             perkObj.GetComponent<MeshFilter>().mesh = _perk.next.mesh;
-            perkObj.GetComponent<MeshRenderer>().material.mainTexture = _perk.next.texture;
 
             RenderEffects(_perk.next.effects);
             AdjustEffectsHeight();
