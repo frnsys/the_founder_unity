@@ -47,7 +47,7 @@ public class UIPerk : UIEffectItem {
 
     void SetupUnownedPerk() {
         costLabel.gameObject.SetActive(true);
-        costLabel.text = string.Format("${0:n}", perk.cost);
+        costLabel.text = string.Format("{0:C0}", perk.cost);
         buttonLabel.text = "Buy";
         action = DecideBuy;
     }

@@ -90,7 +90,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
     public void UpgradeOffice() {
         Office next = currentOffice.nextOffice;
-        UIManager.Instance.Confirm(string.Format("Are you sure want to upgrade your office? It will cost you {0}.", next.cost),
+        UIManager.Instance.Confirm(string.Format("Are you sure want to upgrade your office? It will cost you {0:C0}.", next.cost),
             delegate() {
                 if (company.UpgradeOffice(next)) {
                     UpgradeOffice_(next);
