@@ -119,6 +119,9 @@ public class GameEvent : ScriptableObject {
             case Condition.Type.TechnologiesResearched:
                 comparison = c.technologies.Count;
                 break;
+            case Condition.Type.DeathToll:
+                comparison = c.deathToll;
+                break;
         }
 
         if (cond.greater)
@@ -143,7 +146,8 @@ public class GameEvent : ScriptableObject {
             Locations,
             Employees,
             OfficeLevel,
-            TechnologiesResearched
+            TechnologiesResearched,
+            DeathToll
         }
 
         public Condition() {}

@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Mass Protests Against Defense Contractor
+  m_EditorClassIdentifier: 
+  type: 1
+  description: 'There were massive protests today outside the headquarters of <PLAYERCOMPANY>,
+    a prominent defense contractor who''s advanced weapons designed for state and
+    private militaries alike have caused over an estimated 1 million deaths worldwide.
+
+'
+  from: The Times
+  image: {fileID: 2800000, guid: 3ecaf14b23a214f7d8c350ad4807b7a6, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 0
+  effects:
+    unlocks:
+      productTypes: []
+      workers: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: Anti-Weapon Protests
+      opinion:
+        name: Opinion
+        value: -200
+        duration: 0
+        type: 0
+      publicity:
+        name: Hype
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    economicStability: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+  actions: []
+  conditions:
+  - value: 1e+06
+    greater: 1
+    type: 10

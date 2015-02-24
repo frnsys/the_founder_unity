@@ -33,6 +33,9 @@ public class Product : HasStats {
     public float marketScore = 0;
     public float marketShare = 0;
 
+    public bool killsPeople;
+    public bool debtsPeople;
+
     public Mesh mesh {
         get {
             // Fallback to first product type's mesh.
@@ -158,6 +161,14 @@ public class Product : HasStats {
             revenueModel = recipe.revenueModel;
         } else {
             revenueModel = productTypes[0].revenueModel;
+        }
+
+        foreach (Vertical v in requiredVerticals) {
+            if (v.name == "Defense") {
+                killsPeople = true;
+            } else if (v.name == "Finance") {
+                debtsPeople = true;
+            }
         }
 
         name = GenerateName(c);

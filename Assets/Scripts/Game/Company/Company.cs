@@ -23,6 +23,8 @@ public class Company : HasStats {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
+        deathToll = 0;
+        debtOwned = 0;
         lastMonthRevenue = 0;
         quarterRevenue = 0;
         quarterCosts = 0;
@@ -227,6 +229,12 @@ public class Company : HasStats {
         get { return developingProducts.Count > 0; }
     }
 
+    public float totalMarketShare {
+        get {
+            return activeProducts.Sum(p => p.marketShare)/(activeProducts.Count * 100f);
+        }
+    }
+
     public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();
         product.Init(pts, design, marketing, engineering, this);
@@ -280,6 +288,12 @@ public class Company : HasStats {
         float newRevenue = 0;
         foreach (Product product in products.Where(p => p.launched)) {
             newRevenue += product.Revenue(elapsedTime, this);
+
+            if (product.killsPeople)
+                deathToll += Random.Range(0, 10);
+
+            if (product.debtsPeople)
+                debtOwned += Random.Range(0, 10);
         }
         cash.baseValue += newRevenue;
         lastMonthRevenue += newRevenue;
@@ -366,6 +380,8 @@ public class Company : HasStats {
     public float quarterRevenue;
     public float quarterCosts;
     public float lifetimeRevenue;
+    public int deathToll;
+    public int debtOwned;
 
     static public event System.Action<float, string> Paid;
     public void PayMonthly() {

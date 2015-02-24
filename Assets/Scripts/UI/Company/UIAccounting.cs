@@ -39,16 +39,24 @@ public class UIAccounting : MonoBehaviour {
             float revs = lastQuarter["Quarterly Revenue"];
             float cost = lastQuarter["Quarterly Costs"];
             pastRevenue.text = string.Format("Revenue: {0:C0}", revs);
-            pastProfit.text = string.Format("Profit {0:C0}", revs-cost);
+            pastProfit.text = string.Format("Profit: {0:C0}", revs-cost);
         }
+        lifetimeRevenue.text = string.Format("Lifetime Revenue: {0:C0}", company.lifetimeRevenue);
+        totalMarketShare.text = string.Format("Total Market Share: {0:F2}%", company.totalMarketShare);
+        deathToll.text = string.Format("Deaths Caused by Products: {0}", company.deathToll);
+        debtOwned.text = string.Format("World Debt Owned by Company: {0}", company.debtOwned);
     }
 
     void Update() {
         float revs = company.quarterRevenue;
         float cost = company.quarterCosts;
-        currentRevenue.text = string.Format("Revenue {0:C0}", revs);
-        currentProfit.text = string.Format("Profit {0:C0}", revs-cost);
+        currentRevenue.text = string.Format("Revenue: {0:C0}", revs);
+        currentProfit.text = string.Format("Profit: {0:C0}", revs-cost);
         researchBudget.text = company.researchInvestment.ToString();
+        lifetimeRevenue.text = string.Format("Lifetime Revenue: {0:C0}", company.lifetimeRevenue);
+        totalMarketShare.text = string.Format("Total Market Share: {0:F2}%", company.totalMarketShare);
+        deathToll.text = string.Format("Deaths Caused by Products: {0}", company.deathToll);
+        debtOwned.text = string.Format("World Debt Owned by Company: {0}", company.debtOwned);
     }
 
     public void IncreaseResearchBudget() {
@@ -70,4 +78,8 @@ public class UIAccounting : MonoBehaviour {
     public UILabel pastRevenue;
     public UILabel pastProfit;
     public UILabel researchBudget;
+    public UILabel lifetimeRevenue;
+    public UILabel totalMarketShare;
+    public UILabel deathToll;
+    public UILabel debtOwned;
 }
