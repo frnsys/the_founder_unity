@@ -148,3 +148,7 @@ A `WorkerManager` on the `GameManager` keeps track of these canonical instances,
     GameManager.Instance.workerManager.FireWorker(worker<, company>);
 
 The `WorkerManager` makes sure workers are not employed at multiple places and removes/adds them to the `data.unemployed` list as necessary.
+
+## License
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">The Founder</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://frnsys.com" property="cc:attributionName" rel="cc:attributionURL">Francis Tseng</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://thefounder.biz" rel="dct:source">http://thefounder.biz</a>.
