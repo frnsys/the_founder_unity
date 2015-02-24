@@ -11,19 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c822bb302384127bfc904445600049, type: 3}
   m_Name: Press Release
   m_EditorClassIdentifier: 
-  opinionEvent:
-    name: Press Release
-    opinion:
-      name: Opinion
-      value: 20
-      duration: 0
-      type: 0
-    publicity:
-      name: Hype
-      value: 20
-      duration: 0
-      type: 0
+  icon: {fileID: 2800000, guid: d82632e9a104d4b7ba1d0917d9129d57, type: 3}
+  description: 
   cost: 5000
   requiredProgress: 20
-  difficulty: 1
+  level: {fileID: 0}
   _progress: 88

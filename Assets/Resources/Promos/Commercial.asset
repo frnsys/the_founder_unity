@@ -9,21 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45c822bb302384127bfc904445600049, type: 3}
-  m_Name: Sponsorship
+  m_Name: Commercial
   m_EditorClassIdentifier: 
-  opinionEvent:
-    name: Sponsorship
-    opinion:
-      name: Opinion
-      value: 400
-      duration: 0
-      type: 0
-    publicity:
-      name: Hype
-      value: 300
-      duration: 0
-      type: 0
+  icon: {fileID: 2800000, guid: 0578d447ccbe14feb859cd12aa790582, type: 3}
+  description: 
   cost: 25000
   requiredProgress: 5000
-  difficulty: 1
+  level: {fileID: 0}
   _progress: 0
