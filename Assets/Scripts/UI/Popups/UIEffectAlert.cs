@@ -76,11 +76,15 @@ public class UIEffectAlert : UIAlert {
         }
 
         if (es.wageMultiplier != 0) {
-            RenderBuffEffect(new StatBuff("Consumer Spending", es.wageMultiplier), null);
+            RenderBuffEffect(new StatBuff("Wage Multiplier", es.wageMultiplier), null);
         }
 
         if (es.economicStability != 0) {
             RenderBuffEffect(new StatBuff("Economic Stability", es.economicStability), null);
+        }
+
+        if (es.taxRate != 0) {
+            RenderBuffEffect(new StatBuff("Tax Rate", es.taxRate), null);
         }
 
         if (es.opinionEvent.opinion.value != 0) {
