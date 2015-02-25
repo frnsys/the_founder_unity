@@ -10,6 +10,7 @@ public class UIManageWorkers : UIFullScreenPager {
 
     private List<Worker> workers = new List<Worker>();
     private Color buttonColor = new Color(1f, 0f, 0f);
+    private Color otherButtonColor = new Color(0.42f, 0.33f, 0.97f);
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -35,6 +36,19 @@ public class UIManageWorkers : UIFullScreenPager {
             uiw.button.defaultColor = buttonColor;
             uiw.button.pressed = buttonColor;
             uiw.button.hover = buttonColor;
+
+            if (gm.cloneable && !w.robot) {
+                UIEventListener.Get(uiw.otherButton.gameObject).onClick += delegate(GameObject obj) {
+                    CloneWorker(worker);
+                };
+                uiw.otherButton.gameObject.SetActive(true);
+                uiw.otherButton.transform.Find("Label").GetComponent<UILabel>().text = "Clone";
+                uiw.otherButton.defaultColor = otherButtonColor;
+                uiw.otherButton.pressed = otherButtonColor;
+                uiw.otherButton.hover = otherButtonColor;
+            } else {
+                uiw.otherButton.gameObject.SetActive(false);
+            }
         }
         Adjust();
     }
@@ -59,5 +73,23 @@ public class UIManageWorkers : UIFullScreenPager {
 
         // TO DO make this fancier
         UIManager.Instance.Alert("Your company is shit!!!1!");
+    }
+
+    public void CloneWorker(Worker worker) {
+        UIManager.Instance.Confirm("Are you sure want to clone " + worker.name + "?", delegate {
+                CloneWorker_(worker);
+        } , null);
+    }
+    private void CloneWorker_(Worker worker) {
+        if (worker.robot) {
+            UIManager.Instance.Alert("You can't clone robots. It would violate digital copyright laws.");
+            return;
+        } else if (company.remainingSpace == 0 ){
+            UIManager.Instance.Alert("You don't have room for anymore employees. Fire some.");
+            return;
+        } else {
+            Worker clone = worker.Clone();
+            gm.workerManager.HireWorker(clone);
+        }
     }
 }

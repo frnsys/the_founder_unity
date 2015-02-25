@@ -64,6 +64,7 @@ public class EffectSetRenderer {
         es.wageMultiplier = EditorGUILayout.FloatField("Wage Multiplier (+/-)", es.wageMultiplier);
         es.economicStability = EditorGUILayout.FloatField("Economic Stability (+/-)", es.economicStability);
         es.taxRate = EditorGUILayout.FloatField("Tax Rate (+/-)", es.taxRate);
+        es.specialEffect = (EffectSet.Special)EditorGUILayout.EnumPopup("Special Effect", es.specialEffect);
 
         EditorGUILayout.LabelField("Awakens AI Company");
         es.aiCompany = (AICompany)EditorGUILayout.ObjectField(es.aiCompany, typeof(AICompany), false);

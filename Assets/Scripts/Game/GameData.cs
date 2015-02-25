@@ -29,14 +29,6 @@ public enum Economy {
     Expansion
 }
 
-public enum WorkerInsight {
-    Basic,
-    Fuzzy,
-    Quant,
-    Detailed,
-    Precise
-}
-
 [System.Serializable]
 public class GameData : ScriptableObject {
 
@@ -58,9 +50,6 @@ public class GameData : ScriptableObject {
 
     // Onboarding progress.
     public NarrativeManager.OnboardingState onboardingState;
-
-    // The state of various universal effects.
-    public WorkerInsight workerInsight;
 
     // Research stuff.
     public Technology technology;
@@ -85,6 +74,12 @@ public class GameData : ScriptableObject {
     // Events which are waiting to resolve.
     public List<GameEvent> specialEventsPool;
     public List<GameEvent> eventsPool;
+
+    // Special effects.
+    public bool immortal;
+    public bool cloneable;
+    public bool prescient;
+    public bool workerInsight;
 
     // ===============================================
     // Management ====================================
@@ -124,11 +119,14 @@ public class GameData : ScriptableObject {
         data.specialEventsPool = GameEvent.LoadSpecialEvents();
         data.eventsPool = new List<GameEvent>();
 
-        data.workerInsight = WorkerInsight.Basic;
-
         data.month = Month.January;
         data.year  = 1;
         data.week  = 0;
+
+        data.immortal = false;
+        data.cloneable = false;
+        data.prescient = false;
+        data.workerInsight = false;
 
         // You start your business at 25,
         // so the amount of time you have really ranges from 40-60.

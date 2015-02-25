@@ -46,30 +46,12 @@ public class UIWorker : MonoBehaviour {
     }
 
     public void SetBasicWorker(Worker w) {
-        SetFuzzyWorker(w);
         quantObj.SetActive(false);
-    }
-
-    // Imprecise worker info.
-    public void SetFuzzyWorker(Worker w) {
-        worker = w;
-        creativity.text = string.Format("Creativity: {0}", FuzzyStat(worker_.creativity));
-        charisma.text = string.Format("Charisma: {0}", FuzzyStat(worker_.charisma));
-        cleverness.text = string.Format("Cleverness: {0}", FuzzyStat(worker_.cleverness));
-        productivity.text = string.Format("Productivity: {0}", FuzzyStat(worker_.productivity));
-        happiness.text = string.Format("Happiness: {0}", FuzzyStat(worker_.happiness));
-        credit.text += ". Disclaimer: This is a beta, expect some margin of error.";
-        quantObj.SetActive(true);
     }
 
     public void SetQuantWorker(Worker w) {
         worker = w;
         quantObj.SetActive(true);
-    }
-
-    private int FuzzyStat(Stat stat) {
-        double fuzzy = (0.6 + Random.value) * stat.value;
-        return (int)fuzzy;
     }
 
     public UILabel name;
@@ -82,6 +64,7 @@ public class UIWorker : MonoBehaviour {
     public UILabel happiness;
     public UILabel credit;
     public UIButton button;
+    public UIButton otherButton;
     public MeshRenderer employee;
 
     // These change for robots.

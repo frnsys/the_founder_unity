@@ -63,8 +63,11 @@ public class GameManager : Singleton<GameManager> {
         get { return data.board.revenueTarget; }
     }
 
-    public WorkerInsight workerInsight {
+    public bool workerInsight {
         get { return data.workerInsight; }
+    }
+    public bool cloneable {
+        get { return data.cloneable; }
     }
 
     public List<AICompany> activeAICompanies {
@@ -222,6 +225,23 @@ public class GameManager : Singleton<GameManager> {
         data.unlocked.Unlock(es.unlocks);
     }
 
+    public void ApplySpecialEffect(EffectSet.Special e) {
+        switch(e) {
+            case EffectSet.Special.Immortal:
+                data.immortal = true;
+                break;
+            case EffectSet.Special.Cloneable:
+                data.cloneable = true;
+                break;
+            case EffectSet.Special.Prescient:
+                data.prescient = true;
+                break;
+            case EffectSet.Special.WorkerInsight:
+                data.workerInsight = true;
+                break;
+        }
+    }
+
     // ===============================================
     // Time ==========================================
     // ===============================================
@@ -335,13 +355,19 @@ public class GameManager : Singleton<GameManager> {
             if (data.year > data.lifetimeYear &&
                 (int)data.month > data.lifetimeMonth &&
                 data.week > data.lifetimeWeek) {
-                GameEvent ev = GameEvent.LoadNoticeEvent("Death");
-                GameEvent.Trigger(ev);
 
-                // Pay inheritance tax.
-                float tax = playerCompany.cash.value * 0.3f;
-                playerCompany.Pay(tax);
-                UIManager.Instance.SendPing(string.Format("Paid {0:C0} in inheritance taxes.", tax), Color.red);
+                if (!data.immortal) {
+                    GameEvent ev = GameEvent.LoadNoticeEvent("Death");
+                    GameEvent.Trigger(ev);
+
+                    // Pay inheritance tax.
+                    float tax = playerCompany.cash.value * 0.75f;
+                    playerCompany.Pay(tax);
+                    UIManager.Instance.SendPing(string.Format("Paid {0:C0} in inheritance taxes.", tax), Color.red);
+                } else {
+                    GameEvent ev = GameEvent.LoadNoticeEvent("Immortal");
+                    GameEvent.Trigger(ev);
+                }
             }
 
             // A random AI company makes a move.

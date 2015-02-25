@@ -119,7 +119,7 @@ public class UIHireWorkers : UIFullScreenPager {
 
     public void LoadWorkers(IEnumerable<Worker> workers) {
         ClearGrid();
-        WorkerInsight wi = GameManager.Instance.workerInsight;
+        bool wi = GameManager.Instance.workerInsight;
         foreach (Worker w in workers) {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
@@ -137,18 +137,10 @@ public class UIHireWorkers : UIFullScreenPager {
 
             if (worker.robot) {
                 uiw.worker = worker;
+            } else if (!wi) {
+                uiw.SetBasicWorker(w);
             } else {
-                switch (wi) {
-                    case WorkerInsight.Basic:
-                        uiw.SetBasicWorker(w);
-                        break;
-                    case WorkerInsight.Fuzzy:
-                        uiw.SetFuzzyWorker(w);
-                        break;
-                    case WorkerInsight.Quant:
-                        uiw.SetQuantWorker(w);
-                        break;
-                }
+                uiw.SetQuantWorker(w);
             }
         }
         Adjust();
