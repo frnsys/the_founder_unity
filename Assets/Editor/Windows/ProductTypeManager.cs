@@ -23,9 +23,6 @@ public class ProductTypeManager : ManagerWindow<ProductType> {
 
         EditorGUILayout.LabelField("Product Type");
         target.name = EditorGUILayout.TextField("Name", target.name);
-        target.description = EditorGUILayout.TextArea(target.description, GUILayout.Height(50));
-
-        target.difficulty = EditorGUILayout.FloatField("Difficulty Modifier", target.difficulty);
 
         EditorGUILayout.LabelField("Required Verticals");
         if (target.requiredVerticals == null)
