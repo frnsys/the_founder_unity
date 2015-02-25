@@ -129,6 +129,10 @@ public class UIManager : Singleton<UIManager> {
             GameObject popup = NGUITools.AddChild(alertsPanel, productCompletedAlertPrefab);
             popup.GetComponent<UIProductCompletedAlert>().product = p;
 
+            // Notify the player that they were missing a tech.
+            if (p.techPenalty)
+                StartCoroutine(GameEvent.DelayTrigger(GameEvent.LoadNoticeEvent("Missing Technology"), 25f));
+
         // If it is a competitor's product, show it as an "ad".
         } else {
             GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);

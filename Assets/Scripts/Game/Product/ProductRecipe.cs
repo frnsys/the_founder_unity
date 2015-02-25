@@ -24,6 +24,11 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     // Bonus effects.
     public EffectSet effects = new EffectSet();
 
+    // Required technologies for the recipe.
+    // The recipe can still be built without the required techs,
+    // but it will perform with a penalty.
+    public List<Technology> requiredTechnologies;
+
     public override string ToString() {
         return string.Join(".", productTypes.Where(pt => pt != null).OrderBy(pt => pt.name).Select(pt => pt.name).ToArray());
     }

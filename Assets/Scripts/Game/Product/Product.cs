@@ -35,6 +35,7 @@ public class Product : HasStats {
 
     public bool killsPeople;
     public bool debtsPeople;
+    public bool techPenalty;
 
     public Mesh mesh {
         get {
@@ -171,6 +172,14 @@ public class Product : HasStats {
             }
         }
 
+        // A product recipe can be built without the required techs,
+        // but it will operate at a penalty.
+        techPenalty = false;
+        foreach (Technology t in recipe.requiredTechnologies) {
+            if (!c.technologies.Contains(t))
+                techPenalty = true;
+        }
+
         name = GenerateName(c);
     }
 
@@ -290,6 +299,9 @@ public class Product : HasStats {
             revenue *= marketShare;
             Debug.Log(string.Format("After market share: {0}", revenue));
         }
+
+        if (techPenalty)
+            revenue *= 0.1f;
 
         revenueEarned += revenue;
         lastRevenue = revenue;

@@ -8,19 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Default
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Missing Technology
   m_EditorClassIdentifier: 
-  names: Vaporware
-  description: 
-  productTypes: []
-  revenueModel:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  mesh: {fileID: 0}
-  texture: {fileID: 0}
+  type: 0
+  description: About that last product we released...it looked good on paper, but
+    we were missing a key technology which would make it 10 times more successful.
+    We should try this combination again when we think we have the right tech.
+  from: <COFOUNDER>@<PLAYERCOMPANY>.com
+  image: {fileID: 2800000, guid: 4706daf4b442848f2ae71f3e2728bbf0, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 0
   effects:
     unlocks:
       productTypes: []
@@ -60,3 +60,5 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+  actions: []
+  conditions: []
