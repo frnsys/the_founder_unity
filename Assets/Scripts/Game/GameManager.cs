@@ -59,10 +59,6 @@ public class GameManager : Singleton<GameManager> {
         set { data.taxRate = value; }
     }
 
-    public int maxProductTypes {
-        get { return data.maxProductTypes; }
-    }
-
     public float revenueTarget {
         get { return data.board.revenueTarget; }
     }

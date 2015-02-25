@@ -188,6 +188,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 ob.FIRST_PRODUCT_LAUNCHED = true;
             }
 
+            // to do change this/remove this
             if (c.products.Count >= 3 && !ob.PRODUCT_COMBOS_UNLOCKED) {
                 MentorMessages(new string[] {
                     "You've developed a few products. But we need to INNOVATE to really get ahead.",
@@ -196,7 +197,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "Now that you've gotten the hang of it, why don't you try releasing a few more products.",
                     "I'll come back when you're ready for the next step."
                 }, true);
-                data.maxProductTypes = 2;
                 ob.PRODUCT_COMBOS_UNLOCKED = true;
             }
 

@@ -62,10 +62,6 @@ public class GameData : ScriptableObject {
     // The state of various universal effects.
     public WorkerInsight workerInsight;
 
-    // Maximum product types that can be combined.
-    // Initially this is just 1.
-    public int maxProductTypes;
-
     // Research stuff.
     public Technology technology;
     public float research;
@@ -133,8 +129,6 @@ public class GameData : ScriptableObject {
         data.month = Month.January;
         data.year  = 1;
         data.week  = 0;
-
-        data.maxProductTypes   = 1;
 
         // You start your business at 25,
         // so the amount of time you have really ranges from 40-60.
