@@ -7,12 +7,7 @@ public class Office : MonoBehaviour {
     [System.Serializable]
     public struct PerkDisplay {
         public Perk perk;
-        public PerkObject[] objects;
-    }
-    [System.Serializable]
-    public struct PerkObject {
-        public GameObject obj;
-        public Vector3 position;
+        public GameObject[] objects;
     }
     public PerkDisplay[] perkDisplays;
 
@@ -75,9 +70,7 @@ public class Office : MonoBehaviour {
             // It's possible that we don't have an object for higher upgrade levels,
             // so fall back to highest-level available object.
             int i = Math.Min(upgradeLevel, pd.objects.Length - 1);
-            GameObject perkObj = Instantiate(pd.objects[i].obj) as GameObject;
-            perkObj.transform.parent = transform;
-            perkObj.transform.localPosition = pd.objects[i].position;
+            pd.objects[i].SetActive(true);
         }
     }
 }
