@@ -41,6 +41,7 @@ public class EffectSet {
     public float forgettingRate = 0;
     public float spendingMultiplier = 0;
     public float wageMultiplier = 0;
+    public float taxRate = 0;
     public float economicStability = 0;
 
     public List<ProductEffect> productEffects;
@@ -88,6 +89,7 @@ public class EffectSet {
         gm.spendingMultiplier += spendingMultiplier;
         gm.wageMultiplier += wageMultiplier;
         gm.economicStability += economicStability;
+        gm.taxRate += taxRate;
     }
     public void Remove(Company company) {
         company.activeEffects.Remove(this);

@@ -54,6 +54,10 @@ public class GameManager : Singleton<GameManager> {
         get { return data.forgettingRate; }
         set { data.forgettingRate = value; }
     }
+    public float taxRate {
+        get { return data.taxRate; }
+        set { data.taxRate = value; }
+    }
 
     public int maxProductTypes {
         get { return data.maxProductTypes; }

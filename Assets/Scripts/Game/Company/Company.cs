@@ -25,6 +25,8 @@ public class Company : HasStats {
         research = new Stat("Research", 1);
         deathToll = 0;
         debtOwned = 0;
+        taxesAvoided = 0;
+        lifetimeRevenue = 0;
         lastMonthRevenue = 0;
         quarterRevenue = 0;
         quarterCosts = 0;
@@ -380,6 +382,7 @@ public class Company : HasStats {
     public float quarterRevenue;
     public float quarterCosts;
     public float lifetimeRevenue;
+    public float taxesAvoided;
     public int deathToll;
     public int debtOwned;
 
@@ -406,8 +409,12 @@ public class Company : HasStats {
         toPay += researchInvestment;
 
         // Taxes
-        float taxes = lastMonthRevenue * 0.12f;
+        float taxes = lastMonthRevenue * GameManager.Instance.taxRate;
         toPay += taxes;
+
+        // The base tax rate is 0.3f.
+        float expectedTaxes = lastMonthRevenue * 0.3f;
+        taxesAvoided += expectedTaxes - taxes;
 
         cash.baseValue -= toPay;
 

@@ -437,7 +437,7 @@ GameObject:
   - 4: {fileID: 400052}
   - 114: {fileID: 11400062}
   m_Layer: 8
-  m_Name: Debt Owned
+  m_Name: Forgetting Rate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,7 +485,7 @@ GameObject:
   - 4: {fileID: 400058}
   - 114: {fileID: 11400068}
   m_Layer: 8
-  m_Name: Current Quarter
+  m_Name: Economic Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,6 +502,86 @@ GameObject:
   - 114: {fileID: 11400070}
   m_Layer: 8
   m_Name: Financials
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100062
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400062}
+  - 114: {fileID: 11400072}
+  m_Layer: 8
+  m_Name: Average Income
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100064
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400064}
+  - 114: {fileID: 11400074}
+  m_Layer: 8
+  m_Name: Taxes Avoided
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100066
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400066}
+  - 114: {fileID: 11400076}
+  m_Layer: 8
+  m_Name: Consumer Spending Rate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100068
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400068}
+  - 114: {fileID: 11400078}
+  m_Layer: 8
+  m_Name: Debt Owned
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100070
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400070}
+  - 114: {fileID: 11400080}
+  m_Layer: 8
+  m_Name: Current Quarter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -564,7 +644,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -51, z: 0}
+  m_LocalPosition: {x: 0, y: -37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400014}
@@ -593,7 +673,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -275.999908, z: 0}
+  m_LocalPosition: {x: 0, y: -329.999939, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400008}
@@ -618,11 +698,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -163.999985, z: 0}
+  m_LocalPosition: {x: 0, y: -168, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400060}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &400018
 Transform:
   m_ObjectHideFlags: 1
@@ -630,11 +710,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -203.999985, z: 0}
+  m_LocalPosition: {x: 0, y: -193, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400060}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &400020
 Transform:
   m_ObjectHideFlags: 1
@@ -656,11 +736,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -235.999985, z: 0}
+  m_LocalPosition: {x: 0, y: -215, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400060}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &400024
 Transform:
   m_ObjectHideFlags: 1
@@ -668,11 +748,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -111.999985, z: 0}
+  m_LocalPosition: {x: 0, y: -122, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400060}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &400026
 Transform:
   m_ObjectHideFlags: 1
@@ -680,11 +760,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -79.9999847, z: 0}
+  m_LocalPosition: {x: 0, y: -94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400060}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &400028
 Transform:
   m_ObjectHideFlags: 1
@@ -692,7 +772,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -73, z: 0}
+  m_LocalPosition: {x: 0, y: -62.9999924, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400030}
@@ -704,12 +784,16 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -73.9998932, z: 0}
+  m_LocalPosition: {x: 0, y: -51.9999084, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400056}
   - {fileID: 400028}
   - {fileID: 400054}
+  - {fileID: 400068}
+  - {fileID: 400066}
+  - {fileID: 400064}
+  - {fileID: 400062}
   - {fileID: 400052}
   m_Father: {fileID: 400034}
   m_RootOrder: 2
@@ -850,11 +934,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -149, z: 0}
+  m_LocalPosition: {x: 0, y: -226.000015, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400030}
-  m_RootOrder: 3
+  m_RootOrder: 7
 --- !u!4 &400054
 Transform:
   m_ObjectHideFlags: 1
@@ -862,7 +946,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -111, z: 0}
+  m_LocalPosition: {x: 0, y: -91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400030}
@@ -886,7 +970,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -40, z: 0}
+  m_LocalPosition: {x: 0, y: -32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400060}
@@ -902,12 +986,73 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400058}
+  - {fileID: 400070}
   - {fileID: 400026}
   - {fileID: 400024}
   - {fileID: 400016}
   - {fileID: 400018}
   - {fileID: 400022}
   m_Father: {fileID: 400034}
+  m_RootOrder: 1
+--- !u!4 &400062
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -200, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400030}
+  m_RootOrder: 6
+--- !u!4 &400064
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -174, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400030}
+  m_RootOrder: 5
+--- !u!4 &400066
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -147, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400030}
+  m_RootOrder: 4
+--- !u!4 &400068
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -119.000015, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400030}
+  m_RootOrder: 3
+--- !u!4 &400070
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100070}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -67.0000153, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400060}
   m_RootOrder: 1
 --- !u!54 &5400000
 Rigidbody:
@@ -1105,12 +1250,12 @@ MonoBehaviour:
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
   mWidth: 375
-  mHeight: 78
+  mHeight: 50
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.80769253
+  aspectRatio: 7.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -1227,7 +1372,12 @@ MonoBehaviour:
   lifetimeRevenue: {fileID: 11400066}
   totalMarketShare: {fileID: 11400034}
   deathToll: {fileID: 11400064}
-  debtOwned: {fileID: 11400062}
+  debtOwned: {fileID: 11400078}
+  economicHealth: {fileID: 11400068}
+  spendingRate: {fileID: 11400076}
+  taxesAvoided: {fileID: 11400074}
+  averageIncome: {fileID: 11400072}
+  forgettingRate: {fileID: 11400062}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1322,7 +1472,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3008
+  startingRenderQueue: 3006
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1364,7 +1514,7 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400012}
     relative: 0
-    absolute: -80
+    absolute: -52
   topAnchor:
     target: {fileID: 400012}
     relative: .5
@@ -1373,12 +1523,12 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 487
-  mHeight: 78
+  mHeight: 50
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.24358988
+  aspectRatio: 9.73999977
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1475,12 +1625,12 @@ MonoBehaviour:
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
   mWidth: 487
-  mHeight: 78
+  mHeight: 50
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.24358988
+  aspectRatio: 9.73999977
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -1531,26 +1681,26 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400024}
     relative: 0
-    absolute: -60
+    absolute: -48
   topAnchor:
     target: {fileID: 400024}
     relative: 0
     absolute: -24
   updateAnchors: 1
-  mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
+  mColor: {r: .647058845, g: .647058845, b: .647058845, a: 1}
   mPivot: 4
   mWidth: 487
-  mHeight: 36
+  mHeight: 24
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 13.5277777
+  aspectRatio: 20.291666
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: Last Quarter
-  mFontSize: 24
+  mFontSize: 20
   mFontStyle: 1
   mAlignment: 1
   mEncoding: 1
@@ -1633,26 +1783,26 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400016}
     relative: 0
-    absolute: -32
+    absolute: -22
   topAnchor:
     target: {fileID: 400016}
     relative: 0
-    absolute: -12
+    absolute: -4
   updateAnchors: 1
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
   mWidth: 487
-  mHeight: 20
+  mHeight: 18
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 24.3500004
+  aspectRatio: 27.0555553
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: 'Revenue: $10,000'
-  mFontSize: 24
+  mFontSize: 20
   mFontStyle: 1
   mAlignment: 1
   mEncoding: 1
@@ -1698,21 +1848,21 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400018}
     relative: 0
-    absolute: -32
+    absolute: -22
   topAnchor:
     target: {fileID: 400018}
     relative: 0
-    absolute: -12
+    absolute: -4
   updateAnchors: 1
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
   mWidth: 487
-  mHeight: 20
+  mHeight: 18
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 24.3500004
+  aspectRatio: 27.0555553
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -1763,11 +1913,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400026}
     relative: 0
-    absolute: -32
+    absolute: -28
   topAnchor:
     target: {fileID: 400026}
     relative: 0
-    absolute: -12
+    absolute: -8
   updateAnchors: 1
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
@@ -1818,21 +1968,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400058}
+    target: {fileID: 400070}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 400058}
+    target: {fileID: 400070}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 400058}
+    target: {fileID: 400070}
     relative: 0
-    absolute: -32
+    absolute: -24
   topAnchor:
-    target: {fileID: 400058}
+    target: {fileID: 400070}
     relative: 0
-    absolute: -12
+    absolute: -4
   updateAnchors: 1
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
@@ -1893,11 +2043,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400056}
     relative: 0
-    absolute: -38
+    absolute: -28
   topAnchor:
     target: {fileID: 400056}
     relative: 0
-    absolute: -12
+    absolute: -2
   updateAnchors: 1
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
@@ -2700,35 +2850,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 400054}
+    target: {fileID: 400062}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 400054}
+    target: {fileID: 400062}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 400054}
+    target: {fileID: 400062}
     relative: 0
-    absolute: -38
+    absolute: -26
   topAnchor:
-    target: {fileID: 400054}
+    target: {fileID: 400062}
     relative: 0
-    absolute: -12
+    absolute: -2
   updateAnchors: 1
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
   mWidth: 487
-  mHeight: 26
+  mHeight: 24
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 18.7307701
+  aspectRatio: 20.291666
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: 'Debt Owned: $10,000'
+  mText: 'Forgetting Rate: 1.0x'
   mFontSize: 20
   mFontStyle: 1
   mAlignment: 1
@@ -2775,11 +2925,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400028}
     relative: 0
-    absolute: -38
+    absolute: -28
   topAnchor:
     target: {fileID: 400028}
     relative: 0
-    absolute: -12
+    absolute: -2
   updateAnchors: 1
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
@@ -2905,7 +3055,7 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400060}
     relative: 0
-    absolute: -48
+    absolute: -32
   topAnchor:
     target: {fileID: 400060}
     relative: 0
@@ -2914,18 +3064,18 @@ MonoBehaviour:
   mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
   mWidth: 487
-  mHeight: 36
+  mHeight: 20
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 13.5277777
+  aspectRatio: 24.3500004
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: Current Quarter
-  mFontSize: 24
-  mFontStyle: 1
+  mText: The economy is [u]healthy[/u].
+  mFontSize: 18
+  mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
   mMaxLineCount: 0
@@ -2989,6 +3139,331 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: Financials
+  mFontSize: 20
+  mFontStyle: 1
+  mAlignment: 1
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+--- !u!114 &11400072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400064}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 400064}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 400064}
+    relative: 0
+    absolute: -26
+  topAnchor:
+    target: {fileID: 400064}
+    relative: 0
+    absolute: -2
+  updateAnchors: 1
+  mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
+  mPivot: 4
+  mWidth: 487
+  mHeight: 24
+  mDepth: 1
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 20.291666
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
+  mFont: {fileID: 0}
+  mText: 'Average Income: $60,000/yr'
+  mFontSize: 20
+  mFontStyle: 1
+  mAlignment: 1
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+--- !u!114 &11400074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400066}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 400066}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 400066}
+    relative: 0
+    absolute: -26
+  topAnchor:
+    target: {fileID: 400066}
+    relative: 0
+    absolute: -2
+  updateAnchors: 1
+  mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
+  mPivot: 4
+  mWidth: 487
+  mHeight: 24
+  mDepth: 1
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 20.291666
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
+  mFont: {fileID: 0}
+  mText: 'Taxes Avoided: $10,000'
+  mFontSize: 20
+  mFontStyle: 1
+  mAlignment: 1
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+--- !u!114 &11400076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400068}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 400068}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 400068}
+    relative: 0
+    absolute: -28
+  topAnchor:
+    target: {fileID: 400068}
+    relative: 0
+    absolute: -2
+  updateAnchors: 1
+  mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
+  mPivot: 4
+  mWidth: 487
+  mHeight: 26
+  mDepth: 1
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 18.7307701
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
+  mFont: {fileID: 0}
+  mText: 'Consumer Spending Rate: 1.0x'
+  mFontSize: 20
+  mFontStyle: 1
+  mAlignment: 1
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+--- !u!114 &11400078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400054}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 400054}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 400054}
+    relative: 0
+    absolute: -28
+  topAnchor:
+    target: {fileID: 400054}
+    relative: 0
+    absolute: -2
+  updateAnchors: 1
+  mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
+  mPivot: 4
+  mWidth: 487
+  mHeight: 26
+  mDepth: 1
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 18.7307701
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
+  mFont: {fileID: 0}
+  mText: 'Debt Owned: $10,000'
+  mFontSize: 20
+  mFontStyle: 1
+  mAlignment: 1
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+--- !u!114 &11400080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 400058}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 400058}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 400058}
+    relative: 0
+    absolute: -38
+  topAnchor:
+    target: {fileID: 400058}
+    relative: 0
+    absolute: -12
+  updateAnchors: 1
+  mColor: {r: .676470578, g: .676470578, b: .676470578, a: 1}
+  mPivot: 4
+  mWidth: 487
+  mHeight: 26
+  mDepth: 1
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 18.7307701
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
+  mFont: {fileID: 0}
+  mText: Current Quarter
   mFontSize: 20
   mFontStyle: 1
   mAlignment: 1
