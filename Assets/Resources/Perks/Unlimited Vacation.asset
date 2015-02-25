@@ -17,8 +17,8 @@ MonoBehaviour:
     cost: 1000
     description: People love the idea of unlimited vacation. Luckily, we know that
       social pressure will keep anyone from fully taking advantage of it :)
+    requiredOffice: 1
     mesh: {fileID: 4300040, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 79f6cdd49d98b4ea3a10fb97d4ece50d, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -71,8 +71,8 @@ MonoBehaviour:
     description: We can subsidize the most fantastic vacation experiences for employees
       and their families, without them having to take time off. It's the same thing,
       isn't it?
+    requiredOffice: 1
     mesh: {fileID: 4300088, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: bbc432d7c7546495ba711e32a19d15d3, type: 3}
     effects:
       unlocks:
         productTypes: []

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeLevel: 0
   upgrades:
-  - name: Complimentary Fitness Trackers
+  - name: Fitness Trackers
     cost: 50000
     description: 'Employees will appreciate being able to know every little detail
       about their physical health. We''ll appreciate it too. '
+    requiredOffice: 0
     mesh: {fileID: 4300096, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:
@@ -65,10 +66,11 @@ MonoBehaviour:
         type: 0
       aiCompany: {fileID: 0}
     requiredTechnologies: []
-  - name: Complimentary Psychic Pacemakers
+  - name: Psychic Pacemakers
     cost: 100000
     description: It's one thing to help employees maintain peak physical health, but
       what about mental health? That's more valuable.
+    requiredOffice: 1
     mesh: {fileID: 4300086, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:
@@ -117,10 +119,11 @@ MonoBehaviour:
         type: 0
       aiCompany: {fileID: 0}
     requiredTechnologies: []
-  - name: Complimentary Neuromorphic Implants
+  - name: Neuromorphic Implants
     cost: 1000
     description: It's to our benefit if employees can think above and beyond natural
       limits. Let's give them the equipment to do so.
+    requiredOffice: 1
     mesh: {fileID: 4300090, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:

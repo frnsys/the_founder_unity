@@ -16,18 +16,18 @@ MonoBehaviour:
   - name: Ping-Pong
     cost: 50000
     description: Some game time helps employees unwind and work through problems.
+    requiredOffice: 0
     mesh: {fileID: 4300028, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 20236499e729a4276b7c62aab3c0109e, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -49,6 +49,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -59,23 +63,24 @@ MonoBehaviour:
         value: 10
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []
   - name: VR Experience Translator
     cost: 100000
     description: With VRETs, workers can work while feeling like they're doing something
       else. Work IS play.
+    requiredOffice: 1
     mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: c3cc158c6fd8f4f93ba0e36293234d04, type: 3}
     effects:
       unlocks:
         productTypes: []
         workers: []
-        items: []
         perks: []
-        stores: 
         locations: []
         verticals: []
         promos: []
+        recruitments: []
+        companies: []
       cash: 0
       research:
         name: Research
@@ -97,6 +102,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -107,4 +116,5 @@ MonoBehaviour:
         value: 18
         duration: 0
         type: 0
+      aiCompany: {fileID: 0}
     requiredTechnologies: []

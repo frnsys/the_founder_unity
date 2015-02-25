@@ -20,6 +20,7 @@ internal class PerkInspector : Editor {
             upgrade.name = EditorGUILayout.TextField("Name", upgrade.name);
             upgrade.description = EditorGUILayout.TextField("Description", upgrade.description);
             upgrade.cost = EditorGUILayout.FloatField("Cost", upgrade.cost);
+            upgrade.requiredOffice = (Office.Type)EditorGUILayout.EnumPopup("Required Office", upgrade.requiredOffice);
 
             EditorGUILayout.LabelField("Required Technologies");
             for (int j=0; j < upgrade.requiredTechnologies.Count; j++) {

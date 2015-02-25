@@ -16,6 +16,7 @@ MonoBehaviour:
   - name: Couches
     cost: 50000
     description: Give the employees some places to crash after all-night work sessions.
+    requiredOffice: 0
     mesh: {fileID: 4300100, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:
@@ -67,6 +68,7 @@ MonoBehaviour:
   - name: Sleep Pods
     cost: 100000
     description: So much time is lost commuting to and from the office.
+    requiredOffice: 1
     mesh: {fileID: 4300010, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:
@@ -119,6 +121,7 @@ MonoBehaviour:
     cost: 1000
     description: Our dream publishing technology allows employees to literally work
       in their sleep. There is no "off-the-clock".
+    requiredOffice: 1
     mesh: {fileID: 4300084, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
     effects:
       unlocks:

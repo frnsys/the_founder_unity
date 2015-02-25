@@ -17,8 +17,8 @@ MonoBehaviour:
     cost: 50000
     description: Telepresence helps employees meet even if they can't be together
       physically.
+    requiredOffice: 1
     mesh: {fileID: 4300034, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 3604a3625a7824f06aa01c726980cdae, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -70,8 +70,8 @@ MonoBehaviour:
     cost: 100000
     description: Workers from any office can join consciousness to get the most out
       of their meetings.
+    requiredOffice: 1
     mesh: {fileID: 4300082, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: bbc432d7c7546495ba711e32a19d15d3, type: 3}
     effects:
       unlocks:
         productTypes: []

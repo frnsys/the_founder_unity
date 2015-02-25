@@ -16,8 +16,8 @@ MonoBehaviour:
   - name: Snacks
     cost: 1000
     description: Snacks to keep everyone energized throughout the day.
+    requiredOffice: 0
     mesh: {fileID: 4300014, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 2145c697f186c456998fc49be354a6d9, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -49,6 +49,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -65,8 +69,8 @@ MonoBehaviour:
     cost: 1000
     description: Keep your employees fed at the office so they don't have to leave
       for meals. Working through lunch is a cultural value!
+    requiredOffice: 0
     mesh: {fileID: 4300048, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: d5bae404c0b054e84bb44e6c8d5f9766, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -98,6 +102,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects:
       - name: Happiness
@@ -114,8 +122,8 @@ MonoBehaviour:
     cost: 1000
     description: Keep your employees fed at the office so they don't have to leave
       for meals.
+    requiredOffice: 1
     mesh: {fileID: 4300046, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: d5bae404c0b054e84bb44e6c8d5f9766, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -147,6 +155,10 @@ MonoBehaviour:
       gameEvent: {fileID: 0}
       eventDelay: 0
       eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      economicStability: 0
       productEffects: []
       workerEffects: []
       aiCompany: {fileID: 0}

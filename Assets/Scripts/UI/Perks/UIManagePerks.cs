@@ -14,7 +14,7 @@ public class UIManagePerks : UIFullScreenPager {
 
     private void LoadPerks() {
         ClearGrid();
-        foreach (Perk p in gm.unlocked.perks) {
+        foreach (Perk p in gm.unlocked.perks.Where(pk => pk.current.Available(gm.playerCompany))) {
             GameObject perkItem = NGUITools.AddChild(grid.gameObject, perkPrefab);
             perkItem.GetComponent<UIPerk>().perk = p;
         }

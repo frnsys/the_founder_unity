@@ -12,6 +12,7 @@ public class Perk : TemplateResource<Perk> {
         public string name;
         public float cost = 1000;
         public string description;
+        public Office.Type requiredOffice;
 
         // For the physical representation of the product.
         public Mesh mesh;
@@ -20,6 +21,8 @@ public class Perk : TemplateResource<Perk> {
         public List<Technology> requiredTechnologies = new List<Technology>();
 
         public bool Available(Company c) {
+            if (c.office < requiredOffice)
+                return false;
             foreach (Technology t in requiredTechnologies) {
                 if (!c.technologies.Contains(t))
                     return false;
@@ -44,7 +47,7 @@ public class Perk : TemplateResource<Perk> {
     public bool NextAvailable(Company c) {
         // A perks availability depends on whether or not the company
         // has the necessary technologies and a high enough office level upgrade.
-        return !hasNext ? false : (int)c.office >= upgradeLevel && next.Available(c);
+        return !hasNext ? false : next.Available(c);
     }
     public float cost {
         get { return current.cost; }

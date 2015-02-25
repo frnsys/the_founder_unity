@@ -17,8 +17,8 @@ MonoBehaviour:
     cost: 50000
     description: Organize and sponsor office parties to help employees unwind and
       socialize.
+    requiredOffice: 0
     mesh: {fileID: 4300080, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 48b2c13fc93e043a09dd37590e133fee, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -70,8 +70,8 @@ MonoBehaviour:
     cost: 20000
     description: Organize and sponsor special get-togethers for teams so that they
       learn to work together better.
+    requiredOffice: 0
     mesh: {fileID: 4300078, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 814ccb662f42f4c61ac38122641171ff, type: 3}
     effects:
       unlocks:
         productTypes: []

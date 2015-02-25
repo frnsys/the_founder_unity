@@ -17,8 +17,8 @@ MonoBehaviour:
     cost: 50000
     description: Sometimes the psychic stress of non-stop work gets to people. Maybe
       we should reconsider their employment. But we can also provide help.
+    requiredOffice: 1
     mesh: {fileID: 4300060, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 814ccb662f42f4c61ac38122641171ff, type: 3}
     effects:
       unlocks:
         productTypes: []
@@ -69,8 +69,8 @@ MonoBehaviour:
   - name: Life Coaches
     cost: 20000
     description: Let's help our employees navigate their career/life at <PLAYERCOMPANY>.
+    requiredOffice: 1
     mesh: {fileID: 4300058, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
-    texture: {fileID: 2800000, guid: 814ccb662f42f4c61ac38122641171ff, type: 3}
     effects:
       unlocks:
         productTypes: []
