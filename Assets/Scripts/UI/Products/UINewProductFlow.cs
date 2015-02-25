@@ -48,9 +48,16 @@ public class UINewProductFlow : MonoBehaviour {
     }
 
     void Update() {
+        // Prevent access if something is already developing.
         if (gm.playerCompany.developing) {
             blackout.SetActive(true);
-            progressBar.value = gm.playerCompany.developingProducts[0].progress;
+
+            if (gm.playerCompany.developingProducts.Count > 0) {
+                progressBar.value = gm.playerCompany.developingProducts[0].progress;
+            } else {
+                progressBar.gameObject.SetActive(false);
+            }
+
         } else {
             blackout.SetActive(false);
         }

@@ -16,6 +16,7 @@ public class UnlockSet {
     public List<Promo> promos = new List<Promo>();
     public List<Recruitment> recruitments = new List<Recruitment>();
     public List<MiniCompany> companies = new List<MiniCompany>();
+    public List<SpecialProject> specialProjects = new List<SpecialProject>();
 
     // This "unlocks" an UnlockSet by
     // adding the input UnlockSet's values
@@ -52,6 +53,10 @@ public class UnlockSet {
         foreach (MiniCompany o in us.companies) {
             if (!Duplicate(o, companies))
                 companies.Add(o);
+        }
+        foreach (SpecialProject o in us.specialProjects) {
+            if (!Duplicate(o, specialProjects))
+                specialProjects.Add(o);
         }
     }
 

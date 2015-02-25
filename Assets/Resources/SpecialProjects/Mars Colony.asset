@@ -8,31 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
-  m_Name: Kepler-62e
+  m_Script: {fileID: 11500000, guid: 7c7546f3fc1bd4967ba26f04e11c3f31, type: 3}
+  m_Name: Mars Colony
   m_EditorClassIdentifier: 
   description: 
-  rotation: {x: 0, y: 0, z: 0}
-  cost: 1e+06
-  market: 8
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
-  infrastructure:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
+  cost: 7e+09
+  requiredProgress: 80000
   effects:
     unlocks:
       productTypes: []
       workers: []
       perks: []
-      locations: []
+      locations:
+      - {fileID: 11400000, guid: e7c7dea82df4e45858edb7bcd07a0b10, type: 2}
       verticals: []
       promos: []
       recruitments: []
@@ -67,3 +55,12 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+  requiredInfrastructure:
+    keys: 00000000010000000200000003000000
+    values: 0a000000000000000a0000000a000000
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
+  mesh: {fileID: 0}
+  texture: {fileID: 0}
+  _progress: 0

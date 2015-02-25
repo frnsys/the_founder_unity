@@ -96,6 +96,12 @@ public class UIEffectItem : MonoBehaviour {
         foreach (Location i in es.unlocks.locations) {
             RenderUnlockEffect(i.name);
         }
+        foreach (MiniCompany i in es.unlocks.companies) {
+            RenderUnlockEffect(i.name);
+        }
+        foreach (SpecialProject i in es.unlocks.specialProjects) {
+            RenderUnlockEffect(i.name);
+        }
     }
 
     private void RenderProductEffects(EffectSet es) {

@@ -3,22 +3,19 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UIProductCompletedAlert : UIEffectAlert {
+public class UISpecialProjectCompletedAlert : UIEffectAlert {
     public UILabel nameLabel;
-    public UILabel aspectsLabel;
-    public GameObject productObject;
+    public GameObject projectObject;
 
-    public Product product {
+    public SpecialProject specialProject {
         set {
             nameLabel.text = value.name;
             bodyLabel.text = value.description;
 
-            productObject.GetComponent<MeshFilter>().mesh = value.mesh;
-            productObject.GetComponent<MeshRenderer>().material.mainTexture = value.texture;
+            projectObject.GetComponent<MeshFilter>().mesh = value.mesh;
+            projectObject.GetComponent<MeshRenderer>().material.mainTexture = value.texture;
 
-            aspectsLabel.text = string.Join(" & ", value.productTypes.Select(pt => pt.name).ToArray());
             Extend(bodyLabel.height);
-
             RenderEffects(value.effects);
 
             // -1 because by default there is space for about 1 effect.
@@ -29,7 +26,7 @@ public class UIProductCompletedAlert : UIEffectAlert {
 
     void Update() {
         // Rotate the product, fancy.
-        productObject.transform.Rotate(0,0,0.5f);
+        projectObject.transform.Rotate(0,0,0.5f);
     }
 }
 

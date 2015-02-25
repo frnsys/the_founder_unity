@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400028}
   m_Layer: 0
-  m_Name: Acquisitions UI Target
+  m_Name: Special Projects UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -1016,7 +1016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100128
 GameObject:
   m_ObjectHideFlags: 1
@@ -1625,7 +1625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100202
 GameObject:
   m_ObjectHideFlags: 1
@@ -1924,7 +1924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100238
 GameObject:
   m_ObjectHideFlags: 1
@@ -2560,7 +2560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100314
 GameObject:
   m_ObjectHideFlags: 1
@@ -2641,7 +2641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100324
 GameObject:
   m_ObjectHideFlags: 1
@@ -2656,7 +2656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100326
 GameObject:
   m_ObjectHideFlags: 1
@@ -2722,7 +2722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100334
 GameObject:
   m_ObjectHideFlags: 1
@@ -2771,7 +2771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100340
 GameObject:
   m_ObjectHideFlags: 1
@@ -2803,7 +2803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100344
 GameObject:
   m_ObjectHideFlags: 1
@@ -2852,7 +2852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100350
 GameObject:
   m_ObjectHideFlags: 1
@@ -2901,7 +2901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100356
 GameObject:
   m_ObjectHideFlags: 1
@@ -2950,7 +2950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100362
 GameObject:
   m_ObjectHideFlags: 1
@@ -2963,6 +2963,21 @@ GameObject:
   - 23: {fileID: 2300230}
   m_Layer: 11
   m_Name: Building
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &100364
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400364}
+  m_Layer: 0
+  m_Name: Acquisitions UI Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -3143,11 +3158,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.78999996, y: .910000026, z: -13.6999998}
+  m_LocalPosition: {x: 5.79000092, y: .910000205, z: -13.6999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400080}
-  m_RootOrder: 14
+  m_RootOrder: 15
 --- !u!4 &400030
 Transform:
   m_ObjectHideFlags: 1
@@ -3488,6 +3503,7 @@ Transform:
   - {fileID: 400100}
   - {fileID: 400072}
   - {fileID: 400050}
+  - {fileID: 400364}
   - {fileID: 400028}
   m_Father: {fileID: 400236}
   m_RootOrder: 1
@@ -5333,6 +5349,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400360}
   m_RootOrder: 0
+--- !u!4 &400364
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.78999996, y: .910000026, z: -13.6999998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400080}
+  m_RootOrder: 14
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -8724,6 +8752,7 @@ MonoBehaviour:
   - {fileID: 100002, guid: 2dc7a9221da4442ec95614b21969cc02, type: 2}
   - {fileID: 100000, guid: 20bf8ac8249be4586bc270f96e74900b, type: 2}
   - {fileID: 100000, guid: 2152d426d38e54e4db21f574b4772c7c, type: 2}
+  - {fileID: 100002, guid: 0d471b0044b6f494b87ea10a10da1911, type: 2}
   uiTargets:
   - {fileID: 400134}
   - {fileID: 400086}
@@ -8739,6 +8768,7 @@ MonoBehaviour:
   - {fileID: 400100}
   - {fileID: 400072}
   - {fileID: 400050}
+  - {fileID: 400364}
   - {fileID: 400028}
   cost: 20000
   employeesRequired: 4

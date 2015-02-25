@@ -133,12 +133,14 @@ public class GameManager : Singleton<GameManager> {
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
+        SpecialProject.Completed += OnSpecialProjectCompleted;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
         ResearchManager.Completed -= OnResearchCompleted;
         Product.Completed -= OnProductCompleted;
+        SpecialProject.Completed -= OnSpecialProjectCompleted;
     }
 
     void OnLevelWasLoaded(int level) {
@@ -209,6 +211,10 @@ public class GameManager : Singleton<GameManager> {
             if(c.products.Count(p_ => p_.comboID == p.comboID) == 1)
                 ApplyEffectSet(p.effects);
         }
+    }
+
+    public void OnSpecialProjectCompleted(SpecialProject p) {
+        ApplyEffectSet(p.effects);
     }
 
     public void ApplyEffectSet(EffectSet es) {

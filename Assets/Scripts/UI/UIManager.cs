@@ -31,6 +31,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject quarterlyReportPrefab;
     public GameObject researchCompletedAlertPrefab;
     public GameObject productCompletedAlertPrefab;
+    public GameObject specialProjectCompletedAlertPrefab;
     public GameObject competitorProductCompletedAlertPrefab;
     public GameObject selectWorkerPopupPrefab;
     public GameObject hiringPrefab;
@@ -70,6 +71,7 @@ public class UIManager : Singleton<UIManager> {
         GameEvent.EventTriggered += OnEvent;
         ResearchManager.Completed += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
+        SpecialProject.Completed += OnSpecialProjectCompleted;
         Recruitment.Completed += OnRecruitmentCompleted;
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
@@ -84,6 +86,7 @@ public class UIManager : Singleton<UIManager> {
         GameEvent.EventTriggered -= OnEvent;
         ResearchManager.Completed -= OnResearchCompleted;
         Product.Completed -= OnProductCompleted;
+        SpecialProject.Completed -= OnSpecialProjectCompleted;
         Recruitment.Completed -= OnRecruitmentCompleted;
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
@@ -139,6 +142,13 @@ public class UIManager : Singleton<UIManager> {
             popup.GetComponent<UIProductAdAlert>().SetProductAndCompany(p, c);
         }
     }
+
+    // Show a "special project completed" alert.
+    void OnSpecialProjectCompleted(SpecialProject p) {
+        GameObject popup = NGUITools.AddChild(alertsPanel, specialProjectCompletedAlertPrefab);
+        popup.GetComponent<UISpecialProjectCompletedAlert>().specialProject = p;
+    }
+
 
     void OnRecruitmentCompleted(Recruitment r) {
         IEnumerable<Worker> workers = GameManager.Instance.workerManager.WorkersForRecruitment(r);
