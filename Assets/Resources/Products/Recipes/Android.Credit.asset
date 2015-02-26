@@ -9,10 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Default
+  m_Name: Android.Credit
   m_EditorClassIdentifier: 
-  names: 
-  description: 
+  names: BuyBot
+  description: What do we even need *people* to buy our products for anyways? We can
+    just build robots to work and spend their cash on us.
   synergies: []
   difficulty: 0
   design_W: 1
@@ -28,7 +29,9 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
-  productTypes: []
+  productTypes:
+  - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
+  - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
   mesh: {fileID: 0}
   effects:
     unlocks:
@@ -63,12 +66,16 @@ MonoBehaviour:
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
-    spendingMultiplier: 0
+    spendingMultiplier: .100000001
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
     productEffects: []
-    workerEffects: []
+    workerEffects:
+    - name: Happiness
+      value: 10
+      duration: 0
+      type: 0
     aiCompany: {fileID: 0}
     specialEffect: 0
   requiredTechnologies: []

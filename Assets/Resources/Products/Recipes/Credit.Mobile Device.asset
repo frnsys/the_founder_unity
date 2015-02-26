@@ -9,10 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Default
+  m_Name: Credit.Mobile Device
   m_EditorClassIdentifier: 
-  names: 
-  description: 
+  names: PayBack, Tipper, CashPal, Cube
+  description: We can empower many small businesses and inviduals that need to process
+    payments but don't want to pay credit card companies and their ilk. They can pay
+    us instead.
   synergies: []
   difficulty: 0
   design_W: 1
@@ -28,7 +30,9 @@ MonoBehaviour:
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
-  productTypes: []
+  productTypes:
+  - {fileID: 11400000, guid: 9e2030786d1944c6f8bea608a2f2f237, type: 2}
+  - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
   mesh: {fileID: 0}
   effects:
     unlocks:
@@ -63,12 +67,16 @@ MonoBehaviour:
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
-    spendingMultiplier: 0
+    spendingMultiplier: .100000001
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
     productEffects: []
-    workerEffects: []
+    workerEffects:
+    - name: Happiness
+      value: 10
+      duration: 0
+      type: 0
     aiCompany: {fileID: 0}
     specialEffect: 0
   requiredTechnologies: []

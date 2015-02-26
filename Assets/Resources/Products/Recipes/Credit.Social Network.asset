@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Default
+  m_Name: Credit.Social Network
   m_EditorClassIdentifier: 
-  names: 
-  description: 
+  names: SpareChange, LendAHand, GimmeMoney
+  description: A microfinancing platform makes sure credit is available for everyone.
   synergies: []
   difficulty: 0
   design_W: 1
@@ -25,10 +25,27 @@ MonoBehaviour:
   maxRevenue: 1000
   revenueModel:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: .5
+      value: 1.00342464
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .993852437
+      value: -.00342464447
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  productTypes: []
+  productTypes:
+  - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
+  - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
   mesh: {fileID: 0}
   effects:
     unlocks:
@@ -63,12 +80,16 @@ MonoBehaviour:
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
-    spendingMultiplier: 0
+    spendingMultiplier: .100000001
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
     productEffects: []
-    workerEffects: []
+    workerEffects:
+    - name: Happiness
+      value: 10
+      duration: 0
+      type: 0
     aiCompany: {fileID: 0}
     specialEffect: 0
   requiredTechnologies: []
