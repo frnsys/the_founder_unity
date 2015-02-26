@@ -11,6 +11,7 @@ public class UIHUD : MonoBehaviour {
 
     public UIGrid grid;
     public GameObject activeProductPrefab;
+    public Color highlightColor;
 
     public GameObject promoIndicator;
     public GameObject productIndicator;
@@ -56,7 +57,10 @@ public class UIHUD : MonoBehaviour {
             foreach (Product p in gm.playerCompany.activeProducts) {
                 if (!displayedProducts.Contains(p)) {
                     GameObject productItem = NGUITools.AddChild(grid.gameObject, activeProductPrefab);
-                    productItem.transform.Find("Name").GetComponent<UILabel>().text = p.name;
+                    UILabel nameLabel = productItem.transform.Find("Name").GetComponent<UILabel>();
+                    if (p.synergy)
+                        nameLabel.color = highlightColor;
+                    nameLabel.text = p.name;
 
                     UILabel revenueLabel = productItem.transform.Find("Revenue").GetComponent<UILabel>();
                     revenueLabel.text = string.Format("{0:C0}", p.revenueEarned);

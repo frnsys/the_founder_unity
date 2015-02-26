@@ -36,6 +36,7 @@ public class Product : HasStats {
     public bool killsPeople;
     public bool debtsPeople;
     public bool techPenalty;
+    public bool synergy;
 
     public Mesh mesh {
         get {
@@ -281,10 +282,22 @@ public class Product : HasStats {
 
             revenue *= marketShare;
             Debug.Log(string.Format("After market share: {0}", revenue));
+
+            if (techPenalty)
+                revenue *= 0.1f;
+
+            synergy = true;
+            List<ProductRecipe> activeRecipes = company.activeProducts.Select(p => p.recipe).ToList();
+            foreach (ProductRecipe r in recipe.synergies) {
+                if (!activeRecipes.Contains(r)) {
+                    synergy = false;
+                    break;
+                }
+            }
+            if (synergy)
+                revenue *= 1.5f;
         }
 
-        if (techPenalty)
-            revenue *= 0.1f;
 
         revenueEarned += revenue;
         lastRevenue = revenue;

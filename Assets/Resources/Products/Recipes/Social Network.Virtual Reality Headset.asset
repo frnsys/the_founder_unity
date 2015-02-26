@@ -9,17 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Virtual Reality Headset.Social Network
+  m_Name: Social Network.Virtual Reality Headset
   m_EditorClassIdentifier: 
+  names: Matrix, OZ, The Network
   description: Our virtual reality social network will give us unprecedented direct
     access to our consumers. They'll be spending all their time in a world of our
     creation!
-  productTypes:
-  - {fileID: 11400000, guid: edb72c0621fcf4aa08f92668b5269560, type: 2}
-  - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-  mesh: {fileID: 0}
-  texture: {fileID: 0}
-  names: Matrix, OZ, The Network
+  synergies: []
+  difficulty: 0
   design_W: 1
   marketing_W: 1
   engineering_W: 1
@@ -28,6 +25,16 @@ MonoBehaviour:
   engineering_I: 100
   maxLongevity: 1000
   maxRevenue: 1000
+  revenueModel:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  productTypes:
+  - {fileID: 11400000, guid: edb72c0621fcf4aa08f92668b5269560, type: 2}
+  - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
+  mesh: {fileID: 0}
+  texture: {fileID: 0}
   effects:
     unlocks:
       productTypes: []
@@ -38,6 +45,7 @@ MonoBehaviour:
       promos: []
       recruitments: []
       companies: []
+      specialProjects: []
     cash: 0
     research:
       name: Research
@@ -62,6 +70,7 @@ MonoBehaviour:
     forgettingRate: 0
     spendingMultiplier: .100000001
     wageMultiplier: 0
+    taxRate: 0
     economicStability: 0
     productEffects: []
     workerEffects:
@@ -70,3 +79,5 @@ MonoBehaviour:
       duration: 0
       type: 0
     aiCompany: {fileID: 0}
+    specialEffect: 0
+  requiredTechnologies: []

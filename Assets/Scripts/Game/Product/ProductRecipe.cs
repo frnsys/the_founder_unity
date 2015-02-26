@@ -14,6 +14,8 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     public string names;
     public string description;
 
+    // "Synergistic" product recipes.
+    public ProductRecipe[] synergies;
 
     // The difficulty modifier for this product type.
     // This is for calculating the amount of progress required to develop the product.
