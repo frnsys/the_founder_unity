@@ -102,7 +102,6 @@ public class Product : HasStats {
     // between products to see if they are of the same combo.
     public string comboID;
 
-    // The difficulty of a product is the average of its product types' difficulties.
     public float difficulty {
         get { return recipe.difficulty; }
     }
@@ -140,14 +139,13 @@ public class Product : HasStats {
         marketing =   new Stat("Marketing",   (float)marketing_);
         engineering = new Stat("Engineering", (float)engineering_);
 
-        requiredProgress = TotalProgressRequired(c);
-
         recipe = ProductRecipe.LoadFromTypes(pts);
 
         // Load default if we got nothing.
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
+        requiredProgress = TotalProgressRequired(c);
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {

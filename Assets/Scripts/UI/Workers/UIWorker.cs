@@ -46,6 +46,7 @@ public class UIWorker : MonoBehaviour {
     }
 
     public void SetBasicWorker(Worker w) {
+        worker = w;
         quantObj.SetActive(false);
     }
 

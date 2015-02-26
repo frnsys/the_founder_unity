@@ -82,8 +82,7 @@ public class UINewProductFlow : MonoBehaviour {
     // Select a product type for the new product.
     private void SelectProductType(GameObject obj) {
         // Required product types is 2.
-        if (selectedGrid.transform.childCount == 2) {
-            confirmSelectionButton.isEnabled = true;
+        if (selectedGrid.transform.childCount < 2) {
             ProductType pt = obj.GetComponent<UIProductType>().productType;
             GameObject productType = NGUITools.AddChild(selectedGrid.gameObject, selectedProductTypePrefab);
 
@@ -104,6 +103,10 @@ public class UINewProductFlow : MonoBehaviour {
 
             productTypes.Add(pt);
             selectedGrid.Reposition();
+
+            if (productTypes.Count == 2)
+                confirmSelectionButton.isEnabled = true;
+
             UpdateProductTypeItems();
         }
     }

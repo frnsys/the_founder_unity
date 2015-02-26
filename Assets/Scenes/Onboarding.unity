@@ -159,6 +159,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -222,8 +225,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .950912833, b: .676470578, a: 1}
   mPivot: 4
-  mWidth: 2
-  mHeight: 2
+  mWidth: 539
+  mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -515,7 +518,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 530356668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40, y: 30, z: 0}
+  m_LocalPosition: {x: 94.8630981, y: -449.999969, z: 0}
   m_LocalScale: {x: .999935985, y: .999935985, z: .999935985}
   m_Children:
   - {fileID: 1209284507}
@@ -551,7 +554,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .203921556, g: .866666675, b: .537579417, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 350
   mHeight: 60
   mDepth: 2
   autoResizeBoxCollider: 1
@@ -618,7 +621,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 80, y: 60, z: 0}
+  m_Size: {x: 350, y: 60, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &538088995
 GameObject:
@@ -644,7 +647,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 538088995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -244, z: 0}
+  m_LocalPosition: {x: 0, y: 235.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 624658763}
@@ -700,8 +703,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
-  mWidth: 2
-  mHeight: 2
+  mWidth: 539
+  mHeight: 636
   mDepth: 5
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -768,6 +771,7 @@ MonoBehaviour:
   scrollAxisName: Mouse ScrollWheel
   verticalAxisName: Vertical
   horizontalAxisName: Horizontal
+  commandClick: 1
   submitKey0: 13
   submitKey1: 330
   cancelKey0: 27
@@ -934,7 +938,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1063021703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40, y: 30, z: 0}
+  m_LocalPosition: {x: -174.863098, y: -449.999969, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children:
   - {fileID: 1377279621}
@@ -979,7 +983,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 60, z: 0}
+  m_Size: {x: 190, y: 60, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1063021707
 MonoBehaviour:
@@ -1011,7 +1015,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .937254906, g: .709803939, b: .258823544, a: 1}
   mPivot: 4
-  mWidth: 2
+  mWidth: 190
   mHeight: 60
   mDepth: 2
   autoResizeBoxCollider: 1
@@ -1097,7 +1101,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 350
   mHeight: 60
   mDepth: 3
   autoResizeBoxCollider: 0
@@ -1124,6 +1128,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -1187,7 +1194,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 2
+  mWidth: 190
   mHeight: 60
   mDepth: 3
   autoResizeBoxCollider: 0
@@ -1214,6 +1221,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -1301,9 +1311,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 2044936939}
   - 20: {fileID: 2044936938}
-  - 92: {fileID: 2044936937}
-  - 124: {fileID: 2044936936}
-  - 81: {fileID: 2044936935}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1311,27 +1318,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2044936935
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2044936934}
-  m_Enabled: 1
---- !u!124 &2044936936
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2044936934}
-  m_Enabled: 1
---- !u!92 &2044936937
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2044936934}
-  m_Enabled: 1
 --- !u!20 &2044936938
 Camera:
   m_ObjectHideFlags: 0
@@ -1399,7 +1385,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2120384459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -44, z: 0}
+  m_LocalPosition: {x: 0, y: 435.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 624658763}
@@ -1434,7 +1420,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .16911763, g: .16911763, b: .16911763, a: 1}
   mPivot: 4
-  mWidth: 2
+  mWidth: 539
   mHeight: 40
   mDepth: 4
   autoResizeBoxCollider: 0
@@ -1461,6 +1447,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0

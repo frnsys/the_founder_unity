@@ -10,6 +10,9 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public Office currentOffice;
     public OfficeCameraController officeCameraController;
 
+    // To prevent the upgrade office notice from triggering multiple times.
+    public bool officeUpgradeTriggered;
+
     public GameObject officeArea;
     public GameObject officeUIPanel;
     public GameObject upgradeButton;
@@ -72,7 +75,10 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
             // Office upgrade is available!
             if (currentOffice.nextOffice != null &&
+                !officeUpgradeTriggered &&
                 c.workers.Count >= currentOffice.nextOffice.employeesRequired) {
+                officeUpgradeTriggered = true;
+
                 // TESTING, the production delay should be longer
                 StartCoroutine(GameEvent.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f));
 
@@ -129,6 +135,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         }
 
         upgradeButton.SetActive(false);
+        officeUpgradeTriggered = false;
     }
 
     public void SetupOfficeUI(GameObject[] prefabs, Transform[] targets) {

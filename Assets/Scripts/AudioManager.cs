@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// TO DO this isn't being used now
 public class AudioManager : MonoBehaviour {
     public AudioSource music;
     public AudioSource fx;
