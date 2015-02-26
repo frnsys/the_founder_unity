@@ -1,5 +1,7 @@
 import re
+import sys
 import random
+import operator
 
 
 class Combo():
@@ -36,12 +38,26 @@ def load():
 def main():
     has_combo, no_combo = load()
 
+    types = {}
+    for combo in no_combo:
+        for type in combo.combo:
+            if type not in types:
+                types[type] = 0
+            types[type] += 1
+
     n_has = len(has_combo)
     n_no = len(no_combo)
+    n_types = len(types)
     p_has = n_has/float(n_no) * 100
+    print('{0} product types'.format(n_types))
     print('{0} total combinations'.format(n_has + n_no))
     print('{0} have combinations ({1:.2f}%)'.format(n_has, p_has))
     print('{0} don\'t have combinations'.format(n_no))
+
+    print('Usage amounts (higher is better):')
+    sorted_types = sorted(types.items(), key=operator.itemgetter(1))
+    for type, count in sorted_types:
+        print('  {0}:{1:.2f}% ({2})'.format(type, (n_types - count - 1)/float(n_types - 1) * 100, n_types - count - 1))
 
     print('-'*30)
     print('Selecting random incomplete combo...')
@@ -60,4 +76,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print()
+        sys.exit(0)
