@@ -76,7 +76,6 @@ namespace UnityTest
           // Prepare a product to check that hiring/firing workers automatically updates
           // progress required for developing products.
           ProductType pt = ScriptableObject.CreateInstance<ProductType>();
-          pt.difficulty = 1;
           c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
           Product p = c.products[0];
 

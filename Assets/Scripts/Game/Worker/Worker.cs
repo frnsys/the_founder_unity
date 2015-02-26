@@ -52,6 +52,28 @@ public class Worker : HasStats {
     public string description;
     public string title;
 
+    // Returns a "clone" of this worker.
+    public Worker Clone() {
+        if (!robot) {
+            Worker w = ScriptableObject.CreateInstance<Worker>();
+            w.Init(name,
+                   title,
+                   baseMinSalary,
+                   happiness.baseValue,
+                   productivity.baseValue,
+                   charisma.baseValue,
+                   creativity.baseValue,
+                   cleverness.baseValue);
+            w.texture = texture;
+            w.salary = salary;
+            w.bio = bio;
+            w.description = description;
+            return w;
+        } else {
+            return null;
+        }
+    }
+
     public float baseMinSalary;
     public float MinSalaryForCompany(Company c) {
         float minSalary = baseMinSalary;

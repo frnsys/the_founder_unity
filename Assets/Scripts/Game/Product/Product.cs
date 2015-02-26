@@ -13,7 +13,7 @@ public class Product : HasStats {
 
     public string description {
         get {
-            return recipe != null && recipe.description != null ? recipe.description : productTypes[0].description;
+            return recipe.description != null ? recipe.description : "This combination didn't make any sense. This product is incoherent!";
         }
     }
 
@@ -35,17 +35,18 @@ public class Product : HasStats {
 
     public bool killsPeople;
     public bool debtsPeople;
+    public bool techPenalty;
 
     public Mesh mesh {
         get {
             // Fallback to first product type's mesh.
-            return recipe != null && recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
+            return recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
         }
     }
     public Texture texture {
         get {
             // Fallback to first product type's texture.
-            return recipe != null && recipe.texture != null ? recipe.texture : productTypes[0].texture;
+            return recipe.texture != null ? recipe.texture : productTypes[0].texture;
         }
     }
 
@@ -86,11 +87,7 @@ public class Product : HasStats {
         }
     }
     public EffectSet effects {
-        get {
-            // If there is a recipe, apply only those effects (don't include the
-            // individual product type effects).
-            return recipe != null ? recipe.effects : productTypes[0].effects;
-        }
+        get { return recipe.effects; }
     }
 
     public bool launched { get { return _state == State.LAUNCHED; } }
@@ -112,7 +109,7 @@ public class Product : HasStats {
 
     // The difficulty of a product is the average of its product types' difficulties.
     public float difficulty {
-        get { return productTypes.Average(pt => pt.difficulty); }
+        get { return recipe.difficulty; }
     }
 
     public float timeSinceLaunch = 0;
@@ -150,18 +147,13 @@ public class Product : HasStats {
 
         requiredProgress = TotalProgressRequired(c);
 
-        // Recipes are only relevant for product combos.
-        if (pts.Count > 1) {
-            recipe = ProductRecipe.LoadFromTypes(pts);
+        recipe = ProductRecipe.LoadFromTypes(pts);
 
-            // Load default if we got nothing.
-            if (recipe == null) {
-                recipe = ProductRecipe.LoadDefault();
-            }
-            revenueModel = recipe.revenueModel;
-        } else {
-            revenueModel = productTypes[0].revenueModel;
+        // Load default if we got nothing.
+        if (recipe == null) {
+            recipe = ProductRecipe.LoadDefault();
         }
+        revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
             if (v.name == "Defense") {
@@ -169,6 +161,14 @@ public class Product : HasStats {
             } else if (v.name == "Finance") {
                 debtsPeople = true;
             }
+        }
+
+        // A product recipe can be built without the required techs,
+        // but it will operate at a penalty.
+        techPenalty = false;
+        foreach (Technology t in recipe.requiredTechnologies) {
+            if (!c.technologies.Contains(t))
+                techPenalty = true;
         }
 
         name = GenerateName(c);
@@ -183,15 +183,7 @@ public class Product : HasStats {
         if (version > 0)
             return string.Format("{0} {1}.0", existing.First().name, version + 1);
 
-        if (recipe == null) {
-            if (productTypes[0].names != null && productTypes[0].names.Length > 0) {
-                // TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
-                string[] names = productTypes[0].names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
-                if (names.Length > 0)
-                    return names[Random.Range(0, names.Length-1)];
-            }
-
-        } else if (recipe.names != null) {
+        if (recipe.names != null) {
             // TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
             string[] names = recipe.names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
             if (names.Length > 0)
@@ -231,14 +223,14 @@ public class Product : HasStats {
         float P = engineering.value + 1;
 
         // Weights
-        float a_w = productTypes.Sum(pt => pt.design_W);
-        float u_w = productTypes.Sum(pt => pt.marketing_W);
-        float p_w = productTypes.Sum(pt => pt.engineering_W);
+        float a_w = recipe.design_W;
+        float u_w = recipe.marketing_W;
+        float p_w = recipe.engineering_W;
 
         // Ideals
-        float a_i = productTypes.Sum(pt => pt.design_I);
-        float u_i = productTypes.Sum(pt => pt.marketing_I);
-        float p_i = productTypes.Sum(pt => pt.engineering_I);
+        float a_i = recipe.design_I;
+        float u_i = recipe.marketing_I;
+        float p_i = recipe.engineering_I;
 
         // Calculate the score, i.e. the percent achieve of the ideal product values.
         // The maximum score is 1.0. We cap each value individually so that
@@ -249,10 +241,10 @@ public class Product : HasStats {
         float score = (A_ + U_ + P_)/(a_w + u_w + p_w);
 
         // Revenue model modifications:
-        longevity = productTypes.Average(pt => pt.maxLongevity);
+        longevity = recipe.maxLongevity;
 
         // Maxmimum lifetime revenue of the product.
-        maxRevenue = productTypes.Average(pt => pt.maxRevenue) * score;
+        maxRevenue = recipe.maxRevenue * score;
 
         Debug.Log(string.Format("Score {0}", score));
         Debug.Log(string.Format("Design Value {0}", A));
@@ -290,6 +282,9 @@ public class Product : HasStats {
             revenue *= marketShare;
             Debug.Log(string.Format("After market share: {0}", revenue));
         }
+
+        if (techPenalty)
+            revenue *= 0.1f;
 
         revenueEarned += revenue;
         lastRevenue = revenue;

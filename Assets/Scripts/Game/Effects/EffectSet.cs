@@ -49,6 +49,15 @@ public class EffectSet {
 
     public AICompany aiCompany;
 
+    public Special specialEffect;
+    public enum Special {
+        None,
+        Immortal,
+        Cloneable,
+        Prescient,
+        WorkerInsight
+    }
+
     public void Apply(Company company) {
         company.activeEffects.Add(this);
 
@@ -90,6 +99,9 @@ public class EffectSet {
         gm.wageMultiplier += wageMultiplier;
         gm.economicStability += economicStability;
         gm.taxRate += taxRate;
+
+        if (specialEffect != Special.None)
+            gm.ApplySpecialEffect(specialEffect);
     }
     public void Remove(Company company) {
         company.activeEffects.Remove(this);

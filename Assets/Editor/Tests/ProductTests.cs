@@ -164,10 +164,6 @@ namespace UnityTest
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
-            Debug.Log(pt.design_I);
-            Debug.Log(pt.marketing_I);
-            Debug.Log(pt.engineering_I);
-
             p.Launch();
 
             Assert.IsTrue(p.Revenue(4, c) > zeroRev);
@@ -195,20 +191,6 @@ namespace UnityTest
         [Test]
         public void Points() {
             Assert.AreEqual(p.points, p.productTypes.Sum(t => t.points));
-        }
-
-        [Test]
-        public void Difficulty() {
-            ProductType pt_  = ScriptableObject.CreateInstance<ProductType>();
-            pt_.difficulty  = 1f;
-
-            ProductType pt__ = ScriptableObject.CreateInstance<ProductType>();
-            pt__.difficulty = 2f;
-
-            Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0, c);
-
-            Assert.AreEqual(prod.difficulty, 1.5);
         }
 
         [Test]
@@ -252,7 +234,7 @@ namespace UnityTest
         public void RequiredProgress() {
             int baseProgress = Product.baseProgress;
             float difficulty = 2;
-            pt.difficulty = difficulty;
+            pr.difficulty = difficulty;
 
             Assert.AreEqual(p.difficulty, difficulty);
 
@@ -308,7 +290,7 @@ namespace UnityTest
         public void ProductEffectsApplyOnlyOnce() {
             EffectSet e = new EffectSet();
             e.research = new StatBuff("Research", 2000);
-            pt.effects = e;
+            pr.effects = e;
             float start = c.research.value;
 
             Product.Completed += gm.OnProductCompleted;

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UIProductCompletedAlert: UIEffectAlert {
+public class UIProductCompletedAlert : UIEffectAlert {
     public UILabel nameLabel;
     public UILabel aspectsLabel;
     public GameObject productObject;

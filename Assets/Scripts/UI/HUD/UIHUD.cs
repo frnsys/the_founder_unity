@@ -16,11 +16,13 @@ public class UIHUD : MonoBehaviour {
     public GameObject productIndicator;
     public GameObject researchIndicator;
     public GameObject recruitingIndicator;
+    public GameObject specialProjectIndicator;
 
     public UIProgressBar promoProgressBar;
     public UIProgressBar productProgressBar;
     public UIProgressBar researchProgressBar;
     public UIProgressBar recruitingProgressBar;
+    public UIProgressBar specialProjectProgressBar;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -71,6 +73,14 @@ public class UIHUD : MonoBehaviour {
                 productProgressBar.value = company.developingProducts[0].progress;
             } else {
                 productIndicator.SetActive(false);
+            }
+
+            // Developing special project info.
+            if (company.developingSpecialProject != null) {
+                specialProjectIndicator.SetActive(true);
+                specialProjectProgressBar.value = company.developingSpecialProject.progress;
+            } else {
+                specialProjectIndicator.SetActive(false);
             }
 
             // Research info.

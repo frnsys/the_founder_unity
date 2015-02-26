@@ -40,6 +40,7 @@ public class Company : HasStats {
         _locations = new List<Location>();
         _verticals = new List<Vertical>();
         technologies = new List<Technology>();
+        specialProjects = new List<SpecialProject>();
         markets = new List<MarketManager.Market>();
 
         opinion = new Stat("Opinion", 1);
@@ -228,7 +229,7 @@ public class Company : HasStats {
         get { return products.FindAll(p => !p.developing); }
     }
     public bool developing {
-        get { return developingProducts.Count > 0; }
+        get { return developingSpecialProject != null || developingProducts.Count > 0; }
     }
 
     public float totalMarketShare {
@@ -247,43 +248,6 @@ public class Company : HasStats {
         foreach (Product product in products.Where(p => p.developing)) {
             DevelopProduct(product);
         }
-    }
-
-    public Promo developingPromo;
-    public void DevelopPromo() {
-        if (developingPromo != null && opinionCzar != null) {
-            bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
-
-            if (completed) {
-                UIManager.Instance.LaunchHypeMinigame(developingPromo);
-                developingPromo = null;
-            }
-        }
-    }
-
-    public Recruitment developingRecruitment;
-    public void DevelopRecruitment() {
-        if (developingRecruitment != null) {
-            bool completed = developingRecruitment.Develop();
-
-            if (completed) {
-                developingRecruitment = null;
-            }
-        }
-    }
-
-    public void ApplyOpinionEvent(OpinionEvent oe) {
-        opinion.ApplyBuff(oe.opinion);
-        publicity.ApplyBuff(oe.publicity);
-        opinionEvents.Add(oe);
-    }
-
-    public void StartPromo(Promo promo) {
-        developingPromo = promo.Clone();
-    }
-
-    public void StartRecruitment(Recruitment recruitment) {
-        developingRecruitment = recruitment.Clone();
     }
 
     public void HarvestProducts(float elapsedTime) {
@@ -369,6 +333,79 @@ public class Company : HasStats {
             return products.FindAll(p =>
                 productTypes.Exists(pType => p.productTypes.Contains(pType)));
         }
+    }
+
+
+
+    // ===============================================
+    // Other Management ==============================
+    // ===============================================
+
+    public SpecialProject developingSpecialProject;
+    public List<SpecialProject> specialProjects;
+    public void DevelopSpecialProject() {
+        if (developingSpecialProject != null) {
+            float progress = 0;
+            foreach (Worker worker in allWorkers) {
+                progress += worker.productivity.value * Random.Range(0.90f, 1.05f);
+                float breakthroughChance = worker.happiness.value/10/workers.Count/100;
+                if (Random.value < breakthroughChance) {
+                    progress += worker.productivity.value * 0.5f;
+                }
+            }
+            bool completed = developingSpecialProject.Develop(progress);
+
+            if (completed) {
+                developingSpecialProject = null;
+                specialProjects.Add(developingSpecialProject);
+            }
+        }
+    }
+    public bool StartSpecialProject(SpecialProject p) {
+        if (Pay(p.cost)) {
+            developingSpecialProject = p.Clone();
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public Promo developingPromo;
+    public void DevelopPromo() {
+        if (developingPromo != null && opinionCzar != null) {
+            bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
+
+            if (completed) {
+                UIManager.Instance.LaunchHypeMinigame(developingPromo);
+                developingPromo = null;
+            }
+        }
+    }
+
+    public Recruitment developingRecruitment;
+    public void DevelopRecruitment() {
+        if (developingRecruitment != null) {
+            bool completed = developingRecruitment.Develop();
+
+            if (completed) {
+                developingRecruitment = null;
+            }
+        }
+    }
+
+    public void ApplyOpinionEvent(OpinionEvent oe) {
+        opinion.ApplyBuff(oe.opinion);
+        publicity.ApplyBuff(oe.publicity);
+        opinionEvents.Add(oe);
+    }
+
+    public void StartPromo(Promo promo) {
+        developingPromo = promo.Clone();
+    }
+
+    public void StartRecruitment(Recruitment recruitment) {
+        developingRecruitment = recruitment.Clone();
     }
 
 

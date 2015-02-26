@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class EconomyManager : Singleton<EconomyManager> {
     private GameData data;
     private float economyChangeProbability;
+    private bool changing = false;
 
     // Disable the constructor.
     protected EconomyManager() {}
@@ -53,18 +54,16 @@ public class EconomyManager : Singleton<EconomyManager> {
         }
 
         if (newEconomy != data.economy) {
-            data.economy = newEconomy;
+            // Delay the economy change to some point in the future.
+            // This gives us room for predictions, if the player has them unlocked.
+            changing = true;
+            StartCoroutine(ScheduleChange(newEconomy, eventName));
 
-            // Economic recovery is a special case.
-            if ((data.economy == Economy.Recession || data.economy == Economy.Depression) && (newEconomy == Economy.Expansion || newEconomy == Economy.Neutral)) {
-                eventName = "Economic Recovery";
-            }
-
-            if (eventName != null) {
-                GameEvent ev = GameEvent.LoadNoticeEvent(eventName);
+            // Make a prediction if available.
+            if (data.prescient && newEconomy != Economy.Neutral) {
+                GameEvent ev = GameEvent.LoadNoticeEvent(eventName + " Forecast");
                 GameEvent.Trigger(ev);
             }
-            UpdateEconomyChangeProbability();
         }
     }
 
@@ -76,10 +75,27 @@ public class EconomyManager : Singleton<EconomyManager> {
         yield return new WaitForSeconds(10);
         while (true) {
             // See if the economy changes.
-            if (Random.value < economyChangeProbability) {
+            if (!changing && Random.value < economyChangeProbability) {
                 ChangeEconomy();
             }
             yield return new WaitForSeconds(72);
         }
+    }
+
+    IEnumerator ScheduleChange(Economy newEconomy, string eventName) {
+        yield return new WaitForSeconds(180 + Random.value * 180f);
+
+        // Economic recovery is a special case.
+        if ((data.economy == Economy.Recession || data.economy == Economy.Depression) && (newEconomy == Economy.Expansion || newEconomy == Economy.Neutral)) {
+            eventName = "Economic Recovery";
+        }
+        data.economy = newEconomy;
+
+        if (eventName != null) {
+            GameEvent ev = GameEvent.LoadNoticeEvent(eventName);
+            GameEvent.Trigger(ev);
+        }
+        UpdateEconomyChangeProbability();
+        changing = false;
     }
 }
