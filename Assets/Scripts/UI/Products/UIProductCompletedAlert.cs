@@ -14,7 +14,6 @@ public class UIProductCompletedAlert : UIEffectAlert {
             bodyLabel.text = value.description;
 
             productObject.GetComponent<MeshFilter>().mesh = value.mesh;
-            productObject.GetComponent<MeshRenderer>().material.mainTexture = value.texture;
 
             aspectsLabel.text = string.Join(" & ", value.productTypes.Select(pt => pt.name).ToArray());
             Extend(bodyLabel.height);

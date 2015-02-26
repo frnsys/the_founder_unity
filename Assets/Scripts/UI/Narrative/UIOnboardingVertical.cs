@@ -11,7 +11,6 @@ public class UIOnboardingVertical : MonoBehaviour {
             description.text = vertical_.description;
 
             displayObject.GetComponent<MeshFilter>().mesh = vertical_.mesh;
-            displayObject.GetComponent<MeshRenderer>().material.mainTexture = vertical_.texture;
         }
     }
 

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public class ProductType : SharedResource<ProductType> {
     // For the physical representation of the product.
     public Mesh mesh;
-    public Texture texture;
 
     public override string ToString() {
         return name;

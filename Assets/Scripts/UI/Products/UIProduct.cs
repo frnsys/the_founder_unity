@@ -53,7 +53,6 @@ public class UIProduct : UIEffectItem {
             description.gameObject.SetActive(true);
 
             productObject.GetComponent<MeshFilter>().mesh = product.mesh;
-            productObject.GetComponent<MeshRenderer>().material.mainTexture = product.texture;
             productObject.SetActive(true);
 
             RenderEffects(product_.effects);

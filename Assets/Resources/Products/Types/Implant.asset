@@ -9,14 +9,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
-  m_Name: Social Network
+  m_Name: Implant
   m_EditorClassIdentifier: 
-  mesh: {fileID: 4300030, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  mesh: {fileID: 4300028, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   requiredVerticals:
-  - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+  - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
+  - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
-    values: 02000000000000000000000000000000
+    values: 06000000000000000000000000000000
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000

@@ -29,7 +29,6 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         target.description = EditorGUILayout.TextArea(target.description, GUILayout.Height(50));
 
         target.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", target.mesh, typeof(Mesh), false);
-        target.texture = (Texture)EditorGUILayout.ObjectField("Texture", target.texture, typeof(Texture), false);
 
         if (target.revenueModel == null)
             target.revenueModel = new AnimationCurve();

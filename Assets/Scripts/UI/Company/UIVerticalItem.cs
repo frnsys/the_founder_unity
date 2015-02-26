@@ -11,7 +11,6 @@ public class UIVerticalItem : MonoBehaviour {
             description.text = vertical_.description;
 
             displayObject.GetComponent<MeshFilter>().mesh = vertical_.mesh;
-            displayObject.GetComponent<MeshRenderer>().material.mainTexture = vertical_.texture;
 
             if (GameManager.Instance.playerCompany.verticals.Contains(vertical_)) {
                 cost.text = "operating in this vertical";

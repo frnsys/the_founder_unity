@@ -26,6 +26,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4949f1733456e4776a9b877a0f83c3d5, type: 2}
     - {fileID: 11400000, guid: cf037fa2aa91e436fbd5f188a46f67ba, type: 2}
     - {fileID: 11400000, guid: 0092605769f2f4b93a53f0b4384853ab, type: 2}
+    - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
+    - {fileID: 11400000, guid: ecd254332ace84586bc3981d473393cd, type: 2}
+    - {fileID: 11400000, guid: babac0677bbaf419ebba5e695f802939, type: 2}
+    - {fileID: 11400000, guid: edb72c0621fcf4aa08f92668b5269560, type: 2}
+    - {fileID: 11400000, guid: 20787985a0e8d4bde8dc716ccef3b516, type: 2}
+    - {fileID: 11400000, guid: 2e04f351533894d7fab36c9279cd1df1, type: 2}
+    - {fileID: 11400000, guid: 36896ff72616c4e739fd3a93ab1d96a3, type: 2}
+    - {fileID: 11400000, guid: 6467dbf4e1b3046a6bd386638ebd8e38, type: 2}
     workers:
     - {fileID: 11400000, guid: 5dac42fec526449cfba84bb31ba15627, type: 2}
     - {fileID: 11400000, guid: fa75f5977b6044ac490fc038d3cd66ed, type: 2}
@@ -67,7 +75,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 913f70547464646c69428c350a227b8e, type: 2}
     companies:
     - {fileID: 11400000, guid: 68928279bf98d4bda9ca343d2f7ce33b, type: 2}
+    specialProjects: []
   economy: 0
+  spendingMultiplier: 0
+  wageMultiplier: 0
+  forgettingRate: 0
+  economicStability: 0
+  taxRate: 0
   onboardingState:
     FIRST_PRODUCT_LAUNCHED: 0
     FIRST_WORKER_HIRED: 0
@@ -78,14 +92,9 @@ MonoBehaviour:
     COMMS_UNLOCKED: 0
     VERTICALS_UNLOCKED: 0
     WORKER_LIMIT_REACHED: 0
-  workerInsight: 0
-  maxProductTypes: 0
   technology: {fileID: 0}
   research: 0
   otherCompanies: []
-  LabsAccessible: 0
-  CommsAccessible: 0
-  MarketAccessible: 0
   month: 0
   week: 0
   year: 0
@@ -95,3 +104,7 @@ MonoBehaviour:
   unemployed: []
   specialEventsPool: []
   eventsPool: []
+  immortal: 0
+  cloneable: 0
+  prescient: 0
+  workerInsight: 0

@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 707faaf8538a34848a04e42f9974b4cc, type: 3}
-  m_Name: Social Network
+  m_Name: Ad
   m_EditorClassIdentifier: 
-  mesh: {fileID: 4300030, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  mesh: {fileID: 4300002, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   requiredVerticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
-    values: 02000000000000000000000000000000
+    values: 00000000030000000000000000000000
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000

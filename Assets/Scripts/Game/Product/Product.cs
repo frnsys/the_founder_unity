@@ -44,12 +44,6 @@ public class Product : HasStats {
             return recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
         }
     }
-    public Texture texture {
-        get {
-            // Fallback to first product type's texture.
-            return recipe.texture != null ? recipe.texture : productTypes[0].texture;
-        }
-    }
 
     public float requiredProgress;
 

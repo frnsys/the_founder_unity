@@ -46,7 +46,6 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
 
     // For the physical representation of the product.
     public Mesh mesh;
-    public Texture texture;
 
     // Bonus effects.
     public EffectSet effects = new EffectSet();

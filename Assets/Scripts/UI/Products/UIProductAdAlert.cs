@@ -12,7 +12,6 @@ public class UIProductAdAlert: UIAlert {
         set {
             nameLabel.text = value.name;
             productObject.GetComponent<MeshFilter>().mesh = value.mesh;
-            productObject.GetComponent<MeshRenderer>().material.mainTexture = value.texture;
         }
     }
 

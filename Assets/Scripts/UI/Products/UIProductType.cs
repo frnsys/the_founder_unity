@@ -11,7 +11,6 @@ public class UIProductType : MonoBehaviour {
             infrastructure.text =productType_.requiredInfrastructure.ToString();
 
             productObject.GetComponent<MeshFilter>().mesh = productType_.mesh;
-            productObject.GetComponent<MeshRenderer>().material.mainTexture = productType_.texture;
         }
     }
 
