@@ -37,6 +37,11 @@ public class AICompany : Company {
     public List<ProductType> specialtyProductTypes;
     public List<Location> startLocations;
 
+    public int designSkill;
+    public int engineeringSkill;
+    public int marketingSkill;
+
+
     // To easily keep track of all AI companies.
     public static List<AICompany> all = new List<AICompany>();
 
@@ -128,9 +133,11 @@ public class AICompany : Company {
             // Rank the candidates and pick one.
             foreach (Product p in candidates.OrderBy(p => ScoreProduct(p))) {
                 Debug.Log(name + " is starting a new competing product...");
-                // TO DO these should be actual design, marketing, engineering values.
-                // TO DO should these just instantly launch?
-                StartNewProduct(p.productTypes, 3, 3, 3);
+
+                int design = Random.Range(0, designSkill) + designSkill/2;
+                int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
+                int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
+                StartNewProduct(p.productTypes, design, engineering, marketing);
                 return;
             }
 
@@ -138,11 +145,13 @@ public class AICompany : Company {
         // create a random specialty product.
         } else {
             // TO DO avoid creating duplicate products.
-            // TO DO these should be actual design, marketing, engineering values.
             Debug.Log(name + " is starting a new product...");
-            StartNewProduct(RandomSpecialtyProduct(), 3, 3, 3);
-        }
 
+            int design = Random.Range(0, designSkill) + designSkill/2;
+            int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
+            int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
+            StartNewProduct(RandomSpecialtyProduct(), design, engineering, marketing);
+        }
     }
 
     private float ScoreProduct(Product p) {

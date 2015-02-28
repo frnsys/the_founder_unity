@@ -26,6 +26,10 @@ internal class AICompanyInspector : Editor {
         c.productLimit = EditorGUILayout.IntField("In-Market Product Limit", c.productLimit);
         c.cash.baseValue  = EditorGUILayout.FloatField("Starting Cash", c.cash.baseValue);
 
+        c.designSkill = EditorGUILayout.IntField("Design Skill", c.designSkill);
+        c.engineeringSkill = EditorGUILayout.IntField("Engineering Skill", c.engineeringSkill);
+        c.marketingSkill = EditorGUILayout.IntField("Marketing Skill", c.marketingSkill);
+
         EditorGUILayout.LabelField("Founder/CEO");
         if (c.founders.Count == 0) {
             Founder founder = (Founder)EditorGUILayout.ObjectField(null, typeof(Founder), false);
