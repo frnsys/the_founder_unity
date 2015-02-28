@@ -178,4 +178,14 @@ public class UIEmployee : MonoBehaviour {
     private float Randomize(float value) {
         return Mathf.Max(1, (0.5f + Random.value) * value);
     }
+
+    // Double click to force back to desk,
+    // depending on happiness.
+    void OnDoubleClick() {
+        if (!atDesk && desk == null) {
+            if (Random.value <= 0.5f * worker.happiness.value) {
+                GoToDesk();
+            }
+        }
+    }
 }
