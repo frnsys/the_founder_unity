@@ -347,6 +347,9 @@ public class Product : HasStats {
     }
 
     public float TotalProgressRequired(Company c) {
+        // TEMP
+        return 10000f;
+
         float reqProgress = 0;
 
         // We only count the base value of these stats, since bonuses to them

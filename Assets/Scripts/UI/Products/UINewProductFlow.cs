@@ -17,7 +17,6 @@ public class UINewProductFlow : MonoBehaviour {
     public GameObject productTypePrefab;
     public GameObject selectedProductTypePrefab;
     public GameObject productTypeSelectionView;
-    public GameObject pointAllocationView;
     public List<GameObject> productTypeItems;
     public UIGrid selectedGrid;
     public UIGrid grid;
@@ -135,142 +134,17 @@ public class UINewProductFlow : MonoBehaviour {
 
     // Go to the point allocation page.
     public void ConfirmSelection() {
-        productTypeSelectionView.SetActive(false);
-        pointAllocationView.SetActive(true);
-
         // Not very elegant, but ping the narrative manager
         // to see if anything needs to be displayed.
         gm.narrativeManager.ProgressOnboarding();
-
-        // Create a dummy product with the new product types.
-        product = new Product();
-        product.Init(productTypes, 0, 0, 0, gm.playerCompany);
-
-        // Update the required progress for each feature.
-        GameObject obj;
-        obj = transform.Find("Point Allocation/Features/Design").gameObject;
-        UpdateProgressRequired(obj, "Design",       design);
-
-        obj = transform.Find("Point Allocation/Features/Marketing").gameObject;
-        UpdateProgressRequired(obj, "Marketing",    marketing);
-
-        obj = transform.Find("Point Allocation/Features/Engineering").gameObject;
-        UpdateProgressRequired(obj, "Engineering",  engineering);
-    }
-
-    // ===============================================
-    // Point Allocation ==============================
-    // ===============================================
-
-    private int design = 0;
-    private int marketing = 0;
-    private int engineering = 0;
-    public Color activeColor = new Color(1f, 0.49f, 0.49f, 1f);
-    public Color inactiveColor = new Color(1f, 0.76f, 0.76f, 1f);
-
-    public void IncreaseFeature(GameObject obj) {
-        int points = 0;
-        string feature = obj.name;
-        switch(obj.name) {
-            case "Design":
-                if (design < 10) {
-                    design++;
-                }
-                points = design;
-                break;
-
-            case "Marketing":
-                if (marketing < 10) {
-                    marketing++;
-                }
-                points = marketing;
-                break;
-
-            case "Engineering":
-                if (engineering < 10) {
-                    engineering++;
-                }
-                points = engineering;
-                break;
-
-            default:
-                break;
-        }
-
-        Transform items = obj.transform.Find("Points");
-        for (int i=0; i < items.childCount; i++) {
-            if (i < points)
-                items.GetChild(i).GetComponent<UITexture>().color = activeColor;
-            else
-                items.GetChild(i).GetComponent<UITexture>().color = inactiveColor;
-        }
-
-        UpdateProgressRequired(obj, feature, points);
-    }
-
-    public void DecreaseFeature(GameObject obj) {
-        int points = 0;
-        string feature = obj.name;
-        switch(feature) {
-            case "Design":
-                if (design > 0) {
-                    design--;
-                }
-                points = design;
-                break;
-
-            case "Marketing":
-                if (marketing > 0) {
-                    marketing--;
-                }
-                points = marketing;
-                break;
-
-            case "Engineering":
-                if (engineering > 0) {
-                    engineering--;
-                }
-                points = engineering;
-                break;
-
-            default:
-                break;
-        }
-
-        Transform items = obj.transform.Find("Points");
-        for (int i=0; i < items.childCount; i++) {
-            if (i < points)
-                items.GetChild(i).GetComponent<UITexture>().color = activeColor;
-            else
-                items.GetChild(i).GetComponent<UITexture>().color = inactiveColor;
-        }
-
-        UpdateProgressRequired(obj, feature, points);
-    }
-
-    private void UpdateProgressRequired(GameObject obj, string feature, int points) {
-        int estimatedTime = product.EstimatedCompletionTime(feature, points, gm.playerCompany);
-        UILabel label = obj.transform.Find("Progress Required").gameObject.GetComponent<UILabel>();
-        if (estimatedTime > 100000 || estimatedTime < 0) {
-            label.text = "will take forever";
-        } else {
-            label.text = string.Format("about {0} seconds", estimatedTime);
-        }
     }
 
     public void BeginProductDevelopment() {
-        int totalTime = product.EstimatedCompletionTime(gm.playerCompany);
-        string time;
-        if (totalTime > 100000 || totalTime < 0) {
-            time = "forever";
-        } else {
-            time = string.Format("about {0} seconds", totalTime);
-        }
-        UIManager.Instance.Confirm("Are you happy with this product configuration? It will take " + time + " to develop.", BeginProductDevelopment_, null);
+        UIManager.Instance.Confirm("Are you happy with this product configuration?", BeginProductDevelopment_, null);
     }
 
     private void BeginProductDevelopment_() {
-        gm.playerCompany.StartNewProduct(productTypes, design, marketing, engineering);
+        gm.playerCompany.StartNewProduct(productTypes, 0, 0, 0);
         SendMessageUpwards("Close");
 
         // Not very elegant, but ping the narrative manager

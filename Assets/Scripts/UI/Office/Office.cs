@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Office : MonoBehaviour {
     [System.Serializable]
@@ -42,6 +43,15 @@ public class Office : MonoBehaviour {
     // i.e. the i-th object should match with the i-th target.
     public GameObject[] uiObjects;
     public Transform[] uiTargets;
+
+    // Desks the employees can occupy.
+    [System.Serializable]
+    public class Desk {
+        [HideInInspector]
+        public bool occupied;
+        public Transform transform;
+    }
+    public List<Desk> desks;
 
     // The cost for upgrading to this office.
     public float cost;

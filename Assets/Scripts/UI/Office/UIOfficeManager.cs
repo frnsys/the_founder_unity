@@ -1,5 +1,7 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UIOfficeManager : Singleton<UIOfficeManager> {
     private GameData data;
@@ -36,6 +38,12 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         Company.WorkerFired -= OnFired;
     }
 
+    public void SetupFollowTarget(UIEmployee uie, UIFollowTarget uift) {
+        uift.target = uie.HUDtarget;
+        uift.gameCamera = OfficeCamera;
+        uift.uiCamera = UICamera;
+    }
+
     void OnHired(Worker w, Company c) {
         if (c == company) {
             // A lot of manual set up, there may be a better way.
@@ -59,16 +67,12 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
             Transform happiness = hud.transform.Find("Happiness");
             UIFollowTarget uift = happiness.GetComponent<UIFollowTarget>();
-            uift.target = uie.HUDtarget;
-            uift.gameCamera = OfficeCamera;
-            uift.uiCamera = UICamera;
+            SetupFollowTarget(uie, uift);
             uie.happinessLabel = happiness.GetComponent<UILabel>();
 
             Transform hudtext = hud.transform.Find("HUDText");
             uift = hudtext.GetComponent<UIFollowTarget>();
-            uift.target = uie.HUDtarget;
-            uift.gameCamera = OfficeCamera;
-            uift.uiCamera = UICamera;
+            SetupFollowTarget(uie, uift);
             uie.hudtext = hudtext.GetComponent<HUDText>();
 
             uie.HUDgroup = hud;
@@ -169,6 +173,16 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public Vector3 RandomTarget() {
         Transform target = currentOffice.validEmployeeTargets[Random.Range(0, currentOffice.validEmployeeTargets.Length - 1)];
         return target.position;
+    }
+
+    // Returns a random unoccupied desk.
+    public Office.Desk RandomDesk() {
+        List<Office.Desk> unoccupiedDesks = currentOffice.desks.Where(d => !d.occupied).ToList();
+
+        if (unoccupiedDesks.Count == 0)
+            return null;
+
+        return unoccupiedDesks[Random.Range(0, unoccupiedDesks.Count -1)];
     }
 
     public void Load(GameData d) {

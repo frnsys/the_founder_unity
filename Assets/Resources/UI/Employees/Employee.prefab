@@ -97,15 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d5931a4c68b4ebfba3909ec6d0e532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUDgroup: {fileID: 0}
   HUDtarget: {fileID: 400000}
-  hudtext: {fileID: 0}
-  happinessLabel: {fileID: 0}
   workColor: {r: .87843138, g: 1, b: .984313726, a: 1}
   breakthroughColor: {r: 1, g: .898039222, b: .529411793, a: 1}
   unhappyColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
   happyColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
+  HUDgroup: {fileID: 0}
+  hudtext: {fileID: 0}
+  happinessLabel: {fileID: 0}
   worker: {fileID: 0}
+  laborObj: {fileID: 0}
+  laborPrefab: {fileID: 100010, guid: 056183343dc2b4528839bf8d45860758, type: 2}
+  atDesk: 0
+  desk:
+    occupied: 0
+    transform: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
 --- !u!195 &19500000
 NavMeshAgent:

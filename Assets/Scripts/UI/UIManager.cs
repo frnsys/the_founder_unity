@@ -77,6 +77,7 @@ public class UIManager : Singleton<UIManager> {
         GameManager.PerformanceReport += OnPerformanceReport;
         GameManager.GameLost += OnGameLost;
         Company.Paid += OnPaid;
+        Company.BeganProduct += OnBeganProduct;
 
         pendingPings = new Queue<Ping>();
         StartCoroutine(ShowPings());
@@ -92,6 +93,7 @@ public class UIManager : Singleton<UIManager> {
         GameManager.PerformanceReport -= OnPerformanceReport;
         GameManager.GameLost -= OnGameLost;
         Company.Paid -= OnPaid;
+        Company.BeganProduct -= OnBeganProduct;
     }
 
     void OnPaid(float amount, string name) {
@@ -125,12 +127,23 @@ public class UIManager : Singleton<UIManager> {
         popup.GetComponent<UIResearchCompletedAlert>().technology = t;
     }
 
+    void OnBeganProduct(Product p, Company c) {
+        if (c == gm.playerCompany) {
+            productHud.Clear();
+            productHud.gameObject.SetActive(true);
+        }
+    }
+
     // Show a "product completed" alert.
     void OnProductCompleted(Product p, Company c) {
         // For the player's products, show the product completed alert.
         if (c == gm.playerCompany) {
             GameObject popup = NGUITools.AddChild(alertsPanel, productCompletedAlertPrefab);
             popup.GetComponent<UIProductCompletedAlert>().product = p;
+
+            // Clear/hide the product HUD.
+            productHud.gameObject.SetActive(false);
+            productHud.Clear();
 
             // Notify the player that they were missing a tech.
             if (p.techPenalty)
@@ -270,6 +283,11 @@ public class UIManager : Singleton<UIManager> {
             uift.gameCamera = camera;
             uift.uiCamera = camera;
         }
+    }
+
+    public UIProductDev productHud;
+    public void AddPointsToDevelopingProduct(string feature, float value) {
+        productHud.Add(feature, (int)value);
     }
 }
 

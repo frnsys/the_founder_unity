@@ -238,16 +238,24 @@ public class Company : HasStats {
         }
     }
 
+    static public event System.Action<Product, Company> BeganProduct;
     public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();
         product.Init(pts, design, marketing, engineering, this);
         products.Add(product);
+
+        if (BeganProduct != null)
+            BeganProduct(product, this);
     }
 
     public void DevelopProducts() {
         foreach (Product product in products.Where(p => p.developing)) {
             DevelopProduct(product);
         }
+    }
+
+    public void AddPointsToDevelopingProduct(string feature, float value) {
+        developingProducts[0].StatByName(feature).baseValue += value;
     }
 
     public void HarvestProducts(float elapsedTime) {
