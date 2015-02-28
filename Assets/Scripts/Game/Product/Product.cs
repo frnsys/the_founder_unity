@@ -102,10 +102,6 @@ public class Product : HasStats {
     // between products to see if they are of the same combo.
     public string comboID;
 
-    public float difficulty {
-        get { return recipe.difficulty; }
-    }
-
     public float timeSinceLaunch = 0;
 
     // Revenue earned over the product's lifetime.
@@ -145,7 +141,7 @@ public class Product : HasStats {
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
-        requiredProgress = TotalProgressRequired(c);
+        requiredProgress = 10000f;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
@@ -317,77 +313,6 @@ public class Product : HasStats {
         }
 
         _state = State.RETIRED;
-    }
-
-
-    // Progress required for the nth point.
-    public static int baseProgress = 500;
-    public float ProgressRequired(string feature, int n, Company c) {
-        float reqProgress = Fibonacci(n+2) * baseProgress;
-        float aggStat = 0;
-        reqProgress *= difficulty;
-
-        switch (feature) {
-            case "Design":
-                aggStat = c.AggregateWorkerStat("Creativity");
-                break;
-            case "Engineering":
-                aggStat = c.AggregateWorkerStat("Cleverness");
-                break;
-            case "Marketing":
-                aggStat = c.AggregateWorkerStat("Charisma");
-                break;
-            default:
-                break;
-        }
-
-        if (aggStat == 0)
-            return reqProgress;
-        return reqProgress/aggStat;
-    }
-
-    public float TotalProgressRequired(Company c) {
-        // TEMP
-        return 10000f;
-
-        float reqProgress = 0;
-
-        // We only count the base value of these stats, since bonuses to them
-        // should not penalize development time.
-        reqProgress += ProgressRequired("Design",      (int)design.baseValue, c);
-        reqProgress += ProgressRequired("Engineering", (int)engineering.baseValue, c);
-        reqProgress += ProgressRequired("Marketing",   (int)marketing.baseValue, c);
-
-        // Required progress can't be 0, so set to 1 if it is.
-        return Mathf.Max(1, reqProgress);
-    }
-
-    public int EstimatedCompletionTime(Company c) {
-        float aggProductivity = c.AggregateWorkerStat("Productivity");
-        float reqProgress = TotalProgressRequired(c);
-
-        // Products are developed per development cycle.
-        // Int to round down because of Hofstadter's Law: "It always takes longer than you expect, even when you take into account Hofstadter's Law."
-        return (int)((reqProgress/aggProductivity) * GameManager.CycleTime);
-    }
-
-    public int EstimatedCompletionTime(string feature, int n, Company c) {
-        float aggProductivity = c.AggregateWorkerStat("Productivity");
-        float reqProgress = ProgressRequired(feature, n, c);
-        return (int)((reqProgress/aggProductivity) * GameManager.CycleTime);
-    }
-
-
-    private static int Fibonacci(int n) {
-        if (n == 0)
-            return 0;
-        else if (n == 1)
-            return 1;
-        else
-            return Fibonacci(n-1) + Fibonacci(n-2);
-    }
-    private static float Gaussian(float x, float mean, float sd) {
-        return ( 1 / ( sd * (float)System.Math.Sqrt(2 * (float)System.Math.PI) ) ) * (float)System.Math.Exp( -System.Math.Pow(x - mean, 2) / ( 2 * System.Math.Pow(sd, 2) ) );
     }
 }
 

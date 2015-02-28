@@ -17,10 +17,6 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     // "Synergistic" product recipes.
     public ProductRecipe[] synergies;
 
-    // The difficulty modifier for this product type.
-    // This is for calculating the amount of progress required to develop the product.
-    public float difficulty;
-
     // Weights: how important a given feature is to the product's performance.
     public float design_W = 1;
     public float marketing_W = 1;

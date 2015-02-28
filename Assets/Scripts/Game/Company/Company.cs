@@ -93,11 +93,6 @@ public class Company : HasStats {
 
             _workers.Add(worker);
 
-            // Update the progress required for developing products.
-            foreach (Product p in developingProducts) {
-                p.requiredProgress = p.TotalProgressRequired(this);
-            }
-
             if (WorkerHired != null) {
                 WorkerHired(worker, this);
             }
@@ -116,11 +111,6 @@ public class Company : HasStats {
 
         worker.salary = 0;
         _workers.Remove(worker);
-
-        // Update the progress required for developing products.
-        foreach (Product p in developingProducts) {
-            p.requiredProgress = p.TotalProgressRequired(this);
-        }
 
         if (WorkerFired != null) {
             WorkerFired(worker, this);

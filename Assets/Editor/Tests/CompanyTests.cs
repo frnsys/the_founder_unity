@@ -79,9 +79,6 @@ namespace UnityTest
           c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
           Product p = c.products[0];
 
-          float requiredProgress = p.TotalProgressRequired(c);
-          Assert.AreEqual(p.requiredProgress, requiredProgress);
-
           c.baseSizeLimit = 0;
           c.HireWorker(worker);
           Assert.AreEqual(c.workers.Count, 0);
@@ -91,21 +88,10 @@ namespace UnityTest
           c.HireWorker(worker);
           Assert.AreEqual(c.workers.Count, 1);
 
-          // The total progress required should be different now,
-          // and it should be reflected on the product.
-          // As a reminder, we don't constantly calculate TotalProgressRequired because
-          // it is kind of expensive, so we only recalc it when a worker is hired or fired.
-          float newRequiredProgress = p.TotalProgressRequired(c);
-          Assert.AreNotEqual(requiredProgress, newRequiredProgress);
-          Assert.AreEqual(p.requiredProgress, newRequiredProgress);
-
           worker.salary = 2000;
           c.FireWorker(worker);
           Assert.AreEqual(c.workers.Count, 0);
           Assert.AreEqual(worker.salary, 0);
-
-          // Firing the worker should have brought the required progress back to the previous value.
-          Assert.AreEqual(p.requiredProgress, requiredProgress);
       }
 
       [Test]
@@ -344,9 +330,6 @@ namespace UnityTest
 
             // Assure the infrastructure is properly used up.
             Assert.AreEqual(c.availableInfrastructure, c.infrastructure - pts[0].requiredInfrastructure);
-
-            // Assure the progress is properly set when the company starts the product.
-            Assert.AreEqual(p.requiredProgress, p.TotalProgressRequired(c));
 
             Assert.AreEqual(c.products.Count, 1);
 
