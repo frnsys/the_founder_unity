@@ -23,6 +23,7 @@ public class Company : HasStats {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
+        researchPoints = 0;
         deathToll = 0;
         debtOwned = 0;
         taxesAvoided = 0;
@@ -656,8 +657,24 @@ public class Company : HasStats {
         }
     }
     public Stat research;
+    public int researchPoints;
     public float researchInvestment = 1000;
     public List<Technology> technologies;
+
+    public void Research() {
+        // TO DO this investment calculation should make more sense.
+        researchPoints += research.value + researchInvestment/1000;
+    }
+
+    static public event System.Action<Technology> Completed;
+    public void BuyTechnology(Technology technology) {
+        if (researchPoints >= technology.cost) {
+            researchPoints -= technology.cost;
+            technologies.Add(technology);
+            if (Completed != null)
+                Completed(technology);
+        }
+    }
 
 
     // ===============================================

@@ -69,7 +69,6 @@ public class UIManager : Singleton<UIManager> {
     void OnEnable() {
         gm = GameManager.Instance;
         GameEvent.EventTriggered += OnEvent;
-        ResearchManager.Completed += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
         SpecialProject.Completed += OnSpecialProjectCompleted;
         Recruitment.Completed += OnRecruitmentCompleted;
@@ -85,7 +84,6 @@ public class UIManager : Singleton<UIManager> {
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
-        ResearchManager.Completed -= OnResearchCompleted;
         Product.Completed -= OnProductCompleted;
         SpecialProject.Completed -= OnSpecialProjectCompleted;
         Recruitment.Completed -= OnRecruitmentCompleted;
@@ -119,12 +117,6 @@ public class UIManager : Singleton<UIManager> {
         }
         UIGameEventNotification gameEventNotification = NGUITools.AddChild(alertsPanel, prefab).GetComponent<UIGameEventNotification>();
         gameEventNotification.gameEvent = e;
-    }
-
-    // Show a "research completed" alert.
-    void OnResearchCompleted(Technology t) {
-        GameObject popup = NGUITools.AddChild(alertsPanel, researchCompletedAlertPrefab);
-        popup.GetComponent<UIResearchCompletedAlert>().technology = t;
     }
 
     void OnBeganProduct(Product p, Company c) {
