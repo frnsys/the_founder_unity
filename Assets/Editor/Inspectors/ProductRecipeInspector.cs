@@ -30,7 +30,6 @@ internal class ProductRecipeInspector : Editor {
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("synergies"), true);
 
-        p.difficulty = EditorGUILayout.FloatField("Difficulty", p.difficulty);
         p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);
         p.marketing_W = EditorGUILayout.FloatField("Marketing Weight", p.marketing_W);
         p.engineering_W = EditorGUILayout.FloatField("Engineering Weight", p.engineering_W);

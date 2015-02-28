@@ -72,9 +72,9 @@ public class UIHUD : MonoBehaviour {
             }
 
             // Developing product info.
-            if (company.developingProducts.Count > 0) {
+            if (company.developingProduct != null) {
                 productIndicator.SetActive(true);
-                productProgressBar.value = company.developingProducts[0].progress;
+                productProgressBar.value = company.developingProduct.progress;
             } else {
                 productIndicator.SetActive(false);
             }

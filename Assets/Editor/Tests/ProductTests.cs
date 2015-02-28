@@ -231,62 +231,6 @@ namespace UnityTest
         }
 
         [Test]
-        public void RequiredProgress() {
-            int baseProgress = Product.baseProgress;
-            float difficulty = 2;
-            pr.difficulty = difficulty;
-
-            Assert.AreEqual(p.difficulty, difficulty);
-
-            float cre = 2;
-            float cle = 3;
-            float cha = 4;
-
-            Worker w = ScriptableObject.CreateInstance<Worker>();
-            w.Init("Yoyo Ma");
-            w.creativity.baseValue = cre;
-            w.cleverness.baseValue = cle;
-            w.charisma.baseValue   = cha;
-            gd.company.HireWorker(w);
-
-            Assert.AreEqual(gd.company.AggregateWorkerStat("Creativity"), cre);
-            Assert.AreEqual(gd.company.AggregateWorkerStat("Cleverness"), cle);
-            Assert.AreEqual(gd.company.AggregateWorkerStat("Charisma"),   cha);
-
-            int n = 3;
-            float totalExpected = 0;
-            float expected;
-            float required;
-
-            // Fibonacci value for n+2:
-            int fib = 5;
-
-            expected = (fib * baseProgress * difficulty)/cre;
-            required = p.ProgressRequired("Design", n, gd.company);
-            totalExpected += expected;
-            Assert.AreEqual(expected, required);
-
-            expected = (fib * baseProgress * difficulty)/cle;
-            required = p.ProgressRequired("Engineering", n, gd.company);
-            totalExpected += expected;
-            Assert.AreEqual(expected, required);
-
-            expected = (fib * baseProgress * difficulty)/cha;
-            required = p.ProgressRequired("Marketing", n, gd.company);
-            totalExpected += expected;
-            Assert.AreEqual(expected, required);
-
-            p.design.baseValue      = (float)n;
-            p.marketing.baseValue   = (float)n;
-            p.engineering.baseValue = (float)n;
-            Assert.AreEqual(p.TotalProgressRequired(gd.company), totalExpected);
-
-            // Assure the progress is properly set when the company starts the product.
-            gd.company.StartNewProduct(pts, n, n, n);
-            Assert.AreEqual(gd.company.products[0].requiredProgress, totalExpected);
-        }
-
-        [Test]
         public void ProductEffectsApplyOnlyOnce() {
             EffectSet e = new EffectSet();
             e.research = new StatBuff("Research", 2000);
