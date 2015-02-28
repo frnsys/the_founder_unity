@@ -206,11 +206,9 @@ public class Company : HasStats {
     // ===============================================
 
     public List<Product> products;
+    public Product developingProduct;
     public List<Product> activeProducts {
         get { return products.FindAll(p => p.launched); }
-    }
-    public List<Product> developingProducts {
-        get { return products.FindAll(p => p.developing); }
     }
     public List<Product> retiredProducts {
         get { return products.FindAll(p => p.retired); }
@@ -219,7 +217,7 @@ public class Company : HasStats {
         get { return products.FindAll(p => !p.developing); }
     }
     public bool developing {
-        get { return developingSpecialProject != null || developingProducts.Count > 0; }
+        get { return developingSpecialProject != null || developingProduct != null; }
     }
 
     public float totalMarketShare {
@@ -233,19 +231,14 @@ public class Company : HasStats {
         Product product = ScriptableObject.CreateInstance<Product>();
         product.Init(pts, design, marketing, engineering, this);
         products.Add(product);
+        developingProduct = product;
 
         if (BeganProduct != null)
             BeganProduct(product, this);
     }
 
-    public void DevelopProducts() {
-        foreach (Product product in products.Where(p => p.developing)) {
-            DevelopProduct(product);
-        }
-    }
-
     public void AddPointsToDevelopingProduct(string feature, float value) {
-        developingProducts[0].StatByName(feature).baseValue += value;
+        developingProduct.StatByName(feature).baseValue += value;
     }
 
     public void HarvestProducts(float elapsedTime) {
@@ -265,47 +258,18 @@ public class Company : HasStats {
         lifetimeRevenue += newRevenue;
     }
 
-    public void DevelopProduct(Product product) {
-        float progress = 0;
+    public void DevelopProduct() {
+        // TO DO this should just be removed altogether
+        float progress = 1;
 
-        foreach (Worker worker in allWorkers) {
-            // A bit of randomness to make things more interesting.
-            progress += worker.productivity.value * Random.Range(0.90f, 1.05f);
-
-            // Workers have a chance of making a "breakthrough" depending on their
-            // happiness. Each point of happiness = 1/10% more of a chance.
-            // The chance is weighted by the number of workers at the company as well,
-            // so you can't mass-hire to get greater cumulative probabilities of breakthroughs.
-            // TO DO this may need to be tweaked.
-            float breakthroughChance = worker.happiness.value/10/workers.Count/100;
-
-            // If the breakthrough happens,
-            // the product gets a boost for the feature associated with
-            // the worker's best stat, based on the value of that stat.
-            if (Random.value < breakthroughChance) {
-                Stat bestStat = worker.bestStat;
-                switch (bestStat.name) {
-                    case "Charisma":
-                        product.marketing.baseValue += bestStat.value/100;
-                        break;
-                    case "Cleverness":
-                        product.engineering.baseValue += bestStat.value/100;
-                        break;
-                    case "Creativity":
-                        product.design.baseValue += bestStat.value/100;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        bool completed = product.Develop(progress, this);
+        bool completed = developingProduct.Develop(progress, this);
         if (completed) {
             // Apply relevant effects to the product
             foreach (EffectSet es in activeEffects) {
-                es.Apply(product);
+                es.Apply(developingProduct);
             }
+
+            developingProduct = null;
 
             // The product's effects are applied by the GameManager.
         }

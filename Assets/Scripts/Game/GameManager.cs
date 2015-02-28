@@ -392,11 +392,11 @@ public class GameManager : Singleton<GameManager> {
     IEnumerator ProductDevelopmentCycle() {
         yield return new WaitForSeconds(cycleTime);
         while(true) {
-            playerCompany.DevelopProducts();
+            playerCompany.DevelopProduct();
             playerCompany.DevelopRecruitment();
 
             foreach (AICompany aic in activeAICompanies) {
-                aic.DevelopProducts();
+                aic.DevelopProduct();
             }
 
             // Add a bit of randomness to give things

@@ -326,7 +326,7 @@ namespace UnityTest
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
-            Assert.AreEqual(c.developingProducts[0], p);
+            Assert.AreEqual(c.developingProduct, p);
 
             // Assure the infrastructure is properly used up.
             Assert.AreEqual(c.availableInfrastructure, c.infrastructure - pts[0].requiredInfrastructure);
@@ -348,7 +348,8 @@ namespace UnityTest
 
             Product p = ScriptableObject.CreateInstance<Product>();
             p.Init(pts, 0, 0, 0, c);
-            c.DevelopProduct(p);
+            c.developingProduct = p;
+            c.DevelopProduct();
 
             Assert.IsTrue(p.progress > 0);
         }
@@ -365,7 +366,7 @@ namespace UnityTest
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
-            c.DevelopProduct(p);
+            c.DevelopProduct();
 
             p.Launch();
             Assert.AreEqual(c.activeProducts[0], p);
@@ -386,7 +387,7 @@ namespace UnityTest
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             p.requiredProgress = 0;
-            c.DevelopProduct(p);
+            c.DevelopProduct();
             Assert.AreEqual(c.activeProducts[0], p);
             //Assert.AreEqual(p.design.value, 10);
 

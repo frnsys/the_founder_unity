@@ -51,8 +51,8 @@ public class UINewProductFlow : MonoBehaviour {
         if (gm.playerCompany.developing) {
             blackout.SetActive(true);
 
-            if (gm.playerCompany.developingProducts.Count > 0) {
-                progressBar.value = gm.playerCompany.developingProducts[0].progress;
+            if (gm.playerCompany.developingProduct != null) {
+                progressBar.value = gm.playerCompany.developingProduct.progress;
             } else {
                 progressBar.gameObject.SetActive(false);
             }
