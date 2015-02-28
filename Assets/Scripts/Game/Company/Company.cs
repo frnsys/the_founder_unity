@@ -259,19 +259,21 @@ public class Company : HasStats {
     }
 
     public void DevelopProduct() {
-        // TO DO this should just be removed altogether
-        float progress = 1;
+        if (developingProduct != null) {
+            // TO DO this should just be removed altogether
+            float progress = 1;
 
-        bool completed = developingProduct.Develop(progress, this);
-        if (completed) {
-            // Apply relevant effects to the product
-            foreach (EffectSet es in activeEffects) {
-                es.Apply(developingProduct);
+            bool completed = developingProduct.Develop(progress, this);
+            if (completed) {
+                // Apply relevant effects to the product
+                foreach (EffectSet es in activeEffects) {
+                    es.Apply(developingProduct);
+                }
+
+                developingProduct = null;
+
+                // The product's effects are applied by the GameManager.
             }
-
-            developingProduct = null;
-
-            // The product's effects are applied by the GameManager.
         }
     }
 
