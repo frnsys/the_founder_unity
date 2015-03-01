@@ -155,6 +155,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void Start() {
+#if UNITY_EDITOR
         // TESTING start a test game.
         Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
         Location location = Location.Load("San Francisco");
@@ -164,6 +165,7 @@ public class GameManager : Singleton<GameManager> {
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
+#endif
     }
 
     public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
@@ -246,8 +248,8 @@ public class GameManager : Singleton<GameManager> {
     // Time ==========================================
     // ===============================================
 
-    private static int weekTime = 15;
-    private static float cycleTime = weekTime/14;
+    private static int weekTime = 6;
+    private static float cycleTime = weekTime/14f;
     public static float CycleTime {
         get { return cycleTime; }
     }

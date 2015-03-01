@@ -23,6 +23,7 @@ public class Company : HasStats {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
+        influence = 0;
         deathToll = 0;
         debtOwned = 0;
         taxesAvoided = 0;
@@ -68,8 +69,7 @@ public class Company : HasStats {
         get { return _workers.AsReadOnly(); }
     }
     public IEnumerable<Worker> allWorkers {
-        // This does not include czars!
-        get { return _workers.Concat(founders.Cast<Worker>()).Where(w => w != researchCzar && w != opinionCzar); }
+        get { return _workers.Concat(founders.Cast<Worker>()); }
     }
     public List<Founder> founders;
 
@@ -260,10 +260,7 @@ public class Company : HasStats {
 
     public void DevelopProduct() {
         if (developingProduct != null) {
-            // TO DO this should just be removed altogether
-            float progress = 1;
-
-            bool completed = developingProduct.Develop(progress, this);
+            bool completed = developingProduct.Develop(1f, this);
             if (completed) {
                 // Apply relevant effects to the product
                 foreach (EffectSet es in activeEffects) {
@@ -334,17 +331,8 @@ public class Company : HasStats {
     }
 
 
-
-    public Promo developingPromo;
-    public void DevelopPromo() {
-        if (developingPromo != null && opinionCzar != null) {
-            bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
-
-            if (completed) {
-                UIManager.Instance.LaunchHypeMinigame(developingPromo);
-                developingPromo = null;
-            }
-        }
+    public void StartRecruitment(Recruitment recruitment) {
+        developingRecruitment = recruitment.Clone();
     }
 
     public Recruitment developingRecruitment;
@@ -358,6 +346,12 @@ public class Company : HasStats {
         }
     }
 
+
+    // ===============================================
+    // Hype Management ===============================
+    // ===============================================
+
+    public int influence;
     public void ApplyOpinionEvent(OpinionEvent oe) {
         opinion.ApplyBuff(oe.opinion);
         publicity.ApplyBuff(oe.publicity);
@@ -368,8 +362,17 @@ public class Company : HasStats {
         developingPromo = promo.Clone();
     }
 
-    public void StartRecruitment(Recruitment recruitment) {
-        developingRecruitment = recruitment.Clone();
+    public Promo developingPromo;
+    public void DevelopPromo() {
+        if (developingPromo != null && opinionCzar != null) {
+            bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
+
+            if (completed) {
+                influence += developingPromo.influence;
+                //UIManager.Instance.LaunchHypeMinigame(developingPromo);
+                developingPromo = null;
+            }
+        }
     }
 
 

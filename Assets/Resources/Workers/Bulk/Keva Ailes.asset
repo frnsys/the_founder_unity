@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Keva Ailes
   m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
   texture: {fileID: 0}
+  robot: 0
   salary: 0
   bio: Keva Ailes is easy to talk to but is not very imaginative and reminds me of
     Eeyore. Keva Ailes is kind of lazy and is quite dim.

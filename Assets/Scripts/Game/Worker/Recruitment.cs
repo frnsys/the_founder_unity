@@ -16,13 +16,12 @@ public class Recruitment : TemplateResource<Recruitment> {
     }
 
     void Awake() {
-        requiredProgress = 100;
+        requiredProgress = 800;
     }
 
     static public event System.Action<Recruitment> Completed;
     public bool Develop() {
-        // TESTING. This should be a lower value.
-        _progress += 50;
+        _progress += 1;
         if (progress >= 1) {
             if (Completed != null)
                 Completed(this);
