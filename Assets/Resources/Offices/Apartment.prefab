@@ -313,7 +313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100038
 GameObject:
   m_ObjectHideFlags: 1
@@ -509,6 +509,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400060}
+  - 114: {fileID: 11400002}
   m_Layer: 11
   m_Name: Environment
   m_TagString: Untagged
@@ -518,7 +519,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100062
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -568,7 +569,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100068
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -1283,6 +1284,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!1 &100156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400156}
+  m_Layer: 0
+  m_Name: Lights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &100172
 GameObject:
   m_ObjectHideFlags: 1
@@ -1311,10 +1327,9 @@ Transform:
   - {fileID: 400060}
   - {fileID: 400064}
   - {fileID: 400036}
-  - {fileID: 400068}
-  - {fileID: 400062}
   - {fileID: 400070}
   - {fileID: 400098}
+  - {fileID: 400156}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400002
@@ -1677,7 +1692,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: -.300000012, y: -2.36999989, z: 1.75999999}
+  m_LocalPosition: {x: -.300000012, y: -2.36999989, z: 1.76000023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400058}
@@ -1719,8 +1734,8 @@ Transform:
   m_LocalPosition: {x: 3.33853936, y: 1.89806509, z: -1.31741619}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400000}
-  m_RootOrder: 4
+  m_Father: {fileID: 400156}
+  m_RootOrder: 1
 --- !u!4 &400064
 Transform:
   m_ObjectHideFlags: 1
@@ -1755,8 +1770,8 @@ Transform:
   m_LocalPosition: {x: -2.88146067, y: 2.43806505, z: 5.06258392}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400000}
-  m_RootOrder: 3
+  m_Father: {fileID: 400156}
+  m_RootOrder: 0
 --- !u!4 &400070
 Transform:
   m_ObjectHideFlags: 1
@@ -1775,7 +1790,7 @@ Transform:
   - {fileID: 400014}
   - {fileID: 400172}
   m_Father: {fileID: 400000}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!4 &400072
 Transform:
   m_ObjectHideFlags: 1
@@ -1964,7 +1979,7 @@ Transform:
   - {fileID: 400140}
   - {fileID: 400146}
   m_Father: {fileID: 400000}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!4 &400100
 Transform:
   m_ObjectHideFlags: 1
@@ -2312,6 +2327,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400060}
   m_RootOrder: 7
+--- !u!4 &400156
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400068}
+  - {fileID: 400062}
+  m_Father: {fileID: 400000}
+  m_RootOrder: 5
 --- !u!4 &400172
 Transform:
   m_ObjectHideFlags: 1
@@ -3973,6 +4002,39 @@ MonoBehaviour:
   cost: 0
   employeesRequired: 0
   nextOffice: {fileID: 0}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03cc6204807a864495d8bfe6ec359d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textureAtlasProperties:
+    _anisoLevel: 1
+    _readableTexture: 1
+    _filterMode: 0
+    _ignoreTransparency: 0
+    _wrapMode: 1
+    _shaderPropertiesToLookFor:
+    - _markAsNormal: 0
+      _propertyName: _MainTex
+    - _markAsNormal: 1
+      _propertyName: _BumpMap
+    - _markAsNormal: 0
+      _propertyName: _Cube
+    - _markAsNormal: 0
+      _propertyName: _DecalTex
+    - _markAsNormal: 0
+      _propertyName: _Detail
+    - _markAsNormal: 0
+      _propertyName: _ParallaxMap
+    _maxTextureSize: 2048
+    _padding: 0
+  destroyOriginalGameObject: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
