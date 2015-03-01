@@ -101,7 +101,6 @@ public class UIProductDev : MonoBehaviour {
         }
     }
 
-
     private IEnumerator Pulse(GameObject target, float from, float to) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
@@ -116,6 +115,5 @@ public class UIProductDev : MonoBehaviour {
             target.transform.localScale = Vector3.Lerp(toScale, fromScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
-
     }
 }
