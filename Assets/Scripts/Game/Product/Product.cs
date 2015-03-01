@@ -141,7 +141,7 @@ public class Product : HasStats {
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
-        requiredProgress = 10000f;
+        requiredProgress = 5000f;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {

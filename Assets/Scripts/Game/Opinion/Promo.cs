@@ -8,6 +8,7 @@ public class Promo : TemplateResource<Promo> {
     public string description;
     public float cost;
     public float requiredProgress;
+    public int influence;
     public GameObject level;
 
     [SerializeField, HideInInspector]
