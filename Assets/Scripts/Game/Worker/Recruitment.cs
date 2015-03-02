@@ -8,6 +8,7 @@ public class Recruitment : TemplateResource<Recruitment> {
     public float cost;
     public float targetScore;
     public string description;
+    public bool robots;
     private float requiredProgress;
 
     [SerializeField, HideInInspector]

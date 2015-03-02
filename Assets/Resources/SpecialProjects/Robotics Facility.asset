@@ -9,9 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c7546f3fc1bd4967ba26f04e11c3f31, type: 3}
-  m_Name: Cloning Facility
+  m_Name: Robotics Facility
   m_EditorClassIdentifier: 
-  description: 
+  description: A robotics facility will give us access to new heights of automated
+    labor.
   cost: 5e+07
   requiredProgress: 80000
   effects:
@@ -22,7 +23,8 @@ MonoBehaviour:
       locations: []
       verticals: []
       promos: []
-      recruitments: []
+      recruitments:
+      - {fileID: 11400000, guid: 87dab2a958923495e8757b72eb8fb1fa, type: 2}
       companies: []
       specialProjects: []
     cash: 0
@@ -57,7 +59,7 @@ MonoBehaviour:
     specialEffect: 2
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
-    values: 0a00000000000000000000000a000000
+    values: 0a0000000a0000000000000000000000
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000
