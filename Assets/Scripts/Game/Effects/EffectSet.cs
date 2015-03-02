@@ -64,7 +64,6 @@ public class EffectSet {
         es.unlocks = unlocks;
         es.research = research;
         es.opinionEvent = opinionEvent;
-
         es.gameEvent = gameEvent;
         es.eventDelay = eventDelay;
         es.eventProbability = eventProbability;
@@ -87,6 +86,7 @@ public class EffectSet {
 
         es.aiCompany = aiCompany;
         es.specialEffect = specialEffect;
+
 
         return es;
     }

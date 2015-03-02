@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Yuko Defiguero
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  texture: {fileID: 0}
+  robot: 0
+  salary: 0
+  bio: Yuko Defiguero is an adept problem solver but needs a lot of motivation. Yuko
+    Defiguero is a real pleasure to work with but is not very imaginative and is very
+    awkward.
+  description: 
+  title: Hardware Engineer
+  baseMinSalary: 209000
+  offMarketTime: 0
+  recentPlayerOffers: 0
+  happiness:
+    baseValue: 10
+    _buffs: []
+  productivity:
+    baseValue: 1
+    _buffs: []
+  charisma:
+    baseValue: 3
+    _buffs: []
+  creativity:
+    baseValue: 1
+    _buffs: []
+  cleverness:
+    baseValue: 6
+    _buffs: []

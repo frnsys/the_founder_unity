@@ -16,8 +16,7 @@ public class WorkerManager : MonoBehaviour {
 
     public IEnumerable<Worker> AvailableWorkers {
         get {
-            IEnumerable<string> unlockedWorkerNames = data.unlocked.workers.Select(w => w.name);
-            return AllWorkers.Where(w => w.offMarketTime == 0 && !GameManager.Instance.playerCompany.workers.Contains(w) && unlockedWorkerNames.Contains(w.name));
+            return AllWorkers.Where(w => w.offMarketTime == 0 && !GameManager.Instance.playerCompany.workers.Contains(w));
         }
     }
     public IEnumerable<Worker> AvailableWorkersForAICompany(AICompany c) {

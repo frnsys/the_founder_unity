@@ -9,7 +9,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class UnlockSet {
     public List<ProductType> productTypes = new List<ProductType>();
-    public List<Worker> workers = new List<Worker>();
     public List<Perk> perks = new List<Perk>();
     public List<Location> locations = new List<Location>();
     public List<Vertical> verticals = new List<Vertical>();
@@ -25,10 +24,6 @@ public class UnlockSet {
         foreach (ProductType o in us.productTypes) {
             if (!Duplicate(o, productTypes))
                 productTypes.Add(o);
-        }
-        foreach (Worker o in us.workers) {
-            if (!Duplicate(o, workers))
-                workers.Add(o);
         }
         foreach (Perk o in us.perks) {
             if (!Duplicate(o, perks))

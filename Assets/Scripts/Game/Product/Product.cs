@@ -281,11 +281,15 @@ public class Product : HasStats {
                 revenue *= 0.1f;
 
             synergy = true;
-            List<ProductRecipe> activeRecipes = company.activeProducts.Select(p => p.recipe).ToList();
-            foreach (ProductRecipe r in recipe.synergies) {
-                if (!activeRecipes.Contains(r)) {
-                    synergy = false;
-                    break;
+            if (recipe.synergies.Length == 0) {
+                synergy = false;
+            } else {
+                List<ProductRecipe> activeRecipes = company.activeProducts.Select(p => p.recipe).ToList();
+                foreach (ProductRecipe r in recipe.synergies) {
+                    if (!activeRecipes.Contains(r)) {
+                        synergy = false;
+                        break;
+                    }
                 }
             }
             if (synergy)

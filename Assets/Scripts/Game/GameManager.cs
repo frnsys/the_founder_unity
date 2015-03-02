@@ -379,7 +379,7 @@ public class GameManager : Singleton<GameManager> {
                 activeAICompanies[Random.Range(0, activeAICompanies.Count)].Decide();
 
             // Update workers' off market times.
-            foreach (Worker w in data.unlocked.workers.Where(w => w.offMarketTime > 0)) {
+            foreach (Worker w in workerManager.AllWorkers.Where(w => w.offMarketTime > 0)) {
                 // Reset player offers if appropriate.
                 if (--w.offMarketTime == 0) {
                     w.recentPlayerOffers = 0;

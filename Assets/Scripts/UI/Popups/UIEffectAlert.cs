@@ -37,9 +37,6 @@ public class UIEffectAlert : UIAlert {
         foreach (Vertical i in es.unlocks.verticals) {
             RenderUnlockEffect("the " + i.name + " vertical");
         }
-        foreach (Worker i in es.unlocks.workers) {
-            RenderUnlockEffect(i.name);
-        }
         foreach (Promo i in es.unlocks.promos) {
             RenderUnlockEffect(i.name);
         }

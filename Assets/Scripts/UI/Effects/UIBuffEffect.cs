@@ -17,9 +17,9 @@ public class UIBuffEffect : MonoBehaviour {
         }
 
         if (buff.type == BuffType.ADD) {
-            buffText += buff.value.ToString();
+            buffText += string.Format("{0:F2}", buff.value);
         } else {
-            buffText += buff.value.ToString() + "x";
+            buffText += string.Format("{0:F2}x", buff.value);
         }
 
         buffText += " to " + buff.name;

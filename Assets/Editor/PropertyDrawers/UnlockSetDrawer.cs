@@ -11,7 +11,6 @@ class UnlockSetDrawer : SuperPropertyDrawer {
     private string[] listPropertyNames = new string[] {
         "productTypes",
         "verticals",
-        "workers",
         "perks",
         "locations",
         "promos",
