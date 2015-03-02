@@ -16872,7 +16872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 2013164179}
   activeProductPrefab: {fileID: 100008, guid: 2fd679c24f85441b7819e6ca00ec1dc8, type: 2}
-  highlightColor: {r: 1, g: .898039222, b: .529411793, a: 1}
+  highlightColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
   promoIndicator: {fileID: 1229438053}
   productIndicator: {fileID: 1597615472}
   researchIndicator: {fileID: 1644594427}
@@ -20748,7 +20748,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
+  mColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
   mPivot: 4
   mWidth: 499
   mHeight: 60
@@ -29376,6 +29376,8 @@ MonoBehaviour:
   employeeGroup: {fileID: 264071009}
   employeePrefab: {fileID: 100002, guid: 398c90e07e0974daaad4aa4dc8657648, type: 2}
   employeeHUDPrefab: {fileID: 100000, guid: 6a78d8fca06504127bf3a9cee42278f1, type: 2}
+  dayColor: {r: 1, g: .898039222, b: .529411793, a: 1}
+  nightColor: {r: 0, g: .521568656, b: .980392158, a: 1}
 --- !u!1 &2089191075
 GameObject:
   m_ObjectHideFlags: 0
