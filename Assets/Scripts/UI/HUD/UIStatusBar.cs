@@ -7,6 +7,7 @@ public class UIStatusBar : MonoBehaviour {
     private GameManager gm;
 
     public UILabel cashLabel;
+    public UILabel hypeLabel;
     public UILabel yearLabel;
     public UILabel monthLabel;
     public UIGrid weekGrid;
@@ -31,6 +32,7 @@ public class UIStatusBar : MonoBehaviour {
 
     void Update() {
         cashLabel.text = string.Format("{0:C0}", gm.playerCompany.cash.value);
+        hypeLabel.text = string.Format("{0:F0} hype", gm.playerCompany.publicity.value);
         yearLabel.text = gm.year.ToString();
         monthLabel.text = gm.month.ToUpper();
 

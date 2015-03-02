@@ -461,9 +461,11 @@ public class GameManager : Singleton<GameManager> {
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
 
             // Pull back opinion effects towards 0.
+            // Deflate hype.
             // Advance promos.
             playerCompany.ForgetOpinionEvents();
             playerCompany.DevelopPromo();
+            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - 0.1f);
 
             yield return new WaitForSeconds(elapsedTime);
         }

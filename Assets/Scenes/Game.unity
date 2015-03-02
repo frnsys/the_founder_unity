@@ -215,6 +215,99 @@ MonoBehaviour:
   background: {fileID: 703249031}
   successColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   defaultColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
+--- !u!1 &16888523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 16888524}
+  - 114: {fileID: 16888525}
+  m_Layer: 8
+  m_Name: Hype Label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &16888524
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 16888523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .625, y: 420.005798, z: 0}
+  m_LocalScale: {x: .999826968, y: .999826968, z: .999826968}
+  m_Children: []
+  m_Father: {fileID: 127671519}
+  m_RootOrder: 1
+--- !u!114 &16888525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 16888523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 127671519}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 127671519}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 127671519}
+    relative: 0
+    absolute: -20
+  topAnchor:
+    target: {fileID: 127671519}
+    relative: 1
+    absolute: -40
+  updateAnchors: 1
+  mColor: {r: 1, g: .33088237, b: .33088237, a: 1}
+  mPivot: 4
+  mWidth: 499
+  mHeight: 40
+  mDepth: 0
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 12.4750004
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
+  mFont: {fileID: 0}
+  mText: (Hype)
+  mFontSize: 18
+  mFontStyle: 0
+  mAlignment: 3
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 1
+  mEffectColor: {r: .808823526, g: .136786312, b: .136786312, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 1
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
 --- !u!1 &25890337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,6 +1744,7 @@ Transform:
   m_LocalScale: {x: 1.00001299, y: 1.00001299, z: 1.00001299}
   m_Children:
   - {fileID: 1513043833}
+  - {fileID: 16888524}
   - {fileID: 921502547}
   - {fileID: 189669550}
   - {fileID: 273724436}
@@ -1728,6 +1822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cashLabel: {fileID: 1513043835}
+  hypeLabel: {fileID: 16888525}
   yearLabel: {fileID: 1753126654}
   monthLabel: {fileID: 893560092}
   weekGrid: {fileID: 1005929634}
@@ -2354,7 +2449,7 @@ Transform:
   - {fileID: 1171145224}
   - {fileID: 1753126655}
   m_Father: {fileID: 127671519}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &189669551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3407,7 +3502,7 @@ Transform:
   m_LocalScale: {x: .999987006, y: .999987006, z: .999987006}
   m_Children: []
   m_Father: {fileID: 127671519}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &273724437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12216,7 +12311,7 @@ Transform:
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children: []
   m_Father: {fileID: 127671519}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &921502548
 MonoBehaviour:
   m_ObjectHideFlags: 0

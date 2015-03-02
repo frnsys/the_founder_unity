@@ -23,7 +23,6 @@ public class Company : HasStats {
         // Default values.
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 1);
-        influence = 0;
         deathToll = 0;
         debtOwned = 0;
         taxesAvoided = 0;
@@ -351,7 +350,6 @@ public class Company : HasStats {
     // Hype Management ===============================
     // ===============================================
 
-    public int influence;
     public void ApplyOpinionEvent(OpinionEvent oe) {
         opinion.ApplyBuff(oe.opinion);
         publicity.ApplyBuff(oe.publicity);
@@ -368,8 +366,7 @@ public class Company : HasStats {
             bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
 
             if (completed) {
-                influence += developingPromo.influence;
-                //UIManager.Instance.LaunchHypeMinigame(developingPromo);
+                UIManager.Instance.LaunchHypeMinigame(developingPromo);
                 developingPromo = null;
             }
         }
