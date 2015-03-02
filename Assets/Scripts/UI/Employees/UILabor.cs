@@ -46,7 +46,7 @@ public class UILabor : MonoBehaviour {
             StartCoroutine(Scale(1f, 0f, Destroy));
     }
 
-    public void Capture() {
+    void OnClick() {
         if (!captured) {
             captured = true;
             if (stat_.name == "Breakthrough") {
