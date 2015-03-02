@@ -14,7 +14,8 @@ public class Promo : TemplateResource<Promo> {
     [SerializeField, HideInInspector]
     private float _progress = 0;
     public float progress {
-        get { return _progress/requiredProgress; }
+        // Base promo time is 4 weeks at 12 cycles/week
+        get { return _progress/requiredProgress * 48f; }
     }
 
     static public event System.Action<Promo> Completed;

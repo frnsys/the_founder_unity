@@ -16,7 +16,8 @@ public class Recruitment : TemplateResource<Recruitment> {
     }
 
     void Awake() {
-        requiredProgress = 400f;
+        // At 12cycles/week, this is 4 weeks.
+        requiredProgress = 48f;
     }
 
     static public event System.Action<Recruitment> Completed;

@@ -141,7 +141,10 @@ public class Product : HasStats {
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
-        requiredProgress = 100f;
+
+        // This is 6 weeks at 12cycles/week.
+        // Each progress is one cycle.
+        requiredProgress = 72f;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {

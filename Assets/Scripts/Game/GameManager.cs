@@ -202,7 +202,8 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void OnEvent(GameEvent e) {
-        ApplyEffectSet(e.effects);
+        if (e.effects != null)
+            ApplyEffectSet(e.effects);
     }
 
     void OnResearchCompleted(Technology t) {
@@ -248,8 +249,9 @@ public class GameManager : Singleton<GameManager> {
     // Time ==========================================
     // ===============================================
 
+    // In seconds
     private static int weekTime = 6;
-    private static float cycleTime = weekTime/14f;
+    private static float cycleTime = weekTime/12f;
     public static float CycleTime {
         get { return cycleTime; }
     }
