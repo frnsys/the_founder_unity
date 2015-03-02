@@ -16,7 +16,7 @@ public class Recruitment : TemplateResource<Recruitment> {
     }
 
     void Awake() {
-        requiredProgress = 800;
+        requiredProgress = 400f;
     }
 
     static public event System.Action<Recruitment> Completed;
