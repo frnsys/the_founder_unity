@@ -58,6 +58,55 @@ public class EffectSet {
         WorkerInsight
     }
 
+    public EffectSet Clone() {
+        EffectSet es = new EffectSet();
+        es.cash = cash;
+        es.unlocks = unlocks;
+        es.research = research;
+        es.opinionEvent = opinionEvent;
+
+        es.gameEvent = gameEvent;
+        es.eventDelay = eventDelay;
+        es.eventProbability = eventProbability;
+
+        es.forgettingRate = forgettingRate;
+        es.spendingMultiplier = spendingMultiplier;
+        es.wageMultiplier = wageMultiplier;
+        es.taxRate = taxRate;
+        es.economicStability = economicStability;
+
+        es.productEffects = new List<ProductEffect>();
+        foreach (ProductEffect pe in productEffects) {
+            es.productEffects.Add(new ProductEffect(pe));
+        }
+
+        es.workerEffects = new List<StatBuff>();
+        foreach (StatBuff sb in workerEffects) {
+            es.workerEffects.Add(new StatBuff(sb.name, sb.value));
+        }
+
+        es.aiCompany = aiCompany;
+        es.specialEffect = specialEffect;
+
+        return es;
+    }
+
+    public void ApplyMultiplier(float mult) {
+        research.value *= mult;
+        forgettingRate *= mult;
+        spendingMultiplier *= mult;
+        wageMultiplier *= mult;
+        taxRate *= mult;
+        economicStability *= mult;
+
+        foreach (ProductEffect pe in productEffects) {
+            pe.buff.value *= mult;
+        }
+        foreach (StatBuff sb in workerEffects) {
+            sb.value *= mult;
+        }
+    }
+
     public void Apply(Company company) {
         company.activeEffects.Add(this);
 

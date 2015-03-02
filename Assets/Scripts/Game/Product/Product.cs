@@ -81,9 +81,7 @@ public class Product : HasStats {
             return verts.Distinct().ToList();
         }
     }
-    public EffectSet effects {
-        get { return recipe.effects; }
-    }
+    public EffectSet effects;
 
     public bool launched { get { return _state == State.LAUNCHED; } }
     public bool developing { get { return _state == State.DEVELOPMENT; } }
@@ -237,6 +235,10 @@ public class Product : HasStats {
 
         // Maxmimum lifetime revenue of the product.
         maxRevenue = recipe.maxRevenue * score;
+
+        // Effect modifications.
+        effects = recipe.effects.Clone();
+        effects.ApplyMultiplier(score);
 
         Debug.Log(string.Format("Score {0}", score));
         Debug.Log(string.Format("Design Value {0}", A));

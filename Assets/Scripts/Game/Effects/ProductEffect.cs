@@ -20,6 +20,12 @@ public class ProductEffect {
         buff = new StatBuff(name, 0);
     }
 
+    public ProductEffect(ProductEffect pe) {
+        buff = new StatBuff(pe.buff.name, pe.buff.value);
+        productTypes = pe.productTypes;
+        verticals = pe.verticals;
+    }
+
     public void Apply(Company company) {
         List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
         foreach (Product product in matchingProducts) {
