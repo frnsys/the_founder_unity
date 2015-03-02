@@ -108,7 +108,7 @@ public class UIProductDev : MonoBehaviour {
     private IEnumerator Pulse(GameObject target, float from, float to) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.05f;
+        float step = 0.1f;
 
         for (float f = 0f; f <= 1f + step; f += step) {
             target.transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
