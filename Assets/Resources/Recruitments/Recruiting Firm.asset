@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Recruiting Firm
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: 4ef68993c56bc4381acd21ea9fbf8bdd, type: 3}
-  cost: 1000
-  targetScore: 4
+  cost: 120000
+  targetScore: 24
+  description: Hire a recruiting firm to hunt down the best candidates.
   _progress: 0

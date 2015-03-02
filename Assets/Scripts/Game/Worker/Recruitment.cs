@@ -7,6 +7,7 @@ public class Recruitment : TemplateResource<Recruitment> {
     public Texture icon;
     public float cost;
     public float targetScore;
+    public string description;
     private float requiredProgress;
 
     [SerializeField, HideInInspector]

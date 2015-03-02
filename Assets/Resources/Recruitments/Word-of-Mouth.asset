@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Word-of-Mouth
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: ed958b793539a4793b412fcb6d776833, type: 3}
-  cost: 1000
+  cost: 15000
   targetScore: 4
+  description: Ask friends and family if they know candidates.
   _progress: 0

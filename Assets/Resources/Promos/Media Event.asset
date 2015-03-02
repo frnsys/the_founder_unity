@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: Media Event
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: 9a7bb11ee9797404f86f8f7d9ffac280, type: 3}
-  description: 
-  cost: 50000
-  requiredProgress: 8000
-  level: {fileID: 0}
+  description: Put on a massive spectacle to dazzle the wits out of media and consumers.
+  cost: 145000
+  requiredProgress: 60
+  influence: 22
+  level: {fileID: 100138, guid: a034a3dd4847b46159207b4e59c5988d, type: 2}
   _progress: 0
