@@ -48,7 +48,7 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         get {
             int cost = 0;
             foreach(KeyValuePair<Type, int> item in this) {
-                cost += item.Value * baseCosts[item.Key];
+                cost += (int)(item.Value * baseCosts[item.Key] * (GameManager.Instance.infrastructureCostMultiplier[item.Key]/100f));
             }
             return cost;
         }

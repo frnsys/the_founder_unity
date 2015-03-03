@@ -18,13 +18,14 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
       promos: []
       recruitments: []
       companies: []
+      specialProjects:
+      - {fileID: 11400000, guid: 14fac2bf305b94688b1d122111f42f71, type: 2}
     cash: 0
     research:
       name: Research
@@ -43,11 +44,19 @@ MonoBehaviour:
         value: 0
         duration: 0
         type: 0
-    gameEvent: {fileID: 11400000, guid: a26743fc84f10421584ada7352bf4b73, type: 2}
-    eventDelay: 12
-    eventProbability: 1
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+    specialEffect: 0
   requiredVertical: {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-  requiredTechnologies: []
+  requiredTechnologies:
+  - {fileID: 11400000, guid: 1b687c184e7e54eba90e2485ab84a341, type: 2}
+  - {fileID: 11400000, guid: 04090cca7b2fb4890b8caa64068ad91c, type: 2}

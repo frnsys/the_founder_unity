@@ -62,7 +62,7 @@ public class UILocationItem : MonoBehaviour {
             if (location.capacity[t] == 0) {
                 infItem.gameObject.SetActive(false);
             } else {
-                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t]);
+                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t] * (GameManager.Instance.infrastructureCostMultiplier[t]/100f));
                 infItem.usedAndCapacityLabel.text = string.Format("{0}", location.capacity[t]);
             }
         }
@@ -81,7 +81,7 @@ public class UILocationItem : MonoBehaviour {
             if (location.capacity[t] == 0) {
                 infItem.gameObject.SetActive(false);
             } else {
-                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t]);
+                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t] * (GameManager.Instance.infrastructureCostMultiplier[t]/100f));
 
                 // Setup button actions.
                 Infrastructure.Type lT = t;

@@ -58,6 +58,14 @@ public class GameManager : Singleton<GameManager> {
         get { return data.taxRate; }
         set { data.taxRate = value; }
     }
+    public float expansionCostMultiplier {
+        get { return data.expansionCostMultiplier; }
+        set { data.expansionCostMultiplier = value; }
+    }
+    public Infrastructure infrastructureCostMultiplier {
+        get { return data.infrastructureCostMultiplier; }
+        set { data.infrastructureCostMultiplier = value; }
+    }
 
     public float revenueTarget {
         get { return data.board.revenueTarget; }
