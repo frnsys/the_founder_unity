@@ -22,7 +22,7 @@ public class Company : HasStats {
     public Company Init() {
         // Default values.
         cash = new Stat("Cash", 100000);
-        research = new Stat("Research", 1);
+        research = new Stat("Research", 0);
         researchPoints = 0;
         deathToll = 0;
         debtOwned = 0;
@@ -661,7 +661,7 @@ public class Company : HasStats {
     }
     public Stat research;
     public int researchPoints;
-    public float researchInvestment = 1000;
+    public float researchInvestment = 0;
     public List<Technology> technologies;
 
     public void Research() {
