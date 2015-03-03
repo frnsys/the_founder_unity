@@ -17,8 +17,8 @@ MonoBehaviour:
   requiredProgress: 80000
   effects:
     unlocks:
-      productTypes: []
-      workers: []
+      productTypes:
+      - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
       perks: []
       locations: []
       verticals: []
@@ -53,6 +53,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

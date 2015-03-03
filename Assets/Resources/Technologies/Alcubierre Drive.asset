@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
-  m_Name: Albucierre Drive
+  m_Name: Alcubierre Drive
   m_EditorClassIdentifier: 
   description: This is a powerful interstellar space engine which makes it possible
     to go to the furthest reaches of our galaxy.
@@ -52,6 +52,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

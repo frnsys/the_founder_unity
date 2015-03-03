@@ -50,10 +50,17 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 0000000000000000f6ffffff00000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects:
-    - productTypes:
-      - {fileID: 11400000, guid: 2e04f351533894d7fab36c9279cd1df1, type: 2}
-      verticals: []
+    - productTypes: []
+      verticals:
+      - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
       buff:
         name: Marketing
         value: 20
@@ -63,4 +70,5 @@ MonoBehaviour:
     aiCompany: {fileID: 0}
     specialEffect: 0
   requiredVertical: {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-  requiredTechnologies: []
+  requiredTechnologies:
+  - {fileID: 11400000, guid: 21345570cfcb040af8e7da37eeb4ad7c, type: 2}
