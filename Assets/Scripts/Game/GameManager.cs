@@ -315,7 +315,7 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.PayMonthly();
 
             // You only need to start making profit after the first year.
-            if ((int)data.month % 3 == 0 && (int)data.year > 0) {
+            if ((int)data.month % 3 == 0 && (int)data.year > 1) {
                 // Get the quarterly performance data and generate the report.
                 List<PerformanceDict> quarterData = playerCompany.CollectQuarterlyPerformanceData();
                 PerformanceDict results = quarterData[0];

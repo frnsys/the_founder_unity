@@ -17,7 +17,7 @@ public class UIPerformanceReport : UIAlert {
         revenueDeltaLabel.text = string.Format("{0}%", deltas["Quarterly Revenue"] * 100);
 
         costsLabel.text = string.Format("{0:C0}", results["Quarterly Costs"]);
-        costsLabel.text = string.Format("{0}%", deltas["Quarterly Costs"] * 100);
+        costsDeltaLabel.text = string.Format("{0}%", deltas["Quarterly Costs"] * 100);
 
         profitLabel.text = string.Format("{0:C0}", results["Quarterly Profit"]);
         profitDeltaLabel.text = string.Format("{0}%", deltas["Quarterly Profit"] * 100);
