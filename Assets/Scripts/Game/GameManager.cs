@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System.Linq;
+using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -67,8 +68,8 @@ public class GameManager : Singleton<GameManager> {
         set { data.infrastructureCostMultiplier = value; }
     }
 
-    public float revenueTarget {
-        get { return data.board.revenueTarget; }
+    public float profitTarget {
+        get { return data.board.profitTarget; }
     }
 
     public bool workerInsight {
@@ -167,6 +168,11 @@ public class GameManager : Singleton<GameManager> {
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
 #endif
+
+        // So negative currency values are shown as -$1000 instead of ($1000).
+        System.Globalization.CultureInfo modCulture = new System.Globalization.CultureInfo("en-US");
+        modCulture.NumberFormat.CurrencyNegativePattern = 1;
+        Thread.CurrentThread.CurrentCulture = modCulture;
     }
 
     public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
@@ -308,12 +314,13 @@ public class GameManager : Singleton<GameManager> {
 
             playerCompany.PayMonthly();
 
-            if ((int)data.month % 3 == 0) {
+            // You only need to start making profit after the first year.
+            if ((int)data.month % 3 == 0 && (int)data.year > 0) {
                 // Get the quarterly performance data and generate the report.
                 List<PerformanceDict> quarterData = playerCompany.CollectQuarterlyPerformanceData();
                 PerformanceDict results = quarterData[0];
                 PerformanceDict deltas = quarterData[1];
-                float growth = data.board.EvaluatePerformance(results["Quarterly Revenue"]);
+                float growth = data.board.EvaluatePerformance(results["Quarterly Profit"]);
 
                 if (PerformanceReport != null) {
                     int quarter = (int)data.month/4 + 1;

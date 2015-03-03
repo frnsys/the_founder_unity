@@ -215,6 +215,7 @@ MonoBehaviour:
   background: {fileID: 703249031}
   successColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   defaultColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
+  dangerColor: {r: 1, g: .33088237, b: .33088237, a: 1}
 --- !u!1 &16888523
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +697,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: 'Quarterly Target: $0/$20,000 revenue'
+  mText: 'Quarterly Target: $0/$20,000 profit'
   mFontSize: 18
   mFontStyle: 0
   mAlignment: 0

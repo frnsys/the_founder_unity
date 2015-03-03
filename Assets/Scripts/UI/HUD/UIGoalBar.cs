@@ -10,6 +10,7 @@ public class UIGoalBar : MonoBehaviour {
     public UITexture background;
     public Color successColor;
     public Color defaultColor;
+    public Color dangerColor;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -17,11 +18,11 @@ public class UIGoalBar : MonoBehaviour {
     }
 
     void Update() {
-        string current = string.Format("{0:C0}", company.quarterRevenue);
-        string target  = string.Format("{0:C0}", gm.revenueTarget);
-        goalLabel.text = string.Format("Quarterly Target: {0}/{1}", current, target);
+        goalLabel.text = string.Format("Quarterly Target: {0:C0}/{1:C0} profit", company.quarterProfit, gm.profitTarget);
 
-        if (company.quarterRevenue >= gm.revenueTarget) {
+        if (company.quarterProfit < 0) {
+            background.color = dangerColor;
+        } else if (company.quarterProfit >= gm.profitTarget) {
             background.color = successColor;
         } else {
             background.color = defaultColor;

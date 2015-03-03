@@ -387,6 +387,9 @@ public class Company : HasStats {
     public float taxesAvoided;
     public int deathToll;
     public int debtOwned;
+    public float quarterProfit {
+        get { return quarterRevenue - quarterCosts; }
+    }
 
     static public event System.Action<float, string> Paid;
     public void PayMonthly() {
@@ -697,6 +700,7 @@ public class Company : HasStats {
         PerformanceDict results = new PerformanceDict();
         results["Quarterly Revenue"] = quarterRevenue;
         results["Quarterly Costs"] = quarterCosts;
+        results["Quarterly Profit"] = quarterRevenue - quarterCosts;
 
         QuarterlyPerfHistory.Enqueue(results);
 

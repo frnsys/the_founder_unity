@@ -7,12 +7,12 @@ using UnityEngine;
 [System.Serializable]
 public class TheBoard {
     public float happiness = 10;
-    public float revenueTarget = 20000;
-    public float lastQuarterRevenue = 0;
+    public float profitTarget = 20000;
+    public float lastQuarterProfit = 20000;
     public float desiredGrowth = 0.12f;
 
-    public float EvaluatePerformance(float revenue) {
-        float growth = revenue/lastQuarterRevenue - 1;
+    public float EvaluatePerformance(float profit) {
+        float growth = profit/lastQuarterProfit - 1;
 
         // If the target is exceeded, the board is really happy.
         if (growth >= desiredGrowth * 2)
@@ -32,8 +32,8 @@ public class TheBoard {
         }
 
         // Set the new target.
-        revenueTarget *= 1 + desiredGrowth;
-        lastQuarterRevenue = revenue;
+        profitTarget *= 1 + desiredGrowth;
+        lastQuarterProfit = profit;
 
         return growth;
     }
