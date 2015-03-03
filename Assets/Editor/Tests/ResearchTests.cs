@@ -15,7 +15,6 @@ namespace UnityTest
         private GameData gd;
         private GameManager gm;
 
-        private ResearchManager rm;
         private Technology tech;
         private Vertical vert;
 
@@ -26,7 +25,6 @@ namespace UnityTest
             gd = GameData.New("DEFAULTCORP");
             gm.Load(gd);
 
-            rm = gm.researchManager;
             tech = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestTechnology.asset", typeof(Technology))) as Technology;
             vert = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestVertical.asset", typeof(Vertical)) as Vertical;
             gd.company.research.baseValue = 50;
@@ -37,42 +35,6 @@ namespace UnityTest
         public void TearDown() {
             UnityEngine.Object.DestroyImmediate(gameObj);
             gm = null;
-        }
-
-        [Test]
-        public void Research() {
-            Assert.IsFalse(rm.researching);
-
-            rm.BeginResearch(tech);
-
-            Assert.IsTrue(rm.researching);
-            Assert.AreEqual(rm.technology, tech);
-            Assert.AreEqual(rm.progress, 0);
-            Assert.IsTrue(rm.research == 0);
-
-            rm.Research();
-
-            Assert.AreEqual(rm.progress, 0.5);
-            Assert.IsTrue(rm.research == 50);
-
-            rm.Research();
-
-            // Research should be completed now.
-            Assert.IsFalse(rm.researching);
-            Assert.AreEqual(rm.technology, null);
-            Assert.AreEqual(rm.progress, 0);
-            Assert.IsTrue(rm.research == 0);
-        }
-
-        [Test]
-        public void ResearchProgress() {
-            tech.requiredResearch = 100;
-
-            rm.BeginResearch(tech);
-
-            // Check that progress is properly calculated.
-            rm.Research();
-            Assert.AreEqual(rm.progress, 0.5);
         }
 
         [Test]

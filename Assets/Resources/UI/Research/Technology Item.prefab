@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 16, z: 0}
+  m_LocalPosition: {x: 0, y: -4.00000763, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -134,7 +134,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 54, z: 0}
+  m_LocalPosition: {x: 0, y: 34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92, y: 60, z: 0}
+  m_LocalPosition: {x: 0, y: -80, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -160,7 +160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -106, y: 60, z: 0}
+  m_LocalPosition: {x: 0, y: 80, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -199,7 +199,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -62, z: 0}
+  m_LocalPosition: {x: 0, y: -322, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400010}
@@ -245,15 +245,15 @@ MonoBehaviour:
     relative: 0
     absolute: -12
   updateAnchors: 1
-  mColor: {r: .25, g: .25, b: .25, a: 1}
+  mColor: {r: .219584107, g: .180525541, b: .463235319, a: 1}
   mPivot: 1
-  mWidth: 188
+  mWidth: 280
   mHeight: 100
   mDepth: 254
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.88
+  aspectRatio: 2.79999995
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -275,6 +275,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -308,15 +311,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .220588207, g: .220588207, b: .220588207, a: 1}
+  mColor: {r: .882352948, g: 1, b: .991596639, a: 1}
   mPivot: 4
-  mWidth: 188
+  mWidth: 280
   mHeight: 52
   mDepth: 253
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.61538458
+  aspectRatio: 5.38461542
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: b6eb491d1524c4de5bd267a7f72c788d, type: 3}
   mFont: {fileID: 0}
@@ -339,6 +342,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -357,30 +363,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftAnchor:
     target: {fileID: 400006}
-    relative: 1
-    absolute: 24
+    relative: .5
+    absolute: -140
   rightAnchor:
     target: {fileID: 400008}
-    relative: 1
-    absolute: -24
+    relative: .5
+    absolute: 140
   bottomAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 60
+    relative: .5
+    absolute: -140
   topAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 220
+    relative: .5
+    absolute: -20
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 188
-  mHeight: 160
+  mWidth: 280
+  mHeight: 120
   mDepth: 252
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 94
+  aspectRatio: 140
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -394,20 +400,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 24
+    relative: .5
+    absolute: -80
   rightAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 184
+    relative: .5
+    absolute: 80
   bottomAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 60
+    relative: .5
+    absolute: 0
   topAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 220
+    relative: .5
+    absolute: 160
   updateAnchors: 1
   mColor: {r: 0, g: .882352948, b: .882352948, a: 1}
   mPivot: 4
@@ -417,7 +423,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 80
+  aspectRatio: 10
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -469,13 +475,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 420
-  mHeight: 160
+  mWidth: 540
+  mHeight: 680
   mDepth: 251
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.625
+  aspectRatio: .79411763
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -576,6 +582,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -617,7 +626,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 33.3333321
+  aspectRatio: 2.77777767
   mType: 0
   mFillDirection: 4
   mFillAmount: 1

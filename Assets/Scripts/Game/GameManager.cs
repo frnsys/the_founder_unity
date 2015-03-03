@@ -84,9 +84,6 @@ public class GameManager : Singleton<GameManager> {
 
     // Other managers.
     [HideInInspector]
-    public ResearchManager researchManager;
-
-    [HideInInspector]
     public NarrativeManager narrativeManager;
 
     [HideInInspector]
@@ -101,8 +98,6 @@ public class GameManager : Singleton<GameManager> {
     // Load existing game data.
     public void Load(GameData d) {
         // Clean up existing managers, if any.
-        if (researchManager != null)
-            Destroy(researchManager);
         if (narrativeManager != null)
             Destroy(narrativeManager);
         if (workerManager != null)
@@ -112,7 +107,6 @@ public class GameManager : Singleton<GameManager> {
         if (economyManager != null)
             Destroy(economyManager);
 
-        researchManager  = gameObject.AddComponent<ResearchManager>();
         narrativeManager = gameObject.AddComponent<NarrativeManager>();
         workerManager    = gameObject.AddComponent<WorkerManager>();
         eventManager     = gameObject.AddComponent<EventManager>();
@@ -122,7 +116,6 @@ public class GameManager : Singleton<GameManager> {
         eventManager.Load(d);
         workerManager.Load(d);
         economyManager.Load(d);
-        researchManager.Load(d);
         narrativeManager.Load(d);
 
         // Setup all the AI companies.
@@ -142,14 +135,14 @@ public class GameManager : Singleton<GameManager> {
 
     void OnEnable() {
         GameEvent.EventTriggered += OnEvent;
-        ResearchManager.Completed += OnResearchCompleted;
+        Company.ResearchCompleted += OnResearchCompleted;
         Product.Completed += OnProductCompleted;
         SpecialProject.Completed += OnSpecialProjectCompleted;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
-        ResearchManager.Completed -= OnResearchCompleted;
+        Company.ResearchCompleted -= OnResearchCompleted;
         Product.Completed -= OnProductCompleted;
         SpecialProject.Completed -= OnSpecialProjectCompleted;
     }
@@ -455,7 +448,7 @@ public class GameManager : Singleton<GameManager> {
             // Add a bit of randomness to give things
             // a more "natural" feel.
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
-            researchManager.Research();
+            playerCompany.Research();
 
             yield return new WaitForSeconds(elapsedTime);
         }
