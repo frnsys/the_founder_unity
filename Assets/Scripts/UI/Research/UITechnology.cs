@@ -20,14 +20,11 @@ public class UITechnology : MonoBehaviour {
     public UITexture image;
 
     public void SelectTech() {
-        ResearchManager rm = GameManager.Instance.researchManager;
-        if (rm.technology != null && rm.technology != technology_) {
-            UIManager.Instance.Confirm("Are you sure want to change what you're researching? You will lose accumulated progress for the current technology.", delegate() {
-                rm.BeginResearch(technology_);
-            }, null);
-        } else {
-            rm.BeginResearch(technology_);
-        }
+        UIManager.Instance.Confirm("Are you sure you want to research this technology?", delegate() {
+            if (!GameManager.Instance.playerCompany.BuyTechnology(technology_)) {
+                UIManager.Instance.Alert("You don't have enough research for this technology.");
+            }
+        }, null);
     }
 }
 

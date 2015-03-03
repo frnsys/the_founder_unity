@@ -6,17 +6,12 @@ public class Technology : SharedResource<Technology> {
     public string description;
     public Texture icon;
 
-    public float requiredResearch = 1000;
+    public int cost = 1000;
 
     public EffectSet effects = new EffectSet();
 
     public Vertical requiredVertical;
     public List<Technology> requiredTechnologies;
-
-    public virtual void Awake() {
-        // Default values.
-        requiredTechnologies = new List<Technology>();
-    }
 
     public static new Technology Load(string name) {
         return Resources.Load("Technologies/" + name) as Technology;

@@ -84,9 +84,6 @@ namespace UnityTest
             data.board    = new TheBoard();
                 data.board.happiness = 20;
 
-            data.research  = 500;
-            data.technology = Technology.Load("3D Printing");
-
             data.forgettingRate = 10;
             data.wageMultiplier = 10;
             data.spendingMultiplier = 10;
@@ -262,10 +259,6 @@ namespace UnityTest
             CompareUnlockSets(gd.unlocked,               data.unlocked);
 
             Assert.AreEqual(gd.board.happiness,          data.board.happiness);
-
-            // These should be the _same instance_!
-            Assert.AreEqual(gd.technology, data.technology);
-            Assert.IsTrue(gd.research == data.research);
 		}
 
         private void CompareOpinionEvent(OpinionEvent oe, OpinionEvent oe_) {

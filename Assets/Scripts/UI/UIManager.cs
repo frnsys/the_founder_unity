@@ -29,7 +29,6 @@ public class UIManager : Singleton<UIManager> {
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
     public GameObject quarterlyReportPrefab;
-    public GameObject researchCompletedAlertPrefab;
     public GameObject productCompletedAlertPrefab;
     public GameObject specialProjectCompletedAlertPrefab;
     public GameObject competitorProductCompletedAlertPrefab;

@@ -663,17 +663,19 @@ public class Company : HasStats {
 
     public void Research() {
         // TO DO this investment calculation should make more sense.
-        researchPoints += research.value + researchInvestment/1000;
+        researchPoints += (int)(research.value + researchInvestment/1000f);
     }
 
-    static public event System.Action<Technology> Completed;
-    public void BuyTechnology(Technology technology) {
+    static public event System.Action<Technology> ResearchCompleted;
+    public bool BuyTechnology(Technology technology) {
         if (researchPoints >= technology.cost) {
             researchPoints -= technology.cost;
             technologies.Add(technology);
-            if (Completed != null)
-                Completed(technology);
+            if (ResearchCompleted != null)
+                ResearchCompleted(technology);
+            return true;
         }
+        return false;
     }
 
 

@@ -53,10 +53,6 @@ public class GameData : ScriptableObject {
     // Onboarding progress.
     public NarrativeManager.OnboardingState onboardingState;
 
-    // Research stuff.
-    public Technology technology;
-    public float research;
-
     // Other companies in the world.
     public List<AICompany> otherCompanies;
 
@@ -107,7 +103,6 @@ public class GameData : ScriptableObject {
         // Initialize new game stuff.
         data.company  = new Company(companyName).Init();
         data.board    = new TheBoard();
-        data.research = 0;
         data.unemployed = Worker.LoadAll();
         data.otherCompanies = AICompany.LoadAll();
 

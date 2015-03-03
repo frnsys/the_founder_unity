@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 // Displays info about short(er) term events,
-// such as progress and revenue from products
-// and research progress.
+// such as progress and revenue from products.
 public class UIHUD : MonoBehaviour {
     private GameManager gm;
     private Company company;
@@ -15,13 +14,11 @@ public class UIHUD : MonoBehaviour {
 
     public GameObject promoIndicator;
     public GameObject productIndicator;
-    public GameObject researchIndicator;
     public GameObject recruitingIndicator;
     public GameObject specialProjectIndicator;
 
     public UIProgressBar promoProgressBar;
     public UIProgressBar productProgressBar;
-    public UIProgressBar researchProgressBar;
     public UIProgressBar recruitingProgressBar;
     public UIProgressBar specialProjectProgressBar;
 
@@ -85,14 +82,6 @@ public class UIHUD : MonoBehaviour {
                 specialProjectProgressBar.value = company.developingSpecialProject.progress;
             } else {
                 specialProjectIndicator.SetActive(false);
-            }
-
-            // Research info.
-            if (gm.researchManager.researching) {
-                researchIndicator.SetActive(true);
-                researchProgressBar.value = gm.researchManager.progress;
-            } else {
-                researchIndicator.SetActive(false);
             }
 
             // Promo info.

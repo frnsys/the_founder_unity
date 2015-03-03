@@ -27,7 +27,7 @@ internal class TechnologyInspector : Editor {
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Research Needed");
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("requiredResearch"), GUIContent.none);
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("cost"), GUIContent.none);
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Required Vertical");
