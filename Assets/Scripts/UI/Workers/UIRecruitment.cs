@@ -9,10 +9,14 @@ public class UIRecruitment : MonoBehaviour {
             recruitment_ = value;
             label.text = recruitment_.name;
             image.mainTexture = recruitment_.icon;
+            cost.text = string.Format("{0:C0}", recruitment_.cost);
+            description.text = recruitment_.description;
         }
     }
 
     public UILabel label;
+    public UILabel cost;
+    public UILabel description;
     public UITexture image;
 
     public void SelectRecruitment() {

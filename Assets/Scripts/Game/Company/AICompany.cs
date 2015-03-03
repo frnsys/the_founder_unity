@@ -172,12 +172,8 @@ public class AICompany : Company {
     private List<ProductType> RandomSpecialtyProduct() {
         List<ProductType> pts = new List<ProductType>();
 
-        // Number of product types to use.
-        int numProductTypes = Random.Range(1,2);
-
-        // TO DO Note that it's possible that the AI company creates a product with a double product type.
-        // (two of the same product type). Do we want this?
-        while (pts.Count < numProductTypes) {
+        // TO DO: it's possible that the company creates a product of two of the same product type, it probably shouldn't be able to do this.
+        while (pts.Count < 2) {
             if (specialtyProductTypes.Count > 0) {
                 pts.Add(specialtyProductTypes[Random.Range(0, specialtyProductTypes.Count)]);
             } else {

@@ -17,12 +17,77 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
-      items: []
-      stores: 
+      perks: []
       locations: []
       verticals: []
       promos: []
-    effects: []
+      recruitments: []
+      companies: []
+      specialProjects: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Hype
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
+    productEffects:
+    - productTypes:
+      - {fileID: 11400000, guid: 4dbb4d17a578443aa9a75013ff762804, type: 2}
+      verticals: []
+      buff:
+        name: Design
+        value: 5
+        duration: 0
+        type: 0
+    - productTypes:
+      - {fileID: 11400000, guid: 4dbb4d17a578443aa9a75013ff762804, type: 2}
+      verticals: []
+      buff:
+        name: Marketing
+        value: 10
+        duration: 0
+        type: 0
+    - productTypes:
+      - {fileID: 11400000, guid: 4dbb4d17a578443aa9a75013ff762804, type: 2}
+      verticals: []
+      buff:
+        name: Engineering
+        value: 10
+        duration: 0
+        type: 0
+    workerEffects:
+    - name: Happiness
+      value: 10
+      duration: 0
+      type: 0
+    aiCompany: {fileID: 0}
+    specialEffect: 0
   requiredVertical: {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
   requiredTechnologies: []

@@ -16,13 +16,52 @@ MonoBehaviour:
   requiredResearch: 1000
   effects:
     unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      stores: 
+      productTypes:
+      - {fileID: 11400000, guid: babac0677bbaf419ebba5e695f802939, type: 2}
+      perks: []
       locations: []
       verticals: []
       promos: []
-    effects: []
+      recruitments: []
+      companies: []
+      specialProjects: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+      duration: 0
+      type: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Opinion
+        value: 0
+        duration: 0
+        type: 0
+      publicity:
+        name: Hype
+        value: 0
+        duration: 0
+        type: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+    specialEffect: 0
   requiredVertical: {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-  requiredTechnologies: []
+  requiredTechnologies:
+  - {fileID: 11400000, guid: c58046c623ebe469f94b82588fb6a0b5, type: 2}

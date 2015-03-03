@@ -81,9 +81,7 @@ public class Product : HasStats {
             return verts.Distinct().ToList();
         }
     }
-    public EffectSet effects {
-        get { return recipe.effects; }
-    }
+    public EffectSet effects;
 
     public bool launched { get { return _state == State.LAUNCHED; } }
     public bool developing { get { return _state == State.DEVELOPMENT; } }
@@ -141,7 +139,10 @@ public class Product : HasStats {
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
-        requiredProgress = 10000f;
+
+        // This is 6 weeks at 12cycles/week.
+        // Each progress is one cycle.
+        requiredProgress = 72f;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
@@ -235,6 +236,10 @@ public class Product : HasStats {
         // Maxmimum lifetime revenue of the product.
         maxRevenue = recipe.maxRevenue * score;
 
+        // Effect modifications.
+        effects = recipe.effects.Clone();
+        effects.ApplyMultiplier(score);
+
         Debug.Log(string.Format("Score {0}", score));
         Debug.Log(string.Format("Design Value {0}", A));
         Debug.Log(string.Format("Marketing Value {0}", U));
@@ -251,6 +256,7 @@ public class Product : HasStats {
         float t = timeSinceLaunch/longevity;
         float revenue = 0;
         Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        Debug.Log(string.Format("Elapsed Time {0}", elapsedTime));
         Debug.Log(string.Format("Time {0}", t));
         if (launched && !disabled && t <= 1f) {
             revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
@@ -275,11 +281,15 @@ public class Product : HasStats {
                 revenue *= 0.1f;
 
             synergy = true;
-            List<ProductRecipe> activeRecipes = company.activeProducts.Select(p => p.recipe).ToList();
-            foreach (ProductRecipe r in recipe.synergies) {
-                if (!activeRecipes.Contains(r)) {
-                    synergy = false;
-                    break;
+            if (recipe.synergies.Length == 0) {
+                synergy = false;
+            } else {
+                List<ProductRecipe> activeRecipes = company.activeProducts.Select(p => p.recipe).ToList();
+                foreach (ProductRecipe r in recipe.synergies) {
+                    if (!activeRecipes.Contains(r)) {
+                        synergy = false;
+                        break;
+                    }
                 }
             }
             if (synergy)

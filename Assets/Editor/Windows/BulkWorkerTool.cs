@@ -19,6 +19,8 @@ public class BulkWorkerTool : EditorWindow {
         workers_raw = EditorGUILayout.TextArea(workers_raw, GUILayout.Height(300));
 
         if (workers_raw != "") {
+            List<Texture> textures = Resources.LoadAll<Texture>("Models/Employees/Textures/Human").ToList();
+
             string[] workers_strings = workers_raw.Split('\n');
             foreach (string w_s in workers_strings) {
                 string[] worker_attrs = w_s.Split('|');
@@ -33,6 +35,8 @@ public class BulkWorkerTool : EditorWindow {
 
                 Worker worker = ScriptableObject.CreateInstance<Worker>();
                 worker.Init(name, title, baseMinSalary, happiness, productivity, charisma, creativity, cleverness);
+
+                worker.texture = textures[UnityEngine.Random.Range(0, textures.Count - 1)];
                 AssetDatabase.CreateAsset(worker, "Assets/Resources/Workers/Bulk/" + name + ".asset");
             }
             AssetDatabase.SaveAssets();

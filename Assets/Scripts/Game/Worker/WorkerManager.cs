@@ -16,8 +16,7 @@ public class WorkerManager : MonoBehaviour {
 
     public IEnumerable<Worker> AvailableWorkers {
         get {
-            IEnumerable<string> unlockedWorkerNames = data.unlocked.workers.Select(w => w.name);
-            return AllWorkers.Where(w => w.offMarketTime == 0 && !GameManager.Instance.playerCompany.workers.Contains(w) && unlockedWorkerNames.Contains(w.name));
+            return AllWorkers.Where(w => w.offMarketTime == 0 && !GameManager.Instance.playerCompany.workers.Contains(w));
         }
     }
     public IEnumerable<Worker> AvailableWorkersForAICompany(AICompany c) {
@@ -42,7 +41,7 @@ public class WorkerManager : MonoBehaviour {
         // takes the first 10, and then randomly selects them based on their
         // scores and the recruitment strategy's target score.
         return AvailableWorkers.OrderBy(i => Random.value).Take(10)
-            .Where(w => Random.value < 1 - Mathf.Abs(w.score - r.targetScore)/r.targetScore);
+            .Where(w => w.robot == r.robots && Random.value < 1 - Mathf.Abs(w.score - r.targetScore)/r.targetScore);
     }
 
     // If a worker is at a company,

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Job Listing
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: e44457b56ade74c3584a740b488db696, type: 3}
-  cost: 1000
-  targetScore: 4
+  cost: 45000
+  targetScore: 12
+  description: Post job listings on some popular sites.
   _progress: 0

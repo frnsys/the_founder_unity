@@ -7,6 +7,8 @@ public class Recruitment : TemplateResource<Recruitment> {
     public Texture icon;
     public float cost;
     public float targetScore;
+    public string description;
+    public bool robots;
     private float requiredProgress;
 
     [SerializeField, HideInInspector]
@@ -16,13 +18,13 @@ public class Recruitment : TemplateResource<Recruitment> {
     }
 
     void Awake() {
-        requiredProgress = 100;
+        // At 12cycles/week, this is 4 weeks.
+        requiredProgress = 48f;
     }
 
     static public event System.Action<Recruitment> Completed;
     public bool Develop() {
-        // TESTING. This should be a lower value.
-        _progress += 50;
+        _progress += 1;
         if (progress >= 1) {
             if (Completed != null)
                 Completed(this);

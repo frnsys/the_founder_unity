@@ -21,13 +21,12 @@ public class UILocationItem : MonoBehaviour {
             cost.text = "owned";
             expandButton.SetActive(false);
             grid.gameObject.SetActive(true);
-            capacity.text = "";
             ShowInfrastructure();
         } else {
             cost.text = string.Format("{0:C0}", location_.cost);
             expandButton.SetActive(true);
             grid.gameObject.SetActive(false);
-            capacity.text = "Adds capacity for:\n" + location_.capacity.ToString();
+            ShowInfrastructurePreview();
         }
     }
 
@@ -50,21 +49,39 @@ public class UILocationItem : MonoBehaviour {
 
     public UILabel cost;
     public UILabel label;
-    public UILabel capacity;
     public UILabel description;
     public GameObject expandButton;
 
-    public GameObject infrastructureItemPrefab;
+    public UIGrid infPreviewGrid;
+    public List<UIInfrastructureItem> infPreviewItems;
+
+    private void ShowInfrastructurePreview() {
+        infPreviewGrid.gameObject.SetActive(true);
+        foreach (UIInfrastructureItem infItem in infPreviewItems) {
+            Infrastructure.Type t = infItem.type;
+            if (location.capacity[t] == 0) {
+                infItem.gameObject.SetActive(false);
+            } else {
+                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t] * (GameManager.Instance.infrastructureCostMultiplier[t]/100f));
+                infItem.usedAndCapacityLabel.text = string.Format("{0}", location.capacity[t]);
+            }
+        }
+
+        UpdateButtons();
+        grid.Reposition();
+    }
+
     public List<UIInfrastructureItem> infItems;
     public UIGrid grid;
     private Company playerCompany;
     private void ShowInfrastructure() {
+        infPreviewGrid.gameObject.SetActive(false);
         foreach (UIInfrastructureItem infItem in infItems) {
             Infrastructure.Type t = infItem.type;
             if (location.capacity[t] == 0) {
                 infItem.gameObject.SetActive(false);
             } else {
-                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t]);
+                infItem.costLabel.text = string.Format("{0:C0}/mo each", location.capacity.baseCosts[t] * (GameManager.Instance.infrastructureCostMultiplier[t]/100f));
 
                 // Setup button actions.
                 Infrastructure.Type lT = t;

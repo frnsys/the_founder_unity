@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Conference
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: ea2a32a1995fa4ab39a1366ed244d8bd, type: 3}
-  cost: 1000
-  targetScore: 4
+  cost: 200000
+  targetScore: 36
+  description: Host a conference to attract the cream of the crop.
   _progress: 0

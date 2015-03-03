@@ -7,6 +7,7 @@ public class UIProductDev : MonoBehaviour {
     public UILabel designLabel;
     public UILabel engineeringLabel;
     public UILabel marketingLabel;
+    public UILabel multiplierLabel;
     public UIGrid comboGrid;
     public UISprite[] comboSprites;
 
@@ -22,6 +23,9 @@ public class UIProductDev : MonoBehaviour {
     private int engineering;
     [SerializeField, HideInInspector]
     private int marketing;
+
+    [SerializeField, HideInInspector]
+    private float multiplier;
 
     public void Clear() {
         design = 0;
@@ -64,10 +68,6 @@ public class UIProductDev : MonoBehaviour {
         }
     }
 
-    public void Bonus(string feature) {
-        AddFeature(feature, (int)featureValues.Average());
-    }
-
     private void ClearCombo() {
         int children = comboGrid.transform.childCount;
         for (int i=0;i<children;i++) {
@@ -75,14 +75,13 @@ public class UIProductDev : MonoBehaviour {
         }
         features.Clear();
         featureValues.Clear();
+        multiplier = 1f;
+        multiplierLabel.text = "";
     }
 
     private void ResolveCombo() {
-        // If all are the same.
-        if (!features.Any(f => f != features[0])) {
-            Bonus(features[0]);
-        }
-
+        // Bonus
+        AddFeature(features[0], (int)(featureValues.Average() * multiplier));
         ClearCombo();
     }
 
@@ -96,16 +95,20 @@ public class UIProductDev : MonoBehaviour {
         sprite.gameObject.SetActive(true);
         StartCoroutine(Pulse(sprite.gameObject, 1f, 1.6f));
 
-        if (count == 3) {
+        if ((count > 1 && features[count - 1] != features[count - 2]) || count >= 5) {
+            // As soon as a streak is broke or it is of length 5, resolve.
             Invoke("ResolveCombo", 0.25f);
+        } else if (count >= 2) {
+            // Otherwise, increase the multiplier.
+            multiplier += 0.25f;
+            multiplierLabel.text = string.Format("{0}x", multiplier);
         }
     }
-
 
     private IEnumerator Pulse(GameObject target, float from, float to) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.05f;
+        float step = 0.1f;
 
         for (float f = 0f; f <= 1f + step; f += step) {
             target.transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
@@ -116,6 +119,5 @@ public class UIProductDev : MonoBehaviour {
             target.transform.localScale = Vector3.Lerp(toScale, fromScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
-
     }
 }

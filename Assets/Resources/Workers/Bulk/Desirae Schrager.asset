@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Desirae Schrager
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  texture: {fileID: 2800000, guid: 108d92e8c305446f980af24eaed86da9, type: 3}
+  robot: 0
+  salary: 0
+  bio: Desirae Schrager reminds me of Eeyore and needs a lot of motivation. Desirae
+    Schrager is alienating and is not very imaginative. Desirae Schrager isn't the
+    sharpest tool in the shed.
+  description: 
+  title: Designer
+  baseMinSalary: 45000
+  offMarketTime: 0
+  recentPlayerOffers: 0
+  happiness:
+    baseValue: 1
+    _buffs: []
+  productivity:
+    baseValue: 1
+    _buffs: []
+  charisma:
+    baseValue: 1
+    _buffs: []
+  creativity:
+    baseValue: 1
+    _buffs: []
+  cleverness:
+    baseValue: 1
+    _buffs: []

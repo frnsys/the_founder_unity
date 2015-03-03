@@ -36,7 +36,6 @@ entertainment + cognitive                   => simulated memories (total recall)
 credit + implant                            => neural loan monitoring (improves financial stability)
 mobile device + wearable                    => smartwatch
 mobile device + iot                         => home automation devices
-
 mobile device + implant                     => retinal displays
 wearable + defense                          => exoskeleton
 transportation + space                      => space tours and vacations

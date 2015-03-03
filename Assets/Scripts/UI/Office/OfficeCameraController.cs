@@ -110,14 +110,22 @@ public class OfficeCameraController : MonoBehaviour {
             // Apply speed modification.
             touchDelta *= 0.008f;
 
-            float newSize = officeCamera.orthographicSize += touchDelta;
-            if (newSize < om.currentOffice.cameraSizeLimits[0]) {
-                newSize = om.currentOffice.cameraSizeLimits[0];
-            } else if (newSize > om.currentOffice.cameraSizeLimits[1]) {
-                newSize = om.currentOffice.cameraSizeLimits[1];
-            }
-            officeCamera.orthographicSize = newSize;
-            UpdateBounds();
+            Zoom(touchDelta);
         }
+    }
+
+    void OnDoubleClick() {
+        Zoom(-1f);
+    }
+
+    private void Zoom(float amount) {
+        float newSize = officeCamera.orthographicSize += amount;
+        if (newSize < om.currentOffice.cameraSizeLimits[0]) {
+            newSize = om.currentOffice.cameraSizeLimits[0];
+        } else if (newSize > om.currentOffice.cameraSizeLimits[1]) {
+            newSize = om.currentOffice.cameraSizeLimits[1];
+        }
+        officeCamera.orthographicSize = newSize;
+        UpdateBounds();
     }
 }

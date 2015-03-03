@@ -58,6 +58,14 @@ public class GameManager : Singleton<GameManager> {
         get { return data.taxRate; }
         set { data.taxRate = value; }
     }
+    public float expansionCostMultiplier {
+        get { return data.expansionCostMultiplier; }
+        set { data.expansionCostMultiplier = value; }
+    }
+    public Infrastructure infrastructureCostMultiplier {
+        get { return data.infrastructureCostMultiplier; }
+        set { data.infrastructureCostMultiplier = value; }
+    }
 
     public float revenueTarget {
         get { return data.board.revenueTarget; }
@@ -155,6 +163,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void Start() {
+#if UNITY_EDITOR
         // TESTING start a test game.
         Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
         Location location = Location.Load("San Francisco");
@@ -164,6 +173,7 @@ public class GameManager : Singleton<GameManager> {
 
         // Uncomment this if you want to start the game with onboarding.
         // narrativeManager.InitializeOnboarding();
+#endif
     }
 
     public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
@@ -200,7 +210,8 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void OnEvent(GameEvent e) {
-        ApplyEffectSet(e.effects);
+        if (e.effects != null)
+            ApplyEffectSet(e.effects);
     }
 
     void OnResearchCompleted(Technology t) {
@@ -246,8 +257,9 @@ public class GameManager : Singleton<GameManager> {
     // Time ==========================================
     // ===============================================
 
-    private static int weekTime = 15;
-    private static float cycleTime = weekTime/14;
+    // In seconds
+    private static int weekTime = 6;
+    private static float cycleTime = weekTime/12f;
     public static float CycleTime {
         get { return cycleTime; }
     }
@@ -375,7 +387,7 @@ public class GameManager : Singleton<GameManager> {
                 activeAICompanies[Random.Range(0, activeAICompanies.Count)].Decide();
 
             // Update workers' off market times.
-            foreach (Worker w in data.unlocked.workers.Where(w => w.offMarketTime > 0)) {
+            foreach (Worker w in workerManager.AllWorkers.Where(w => w.offMarketTime > 0)) {
                 // Reset player offers if appropriate.
                 if (--w.offMarketTime == 0) {
                     w.recentPlayerOffers = 0;
@@ -457,9 +469,11 @@ public class GameManager : Singleton<GameManager> {
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
 
             // Pull back opinion effects towards 0.
+            // Deflate hype.
             // Advance promos.
             playerCompany.ForgetOpinionEvents();
             playerCompany.DevelopPromo();
+            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - 0.1f);
 
             yield return new WaitForSeconds(elapsedTime);
         }

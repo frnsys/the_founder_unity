@@ -17,7 +17,6 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations:
       - {fileID: 11400000, guid: e30291e4b78394118a831439660cf994, type: 2}
@@ -46,9 +45,9 @@ MonoBehaviour:
         value: 0
         duration: 0
         type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
+    gameEvent: {fileID: 11400000, guid: a26743fc84f10421584ada7352bf4b73, type: 2}
+    eventDelay: 14
+    eventProbability: 1
     forgettingRate: 0
     spendingMultiplier: 0
     wageMultiplier: 0
@@ -57,9 +56,10 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+    specialEffect: 0
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
-    values: 0a000000000000000a0000000a000000
+    values: 14000000140000000000000014000000
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000

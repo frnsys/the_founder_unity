@@ -9,7 +9,7 @@ import random
 mu = 5.
 sigma = 5.
 iters = 10000
-amount = 60
+amount = 40
 
 # Load names.
 with open('male_names.txt', 'r') as f:
@@ -53,7 +53,7 @@ class Worker():
         self.score = sum([getattr(self, attr) for attr in self.attrs])
 
         # Calculate the min salary for a given score.
-        self.min_salary = (self.score - 2) * ((self.score % 10) * 1000 + 1000)
+        self.min_salary = (self.score - 2) * ((self.score % 10) * 1000 + 10000)
 
     def __repr__(self):
         return '|'.join([self.name, self.title, str(self.min_salary)] +

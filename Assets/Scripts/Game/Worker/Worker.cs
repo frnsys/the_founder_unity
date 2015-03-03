@@ -12,7 +12,8 @@ using System.Collections.Generic;
 public class Worker : HasStats {
     public static List<Worker> LoadAll() {
         // Load workers as _copies_ so any changes don't get saved to the actual resources.
-        return Resources.LoadAll<Worker>("Workers").ToList().Select(w => {
+        // This does not load special workers, since they are only added to available workers through effects.
+        return Resources.LoadAll<Worker>("Workers/Bulk").ToList().Select(w => {
                 Worker worker = Instantiate(w) as Worker;
                 worker.name = w.name;
                 return worker;

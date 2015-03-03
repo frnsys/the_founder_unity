@@ -62,12 +62,22 @@ public class UIEffectItem : MonoBehaviour {
             RenderBuffEffect(new StatBuff("Tax Rate", es.taxRate), null);
         }
 
+        if (es.expansionCostMultiplier != 0) {
+            RenderBuffEffect(new StatBuff("Expansion Costs", es.expansionCostMultiplier), null);
+        }
+
         if (es.opinionEvent.opinion.value != 0) {
             RenderBuffEffect(es.opinionEvent.opinion, null);
         }
 
         if (es.opinionEvent.publicity.value != 0) {
             RenderBuffEffect(es.opinionEvent.publicity, null);
+        }
+
+        foreach (Infrastructure.Type t in Infrastructure.Types) {
+            if (es.infrastructureCostMultiplier[t] != 0) {
+                RenderBuffEffect(new StatBuff(t.ToString(), es.infrastructureCostMultiplier[t]/100f), null);
+            }
         }
     }
 
@@ -80,9 +90,6 @@ public class UIEffectItem : MonoBehaviour {
         }
         foreach (Vertical i in es.unlocks.verticals) {
             RenderUnlockEffect("the " + i.name + " vertical");
-        }
-        foreach (Worker i in es.unlocks.workers) {
-            RenderUnlockEffect(i.name);
         }
         foreach (Promo i in es.unlocks.promos) {
             RenderUnlockEffect(i.name);

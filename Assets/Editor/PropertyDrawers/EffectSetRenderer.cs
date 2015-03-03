@@ -64,7 +64,13 @@ public class EffectSetRenderer {
         es.wageMultiplier = EditorGUILayout.FloatField("Wage Multiplier (+/-)", es.wageMultiplier);
         es.economicStability = EditorGUILayout.FloatField("Economic Stability (+/-)", es.economicStability);
         es.taxRate = EditorGUILayout.FloatField("Tax Rate (+/-)", es.taxRate);
+        es.expansionCostMultiplier = EditorGUILayout.FloatField("Expansion Cost (+/-)", es.expansionCostMultiplier);
         es.specialEffect = (EffectSet.Special)EditorGUILayout.EnumPopup("Special Effect", es.specialEffect);
+
+        EditorGUILayout.LabelField("Infrastructure Cost Multiplier (+/- %)");
+        foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
+            es.infrastructureCostMultiplier[t] =  EditorGUILayout.IntField(t.ToString(), es.infrastructureCostMultiplier[t]);
+        }
 
         EditorGUILayout.LabelField("Awakens AI Company");
         es.aiCompany = (AICompany)EditorGUILayout.ObjectField(es.aiCompany, typeof(AICompany), false);

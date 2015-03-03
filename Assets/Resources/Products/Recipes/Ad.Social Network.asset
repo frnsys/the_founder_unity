@@ -15,15 +15,14 @@ MonoBehaviour:
   description: A social networking site - people can keep up with friends, meet new
     people, and be people!
   synergies: []
-  difficulty: 1
-  design_W: 1
+  design_W: 2
   marketing_W: 1
-  engineering_W: 1
-  design_I: 100
-  marketing_I: 100
-  engineering_I: 100
+  engineering_W: 2
+  design_I: 30
+  marketing_I: 25
+  engineering_I: 40
   maxLongevity: 1000
-  maxRevenue: 1000
+  maxRevenue: 10000
   revenueModel:
     serializedVersion: 2
     m_Curve:
@@ -51,7 +50,6 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []

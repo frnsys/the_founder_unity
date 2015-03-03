@@ -27,7 +27,7 @@ public class UILabor : MonoBehaviour {
     private IEnumerator Scale(float from, float to, Action<GameObject> cb = null) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.05f;
+        float step = 0.1f;
 
         for (float f = 0f; f <= 1f + step; f += step) {
             transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
@@ -42,24 +42,47 @@ public class UILabor : MonoBehaviour {
     void Update() {
         timer.value -= 0.008f;
 
-        if (timer.value <= 0)
+        if (timer.value <= 0 && !captured)
             StartCoroutine(Scale(1f, 0f, Destroy));
     }
 
-    public void Capture() {
-        if (stat_.name == "Breakthrough") {
-            GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Design", stat_.value);
-            UIManager.Instance.AddPointsToDevelopingProduct("Design", stat_.value);
+    void OnClick() {
+        if (!captured) {
+            captured = true;
+            if (stat_.name == "Breakthrough") {
+                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Design", stat_.value);
+                UIManager.Instance.AddPointsToDevelopingProduct("Design", stat_.value);
 
-            GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Engineering", stat_.value);
-            UIManager.Instance.AddPointsToDevelopingProduct("Engineering", stat_.value);
+                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Engineering", stat_.value);
+                UIManager.Instance.AddPointsToDevelopingProduct("Engineering", stat_.value);
 
-            GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Marketing", stat_.value);
-            UIManager.Instance.AddPointsToDevelopingProduct("Marketing", stat_.value);
-        } else {
-            GameManager.Instance.playerCompany.AddPointsToDevelopingProduct(stat_.name, stat_.value);
-            UIManager.Instance.AddPointsToDevelopingProduct(stat_.name, stat_.value);
+                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Marketing", stat_.value);
+                UIManager.Instance.AddPointsToDevelopingProduct("Marketing", stat_.value);
+            } else {
+                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct(stat_.name, stat_.value);
+                UIManager.Instance.AddPointsToDevelopingProduct(stat_.name, stat_.value);
+            }
+            StartCoroutine(Pulse(gameObject, 1f, 1.4f));
         }
+    }
+
+    [SerializeField, HideInInspector]
+    private bool captured = false;
+    private IEnumerator Pulse(GameObject target, float from, float to) {
+        Vector3 fromScale = new Vector3(from,from,from);
+        Vector3 toScale = new Vector3(to,to,to);
+        float step = 0.1f;
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            target.transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
+        }
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            target.transform.localScale = Vector3.Lerp(toScale, Vector3.zero, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
+        }
+
         Destroy(gameObject);
     }
 }
