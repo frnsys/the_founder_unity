@@ -25,14 +25,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9e2030786d1944c6f8bea608a2f2f237, type: 2}
     - {fileID: 11400000, guid: 60cbdd04cc2fd45df87ef04037b32f3f, type: 2}
     - {fileID: 11400000, guid: b8b74820f307b4f009881fbe08c7396e, type: 2}
-    workers:
-    - {fileID: 11400000, guid: 5dac42fec526449cfba84bb31ba15627, type: 2}
-    - {fileID: 11400000, guid: fa75f5977b6044ac490fc038d3cd66ed, type: 2}
-    - {fileID: 11400000, guid: 84fe8544c28594126ad40ab02d4f4c8c, type: 2}
-    - {fileID: 11400000, guid: 01eaff63868d4491389e240353da620b, type: 2}
-    - {fileID: 11400000, guid: f34293193c60b4313bd2ba956f4811dc, type: 2}
-    - {fileID: 11400000, guid: 9439961fbd6d542c2a0788ea973c2ba8, type: 2}
-    - {fileID: 11400000, guid: 1d77c8b44067f4bb7b1de77a9de91599, type: 2}
+    - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
+    - {fileID: 11400000, guid: ecd254332ace84586bc3981d473393cd, type: 2}
+    - {fileID: 11400000, guid: af0dff6cabf1e45da959491659f8a596, type: 2}
+    - {fileID: 11400000, guid: 2e04f351533894d7fab36c9279cd1df1, type: 2}
+    - {fileID: 11400000, guid: b8b6f7753bcee4fffac57592d376b3c7, type: 2}
+    - {fileID: 11400000, guid: 4dbb4d17a578443aa9a75013ff762804, type: 2}
+    - {fileID: 11400000, guid: cd6dae4cdbb944ba897f85582737864d, type: 2}
     perks:
     - {fileID: 11400000, guid: 0112d99a7129143ef9178ed9f33ce048, type: 2}
     - {fileID: 11400000, guid: 50b2b26e601574a46944c475a25712eb, type: 2}
@@ -86,6 +85,13 @@ MonoBehaviour:
   forgettingRate: 0
   economicStability: 0
   taxRate: 0
+  expansionCostMultiplier: 0
+  infrastructureCostMultiplier:
+    keys: 00000000010000000200000003000000
+    values: 00000000000000000000000000000000
+    baseCosts:
+      keys: 00000000010000000200000003000000
+      values: e8030000e8030000e8030000e8030000
   onboardingState:
     FIRST_PRODUCT_LAUNCHED: 0
     FIRST_WORKER_HIRED: 0
@@ -96,8 +102,6 @@ MonoBehaviour:
     COMMS_UNLOCKED: 0
     VERTICALS_UNLOCKED: 0
     WORKER_LIMIT_REACHED: 0
-  technology: {fileID: 0}
-  research: 0
   otherCompanies: []
   month: 0
   week: 0
