@@ -46,7 +46,7 @@ MonoBehaviour:
   productTypes:
   - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
   - {fileID: 11400000, guid: 0092605769f2f4b93a53f0b4384853ab, type: 2}
-  mesh: {fileID: 0}
+  mesh: {fileID: 4300030, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   effects:
     unlocks:
       productTypes: []
@@ -83,6 +83,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects:
     - name: Happiness

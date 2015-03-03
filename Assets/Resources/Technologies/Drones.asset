@@ -13,11 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   icon: {fileID: 2800000, guid: 7639939b92cab46f99a343318259df5f, type: 3}
-  requiredResearch: 1000
+  cost: 1000
   effects:
     unlocks:
-      productTypes:
-      - {fileID: 11400000, guid: ef8c47c7da16249f68191dad40cd9c51, type: 2}
+      productTypes: []
       perks: []
       locations: []
       verticals: []

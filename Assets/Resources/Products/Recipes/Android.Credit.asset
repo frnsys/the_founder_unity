@@ -15,7 +15,6 @@ MonoBehaviour:
   description: What do we even need *people* to buy our products for anyways? We can
     just build robots to work and spend their cash on us.
   synergies: []
-  difficulty: 1
   design_W: 1
   marketing_W: 1
   engineering_W: 1
@@ -47,11 +46,10 @@ MonoBehaviour:
   productTypes:
   - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
   - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
-  mesh: {fileID: 0}
+  mesh: {fileID: 4300038, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
@@ -85,6 +83,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects:
     - name: Happiness

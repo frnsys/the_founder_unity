@@ -14,8 +14,8 @@ MonoBehaviour:
   company: {fileID: 0}
   board:
     happiness: 10
-    revenueTarget: 20000
-    lastQuarterRevenue: 0
+    profitTarget: 20000
+    lastQuarterProfit: 20000
     desiredGrowth: .119999997
   unlocked:
     productTypes:
@@ -27,11 +27,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b8b74820f307b4f009881fbe08c7396e, type: 2}
     - {fileID: 11400000, guid: 72b983a1f8fea444c809ab64107bf601, type: 2}
     - {fileID: 11400000, guid: ecd254332ace84586bc3981d473393cd, type: 2}
-    - {fileID: 11400000, guid: af0dff6cabf1e45da959491659f8a596, type: 2}
     - {fileID: 11400000, guid: 2e04f351533894d7fab36c9279cd1df1, type: 2}
     - {fileID: 11400000, guid: b8b6f7753bcee4fffac57592d376b3c7, type: 2}
     - {fileID: 11400000, guid: 4dbb4d17a578443aa9a75013ff762804, type: 2}
-    - {fileID: 11400000, guid: cd6dae4cdbb944ba897f85582737864d, type: 2}
     perks:
     - {fileID: 11400000, guid: 0112d99a7129143ef9178ed9f33ce048, type: 2}
     - {fileID: 11400000, guid: 50b2b26e601574a46944c475a25712eb, type: 2}
