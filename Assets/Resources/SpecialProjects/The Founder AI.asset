@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c7546f3fc1bd4967ba26f04e11c3f31, type: 3}
-  m_Name: Delphi
+  m_Name: The Founder AI
   m_EditorClassIdentifier: 
   description: 
   cost: 7e+09
@@ -18,8 +18,7 @@ MonoBehaviour:
     unlocks:
       productTypes: []
       perks: []
-      locations:
-      - {fileID: 11400000, guid: e7c7dea82df4e45858edb7bcd07a0b10, type: 2}
+      locations: []
       verticals: []
       promos: []
       recruitments: []
@@ -64,7 +63,7 @@ MonoBehaviour:
     specialEffect: 3
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
-    values: 0a000000000000000a0000000a000000
+    values: 14000000140000001400000014000000
     baseCosts:
       keys: 00000000010000000200000003000000
       values: e8030000e8030000e8030000e8030000

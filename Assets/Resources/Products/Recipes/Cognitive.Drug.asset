@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: Xany
   description: Cognitive emotional control and enhancement drugs
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 1ebbc80415e5841c1a39165519f200c8, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

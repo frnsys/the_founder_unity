@@ -17,7 +17,6 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations:
       - {fileID: 11400000, guid: e7c7dea82df4e45858edb7bcd07a0b10, type: 2}
@@ -52,6 +51,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: yPad
   description: Tablets
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: d2f1a4664fe914262860b19f8ec65fd0, type: 2}
+  - {fileID: 11400000, guid: 0147661c1aefe44c5954535ec04044b9, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

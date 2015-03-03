@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: Entertainalytics
   description: Personalized streaming media services.
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 6729bca5ee39545068edc584c3ab5b47, type: 2}
+  - {fileID: 11400000, guid: d2f1a4664fe914262860b19f8ec65fd0, type: 2}
+  - {fileID: 11400000, guid: e0c1f355af5784aa2abf81cfc142f2d3, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1

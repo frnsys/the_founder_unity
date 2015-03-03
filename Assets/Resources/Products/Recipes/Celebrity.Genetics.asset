@@ -14,7 +14,9 @@ MonoBehaviour:
   names: CelebGenes
   description: Licensed genetic sequences from your favorite celebrities, ready to
     incorporate into your own DNA.
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: e0c1f355af5784aa2abf81cfc142f2d3, type: 2}
+  - {fileID: 11400000, guid: 4660618c80ed04c3e9ebd4129a2e0da0, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

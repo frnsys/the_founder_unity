@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: MindWorld
   description: A virtual world for your mind
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: af22bc25968b4498b8e505076b24de69, type: 2}
+  - {fileID: 11400000, guid: 997ad16eb9db14a3889fcd0526950c50, type: 2}
+  - {fileID: 11400000, guid: ceeb6ea815bd44508b5d60771516a0d5, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

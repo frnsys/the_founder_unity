@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: Moody
   description: Mood pacemakers
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 6bd3be610908f4cbb8695fc873e01446, type: 2}
+  - {fileID: 11400000, guid: 1067c0841ea4d4a6fbbadb344e1d1fd0, type: 2}
+  - {fileID: 11400000, guid: 5a9c04a7d6db043d284bad7f7207f4f1, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

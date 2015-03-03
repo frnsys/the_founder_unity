@@ -15,8 +15,10 @@ MonoBehaviour:
   description: Our virtual reality social network will give us unprecedented direct
     access to our consumers. They'll be spending all their time in a world of our
     creation!
-  synergies: []
-  difficulty: 1
+  synergies:
+  - {fileID: 11400000, guid: eab94d98cced54e5880c87577fe21790, type: 2}
+  - {fileID: 11400000, guid: 997ad16eb9db14a3889fcd0526950c50, type: 2}
+  - {fileID: 11400000, guid: af22bc25968b4498b8e505076b24de69, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1
@@ -52,7 +54,6 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
@@ -86,6 +87,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects:
     - name: Happiness

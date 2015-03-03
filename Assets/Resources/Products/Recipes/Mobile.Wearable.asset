@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: yWatch
   description: Smartwatches
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 0147661c1aefe44c5954535ec04044b9, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

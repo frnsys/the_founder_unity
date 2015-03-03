@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: EagleEye, DefenseWatch
   description: National automated defense and threat-detection system
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: bafc41279365849d3a1597d2985b537e, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1

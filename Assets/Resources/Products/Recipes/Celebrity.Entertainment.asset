@@ -13,7 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: CheesyMovieName
   description: Blockbuster film
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: d2f1a4664fe914262860b19f8ec65fd0, type: 2}
+  - {fileID: 11400000, guid: 6729bca5ee39545068edc584c3ab5b47, type: 2}
+  - {fileID: 11400000, guid: b1d79dada09124d5fa357982c4b4fa6a, type: 2}
+  - {fileID: 11400000, guid: 7aba057115bc848409aefe0d276af278, type: 2}
+  - {fileID: 11400000, guid: 6d271b7db2a9247358c706047c74c297, type: 2}
+  - {fileID: 11400000, guid: fdd1c394a366745279c3dde0ffe4ea7e, type: 2}
+  - {fileID: 11400000, guid: 997ad16eb9db14a3889fcd0526950c50, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

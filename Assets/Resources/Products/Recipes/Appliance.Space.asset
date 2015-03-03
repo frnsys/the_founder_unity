@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: Sats
   description: Satellites
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 26444901eeeb942d7810995992e6b9d3, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

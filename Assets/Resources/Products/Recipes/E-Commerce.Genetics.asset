@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: BabyStop
   description: Online marketplace for designer babies and other genetics-based products.
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: b1d79dada09124d5fa357982c4b4fa6a, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1

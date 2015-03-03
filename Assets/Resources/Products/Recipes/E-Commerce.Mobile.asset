@@ -9,19 +9,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Drug.Implant 1
+  m_Name: E-Commerce.Mobile
   m_EditorClassIdentifier: 
-  names: Moody
-  description: Mood pacemakers
-  synergies: []
-  design_W: 2
+  names: AppShop, SoftStore
+  description: A marketplace where aspiring companies can sell their software.
+  synergies:
+  - {fileID: 11400000, guid: 273426cd967be4c598445cdaccd147be, type: 2}
+  - {fileID: 11400000, guid: 3205d517eba8542b98142f217e9bab8b, type: 2}
+  - {fileID: 11400000, guid: be1b1e117babd42bd9e5f766c310666a, type: 2}
+  design_W: 1
   marketing_W: 1
-  engineering_W: 2
-  design_I: 30
-  marketing_I: 25
-  engineering_I: 40
+  engineering_W: 1
+  design_I: 100
+  marketing_I: 100
+  engineering_I: 100
   maxLongevity: 1000
-  maxRevenue: 10000
+  maxRevenue: 1000
   revenueModel:
     serializedVersion: 2
     m_Curve:
@@ -43,9 +46,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   productTypes:
-  - {fileID: 11400000, guid: 36896ff72616c4e739fd3a93ab1d96a3, type: 2}
-  - {fileID: 11400000, guid: 4949f1733456e4776a9b877a0f83c3d5, type: 2}
-  mesh: {fileID: 4300018, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  - {fileID: 11400000, guid: 225fb7177bd724944b52f0563cbf48c5, type: 2}
+  - {fileID: 11400000, guid: 9e2030786d1944c6f8bea608a2f2f237, type: 2}
+  mesh: {fileID: 0}
   effects:
     unlocks:
       productTypes: []
@@ -97,5 +100,4 @@ MonoBehaviour:
       type: 0
     aiCompany: {fileID: 0}
     specialEffect: 0
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 31668b731849f4f1db579a3d8afffdde, type: 2}
+  requiredTechnologies: []

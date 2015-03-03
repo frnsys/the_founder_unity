@@ -9,20 +9,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: E-Commerce.Mobile Device
+  m_Name: Appliance.Mobile
   m_EditorClassIdentifier: 
-  names: AppShop, SoftStore
-  description: A marketplace where aspiring companies can sell their software.
+  names: yPhone
+  description: Smartphones
   synergies: []
-  difficulty: 1
-  design_W: 1
+  design_W: 2
   marketing_W: 1
-  engineering_W: 1
-  design_I: 100
-  marketing_I: 100
-  engineering_I: 100
+  engineering_W: 2
+  design_I: 30
+  marketing_I: 25
+  engineering_I: 40
   maxLongevity: 1000
-  maxRevenue: 1000
+  maxRevenue: 10000
   revenueModel:
     serializedVersion: 2
     m_Curve:
@@ -44,13 +43,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   productTypes:
-  - {fileID: 11400000, guid: 225fb7177bd724944b52f0563cbf48c5, type: 2}
+  - {fileID: 11400000, guid: 60cbdd04cc2fd45df87ef04037b32f3f, type: 2}
   - {fileID: 11400000, guid: 9e2030786d1944c6f8bea608a2f2f237, type: 2}
-  mesh: {fileID: 0}
+  mesh: {fileID: 4300008, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
@@ -84,6 +82,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects:
     - name: Happiness

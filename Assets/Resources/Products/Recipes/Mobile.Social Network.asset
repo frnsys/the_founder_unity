@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: LetsChat, SupApp, FaceTalk, Blabber
   description: People have phones and use social networks. Seems like a natural combination.
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: b8d7a9f631b684924a0a8806a6bffdc7, type: 2}
+  - {fileID: 11400000, guid: 995c322ff4de1455193cc30b0ea473f6, type: 2}
+  - {fileID: 11400000, guid: be1b1e117babd42bd9e5f766c310666a, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1

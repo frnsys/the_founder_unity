@@ -13,7 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: VRT, RetinalVR
   description: VR headset
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: d2e09f95ccb0844cab099d852360ef62, type: 2}
+  - {fileID: 11400000, guid: 997ad16eb9db14a3889fcd0526950c50, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

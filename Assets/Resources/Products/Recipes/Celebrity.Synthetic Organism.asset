@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: DNACelebs
   description: Vat-grown celebrities - perfect down to their DNA.
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: e0c1f355af5784aa2abf81cfc142f2d3, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

@@ -14,7 +14,10 @@ MonoBehaviour:
   names: Hayuke Minu, HoloPac
   description: Perfectly-personalized holographic celebrities for every demographic
     and taste!
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: e0c1f355af5784aa2abf81cfc142f2d3, type: 2}
+  - {fileID: 11400000, guid: eab94d98cced54e5880c87577fe21790, type: 2}
+  - {fileID: 11400000, guid: d2e09f95ccb0844cab099d852360ef62, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

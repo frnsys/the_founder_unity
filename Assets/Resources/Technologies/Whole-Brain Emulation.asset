@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   icon: {fileID: 2800000, guid: aa06ef2e5ab864cb683427fc6015124f, type: 3}
-  requiredResearch: 1000
+  cost: 1000
   effects:
     unlocks:
       productTypes: []
@@ -23,7 +23,8 @@ MonoBehaviour:
       promos: []
       recruitments: []
       companies: []
-      specialProjects: []
+      specialProjects:
+      - {fileID: 11400000, guid: 944c8806798a249ed88a92957f7256f9, type: 2}
     cash: 0
     research:
       name: Research

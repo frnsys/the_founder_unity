@@ -14,7 +14,8 @@ MonoBehaviour:
   names: LoanNeural
   description: Keep detailed track of risky loaners with these neural loan monitoring
     devices.
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 86341c603d5974f858cd660f561d072b, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

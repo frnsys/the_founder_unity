@@ -15,8 +15,9 @@ MonoBehaviour:
   description: TV is dead - people don't want to have to leave their computers to
     watch something. With recent advances in streaming technology, we can support
     that behavior.
-  synergies: []
-  difficulty: 1
+  synergies:
+  - {fileID: 11400000, guid: e0c1f355af5784aa2abf81cfc142f2d3, type: 2}
+  - {fileID: 11400000, guid: 6d271b7db2a9247358c706047c74c297, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1
@@ -52,7 +53,6 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
@@ -86,6 +86,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects:
     - name: Happiness

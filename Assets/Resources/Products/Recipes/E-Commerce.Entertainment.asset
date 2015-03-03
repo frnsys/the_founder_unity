@@ -13,7 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   names: TuneStore, BuyMeDia
   description: DRM'd entertainment products
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 273426cd967be4c598445cdaccd147be, type: 2}
+  - {fileID: 11400000, guid: e0c1f355af5784aa2abf81cfc142f2d3, type: 2}
+  - {fileID: 11400000, guid: 6d271b7db2a9247358c706047c74c297, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1

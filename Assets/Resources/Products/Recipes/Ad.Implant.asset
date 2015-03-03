@@ -14,7 +14,8 @@ MonoBehaviour:
   names: BrainShare
   description: Thrifty consumers can rent out thoughtspace for thought-ads and save
     on their favorite brands!
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 995c322ff4de1455193cc30b0ea473f6, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2

@@ -14,7 +14,8 @@ MonoBehaviour:
   names: HiveMind, GroupThink, MindMeld
   description: A social cognitive experience - merge thoughts and become a collective
     consciousness.
-  synergies: []
+  synergies:
+  - {fileID: 11400000, guid: 65cd92d47aa9c49be9712d28d9310443, type: 2}
   design_W: 1
   marketing_W: 1
   engineering_W: 1
