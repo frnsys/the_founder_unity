@@ -86,8 +86,11 @@ public class UIProductDev : MonoBehaviour {
         if (multiplier > 1f)
             audio.PlayOneShot(comboAudioClip);
 
+        float value = (float)(featureValues.Average() * multiplier);
+
         // Bonus
-        AddFeature(features[0], (int)(featureValues.Average() * multiplier));
+        AddFeature(features[0], (int)value);
+        GameManager.Instance.playerCompany.AddPointsToDevelopingProduct(features[0], value);
         ClearCombo();
     }
 
