@@ -3,9 +3,8 @@
  */
 
 using UnityEngine;
-using System.Timers;
+using System.Linq;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 [System.Serializable]
 public class Stat {
@@ -14,30 +13,24 @@ public class Stat {
     public string name {
         get { return _name; }
     }
+    public float value {
+        get { return baseValue + acc; }
+    }
     public float baseValue = 0;
+    public float acc = 0;
 
     [SerializeField]
     private List<StatBuff> _buffs = new List<StatBuff>();
-    public ReadOnlyCollection<StatBuff> buffs {
-        get { return _buffs.AsReadOnly(); }
-    }
-
-    public float value {
-        get {
-            float finalValue = baseValue;
-            foreach (StatBuff buff in _buffs) {
-                finalValue += buff.value;
-            }
-            return finalValue;
-        }
-    }
 
     public void ApplyBuff(StatBuff buff) {
-        _buffs.Insert(0, buff);
+        _buffs.Add(buff);
+        acc += buff.value;
     }
 
     public void RemoveBuff(StatBuff buff) {
-        _buffs.Remove(buff);
+        if (_buffs.Remove(buff)) {
+            acc -= buff.value;
+        }
     }
 
     public Stat(string name_, float baseValue_ = 0) {
