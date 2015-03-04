@@ -22,14 +22,13 @@ public class UIEmployee : MonoBehaviour {
     public GameObject laborObj;
     public GameObject laborPrefab;
 
-    [HideInInspector]
-    public bool atDesk = false;
-    [HideInInspector]
-    public Office.Desk desk;
+    [SerializeField, HideInInspector]
+    private Office.Desk desk;
+    [SerializeField, HideInInspector]
+    private State state = State.Wandering;
 
     private NavMeshAgent agent;
     private Company company;
-    private bool idling;
 
     [HideInInspector]
     public Vector3 target;
@@ -42,39 +41,45 @@ public class UIEmployee : MonoBehaviour {
         target = RandomTarget();
     }
 
+    [System.Serializable]
+    private enum State {
+        Wandering,
+        Idling,
+        GoingToDesk,
+        AtDesk
+    }
+
     void Update() {
         // Move to target if not at desk and not idling.
-        if (!idling && !atDesk) {
+        if (state == State.GoingToDesk || state == State.Wandering) {
             agent.SetDestination(target);
+
+            // May randomly go to desk.
+            if (state == State.Wandering && company.developing && Random.value < 0.25f * worker.productivity.value) {
+                GoToDesk();
+            }
 
             // Check if we've reached the destination
             // For this to work, the stoppingDistance has to be about 1.
             if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
 
                 // If going to a desk...
-                if (desk != null) {
-                    atDesk = true;
+                if (state == State.GoingToDesk) {
+                    state = State.AtDesk;
 
                 } else {
-
-                    // May randomly go to desk.
-                    if (company.developing && Random.value > 0.05f * worker.productivity.value) {
-                        GoToDesk();
-
                     // Else, continue wandering around.
-                    } else {
-                        StartCoroutine(Pause());
-                        target = RandomTarget();
-                    }
+                    StartCoroutine(Pause());
+                    target = RandomTarget();
                 }
             }
         }
     }
 
     IEnumerator Pause() {
-        idling = true;
+        state = State.Idling;
         yield return new WaitForSeconds(1f + Random.value * 3f);
-        idling = false;
+        state = State.Wandering;
     }
 
     void OnEnable() {
@@ -96,20 +101,16 @@ public class UIEmployee : MonoBehaviour {
     }
 
     public void GoToDesk() {
-        Debug.Log("GOING TO DESK!");
         desk = UIOfficeManager.Instance.RandomDesk();
         if (desk != null) {
-            Debug.Log("-----");
-            Debug.Log(transform);
-            Debug.Log(desk.transform);
-            Debug.Log("******");
+            state = State.GoingToDesk;
             target = transform.parent.TransformDirection(desk.transform.position);
             desk.occupied = true;
         }
     }
     public void LeaveDesk() {
         Debug.Log("LEAVING DESK!");
-        atDesk = false;
+        state = State.Wandering;
         desk.occupied = false;
         desk = null;
         target = RandomTarget();
@@ -135,12 +136,12 @@ public class UIEmployee : MonoBehaviour {
                 happinessLabel.color = unhappyColor;
             }
 
-            if (company.developing && atDesk && laborObj == null) {
+            if (company.developing && state == State.AtDesk && laborObj == null) {
                 // Decide whether or not to work
                 // or leave the desk.
                 // Robots don't leave their desk.
                 // TO DO may need to tweak this value.
-                if (!worker.robot && Random.value < 0.05f/worker.productivity.value) {
+                if (!worker.robot && Random.value < 0.8f/worker.productivity.value) {
                     LeaveDesk();
                 } else {
                     laborObj = NGUITools.AddChild(HUDgroup, laborPrefab);
@@ -166,14 +167,6 @@ public class UIEmployee : MonoBehaviour {
                     UIFollowTarget uift = laborObj.GetComponent<UIFollowTarget>();
                     UIOfficeManager.Instance.SetupFollowTarget(this, uift);
                 }
-
-                // Breakthrough!
-                // TO DO this should be based on employee happiness
-                //if (Random.value < 0.4) {
-                    //hudtext.Add("BRK!", breakthroughColor, 0f);
-                //} else {
-                    //hudtext.Add(worker.productivity.value, workColor, 0f);
-                //}
             }
 
             yield return new WaitForSeconds(2 * Random.value);
@@ -187,7 +180,7 @@ public class UIEmployee : MonoBehaviour {
     // Double click to force back to desk,
     // depending on happiness.
     void OnDoubleClick() {
-        if (!atDesk && desk == null) {
+        if (state != State.AtDesk) {
             if (Random.value <= 0.5f * worker.happiness.value) {
                 GoToDesk();
             }

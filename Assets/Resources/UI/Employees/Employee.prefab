@@ -73,7 +73,7 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: a8032affc94154eb883a3431cf780b7a, type: 2}
-  m_SubsetIndices: 
+  m_SubsetIndices:
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94d5931a4c68b4ebfba3909ec6d0e532, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   HUDtarget: {fileID: 400000}
   workColor: {r: .87843138, g: 1, b: .984313726, a: 1}
   breakthroughColor: {r: 1, g: .898039222, b: .529411793, a: 1}
@@ -123,8 +123,6 @@ MonoBehaviour:
   laborPrefab: {fileID: 100010, guid: 056183343dc2b4528839bf8d45860758, type: 2}
   atDesk: 0
   desk:
-    occupied: 0
-    transform: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
 --- !u!195 &19500000
 NavMeshAgent:

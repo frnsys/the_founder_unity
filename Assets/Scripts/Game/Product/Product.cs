@@ -257,7 +257,7 @@ public class Product : HasStats {
         float revenue = 0;
         //Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         //Debug.Log(string.Format("Elapsed Time {0}", elapsedTime));
-        Debug.Log(string.Format("Time {0}", t));
+        //Debug.Log(string.Format("Time {0}", t));
         if (launched && !disabled && t <= 1f) {
             revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
             //Debug.Log(string.Format("Raw revenue: {0}", revenue));
