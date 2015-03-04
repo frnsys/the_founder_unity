@@ -50,6 +50,8 @@ public class UIGameEventNotification: UIEffectAlert {
             cofounderName = gm.playerCompany.founders[0].name;
         else
             cofounderName = "<testing cofounder>";
+
+        Show();
     }
 
     private string ProcessText(string text) {
