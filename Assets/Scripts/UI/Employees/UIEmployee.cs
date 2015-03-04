@@ -181,9 +181,27 @@ public class UIEmployee : MonoBehaviour {
     // depending on happiness.
     void OnDoubleClick() {
         if (state != State.AtDesk) {
+            StartCoroutine(Pulse(0.4f, 0.5f));
             if (Random.value <= 0.5f * worker.happiness.value) {
+                AudioManager.Instance.PlayEmployeeTouchedFX();
                 GoToDesk();
             }
+        }
+    }
+
+    private IEnumerator Pulse(float from, float to) {
+        Vector3 fromScale = new Vector3(from,from,from);
+        Vector3 toScale = new Vector3(to,to,to);
+        float step = 0.1f;
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
+        }
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            transform.localScale = Vector3.Lerp(toScale, fromScale, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
         }
     }
 }

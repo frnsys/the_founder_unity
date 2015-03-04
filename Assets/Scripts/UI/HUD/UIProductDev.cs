@@ -44,13 +44,11 @@ public class UIProductDev : MonoBehaviour {
     }
 
     public void Add(string feature, int value) {
-        audio.PlayOneShot(audioClips[Random.Range(0, audioClips.Length)]);
+        AudioManager.Instance.PlayLaborFX();
         AddFeature(feature, value);
         AddToCombo(feature, value);
     }
 
-    public AudioClip[] audioClips;
-    public AudioClip comboAudioClip;
     public void AddFeature(string feature, int value) {
         switch (feature) {
             case "Design":
@@ -84,7 +82,7 @@ public class UIProductDev : MonoBehaviour {
 
     private void ResolveCombo() {
         if (multiplier > 1f)
-            audio.PlayOneShot(comboAudioClip);
+            AudioManager.Instance.PlayComboFX();
 
         float value = (float)(featureValues.Average() * multiplier);
 
