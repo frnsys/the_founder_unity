@@ -207,10 +207,9 @@ public class Product : HasStats {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
 
-        // +1 because the minimum value is 1, not 0.
-        float A = design.value + 1;
-        float U = marketing.value + 1;
-        float P = engineering.value + 1;
+        float A = design.value;
+        float U = marketing.value;
+        float P = engineering.value;
 
         // Weights
         float a_w = recipe.design_W;

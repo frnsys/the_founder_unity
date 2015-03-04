@@ -192,7 +192,7 @@ public class UIEmployee : MonoBehaviour {
     private IEnumerator Pulse(float from, float to) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.1f;
+        float step = 0.15f;
 
         for (float f = 0f; f <= 1f + step; f += step) {
             transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
