@@ -16,12 +16,7 @@ public class UIBuffEffect : MonoBehaviour {
             label.color = buffColor;
         }
 
-        if (buff.type == BuffType.ADD) {
-            buffText += string.Format("{0:F2}", buff.value);
-        } else {
-            buffText += string.Format("{0:F2}x", buff.value);
-        }
-
+        buffText += string.Format("{0:F2}", buff.value);
         buffText += " to " + buff.name;
 
         if (target != null)

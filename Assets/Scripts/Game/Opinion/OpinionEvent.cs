@@ -13,12 +13,12 @@ public class OpinionEvent {
     public StatBuff publicity;
 
     public OpinionEvent() {
-        opinion   = new StatBuff("Opinion", 0, 0);
-        publicity = new StatBuff("Hype", 0, 0);
+        opinion   = new StatBuff("Opinion", 0);
+        publicity = new StatBuff("Hype", 0);
     }
     public OpinionEvent(float o, float p) {
-        opinion   = new StatBuff("Opinion", o, 0);
-        publicity = new StatBuff("Hype", p, 0);
+        opinion   = new StatBuff("Opinion", o);
+        publicity = new StatBuff("Hype", p);
     }
 
     // "Forget" the event, i.e. pull back its effect towards 0.
