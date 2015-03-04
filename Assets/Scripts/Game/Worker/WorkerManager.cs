@@ -19,11 +19,6 @@ public class WorkerManager : MonoBehaviour {
             return AllWorkers.Where(w => w.offMarketTime == 0 && !GameManager.Instance.playerCompany.workers.Contains(w));
         }
     }
-    public IEnumerable<Worker> AvailableWorkersForAICompany(AICompany c) {
-        // Off market time doesn't matter for AI companies.
-        // AI Companies have access to all workers.
-        return AllWorkers.Where(w => !c.workers.Contains(w));
-    }
 
     public Company EmployerForWorker(Worker w) {
         return GameManager.Instance.allCompanies.Where(c => c.workers.Contains(w)).SingleOrDefault();

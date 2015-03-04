@@ -211,19 +211,11 @@ public class AICompany : Company {
         if (workers.Count < sizeLimit) {
             List<Worker> candidates = new List<Worker>();
             foreach (AICompany c in all.Where(x => x != this)) {
-                foreach (Worker w in c.workers) {
-                    if (WorkerROI(w) > avgROI) {
-                        candidates.Add(w);
-                    }
-                }
+                candidates.AddRange(c.workers.Where(w => WorkerROI(w) > avgROI));
             }
-
-            // Also consider any worker in the job market.
-            foreach (Worker w in GameManager.Instance.workerManager.AvailableWorkersForAICompany(this)) {
-                if (WorkerROI(w) > avgROI) {
-                    candidates.Add(w);
-                }
-            }
+            candidates.AddRange(
+                GameManager.Instance.workerManager.AllWorkers.Where(w => !workers.Contains(w) && WorkerROI(w) > avgROI)
+            );
 
             // Rank the candidates and hire one.
             foreach (Worker w in candidates.OrderBy(w => WorkerROI(w))) {
