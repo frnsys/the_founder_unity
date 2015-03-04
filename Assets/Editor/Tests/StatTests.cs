@@ -32,25 +32,6 @@ namespace UnityTest
 		}
 
         [Test]
-        public void StatBuffConstructor_WithoutDefaults() {
-            buff = new StatBuff("test stat", 20f, 5, BuffType.MULTIPLY);
-            Assert.IsNotNull(buff);
-            Assert.AreEqual(buff.value, 20f);
-            Assert.AreEqual(buff.name, "test stat");
-            Assert.AreEqual(buff.duration, 5);
-            Assert.AreEqual(buff.type, BuffType.MULTIPLY);
-        }
-
-        [Test]
-        public void StatBuffConstructor_WithDefaults() {
-            buff = new StatBuff("test stat", 20f);
-            Assert.IsNotNull(buff);
-            Assert.AreEqual(buff.value, 20f);
-            Assert.AreEqual(buff.name, "test stat");
-            Assert.AreEqual(buff.duration, 0);
-        }
-
-        [Test]
         public void FinalValue_Withoutbuffs() {
             Assert.AreEqual(stat.value, statbasevalue);
         }
@@ -72,40 +53,6 @@ namespace UnityTest
             stat.ApplyBuff(buff);
             stat.ApplyBuff(buff2);
             Assert.AreEqual(stat.value, 40f);
-        }
-
-        [Test]
-        public void FinalValue_WithMULTIPLYingbuffs() {
-            float multiple = 2f;
-            buff = new StatBuff("test stat", multiple, 0, BuffType.MULTIPLY);
-            Assert.AreEqual(stat.value, statbasevalue);
-
-            stat.ApplyBuff(buff);
-            Assert.AreEqual(stat.value, statbasevalue * multiple);
-        }
-
-        [Test]
-        public void FinalValue_WithBuffOrderOfOperations() {
-            float multiple = 2f;
-            buff = new StatBuff("test stat", multiple, 0, BuffType.MULTIPLY);
-            StatBuff buff2 = new StatBuff("test stat", 20f, 0, BuffType.ADD);
-
-            // Adding the multiplication buff first,
-            // but we expect the addition one to be calculated first.
-            stat.ApplyBuff(buff);
-            stat.ApplyBuff(buff2);
-            Assert.AreEqual(stat.value, (20f + statbasevalue) * multiple);
-        }
-
-        [Test]
-        public void StatBuff_Temporary() {
-            buff = new StatBuff("test stat", 20f, 100);
-            stat.ApplyBuff(buff);
-            Assert.AreEqual(stat.value, 30f);
-            System.Threading.Thread.Sleep(50);
-            Assert.AreEqual(stat.value, 30f);
-            System.Threading.Thread.Sleep(60);
-            Assert.AreEqual(stat.value, statbasevalue);
         }
     }
 }
