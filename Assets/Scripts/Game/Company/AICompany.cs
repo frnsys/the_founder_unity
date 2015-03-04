@@ -120,38 +120,28 @@ public class AICompany : Company {
                 ShutdownProduct(activeProducts[i]);
         }
 
+        int design = Random.Range(0, designSkill) + designSkill/2;
+        int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
+        int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
+
         // AI companies basically exist to compete with the player.
         // Ignore products for which the company already has a matching product.
-        List<Product> candidates = new List<Product>();
         foreach (Product p in GameManager.Instance.playerCompany.activeProducts
-                .Where(p => FindMatchingProducts(p.productTypes).Count == 0)) {
-                candidates.Add(p);
+                .Where(p => MatchingProducts(p) == 0).OrderBy(p => ScoreProduct(p))) {
+            Debug.Log(name + " is starting a new competing product...");
+            StartNewProduct(p.productTypes, design, engineering, marketing);
+            return;
         }
-
-        // If we found some candidates,
-        if (candidates.Count > 0) {
-            // Rank the candidates and pick one.
-            foreach (Product p in candidates.OrderBy(p => ScoreProduct(p))) {
-                Debug.Log(name + " is starting a new competing product...");
-
-                int design = Random.Range(0, designSkill) + designSkill/2;
-                int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
-                int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
-                StartNewProduct(p.productTypes, design, engineering, marketing);
-                return;
-            }
 
         // If no candidates,
         // create a random specialty product.
-        } else {
-            // TO DO avoid creating duplicate products.
-            Debug.Log(name + " is starting a new product...");
+        // TO DO avoid creating duplicate products.
+        Debug.Log(name + " is starting a new product...");
+        StartNewProduct(RandomSpecialtyProduct(), design, engineering, marketing);
+    }
 
-            int design = Random.Range(0, designSkill) + designSkill/2;
-            int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
-            int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
-            StartNewProduct(RandomSpecialtyProduct(), design, engineering, marketing);
-        }
+    private int MatchingProducts(Product p) {
+        return activeProducts.Where(p_ => p_.comboID == p.comboID).Count();
     }
 
     private float ScoreProduct(Product p) {
@@ -196,13 +186,10 @@ public class AICompany : Company {
             avgROI = workers.Average(w => WorkerROI(w));
 
             // Review all hired workers (this should not include the founder(s)).
-            List<Worker> toFire = new List<Worker>();
-            for (int i = workers.Count - 1; i >= 0; i--) {
-                float ROI = WorkerROI(workers[i]);
-                if (ROI < avgROI * 0.8f) {
-                    Debug.Log(string.Format("{0} is firing {1}...", name, workers[i].name));
-                    FireWorker(workers[i]);
-                }
+            List<Worker> toFire = workers.Where(w => WorkerROI(w) < avgROI * 0.8f).ToList();
+            for (int i = toFire.Count - 1; i >= 0; i--) {
+                Debug.Log(string.Format("{0} is firing {1}...", name, workers[i].name));
+                FireWorker(toFire[i]);
             }
         }
 
