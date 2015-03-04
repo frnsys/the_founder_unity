@@ -276,7 +276,7 @@ public class GameManager : Singleton<GameManager> {
         get { return data.week; }
     }
     public int date {
-        get { return int.Parse(string.Format("{0}{1}{2}", year, numMonth, week)); }
+        get { return int.Parse(string.Format("{0}{1:00}{2}", year, numMonth, week)); }
     }
 
     public void Pause() {

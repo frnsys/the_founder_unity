@@ -24,13 +24,13 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
       promos: []
       recruitments: []
       companies: []
+      specialProjects: []
     cash: 0
     research:
       name: Research
@@ -55,12 +55,21 @@ MonoBehaviour:
     forgettingRate: 0
     spendingMultiplier: 0
     wageMultiplier: 0
+    taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 11400000, guid: 49092407a7071464bb729bad90a62bd1, type: 2}
+    specialEffect: 0
   actions: []
   conditions:
-  - value: 200182
+  - value: 2001082
     greater: 1
     type: 4

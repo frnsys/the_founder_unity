@@ -99,6 +99,10 @@ public class UIEmployee : MonoBehaviour {
         Debug.Log("GOING TO DESK!");
         desk = UIOfficeManager.Instance.RandomDesk();
         if (desk != null) {
+            Debug.Log("-----");
+            Debug.Log(transform);
+            Debug.Log(desk.transform);
+            Debug.Log("******");
             target = transform.parent.TransformDirection(desk.transform.position);
             desk.occupied = true;
         }

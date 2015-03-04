@@ -255,27 +255,27 @@ public class Product : HasStats {
 
         float t = timeSinceLaunch/longevity;
         float revenue = 0;
-        Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        Debug.Log(string.Format("Elapsed Time {0}", elapsedTime));
+        //Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        //Debug.Log(string.Format("Elapsed Time {0}", elapsedTime));
         Debug.Log(string.Format("Time {0}", t));
         if (launched && !disabled && t <= 1f) {
             revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
-            Debug.Log(string.Format("Raw revenue: {0}", revenue));
+            //Debug.Log(string.Format("Raw revenue: {0}", revenue));
 
             // Economy's impact.
             revenue *= GameManager.Instance.economyMultiplier;
-            Debug.Log(string.Format("After economy: {0}", revenue));
+            //Debug.Log(string.Format("After economy: {0}", revenue));
 
             // Consumer spending impact.
             revenue *= GameManager.Instance.spendingMultiplier;
-            Debug.Log(string.Format("After consumer spending: {0}", revenue));
+            //Debug.Log(string.Format("After consumer spending: {0}", revenue));
 
             // Public opinion's impact.
             revenue *= 1 + company.opinion.value/100f;
-            Debug.Log(string.Format("After opinion: {0}", revenue));
+            //Debug.Log(string.Format("After opinion: {0}", revenue));
 
             revenue *= marketShare;
-            Debug.Log(string.Format("After market share: {0}", revenue));
+            //Debug.Log(string.Format("After market share: {0}", revenue));
 
             if (techPenalty)
                 revenue *= 0.1f;

@@ -353,7 +353,7 @@ public class Company : HasStats {
 
     public void ApplyOpinionEvent(OpinionEvent oe) {
         opinion.ApplyBuff(oe.opinion);
-        publicity.ApplyBuff(oe.publicity);
+        publicity.baseValue += oe.publicity.value;
         opinionEvents.Add(oe);
     }
 
