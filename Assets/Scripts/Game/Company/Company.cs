@@ -267,9 +267,26 @@ public class Company : HasStats {
         if (developingProduct != null) {
             bool completed = developingProduct.Develop(1f, this);
             if (completed) {
+                UpdateProductSynergies();
                 developingProduct = null;
 
                 // The product's effects are applied by the GameManager.
+            }
+        }
+    }
+
+    private void UpdateProductSynergies() {
+        List<ProductRecipe> activeRecipes = activeProducts.Select(p => p.Recipe).ToList();
+        foreach (Product p in activeProducts) {
+            if (p.synergies.Length == 0) {
+                p.synergy = false;
+            } else {
+                for (int i=0; i<p.synergies.Length; i++) {
+                    if (!activeRecipes.Contains(p.synergies[i])) {
+                        p.synergy = false;
+                        break;
+                    }
+                }
             }
         }
     }
@@ -394,24 +411,10 @@ public class Company : HasStats {
     static public event System.Action<float, string> Paid;
     public void PayMonthly() {
         float toPay = 0;
-        float salaries = 0;
-        float rent = 0;
 
-        foreach (Worker worker in workers) {
-            salaries += worker.monthlyPay;
-        }
-        toPay += salaries;
-
-        foreach (Location loc in locations) {
-            rent += loc.cost;
-
-            // We have to add up location infrastructure cost in this way,
-            // so we incorporate the cost of the infrastructure for the location.
-            rent += loc.infrastructure.cost;
-        }
-        toPay += rent;
-
-        toPay += researchInvestment;
+        float salaries = workers.Sum(w => w.monthlyPay);
+        float rent = locations.Sum(l => l.cost + l.infrastructure.cost);
+        toPay += salaries + rent + researchInvestment;
 
         // Taxes
         float taxes = lastMonthRevenue * GameManager.Instance.taxRate;
@@ -423,7 +426,7 @@ public class Company : HasStats {
 
         cash.baseValue -= toPay;
 
-        // Reset month's costs with this month's costs.
+        // Add to quarter costs.
         quarterCosts += toPay;
 
         // Also reset month's revenues.

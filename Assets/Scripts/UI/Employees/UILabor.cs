@@ -40,7 +40,7 @@ public class UILabor : MonoBehaviour {
     }
 
     void Update() {
-        timer.value -= 0.008f;
+        timer.value -= 0.016f;
 
         if (timer.value <= 0 && !captured)
             StartCoroutine(Scale(1f, 0f, Destroy));
