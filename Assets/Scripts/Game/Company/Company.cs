@@ -267,9 +267,26 @@ public class Company : HasStats {
         if (developingProduct != null) {
             bool completed = developingProduct.Develop(1f, this);
             if (completed) {
+                UpdateProductSynergies();
                 developingProduct = null;
 
                 // The product's effects are applied by the GameManager.
+            }
+        }
+    }
+
+    private void UpdateProductSynergies() {
+        List<ProductRecipe> activeRecipes = activeProducts.Select(p => p.Recipe).ToList();
+        foreach (Product p in activeProducts) {
+            if (p.synergies.Length == 0) {
+                p.synergy = false;
+            } else {
+                for (int i=0; i<p.synergies.Length; i++) {
+                    if (!activeRecipes.Contains(p.synergies[i])) {
+                        p.synergy = false;
+                        break;
+                    }
+                }
             }
         }
     }

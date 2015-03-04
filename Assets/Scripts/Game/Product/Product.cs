@@ -95,6 +95,10 @@ public class Product : HasStats {
         get { return recipe; }
     }
 
+    public ProductRecipe[] synergies {
+        get { return recipe.synergies; }
+    }
+
     // This is identifies what combination of product types
     // the product is. This is meant for quicker comparisons
     // between products to see if they are of the same combo.
@@ -279,18 +283,6 @@ public class Product : HasStats {
             if (techPenalty)
                 revenue *= 0.1f;
 
-            synergy = true;
-            if (recipe.synergies.Length == 0) {
-                synergy = false;
-            } else {
-                List<ProductRecipe> activeRecipes = company.activeProducts.Select(p => p.recipe).ToList();
-                foreach (ProductRecipe r in recipe.synergies) {
-                    if (!activeRecipes.Contains(r)) {
-                        synergy = false;
-                        break;
-                    }
-                }
-            }
             if (synergy)
                 revenue *= 1.5f;
         }
