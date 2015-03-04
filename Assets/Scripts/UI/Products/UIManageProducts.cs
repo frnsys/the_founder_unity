@@ -36,7 +36,7 @@ public class UIManageProducts : UIFullScreenPager {
     }
 
     public void ShutdownProduct(GameObject obj) {
-        GameObject productItem = obj.transform.parent.gameObject;
+        GameObject productItem = obj.transform.parent.parent.gameObject;
         Product product = productItem.GetComponent<UIProduct>().product;
 
         Action yes = delegate() {

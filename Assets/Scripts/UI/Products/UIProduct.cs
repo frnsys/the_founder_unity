@@ -46,8 +46,7 @@ public class UIProduct : UIEffectItem {
             status.text = "Developing...";
             description.gameObject.SetActive(false);
             productObject.SetActive(false);
-        }
-        else {
+        } else {
             name.text = product_.name;
             progress.gameObject.SetActive(false);
             description.gameObject.SetActive(true);
