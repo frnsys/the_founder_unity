@@ -17,6 +17,8 @@ public class AudioManager : Singleton<AudioManager> {
         laborAudioClips = Resources.LoadAll<AudioClip>("Sounds/Labor/");
         employeeTouchClips = Resources.LoadAll<AudioClip>("Sounds/Employee/");
 
+        menuClip = Resources.Load<AudioClip>("Sounds/Music/Menu");
+
         UpdatePrefs();
     }
 
@@ -28,6 +30,7 @@ public class AudioManager : Singleton<AudioManager> {
     public AudioClip[] laborAudioClips;
     public AudioClip comboAudioClip;
     public AudioClip[] employeeTouchClips;
+    public AudioClip menuClip;
 
     public void PlayComboFX() {
         fx.PlayOneShot(comboAudioClip);
@@ -39,5 +42,10 @@ public class AudioManager : Singleton<AudioManager> {
 
     public void PlayEmployeeTouchedFX() {
         fx.PlayOneShot(employeeTouchClips[Random.Range(0, employeeTouchClips.Length)]);
+    }
+
+    public void PlayMenuMusic() {
+        music.clip = menuClip;
+        music.Play();
     }
 }
