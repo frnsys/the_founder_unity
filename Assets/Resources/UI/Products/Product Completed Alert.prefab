@@ -454,7 +454,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -50.4953537, z: 0}
+  m_LocalPosition: {x: 0, y: -100.495354, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -479,7 +479,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -163.495361, z: 0}
+  m_LocalPosition: {x: 0, y: -151.495361, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400018}
@@ -600,7 +600,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
   m_LocalRotation: {x: 0, y: .707106829, z: .707106829, w: 0}
-  m_LocalPosition: {x: 0, y: 75, z: 200}
+  m_LocalPosition: {x: 0, y: 75, z: -200}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 400018}
@@ -726,7 +726,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -37.4953537, z: 0}
+  m_LocalPosition: {x: 0, y: -87.4953613, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children:
   - {fileID: 400046}
@@ -798,7 +798,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 539, y: 958, z: 0}
+  m_Size: {x: 540, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -1169,7 +1169,7 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 400012}
     relative: 0
-    absolute: -150
+    absolute: -200
   updateAnchors: 1
   mColor: {r: .213235319, g: .211667418, b: .211667418, a: 1}
   mPivot: 1
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 153
+  mHeight: 165
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -1522,8 +1522,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 0}
   mPivot: 4
-  mWidth: 539
-  mHeight: 958
+  mWidth: 540
+  mHeight: 960
   mDepth: -1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
