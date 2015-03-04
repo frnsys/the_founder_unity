@@ -233,6 +233,11 @@ public class Company : HasStats {
         products.Add(product);
         developingProduct = product;
 
+        // Apply relevant effects to the product
+        foreach (EffectSet es in activeEffects) {
+            es.Apply(developingProduct);
+        }
+
         if (BeganProduct != null)
             BeganProduct(product, this);
     }
@@ -262,11 +267,6 @@ public class Company : HasStats {
         if (developingProduct != null) {
             bool completed = developingProduct.Develop(1f, this);
             if (completed) {
-                // Apply relevant effects to the product
-                foreach (EffectSet es in activeEffects) {
-                    es.Apply(developingProduct);
-                }
-
                 developingProduct = null;
 
                 // The product's effects are applied by the GameManager.
