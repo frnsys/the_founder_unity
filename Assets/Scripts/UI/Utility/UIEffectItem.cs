@@ -18,6 +18,7 @@ public class UIEffectItem : MonoBehaviour {
         RenderUnlockEffects(es);
         RenderBuffEffects(es);
         RenderProductEffects(es);
+        RenderSpecialEffects(es);
         effectGrid.Reposition();
     }
 
@@ -118,9 +119,20 @@ public class UIEffectItem : MonoBehaviour {
         }
     }
 
+    private void RenderSpecialEffects(EffectSet es) {
+        if (es.specialEffect != EffectSet.Special.None) {
+            RenderSpecialEffect(es.specialEffect);
+        }
+    }
+
     private void RenderUnlockEffect(string name) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
         effectObj.GetComponent<UIUnlockEffect>().Set(name);
+    }
+
+    private void RenderSpecialEffect(EffectSet.Special effect) {
+        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
+        effectObj.GetComponent<UIUnlockEffect>().SetSpecial(effect);
     }
 
     private void RenderBuffEffect(StatBuff buff, string target) {

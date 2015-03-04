@@ -20,6 +20,7 @@ public class UIEffectAlert : UIAlert {
         RenderUnlockEffects(es);
         RenderBuffEffects(es);
         RenderProductEffects(es);
+        RenderSpecialEffects(es);
     }
 
     public void AdjustEffectsHeight() {
@@ -116,9 +117,20 @@ public class UIEffectAlert : UIAlert {
         }
     }
 
+    private void RenderSpecialEffects(EffectSet es) {
+        if (es.specialEffect != EffectSet.Special.None) {
+            RenderSpecialEffect(es.specialEffect);
+        }
+    }
+
     private void RenderUnlockEffect(string name) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
         effectObj.GetComponent<UIUnlockEffect>().Set(name);
+    }
+
+    private void RenderSpecialEffect(EffectSet.Special effect) {
+        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
+        effectObj.GetComponent<UIUnlockEffect>().SetSpecial(effect);
     }
 
     private void RenderBuffEffect(StatBuff buff, string target) {
