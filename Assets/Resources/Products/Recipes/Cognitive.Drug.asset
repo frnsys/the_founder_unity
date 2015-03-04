@@ -79,7 +79,7 @@ MonoBehaviour:
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
-    spendingMultiplier: .100000001
+    spendingMultiplier: 0
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
@@ -93,7 +93,11 @@ MonoBehaviour:
     productEffects: []
     workerEffects:
     - name: Happiness
-      value: 10
+      value: 5
+      duration: 0
+      type: 0
+    - name: Productivity
+      value: 5
       duration: 0
       type: 0
     aiCompany: {fileID: 0}

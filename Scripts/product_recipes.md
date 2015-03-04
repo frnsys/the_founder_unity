@@ -176,7 +176,6 @@ description: People want to buy stuff, but can't because they don't have money.
 m_Name: Credit.Implant
 names: LoanNeural
 description: Keep detailed track of risky loaners with these neural loan monitoring
-    - spending rate + 0.05
     - economic stability + 0.05
     - synergies: credit.ecommerce
 

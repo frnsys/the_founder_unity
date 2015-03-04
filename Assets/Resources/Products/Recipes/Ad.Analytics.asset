@@ -89,7 +89,14 @@ MonoBehaviour:
       baseCosts:
         keys: 00000000010000000200000003000000
         values: e8030000e8030000e8030000e8030000
-    productEffects: []
+    productEffects:
+    - productTypes: []
+      verticals: []
+      buff:
+        name: Marketing
+        value: 5
+        duration: 0
+        type: 0
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0

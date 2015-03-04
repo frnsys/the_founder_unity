@@ -78,8 +78,8 @@ MonoBehaviour:
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
-    forgettingRate: 0
-    spendingMultiplier: .100000001
+    forgettingRate: .0500000007
+    spendingMultiplier: 0
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
@@ -93,10 +93,9 @@ MonoBehaviour:
     productEffects: []
     workerEffects:
     - name: Happiness
-      value: 10
+      value: 5
       duration: 0
       type: 0
     aiCompany: {fileID: 0}
     specialEffect: 0
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 31668b731849f4f1db579a3d8afffdde, type: 2}
+  requiredTechnologies: []

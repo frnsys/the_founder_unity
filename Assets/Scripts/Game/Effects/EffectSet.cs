@@ -104,6 +104,7 @@ public class EffectSet {
         wageMultiplier *= mult;
         taxRate *= mult;
         economicStability *= mult;
+        cash *= mult;
 
         foreach (ProductEffect pe in productEffects) {
             pe.buff.value *= mult;
