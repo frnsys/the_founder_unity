@@ -53,48 +53,50 @@ public class MarketManager {
         }
     }
 
-    // sketch
-    public static void CalculateMarketShares(List<Company> companies) {
+    public static void CalculateMarketShares(Company playerCompany, List<AICompany> aiCompanies) {
         // Calculate the aggregate market share for every active product.
         // The market share is the market size the product has captured.
         // For instance, if a product is in the Asia and Europe markets,
         // with total sizes of 2.0 and 1.1 respectively, then it might have
         // a market share of 2.2 out of the total 3.1.
 
+        // Keep track of combo totals.
+        // This is reset for each market.
+        Dictionary<string, float> comboTotals = new Dictionary<string, float>();
+
         // Calculate the market scores
-        // and reset the market shares.
-        foreach (Company c in companies) {
-            foreach (Product p in c.activeProducts) {
-                p.marketScore = c.publicity.value + c.opinion.value + p.marketing.value + p.design.value/2 + p.engineering.value/3;
-                p.marketShare = 0;
-            }
+        // and reset the market shares
+        // for the player company only (AI companies's don't matter in the end)
+        foreach (Product p in playerCompany.activeProducts) {
+            p.marketScore = MarketScore(p, playerCompany);
+            p.marketShare = 0;
+
+            // Initialize the combo totals.
+            comboTotals[p.comboID] = p.marketScore;
         }
+
+        // Get only AI active products which match the player company's active products.
+        List<Product> aiProducts = aiCompanies.SelectMany(c => c.activeProducts).Where(p => comboTotals.ContainsKey(p.comboID)).ToList();
 
         foreach (MarketManager.Market m in MarketManager.Markets) {
             float marketSize = SizeForMarket(m);
 
-            // Keep track of combo totals.
-            Dictionary<string, float> comboTotals = new Dictionary<string, float>();
-
-            // Keep track of products by combo.
-            Dictionary<string, List<Product>> comboProducts = new Dictionary<string, List<Product>>();
-
-            foreach (Company c in companies.Where(x => x.markets.Contains(m))) {
-                foreach (Product p in c.activeProducts) {
-                    if (!comboTotals.ContainsKey(p.comboID)) {
-                        comboTotals[p.comboID] = 0;
-                        comboProducts[p.comboID] = new List<Product>();
-                    }
-                    comboTotals[p.comboID] += p.marketScore;
-                    comboProducts[p.comboID].Add(p);
-                }
+            // We assume the AI companies are already in every market.
+            foreach (Product p in aiProducts) {
+                comboTotals[p.comboID] += p.marketScore;
             }
 
-            foreach(KeyValuePair<string, List<Product>> i in comboProducts) {
-                foreach (Product p in i.Value) {
-                    p.marketShare += p.marketScore/comboTotals[i.Key] * marketSize;
-                }
+            // Again, we only care about market shares for the player company.
+            foreach (Product p in playerCompany.activeProducts) {
+                p.marketShare += p.marketScore/comboTotals[p.comboID] * marketSize;
+
+                // Reset the combo totals.
+                comboTotals[p.comboID] = p.marketScore;
             }
         }
+    }
+
+    private static float MarketScore(Product p, Company c) {
+        return c.publicity.value + c.opinion.value + p.design.value + p.marketing.value + p.engineering.value;
     }
 }

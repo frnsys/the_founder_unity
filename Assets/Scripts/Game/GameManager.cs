@@ -436,7 +436,7 @@ public class GameManager : Singleton<GameManager> {
             // a more "natural" feel.
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
 
-            MarketManager.CalculateMarketShares(allCompanies);
+            MarketManager.CalculateMarketShares(playerCompany, activeAICompanies);
 
             playerCompany.HarvestProducts(elapsedTime);
             playerCompany.HarvestCompanies();
