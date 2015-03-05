@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Office
-  m_Shader: {fileID: 10, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 10708, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords:
   - _EMISSIVE_ONOFF_ON
   m_CustomRenderQueue: -1
@@ -119,7 +119,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .588235259, g: .588235259, b: .588235259, a: 1}
+        second: {r: 1, g: .551470578, b: .551470578, a: 1}
       data:
         first:
           name: _SpecColor
