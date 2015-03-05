@@ -39,6 +39,8 @@ public class UIEmployee : MonoBehaviour {
 
         agent = GetComponent<NavMeshAgent>();
         target = RandomTarget();
+        desk = UIOfficeManager.Instance.RandomDesk();
+        desk.occupied = true;
     }
 
     [System.Serializable]
@@ -55,7 +57,7 @@ public class UIEmployee : MonoBehaviour {
             agent.SetDestination(target);
 
             // May randomly go to desk.
-            if (state == State.Wandering && company.developing && Random.value < 0.25f * worker.productivity.value) {
+            if (state == State.Wandering && company.developing && Random.value < 0.05f * worker.productivity.value) {
                 GoToDesk();
             }
 
@@ -83,8 +85,16 @@ public class UIEmployee : MonoBehaviour {
     }
 
     void OnEnable() {
-        // On enable, reset the target.
+        // On enable, reset the target and desk.
         target = RandomTarget();
+        desk = UIOfficeManager.Instance.RandomDesk();
+        desk.occupied = true;
+    }
+
+    void OnDisable() {
+        // Relinquish the deks.
+        desk.occupied = false;
+        desk = null;
     }
 
     void OnDestroy() {
@@ -101,18 +111,13 @@ public class UIEmployee : MonoBehaviour {
     }
 
     public void GoToDesk() {
-        desk = UIOfficeManager.Instance.RandomDesk();
-        if (desk != null) {
-            state = State.GoingToDesk;
-            target = transform.parent.TransformDirection(desk.transform.position);
-            desk.occupied = true;
-        }
+        Debug.Log("GOING TO DESK!");
+        state = State.GoingToDesk;
+        target = transform.parent.TransformDirection(desk.transform.position);
     }
     public void LeaveDesk() {
         Debug.Log("LEAVING DESK!");
         state = State.Wandering;
-        desk.occupied = false;
-        desk = null;
         target = RandomTarget();
     }
 

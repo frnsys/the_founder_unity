@@ -23,19 +23,24 @@ MonoBehaviour:
   offMarketTime: 0
   recentPlayerOffers: 0
   happiness:
-    baseValue: 0
+    baseValue: 10
+    acc: 0
     _buffs: []
   productivity:
     baseValue: 10
+    acc: 0
     _buffs: []
   charisma:
     baseValue: 4
+    acc: 0
     _buffs: []
   creativity:
     baseValue: 2
+    acc: 0
     _buffs: []
   cleverness:
     baseValue: 1
+    acc: 0
     _buffs: []
   bonuses:
     unlocks:
@@ -51,20 +56,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -73,6 +72,13 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+      baseCosts:
+        keys: 00000000010000000200000003000000
+        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

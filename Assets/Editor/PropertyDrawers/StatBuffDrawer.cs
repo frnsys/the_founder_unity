@@ -43,12 +43,6 @@ class StatBuffDrawer : PropertyDrawer {
         propertyRect.x += propertyRect.width;
         EditorGUI.PropertyField(propertyRect, property.FindPropertyRelative("value"), GUIContent.none);
 
-        propertyRect.x += propertyRect.width;
-        EditorGUI.PropertyField(propertyRect, property.FindPropertyRelative("type"), GUIContent.none);
-
-        propertyRect.x += propertyRect.width;
-        EditorGUI.PropertyField(propertyRect, property.FindPropertyRelative("duration"), GUIContent.none);
-
         // Set indent back to what it was
         EditorGUI.indentLevel = indent;
         EditorGUI.EndProperty();

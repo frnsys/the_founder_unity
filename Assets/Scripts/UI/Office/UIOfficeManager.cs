@@ -205,7 +205,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         if (unoccupiedDesks.Count == 0)
             return null;
 
-        return unoccupiedDesks[Random.Range(0, unoccupiedDesks.Count -1)];
+        return unoccupiedDesks[Random.Range(0, unoccupiedDesks.Count)];
     }
 
     public void Load(GameData d) {
