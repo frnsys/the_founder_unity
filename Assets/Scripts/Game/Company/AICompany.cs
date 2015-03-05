@@ -132,12 +132,6 @@ public class AICompany : Company {
             StartNewProduct(p.productTypes, design, engineering, marketing);
             return;
         }
-
-        // If no candidates,
-        // create a random specialty product.
-        // TO DO avoid creating duplicate products.
-        Debug.Log(name + " is starting a new product...");
-        StartNewProduct(RandomSpecialtyProduct(), design, engineering, marketing);
     }
 
     private int MatchingProducts(Product p) {
@@ -157,23 +151,6 @@ public class AICompany : Company {
 
         return score;
     }
-
-    // Generate a random product combo based on this company's specialties. If no specialties are available for the aspect, a random unlocked one is chosen.
-    private List<ProductType> RandomSpecialtyProduct() {
-        List<ProductType> pts = new List<ProductType>();
-
-        // TO DO: it's possible that the company creates a product of two of the same product type, it probably shouldn't be able to do this.
-        while (pts.Count < 2) {
-            if (specialtyProductTypes.Count > 0) {
-                pts.Add(specialtyProductTypes[Random.Range(0, specialtyProductTypes.Count)]);
-            } else {
-                pts.Add(unlocked.productTypes[Random.Range(0, unlocked.productTypes.Count)]);
-            }
-        }
-
-        return pts;
-    }
-
 
     // ===============================================
     // Worker Management =============================
