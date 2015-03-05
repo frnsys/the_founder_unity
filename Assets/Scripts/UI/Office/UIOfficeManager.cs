@@ -24,6 +24,12 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public GameObject employeePrefab;
     public GameObject employeeHUDPrefab;
 
+    public Color[] employeePathColors;
+
+    public Color RandomColor() {
+        return employeePathColors[Random.Range(0, employeePathColors.Length)];
+    }
+
     void Awake() {
         DontDestroyOnLoad(gameObject);
         StartCoroutine(DayNightCycle());

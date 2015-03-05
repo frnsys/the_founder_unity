@@ -29617,6 +29617,12 @@ MonoBehaviour:
   employeeGroup: {fileID: 264071009}
   employeePrefab: {fileID: 100002, guid: 398c90e07e0974daaad4aa4dc8657648, type: 2}
   employeeHUDPrefab: {fileID: 100000, guid: 6a78d8fca06504127bf3a9cee42278f1, type: 2}
+  employeePathColors:
+  - {r: 1, g: .898039222, b: .529411793, a: 1}
+  - {r: 1, g: .492647052, b: .492647052, a: 1}
+  - {r: .0705882311, g: .621879816, b: .949019611, a: 1}
+  - {r: .417026132, g: .328287214, b: .970588207, a: 1}
+  - {r: .470588237, g: .87843138, b: .619607866, a: 1}
   dayColor: {r: .658682942, g: .963235319, b: .923938215, a: 1}
   nightColor: {r: 0, g: .521568656, b: .980392158, a: 1}
 --- !u!1 &2089191075

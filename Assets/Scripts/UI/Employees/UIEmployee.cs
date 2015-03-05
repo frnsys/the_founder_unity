@@ -3,8 +3,6 @@ using System.Collections;
 
 public class UIEmployee : MonoBehaviour {
     public Transform HUDtarget;
-    public Color workColor;
-    public Color breakthroughColor;
     public Color unhappyColor;
     public Color happyColor;
 
@@ -28,6 +26,7 @@ public class UIEmployee : MonoBehaviour {
     private State state = State.Wandering;
 
     private NavMeshAgent agent;
+    private LineRenderer line;
     private Company company;
 
     [HideInInspector]
@@ -38,9 +37,12 @@ public class UIEmployee : MonoBehaviour {
         StartCoroutine(Working());
 
         agent = GetComponent<NavMeshAgent>();
+        line = GetComponent<LineRenderer>();
         target = RandomTarget();
         desk = UIOfficeManager.Instance.RandomDesk();
         desk.occupied = true;
+
+        line.material.color = UIOfficeManager.Instance.RandomColor();
     }
 
     [System.Serializable]
@@ -54,7 +56,9 @@ public class UIEmployee : MonoBehaviour {
     void Update() {
         // Move to target if not at desk and not idling.
         if (state == State.GoingToDesk || state == State.Wandering) {
+            line.SetPosition(0, transform.position);
             agent.SetDestination(target);
+            DrawPath(agent.path);
 
             // May randomly go to desk.
             if (state == State.Wandering && company.developing && Random.value < 0.05f * worker.productivity.value) {
@@ -207,6 +211,21 @@ public class UIEmployee : MonoBehaviour {
         for (float f = 0f; f <= 1f + step; f += step) {
             transform.localScale = Vector3.Lerp(toScale, fromScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
+        }
+    }
+
+    // Draw path to employee's target.
+    private void DrawPath(NavMeshPath path) {
+        // If the path has 1 or no corners, there is no need.
+        if (path.corners.Length < 2)
+            return;
+
+        // Set the array of positions to the amount of corners.
+        line.SetVertexCount(path.corners.Length);
+
+        // Go through each corner and set that to the line renderer's position.
+        for(int i=0; i<path.corners.Length; i++){
+            line.SetPosition(i, path.corners[i]);
         }
     }
 }
