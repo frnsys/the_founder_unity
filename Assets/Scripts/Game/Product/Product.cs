@@ -273,6 +273,9 @@ public class Product : HasStats {
             revenue *= GameManager.Instance.spendingMultiplier;
             //Debug.Log(string.Format("After consumer spending: {0}", revenue));
 
+            // Hype impact.
+            revneue *= 1 + company.publicity.value/100f;
+
             // Public opinion's impact.
             revenue *= 1 + company.opinion.value/100f;
             //Debug.Log(string.Format("After opinion: {0}", revenue));
