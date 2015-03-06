@@ -227,7 +227,7 @@ public class Company : HasStats {
     }
 
     public bool HasProduct(ProductRecipe r ) {
-        return products.FirstOrDefault(p => p.Recipe == r) == null;
+        return products.FirstOrDefault(p => p.Recipe == r) != null;
     }
 
     static public event System.Action<Product, Company> BeganProduct;

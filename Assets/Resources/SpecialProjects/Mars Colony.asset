@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7546f3fc1bd4967ba26f04e11c3f31, type: 3}
   m_Name: Mars Colony
   m_EditorClassIdentifier: 
-  description: 
+  description: Establish the first off-planet colony and develop a brand new market.
   cost: 7e+09
   requiredProgress: 80000
   effects:
@@ -29,20 +29,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -55,9 +49,6 @@ MonoBehaviour:
     infrastructureCostMultiplier:
       keys: 00000000010000000200000003000000
       values: 00000000000000000000000000000000
-      baseCosts:
-        keys: 00000000010000000200000003000000
-        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
@@ -65,9 +56,9 @@ MonoBehaviour:
   requiredInfrastructure:
     keys: 00000000010000000200000003000000
     values: 0a000000000000000a0000000a000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
+  requiredProducts:
+  - {fileID: 11400000, guid: b8d7a9f631b684924a0a8806a6bffdc7, type: 2}
+  - {fileID: 11400000, guid: b1d79dada09124d5fa357982c4b4fa6a, type: 2}
   mesh: {fileID: 0}
   texture: {fileID: 0}
   _progress: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UISpecialProject : UIEffectItem {
     private SpecialProject _specialProject;
@@ -42,14 +43,16 @@ public class UISpecialProject : UIEffectItem {
         AdjustEffectsHeight();
     }
 
+    private List<UIWidget> prereqWidgets = new List<UIWidget>();
     void RenderRequiredProducts() {
         foreach (ProductRecipe r in _specialProject.requiredProducts) {
             GameObject pObj = NGUITools.AddChild(requiredProductsGrid.gameObject, requiredProductPrefab);
             if (company.HasProduct(r)) {
-                pObj.GetComponent<UILabel>().text = string.Format("[00ff00]{0}[-]", r.genericName);
+                pObj.transform.Find("Label").GetComponent<UILabel>().text = string.Format("[c][56FB92]{0}[-][/c]", r.genericName);
             } else {
-                pObj.GetComponent<UILabel>().text = string.Format("[ff0000]{0}[-]", r.genericName);
+                pObj.transform.Find("Label").GetComponent<UILabel>().text = string.Format("{0}", r.genericName);
             }
+            prereqWidgets.Add(pObj.GetComponent<UIWidget>());
         }
         requiredProductsGrid.Reposition();
     }
@@ -57,7 +60,11 @@ public class UISpecialProject : UIEffectItem {
     void SetupNewProject() {
         costLabel.gameObject.SetActive(true);
         costLabel.text = string.Format("{0:C0}", _specialProject.cost);
-        buttonLabel.text = "Develop";
+        buttonLabel.text = "Begin Development";
+
+        if (!_specialProject.isAvailable(company)) {
+            button.isEnabled = false;
+        }
     }
 
     void SetupCompletedProject() {
@@ -74,6 +81,12 @@ public class UISpecialProject : UIEffectItem {
     void Update() {
         // Rotate the product, fancy.
         projectObj.transform.Rotate(0,0,-50*Time.deltaTime);
+        UpdateEffectWidths();
+
+        int w = requiredProductsGrid.GetComponent<UIWidget>().width;
+        foreach (UIWidget widget in prereqWidgets) {
+            widget.width = w;
+        }
     }
 
     public void BeginProject(GameObject obj) {
