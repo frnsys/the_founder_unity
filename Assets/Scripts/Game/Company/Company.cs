@@ -412,8 +412,9 @@ public class Company : HasStats {
     public void PayMonthly() {
         float toPay = 0;
 
+        // Skip the first location's rent since it is our HQ and considered free.
         float salaries = workers.Sum(w => w.monthlyPay);
-        float rent = locations.Sum(l => l.cost) + infrastructure.cost;
+        float rent = locations.Skip(1).Sum(l => l.cost) + infrastructure.cost;
         toPay += salaries + rent + researchInvestment;
 
         // Taxes
