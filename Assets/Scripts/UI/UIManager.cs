@@ -205,6 +205,10 @@ public class UIManager : Singleton<UIManager> {
         NGUITools.DestroyImmediate(currentPopup);
         currentPopup = null;
     }
+    public void CloseAndOpenPopup(GameObject popupPrefab) {
+        ClosePopup();
+        OpenPopup(popupPrefab);
+    }
 
     // Create a simple alert.
     public UIAlert Alert(string text) {
