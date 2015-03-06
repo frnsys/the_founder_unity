@@ -14,6 +14,10 @@ public class Location : SharedResource<Location> {
     public EffectSet effects = new EffectSet();
 
     public static Location Load(string name) {
-        return Resources.Load<Location>("Locations/" + name) as Location;
+        return Resources.Load<Location>("Locations/" + name);
+    }
+
+    public static Location[] LoadAll() {
+        return Resources.LoadAll<Location>("Locations");
     }
 }

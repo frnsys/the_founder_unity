@@ -78,6 +78,9 @@ public class MarketManager {
         }
     }
 
+    public static Dictionary<Market, float> marketLocations;
+    public static float totalMarketSize = 0;
+
     public static void CalculateMarketShares(Company playerCompany, List<AICompany> aiCompanies) {
         // Calculate the aggregate market share for every active product.
         // The market share is the market size the product has captured.
@@ -85,8 +88,23 @@ public class MarketManager {
         // with total sizes of 2.0 and 1.1 respectively, then it might have
         // a market share of 2.2 out of the total 3.1.
 
+        // Count how many locations are in each market.
+        if (marketLocations == null) {
+            marketLocations = new Dictionary<Market, float>();
+            totalMarketSize = 0;
+
+            foreach (Market m in Markets) {
+                marketLocations[m] = 0;
+                totalMarketSize += SizeForMarket(m);
+            }
+
+            foreach (Location l in Location.LoadAll()) {
+                marketLocations[l.market] += 1;
+            }
+
+        }
+
         // Keep track of combo totals.
-        // This is reset for each market.
         Dictionary<string, float> comboTotals = new Dictionary<string, float>();
 
         // Calculate the market scores
@@ -100,24 +118,26 @@ public class MarketManager {
             comboTotals[p.comboID] = p.marketScore;
         }
 
+
         // Get only AI active products which match the player company's active products.
-        List<Product> aiProducts = aiCompanies.SelectMany(c => c.activeProducts).Where(p => comboTotals.ContainsKey(p.comboID)).ToList();
+        // We assume the AI companies are already in every market.
+        foreach (Product p in aiCompanies.SelectMany(c => c.activeProducts).Where(p => comboTotals.ContainsKey(p.comboID))) {
+            comboTotals[p.comboID] += p.marketScore;
+        }
 
-        foreach (MarketManager.Market m in MarketManager.Markets) {
+        foreach (Market m in Markets) {
             float marketSize = SizeForMarket(m);
-
-            // We assume the AI companies are already in every market.
-            foreach (Product p in aiProducts) {
-                comboTotals[p.comboID] += p.marketScore;
-            }
+            float marketShare = playerCompany.LocationsForMarket(m)/marketLocations[m];
 
             // Again, we only care about market shares for the player company.
             foreach (Product p in playerCompany.activeProducts) {
-                p.marketShare += p.marketScore/comboTotals[p.comboID] * marketSize;
-
-                // Reset the combo totals.
-                comboTotals[p.comboID] = p.marketScore;
+                p.marketShare += p.marketScore/comboTotals[p.comboID] * marketShare * marketSize;
             }
+        }
+
+        // Normalize the market shares.
+        foreach (Product p in playerCompany.activeProducts) {
+            p.marketShare /= totalMarketSize;
         }
     }
 

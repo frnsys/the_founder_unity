@@ -161,6 +161,9 @@ public class Company : HasStats {
         get { return (locations.Count - 1) * workers.Count + companies.Count * 1000; }
     }
     public List<MarketManager.Market> markets;
+    public int LocationsForMarket(MarketManager.Market m) {
+        return locations.Where(l => l.market == m).Count();
+    }
 
     public bool HasLocation(Location loc) {
         return locations.Contains(loc);
