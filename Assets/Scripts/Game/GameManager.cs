@@ -406,10 +406,6 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.DevelopProduct();
             playerCompany.DevelopRecruitment();
 
-            foreach (AICompany aic in activeAICompanies) {
-                aic.DevelopProduct();
-            }
-
             // Add a bit of randomness to give things
             // a more "natural" feel.
             yield return new WaitForSeconds(cycleTime * Random.Range(0.4f, 1.4f));
@@ -439,10 +435,6 @@ public class GameManager : Singleton<GameManager> {
 
             playerCompany.HarvestProducts(elapsedTime);
             playerCompany.HarvestCompanies();
-
-            foreach (AICompany aic in activeAICompanies) {
-                aic.HarvestProducts(elapsedTime);
-            }
 
             yield return new WaitForSeconds(elapsedTime);
         }

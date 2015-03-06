@@ -227,7 +227,7 @@ public class Company : HasStats {
     }
 
     static public event System.Action<Product, Company> BeganProduct;
-    public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
+    public Product StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();
         product.Init(pts, design, marketing, engineering, this);
         products.Add(product);
@@ -240,6 +240,8 @@ public class Company : HasStats {
 
         if (BeganProduct != null)
             BeganProduct(product, this);
+
+        return product;
     }
 
     public void AddPointsToDevelopingProduct(string feature, float value) {

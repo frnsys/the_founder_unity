@@ -196,7 +196,6 @@ public class Product : HasStats {
 
             if (_progress >= requiredProgress) {
                 Launch();
-
                 // Trigger completed event.
                 if (Completed != null) {
                     Completed(this, company);
