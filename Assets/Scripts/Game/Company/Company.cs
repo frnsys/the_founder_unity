@@ -169,6 +169,12 @@ public class Company : HasStats {
         return locations.Contains(loc);
     }
 
+    public void SetHQ(Location l) {
+        _locations.Add(l);
+        markets.Add(l.market);
+        l.effects.Apply(this);
+    }
+
     public bool ExpandToLocation(Location l) {
         if (Pay(l.cost)) {
             _locations.Add(l);

@@ -33,6 +33,7 @@ public class UIHUD : MonoBehaviour {
     private List<Product> displayedProducts = new List<Product>();
     private List<GameObject> productObjects = new List<GameObject>();
     private List<UILabel> revenueLabels = new List<UILabel>();
+    private List<UILabel> marketLabels = new List<UILabel>();
 
     IEnumerator UpdateHUD() {
         while (true) {
@@ -41,12 +42,14 @@ public class UIHUD : MonoBehaviour {
                 if (displayedProducts[i].retired) {
                     NGUITools.Destroy(productObjects[i]);
                     revenueLabels.RemoveAt(i);
+                    marketLabels.RemoveAt(i);
                     productObjects.RemoveAt(i);
                     displayedProducts.RemoveAt(i);
 
-                // Update revenue label otherwise.
+                // Update revenue & market share label otherwise.
                 } else {
                     revenueLabels[i].text = string.Format("{0:C0}", displayedProducts[i].revenueEarned);
+                    marketLabels[i].text = string.Format("{0:0}%", Mathf.Ceil(displayedProducts[i].marketShare));
                 }
             }
 
@@ -62,9 +65,13 @@ public class UIHUD : MonoBehaviour {
                     UILabel revenueLabel = productItem.transform.Find("Revenue").GetComponent<UILabel>();
                     revenueLabel.text = string.Format("{0:C0}", p.revenueEarned);
 
+                    UILabel marketLabel = productItem.transform.Find("Market Share").GetComponent<UILabel>();
+                    marketLabel.text = string.Format("{0:0}%", Mathf.Ceil(p.marketShare));
+
                     displayedProducts.Add(p);
                     productObjects.Add(productItem);
                     revenueLabels.Add(revenueLabel);
+                    marketLabels.Add(marketLabel);;
                 }
             }
 

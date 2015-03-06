@@ -14,23 +14,13 @@ MonoBehaviour:
   description: 
   rotation: {x: 0, y: 0, z: 0}
   cost: 1e+06
-  market: 0
+  market: 2
   capacity:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
-  infrastructure:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
@@ -42,20 +32,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -64,6 +48,11 @@ MonoBehaviour:
     wageMultiplier: 0
     taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+    specialEffect: 0
