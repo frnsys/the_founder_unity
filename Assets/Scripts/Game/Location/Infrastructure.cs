@@ -12,17 +12,6 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         Lab
     }
 
-    // Set the cost per type of infrastructure.
-    [System.Serializable]
-    public class Cost : SerializableDictionary<Infrastructure.Type, int> {
-        public Cost() {
-            // Initialize each infrastructure type.
-            foreach (Type t in Enum.GetValues(typeof(Type))) {
-                Add(t, 1000);
-            }
-        }
-    }
-
     public static Type[] Types {
         get { return Enum.GetValues(typeof(Type)) as Type[]; }
     }
@@ -41,16 +30,33 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         }
     }
 
-    public Cost baseCosts = new Cost();
+    public static string Plural(Type t) {
+        switch (t) {
+            case Type.Datacenter:
+                return "datacenters";
+            case Type.Factory:
+                return "factories";
+            case Type.Studio:
+                return "studios";
+            case Type.Lab:
+                return "labs";
+        }
+        return "infrastructures";
+    }
+
+    // Each piece of infrastructure costs 1000.
+    public static int baseCost {
+        get { return 1000; }
+    }
 
     // Returns the cost for this set of infrastructure.
     public int cost {
         get {
-            int cost = 0;
+            int totalCost = 0;
             foreach(KeyValuePair<Type, int> item in this) {
-                cost += (int)(item.Value * baseCosts[item.Key] * (GameManager.Instance.infrastructureCostMultiplier[item.Key]/100f));
+                totalCost += (int)(item.Value * baseCost * (GameManager.Instance.infrastructureCostMultiplier[item.Key]/100f));
             }
-            return cost;
+            return totalCost;
         }
     }
 

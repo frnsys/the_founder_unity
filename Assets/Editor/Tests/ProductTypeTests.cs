@@ -61,7 +61,7 @@ namespace UnityTest
             i[Infrastructure.Type.Factory] = 1;
 
             gd.company.cash.baseValue = i.cost;
-            gd.company.BuyInfrastructure(i, startLoc);
+            gd.company.BuyInfrastructure(i);
 
             Assert.IsTrue(pt.isAvailable(gd.company));
         }

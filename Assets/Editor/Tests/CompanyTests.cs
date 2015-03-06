@@ -205,7 +205,7 @@ namespace UnityTest
 
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 1;
-            c.BuyInfrastructure(i, startLoc);
+            c.BuyInfrastructure(i);
 
             Location loc = ScriptableObject.CreateInstance<Location>();
             loc.cost = 100;
@@ -245,15 +245,15 @@ namespace UnityTest
 
             // Can't buy the infrastructure, not enough cash.
             c.cash.baseValue = 0;
-            Assert.IsFalse(c.BuyInfrastructure(i, newLoc));
+            Assert.IsFalse(c.BuyInfrastructure(i));
 
             // Can't buy the infrastructure, not enough capacity.
             c.cash.baseValue = i.cost;
-            Assert.IsFalse(c.BuyInfrastructure(i, newLoc));
+            Assert.IsFalse(c.BuyInfrastructure(i));
 
             // Can buy the infrastructure: enough cash + capacity.
             i[Infrastructure.Type.Datacenter] = 1;
-            Assert.IsTrue(c.BuyInfrastructure(i, newLoc));
+            Assert.IsTrue(c.BuyInfrastructure(i));
 
             // The available capacity should now be less than the total capacity.
             Assert.IsFalse(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
@@ -296,7 +296,7 @@ namespace UnityTest
             // Adding a location should have increased the capacity by the amount the location gives.
             Assert.AreEqual(c.infrastructureCapacity[Infrastructure.Type.Datacenter], oldDatacenterCapacity + 10);
 
-            c.DestroyInfrastructure(i, newLoc);
+            c.DestroyInfrastructure(i);
 
             // Destroying the infrastructure we had should have cleared up all capacity.
             // No infrastructure should be available now.
@@ -322,7 +322,7 @@ namespace UnityTest
             Infrastructure i = new Infrastructure();
             i[Infrastructure.Type.Datacenter] = 1;
             i[Infrastructure.Type.Factory] = 1;
-            c.BuyInfrastructure(i, startLoc);
+            c.BuyInfrastructure(i);
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];

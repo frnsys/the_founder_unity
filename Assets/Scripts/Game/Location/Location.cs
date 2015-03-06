@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Location : TemplateResource<Location> {
+public class Location : SharedResource<Location> {
     public string description;
 
     // Rotation on the earth.
@@ -11,19 +11,9 @@ public class Location : TemplateResource<Location> {
     public MarketManager.Market market = MarketManager.Market.NorthAmerica;
 
     public Infrastructure capacity = new Infrastructure();
-    public Infrastructure infrastructure = new Infrastructure();
     public EffectSet effects = new EffectSet();
 
-    public Infrastructure availableInfrastructureCapacity {
-        get { return capacity - infrastructure; }
-    }
-
-    public bool HasCapacityFor(Infrastructure i) {
-        return availableInfrastructureCapacity >= i;
-    }
-
     public static Location Load(string name) {
-        Location loc = Resources.Load<Location>("Locations/" + name) as Location;
-        return loc.Clone();
+        return Resources.Load<Location>("Locations/" + name) as Location;
     }
 }
