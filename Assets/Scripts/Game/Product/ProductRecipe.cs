@@ -72,4 +72,11 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     public static List<ProductRecipe> LoadAll() {
         return new List<ProductRecipe>(Resources.LoadAll<ProductRecipe>("Products/Recipes"));
     }
+
+    // A generic name just based on the product types.
+    public string genericName {
+        get {
+            return string.Join(" + ", productTypes.Select(pt => pt.name).ToArray());
+        }
+    }
 }

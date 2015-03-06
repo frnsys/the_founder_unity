@@ -24,10 +24,7 @@ internal class SpecialProjectInspector : Editor {
         p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
         p.texture = (Texture)EditorGUILayout.ObjectField("Texture", p.texture, typeof(Texture), false);
 
-        EditorGUILayout.LabelField("Required Infrastructure");
-        foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
-            p.requiredInfrastructure[t] = EditorGUILayout.IntField(t.ToString(), p.requiredInfrastructure[t]);
-        }
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("requiredProducts"), true);
 
         EditorGUILayout.LabelField("Effects");
         if (p.effects == null)
