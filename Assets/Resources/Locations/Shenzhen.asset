@@ -12,51 +12,47 @@ MonoBehaviour:
   m_Name: Shenzhen
   m_EditorClassIdentifier: 
   description: All the big hitters go here for low-cost manufacturing.
+  rotation: {x: -104.900002, y: 22.6200008, z: 0}
   cost: 1e+06
   market: 2
   capacity:
     keys: 00000000010000000200000003000000
     values: 000000000a0000000000000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000c8000000e8030000e8030000
-  infrastructure:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
-    baseCosts:
-      keys: 00000000010000000200000003000000
-      values: e8030000e8030000e8030000e8030000
   effects:
     unlocks:
       productTypes: []
-      workers: []
-      items: []
       perks: []
-      stores: 
       locations: []
       verticals: []
       promos: []
+      recruitments: []
+      companies: []
+      specialProjects: []
     cash: 0
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000fcffffff0000000000000000
     productEffects: []
     workerEffects: []
-  rotation: {x: -104.900002, y: 22.6200008, z: 0}
+    aiCompany: {fileID: 0}
+    specialEffect: 0

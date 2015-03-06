@@ -53,6 +53,31 @@ public class MarketManager {
         }
     }
 
+    public static string NameForMarket(Market m) {
+        switch (m) {
+            case Market.NorthAmerica:
+                return "North America";
+            case Market.SouthAmerica:
+                return "South America";
+            case Market.Asia:
+                return "Asia";
+            case Market.Europe:
+                return "Europe";
+            case Market.Africa:
+                return "Africa";
+            case Market.Australia:
+                return "Australia";
+            case Market.Antarctica:
+                return "Antractica";
+            case Market.ExtraTerra:
+                return "Space Colony";
+            case Market.Alien:
+                return "Extraterrestrial";
+            default:
+                return "Global";
+        }
+    }
+
     public static void CalculateMarketShares(Company playerCompany, List<AICompany> aiCompanies) {
         // Calculate the aggregate market share for every active product.
         // The market share is the market size the product has captured.

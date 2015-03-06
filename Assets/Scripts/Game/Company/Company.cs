@@ -34,6 +34,7 @@ public class Company : HasStats {
         baseSizeLimit = 5;
         perks = new List<Perk>();
         office = Office.Type.Apartment;
+        infrastructure = new Infrastructure();
 
         products = new List<Product>();
         founders = new List<Founder>();
@@ -162,12 +163,11 @@ public class Company : HasStats {
     public List<MarketManager.Market> markets;
 
     public bool HasLocation(Location loc) {
-        return Location.Find(loc, locations) != null;
+        return locations.Contains(loc);
     }
 
     public bool ExpandToLocation(Location l) {
         if (Pay(l.cost)) {
-            l = l.Clone();
             _locations.Add(l);
 
             // The location's market region is now available.
@@ -413,7 +413,7 @@ public class Company : HasStats {
         float toPay = 0;
 
         float salaries = workers.Sum(w => w.monthlyPay);
-        float rent = locations.Sum(l => l.cost + l.infrastructure.cost);
+        float rent = locations.Sum(l => l.cost) + infrastructure.cost;
         toPay += salaries + rent + researchInvestment;
 
         // Taxes
@@ -527,14 +527,7 @@ public class Company : HasStats {
     // Infrastructure Management =====================
     // ===============================================
 
-    public Infrastructure infrastructure {
-        get {
-            IEnumerable<Infrastructure> locationInfra = locations.Select(i => i.infrastructure);
-            if (locationInfra.Count() > 0)
-                return locationInfra.Aggregate((x,y) => x + y);
-            return new Infrastructure();
-        }
-    }
+    public Infrastructure infrastructure;
 
     // Infrastructure which is available for new products.
     public Infrastructure availableInfrastructure {
@@ -567,19 +560,17 @@ public class Company : HasStats {
         get { return infrastructureCapacity - infrastructure; }
     }
 
-    public bool BuyInfrastructure(Infrastructure i, Location loc) {
-        loc = Location.Find(loc, locations);
-        if (loc.HasCapacityFor(i) && Pay(i.cost)) {
-            loc.infrastructure += i;
+    public bool BuyInfrastructure(Infrastructure i) {
+        if (HasCapacityFor(i) && Pay(i.cost)) {
+            infrastructure += i;
             UpdateProductStatuses();
             return true;
         }
         return false;
     }
 
-    public void DestroyInfrastructure(Infrastructure i, Location loc) {
-        loc = Location.Find(loc, locations);
-        loc.infrastructure -= i;
+    public void DestroyInfrastructure(Infrastructure i) {
+        infrastructure -= i;
         UpdateProductStatuses();
     }
 

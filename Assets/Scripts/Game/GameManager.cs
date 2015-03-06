@@ -178,9 +178,8 @@ public class GameManager : Singleton<GameManager> {
     public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
         data.company.verticals = new List<Vertical> { vertical };
 
-        Location loc = location.Clone();
-        loc.cost = 0;
-        data.company.ExpandToLocation(loc);
+        data.company.cash.baseValue += location.cost;
+        data.company.ExpandToLocation(location);
         data.unlocked.locations = new List<Location> { location };
 
         data.company.founders.Add(cofounder);

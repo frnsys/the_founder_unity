@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UIEffectItem : MonoBehaviour {
     public UIGrid effectGrid;
+    public List<UIWidget> effectWidgets = new List<UIWidget>();
 
     public GameObject buffEffectPrefab;
     public GameObject unlockEffectPrefab;
@@ -77,7 +79,7 @@ public class UIEffectItem : MonoBehaviour {
 
         foreach (Infrastructure.Type t in Infrastructure.Types) {
             if (es.infrastructureCostMultiplier[t] != 0) {
-                RenderBuffEffect(new StatBuff(t.ToString(), es.infrastructureCostMultiplier[t]/100f), null);
+                RenderBuffEffect(new StatBuff(string.Format("{0} costs", t), es.infrastructureCostMultiplier[t]/100f), null);
             }
         }
     }
@@ -116,6 +118,7 @@ public class UIEffectItem : MonoBehaviour {
         foreach (ProductEffect pe in es.productEffects) {
             GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
             effectObj.GetComponent<UIProductEffect>().Set(pe);
+            effectWidgets.Add(effectObj.GetComponent<UIWidget>());
         }
     }
 
@@ -128,22 +131,32 @@ public class UIEffectItem : MonoBehaviour {
     private void RenderUnlockEffect(string name) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
         effectObj.GetComponent<UIUnlockEffect>().Set(name);
+        effectWidgets.Add(effectObj.GetComponent<UIWidget>());
     }
 
     private void RenderSpecialEffect(EffectSet.Special effect) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
         effectObj.GetComponent<UIUnlockEffect>().SetSpecial(effect);
+        effectWidgets.Add(effectObj.GetComponent<UIWidget>());
     }
 
     private void RenderBuffEffect(StatBuff buff, string target) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
         effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
+        effectWidgets.Add(effectObj.GetComponent<UIWidget>());
     }
 
     public void Extend(int amount) {
         gameObject.GetComponent<UIWidget>().height += amount;
     }
 
+    // Call this in the update loop to keep effects at full width.
+    protected void UpdateEffectWidths() {
+        int w = effectGrid.GetComponent<UIWidget>().width;
+        foreach (UIWidget widget in effectWidgets) {
+            widget.width = w;
+        }
+    }
 }
 
 

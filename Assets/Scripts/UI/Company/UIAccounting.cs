@@ -17,15 +17,8 @@ public class UIAccounting : MonoBehaviour {
         }
         salaries.text = string.Format("{0:C0} per month in salaries", monthlySalaries);
 
-        float monthlyRent = 0;
-        float monthlyInf = 0;
-        foreach (Location loc in company.locations) {
-            monthlyRent += loc.cost;
-
-            // We have to add up location infrastructure cost in this way,
-            // so we incorporate the cost of the infrastructure for the location.
-            monthlyInf += loc.infrastructure.cost;
-        }
+        float monthlyRent = company.locations.Sum(l => l.cost);
+        float monthlyInf = company.infrastructure.cost;
         rent.text = string.Format("{0:C0} per month in rent", monthlyRent);
         inf.text = string.Format("{0:C0} per month in infrastructure costs", monthlyInf);
 

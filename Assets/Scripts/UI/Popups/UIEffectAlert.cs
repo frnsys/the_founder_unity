@@ -105,7 +105,7 @@ public class UIEffectAlert : UIAlert {
 
         foreach (Infrastructure.Type t in Infrastructure.Types) {
             if (es.infrastructureCostMultiplier[t] != 0) {
-                RenderBuffEffect(new StatBuff(t.ToString(), es.infrastructureCostMultiplier[t]/100f), null);
+                RenderBuffEffect(new StatBuff(string.Format("{0} costs", t), es.infrastructureCostMultiplier[t]/100f), null);
             }
         }
     }

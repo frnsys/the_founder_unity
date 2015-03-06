@@ -7,7 +7,7 @@ public class UIInfrastructureItem : MonoBehaviour {
 
     public GameObject displayObject;
     public UILabel costLabel;
-    public UILabel usedAndCapacityLabel;
+    public UILabel amountLabel;
     public UIButton buyButton;
     public UIButton desButton;
 
