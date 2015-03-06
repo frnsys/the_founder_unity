@@ -10,6 +10,7 @@ public class SpecialProject : TemplateResource<SpecialProject> {
     public float requiredProgress;
     public EffectSet effects = new EffectSet();
     public Infrastructure requiredInfrastructure;
+    public ProductRecipe[] requiredProducts;
 
     public Mesh mesh;
     public Texture texture;
@@ -37,7 +38,10 @@ public class SpecialProject : TemplateResource<SpecialProject> {
 
     public bool isAvailable(Company company) {
         // Check that the required infrastructure is available.
-        return company.cash.value >= cost && company.availableInfrastructure >= requiredInfrastructure;
+        if (!(company.cash.value >= cost && company.availableInfrastructure >= requiredInfrastructure))
+            return false;
+
+        return requiredProducts.Length == company.products.Where(p => requiredProducts.Contains(p.Recipe)).Distinct().Count();
     }
 }
 

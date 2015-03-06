@@ -29,6 +29,8 @@ internal class SpecialProjectInspector : Editor {
             p.requiredInfrastructure[t] = EditorGUILayout.IntField(t.ToString(), p.requiredInfrastructure[t]);
         }
 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("requiredProducts"), true);
+
         EditorGUILayout.LabelField("Effects");
         if (p.effects == null)
             p.effects = new EffectSet();

@@ -226,6 +226,10 @@ public class Company : HasStats {
         }
     }
 
+    public bool HasProduct(ProductRecipe r ) {
+        return products.FirstOrDefault(p => p.Recipe == r) == null;
+    }
+
     static public event System.Action<Product, Company> BeganProduct;
     public void StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
         Product product = ScriptableObject.CreateInstance<Product>();

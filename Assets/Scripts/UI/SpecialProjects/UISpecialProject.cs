@@ -29,13 +29,29 @@ public class UISpecialProject : UIEffectItem {
     public UILabel buttonLabel;
     public GameObject projectObj;
 
+    public UIGrid requiredProductsGrid;
+    public GameObject requiredProductPrefab;
+
     void DisplayProject() {
         nameLabel.text = _specialProject.name;
         descLabel.text = _specialProject.description;
         projectObj.GetComponent<MeshFilter>().mesh = _specialProject.mesh;
 
+        RenderRequiredProducts();
         RenderEffects(_specialProject.effects);
         AdjustEffectsHeight();
+    }
+
+    void RenderRequiredProducts() {
+        foreach (ProductRecipe r in _specialProject.requiredProducts) {
+            GameObject pObj = NGUITools.AddChild(requiredProductsGrid.gameObject, requiredProductPrefab);
+            if (company.HasProduct(r)) {
+                pObj.GetComponent<UILabel>().text = string.Format("[00ff00]{0}[-]", r.genericName);
+            } else {
+                pObj.GetComponent<UILabel>().text = string.Format("[ff0000]{0}[-]", r.genericName);
+            }
+        }
+        requiredProductsGrid.Reposition();
     }
 
     void SetupNewProject() {
