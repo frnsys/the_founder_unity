@@ -24,7 +24,7 @@ public class Worker : HasStats {
     public GameObject avatar;
 
     // Each worker has their own style!
-    public Texture texture;
+    public Material material;
 
     // Later on, there are robotic workers.
     public bool robot = false;
@@ -65,7 +65,7 @@ public class Worker : HasStats {
                    charisma.baseValue,
                    creativity.baseValue,
                    cleverness.baseValue);
-            w.texture = texture;
+            w.material = material;
             w.salary = salary;
             w.bio = bio;
             w.description = description;

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Ronny Fosnough
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
+  robot: 0
+  salary: 0
+  bio: Ronny Fosnough is easy to talk to but reminds me of Eeyore. Ronny Fosnough
+    works hard but is absolutely brilliant. Ronny Fosnough is not very imaginative.
+  description: 
+  title: Software Engineer
+  baseMinSalary: 513000
+  offMarketTime: 0
+  recentPlayerOffers: 0
+  happiness:
+    baseValue: 1
+    acc: 0
+    _buffs: []
+  productivity:
+    baseValue: 8
+    acc: 0
+    _buffs: []
+  charisma:
+    baseValue: 5
+    acc: 0
+    _buffs: []
+  creativity:
+    baseValue: 1
+    acc: 0
+    _buffs: []
+  cleverness:
+    baseValue: 14
+    acc: 0
+    _buffs: []

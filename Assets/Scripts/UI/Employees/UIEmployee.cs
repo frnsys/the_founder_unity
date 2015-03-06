@@ -42,7 +42,7 @@ public class UIEmployee : MonoBehaviour {
         desk = UIOfficeManager.Instance.RandomDesk();
         desk.occupied = true;
 
-        line.material.color = UIOfficeManager.Instance.RandomColor();
+        line.material = UIOfficeManager.Instance.RandomColor();
     }
 
     [System.Serializable]

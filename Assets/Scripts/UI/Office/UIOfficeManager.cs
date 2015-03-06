@@ -24,9 +24,9 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public GameObject employeePrefab;
     public GameObject employeeHUDPrefab;
 
-    public Color[] employeePathColors;
+    public Material[] employeePathColors;
 
-    public Color RandomColor() {
+    public Material RandomColor() {
         return employeePathColors[Random.Range(0, employeePathColors.Length)];
     }
 
@@ -103,8 +103,8 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         UIEmployee uie = obj.GetComponent<UIEmployee>();
         uie.worker = w;
         w.avatar = obj;
-        if (w.texture != null)
-            uie.GetComponent<MeshRenderer>().material.mainTexture = w.texture;
+        if (w.material != null)
+            uie.GetComponent<MeshRenderer>().material = w.material;
 
         GameObject hud = NGUITools.AddChild(employeeHUDs, employeeHUDPrefab);
 

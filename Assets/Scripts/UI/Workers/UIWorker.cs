@@ -17,8 +17,8 @@ public class UIWorker : MonoBehaviour {
             worker_ = value;
             name.text = worker_.name;
 
-            if (worker_.texture != null)
-                employee.material.mainTexture = worker_.texture;
+            if (worker_.material != null)
+                employee.material = worker_.material;
 
             if (worker_.description != "")
                 bio.text = string.Format("{0} {1}", worker_.description, worker_.bio);
