@@ -10,12 +10,14 @@ public class UITechnology : MonoBehaviour {
             label.text = technology_.name;
             description.text = technology_.description;
             image.mainTexture = technology_.icon;
+            cost.text = string.Format("Costs {0} research", technology_.cost);
 
             // TO DO Show effects?
         }
     }
 
     public UILabel label;
+    public UILabel cost;
     public UILabel description;
     public UITexture image;
 

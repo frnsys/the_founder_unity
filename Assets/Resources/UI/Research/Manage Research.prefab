@@ -794,14 +794,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1280
+  mWidth: 540
   mHeight: 680
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.88235295
-  childSize: {x: 1280, y: 680}
+  aspectRatio: .79411763
+  childSize: {x: 540, y: 680}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 280}
 --- !u!114 &11400022
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 1280
+  itemSize: 540
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -882,12 +882,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: 0
   dragEffect: 1
-  restrictWithinPanel: 1
+  restrictWithinPanel: 0
   disableDragIfFits: 0
   smoothDragStart: 1
   iOSDragEmulation: 1
   scrollWheelFactor: .25
-  momentumAmount: 0
+  momentumAmount: 50
   horizontalScrollBar: {fileID: 0}
   verticalScrollBar: {fileID: 0}
   showScrollBars: 1

@@ -12,10 +12,7 @@ public class UIManageResearch : UIFullScreenPager {
 
     private void LoadTechs() {
         ClearGrid();
-        Debug.Log("loading techies");
-        Debug.Log(Technology.LoadAll().Count);
         foreach (Technology t in Technology.LoadAll().Where(t => t.isAvailable(GameManager.Instance.playerCompany))) {
-            Debug.Log(t);
             GameObject techItem = NGUITools.AddChild(grid.gameObject, techPrefab);
             techItem.GetComponent<UITechnology>().technology = t;
         }

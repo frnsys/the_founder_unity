@@ -1770,7 +1770,7 @@ MonoBehaviour:
   smoothDragStart: 1
   iOSDragEmulation: 1
   scrollWheelFactor: .25
-  momentumAmount: 35
+  momentumAmount: 50
   horizontalScrollBar: {fileID: 0}
   verticalScrollBar: {fileID: 0}
   showScrollBars: 1
@@ -1859,11 +1859,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400078}
     relative: 0
-    absolute: 60
+    absolute: 80
   topAnchor:
     target: {fileID: 400078}
     relative: 1
-    absolute: 0
+    absolute: -60
   updateAnchors: 1
   showInPanelTool: 1
   generateNormals: 0
@@ -1876,8 +1876,8 @@ MonoBehaviour:
   startingRenderQueue: 3002
   mClipTexture: {fileID: 0}
   mAlpha: 1
-  mClipping: 3
-  mClipRange: {x: 0, y: -450.000061, z: 535, w: 900}
+  mClipping: 4
+  mClipRange: {x: 0, y: -470.000061, z: 535, w: 820}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 10
   mSortingOrder: 0
