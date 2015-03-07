@@ -38,4 +38,9 @@ public class UIManageCommunications : UIFullScreenPager {
             progress.value = company.developingPromo.progress;
         }
     }
+
+    public GameObject historyPrefab;
+    public void OpenHistory() {
+        UIManager.Instance.CloseAndOpenPopup(historyPrefab);
+    }
 }
