@@ -231,6 +231,8 @@ public class Company : HasStats {
 
     public float totalMarketShare {
         get {
+            if (activeProducts.Count == 0)
+                return 0;
             return activeProducts.Sum(p => p.marketShare)/(activeProducts.Count * 100f);
         }
     }
