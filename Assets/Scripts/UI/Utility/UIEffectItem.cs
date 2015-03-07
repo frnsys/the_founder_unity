@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class UIEffectItem : MonoBehaviour {
     public UIGrid effectGrid;
-    public List<UIWidget> effectWidgets = new List<UIWidget>();
+    private List<UIWidget> effectWidgets = new List<UIWidget>();
 
     public GameObject buffEffectPrefab;
     public GameObject unlockEffectPrefab;

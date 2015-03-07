@@ -72,11 +72,11 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 400008}
     relative: 0
-    absolute: 10
+    absolute: 0
   rightAnchor:
     target: {fileID: 400008}
     relative: 1
-    absolute: -10
+    absolute: 0
   bottomAnchor:
     target: {fileID: 400008}
     relative: 0
@@ -115,6 +115,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0

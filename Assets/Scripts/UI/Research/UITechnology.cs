@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class UITechnology : MonoBehaviour {
+public class UITechnology : UIEffectItem {
     private Technology technology_;
     public Technology technology {
         get { return technology_; }
@@ -13,6 +13,8 @@ public class UITechnology : MonoBehaviour {
             cost.text = string.Format("Costs {0} research", technology_.cost);
 
             // TO DO Show effects?
+            RenderEffects(technology_.effects);
+            AdjustEffectsHeight();
         }
     }
 
@@ -27,6 +29,10 @@ public class UITechnology : MonoBehaviour {
                 UIManager.Instance.Alert("You don't have enough research for this technology.");
             }
         }, null);
+    }
+
+    void Update() {
+        UpdateEffectWidths();
     }
 }
 
