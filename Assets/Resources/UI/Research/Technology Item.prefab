@@ -274,7 +274,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 36, z: 0}
+  m_Size: {x: 140, y: 36, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -558,6 +558,8 @@ MonoBehaviour:
   label: {fileID: 11400002}
   cost: {fileID: 11400000}
   description: {fileID: 11400018}
+  buttonLabel: {fileID: 11400014}
+  button: {fileID: 11400012}
   image: {fileID: 11400006}
 --- !u!114 &11400012
 MonoBehaviour:
@@ -667,11 +669,11 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: -50
+    absolute: -70
   rightAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: 50
+    absolute: 70
   bottomAnchor:
     target: {fileID: 400008}
     relative: 0
@@ -683,13 +685,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .41911763, b: .41911763, a: 1}
   mPivot: 4
-  mWidth: 100
+  mWidth: 140
   mHeight: 36
   mDepth: 255
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.77777767
+  aspectRatio: 3.88888884
   mType: 0
   mFillDirection: 4
   mFillAmount: 1

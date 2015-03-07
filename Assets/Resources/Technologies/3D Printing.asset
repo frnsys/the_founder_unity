@@ -11,10 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
   m_Name: 3D Printing
   m_EditorClassIdentifier: 
-  description: Finally, consumer-ready 3D printing is available. Now anyone can make
-    plastic trinkets!
+  description: Print endless plastic trinkets.
   icon: {fileID: 2800000, guid: 23b0020cfee984f7ab1dcbced6861c81, type: 3}
-  requiredResearch: 1000
+  cost: 1000
   effects:
     unlocks:
       productTypes: []
@@ -29,20 +28,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -55,9 +48,6 @@ MonoBehaviour:
     infrastructureCostMultiplier:
       keys: 00000000010000000200000003000000
       values: 00000000feffffff0000000000000000
-      baseCosts:
-        keys: 00000000010000000200000003000000
-        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
