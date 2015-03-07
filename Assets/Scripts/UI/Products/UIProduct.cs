@@ -61,10 +61,6 @@ public class UIProduct : UIEffectItem {
         if (product_.retired) {
             shutdown.isEnabled = false;
             shutdown.transform.Find("Label").GetComponent<UILabel>().text = "Discontinued";
-
-            foreach (Transform t in effectGrid.transform) {
-                t.gameObject.GetComponent<UIBuffEffect>().Disable();
-            }
         }
         state = product_.state;
     }

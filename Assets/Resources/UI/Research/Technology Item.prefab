@@ -304,7 +304,7 @@ MonoBehaviour:
     relative: 0
     absolute: 68
   updateAnchors: 1
-  mColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
+  mColor: {r: 1, g: .898039222, b: .529411793, a: 1}
   mPivot: 1
   mWidth: 280
   mHeight: 20
@@ -813,7 +813,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 140
+  aspectRatio: 7
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1

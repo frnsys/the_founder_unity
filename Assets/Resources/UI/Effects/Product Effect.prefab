@@ -70,9 +70,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 11400010}
-  debuffColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
-  buffColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
-  disabledColor: {r: .75, g: .75, b: .75, a: 1}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,7 +135,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .426106721, g: .234645322, b: .911764681, a: 1}
+  mColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
   mPivot: 4
   mWidth: 340
   mHeight: 100
