@@ -12,18 +12,17 @@ MonoBehaviour:
   m_Name: Ad.Social Network
   m_EditorClassIdentifier: 
   names: PalHub, FaceSpace
-  description: A social networking site - people can keep up with friends, meet new
-    people, and be people!
+  description: A social networking site - where people can be people!
   synergies:
   - {fileID: 11400000, guid: 995c322ff4de1455193cc30b0ea473f6, type: 2}
   design_W: 2
   marketing_W: 1
   engineering_W: 2
-  design_I: 250
-  marketing_I: 200
-  engineering_I: 250
+  design_I: 50
+  marketing_I: 30
+  engineering_I: 50
   maxLongevity: 1000
-  maxRevenue: 10000
+  maxRevenue: 600000
   revenueModel:
     serializedVersion: 2
     m_Curve:
@@ -62,20 +61,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -88,17 +81,12 @@ MonoBehaviour:
     infrastructureCostMultiplier:
       keys: 00000000010000000200000003000000
       values: 00000000000000000000000000000000
-      baseCosts:
-        keys: 00000000010000000200000003000000
-        values: e8030000e8030000e8030000e8030000
     productEffects:
     - productTypes: []
       verticals: []
       buff:
         name: Marketing
         value: 5
-        duration: 0
-        type: 0
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0

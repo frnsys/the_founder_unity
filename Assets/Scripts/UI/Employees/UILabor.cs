@@ -49,19 +49,8 @@ public class UILabor : MonoBehaviour {
     void OnClick() {
         if (!captured) {
             captured = true;
-            if (stat_.name == "Breakthrough") {
-                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Design", stat_.value);
-                UIManager.Instance.AddPointsToDevelopingProduct("Design", stat_.value);
-
-                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Engineering", stat_.value);
-                UIManager.Instance.AddPointsToDevelopingProduct("Engineering", stat_.value);
-
-                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct("Marketing", stat_.value);
-                UIManager.Instance.AddPointsToDevelopingProduct("Marketing", stat_.value);
-            } else {
-                GameManager.Instance.playerCompany.AddPointsToDevelopingProduct(stat_.name, stat_.value);
-                UIManager.Instance.AddPointsToDevelopingProduct(stat_.name, stat_.value);
-            }
+            GameManager.Instance.playerCompany.AddPointsToDevelopingProduct(stat_.name, stat_.value);
+            UIManager.Instance.AddPointsToDevelopingProduct(stat_.name, stat_.value);
             StartCoroutine(Pulse(gameObject, 1f, 1.4f));
         }
     }

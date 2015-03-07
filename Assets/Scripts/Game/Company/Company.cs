@@ -260,7 +260,13 @@ public class Company : HasStats {
     }
 
     public void AddPointsToDevelopingProduct(string feature, float value) {
-        developingProduct.StatByName(feature).baseValue += value;
+        if (feature == "Breakthrough") {
+            developingProduct.StatByName("Design").baseValue += value;
+            developingProduct.StatByName("Engineering").baseValue += value;
+            developingProduct.StatByName("Marketing").baseValue += value;
+        } else {
+            developingProduct.StatByName(feature).baseValue += value;
+        }
     }
 
     public void HarvestProducts(float elapsedTime) {

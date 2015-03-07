@@ -52,21 +52,35 @@ public class UIProductDev : MonoBehaviour {
     public void AddFeature(string feature, int value) {
         switch (feature) {
             case "Design":
-                design += value;
-                SetLabel(designLabel, design);
-                StartCoroutine(Pulse(designLabel.gameObject, 1f, 1.6f));
+                AddDesign(value);
                 break;
             case "Engineering":
-                engineering += value;
-                SetLabel(engineeringLabel, engineering);
-                StartCoroutine(Pulse(engineeringLabel.gameObject, 1f, 1.6f));
+                AddEngineering(value);
                 break;
             case "Marketing":
-                marketing += value;
-                SetLabel(marketingLabel, marketing);
-                StartCoroutine(Pulse(marketingLabel.gameObject, 1f, 1.6f));
+                AddMarketing(value);
+                break;
+            case "Breakthrough":
+                AddDesign(value);
+                AddEngineering(value);
+                AddMarketing(value);
                 break;
         }
+    }
+    private void AddDesign(int value) {
+        design += value;
+        SetLabel(designLabel, design);
+        StartCoroutine(Pulse(designLabel.gameObject, 1f, 1.6f));
+    }
+    private void AddEngineering(int value) {
+        engineering += value;
+        SetLabel(engineeringLabel, engineering);
+        StartCoroutine(Pulse(engineeringLabel.gameObject, 1f, 1.6f));
+    }
+    private void AddMarketing(int value) {
+        marketing += value;
+        SetLabel(marketingLabel, marketing);
+        StartCoroutine(Pulse(marketingLabel.gameObject, 1f, 1.6f));
     }
 
     private void ClearCombo() {
