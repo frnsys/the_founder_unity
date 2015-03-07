@@ -34,9 +34,6 @@ namespace UnityTest
             gm.Load(data);
             wm = gm.workerManager;
 
-            Worker researchCzar = CreateWorker("RESEARCHER", 1000);
-            Worker opinionCzar  = CreateWorker("OPINIONER",  2000);
-
             // Initialize new game stuff.
             data.company  = new Company("TESTINGCORP").Init();
                 data.company.founders.Add(CreateFounder("STEVE", 100));
@@ -45,8 +42,6 @@ namespace UnityTest
                 data.company.quarterRevenue      = 12489;
                 data.company.quarterCosts        = 184787;
                 data.company.cash.baseValue      = 100000000;
-                data.company.ResearchCzar        = researchCzar;
-                data.company.OpinionCzar         = opinionCzar;
                 data.company.opinion.baseValue   = 200;
                 data.company.publicity.baseValue = 300;
                 data.company.office              = Office.Type.Office;
@@ -180,8 +175,6 @@ namespace UnityTest
             Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
             Assert.AreEqual(gd.company.publicity.value,    data.company.publicity.value);
             Assert.AreEqual(gd.company.markets,            data.company.markets);
-            CompareWorkers(gd.company.ResearchCzar,        data.company.ResearchCzar);
-            CompareWorkers(gd.company.OpinionCzar,         data.company.OpinionCzar);
 
             for (int i=0; i<gd.company.perks.Count; i++) {
                 Perk p = gd.company.perks[i];

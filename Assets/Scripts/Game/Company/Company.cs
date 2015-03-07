@@ -395,8 +395,9 @@ public class Company : HasStats {
 
     public Promo developingPromo;
     public void DevelopPromo() {
-        if (developingPromo != null && opinionCzar != null) {
-            bool completed = developingPromo.Develop(opinionCzar.productivity.value, opinionCzar.creativity.value);
+        if (developingPromo != null) {
+            // TEMP, this should be 1f
+            bool completed = developingPromo.Develop(100f);
 
             if (completed) {
                 UIManager.Instance.LaunchHypeMinigame(developingPromo);
@@ -634,15 +635,6 @@ public class Company : HasStats {
     // ===============================================
     // Public Opinion ================================
     // ===============================================
-    [SerializeField]
-    private Worker opinionCzar;
-    public Worker OpinionCzar {
-        get { return opinionCzar; }
-        set {
-            opinionCzar = value;
-            opinion.baseValue = value != null ? opinionCzar.charisma.value : 0;
-        }
-    }
     public Stat opinion;
     public Stat publicity;
 
@@ -661,14 +653,6 @@ public class Company : HasStats {
     // Research ======================================
     // ===============================================
     [SerializeField]
-    private Worker researchCzar;
-    public Worker ResearchCzar {
-        get { return researchCzar; }
-        set {
-            researchCzar = value;
-            research.baseValue = value != null ? researchCzar.cleverness.value : 0;
-        }
-    }
     public Stat research;
     public int researchPoints;
     public float researchInvestment = 0;

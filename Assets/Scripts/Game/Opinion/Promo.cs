@@ -18,7 +18,7 @@ public class Promo : TemplateResource<Promo> {
     }
 
     static public event System.Action<Promo> Completed;
-    public bool Develop(float amount, float skill) {
+    public bool Develop(float amount) {
         _progress += amount;
         if (progress >= 1) {
             if (Completed != null)

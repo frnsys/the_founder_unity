@@ -94,49 +94,6 @@ namespace UnityTest
           Assert.AreEqual(worker.salary, 0);
       }
 
-      [Test]
-      public void ResearchCzar() {
-          worker = ScriptableObject.CreateInstance<Worker>();
-          worker.Init("Researcher");
-          worker.cleverness.baseValue = 10000;
-
-          Assert.AreNotEqual(worker.cleverness.value, c.research.baseValue);
-
-          c.HireWorker(worker);
-          Assert.AreEqual(c.workers.Count, 1);
-
-          Assert.IsTrue(c.allWorkers.Contains(worker));
-
-          c.ResearchCzar = worker;
-
-          // Company's base research should be the research czar's cleverness.
-          Assert.AreEqual(worker.cleverness.value, c.research.baseValue);
-
-          // The research czar should not be counted among "all workers".
-          Assert.IsFalse(c.allWorkers.Contains(worker));
-      }
-
-      [Test]
-      public void OpinionCzar() {
-          worker = ScriptableObject.CreateInstance<Worker>();
-          worker.Init("Opinioner");
-          worker.charisma.baseValue = 10000;
-
-          Assert.AreNotEqual(worker.charisma.value, c.opinion.baseValue);
-
-          c.HireWorker(worker);
-          Assert.AreEqual(c.workers.Count, 1);
-
-          Assert.IsTrue(c.allWorkers.Contains(worker));
-
-          c.OpinionCzar = worker;
-
-          // Company's base opinion should be the opinion czar's charisma.
-          Assert.AreEqual(worker.charisma.value, c.opinion.baseValue);
-
-          // The opinion czar should not be counted among "all workers".
-          Assert.IsFalse(c.allWorkers.Contains(worker));
-      }
 
 		[Test]
 		public void AggregateWorkerStats() {
