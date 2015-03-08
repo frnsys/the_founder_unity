@@ -38,6 +38,7 @@ public class UIEmployee : MonoBehaviour {
 
         agent = GetComponent<NavMeshAgent>();
         line = GetComponent<LineRenderer>();
+        line.enabled = false;
         target = RandomTarget();
         desk = UIOfficeManager.Instance.RandomDesk();
         desk.occupied = true;
@@ -58,11 +59,13 @@ public class UIEmployee : MonoBehaviour {
         if (state == State.GoingToDesk || state == State.Wandering) {
             line.SetPosition(0, transform.position);
             agent.SetDestination(target);
-            DrawPath(agent.path);
 
             // May randomly go to desk.
             if (state == State.Wandering && company.developing && Random.value < 0.05f * worker.productivity.value) {
                 GoToDesk();
+            } else if (state == State.GoingToDesk) {
+                DrawPath(agent.path);
+                line.enabled = true;
             }
 
             // Check if we've reached the destination
@@ -72,6 +75,7 @@ public class UIEmployee : MonoBehaviour {
                 // If going to a desk...
                 if (state == State.GoingToDesk) {
                     state = State.AtDesk;
+                    line.enabled = false;
 
                 } else {
                     // Else, continue wandering around.
@@ -145,37 +149,35 @@ public class UIEmployee : MonoBehaviour {
                 happinessLabel.color = unhappyColor;
             }
 
-            if (company.developing && state == State.AtDesk && laborObj == null) {
-                // Decide whether or not to work
-                // or leave the desk.
-                // Robots don't leave their desk.
-                // TO DO may need to tweak this value.
-                if (!worker.robot && Random.value < 0.8f/worker.productivity.value) {
+            // Decide whether or not to work
+            // or leave the desk.
+            // Robots don't leave their desk.
+            // TO DO may need to tweak this value.
+            if (state == State.AtDesk && !worker.robot && Random.value < 0.8f/worker.productivity.value) {
                     LeaveDesk();
+            } else if (company.developing && state == State.AtDesk && laborObj == null) {
+                laborObj = NGUITools.AddChild(HUDgroup, laborPrefab);
+
+                Stat stat;
+                if (Random.value <= 0.02f * worker.happiness.value) {
+                    stat = new Stat("Breakthrough", Randomize(
+                        (worker.creativity.value + worker.cleverness.value + worker.charisma.value)/3f
+                    ));
                 } else {
-                    laborObj = NGUITools.AddChild(HUDgroup, laborPrefab);
-
-                    Stat stat;
-                    if (Random.value <= 0.02f * worker.happiness.value) {
-                        stat = new Stat("Breakthrough", Randomize(
-                            (worker.creativity.value + worker.cleverness.value + worker.charisma.value)/3f
-                        ));
+                    float roll = Random.value;
+                    if (roll <= 0.33) {
+                        stat = new Stat("Design", Randomize(worker.creativity.value ));
+                    } else if (roll <= 0.66) {
+                        stat = new Stat("Engineering", Randomize(worker.cleverness.value ));
                     } else {
-                        float roll = Random.value;
-                        if (roll <= 0.33) {
-                            stat = new Stat("Design", Randomize(worker.creativity.value ));
-                        } else if (roll <= 0.66) {
-                            stat = new Stat("Engineering", Randomize(worker.cleverness.value ));
-                        } else {
-                            stat = new Stat("Marketing", Randomize(worker.charisma.value ));
-                        }
+                        stat = new Stat("Marketing", Randomize(worker.charisma.value ));
                     }
-
-                    laborObj.GetComponent<UILabor>().stat = stat;
-
-                    UIFollowTarget uift = laborObj.GetComponent<UIFollowTarget>();
-                    UIOfficeManager.Instance.SetupFollowTarget(this, uift);
                 }
+
+                laborObj.GetComponent<UILabor>().stat = stat;
+
+                UIFollowTarget uift = laborObj.GetComponent<UIFollowTarget>();
+                UIOfficeManager.Instance.SetupFollowTarget(this, uift);
             }
 
             yield return new WaitForSeconds(2 * Random.value);
