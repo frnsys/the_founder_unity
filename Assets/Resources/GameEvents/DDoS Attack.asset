@@ -11,44 +11,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
   m_Name: DDoS Attack
   m_EditorClassIdentifier: 
-  description: Some internet vigilantes with nothing better to do have started DDoSing
-    some of our services.
+  type: 0
+  description: some internet vigilantes with nothing better to do have started DDoSing
+    some of our services...
+  from: 
+  image: {fileID: 0}
+  _delay: 0
+  countdown: 0
+  probability: 0
   repeatable: 1
-  probability:
-    baseValue: .100000001
-    _buffs: []
   effects:
-    products: []
-    workers: []
-    company: []
     unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
       productTypes: []
-      workers: []
-      events: []
-      items: []
-      stores: 
+      perks: []
       locations: []
       verticals: []
-      characters: []
       promos: []
-    opinionEvents:
-    - name: DDoS Attack
+      recruitments: []
+      companies: []
+      specialProjects: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+    opinionEvent:
+      name: 
       opinion:
-        name: 
-        value: -25
-        duration: 0
-        type: 0
+        name: Opinion
+        value: 0
       publicity:
-        name: 
-        value: 10
-        duration: 0
-        type: 0
+        name: Hype
+        value: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+    specialEffect: 0
   actions: []
+  conditions: []

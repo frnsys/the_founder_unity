@@ -15,12 +15,12 @@ public class UIAccounting : MonoBehaviour {
         foreach (Worker worker in company.workers) {
             monthlySalaries += worker.monthlyPay;
         }
-        salaries.text = string.Format("[c][EF4542]{0:C0}[-][/c] per month in salaries", monthlySalaries);
+        salaries.text = string.Format("Salaries: [c][EF4542]{0:C0}[-][/c]/month", monthlySalaries);
 
         float monthlyRent = company.locations.Sum(l => l.cost);
         float monthlyInf = company.infrastructure.cost;
-        rent.text = string.Format("[c][EF4542]{0:C0}[-][/c] per month in rent", monthlyRent);
-        inf.text = string.Format("[c][EF4542]{0:C0}[-][/c] per month in infrastructure costs", monthlyInf);
+        rent.text = string.Format("Rent: [c][EF4542]{0:C0}[-][/c]/month", monthlyRent);
+        inf.text = string.Format("Infrastructure: [c][EF4542]{0:C0}[-][/c]/month", monthlyInf);
 
         numWorkerLocations.text = string.Format("[c][6A53F7]{0}[-][/c] employees across [c][6A53F7]{1}[-][/c] locations ([c][6A53F7]{2}[-][/c] employees at HQ)", company.employeesAcrossLocations, company.locations.Count, company.workers.Count);
 
@@ -51,6 +51,7 @@ public class UIAccounting : MonoBehaviour {
         totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.totalMarketShare);
         deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
         debtOwned.text = string.Format("World Debt Owned by Company: [c][EF4542]{0}[-][/c]", company.debtOwned);
+        pollution.text = string.Format("Pollution Emitted: [c][EF4542]{0:0}[-][/c] metric tons", company.pollution);
         spendingRate.text = string.Format("Consumer Spending Rate: [c][20D060]{0:F2}x[-][/c]", gm.spendingMultiplier);
         taxesAvoided.text = string.Format("Taxes Avoided: [c][20D060]{0:C0}[-][/c]", company.taxesAvoided);
         averageIncome.text = string.Format("Global Average Income: [c][6A53F7]{0:C0}/yr[-][/c]", gm.wageMultiplier * 60000);
@@ -92,6 +93,7 @@ public class UIAccounting : MonoBehaviour {
     public UILabel totalMarketShare;
     public UILabel deathToll;
     public UILabel debtOwned;
+    public UILabel pollution;
     public UILabel economicHealth;
     public UILabel spendingRate;
     public UILabel taxesAvoided;

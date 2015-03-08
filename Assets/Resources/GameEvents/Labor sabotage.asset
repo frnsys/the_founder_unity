@@ -8,17 +8,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdffd9aed3bdb4b6c87f71d624c66640, type: 3}
-  m_Name: Transit Stipends
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Labor sabotage
   m_EditorClassIdentifier: 
-  upgradeLevel: 0
-  upgrades:
-  - name: Transit Stipends
-    cost: 50000
-    description: We need our employees here for their best work, so let's subsidize
-      their transit.
-    requiredOffice: 0
-    mesh: {fileID: 4300018, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+  type: 0
+  description: ah shit - workers at several of our overseas locations have been organizing
+    and sabotaging equipment. it's killing our productivity. if you take care of it,
+    our productivity will return to normal. otherwise, it won't.
+  from: <COFOUNDER>@<PLAYERCOMPANY>.com
+  image: {fileID: 2800000, guid: f40697ade29d84d56b8ca7aa74311ac4, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 1
+  effects:
+    unlocks:
+      productTypes: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+      specialProjects: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+    opinionEvent:
+      name: Labor Sabotage
+      opinion:
+        name: Opinion
+        value: -20
+      publicity:
+        name: Hype
+        value: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 24
+    eventProbability: 1
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+    productEffects: []
+    workerEffects:
+    - name: Productivity
+      value: -4
+    aiCompany: {fileID: 0}
+    specialEffect: 0
+  actions:
+  - name: Take care of it
     effects:
       unlocks:
         productTypes: []
@@ -31,15 +75,15 @@ MonoBehaviour:
         specialProjects: []
       cash: 0
       research:
-        name: Research
+        name: 
         value: 0
       opinionEvent:
         name: 
         opinion:
-          name: Opinion
+          name: 
           value: 0
         publicity:
-          name: Hype
+          name: 
           value: 0
       gameEvent: {fileID: 0}
       eventDelay: 0
@@ -55,19 +99,11 @@ MonoBehaviour:
         values: 00000000000000000000000000000000
       productEffects: []
       workerEffects:
-      - name: Happiness
-        value: 4
       - name: Productivity
-        value: 10
+        value: 4
       aiCompany: {fileID: 0}
       specialEffect: 0
-    requiredTechnologies: []
-  - name: Employee Buses
-    cost: 100000
-    description: Employees are driving to work and getting stuck in traffic - this
-      is more efficient.
-    requiredOffice: 1
-    mesh: {fileID: 4300008, guid: 21b9c7f9bca6e4b94abd4e9e548c9a18, type: 3}
+  - name: Let them be
     effects:
       unlocks:
         productTypes: []
@@ -80,19 +116,19 @@ MonoBehaviour:
         specialProjects: []
       cash: 0
       research:
-        name: Research
+        name: 
         value: 0
       opinionEvent:
         name: 
         opinion:
-          name: Opinion
+          name: 
           value: 0
         publicity:
-          name: Hype
+          name: 
           value: 0
-      gameEvent: {fileID: 11400000, guid: e7d51b514dc754a78bee02f7531a1337, type: 2}
-      eventDelay: 24
-      eventProbability: .5
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
       forgettingRate: 0
       spendingMultiplier: 0
       wageMultiplier: 0
@@ -104,10 +140,8 @@ MonoBehaviour:
         values: 00000000000000000000000000000000
       productEffects: []
       workerEffects:
-      - name: Happiness
-        value: 5
-      - name: Productivity
+      - name: Cleverness
         value: 5
       aiCompany: {fileID: 0}
       specialEffect: 0
-    requiredTechnologies: []
+  conditions: []

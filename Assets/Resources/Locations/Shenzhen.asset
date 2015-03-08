@@ -40,9 +40,9 @@ MonoBehaviour:
       publicity:
         name: Hype
         value: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
+    gameEvent: {fileID: 11400000, guid: bc234621e096844f8a6d043af6147640, type: 2}
+    eventDelay: 24
+    eventProbability: .5
     forgettingRate: 0
     spendingMultiplier: 0
     wageMultiplier: 0

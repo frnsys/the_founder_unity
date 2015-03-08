@@ -279,6 +279,9 @@ public class Company : HasStats {
 
             if (product.debtsPeople)
                 debtOwned += Random.Range(0, 10);
+
+            if (product.pollutes)
+                pollution += Random.Range(0, 10);
         }
         cash.baseValue += newRevenue;
         lastMonthRevenue += newRevenue;
@@ -428,6 +431,7 @@ public class Company : HasStats {
     public float taxesAvoided;
     public int deathToll;
     public int debtOwned;
+    public int pollution;
     public float quarterProfit {
         get { return quarterRevenue - quarterCosts; }
     }

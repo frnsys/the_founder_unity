@@ -144,7 +144,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 "This kind of mention has driven up the hype for your company.",
                 "Hype is central to your company's success. A hyped company's products sell much better.",
                 "But hype is always deflating. Keep hyping your company and shape it's public image by launching promotional campaigns from the [c][4B2FF8]Communications[-][/c] menu item.",
-                "But note that some press can be negative, and hurt your company's image. Consumers aren't going to buy your products if they disagree with your decisions. Consumers forget things over time, but promotional campaigns can also help expedite that process."
+                "But note that some press can be negative, and hurt your company's image.",
+                "Consumers aren't going to buy your products if they disagree with your decisions.",
+                "Consumers forget things over time, and promotional campaigns can also help expedite that process."
             });
             UIManager uim = UIManager.Instance;
             uim.statusBar.hypeLabel.gameObject.SetActive(true);
@@ -257,7 +259,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 MentorMessages(new string[] {
                     "Congratulations! You've completed your first product.",
                     "It will start generating revenue, depending on its final design, engineering, and marketing values.",
-                    "Next to the product's revenue is the market share of the product. Products make more money if they have a larger share of the market. You can increase your market share by expanding to new locations and building better products.",
+                    "Next to the product's revenue is the market share of the product. Products make more money if they have a larger share of the market.",
+                    "You can increase your market share by expanding to new locations and building better products.",
                     "To make better products you need to assemble a talented team.",
                     "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
                 });

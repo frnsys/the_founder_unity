@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Text.RegularExpressions;
 using System.Collections;
 
 public class UIGameEventNotification: UIEffectAlert {
@@ -18,11 +19,11 @@ public class UIGameEventNotification: UIEffectAlert {
             gameEvent_ = value;
 
             titleLabel.text = gameEvent_.name;
-            bodyLabel.text = ProcessText(gameEvent_.description);
-            fromLabel.text = ProcessText(gameEvent_.from);
+            bodyLabel.text = ProcessText(gameEvent_.description, false);
+            fromLabel.text = ProcessText(gameEvent_.from, true);
 
             if (toLabel != null)
-                toLabel.text = "founder@" + companyName + ".com";
+                toLabel.text = string.Format("founder@{0}.com", Slugify(companyName));
 
             if (gameEvent_.image != null)
                 image.mainTexture = gameEvent_.image;
@@ -54,10 +55,16 @@ public class UIGameEventNotification: UIEffectAlert {
         Show();
     }
 
-    private string ProcessText(string text) {
-        text = text.Replace("<PLAYERCOMPANY>", companyName);
-        text = text.Replace("<AICOMPANY>", aiCompanyName);
-        text = text.Replace("<COFOUNDER>", cofounderName);
+    private string ProcessText(string text, bool slugify) {
+        if (slugify) {
+            text = text.Replace("<PLAYERCOMPANY>", companyName);
+            text = text.Replace("<AICOMPANY>", aiCompanyName);
+            text = text.Replace("<COFOUNDER>", cofounderName);
+        } else {
+            text = text.Replace("<PLAYERCOMPANY>", Slugify(companyName));
+            text = text.Replace("<AICOMPANY>", Slugify(aiCompanyName));
+            text = text.Replace("<COFOUNDER>", Slugify(cofounderName));
+        }
         return text;
     }
 
@@ -97,6 +104,13 @@ public class UIGameEventNotification: UIEffectAlert {
         shadow.bottomAnchor.Set(body.transform, 0, -actionHeight);
     }
 
+
+    public string Slugify(string str) {
+        str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
+        str = Regex.Replace(str, @"\s+", " ").Trim();
+        str = Regex.Replace(str, @"\s", "_");
+        return str;
+    }
 }
 
 

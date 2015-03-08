@@ -35,6 +35,7 @@ public class Product : HasStats {
 
     public bool killsPeople;
     public bool debtsPeople;
+    public bool pollutes;
     public bool techPenalty;
     public bool synergy;
 
@@ -154,6 +155,8 @@ public class Product : HasStats {
                 killsPeople = true;
             } else if (v.name == "Finance") {
                 debtsPeople = true;
+            } else if (v.name == "Hardware") {
+                pollutes = true;
             }
         }
 

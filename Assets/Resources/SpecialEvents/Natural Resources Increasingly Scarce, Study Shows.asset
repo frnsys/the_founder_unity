@@ -8,20 +8,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7546f3fc1bd4967ba26f04e11c3f31, type: 3}
-  m_Name: Interstellar Ship
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Natural Resources Increasingly Scarce, Study Shows
   m_EditorClassIdentifier: 
-  description: 
-  cost: 1e+10
-  requiredProgress: 100000
+  type: 1
+  description: 'Climate change is finally catching up with us. Freshwater supplies
+    and other vital natural resources have decreased irreversibly, reports 20-year
+    long study published today. '
+  from: The Times
+  image: {fileID: 2800000, guid: b6dbe942444d3409a84c5c0033cbdbda, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 0
   effects:
     unlocks:
       productTypes: []
       perks: []
-      locations:
-      - {fileID: 11400000, guid: e30291e4b78394118a831439660cf994, type: 2}
-      - {fileID: 11400000, guid: 268ed9f9ea3534a3089bf1a9a58e0300, type: 2}
-      - {fileID: 11400000, guid: aac0bf8db8e4b4c659124afab5b83cd7, type: 2}
+      locations: []
       verticals: []
       promos: []
       recruitments: []
@@ -39,8 +43,8 @@ MonoBehaviour:
       publicity:
         name: Hype
         value: 0
-    gameEvent: {fileID: 11400000, guid: a26743fc84f10421584ada7352bf4b73, type: 2}
-    eventDelay: 14
+    gameEvent: {fileID: 11400000, guid: 206086b7a5a2743fda3f03610b2b7dec, type: 2}
+    eventDelay: 1
     eventProbability: 1
     forgettingRate: 0
     spendingMultiplier: 0
@@ -55,7 +59,8 @@ MonoBehaviour:
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
-  requiredProducts: []
-  mesh: {fileID: 0}
-  texture: {fileID: 0}
-  _progress: 0
+  actions: []
+  conditions:
+  - value: 100000
+    greater: 0
+    type: 11

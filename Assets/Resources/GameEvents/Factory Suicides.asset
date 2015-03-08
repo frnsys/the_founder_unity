@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
+  m_Name: Factory Suicides
+  m_EditorClassIdentifier: 
+  type: 1
+  description: 'A factory in Shenzhen, which handles production for many major hardware
+    companies, including <PLAYERCOMPANY>, is the subject of much controversy after
+    a worker committed suicide during work hours. One worker commented: "We must work
+    long hours and very quickly. If we get injured, we cannot stop until our shift
+    is over."'
+  from: The Times
+  image: {fileID: 2800000, guid: f40697ade29d84d56b8ca7aa74311ac4, type: 3}
+  _delay: 0
+  countdown: 0
+  probability: 0
+  repeatable: 1
+  effects:
+    unlocks:
+      productTypes: []
+      perks: []
+      locations: []
+      verticals: []
+      promos: []
+      recruitments: []
+      companies: []
+      specialProjects: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+    opinionEvent:
+      name: Factory Suicide
+      opinion:
+        name: Opinion
+        value: -120
+      publicity:
+        name: Hype
+        value: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 24
+    eventProbability: 1
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
+    expansionCostMultiplier: 0
+    infrastructureCostMultiplier:
+      keys: 00000000010000000200000003000000
+      values: 00000000000000000000000000000000
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+    specialEffect: 0
+  actions:
+  - name: 
+    effects:
+      unlocks:
+        productTypes: []
+        perks: []
+        locations: []
+        verticals: []
+        promos: []
+        recruitments: []
+        companies: []
+        specialProjects: []
+      cash: -5000
+      research:
+        name: 
+        value: 0
+      opinionEvent:
+        name: 
+        opinion:
+          name: 
+          value: 0
+        publicity:
+          name: 
+          value: 0
+      gameEvent: {fileID: 0}
+      eventDelay: 0
+      eventProbability: 0
+      forgettingRate: 0
+      spendingMultiplier: 0
+      wageMultiplier: 0
+      taxRate: 0
+      economicStability: 0
+      expansionCostMultiplier: 0
+      infrastructureCostMultiplier:
+        keys: 00000000010000000200000003000000
+        values: 00000000000000000000000000000000
+      productEffects: []
+      workerEffects:
+      - name: Cleverness
+        value: 5
+      aiCompany: {fileID: 0}
+      specialEffect: 0
+  conditions: []
