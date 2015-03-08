@@ -47,16 +47,7 @@ public class UIOnboarding : MonoBehaviour {
 
     void Intro() {
         backButton.GetComponent<UIButton>().isEnabled = false;
-        string[] messages = new string[] {
-            "It's the year 2001. The dot-com bubble has just burst, leaving many companies to shutter their operations.",
-            "A few stronger enterprises - Spügle, Coralzon, and others - have managed to survive.",
-            "But their weakened state and the void left by mass bankruptcy means the business world is ripe for disruption.",
-            "I have a good feeling about you - so I've given you some starting funds to take advantage of this time and build a powerful company yourself."
-        };
-
-        gm.narrativeManager.MentorMessages(messages, delegate(GameObject obj) {
-            VerticalSelection(null);
-        });
+        VerticalSelection(null);
     }
 
 
@@ -87,6 +78,10 @@ public class UIOnboarding : MonoBehaviour {
         // Otherwise, it is a "back" event.
         if (!didShowVerticals) {
             string[] messages = new string[] {
+                "It's the year 2001. The dot-com bubble has just burst, leaving many companies to shutter their operations.",
+                "A few stronger enterprises - Spügle, Coralzon, and others - have managed to survive.",
+                "But their weakened state and the void left by mass bankruptcy means the business world is ripe for disruption.",
+                "I have a good feeling about you - so I've given you some starting funds to take advantage of this time and build a powerful company yourself.",
                 "First, what kind of business do you want to create?",
                 "Remember that a lot of companies start doing one thing and grow to do many."
             };

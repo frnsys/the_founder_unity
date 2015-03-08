@@ -231,7 +231,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .561458349
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -560,7 +560,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.33333337
+  aspectRatio: 5.83333349
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -709,7 +709,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .847484291
 --- !u!1 &608802195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0333333351
+  aspectRatio: 3.16666675
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.33333337
+  aspectRatio: 5.83333349
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0333333351
+  aspectRatio: 3.16666675
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
@@ -1311,6 +1311,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2044936939}
   - 20: {fileID: 2044936938}
+  - 81: {fileID: 2044936935}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1318,6 +1319,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &2044936935
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2044936934}
+  m_Enabled: 1
 --- !u!20 &2044936938
 Camera:
   m_ObjectHideFlags: 0
@@ -1426,7 +1434,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .0500000007
+  aspectRatio: 13.4750004
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}

@@ -150,23 +150,25 @@ public class GameManager : Singleton<GameManager> {
 
     void OnLevelWasLoaded(int level) {
         // See Build Settings to get the number for levels/scenes.
-        if (level == 2) {
+        if (Application.loadedLevelName == "Game") {
             StartGame();
-            //narrativeManager.InitializeOnboarding();
+            narrativeManager.InitializeOnboarding();
         }
     }
 
     void Start() {
 #if UNITY_EDITOR
         // TESTING start a test game.
-        Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
-        Location location = Location.Load("San Francisco");
-        Vertical vertical = Vertical.Load("Information");
-        InitializeGame(cofounder, location, vertical);
-        StartGame();
+        if (Application.loadedLevelName == "Game") {
+            Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
+            Location location = Location.Load("San Francisco");
+            Vertical vertical = Vertical.Load("Information");
+            InitializeGame(cofounder, location, vertical);
+            StartGame();
 
-        // Uncomment this if you want to start the game with onboarding.
-        narrativeManager.InitializeOnboarding();
+            // Uncomment this if you want to start the game with onboarding.
+            narrativeManager.InitializeOnboarding();
+        }
 #endif
 
         // So negative currency values are shown as -$1000 instead of ($1000).
