@@ -5,6 +5,7 @@ public class UIMenuItem : MonoBehaviour {
     public GameObject window;
 
     void OnClick() {
-        UIManager.Instance.CloseAndOpenPopup(window);
+        UIManager.Instance.CloseMenu();
+        UIManager.Instance.OpenPopup(window);
     }
 }

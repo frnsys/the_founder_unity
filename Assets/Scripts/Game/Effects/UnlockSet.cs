@@ -17,6 +17,8 @@ public class UnlockSet {
     public List<MiniCompany> companies = new List<MiniCompany>();
     public List<SpecialProject> specialProjects = new List<SpecialProject>();
 
+    static public event System.Action<UnlockSet> Unlocked;
+
     // This "unlocks" an UnlockSet by
     // adding the input UnlockSet's values
     // to this one.
@@ -53,6 +55,9 @@ public class UnlockSet {
             if (!Duplicate(o, specialProjects))
                 specialProjects.Add(o);
         }
+
+        if (Unlocked != null)
+            Unlocked(this);
     }
 
     private bool Duplicate<T>(T obj, List<T> objs) where T : Object {
