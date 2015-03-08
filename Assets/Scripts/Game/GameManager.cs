@@ -166,7 +166,7 @@ public class GameManager : Singleton<GameManager> {
         StartGame();
 
         // Uncomment this if you want to start the game with onboarding.
-        // narrativeManager.InitializeOnboarding();
+        narrativeManager.InitializeOnboarding();
 #endif
 
         // So negative currency values are shown as -$1000 instead of ($1000).
@@ -177,6 +177,12 @@ public class GameManager : Singleton<GameManager> {
 
     public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
         data.company.verticals = new List<Vertical> { vertical };
+
+        if (vertical.name == "Information") {
+            data.company.infrastructure[Infrastructure.Type.Datacenter] = 6;
+        } else {
+            data.company.infrastructure[Infrastructure.Type.Factory] = 6;
+        }
 
         data.company.SetHQ(location);
         data.unlocked.locations = new List<Location> { location };

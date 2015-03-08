@@ -242,6 +242,7 @@ GameObject:
   - 4: {fileID: 400028}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
+  - 114: {fileID: 11400060}
   m_Layer: 8
   m_Name: The Product
   m_TagString: Untagged
@@ -479,7 +480,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -151.495361, z: 0}
+  m_LocalPosition: {x: 0, y: -213.495361, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400018}
@@ -1261,12 +1262,12 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 165
+  mHeight: 103
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.35294127
+  aspectRatio: 2.18181825
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2174,6 +2175,18 @@ MonoBehaviour:
   hideInactive: 0
   keepWithinPanel: 0
   sorted: 0
+--- !u!114 &11400060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a9998be0d09d42918716e850d450779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderQueue: 4000
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

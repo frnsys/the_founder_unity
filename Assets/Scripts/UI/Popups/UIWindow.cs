@@ -9,7 +9,6 @@ using System.Collections;
 public class UIWindow : UIPopup {
     // An event that fires when a window is opened.
     static public event System.Action<string> WindowOpened;
-    static public event System.Action<string> TabOpened;
 
     protected GameObject currentScreen_;
     public GameObject currentScreen {
@@ -20,12 +19,6 @@ public class UIWindow : UIPopup {
                 currentScreen_ = value;
             }
         }
-    }
-
-    public void SelectTab(GameObject screen) {
-        currentScreen = screen;
-        if (TabOpened != null)
-            TabOpened(screen.name.Replace("(Clone)", ""));
     }
 
     void OnEnable() {
@@ -40,7 +33,7 @@ public class UIWindow : UIPopup {
         NGUITools.DestroyImmediate(gameObject);
     }
 
-    void Show(GameObject target) {
+    public void Show(GameObject target) {
         // no scaling animation
     }
 }

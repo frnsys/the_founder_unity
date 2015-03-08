@@ -574,8 +574,15 @@ public class Company : HasStats {
     public Infrastructure infrastructureCapacity {
         get {
             IEnumerable<Infrastructure> locationCapacities = locations.Select(i => i.capacity);
-            if (locationCapacities.Count() > 0)
-                return locationCapacities.Aggregate((x,y) => x + y);
+            if (locationCapacities.Count() > 0) {
+                Infrastructure baseInf = new Infrastructure();
+                if (verticals[0].name == "Information") {
+                    baseInf[Infrastructure.Type.Datacenter] = 6;
+                } else {
+                    baseInf[Infrastructure.Type.Factory] = 6;
+                }
+                return locationCapacities.Aggregate((x,y) => x + y) + baseInf;
+            }
             return new Infrastructure();
         }
     }

@@ -13,15 +13,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     [System.Serializable]
     public struct OnboardingState {
-        public bool FIRST_PRODUCT_LAUNCHED;
-        public bool FIRST_WORKER_HIRED;
-        public bool MARKET_UNLOCKED;
-        public bool RESEARCH_UNLOCKED;
-        public bool PRODUCT_COMBOS_UNLOCKED;
-        public bool RESEARCH_OPENED;
-        public bool COMMS_UNLOCKED;
+        public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
-        public bool WORKER_LIMIT_REACHED;
+        public bool LOCATIONS_UNLOCKED;
+        public bool SPECIALPROJECTS_UNLOCKED;
+        public bool HYPE_MINIGAME;
     }
 
     // Disable the constructor.
@@ -35,12 +31,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     void OnEnable() {
         UIWindow.WindowOpened += OnScreenOpened;
-        UIWindow.TabOpened    += OnScreenOpened;
     }
 
     void OnDisable() {
         UIWindow.WindowOpened -= OnScreenOpened;
-        UIWindow.TabOpened    -= OnScreenOpened;
     }
 
     public void Load(GameData d) {
@@ -102,22 +96,15 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     private enum OBS {
         START,
-        COFOUNDER_INTRO,
-        COFOUNDER_SELECT,
-        COFOUNDER_OUTRO,
         GAME_INTRO,
-        OPENED_PRODUCTS,
         OPENED_NEW_PRODUCT,
-        OPENED_COMPANY,
-        OPENED_INFRASTRUCTURE,
-        OPENED_PRODUCTS_W_INFRA,
-        OPENED_NEW_PRODUCT_W_INFRA,
-        OPENED_NEW_PRODUCT_POINTS,
         STARTED_PRODUCT,
-        MANAGE_PRODUCTS,
-        OPENED_EMPLOYEES,
-        OPENED_HIRE_EMPLOYEE,
-        END
+        COMPLETED_PRODUCT,
+        OPENED_RECRUITING,
+        OPENED_HIRING,
+        INFRASTRUCTURE,
+        RESEARCH,
+        OTHER_PRODUCT_ASPECTS
     }
     private OBS obs = OBS.START;
 
@@ -126,136 +113,64 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         obs = OBS.START;
 
         // Listen to some events.
-        Product.Completed += OnProductCompleted;
+        Company.BeganProduct += BeganProduct;
+        Product.Completed += CompletedProduct;
+        Company.WorkerHired += WorkerHired;
+        Promo.Completed += PromoCompleted;
         GameEvent.EventTriggered += OnEvent;
-        Company.WorkerHired += OnWorkerHired;
+        UnlockSet.Unlocked += OnUnlocked;
+        UIOfficeManager.OfficeUpgraded += OfficeUpgraded;
+
+        // Hide some menu and status bar items.
+        UIManager uim = UIManager.Instance;
+        uim.statusBar.hypeLabel.gameObject.SetActive(false);
+        uim.statusBar.researchLabel.gameObject.SetActive(false);
+        uim.menu.Deactivate("Special Projects");
+        uim.menu.Deactivate("Infrastructure");
+        uim.menu.Deactivate("Locations");
+        uim.menu.Deactivate("Verticals");
+        uim.menu.Deactivate("Acquisitions");
+        uim.menu.Deactivate("Recruiting");
+        uim.menu.Deactivate("Employees");
+        uim.menu.Deactivate("Perks");
+        uim.menu.Deactivate("Research");
+        uim.menu.Deactivate("Communications");
 
         // Show the game intro.
         Intro();
     }
 
     void OnEvent(GameEvent ev) {
-        if (data.company.OpinionEvents.Count > 0 && data.company.opinion.value < 0 && !ob.COMMS_UNLOCKED) {
+        if (ev.name == "First Product Launched") {
             MentorMessages(new string[] {
-                "Yikes. People aren't too happy with our company. The public opinion towards our company can hurt how well our products perform in the market.",
-                "Fortunately, we have the techniques of PUBLIC RELATIONS to fend off egregious defamatory remarks.",
-                "We can run our own promotions and advertisements to spin public opinion. You can manage these in the 'Communications' window."
+                "Congratulations! This is your first write-up in a major publication.",
+                "This kind of mention has driven up the hype for your company.",
+                "Hype is central to your company's success. A hyped company's products sell much better.",
+                "But hype is always deflating. Keep hyping your company and shape it's public image by launching promotional campaigns from the [c][4B2FF8]Communications[-][/c] menu item.",
+                "But note that some press can be negative, and hurt your company's image. Consumers aren't going to buy your products if they disagree with your decisions. Consumers forget things over time, but promotional campaigns can also help expedite that process."
             }, true);
-            ob.COMMS_UNLOCKED = true;
+            UIManager uim = UIManager.Instance;
+            uim.statusBar.hypeLabel.gameObject.SetActive(true);
+            uim.menu.Activate("Communications");
+
+        } else if (ev.name == "RIVALCORP Founded") {
+            MentorMessages(new string[] {
+                "Now seems like a good time to mention that you have some competition.",
+                "Competitors will copy your successful products and steal market share from away from you. If you keep your products better than them, you won't have to worry.",
+                "Competitors will also poach your employees. This kind of activity can drive wages up. This is a lose-lose for everyone - other companies can be cooperative when it comes to dealing with this."
+            }, true);
         }
-    }
-
-    void OnWorkerHired(Worker w, Company c) {
-        if (c == data.company) {
-            if (!ob.FIRST_WORKER_HIRED) {
-                MentorMessages(new string[] {
-                    "You've hired your first employee! Employees help you develop better products by contributing their skills.",
-                    "Employees also have a level of happiness and productivity, which are interrelated. Generally, happy employees are more productive.",
-                    "More productive employees help you build products faster. You should maintain peak efficiency!"
-                }, true);
-                ob.FIRST_WORKER_HIRED = true;
-
-            } else if (c.workers.Count > 3 && !ob.MARKET_UNLOCKED) {
-                MentorMessages(new string[] {
-                    "Now that your office is buzzing with a few employees, you should try to keep them as happy and productive as possible.",
-                    "You also want to cultivate an office environment and CULTURE that is attractive to future employees.",
-                    "You can purchase perks and equipment to keep your employees efficient and satisfied in The Market."
-                }, true);
-                ob.MARKET_UNLOCKED = true;
-
-            } else if (c.remainingSpace == 0 && !ob.WORKER_LIMIT_REACHED) {
-                MentorMessages(new string[] {
-                    "It looks like you're running out of space for more employees.",
-                    "It might be time to expand to another location.",
-                    "New locations provide room for more employees and infrastructure, access to new markets, and sometimes other bonuses as well.",
-                    "You can expand to new locations in the 'Company' window.",
-                    "More locations will become available over time."
-                }, true);
-                ob.WORKER_LIMIT_REACHED = true;
-            }
-        }
-    }
-
-    void OnProductCompleted(Product p, Company c) {
-        if (c == data.company) {
-            if (!ob.FIRST_PRODUCT_LAUNCHED) {
-                MentorMessages(new string[] {
-                    "Excellent! Your first product is completed and has been released to the world.",
-                    "The success of your product depends on a number of factors, most of all the quality of its design, engineering, and marketing.",
-                    "Some products will earn you lots of money, some will fizzle out and be ignored.",
-                    "If you see that your product isn't doing so well, you should shut it down and put that infrastructure to better use!"
-                }, true);
-                ob.FIRST_PRODUCT_LAUNCHED = true;
-            }
-
-            // to do change this/remove this
-            if (c.products.Count >= 3 && !ob.PRODUCT_COMBOS_UNLOCKED) {
-                MentorMessages(new string[] {
-                    "You've developed a few products. But we need to INNOVATE to really get ahead.",
-                    "Why don't you try combining different products?",
-                    "Some combinations might be real hits. Some might flounder.",
-                    "Now that you've gotten the hang of it, why don't you try releasing a few more products.",
-                    "I'll come back when you're ready for the next step."
-                }, true);
-                ob.PRODUCT_COMBOS_UNLOCKED = true;
-            }
-
-            if (c.products.Count >= 5 && !ob.RESEARCH_UNLOCKED) {
-                MentorMessages(new string[] {
-                    "The world is changing and we need to change with it. We need to INNOVATE even harder.",
-                    "An internal Innovation Labs has started up to research bleeding edge technologies.",
-                    "We can use these earth-shattering technologies to create even more paradigm-shifting products.",
-                    "Check it out when you get the chance."
-                }, true);
-                ob.RESEARCH_UNLOCKED = true;
-            }
-
-            if (c.products.Count >= 7 && !ob.VERTICALS_UNLOCKED) {
-                MentorMessages(new string[] {
-                    "Websites are great and all, but we should try to capture the entire end-to-end digital experience.",
-                    "If you want to expand the kinds of products you can develop, you have to expand into new VERTICALS.",
-                    "VERTICALS give you access to new products and new technologies.",
-                    "You've got enough experience to expand into the Hardware vertical.",
-                    "Expansion can be expensive, but it is necessary for your growth.",
-                    "You can add on new verticals through the 'Company' window."
-                }, true);
-                data.unlocked.verticals.Add( Vertical.Load("Hardware") );
-                ob.VERTICALS_UNLOCKED = true;
-            }
-        }
-    }
-
-    public void CofounderIntro() {
-        MentorMessages(new string[] {
-            "Welcome to the world of entrepreneurs!",
-            "You have joined a class of accomplished, impactful people. But you need to earn that title.",
-            "Starting a company is no small task - you'll need some help.",
-            "As your mentor, I'll give you advice and guidance, but you also need someone working directly alongside you.",
-            "You need a cofounder."
-        }, true);
-    }
-
-    public void CofounderSelection() {
-        MentorMessages(new string[] {
-            "Here are a few entrepreneurs I've worked with in the past.",
-            "They each bring something different to the table - it's up to you to decide who to move forward with."
-        }, true);
-    }
-
-    public void CofounderOutro() {
-        MentorMessages(new string[] {
-            "Ok good choice.",
-            "Let's begin."
-        }, true);
     }
 
     public void Intro() {
         obs = OBS.GAME_INTRO;
         MentorMessages(new string[] {
-            "Welcome to your office! It's not much right now, but that'll change.",
-            "You've raised a bit of angel investment, but you should keep costs low to start.",
+            "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
+            "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
+            "[c][FC5656]The Board[-][/c] sets quarterly profit targets for you and requires that you [c][1A9EF2]expand your profits by 12% every quarter[-][/c]. You [i]must[/i] hit these targets.",
+            "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will dismiss you from the company.",
             "You're not much of a business if haven't got anything to sell. Let's create a product.",
-            "Open the menu up and select 'Products'."
+            "Open the menu up and select [c][4B2FF8]New Product[-][/c]."
         }, true);
     }
 
@@ -273,101 +188,48 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         Debug.Log(name + " opened");
         switch(name) {
 
-            case "Products":
-                if (Stage(OBS.OPENED_PRODUCTS)) {
-                    MentorMessages(new string[] {
-                        "This window is where you manage products and their development.",
-                        "Jump over to the 'New' view to start creating a new product."
-                    }, true);
-
-                } else if (Stage(OBS.OPENED_PRODUCTS_W_INFRA)) {
-                    MentorMessages(new string[] {
-                        "Now that you have the infrastructure, we can start a new product. Go to the 'New' tab."
-                    }, true);
-
-                } else if (Stage(OBS.MANAGE_PRODUCTS)) {
-                    MentorMessages(new string[] {
-                        "Here is where you can manage your developing and released products.",
-                        "You can see how they're doing in the market. You can shut down their development or pull them from the market.",
-                        "Shutting down or pulling products frees up the infrastructure they were using, so you can put it towards new and better uses.",
-                        "This development could be faster. Let's hire an employee to help us out. From the menu, select 'Employees'."
-                    }, true);
-
-                }
-                break;
-
-
             case "New Product":
                 if (Stage(OBS.OPENED_NEW_PRODUCT)) {
                     MentorMessages(new string[] {
-                        "Here you'll see the types of products you can currently develop.",
-                        "Since you're just starting out, you can only build a couple basic things.",
-                        "...But we can't build anything yet.",
-                        "At the top you'll see what infrastructure you have available, which is none.",
-                        "All products require some infrastructure to support them. Websites, for instance, need datacenters.",
-                        "Let's close this window and open up the 'Company' window from the menu."
+                        "Products are created by combining two product types.",
+                        "Some combinations work well and give bonuses. Some don't.",
+                        string.Format("You will have to {0} and experiment with different combinations.", innovate),
+                        "Right now you only have a few types available, but that will change over time.",
+                        "Pick two product types and hit the button below to start developing the product."
                     }, true);
 
-
-                } else if (Stage(OBS.OPENED_NEW_PRODUCT_W_INFRA)) {
+                } else if (Stage(OBS.INFRASTRUCTURE)) {
                     MentorMessages(new string[] {
-                        "Select one of the product types here and hit 'Continue'."
+                        "Products require different kinds of infrastructure to support their growth.",
+                        "They might require [c][82D6FD]datacenters[-][/c], [c][82D6FD]factories[-][/c], [c][82D6FD]labs[-][/c], or [c][82D6FD]studios[-][/c]. All product types have some minimum necessary infrastructure before you can use them.",
+                        "As products grow in the market, they will use more infrastructure. If there isn't any infrastructure available, products will stop growing and you'll be leaving money on the table.",
+                        "You can buy more infrastructure in the [c][4B2FF8]Infrastructure[-][/c] menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.",
+                        "The amount of infrastructure you can buy is limited, but you can increase this limit by expanding to new locations - some locations are better for certain infrastructure.",
+                        "Remember that you can shutdown products in the [c][4B2FF8]Products[-][/c] menu item to reclaim their infrastructure."
                     }, true);
+                    UIManager.Instance.menu.Activate("Infrastructure");
                 }
                 break;
 
-
-            case "Company":
-                if (Stage(OBS.OPENED_COMPANY)) {
+            case "Recruiting":
+                if (Stage(OBS.OPENED_RECRUITING)) {
                     MentorMessages(new string[] {
-                        "Here is where you can manage various high-level aspects of your company.",
-                        "You're just getting started so there's not a lot to see here. Jump over to the 'Manage' view."
+                        "Here is where you can recruit some new candidates to hire.",
+                        "There are a few different recruiting methods which vary in cost and quality of candidate.",
+                        "For now you should probably keep costs low and go by word-of-mouth. Give it a try. You'll be notified about the candidates when recruiting has finished."
                     }, true);
+                    UIManager.Instance.menu.Activate("Recruiting");
                 }
                 break;
 
-            case "Manage":
-                if (Stage(OBS.OPENED_INFRASTRUCTURE)) {
+            case "Hiring":
+                if (Stage(OBS.OPENED_HIRING)) {
                     MentorMessages(new string[] {
-                        "This is where you manage your company's presence throughout the world.",
-                        "Right now you only have one location, but you can expand to others.",
-                        "Locations allow you to hire more people, provide access to new markets, and expand the amount of infrastructure you can have.",
-                        "Here we can start renting out datacenters at our San Francisco office.",
-                        "Each piece of infrastructure incurs a monthly cost.",
-                        "Add two datacenters and return to the 'Products' window."
+                        "Here are the candidates from your recruiting effort.",
+                        "To hire an candidate, you must give them an offer they find acceptable. You have three tries before they take an offer elsewhere.",
+                        "The minimum salary an candidate is willing to accept is affected by a few things. If your employees are happier than they are, candidates will be willing to take a lower salary. General global salary averages and their current salary, if they are employed, will also have an impact.",
+                        "Don't forget - you're fighting to keep a high profit margin - so negotiate with that in mind!"
                     }, true);
-                }
-                break;
-
-            case "Workers":
-                if (Stage(OBS.OPENED_EMPLOYEES)) {
-                    MentorMessages(new string[] {
-                        "Here is where you manage your employees.",
-                        "Every great company is built on the sweat and tears of their founders, but employees are useful too.",
-                        "They are important for developing high-quality products in reasonable amounts of time.",
-                        "Right now, you've got no one working for you. Let's pop over to the 'Hire' tab to bring someone onboard."
-                    }, true);
-                }
-                break;
-
-            case "Hire Workers":
-                if (Stage(OBS.OPENED_HIRE_EMPLOYEE)) {
-                    MentorMessages(new string[] {
-                        "There are a few candidates on the job market right now. Who's available changes over time.",
-                        "Hiring employees is tricky. You have to make an offer and see if they accept it.",
-                        "If your offers are too low, the candidate might accept a position elsewhere and become unavailable.",
-                        "Try hiring someone."
-                    }, true);
-                }
-                break;
-
-            case "Research":
-                if (!ob.RESEARCH_OPENED) {
-                    MentorMessages(new string[] {
-                        "In this window, you can invest more into research per month and appoint a Head of Research.",
-                        "The more clever your Head of Research is, the faster you'll make breakthrough discoveries!"
-                    }, true);
-                    ob.RESEARCH_OPENED = true;
                 }
                 break;
 
@@ -376,24 +238,132 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    // This is a catch-all which can be called manually to progress onboarding.
-    public void ProgressOnboarding() {
-        if (Stage(OBS.OPENED_NEW_PRODUCT_POINTS)) {
-            MentorMessages(new string[] {
-                "On this screen you can decide how much effort we want to put into different aspects of the product.",
-                "Each point adds to development time.",
-                "The more employees you have and the better their skills, the faster development will go, so you'll be able to afford more points.",
-                "Some products are easier to create than other, so they're quicker to develop.",
-                "You don't want products to take too long to develop because you're constantly burning through cash.",
-                "For now, just add a point or two and get started."
-            }, true);
-
-        } else if (Stage(OBS.STARTED_PRODUCT)) {
-            MentorMessages(new string[] {
-                "Congratulations! You've started developing your first product.",
-                "When it's finished and released into the market, you'll start earning some revenue.",
-                "Let's take a look at how development is going. Open up the 'Products' window again."
-            }, true);
+    void BeganProduct(Product p, Company c) {
+        if (c == data.company) {
+            if (Stage(OBS.STARTED_PRODUCT)) {
+                MentorMessages(new string[] {
+                    "Great! You've started developing your first product.",
+                    "You need employees at their desks so they can work on the product.",
+                    "Productive workers will diligently head to their desk, but others must be nudged. [c][56FB92]double-tap[-][/c] an employee to get them to go to their desk.",
+                    "To develop the product, capture the value your employees produce by [c][56FB92]tapping[-][/c] on the icons that appear above them.",
+                    "Employees can produce [c][82D6FD]design[-][/c], [c][82D6FD]engineering[-][/c], or [c][82D6FD]marketing[-][/c] points for your products. Certain products rely more on heavily on some of these features. Happy employees may have [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
+                    "Try to get bonus multipliers by chaining feature points together!"
+                }, true);
+            }
+            Company.BeganProduct -= BeganProduct;
         }
     }
+
+    void CompletedProduct(Product p, Company c) {
+        if (c == data.company) {
+            if (Stage(OBS.COMPLETED_PRODUCT)) {
+                MentorMessages(new string[] {
+                    "Congratulations! You've completed your first product.",
+                    "It will start generating revenue, depending on its final design, engineering, and marketing values.",
+                    "Next to the product's revenue is the market share of the product. Products make more money if they have a larger share of the market. You can increase your market share by expanding to new locations and building better products.",
+                    "To make better products you need to assemble a talented team.",
+                    "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
+                }, true);
+            } else if (Stage(OBS.OTHER_PRODUCT_ASPECTS)) {
+                MentorMessages(new string[] {
+                    "There are a few other factors which can affect a product's in-market performance.",
+                    "All products will be affected by the state of the economy. During downturns, consumers spend less and so your products will generate less revenue. In boom times, the opposite is true.",
+                    "Sometimes you may have a brilliant product combination, but lack the necessary technology to really make it work. In this case, the product just won't perform as well - research the missing technology and try again.",
+                    "Finally, some products compliment each other when they are in the market together. The synergy of these products will cause them both to sell a lot better. You'll have to experiment to see what works!"
+                }, true);
+            } else if (Stage(OBS.RESEARCH)) {
+                MentorMessages(new string[] {
+                    "You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge research.",
+                    "You can manage your research budget in the [c][4B2FF8]Accounting[-][/c] menu item, which influences how much research points you generate.",
+                    "Spend research points to purchase new technologies in the [c][4B2FF8]Research[-][/c] menu item. New technologies can unlock new product types, special projects, and provide other bonuses. Stay ahead of the competition!"
+                }, true);
+                UIManager uim = UIManager.Instance;
+                uim.statusBar.researchLabel.gameObject.SetActive(true);
+                uim.menu.Activate("Research");
+                Product.Completed -= CompletedProduct;
+            }
+        }
+    }
+
+    void WorkerHired(Worker w, Company c) {
+        if (c == data.company && !ob.PERKS_UNLOCKED && c.workers.Count >= 2) {
+            MentorMessages(new string[] {
+                "Now that you have a few employees, you want to maximize their productivity and happiness.",
+                "Productive employees are easier to manage and happy employees can have valuable breakthroughs during product development and attract better talent.",
+                "A great way to accomplish this is through perks. You can purchase and upgrade perks for your company through the [c][4B2FF8]Perks[-][/c] menu item."
+            }, true);
+            UIManager.Instance.menu.Activate("Perks");
+            ob.PERKS_UNLOCKED = true;
+        }
+    }
+
+    void PromoCompleted(Promo p) {
+        if (!ob.HYPE_MINIGAME) {
+            MentorMessages(new string[] {
+                "Completing promotional campaigns gives you the opportunity to garner some allies in the media. The more you have, the better your public image, and the greater the hype around your company.",
+                "[c][56FB92]Flick[-][/c] the puck and hit some influencers to get them on your side. More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
+            }, true);
+            ob.HYPE_MINIGAME = true;
+        }
+    }
+
+    void OnUnlocked(UnlockSet us) {
+        if (us.verticals.Count > 0) {
+            switch (us.verticals[0].name) {
+                case "Finance":
+                    MentorMessages(new string[] {
+                        "Financial products can be extremely useful in your growth strategy.",
+                        "Through credit cards and other financial schemes, you can fund consumption well beyond consumers' means. Financial products will typically increase consumer spending, thus making all your products more profitable!",
+                    }, true);
+                    break;
+                case "Defense":
+                    MentorMessages(new string[] {
+                        "Building defense products may seem unethical, but they generally lead to lucrative government contract lump-sums which are invaluable for funding your continued expansion."
+                    }, true);
+                    break;
+                case "Entertainment":
+                    MentorMessages(new string[] {
+                        "Promotional campaigns are great, but the most efficient way to manage public perception is through entertainment and media companies.",
+                        "Entertainment products help consumers forget the dreariness or difficulty of their lives. Fortunately, these distractions also help them forget about your company's transgressions more quickly."
+                    }, true);
+                    break;
+                default:
+                    if (!ob.VERTICALS_UNLOCKED) {
+                        MentorMessages(new string[] {
+                            "Now that you've unlocked another vertical, you should consider saving up some capital to expand into it.",
+                            string.Format("Verticals provide access to new product types and technologies so you can {0} even further. Manage your verticals in the [c][4B2FF8]Vertical[-][/c] menu item.", innovate)
+                        }, true);
+                        UIManager.Instance.menu.Activate("Verticals");
+                        ob.VERTICALS_UNLOCKED = true;
+                    }
+                    break;
+            }
+
+        } else if (us.locations.Count > 0 && !ob.LOCATIONS_UNLOCKED) {
+            MentorMessages(new string[] {
+                "A new location is available for you to expand to. Locations allow you to increase your share of existing markets or establish a foothold in new ones, and also provide capacity for more infrastructure. Some locations have special bonuses too. Manage your locations in the [c][4B2FF8]Location[-][/c] menu item."
+            }, true);
+            UIManager.Instance.menu.Activate("Locations");
+            ob.LOCATIONS_UNLOCKED = true;
+
+        } else if (us.specialProjects.Count > 0 && !ob.SPECIALPROJECTS_UNLOCKED) {
+            MentorMessages(new string[] {
+                "Your first special project is available. Special projects are one-off products which can have world-changing effects. In order to build one, you need to have built some prerequisite products beforehand. Manage special projects in the [c][4B2FF8]Special Projects[-][/c] menu item."
+            }, true);
+            UIManager.Instance.menu.Activate("Special Projects");
+            ob.SPECIALPROJECTS_UNLOCKED = true;
+        }
+    }
+
+    void OfficeUpgraded(Office o) {
+        if (o.type == Office.Type.Campus) {
+            MentorMessages(new string[] {
+                "Your company is impressively large now! But it could still be larger.",
+                "It's harder to innovate on your own, but with all of your capital you can buy up other companies now. Manage these purchases through the [c][4B2FF8]Acquisitions[-][/c]"
+            }, true);
+            UIManager.Instance.menu.Activate("Acquisitions");
+        }
+    }
+
+    string innovate = "[c][FFE587]i[-][4B2FF8]n[-]n[79ECDD]o[-][FC5656]v[-][EFB542]a[-][78E09E]t[-][E0FFFB]e[-][/c]";
 }

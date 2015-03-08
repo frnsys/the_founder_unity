@@ -132,13 +132,6 @@ public class UINewProductFlow : MonoBehaviour {
         return (gm.playerCompany.availableInfrastructure - selectionInf) >= pt.requiredInfrastructure;
     }
 
-    // Go to the point allocation page.
-    public void ConfirmSelection() {
-        // Not very elegant, but ping the narrative manager
-        // to see if anything needs to be displayed.
-        gm.narrativeManager.ProgressOnboarding();
-    }
-
     public void BeginProductDevelopment() {
         UIManager.Instance.Confirm("Are you happy with this product configuration?", BeginProductDevelopment_, null);
     }
@@ -146,10 +139,6 @@ public class UINewProductFlow : MonoBehaviour {
     private void BeginProductDevelopment_() {
         gm.playerCompany.StartNewProduct(productTypes, 0, 0, 0);
         SendMessageUpwards("Close");
-
-        // Not very elegant, but ping the narrative manager
-        // to see if anything needs to be displayed.
-        gm.narrativeManager.ProgressOnboarding();
     }
 }
 

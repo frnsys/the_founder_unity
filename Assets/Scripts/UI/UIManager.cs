@@ -35,6 +35,15 @@ public class UIManager : Singleton<UIManager> {
     public GameObject selectWorkerPopupPrefab;
     public GameObject hiringPrefab;
 
+    public UIMenu menu;
+    public void OpenMenu() {
+        menu.gameObject.SetActive(true);
+    }
+    public void CloseMenu() {
+        menu.gameObject.SetActive(false);
+    }
+    public UIStatusBar statusBar;
+
     private struct Ping {
         public string note;
         public Color color;

@@ -242,7 +242,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 784, y: 948, z: 0}
+  m_Size: {x: 533, y: 948, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -272,7 +272,7 @@ MonoBehaviour:
     relative: 1
     absolute: -20
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: .213235319, g: .211667418, b: .211667418, a: 1}
   mPivot: 4
   mWidth: 346
   mHeight: 360
@@ -301,6 +301,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -392,7 +395,7 @@ MonoBehaviour:
     relative: .5
     absolute: 200
   updateAnchors: 1
-  mColor: {r: .240376323, g: .680731833, b: .860294104, a: 1}
+  mColor: {r: 1, g: .936274469, b: .705882311, a: 1}
   mPivot: 4
   mWidth: 400
   mHeight: 400
@@ -458,7 +461,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 1
-  startingRenderQueue: 5000
+  startingRenderQueue: 8000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -512,13 +515,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: .00392156886}
   mPivot: 4
-  mWidth: 784
+  mWidth: 533
   mHeight: 948
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .827004194
+  aspectRatio: .562236309
   mType: 0
   mFillDirection: 4
   mFillAmount: 1

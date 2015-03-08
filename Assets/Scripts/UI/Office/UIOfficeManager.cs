@@ -127,6 +127,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         }
     }
 
+    static public event System.Action<Office> OfficeUpgraded;
     public void UpgradeOffice() {
         Office next = currentOffice.nextOffice;
         UIManager.Instance.Confirm(string.Format("Are you sure want to upgrade your office? It will cost you {0:C0}.", next.cost),
@@ -169,6 +170,9 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
         upgradeButton.SetActive(false);
         officeUpgradeTriggered = false;
+
+        if (OfficeUpgraded != null)
+            OfficeUpgraded(currentOffice);
     }
 
     public void SetupOfficeUI(GameObject[] prefabs, Transform[] targets) {
