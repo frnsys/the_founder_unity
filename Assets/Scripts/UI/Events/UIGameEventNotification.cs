@@ -57,13 +57,13 @@ public class UIGameEventNotification: UIEffectAlert {
 
     private string ProcessText(string text, bool slugify) {
         if (slugify) {
-            text = text.Replace("<PLAYERCOMPANY>", companyName);
-            text = text.Replace("<AICOMPANY>", aiCompanyName);
-            text = text.Replace("<COFOUNDER>", cofounderName);
-        } else {
             text = text.Replace("<PLAYERCOMPANY>", Slugify(companyName));
             text = text.Replace("<AICOMPANY>", Slugify(aiCompanyName));
             text = text.Replace("<COFOUNDER>", Slugify(cofounderName));
+        } else {
+            text = text.Replace("<PLAYERCOMPANY>", companyName);
+            text = text.Replace("<AICOMPANY>", aiCompanyName);
+            text = text.Replace("<COFOUNDER>", cofounderName);
         }
         return text;
     }
@@ -106,6 +106,7 @@ public class UIGameEventNotification: UIEffectAlert {
 
 
     public string Slugify(string str) {
+        str = str.ToLower();
         str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
         str = Regex.Replace(str, @"\s+", " ").Trim();
         str = Regex.Replace(str, @"\s", "_");
