@@ -17,17 +17,14 @@ public class UIMentor : UIPopup {
         overlay.gameObject.SetActive(true);
         StartCoroutine(FadeOverlay(0f, overlayAlpha));
         StartCoroutine(ScaleModel(new Vector3(40, 0, 40), new Vector3(40, 40, 40)));
-
-        GameManager.Instance.Pause();
     }
 
     public void Hide() {
+        GameManager.Instance.Resume();
         StartCoroutine(FadeOverlay(overlayAlpha, 0f));
         StartCoroutine(ScaleModel(model.transform.localScale, new Vector3(40, 0, 40)));
         base.Hide(box);
         base.Hide(shadow);
-
-        GameManager.Instance.Resume();
     }
 
     public string message {
@@ -52,17 +49,19 @@ public class UIMentor : UIPopup {
 
     private IEnumerator ScaleModel(Vector3 from, Vector3 to) {
         // Scale the model up and down, with a little bounciness.
-        float step = 0.05f;
+        float step = 0.1f;
         Vector3 to_ = to * 1.1f;
         for (float f = 0f; f <= 1f + step; f += step) {
             model.transform.localScale = Vector3.Lerp(from, to_, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
 
-        step = 0.2f;
+        step = 4f;
         for (float f = 0f; f <= 1f + step; f += step) {
             model.transform.localScale = Vector3.Lerp(to_, to, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
+
+        GameManager.Instance.Pause();
     }
 }

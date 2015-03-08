@@ -46,6 +46,6 @@ public class AudioManager : Singleton<AudioManager> {
 
     public void PlayMenuMusic() {
         music.clip = menuClip;
-        music.Play();
+        //music.Play();
     }
 }

@@ -57,7 +57,7 @@ public class UnlockSet {
         }
 
         if (Unlocked != null)
-            Unlocked(this);
+            Unlocked(us);
     }
 
     private bool Duplicate<T>(T obj, List<T> objs) where T : Object {

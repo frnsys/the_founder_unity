@@ -22,7 +22,7 @@ public abstract class UIPopup : MonoBehaviour {
     protected IEnumerator Scale(GameObject target, float from, float to, Action<GameObject> cb = null) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.1f;
+        float step = 0.15f;
 
         for (float f = 0f; f <= 1f + step; f += step) {
             // SmoothStep gives us a bit of easing.
