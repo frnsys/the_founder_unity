@@ -60,7 +60,8 @@ public class EffectSet {
         Immortal,
         Cloneable,
         Prescient,
-        WorkerInsight
+        WorkerInsight,
+        FounderAI
     }
 
     public EffectSet Clone() {

@@ -16,7 +16,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public bool officeUpgradeTriggered;
 
     public GameObject officeArea;
-    public GameObject officeUIPanel;
     public GameObject upgradeButton;
 
     public GameObject employeeHUDs;
@@ -31,7 +30,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     }
 
     void Awake() {
-        DontDestroyOnLoad(gameObject);
         StartCoroutine(DayNightCycle());
     }
 
@@ -173,21 +171,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
         if (OfficeUpgraded != null)
             OfficeUpgraded(currentOffice);
-    }
-
-    public void SetupOfficeUI(GameObject[] prefabs, Transform[] targets) {
-        // Cleanup existing office UI.
-        Transform trans = officeUIPanel.transform;
-        while (trans.childCount > 0)
-            NGUITools.Destroy(trans.GetChild(0).gameObject);
-
-        for (int i=0; i < prefabs.Length; i++) {
-            GameObject obj = NGUITools.AddChild(officeUIPanel, prefabs[i]);
-            UIFollowTarget uift = obj.GetComponent<UIFollowTarget>();
-            uift.target = targets[i];
-            uift.disableIfInvisible = false;
-            uift.gameCamera = OfficeCamera;
-        }
     }
 
     void RandomlyPlaceEmployee(GameObject obj) {

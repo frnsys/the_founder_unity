@@ -255,6 +255,9 @@ public class GameManager : Singleton<GameManager> {
             case EffectSet.Special.WorkerInsight:
                 data.workerInsight = true;
                 break;
+            case EffectSet.Special.FounderAI:
+                narrativeManager.GameWon();
+                break;
         }
     }
 
@@ -307,7 +310,6 @@ public class GameManager : Singleton<GameManager> {
     }
 
     static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> PerformanceReport;
-    static public event System.Action<Company> GameLost;
     IEnumerator Monthly() {
         int monthTime = weekTime*4;
         yield return new WaitForSeconds(monthTime);
@@ -338,7 +340,7 @@ public class GameManager : Singleton<GameManager> {
 
                 // Lose condition:
                 if (data.board.happiness < -20)
-                    GameLost(playerCompany);
+                    narrativeManager.GameLost();
             }
 
             yield return new WaitForSeconds(monthTime);

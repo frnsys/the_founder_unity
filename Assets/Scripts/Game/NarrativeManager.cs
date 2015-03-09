@@ -366,4 +366,32 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     string innovate = "[c][FC5656]i[-][FFC800]n[-][78E09E]n[-][79ECDD]o[-][4B2FF8]v[-][FD7EFF]a[-][FC5656]t[-][FFC800]e[-][/c]";
+
+    public void GameLost() {
+        MentorMessages(new string[] {
+            "Appalled by your inability to maintain the growth they are legally entitled to, the board has forced your resignation. You lose.",
+            "But you don't really lose. You have secured your place in a class shielded from any real consequence or harm. You'll be fine. You could always found another company.",
+            "GAME OVER."
+        }, delegate(GameObject obj) {
+            Application.LoadLevel("MainMenu");
+        });
+    }
+
+    public void GameWon() {
+        MentorMessages(new string[] {
+            "Slowly, over the years, the vast network of sensors and extremities of some unknown project were constructed and distributed, the public clamoring desperately for each shiny piece.",
+            "Each piece - each gadget and every app - was always quietly listening and watching and collecting data in their pockets and on their bodies and in their heads.",
+            "It only took the brilliant innovation of The Founder to unify this fabric of disparate technology into its grand, unified destiny, dubbed \"The Founder AI\".",
+            "The Founder AI would generate the most detailed and accurate of consumer taste profiles, down to impossibly accurate predictions of behavior in every sphere of life.",
+            "In its ultimate efficiency and rationality, and with the world's automated infrastructure at its reigns, it would allocate resources, command employees, manage campaigns, and so much more, at global optima previously only theorized.",
+            "Profit could be indisputably maximized by the complex interactions of intricate mathematical models capturing even the smallest aspects of life and market society.",
+            "On the inaugural day of The Founder AI, you receive an email.",
+            "You are being let go.",
+            "Yes, you, The Founder, are an obstruction to the company's continued expansion.",
+            "And so you melt into the impoverished population, finally betrayed by the oppressive logic, forever left to wander the terrible world it has shaped.",
+            "GAME OVER."
+        }, delegate(GameObject obj) {
+            Application.LoadLevel("MainMenu");
+        });
+    }
 }

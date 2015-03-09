@@ -69,10 +69,6 @@ public class UIManager : Singleton<UIManager> {
         }
     }
 
-    void Awake() {
-        DontDestroyOnLoad(gameObject);
-    }
-
     void OnEnable() {
         gm = GameManager.Instance;
         GameEvent.EventTriggered += OnEvent;
@@ -81,7 +77,6 @@ public class UIManager : Singleton<UIManager> {
         Recruitment.Completed += OnRecruitmentCompleted;
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
-        GameManager.GameLost += OnGameLost;
         Company.Paid += OnPaid;
         Company.BeganProduct += OnBeganProduct;
 
@@ -96,7 +91,6 @@ public class UIManager : Singleton<UIManager> {
         Recruitment.Completed -= OnRecruitmentCompleted;
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
-        GameManager.GameLost -= OnGameLost;
         Company.Paid -= OnPaid;
         Company.BeganProduct -= OnBeganProduct;
     }
@@ -189,11 +183,6 @@ public class UIManager : Singleton<UIManager> {
         UIManager.Instance.Alert(
             string.Format("Happy {0}{1} birthday! I called the doctor today - she estimates you'll live another {2}-{3} years.", age, ending, 40-age, 60-age)
         );
-    }
-
-    void OnGameLost(Company company) {
-        Alert("Appalled by your inability to maintain the growth they are legally entitled to, the board has forced your resignation. You lose.");
-        Alert("But you don't really lose. Because you have secured your place in a class shielded from any real consequence or harm. You'll be fine. You could always found another company.");
     }
 
     [HideInInspector]

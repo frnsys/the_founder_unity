@@ -1402,36 +1402,6 @@ MonoBehaviour:
   cameraBounds: {x: -51.9000015, y: 3, z: -29.2600002, w: 6}
   cameraSizeLimits: {x: 6, y: 12}
   upgradeButtonPosition: {x: -45.7299995, y: -2.33999991, z: 6.19999981}
-  uiObjects:
-  - {fileID: 100002, guid: bbd652ab741ad447f8b95e92d923199e, type: 2}
-  - {fileID: 100000, guid: 985f2c75204ce48c785a87e14146be5d, type: 2}
-  - {fileID: 100000, guid: 7a9080f7b0b63443186755b83c6d6831, type: 2}
-  - {fileID: 100000, guid: 99ae1c0b7187f4ea897b659fc268fd1d, type: 2}
-  - {fileID: 100002, guid: b3bbbe46385844b9092645a04864096a, type: 2}
-  - {fileID: 100000, guid: ddea970286c71470383385c6bda5efd7, type: 2}
-  - {fileID: 100002, guid: 4dfcaec4df32f4c86ac173ef1e3cae8a, type: 2}
-  - {fileID: 100002, guid: 9fcdbf39f43d94c71a98c02fe249b1a8, type: 2}
-  - {fileID: 100000, guid: 65de7fa6b8fc14f6d9591e84ba06c4a0, type: 2}
-  - {fileID: 100002, guid: 8b7f7648adf9e4055b1e68737983518d, type: 2}
-  - {fileID: 100002, guid: af842dce4a43a44c4952849d17238e4c, type: 2}
-  - {fileID: 100002, guid: c933070e2d62f4ec090b5d20e30b145e, type: 2}
-  - {fileID: 100002, guid: 2dc7a9221da4442ec95614b21969cc02, type: 2}
-  - {fileID: 100000, guid: 20bf8ac8249be4586bc270f96e74900b, type: 2}
-  uiTargets:
-  - {fileID: 913603130}
-  - {fileID: 1344930849}
-  - {fileID: 60012674}
-  - {fileID: 1021331124}
-  - {fileID: 158932350}
-  - {fileID: 514197017}
-  - {fileID: 503114860}
-  - {fileID: 903131757}
-  - {fileID: 649542072}
-  - {fileID: 1310999842}
-  - {fileID: 1552855367}
-  - {fileID: 1253457092}
-  - {fileID: 1428995074}
-  - {fileID: 1954719084}
   desks:
   - occupied: 0
     transform: {fileID: 1488843629}
@@ -7523,40 +7493,6 @@ MonoBehaviour:
   cameraBounds: {x: -203.5, y: -3.0999999, z: -120, w: 50}
   cameraSizeLimits: {x: 18, y: 40}
   upgradeButtonPosition: {x: 0, y: 0, z: 0}
-  uiObjects:
-  - {fileID: 100002, guid: bbd652ab741ad447f8b95e92d923199e, type: 2}
-  - {fileID: 100000, guid: 985f2c75204ce48c785a87e14146be5d, type: 2}
-  - {fileID: 100000, guid: 7a9080f7b0b63443186755b83c6d6831, type: 2}
-  - {fileID: 100000, guid: 99ae1c0b7187f4ea897b659fc268fd1d, type: 2}
-  - {fileID: 100002, guid: b3bbbe46385844b9092645a04864096a, type: 2}
-  - {fileID: 100000, guid: ddea970286c71470383385c6bda5efd7, type: 2}
-  - {fileID: 100002, guid: 4dfcaec4df32f4c86ac173ef1e3cae8a, type: 2}
-  - {fileID: 100002, guid: 9fcdbf39f43d94c71a98c02fe249b1a8, type: 2}
-  - {fileID: 100000, guid: 65de7fa6b8fc14f6d9591e84ba06c4a0, type: 2}
-  - {fileID: 100002, guid: 8b7f7648adf9e4055b1e68737983518d, type: 2}
-  - {fileID: 100002, guid: af842dce4a43a44c4952849d17238e4c, type: 2}
-  - {fileID: 100002, guid: c933070e2d62f4ec090b5d20e30b145e, type: 2}
-  - {fileID: 100002, guid: 2dc7a9221da4442ec95614b21969cc02, type: 2}
-  - {fileID: 100000, guid: 20bf8ac8249be4586bc270f96e74900b, type: 2}
-  - {fileID: 100000, guid: 2152d426d38e54e4db21f574b4772c7c, type: 2}
-  - {fileID: 100002, guid: 0d471b0044b6f494b87ea10a10da1911, type: 2}
-  uiTargets:
-  - {fileID: 1139687028}
-  - {fileID: 251550626}
-  - {fileID: 575384125}
-  - {fileID: 1010774241}
-  - {fileID: 1966184617}
-  - {fileID: 1951342860}
-  - {fileID: 482541455}
-  - {fileID: 2120797707}
-  - {fileID: 1722490722}
-  - {fileID: 305235814}
-  - {fileID: 2076477250}
-  - {fileID: 368745683}
-  - {fileID: 1171870428}
-  - {fileID: 491040973}
-  - {fileID: 355610965}
-  - {fileID: 1536504231}
   desks:
   - occupied: 0
     transform: {fileID: 1733050096}
@@ -18178,22 +18114,6 @@ MonoBehaviour:
   cameraBounds: {x: -9, y: 6, z: -.5, w: 8.30000019}
   cameraSizeLimits: {x: 6, y: 12}
   upgradeButtonPosition: {x: -1.13999999, y: -2.33999991, z: .569999993}
-  uiObjects:
-  - {fileID: 100002, guid: bbd652ab741ad447f8b95e92d923199e, type: 2}
-  - {fileID: 100000, guid: 985f2c75204ce48c785a87e14146be5d, type: 2}
-  - {fileID: 100000, guid: 7a9080f7b0b63443186755b83c6d6831, type: 2}
-  - {fileID: 100000, guid: 99ae1c0b7187f4ea897b659fc268fd1d, type: 2}
-  - {fileID: 100002, guid: b3bbbe46385844b9092645a04864096a, type: 2}
-  - {fileID: 100000, guid: ddea970286c71470383385c6bda5efd7, type: 2}
-  - {fileID: 100002, guid: e88cc8caa3d3c40c6ba40e923c343249, type: 2}
-  uiTargets:
-  - {fileID: 1985213925}
-  - {fileID: 915634185}
-  - {fileID: 738463905}
-  - {fileID: 497230707}
-  - {fileID: 700746028}
-  - {fileID: 395134930}
-  - {fileID: 1223569122}
   desks:
   - occupied: 0
     transform: {fileID: 1434810352}
@@ -20506,8 +20426,6 @@ MonoBehaviour:
   specialProjectCompletedAlertPrefab: {fileID: 100024, guid: f2b23ea7a772949e38e00d27e3b78bfe,
     type: 2}
   competitorProductCompletedAlertPrefab: {fileID: 100024, guid: 4b61f11665f7e44e8a32d5f966f685a3,
-    type: 2}
-  selectWorkerPopupPrefab: {fileID: 100022, guid: adaf7bbd39ee24679b372560014490d3,
     type: 2}
   hiringPrefab: {fileID: 100020, guid: 130742e47ccde4724b6f96656fe5c13a, type: 2}
   menu: {fileID: 1275237010}
@@ -34708,7 +34626,6 @@ MonoBehaviour:
   officeCameraController: {fileID: 1105655469}
   officeUpgradeTriggered: 0
   officeArea: {fileID: 701778264}
-  officeUIPanel: {fileID: 1645570737}
   upgradeButton: {fileID: 1316899685}
   employeeHUDs: {fileID: 1858312108}
   employeeGroup: {fileID: 264071009}

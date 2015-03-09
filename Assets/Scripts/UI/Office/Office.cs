@@ -37,13 +37,6 @@ public class Office : MonoBehaviour {
     // Where the office upgrade button should be positioned.
     public Vector3 upgradeButtonPosition;
 
-    // The UI objects (in-office buttons) and
-    // the UI targets the they should follow.
-    // These targets should match by index,
-    // i.e. the i-th object should match with the i-th target.
-    public GameObject[] uiObjects;
-    public Transform[] uiTargets;
-
     // Desks the employees can occupy.
     [System.Serializable]
     public class Desk {
@@ -63,7 +56,6 @@ public class Office : MonoBehaviour {
     public Office nextOffice;
 
     void OnEnable() {
-        UIOfficeManager.Instance.SetupOfficeUI(uiObjects, uiTargets);
         Company.PerkBought += ShowPerk;
     }
 
