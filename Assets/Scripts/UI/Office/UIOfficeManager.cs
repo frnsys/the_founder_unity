@@ -16,8 +16,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public bool officeUpgradeTriggered;
 
     public GameObject officeArea;
-    public GameObject upgradeButton;
-
     public GameObject employeeHUDs;
     public GameObject employeeGroup;
     public GameObject employeePrefab;
@@ -31,6 +29,11 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
     void Awake() {
         StartCoroutine(DayNightCycle());
+
+        if (officeUpgradeTriggered)
+            UIManager.Instance.menu.Activate("Upgrade Office");
+        else
+            UIManager.Instance.menu.Deactivate("Upgrade Office");
     }
 
     void OnEnable() {
@@ -80,8 +83,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
                 // TESTING, the production delay should be longer
                 StartCoroutine(GameEvent.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f));
 
-                upgradeButton.GetComponent<UIFollowTarget>().target.localPosition = currentOffice.upgradeButtonPosition;
-                upgradeButton.SetActive(true);
+                UIManager.Instance.menu.Activate("Upgrade Office");
             }
         }
     }
@@ -166,7 +168,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
             currentOffice.ShowPerk(p);
         }
 
-        upgradeButton.SetActive(false);
+        UIManager.Instance.menu.Deactivate("Upgrade Office");
         officeUpgradeTriggered = false;
 
         if (OfficeUpgraded != null)

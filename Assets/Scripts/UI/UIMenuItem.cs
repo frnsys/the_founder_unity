@@ -6,6 +6,8 @@ public class UIMenuItem : MonoBehaviour {
 
     void OnClick() {
         UIManager.Instance.CloseMenu();
-        UIManager.Instance.OpenPopup(window);
+
+        if (window != null)
+            UIManager.Instance.OpenPopup(window);
     }
 }
