@@ -217,7 +217,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "There are a few different recruiting methods which vary in cost and quality of candidate.",
                         "For now you should probably keep costs low and go by word-of-mouth. Give it a try. You'll be notified about the candidates when recruiting has finished."
                     });
-                    UIManager.Instance.menu.Activate("Recruiting");
                 }
                 break;
 
@@ -265,6 +264,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "To make better products you need to assemble a talented team.",
                     "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
                 });
+                UIManager.Instance.menu.Activate("Recruiting");
             } else if (Stage(OBS.OTHER_PRODUCT_ASPECTS)) {
                 MentorMessages(new string[] {
                     "There are a few other factors which can affect a product's in-market performance.",
