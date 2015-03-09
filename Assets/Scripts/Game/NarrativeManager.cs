@@ -245,7 +245,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "You need employees at their desks so they can work on the product.",
                     "Productive workers will diligently head to their desk, but others must be nudged. [c][56FB92]double-tap[-][/c] an employee to get them to go to their desk.",
                     "To develop the product, capture the value your employees produce by [c][56FB92]tapping[-][/c] on the icons that appear above them.",
-                    "Employees can produce [c][82D6FD]design[-][/c], [c][82D6FD]engineering[-][/c], or [c][82D6FD]marketing[-][/c] points for your products. Certain products rely more on heavily on some of these features. Happy employees may have [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
+                    "Employees can produce [c][82D6FD]design[-][/c], [c][82D6FD]engineering[-][/c], or [c][82D6FD]marketing[-][/c] points for your products.",
+                    "Certain products rely more on heavily on some of these features. Happy employees may have [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
                     "Try to get bonus multipliers by chaining feature points together!"
                 });
             }

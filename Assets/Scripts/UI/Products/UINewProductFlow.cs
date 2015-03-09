@@ -65,7 +65,8 @@ public class UINewProductFlow : MonoBehaviour {
     // Load product types into the grid.
     private void LoadProductTypes() {
         productTypeItems.Clear();
-        foreach (ProductType pt in gm.unlocked.productTypes.Where(p => p.isAvailable(gm.playerCompany))) {
+        //foreach (ProductType pt in gm.unlocked.productTypes.Where(p => p.isAvailable(gm.playerCompany))) {
+        foreach (ProductType pt in ProductType.LoadAll()) { // TEMP
             GameObject productType = NGUITools.AddChild(grid.gameObject, productTypePrefab);
             UIEventListener.Get(productType).onClick += SelectProductType;
             productType.GetComponent<UIProductType>().productType = pt;
