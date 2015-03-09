@@ -28,8 +28,6 @@ public class ProductRecipeManager : ManagerWindow<ProductRecipe> {
         EditorGUILayout.LabelField("Description");
         target.description = EditorGUILayout.TextArea(target.description, GUILayout.Height(50));
 
-        target.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", target.mesh, typeof(Mesh), false);
-
         if (target.revenueModel == null)
             target.revenueModel = new AnimationCurve();
         target.revenueModel = EditorGUILayout.CurveField("Revenue Model", target.revenueModel, GUILayout.Height(50));

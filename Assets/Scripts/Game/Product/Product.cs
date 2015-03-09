@@ -39,12 +39,7 @@ public class Product : HasStats {
     public bool techPenalty;
     public bool synergy;
 
-    public Mesh mesh {
-        get {
-            // Fallback to first product type's mesh.
-            return recipe.mesh != null ? recipe.mesh : productTypes[0].mesh;
-        }
-    }
+    public Mesh[] meshes;
 
     public float requiredProgress;
 
@@ -144,6 +139,11 @@ public class Product : HasStats {
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
+
+        meshes = new Mesh[] {
+            pts[0].mesh,
+            pts[1].mesh
+        };
 
         // This is 6 weeks at 12cycles/week.
         // Each progress is one cycle.

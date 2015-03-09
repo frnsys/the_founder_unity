@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class UIProductCompletedAlert : UIEffectAlert {
     public UILabel nameLabel;
     public UILabel aspectsLabel;
-    public GameObject productObject;
+    public GameObject[] productObjects;
 
     public List<UILabel> featureLabels;
 
@@ -15,7 +15,9 @@ public class UIProductCompletedAlert : UIEffectAlert {
             nameLabel.text = value.name;
             bodyLabel.text = value.description;
 
-            productObject.GetComponent<MeshFilter>().mesh = value.mesh;
+            for (int i=0; i<value.meshes.Length; i++) {
+                productObjects[i].GetComponent<MeshFilter>().mesh = value.meshes[i];
+            }
 
             featureLabels[0].text = string.Format("{0:0}", value.design.value);
             featureLabels[1].text = string.Format("{0:0}", value.engineering.value);
@@ -34,7 +36,9 @@ public class UIProductCompletedAlert : UIEffectAlert {
 
     void Update() {
         // Rotate the product, fancy.
-        productObject.transform.Rotate(0,0,0.5f);
+        for (int i=0; i<productObjects.Length; i++) {
+            productObjects[i].transform.Rotate(0,0,0.5f);
+        }
     }
 }
 

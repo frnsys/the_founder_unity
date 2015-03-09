@@ -26,8 +26,6 @@ internal class ProductRecipeInspector : Editor {
         EditorGUILayout.LabelField("Description");
         p.description = EditorGUILayout.TextArea(p.description, GUILayout.Height(50));
 
-        p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
-
         EditorGUILayout.PropertyField(serializedObject.FindProperty("synergies"), true);
 
         p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);

@@ -36,7 +36,9 @@ public class UIProduct : UIEffectItem {
             SetData();
 
             // Rotate the product, fancy.
-            productObject.transform.Rotate(0,0,-50*Time.deltaTime);
+            for (int i=0; i<productObjects.Length; i++) {
+                productObjects[i].transform.Rotate(0,0,0.5f);
+            }
         }
     }
 
@@ -45,14 +47,18 @@ public class UIProduct : UIEffectItem {
             name.text = product_.genericName;
             status.text = "Developing...";
             description.gameObject.SetActive(false);
-            productObject.SetActive(false);
+            for (int i=0; i<product_.meshes.Length; i++) {
+                productObjects[i].SetActive(false);
+            }
         } else {
             name.text = product_.name;
             progress.gameObject.SetActive(false);
             description.gameObject.SetActive(true);
 
-            productObject.GetComponent<MeshFilter>().mesh = product.mesh;
-            productObject.SetActive(true);
+            for (int i=0; i<product_.meshes.Length; i++) {
+                productObjects[i].GetComponent<MeshFilter>().mesh = product_.meshes[i];
+                productObjects[i].SetActive(true);
+            }
 
             RenderEffects(product_.effects);
             AdjustEffectsHeight();
@@ -80,7 +86,7 @@ public class UIProduct : UIEffectItem {
     public UILabel description;
     public UIButton shutdown;
     public UIProgressBar progress;
-    public GameObject productObject;
+    public GameObject[] productObjects;
 }
 
 

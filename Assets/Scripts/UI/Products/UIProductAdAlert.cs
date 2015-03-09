@@ -6,12 +6,14 @@ using System.Collections.Generic;
 public class UIProductAdAlert: UIAlert {
     public UILabel nameLabel;
     public UILabel companyLabel;
-    public GameObject productObject;
+    public GameObject[] productObjects;
 
     public Product product {
         set {
             nameLabel.text = value.name;
-            productObject.GetComponent<MeshFilter>().mesh = value.mesh;
+            for (int i=0; i<value.meshes.Length; i++) {
+                productObjects[i].GetComponent<MeshFilter>().mesh = value.meshes[i];
+            }
         }
     }
 
@@ -25,7 +27,9 @@ public class UIProductAdAlert: UIAlert {
 
     void Update() {
         // Rotate the product, fancy.
-        productObject.transform.Rotate(0,0,0.5f);
+        for (int i=0; i<productObjects.Length; i++) {
+            productObjects[i].transform.Rotate(0,0,0.5f);
+        }
     }
 }
 
