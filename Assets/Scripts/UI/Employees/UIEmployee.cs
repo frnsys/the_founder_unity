@@ -165,9 +165,9 @@ public class UIEmployee : MonoBehaviour {
                     ));
                 } else {
                     float roll = Random.value;
-                    if (roll <= 0.33) {
+                    if (roll <= 0.33f) {
                         stat = new Stat("Design", Randomize(worker.creativity.value ));
-                    } else if (roll <= 0.66) {
+                    } else if (roll <= 0.66f) {
                         stat = new Stat("Engineering", Randomize(worker.cleverness.value ));
                     } else {
                         stat = new Stat("Marketing", Randomize(worker.charisma.value ));
@@ -180,7 +180,7 @@ public class UIEmployee : MonoBehaviour {
                 UIOfficeManager.Instance.SetupFollowTarget(this, uift);
             }
 
-            yield return new WaitForSeconds(2 * Random.value);
+            yield return new WaitForSeconds(1.4f * Random.value);
         }
     }
 

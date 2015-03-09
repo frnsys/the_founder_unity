@@ -32,7 +32,6 @@ public class UIManager : Singleton<UIManager> {
     public GameObject productCompletedAlertPrefab;
     public GameObject specialProjectCompletedAlertPrefab;
     public GameObject competitorProductCompletedAlertPrefab;
-    public GameObject selectWorkerPopupPrefab;
     public GameObject hiringPrefab;
 
     public UIMenu menu;
@@ -263,19 +262,6 @@ public class UIManager : Singleton<UIManager> {
         UIPerformanceReport report = NGUITools.AddChild(alertsPanel, quarterlyReportPrefab).GetComponent<UIPerformanceReport>();
         report.BuildReport(results, deltas, board);
         return report;
-    }
-
-    // Show a worker selection popup.
-    public void WorkerSelectionPopup(string title, Action<Worker> confirm, Func<Worker, bool> filter, Worker selected) {
-        IEnumerable<Worker> workers;
-        if (filter != null) {
-            workers = GameManager.Instance.playerCompany.workers.Where(w => filter(w));
-        } else {
-            workers = GameManager.Instance.playerCompany.workers;
-        }
-
-        UISelectWorkerPopup p = NGUITools.AddChild(alertsPanel, selectWorkerPopupPrefab).GetComponent<UISelectWorkerPopup>();
-        p.SetData(title, workers, confirm, selected);
     }
 
     public GameObject hypeMinigame;
