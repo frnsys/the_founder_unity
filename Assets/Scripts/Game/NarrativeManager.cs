@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 public class NarrativeManager : Singleton<NarrativeManager> {
@@ -143,26 +144,34 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     void OnEvent(GameEvent ev) {
         if (ev.name == "First Product Launched") {
-            MentorMessages(new string[] {
-                "Congratulations! This is your first write-up in a major publication.",
-                "This kind of mention has driven up the hype for your company.",
-                "Hype is central to your company's success. A hyped company's products sell much better.",
-                "But hype is always deflating. Keep hyping your company and shape it's public image by launching promotional campaigns from the [c][4B2FF8]Communications[-][/c] menu item.",
-                "But note that some press can be negative, and hurt your company's image.",
-                "Consumers aren't going to buy your products if they disagree with your decisions.",
-                "Consumers forget things over time, and promotional campaigns can also help expedite that process."
-            });
-            UIManager uim = UIManager.Instance;
-            uim.statusBar.hypeLabel.gameObject.SetActive(true);
-            uim.menu.Activate("Communications");
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                MentorMessages(new string[] {
+                    "Congratulations! This is your first write-up in a major publication.",
+                    "This kind of mention has driven up the hype for your company.",
+                    "Hype is central to your company's success. A hyped company's products sell much better.",
+                    "But hype is always deflating. Keep hyping your company and shape it's public image by launching promotional campaigns from the [c][4B2FF8]Communications[-][/c] menu item.",
+                    "But note that some press can be negative, and hurt your company's image.",
+                    "Consumers aren't going to buy your products if they disagree with your decisions.",
+                    "Consumers forget things over time, and promotional campaigns can also help expedite that process."
+                });
+                UIManager uim = UIManager.Instance;
+                uim.statusBar.hypeLabel.gameObject.SetActive(true);
+                uim.menu.Activate("Communications");
+            }));
 
         } else if (ev.name == "RIVALCORP Founded") {
-            MentorMessages(new string[] {
-                "Now seems like a good time to mention that you have some competition.",
-                "Competitors will copy your successful products and steal market share from away from you. If you keep your products better than them, you won't have to worry.",
-                "Competitors will also poach your employees. This kind of activity can drive wages up. This is a lose-lose for everyone - other companies can be cooperative when it comes to dealing with this."
-            });
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                MentorMessages(new string[] {
+                    "Now seems like a good time to mention that you have some competition.",
+                    "Competitors will copy your successful products and steal market share from away from you. If you keep your products better than them, you won't have to worry.",
+                    "Competitors will also poach your employees. This kind of activity can drive wages up. This is a lose-lose for everyone - other companies can be cooperative when it comes to dealing with this."
+                });
+            }));
         }
+    }
+    private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
+        yield return new WaitForSeconds(delay);
+        callback(null);
     }
 
     public void Intro() {
@@ -259,15 +268,17 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     void BeganProduct(Product p, Company c) {
         if (c == data.company) {
             if (Stage(OBS.STARTED_PRODUCT)) {
-                MentorMessages(new string[] {
-                    "Great! You've started developing your first product.",
-                    "You need employees at their desks so they can work on the product.",
-                    "Productive workers will diligently head to their desk, but others must be nudged. [c][56FB92]double-tap[-][/c] an employee to get them to go to their desk.",
-                    "To develop the product, capture the value your employees produce by [c][56FB92]tapping[-][/c] on the icons that appear above them.",
-                    "Employees can produce\n:DESIGN: [c][82D6FD]design[-][/c],\n:ENGINEERING: [c][82D6FD]engineering[-][/c], or\n:MARKETING: [c][82D6FD]marketing[-][/c]\npoints for your products.",
-                    "Certain products rely more on heavily on some of these features. Happy employees may have :BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
-                    "Try to get bonus multipliers by chaining feature points together!"
-                });
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    MentorMessages(new string[] {
+                        "Great! You've started developing your first product.",
+                        "You need employees at their desks so they can work on the product.",
+                        "Productive workers will diligently head to their desk, but others must be nudged. [c][56FB92]double-tap[-][/c] an employee to get them to go to their desk.",
+                        "To develop the product, capture the value your employees produce by [c][56FB92]tapping[-][/c] on the icons that appear above them.",
+                        "Employees can produce\n:DESIGN: [c][82D6FD]design[-][/c],\n:ENGINEERING: [c][82D6FD]engineering[-][/c], or\n:MARKETING: [c][82D6FD]marketing[-][/c]\npoints for your products.",
+                        "Certain products rely more on heavily on some of these features. Happy employees may have :BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
+                        "Try to get bonus multipliers by chaining feature points together!"
+                    });
+                }, 2f));
             }
             Company.BeganProduct -= BeganProduct;
         }
@@ -276,31 +287,37 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     void CompletedProduct(Product p, Company c) {
         if (c == data.company) {
             if (Stage(OBS.COMPLETED_PRODUCT)) {
-                MentorMessages(new string[] {
-                    "Congratulations! You've completed your first product.",
-                    "It will start generating revenue, depending on its final design, engineering, and marketing values.",
-                    "Next to the product's revenue is the market share of the product. Products make more money if they have a larger share of the market.",
-                    "You can increase your market share by expanding to new locations and building better products.",
-                    "To make better products you need to assemble a talented team.",
-                    "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
-                });
-                UIManager.Instance.menu.Activate("Recruiting");
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    MentorMessages(new string[] {
+                        "Congratulations! You've completed your first product.",
+                        "It will start generating revenue, depending on its final design, engineering, and marketing values.",
+                        "Next to the product's revenue is the market share of the product. Products make more money if they have a larger share of the market.",
+                        "You can increase your market share by expanding to new locations and building better products.",
+                        "To make better products you need to assemble a talented team.",
+                        "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
+                    });
+                    UIManager.Instance.menu.Activate("Recruiting");
+                }, 6f));
             } else if (Stage(OBS.OTHER_PRODUCT_ASPECTS)) {
-                MentorMessages(new string[] {
-                    "There are a few other factors which can affect a product's in-market performance.",
-                    "All products will be affected by the state of the economy. During downturns, consumers spend less and so your products will generate less revenue. In boom times, the opposite is true.",
-                    "Sometimes you may have a brilliant product combination, but lack the necessary technology to really make it work. In this case, the product just won't perform as well - research the missing technology and try again.",
-                    "Finally, some products compliment each other when they are in the market together. The synergy of these products will cause them both to sell a lot better. You'll have to experiment to see what works!"
-                });
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    MentorMessages(new string[] {
+                        "There are a few other factors which can affect a product's in-market performance.",
+                        "All products will be affected by the state of the economy. During downturns, consumers spend less and so your products will generate less revenue. In boom times, the opposite is true.",
+                        "Sometimes you may have a brilliant product combination, but lack the necessary technology to really make it work. In this case, the product just won't perform as well - research the missing technology and try again.",
+                        "Finally, some products compliment each other when they are in the market together. The synergy of these products will cause them both to sell a lot better. You'll have to experiment to see what works!"
+                    });
+                }, 6f));
             } else if (Stage(OBS.RESEARCH)) {
-                MentorMessages(new string[] {
-                    "You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge research.",
-                    "You can manage your research budget in the [c][4B2FF8]Accounting[-][/c] menu item, which influences how much research points you generate.",
-                    "Spend research points to purchase new technologies in the [c][4B2FF8]Research[-][/c] menu item. New technologies can unlock new product types, special projects, and provide other bonuses. Stay ahead of the competition!"
-                });
-                UIManager uim = UIManager.Instance;
-                uim.statusBar.researchLabel.gameObject.SetActive(true);
-                uim.menu.Activate("Research");
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    MentorMessages(new string[] {
+                        "You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge research.",
+                        "You can manage your research budget in the [c][4B2FF8]Accounting[-][/c] menu item, which influences how much research points you generate.",
+                        "Spend research points to purchase new technologies in the [c][4B2FF8]Research[-][/c] menu item. New technologies can unlock new product types, special projects, and provide other bonuses. Stay ahead of the competition!"
+                    });
+                    UIManager uim = UIManager.Instance;
+                    uim.statusBar.researchLabel.gameObject.SetActive(true);
+                    uim.menu.Activate("Research");
+                }, 12f));
                 Product.Completed -= CompletedProduct;
             }
         }
@@ -308,13 +325,15 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     void WorkerHired(Worker w, Company c) {
         if (c == data.company && !ob.PERKS_UNLOCKED && c.workers.Count >= 2) {
-            MentorMessages(new string[] {
-                "Now that you have a few employees, you want to maximize their productivity and happiness.",
-                "Productive employees are easier to manage and happy employees can have valuable breakthroughs during product development and attract better talent.",
-                "A great way to accomplish this is through perks. You can purchase and upgrade perks for your company through the [c][4B2FF8]Perks[-][/c] menu item."
-            });
-            UIManager.Instance.menu.Activate("Perks");
-            ob.PERKS_UNLOCKED = true;
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                MentorMessages(new string[] {
+                    "Now that you have a few employees, you want to maximize their productivity and happiness.",
+                    "Productive employees are easier to manage and happy employees can have valuable breakthroughs during product development and attract better talent.",
+                    "A great way to accomplish this is through perks. You can purchase and upgrade perks for your company through the [c][4B2FF8]Perks[-][/c] menu item."
+                });
+                UIManager.Instance.menu.Activate("Perks");
+                ob.PERKS_UNLOCKED = true;
+            }, 6f));
         }
     }
 
