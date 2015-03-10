@@ -175,7 +175,7 @@ public class UIManager : Singleton<UIManager> {
         if (age % 10 == 0) {
             // TO DO this should be a notice event.
             UIManager.Instance.Alert(
-                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {2}-{3} years.", age, 40-age, 60-age)
+                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {1}-{2} years. Can you believe that we founded this company {3} years ago?", age, 40-age, 60-age, age-25)
             );
         }
     }
