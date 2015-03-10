@@ -123,6 +123,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         UIManager uim = UIManager.Instance;
         uim.statusBar.hypeLabel.gameObject.SetActive(false);
         uim.statusBar.researchLabel.gameObject.SetActive(false);
+        uim.menu.Deactivate("New Product");
+        uim.menu.Deactivate("Accounting");
         uim.menu.Deactivate("Special Projects");
         uim.menu.Deactivate("Infrastructure");
         uim.menu.Deactivate("Products");
@@ -174,6 +176,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             "You're not much of a business if haven't got anything to sell. Let's create a product.",
             "Open the menu up and select [c][4B2FF8]New Product[-][/c]."
         });
+        UIManager.Instance.menu.Activate("New Product");
+        UIManager.Instance.menu.Activate("Accounting");
     }
 
     // Checks if it is appropriate to execute the specified stage,

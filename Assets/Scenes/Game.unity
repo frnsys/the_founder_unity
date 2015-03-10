@@ -4602,6 +4602,7 @@ GameObject:
   - 114: {fileID: 291774583}
   - 114: {fileID: 291774582}
   - 65: {fileID: 291774584}
+  - 114: {fileID: 291774585}
   m_Layer: 8
   m_Name: Menu Button
   m_TagString: Untagged
@@ -4720,6 +4721,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 36, y: 36, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &291774585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291774580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511c7511412ff45ada2e85b946c4ba03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &293380862
 GameObject:
   m_ObjectHideFlags: 0
@@ -20204,6 +20216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 1435893506}
+  menuButton: {fileID: 291774585}
 --- !u!1 &1277323834
 GameObject:
   m_ObjectHideFlags: 0
