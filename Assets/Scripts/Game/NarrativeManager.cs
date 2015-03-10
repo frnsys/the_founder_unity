@@ -203,7 +203,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 } else if (Stage(OBS.INFRASTRUCTURE)) {
                     MentorMessages(new string[] {
                         "Products require different kinds of infrastructure to support their growth.",
-                        "They might require [c][82D6FD]datacenters[-][/c], [c][82D6FD]factories[-][/c], [c][82D6FD]labs[-][/c], or [c][82D6FD]studios[-][/c]. All product types have some minimum necessary infrastructure before you can use them.",
+                        "They might require\n:DATACENTER: [c][82D6FD]datacenters[-][/c],\n:FACTORY: [c][82D6FD]factories[-][/c],\n:LAB: [c][82D6FD]labs[-][/c], or\n:STUDIO: [c][82D6FD]studios[-][/c].",
+                        "All product types have some minimum necessary infrastructure before you can use them.",
                         "As products grow in the market, they will use more infrastructure. If there isn't any infrastructure available, products will stop growing and you'll be leaving money on the table.",
                         "You can buy more infrastructure in the [c][4B2FF8]Infrastructure[-][/c] menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.",
                         "The amount of infrastructure you can buy is limited, but you can increase this limit by expanding to new locations - some locations are better for certain infrastructure.",
@@ -259,8 +260,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "You need employees at their desks so they can work on the product.",
                     "Productive workers will diligently head to their desk, but others must be nudged. [c][56FB92]double-tap[-][/c] an employee to get them to go to their desk.",
                     "To develop the product, capture the value your employees produce by [c][56FB92]tapping[-][/c] on the icons that appear above them.",
-                    "Employees can produce [c][82D6FD]design[-][/c], [c][82D6FD]engineering[-][/c], or [c][82D6FD]marketing[-][/c] points for your products.",
-                    "Certain products rely more on heavily on some of these features. Happy employees may have [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
+                    "Employees can produce\n:DESIGN: [c][82D6FD]design[-][/c],\n:ENGINEERING: [c][82D6FD]engineering[-][/c], or\n:MARKETING: [c][82D6FD]marketing[-][/c]\npoints for your products.",
+                    "Certain products rely more on heavily on some of these features. Happy employees may have :BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
                     "Try to get bonus multipliers by chaining feature points together!"
                 });
             }

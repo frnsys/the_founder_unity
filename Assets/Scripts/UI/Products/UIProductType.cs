@@ -8,8 +8,7 @@ public class UIProductType : MonoBehaviour {
         set {
             productType_ = value;
             label.text = productType_.name;
-            infrastructure.text =productType_.requiredInfrastructure.ToString();
-
+            infrastructure.text = productType_.requiredInfrastructure.ToString();
             productObject.GetComponent<MeshFilter>().mesh = productType_.mesh;
         }
     }

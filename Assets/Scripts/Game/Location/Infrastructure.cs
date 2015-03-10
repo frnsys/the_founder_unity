@@ -74,7 +74,7 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         string repr = "";
         foreach(KeyValuePair<Type, int> item in this) {
             if (item.Value > 0)
-                repr += item.Key.ToString() + ":" + item.Value.ToString() + " ";
+                repr += string.Format(":{0}: {1} ", item.Key.ToString().ToUpper(), item.Value.ToString());
         }
         return repr;
     }
