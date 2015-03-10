@@ -13,6 +13,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     [System.Serializable]
     public struct OnboardingState {
+        public bool PRODUCTS_OPENED;
         public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
         public bool LOCATIONS_UNLOCKED;
@@ -124,6 +125,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         uim.statusBar.researchLabel.gameObject.SetActive(false);
         uim.menu.Deactivate("Special Projects");
         uim.menu.Deactivate("Infrastructure");
+        uim.menu.Deactivate("Products");
         uim.menu.Deactivate("Locations");
         uim.menu.Deactivate("Verticals");
         uim.menu.Deactivate("Acquisitions");
@@ -166,8 +168,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         MentorMessages(new string[] {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
-            "[c][FC5656]The Board[-][/c] sets quarterly profit targets for you and requires that you [c][1A9EF2]expand your profits by 12% every quarter[-][/c]. You [i]must[/i] hit these targets.",
+            "[c][FC5656]The Board[-][/c] sets annual profit targets for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c]. You [i]must[/i] hit these targets.",
             "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will dismiss you from the company.",
+            "You can keep track of your profit and other accounting in the [c][4B2FF8]Accounting[-][/c] menu item.",
             "You're not much of a business if haven't got anything to sell. Let's create a product.",
             "Open the menu up and select [c][4B2FF8]New Product[-][/c]."
         });
@@ -207,6 +210,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Remember that you can shutdown products in the [c][4B2FF8]Products[-][/c] menu item to reclaim their infrastructure."
                     });
                     UIManager.Instance.menu.Activate("Infrastructure");
+                    UIManager.Instance.menu.Activate("Products");
                 }
                 break;
 
@@ -228,6 +232,17 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "The minimum salary an candidate is willing to accept is affected by a few things. If your employees are happier than they are, candidates will be willing to take a lower salary. General global salary averages and their current salary, if they are employed, will also have an impact.",
                         "Don't forget - you're fighting to keep a high profit margin - so negotiate with that in mind!"
                     });
+                }
+                break;
+
+            case "Products":
+                if (!ob.PRODUCTS_OPENED) {
+                    MentorMessages(new string[] {
+                        "This is where you manage your products.",
+                        "You can shutdown in-market products to reclaim the infrastructure they use and put it towards new products.",
+                        "Shutdown products stop generating revenue for you. But their bonus effects are permanent!"
+                    });
+                    ob.PRODUCTS_OPENED = true;
                 }
                 break;
 
