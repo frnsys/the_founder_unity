@@ -29,8 +29,8 @@ public class Company : HasStats {
         taxesAvoided = 0;
         lifetimeRevenue = 0;
         lastMonthRevenue = 0;
-        quarterRevenue = 0;
-        quarterCosts = 0;
+        annualRevenue = 0;
+        annualCosts = 0;
         baseSizeLimit = 5;
         perks = new List<Perk>();
         office = Office.Type.Apartment;
@@ -53,8 +53,8 @@ public class Company : HasStats {
 
         companies = new List<MiniCompany>();
 
-        // Keep track for 10 quarters.
-        QuarterlyPerfHistory = new PerformanceHistory(10);
+        // Keep track for 10 years.
+        AnnualPerfHistory = new PerformanceHistory(10);
 
         return this;
     }
@@ -285,7 +285,7 @@ public class Company : HasStats {
         }
         cash.baseValue += newRevenue;
         lastMonthRevenue += newRevenue;
-        quarterRevenue += newRevenue;
+        annualRevenue += newRevenue;
         lifetimeRevenue += newRevenue;
     }
 
@@ -425,15 +425,15 @@ public class Company : HasStats {
 
     // Keep track of each month's costs.
     public float lastMonthRevenue;
-    public float quarterRevenue;
-    public float quarterCosts;
+    public float annualRevenue;
+    public float annualCosts;
     public float lifetimeRevenue;
     public float taxesAvoided;
     public int deathToll;
     public int debtOwned;
     public int pollution;
-    public float quarterProfit {
-        get { return quarterRevenue - quarterCosts; }
+    public float annualProfit {
+        get { return annualRevenue - annualCosts; }
     }
 
     static public event System.Action<float, string> Paid;
@@ -455,8 +455,8 @@ public class Company : HasStats {
 
         cash.baseValue -= toPay;
 
-        // Add to quarter costs.
-        quarterCosts += toPay;
+        // Add to annual costs.
+        annualCosts += toPay;
 
         // Also reset month's revenues.
         lastMonthRevenue = 0;
@@ -472,7 +472,7 @@ public class Company : HasStats {
     public bool Pay(float cost) {
         if (cash.baseValue - cost >= 0) {
             cash.baseValue -= cost;
-            quarterCosts += cost;
+            annualCosts += cost;
             return true;
         }
         return false;
@@ -504,7 +504,7 @@ public class Company : HasStats {
         }
         cash.baseValue += newRevenue;
         lastMonthRevenue += newRevenue;
-        quarterRevenue += newRevenue;
+        annualRevenue += newRevenue;
         lifetimeRevenue += newRevenue;
     }
 
@@ -701,30 +701,30 @@ public class Company : HasStats {
 
     // Keep track of company performance history as well to try and make decisions.
     [SerializeField]
-    protected PerformanceHistory QuarterlyPerfHistory;
-    public PerformanceDict lastQuarterPerformance {
+    protected PerformanceHistory AnnualPerfHistory;
+    public PerformanceDict lastAnnualPerformance {
         get {
-            return QuarterlyPerfHistory.Count > 0 ? QuarterlyPerfHistory.Last() : null;
+            return AnnualPerfHistory.Count > 0 ? AnnualPerfHistory.Last() : null;
         }
     }
 
-    // Collect aggregate data for the past quarter.
-    public List<PerformanceDict> CollectQuarterlyPerformanceData() {
+    // Collect aggregate data for the past year.
+    public List<PerformanceDict> CollectAnnualPerformanceData() {
         PerformanceDict results = new PerformanceDict();
-        results["Quarterly Revenue"] = quarterRevenue;
-        results["Quarterly Costs"] = quarterCosts;
-        results["Quarterly Profit"] = quarterRevenue - quarterCosts;
+        results["Annual Revenue"] = annualRevenue;
+        results["Annual Costs"] = annualCosts;
+        results["Annual Profit"] = annualRevenue - annualCosts;
 
-        QuarterlyPerfHistory.Enqueue(results);
+        AnnualPerfHistory.Enqueue(results);
 
-        // Compare this quarter's performance to last quarter's (if available).
+        // Compare this annual's performance to last annual's (if available).
         PerformanceDict deltas = new PerformanceDict();
-        if (QuarterlyPerfHistory.Count > 1) {
-            // Last quarter is the second to last element.
-            PerformanceDict lastQuarter = (PerformanceDict)QuarterlyPerfHistory.Skip(QuarterlyPerfHistory.Count - 2).Take(1);
+        if (AnnualPerfHistory.Count > 1) {
+            // Last annual is the second to last element.
+            PerformanceDict lastAnnual = (PerformanceDict)AnnualPerfHistory.Skip(AnnualPerfHistory.Count - 2).Take(1);
 
             foreach (string key in results.Keys) {
-                deltas[key] = results[key]/lastQuarter[key] - 1f;
+                deltas[key] = results[key]/lastAnnual[key] - 1f;
             }
 
         // Otherwise, everything improved by 100%!!!
@@ -735,8 +735,8 @@ public class Company : HasStats {
         }
 
         // Reset values.
-        quarterRevenue = 0;
-        quarterCosts = 0;
+        annualRevenue = 0;
+        annualCosts = 0;
 
         return new List<PerformanceDict> { results, deltas };
     }

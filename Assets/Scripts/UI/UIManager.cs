@@ -28,7 +28,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
-    public GameObject quarterlyReportPrefab;
+    public GameObject annualReportPrefab;
     public GameObject productCompletedAlertPrefab;
     public GameObject specialProjectCompletedAlertPrefab;
     public GameObject competitorProductCompletedAlertPrefab;
@@ -164,7 +164,7 @@ public class UIManager : Singleton<UIManager> {
         window.GetComponent<UIHireWorkers>().LoadWorkers(workers);
     }
 
-    void OnPerformanceReport(int quarter, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+    void OnPerformanceReport(int year, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
         PerformanceReport(results, deltas, board);
     }
 
@@ -243,7 +243,7 @@ public class UIManager : Singleton<UIManager> {
 
     // Create an annual report.
     public UIPerformanceReport PerformanceReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
-        UIPerformanceReport report = NGUITools.AddChild(alertsPanel, quarterlyReportPrefab).GetComponent<UIPerformanceReport>();
+        UIPerformanceReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIPerformanceReport>();
         report.BuildReport(results, deltas, board);
         return report;
     }

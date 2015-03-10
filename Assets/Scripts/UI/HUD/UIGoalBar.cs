@@ -18,11 +18,11 @@ public class UIGoalBar : MonoBehaviour {
     }
 
     void Update() {
-        goalLabel.text = string.Format("Quarterly Target: {0:C0}/{1:C0} profit", company.quarterProfit, gm.profitTarget);
+        goalLabel.text = string.Format("This year's Profit Target: {0:C0}/{1:C0}", company.annualProfit, gm.profitTarget);
 
-        if (company.quarterProfit < 0) {
+        if (company.annualProfit < 0) {
             background.color = dangerColor;
-        } else if (company.quarterProfit >= gm.profitTarget) {
+        } else if (company.annualProfit >= gm.profitTarget) {
             background.color = successColor;
         } else {
             background.color = defaultColor;
