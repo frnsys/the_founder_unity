@@ -900,10 +900,10 @@ MonoBehaviour:
   keepAspectRatio: 0
   aspectRatio: .100000001
   keepCrispWhenShrunk: 1
-  mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
-  mFont: {fileID: 0}
+  mTrueTypeFont: {fileID: 0}
+  mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
   mText: '{infra}'
-  mFontSize: 14
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1

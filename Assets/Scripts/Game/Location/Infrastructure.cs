@@ -74,9 +74,19 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         string repr = "";
         foreach(KeyValuePair<Type, int> item in this) {
             if (item.Value > 0)
-                repr += string.Format(":{0}: {1} ", item.Key.ToString().ToUpper(), item.Value.ToString());
+                repr += string.Format(":{0}: {1} ", item.Key.ToString().ToUpper(), item.Value);
         }
         return repr;
+    }
+
+    public string ToStringWithEmpty() {
+        string[] infs = new string[] {
+            string.Format(":DATACENTER: {0} ", this[Type.Datacenter]),
+            string.Format(":FACTORY: {0} ", this[Type.Factory]),
+            string.Format(":LAB: {0} ", this[Type.Lab]),
+            string.Format(":STUDIO: {0} ", this[Type.Studio])
+        };
+        return String.Join("          ", infs);
     }
 
     public bool Equals(Infrastructure right) {

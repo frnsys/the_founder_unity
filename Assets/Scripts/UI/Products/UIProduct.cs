@@ -20,7 +20,7 @@ public class UIProduct : UIEffectItem {
             product_ = value;
 
             // This never changes so just set it once.
-            infrastructure.text = product_.requiredInfrastructure.ToString();
+            infrastructure.text = string.Format("Using {0}", product_.requiredInfrastructure);
 
             UpdateState();
             SetData();

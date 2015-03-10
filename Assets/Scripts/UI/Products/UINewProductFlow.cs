@@ -21,6 +21,7 @@ public class UINewProductFlow : MonoBehaviour {
     public UIGrid selectedGrid;
     public UIGrid grid;
     public UIButton confirmSelectionButton;
+    public UILabel availableInfrastructureLabel;
 
     public GameObject blackout;
     public UIProgressBar progressBar;
@@ -55,6 +56,9 @@ public class UINewProductFlow : MonoBehaviour {
         } else {
             blackout.SetActive(false);
         }
+
+        // Update how much infrastructure is available.
+        availableInfrastructureLabel.text = (gm.playerCompany.availableInfrastructure - SelectedInfrastructure()).ToStringWithEmpty();
     }
 
     // Load product types into the grid.
