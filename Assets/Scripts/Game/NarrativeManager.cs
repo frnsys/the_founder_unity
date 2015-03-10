@@ -74,6 +74,17 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     public void MentorMessages(string[] messages, UIEventListener.VoidDelegate callback) {
         int i = 0;
+
+        // Back button action.
+        UIEventListener.VoidDelegate back = delegate(GameObject obj) {
+            if (i > 0) {
+                i--;
+                obj.transform.parent.GetComponent<UIMentor>().message = messages[i];
+                if (i == 0)
+                    obj.SetActive(false);
+            }
+        };
+
         UIEventListener.VoidDelegate afterEach = delegate(GameObject obj) {
             if (i < messages.Length - 1) {
                 i++;
@@ -82,7 +93,19 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 obj.GetComponent<UIMentor>().Hide();
                 callback(obj);
             }
+
+            // Show & setup back button if necessary.
+            GameObject backButton = obj.transform.Find("Back").gameObject;
+            if (i > 0) {
+                backButton.SetActive(true);
+                if (UIEventListener.Get(backButton).onClick == null) {
+                    UIEventListener.Get(backButton).onClick += back;
+                }
+            } else {
+                backButton.SetActive(false);
+            }
         };
+
         MentorMessage(messages[0], afterEach);
     }
 
@@ -297,7 +320,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
                     });
                     UIManager.Instance.menu.Activate("Recruiting");
-                }, 6f));
+                }, 3f));
             } else if (Stage(OBS.OTHER_PRODUCT_ASPECTS)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
