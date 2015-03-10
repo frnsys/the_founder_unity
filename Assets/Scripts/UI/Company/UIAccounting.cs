@@ -24,12 +24,12 @@ public class UIAccounting : MonoBehaviour {
 
         numWorkerLocations.text = string.Format("[c][6A53F7]{0}[-][/c] employees across [c][6A53F7]{1}[-][/c] locations ([c][6A53F7]{2}[-][/c] employees at HQ)", company.employeesAcrossLocations, company.locations.Count, company.workers.Count);
 
-        PerformanceDict lastQuarter = company.lastQuarterPerformance;
+        PerformanceDict lastAnnual = company.lastAnnualPerformance;
         float revs = 0;
         float cost = 0;
-        if (lastQuarter != null) {
-            revs = lastQuarter["Quarterly Revenue"];
-            cost = lastQuarter["Quarterly Costs"];
+        if (lastAnnual != null) {
+            revs = lastAnnual["Annual Revenue"];
+            cost = lastAnnual["Annual Costs"];
         }
         pastRevenue.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
         pastProfit.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
@@ -59,8 +59,8 @@ public class UIAccounting : MonoBehaviour {
     }
 
     void Update() {
-        float revs = company.quarterRevenue;
-        float cost = company.quarterCosts;
+        float revs = company.annualRevenue;
+        float cost = company.annualCosts;
         currentRevenue.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
         currentProfit.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
         researchBudget.text = company.researchInvestment.ToString();

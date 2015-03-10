@@ -167,7 +167,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
 
             // Uncomment this if you want to start the game with onboarding.
-            //narrativeManager.InitializeOnboarding();
+            narrativeManager.InitializeOnboarding();
         }
 #endif
 
@@ -289,11 +289,16 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void Pause() {
+        pauses++;
         Time.timeScale = 0;
     }
     public void Resume() {
-        Time.timeScale = 1;
+        pauses--;
+        if (pauses == 0)
+            Time.timeScale = 1;
     }
+    // So we can keep track of how many pauses have been called.
+    public int pauses;
 
     static public event System.Action<int> YearEnded;
     IEnumerator Yearly() {
@@ -323,16 +328,15 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.PayMonthly();
 
             // You only need to start making profit after the first year.
-            if ((int)data.month % 3 == 0 && (int)data.year > 1) {
-                // Get the quarterly performance data and generate the report.
-                List<PerformanceDict> quarterData = playerCompany.CollectQuarterlyPerformanceData();
-                PerformanceDict results = quarterData[0];
-                PerformanceDict deltas = quarterData[1];
-                float growth = data.board.EvaluatePerformance(results["Quarterly Profit"]);
+            if ((int)data.month % 3 == 0 && (int)data.year > 2) {
+                // Get the annual performance data and generate the report.
+                List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
+                PerformanceDict results = annualData[0];
+                PerformanceDict deltas = annualData[1];
+                float growth = data.board.EvaluatePerformance(results["Annual Profit"]);
 
                 if (PerformanceReport != null) {
-                    int quarter = (int)data.month/4 + 1;
-                    PerformanceReport(quarter, results, deltas, data.board);
+                    PerformanceReport(data.year, results, deltas, data.board);
                 }
 
                 // Schedule a news story about the growth (if it warrants one).

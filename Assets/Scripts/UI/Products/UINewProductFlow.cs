@@ -21,6 +21,7 @@ public class UINewProductFlow : MonoBehaviour {
     public UIGrid selectedGrid;
     public UIGrid grid;
     public UIButton confirmSelectionButton;
+    public UILabel availableInfrastructureLabel;
 
     public GameObject blackout;
     public UIProgressBar progressBar;
@@ -37,12 +38,7 @@ public class UINewProductFlow : MonoBehaviour {
             productTypeItems = new List<GameObject>();
         }
 
-        if (productTypes.Count == 0) {
-            confirmSelectionButton.isEnabled = false;
-        } else {
-            confirmSelectionButton.isEnabled = true;
-        }
-
+        UpdateConfirmButton();
         LoadProductTypes();
     }
 
@@ -60,6 +56,9 @@ public class UINewProductFlow : MonoBehaviour {
         } else {
             blackout.SetActive(false);
         }
+
+        // Update how much infrastructure is available.
+        availableInfrastructureLabel.text = (gm.playerCompany.availableInfrastructure - SelectedInfrastructure()).ToStringWithEmpty();
     }
 
     // Load product types into the grid.
@@ -75,6 +74,9 @@ public class UINewProductFlow : MonoBehaviour {
             bool capacity = HasCapacityFor(pt);
             productType.GetComponent<UIButton>().isEnabled = capacity;
             productType.transform.Find("Overlay").gameObject.SetActive(!capacity);
+            if (!capacity) {
+                productType.transform.Find("Overlay/Missing").GetComponent<UILabel>().text = string.Format("Needs an additional\n{0}", MissingInfrastructureFor(pt));
+            }
         }
         grid.Reposition();
     }
@@ -90,23 +92,19 @@ public class UINewProductFlow : MonoBehaviour {
             Transform po = productType.transform.Find("Product Object");
             po.GetComponent<MeshFilter>().mesh = pt.mesh;
 
-            UIEventListener.Get(productType.transform.Find("Remove").gameObject).onClick += delegate(GameObject go) {
+            UIEventListener.Get(productType.gameObject).onClick += delegate(GameObject go) {
                 NGUITools.Destroy(productType);
                 productTypes.Remove(pt);
                 selectedGrid.Reposition();
 
-                if (productTypes.Count != 2)
-                    confirmSelectionButton.isEnabled = false;
-
+                UpdateConfirmButton();
                 UpdateProductTypeItems();
             };
 
             productTypes.Add(pt);
             selectedGrid.Reposition();
 
-            if (productTypes.Count == 2)
-                confirmSelectionButton.isEnabled = true;
-
+            UpdateConfirmButton();
             UpdateProductTypeItems();
         }
     }
@@ -124,13 +122,19 @@ public class UINewProductFlow : MonoBehaviour {
 
     // Check if the company has enough capacity for a particular product type.
     private bool HasCapacityFor(ProductType pt) {
+        return (gm.playerCompany.availableInfrastructure - SelectedInfrastructure()) >= pt.requiredInfrastructure;
+    }
+    private Infrastructure MissingInfrastructureFor(ProductType pt) {
+        return pt.requiredInfrastructure - gm.playerCompany.availableInfrastructure - SelectedInfrastructure();
+    }
+    private Infrastructure SelectedInfrastructure() {
         Infrastructure selectionInf = new Infrastructure();
         if (productTypes.Count > 0) {
             IEnumerable<Infrastructure> selectionInfs = productTypes.Select(x => x.requiredInfrastructure);
             if (selectionInfs.Count() > 0)
                 selectionInf += selectionInfs.Aggregate((x, y) => x + y);
         }
-        return (gm.playerCompany.availableInfrastructure - selectionInf) >= pt.requiredInfrastructure;
+        return selectionInf;
     }
 
     public void BeginProductDevelopment() {
@@ -140,6 +144,19 @@ public class UINewProductFlow : MonoBehaviour {
     private void BeginProductDevelopment_() {
         gm.playerCompany.StartNewProduct(productTypes, 0, 0, 0);
         SendMessageUpwards("Close");
+    }
+
+    private void UpdateConfirmButton() {
+        if (productTypes.Count == 2) {
+            confirmSelectionButton.isEnabled = true;
+            confirmSelectionButton.transform.Find("Label").GetComponent<UILabel>().text = "Ok, let's get started";
+        } else if (productTypes.Count == 0) {
+            confirmSelectionButton.isEnabled = false;
+            confirmSelectionButton.transform.Find("Label").GetComponent<UILabel>().text = string.Format("Select two product types");
+        } else if (productTypes.Count == 1) {
+            confirmSelectionButton.isEnabled = false;
+            confirmSelectionButton.transform.Find("Label").GetComponent<UILabel>().text = string.Format("Select one more product type");
+        }
     }
 }
 

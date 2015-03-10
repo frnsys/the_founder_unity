@@ -107,7 +107,6 @@ public class UIGameEventNotification: UIEffectAlert {
 
     public string Slugify(string str) {
         str = str.ToLower();
-        str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
         str = Regex.Replace(str, @"\s+", " ").Trim();
         str = Regex.Replace(str, @"\s", "_");
         return str;

@@ -141,7 +141,7 @@ GameObject:
   - 4: {fileID: 400016}
   - 114: {fileID: 11400022}
   m_Layer: 8
-  m_Name: Last Quarter
+  m_Name: Last Year
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,7 @@ GameObject:
   - 4: {fileID: 400018}
   - 114: {fileID: 11400026}
   m_Layer: 8
-  m_Name: Last Quarter Revenue
+  m_Name: Last Year Revenue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,7 +193,7 @@ GameObject:
   - 4: {fileID: 400022}
   - 114: {fileID: 11400028}
   m_Layer: 8
-  m_Name: Last Quarter Profit
+  m_Name: Last Year Profit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ GameObject:
   - 4: {fileID: 400024}
   - 114: {fileID: 11400030}
   m_Layer: 8
-  m_Name: Current Quarter Profit
+  m_Name: Current Year Profit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ GameObject:
   - 4: {fileID: 400026}
   - 114: {fileID: 11400032}
   m_Layer: 8
-  m_Name: Current Quarter Revenue
+  m_Name: Current Year Revenue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,7 +581,7 @@ GameObject:
   - 4: {fileID: 400070}
   - 114: {fileID: 11400080}
   m_Layer: 8
-  m_Name: Current Quarter
+  m_Name: Current Year
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1729,7 +1729,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: Last Quarter
+  mText: Last Year
   mFontSize: 20
   mFontStyle: 1
   mAlignment: 1
@@ -3493,7 +3493,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: Current Quarter
+  mText: Current Year
   mFontSize: 20
   mFontStyle: 1
   mAlignment: 1

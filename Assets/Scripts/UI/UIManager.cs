@@ -28,7 +28,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
-    public GameObject quarterlyReportPrefab;
+    public GameObject annualReportPrefab;
     public GameObject productCompletedAlertPrefab;
     public GameObject specialProjectCompletedAlertPrefab;
     public GameObject competitorProductCompletedAlertPrefab;
@@ -164,25 +164,20 @@ public class UIManager : Singleton<UIManager> {
         window.GetComponent<UIHireWorkers>().LoadWorkers(workers);
     }
 
-    void OnPerformanceReport(int quarter, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+    void OnPerformanceReport(int year, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
         PerformanceReport(results, deltas, board);
     }
 
     void OnYearEnded(int year) {
         // Anniversary/birthday alert!
         int age = 25 + year;
-        int lastDigit = age % 10;
-        string ending = "th";
-        if (lastDigit == 1)
-            ending = "st";
-        else if (lastDigit == 2)
-            ending = "nd";
-        else if (lastDigit == 3)
-            ending = "rd";
-
-        UIManager.Instance.Alert(
-            string.Format("Happy {0}{1} birthday! I called the doctor today - she estimates you'll live another {2}-{3} years.", age, ending, 40-age, 60-age)
-        );
+        // Only show every 10th birthday.
+        if (age % 10 == 0) {
+            // TO DO this should be a notice event.
+            UIManager.Instance.Alert(
+                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {1}-{2} years. Can you believe that we founded this company {3} years ago?", age, 40-age, 60-age, age-25)
+            );
+        }
     }
 
     [HideInInspector]
@@ -248,7 +243,7 @@ public class UIManager : Singleton<UIManager> {
 
     // Create an annual report.
     public UIPerformanceReport PerformanceReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
-        UIPerformanceReport report = NGUITools.AddChild(alertsPanel, quarterlyReportPrefab).GetComponent<UIPerformanceReport>();
+        UIPerformanceReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIPerformanceReport>();
         report.BuildReport(results, deltas, board);
         return report;
     }
