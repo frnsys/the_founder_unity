@@ -20,14 +20,7 @@ public class UIPromo : MonoBehaviour {
     public UITexture image;
 
     public void SelectPromo() {
-        Company company = GameManager.Instance.playerCompany;
-        if (company.developingPromo != null && company.developingPromo != promo_) {
-            UIManager.Instance.Confirm("Are you sure want to change the current promotion? You will lose accumulated progress for the current promotion.", delegate() {
-                company.StartPromo(promo_);
-            }, null);
-        } else {
-            company.StartPromo(promo_);
-        }
+        GameManager.Instance.playerCompany.StartPromo(promo_);
     }
 }
 

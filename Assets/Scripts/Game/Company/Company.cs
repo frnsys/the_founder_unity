@@ -406,22 +406,10 @@ public class Company : HasStats {
     }
 
     public void StartPromo(Promo promo) {
-        developingPromo = promo.Clone();
+        Promo p = promo.Clone();
+        p.Develop();
+        UIManager.Instance.LaunchHypeMinigame(p);
     }
-
-    public Promo developingPromo;
-    public void DevelopPromo() {
-        if (developingPromo != null) {
-            // TEMP, this should be 1f
-            bool completed = developingPromo.Develop(100f);
-
-            if (completed) {
-                UIManager.Instance.LaunchHypeMinigame(developingPromo);
-                developingPromo = null;
-            }
-        }
-    }
-
 
 
     // ===============================================

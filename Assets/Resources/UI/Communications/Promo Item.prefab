@@ -371,12 +371,12 @@ MonoBehaviour:
     absolute: -24
   bottomAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 60
+    relative: .5
+    absolute: -20
   topAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 220
+    relative: .5
+    absolute: 140
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
@@ -386,7 +386,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.17499995
+  aspectRatio: 5.52941179
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -408,12 +408,12 @@ MonoBehaviour:
     absolute: 184
   bottomAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 60
+    relative: .5
+    absolute: -20
   topAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 220
+    relative: .5
+    absolute: 140
   updateAnchors: 1
   mColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   mPivot: 4
@@ -612,12 +612,12 @@ MonoBehaviour:
     absolute: 70
   bottomAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: -6
+    relative: .5
+    absolute: -86
   topAnchor:
     target: {fileID: 400008}
-    relative: 0
-    absolute: 42
+    relative: .5
+    absolute: -38
   updateAnchors: 1
   mColor: {r: 1, g: .41911763, b: .41911763, a: 1}
   mPivot: 4

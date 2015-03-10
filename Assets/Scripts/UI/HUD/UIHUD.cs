@@ -12,12 +12,10 @@ public class UIHUD : MonoBehaviour {
     public GameObject activeProductPrefab;
     public Color highlightColor;
 
-    public GameObject promoIndicator;
     public GameObject productIndicator;
     public GameObject recruitingIndicator;
     public GameObject specialProjectIndicator;
 
-    public UIProgressBar promoProgressBar;
     public UIProgressBar productProgressBar;
     public UIProgressBar recruitingProgressBar;
     public UIProgressBar specialProjectProgressBar;
@@ -82,14 +80,6 @@ public class UIHUD : MonoBehaviour {
                 specialProjectProgressBar.value = company.developingSpecialProject.progress;
             } else {
                 specialProjectIndicator.SetActive(false);
-            }
-
-            // Promo info.
-            if (company.developingPromo != null) {
-                promoIndicator.SetActive(true);
-                promoProgressBar.value = company.developingPromo.progress;
-            } else {
-                promoIndicator.SetActive(false);
             }
 
             // Recruiting info.

@@ -420,7 +420,8 @@ public class GameManager : Singleton<GameManager> {
         yield return new WaitForSeconds(cycleTime);
         while(true) {
             playerCompany.DevelopProduct();
-            playerCompany.DevelopRecruitment();
+
+            //playerCompany.DevelopRecruitment(); // trying without developing recruitment time
 
             // Add a bit of randomness to give things
             // a more "natural" feel.
@@ -475,9 +476,7 @@ public class GameManager : Singleton<GameManager> {
 
             // Pull back opinion effects towards 0.
             // Deflate hype.
-            // Advance promos.
             playerCompany.ForgetOpinionEvents();
-            playerCompany.DevelopPromo();
             playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - 0.1f);
 
             yield return new WaitForSeconds(elapsedTime);
