@@ -166,7 +166,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     void OnEvent(GameEvent ev) {
-        if (ev.name == "First Product Launched") {
+        if (ev.name == "New Company on the Scene") {
             StartCoroutine(Delay(delegate(GameObject obj) {
                 MentorMessages(new string[] {
                     "Congratulations! This is your first write-up in a major publication.",

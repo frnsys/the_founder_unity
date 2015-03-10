@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e44926a59c86d4a79ade265c09120b7a, type: 3}
-  m_Name: First Product Launched
+  m_Name: New Company on the Scene
   m_EditorClassIdentifier: 
   type: 1
-  description: A promising new enterprise recently launched its first product. <PLAYERCOMPANY>,
-    founded earlier this year, has high ambitions and expectations of growth. When
-    interviewed, other major companies in the industry were unimpressed. "They just
-    built a dinky widget," said the CEO of <AICOMPANY>. "They won't last long."
+  description: A promising new enterprise has made a splash. <PLAYERCOMPANY> has high
+    ambitions and expectations of growth. When interviewed, other major companies
+    in the industry were unimpressed. "They just built a dinky widget," said the CEO
+    of <AICOMPANY>. "They won't last long."
   from: Techbunch
   image: {fileID: 2800000, guid: b964023f0fdab4969ab5ac2808835d57, type: 3}
   _delay: 0
@@ -62,6 +62,6 @@ MonoBehaviour:
     specialEffect: 0
   actions: []
   conditions:
-  - value: 0
+  - value: 4
     greater: 1
     type: 5
