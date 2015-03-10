@@ -291,13 +291,11 @@ public class GameManager : Singleton<GameManager> {
     public void Pause() {
         pauses++;
         Time.timeScale = 0;
-        Debug.Log(pauses);
     }
     public void Resume() {
         pauses--;
         if (pauses == 0)
             Time.timeScale = 1;
-        Debug.Log(pauses);
     }
     // So we can keep track of how many pauses have been called.
     public int pauses;

@@ -8,6 +8,7 @@ public class UIMenuButton : MonoBehaviour {
         if (wiggler != null) {
             StopCoroutine(wiggler);
             wiggler = null;
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
 
