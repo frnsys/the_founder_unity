@@ -60,7 +60,8 @@ public class UIHireWorkers : UIFullScreenPager {
 
             UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
                 ic.Close_();
-                if (ic.offer >= worker.MinSalaryForCompany(company)) {
+                float minSal = worker.MinSalaryForCompany(company);
+                if (ic.offer >= minSal) {
                     // Set the worker's salary to the offer.
                     // Reset the player offer counter.
                     // Hire the worker!
@@ -77,7 +78,15 @@ public class UIHireWorkers : UIFullScreenPager {
 
                         RemoveWorker(worker);
                     } else {
-                        UIManager.Instance.Alert("That's way too low. I can't work for that much.");
+                        if (minSal - ic.offer >= 50000) {
+                            UIManager.Instance.Alert("That is insultingly low. I'm worth way more than that.");
+                        } else if (minSal - ic.offer >= 30000) {
+                            UIManager.Instance.Alert("I made more than that at my last job. How about more?");
+                        } else if (minSal - ic.offer >= 10000) {
+                            UIManager.Instance.Alert("That's a little low. I think I deserve more.");
+                        } else {
+                            UIManager.Instance.Alert("This is starting to look acceptable, but I need to see a bit more.");
+                        }
                     }
                 }
             };
