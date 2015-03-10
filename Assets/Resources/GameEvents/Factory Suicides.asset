@@ -61,46 +61,5 @@ MonoBehaviour:
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
-  actions:
-  - name: 
-    effects:
-      unlocks:
-        productTypes: []
-        perks: []
-        locations: []
-        verticals: []
-        promos: []
-        recruitments: []
-        companies: []
-        specialProjects: []
-      cash: -5000
-      research:
-        name: 
-        value: 0
-      opinionEvent:
-        name: 
-        opinion:
-          name: 
-          value: 0
-        publicity:
-          name: 
-          value: 0
-      gameEvent: {fileID: 0}
-      eventDelay: 0
-      eventProbability: 0
-      forgettingRate: 0
-      spendingMultiplier: 0
-      wageMultiplier: 0
-      taxRate: 0
-      economicStability: 0
-      expansionCostMultiplier: 0
-      infrastructureCostMultiplier:
-        keys: 00000000010000000200000003000000
-        values: 00000000000000000000000000000000
-      productEffects: []
-      workerEffects:
-      - name: Cleverness
-        value: 5
-      aiCompany: {fileID: 0}
-      specialEffect: 0
+  actions: []
   conditions: []

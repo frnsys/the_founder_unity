@@ -12,10 +12,20 @@ public class HypeMinigame : Singleton<HypeMinigame> {
     private float hypeScore = 0;
     private float opinionScore = 0;
 
+    private GameObject level;
     public void Setup(Promo promo) {
         promo = promo;
-        GameObject level = Instantiate(promo.level) as GameObject;
+        level = Instantiate(promo.level) as GameObject;
         level.transform.parent = gameBoard;
+
+        // This is a hack so that the mentor message
+        // doesn't have to deal with layering issues with the blebs.
+        level.SetActive(false);
+        Invoke("StartGame", 0.5f);
+    }
+
+    void StartGame() {
+        level.SetActive(true);
     }
 
     void OnEnable() {

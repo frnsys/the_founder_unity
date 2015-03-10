@@ -33,6 +33,7 @@ public class HypePuck : MonoBehaviour {
     }
 
     public void Fire(Vector2 dir) {
+        // TO DO tweak this
         rigidbody2D.AddForce(Vector2.ClampMagnitude(dir * speed, speedLimit));
         fired = true;
     }

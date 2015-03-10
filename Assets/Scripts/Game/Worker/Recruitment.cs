@@ -24,7 +24,8 @@ public class Recruitment : TemplateResource<Recruitment> {
 
     static public event System.Action<Recruitment> Completed;
     public bool Develop() {
-        _progress += 1;
+        //_progress += 1;
+        _progress += 100;
         if (progress >= 1) {
             if (Completed != null)
                 Completed(this);

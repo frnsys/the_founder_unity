@@ -22,7 +22,7 @@ MonoBehaviour:
   marketing_I: 25
   engineering_I: 40
   maxLongevity: 1000
-  maxRevenue: 10000
+  maxRevenue: 600000
   revenueModel:
     serializedVersion: 2
     m_Curve:
@@ -46,7 +46,6 @@ MonoBehaviour:
   productTypes:
   - {fileID: 11400000, guid: babac0677bbaf419ebba5e695f802939, type: 2}
   - {fileID: 11400000, guid: 0092605769f2f4b93a53f0b4384853ab, type: 2}
-  mesh: {fileID: 4300030, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   effects:
     unlocks:
       productTypes: []
@@ -61,20 +60,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -87,22 +80,15 @@ MonoBehaviour:
     infrastructureCostMultiplier:
       keys: 00000000010000000200000003000000
       values: 00000000000000000000000000000000
-      baseCosts:
-        keys: 00000000010000000200000003000000
-        values: e8030000e8030000e8030000e8030000
     productEffects:
     - productTypes: []
       verticals: []
       buff:
         name: Marketing
         value: 10
-        duration: 0
-        type: 0
     workerEffects:
     - name: Happiness
       value: 10
-      duration: 0
-      type: 0
     aiCompany: {fileID: 0}
     specialEffect: 0
   requiredTechnologies: []

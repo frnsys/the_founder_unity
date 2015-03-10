@@ -395,7 +395,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a9dfec60a1b5a44c6bc7999cd7c5527b, type: 2}
+  - {fileID: 2100000, guid: d2536123db18b453e9d2989fdbb47884, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -434,7 +434,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectGrid: {fileID: 11400016}
-  effectWidgets: []
   buffEffectPrefab: {fileID: 100000, guid: 75fc8a3a57b014758ac27337a73251ec, type: 2}
   unlockEffectPrefab: {fileID: 100008, guid: 356d62bb98d1c4622b801d0d43022fb7, type: 2}
   productEffectPrefab: {fileID: 100000, guid: 39b9fab38ff9d4956bf988f948c90648, type: 2}
@@ -824,7 +823,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 191
+  aspectRatio: 27.2857151
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
