@@ -14,8 +14,7 @@ public class UIManageVerticals : UIFullScreenPager {
 
     private void LoadVerticals() {
         ClearGrid();
-        //foreach (Vertical l in gm.unlocked.verticals) {
-        foreach (Vertical l in Vertical.LoadAll()) { // TEMP
+        foreach (Vertical l in gm.unlocked.verticals) {
             GameObject verticalItem = NGUITools.AddChild(grid.gameObject, verticalPrefab);
             verticalItem.GetComponent<UIVerticalItem>().vertical = l;
         }

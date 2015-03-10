@@ -19,8 +19,7 @@ public class UIManageLocations : UIFullScreenPager {
         gridCenter.onFinished = OnCenter;
         ClearGrid();
 
-        //foreach (Location l in gm.unlocked.locations) {
-        foreach (Location l in Location.LoadAll()) { // TEMP
+        foreach (Location l in gm.unlocked.locations) {
             GameObject locationItem = NGUITools.AddChild(grid.gameObject, locationPrefab);
             locationItem.GetComponent<UILocationItem>().location = l;
 
