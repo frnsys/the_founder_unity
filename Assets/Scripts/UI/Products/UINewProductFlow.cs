@@ -69,15 +69,24 @@ public class UINewProductFlow : MonoBehaviour {
             UIEventListener.Get(productType).onClick += SelectProductType;
             productType.GetComponent<UIProductType>().productType = pt;
             productTypeItems.Add(productType);
-
-            bool capacity = HasCapacityFor(pt);
-            productType.GetComponent<UIButton>().isEnabled = capacity;
-            productType.transform.Find("Overlay").gameObject.SetActive(!capacity);
-            if (!capacity) {
-                productType.transform.Find("Overlay/Missing").GetComponent<UILabel>().text = string.Format("Needs an additional\n{0}", MissingInfrastructureFor(pt));
-            }
+            ToggleProductType(pt, productType);
         }
         grid.Reposition();
+    }
+
+    private void ToggleProductType(ProductType pt, GameObject obj) {
+        if (productTypes.Contains(pt)) {
+            obj.transform.Find("Overlay").gameObject.SetActive(true);
+            obj.transform.Find("Overlay/Missing").GetComponent<UILabel>().text = "";
+            return;
+        }
+
+        bool capacity = HasCapacityFor(pt);
+        obj.GetComponent<UIButton>().isEnabled = capacity;
+        obj.transform.Find("Overlay").gameObject.SetActive(!capacity);
+        if (!capacity) {
+            obj.transform.Find("Overlay/Missing").GetComponent<UILabel>().text = string.Format("Needs an additional\n{0}", MissingInfrastructureFor(pt));
+        }
     }
 
     // Select a product type for the new product.
@@ -85,12 +94,18 @@ public class UINewProductFlow : MonoBehaviour {
         // Required product types is 2.
         if (selectedGrid.transform.childCount < 2) {
             ProductType pt = obj.GetComponent<UIProductType>().productType;
+
+            // Can't have two of the same product type.
+            if (productTypes.Contains(pt))
+                return;
+
             GameObject productType = NGUITools.AddChild(selectedGrid.gameObject, selectedProductTypePrefab);
 
             productType.transform.Find("Label").GetComponent<UILabel>().text = pt.name;
             Transform po = productType.transform.Find("Product Object");
             po.GetComponent<MeshFilter>().mesh = pt.mesh;
 
+            // Deselect on click.
             UIEventListener.Get(productType.gameObject).onClick += delegate(GameObject go) {
                 NGUITools.Destroy(productType);
                 productTypes.Remove(pt);
@@ -112,10 +127,7 @@ public class UINewProductFlow : MonoBehaviour {
     private void UpdateProductTypeItems() {
         foreach (GameObject item in productTypeItems) {
             ProductType pt = item.GetComponent<UIProductType>().productType;
-
-            bool capacity = HasCapacityFor(pt);
-            item.GetComponent<UIButton>().isEnabled = capacity;
-            item.transform.Find("Overlay").gameObject.SetActive(!capacity);
+            ToggleProductType(pt, item);
         }
     }
 
