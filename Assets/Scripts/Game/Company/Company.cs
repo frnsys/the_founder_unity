@@ -406,9 +406,8 @@ public class Company : HasStats {
     }
 
     public void StartPromo(Promo promo) {
-        Promo p = promo.Clone();
-        p.Develop();
-        UIManager.Instance.LaunchHypeMinigame(p);
+        promo.Develop();
+        UIManager.Instance.LaunchHypeMinigame(promo);
     }
 
 

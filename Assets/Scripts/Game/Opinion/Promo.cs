@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Promo : TemplateResource<Promo> {
+public class Promo : SharedResource<Promo> {
     public Texture icon;
     public string description;
     public float cost;
