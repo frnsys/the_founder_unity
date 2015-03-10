@@ -295,8 +295,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Great! You've started developing your first product.",
                         "You need employees at their desks so they can work on the product.",
-                        "Productive workers will diligently head to their desk, but others must be nudged. [c][56FB92]double-tap[-][/c] an employee to get them to go to their desk.",
-                        "To develop the product, capture the value your employees produce by [c][56FB92]tapping[-][/c] on the icons that appear above them.",
+                        "Productive workers will diligently head to their desk, but others must be nudged.",
+                        ":INTERACT: [c][1CD05E]double-tap[-][/c] an employee to get them to go to their desk.",
+                        "To develop the product, capture the value your employees produce by :INTERACT: [c][1CD05E]tapping[-][/c] on the icons that appear above them.",
                         "Employees can produce\n:DESIGN: [c][82D6FD]design[-][/c],\n:ENGINEERING: [c][82D6FD]engineering[-][/c], or\n:MARKETING: [c][82D6FD]marketing[-][/c]\npoints for your products.",
                         "Certain products rely more on heavily on some of these features. Happy employees may have :BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
                         "Try to get bonus multipliers by chaining feature points together!"
@@ -364,7 +365,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         if (!ob.HYPE_MINIGAME) {
             MentorMessages(new string[] {
                 "Completing promotional campaigns gives you the opportunity to garner some allies in the media. The more you have, the better your public image, and the greater the hype around your company.",
-                "[c][56FB92]Flick[-][/c] the puck and hit some influencers to get them on your side. More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
+                ":INTERACT: [c][1CD05E]Flick[-][/c] the puck and hit some influencers to get them on your side. More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
             });
             ob.HYPE_MINIGAME = true;
         }

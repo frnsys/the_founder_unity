@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class UIPing : MonoBehaviour {
     public UILabel label;
+    public UITexture background;
     public void Set(string note, Color color) {
         label.text = note;
-        label.color = color;
+        background.color = color;
     }
 }
