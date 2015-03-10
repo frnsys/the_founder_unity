@@ -10,19 +10,12 @@ public class UIWindow : UIPopup {
     // An event that fires when a window is opened.
     static public event System.Action<string> WindowOpened;
 
-    protected GameObject currentScreen_;
-    public GameObject currentScreen {
-        set {
-            if (currentScreen_ != value) {
-                currentScreen_.SetActive(false);
-                value.SetActive(true);
-                currentScreen_ = value;
-            }
-        }
-    }
-
     void OnEnable() {
         Show(gameObject);
+
+        if (GameManager.hasInstance)
+            GameManager.Instance.Pause();
+
         if (WindowOpened != null)
             WindowOpened(gameObject.name.Replace("(Clone)", ""));
     }
@@ -31,6 +24,11 @@ public class UIWindow : UIPopup {
         // no scaling animation
         // Hide(gameObject);
         NGUITools.DestroyImmediate(gameObject);
+    }
+
+    void OnDisable() {
+        if (GameManager.hasInstance)
+            GameManager.Instance.Resume();
     }
 
     public void Show(GameObject target) {
