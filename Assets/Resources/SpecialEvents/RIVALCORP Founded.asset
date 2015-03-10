@@ -35,20 +35,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -61,15 +55,12 @@ MonoBehaviour:
     infrastructureCostMultiplier:
       keys: 00000000010000000200000003000000
       values: 00000000000000000000000000000000
-      baseCosts:
-        keys: 00000000010000000200000003000000
-        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 11400000, guid: 49092407a7071464bb729bad90a62bd1, type: 2}
     specialEffect: 0
   actions: []
   conditions:
-  - value: 2001082
+  - value: 2002082
     greater: 1
     type: 4
