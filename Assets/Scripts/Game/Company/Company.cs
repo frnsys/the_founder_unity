@@ -44,6 +44,8 @@ public class Company : HasStats {
         technologies = new List<Technology>();
         specialProjects = new List<SpecialProject>();
         markets = new List<MarketManager.Market>();
+        marketShare = 0;
+        marketSharePercent = 0;
 
         opinion = new Stat("Opinion", 1);
         opinionEvents = new List<OpinionEvent>();
@@ -161,6 +163,8 @@ public class Company : HasStats {
         get { return (locations.Count - 1) * workers.Count + companies.Count * 1000; }
     }
     public List<MarketManager.Market> markets;
+    public float marketShare;
+    public float marketSharePercent;
     public int LocationsForMarket(MarketManager.Market m) {
         return locations.Where(l => l.market == m).Count();
     }
@@ -173,6 +177,14 @@ public class Company : HasStats {
         _locations.Add(l);
         markets.Add(l.market);
         l.effects.Apply(this);
+        UpdateMarketShare();
+    }
+
+    private void UpdateMarketShare() {
+        foreach (MarketManager.Market m in MarketManager.Markets) {
+            marketShare += LocationsForMarket(m)/MarketManager.marketLocations[m] * MarketManager.SizeForMarket(m);
+        }
+        marketSharePercent = marketShare/MarketManager.totalMarketSize;
     }
 
     public bool ExpandToLocation(Location l) {
@@ -182,6 +194,7 @@ public class Company : HasStats {
             // The location's market region is now available.
             if (!markets.Contains(l.market))
                 markets.Add(l.market);
+            UpdateMarketShare();
 
             // Note this doesn't apply unlock effects...for now assuming locations don't have those.
             l.effects.Apply(this);
@@ -227,14 +240,6 @@ public class Company : HasStats {
     }
     public bool developing {
         get { return developingSpecialProject != null || developingProduct != null; }
-    }
-
-    public float totalMarketShare {
-        get {
-            if (activeProducts.Count == 0)
-                return 0;
-            return activeProducts.Sum(p => p.marketShare)/(activeProducts.Count * 100f);
-        }
     }
 
     public bool HasProduct(ProductRecipe r ) {

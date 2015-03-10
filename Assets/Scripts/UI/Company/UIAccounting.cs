@@ -17,7 +17,7 @@ public class UIAccounting : MonoBehaviour {
         }
         salaries.text = string.Format("Salaries: [c][EF4542]{0:C0}[-][/c]/month", monthlySalaries);
 
-        float monthlyRent = company.locations.Sum(l => l.cost);
+        float monthlyRent = company.locations.Skip(1).Sum(l => l.cost);
         float monthlyInf = company.infrastructure.cost;
         rent.text = string.Format("Rent: [c][EF4542]{0:C0}[-][/c]/month", monthlyRent);
         inf.text = string.Format("Infrastructure: [c][EF4542]{0:C0}[-][/c]/month", monthlyInf);
@@ -48,7 +48,7 @@ public class UIAccounting : MonoBehaviour {
         }
         economicHealth.text = string.Format("The economy is {0}.", economy);
         lifetimeRevenue.text = string.Format("Lifetime Revenue: [c][6A53F7]{0:C0}[-][/c]", company.lifetimeRevenue);
-        totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.totalMarketShare);
+        totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
         deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
         debtOwned.text = string.Format("World Debt Owned by Company: [c][EF4542]{0}[-][/c]", company.debtOwned);
         pollution.text = string.Format("Pollution Emitted: [c][EF4542]{0:0}[-][/c] metric tons", company.pollution);
@@ -65,9 +65,13 @@ public class UIAccounting : MonoBehaviour {
         currentProfit.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
         researchBudget.text = company.researchInvestment.ToString();
         lifetimeRevenue.text = string.Format("Lifetime Revenue: [c][6A53F7]{0:C0}[-][/c]", company.lifetimeRevenue);
-        totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.totalMarketShare);
+        totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
         deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
         debtOwned.text = string.Format("World Debt Owned by Company: [c][EF4542]{0}[-][/c]", company.debtOwned);
+        pollution.text = string.Format("Pollution Emitted: [c][EF4542]{0:0}[-][/c] metric tons", company.pollution);
+        taxesAvoided.text = string.Format("Taxes Avoided: [c][20D060]{0:C0}[-][/c]", company.taxesAvoided);
+        averageIncome.text = string.Format("Global Average Income: [c][6A53F7]{0:C0}/yr[-][/c]", gm.wageMultiplier * 60000);
+        forgettingRate.text = string.Format("Public Forgetting Rate: [c][20D060]{0:F2}x[-][/c]", gm.forgettingRate);
     }
 
     public void IncreaseResearchBudget() {

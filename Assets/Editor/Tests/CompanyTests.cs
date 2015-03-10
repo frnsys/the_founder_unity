@@ -328,9 +328,6 @@ namespace UnityTest
             p.Launch();
             Assert.AreEqual(c.activeProducts[0], p);
 
-            // Fake the product's market share:
-            p.marketShare = 1;
-
             c.HarvestProducts(2);
 
             Assert.IsTrue(c.cash.baseValue > 2000);

@@ -30,9 +30,6 @@ public class Product : HasStats {
         get { return _progress/requiredProgress; }
     }
 
-    public float marketScore = 0;
-    public float marketShare = 0;
-
     public bool killsPeople;
     public bool debtsPeople;
     public bool pollutes;
@@ -282,7 +279,7 @@ public class Product : HasStats {
             revenue *= 1 + company.opinion.value/100f;
             //Debug.Log(string.Format("After opinion: {0}", revenue));
 
-            revenue *= marketShare;
+            revenue *= company.marketShare;
             //Debug.Log(string.Format("After market share: {0}", revenue));
 
             if (techPenalty)
