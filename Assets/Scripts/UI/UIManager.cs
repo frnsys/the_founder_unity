@@ -171,18 +171,13 @@ public class UIManager : Singleton<UIManager> {
     void OnYearEnded(int year) {
         // Anniversary/birthday alert!
         int age = 25 + year;
-        int lastDigit = age % 10;
-        string ending = "th";
-        if (lastDigit == 1)
-            ending = "st";
-        else if (lastDigit == 2)
-            ending = "nd";
-        else if (lastDigit == 3)
-            ending = "rd";
-
-        UIManager.Instance.Alert(
-            string.Format("Happy {0}{1} birthday! I called the doctor today - she estimates you'll live another {2}-{3} years.", age, ending, 40-age, 60-age)
-        );
+        // Only show every 10th birthday.
+        if (age % 10 == 0) {
+            // TO DO this should be a notice event.
+            UIManager.Instance.Alert(
+                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {2}-{3} years.", age, 40-age, 60-age)
+            );
+        }
     }
 
     [HideInInspector]
