@@ -291,7 +291,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: -449.999969, z: 540.080688, w: 60}
+  mClipRange: {x: 0, y: -449.999969, z: 539.452393, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 10
   mSortingOrder: 0
@@ -370,13 +370,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
-  mWidth: 500
+  mWidth: 499
   mHeight: 40
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12.5
+  aspectRatio: 12.4750004
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -861,6 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: a79536d0961134a17b85095d84e02340, type: 2}
+  wiggle: 0
 --- !u!114 &37147171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,13 +1037,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 540
+  mWidth: 539
   mHeight: 60
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 9
+  aspectRatio: 8.98333359
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -2401,6 +2402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: d08422f1fe108461693ee63f7c714cc0, type: 2}
+  wiggle: 0
 --- !u!114 &125404155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,7 +2538,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: .625, y: 449.999969, z: 500.080688, w: 60}
+  mClipRange: {x: .625, y: 449.999969, z: 499.452393, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 2000
   mSortingOrder: 0
@@ -3398,7 +3400,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189669549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -177.418579, y: 450.005798, z: 0}
+  m_LocalPosition: {x: -177.104431, y: 450.005798, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children:
   - {fileID: 893560091}
@@ -4550,13 +4552,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 500
+  mWidth: 499
   mHeight: 60
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.33333302
+  aspectRatio: 8.3166666
 --- !u!1 &276024318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4711,7 +4713,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291774580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 228.040344, y: -377.999969, z: 0}
+  m_LocalPosition: {x: 227.726196, y: -377.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1278708169}
@@ -6256,6 +6258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 617403e4ec408431880eb6fffd8b03a1, type: 2}
+  wiggle: 0
 --- !u!114 &393417276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10477,6 +10480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 188dea6bd0cd641539845c68ffe2de78, type: 2}
+  wiggle: 0
 --- !u!114 &696726458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10870,13 +10874,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   mPivot: 4
-  mWidth: 540
+  mWidth: 539
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 9
+  aspectRatio: 8.98333359
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -11873,13 +11877,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   mPivot: 4
-  mWidth: 500
+  mWidth: 499
   mHeight: 40
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12.5
+  aspectRatio: 12.4750004
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -12328,6 +12332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 1b7ccce1bb5f74d50a2186c4443085e0, type: 2}
+  wiggle: 0
 --- !u!114 &766814567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13354,6 +13359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 70c26f31ca6f64b82b52c1d10590b7ca, type: 2}
+  wiggle: 0
 --- !u!114 &841216152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14752,7 +14758,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 921502546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -87.4208984, y: 450.011658, z: 0}
+  m_LocalPosition: {x: -87.1067429, y: 450.011658, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children: []
   m_Father: {fileID: 127671519}
@@ -17465,7 +17471,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 540, y: 960, z: 0}
+  m_Size: {x: 539, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1105655471
 MonoBehaviour:
@@ -17497,13 +17503,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 540
+  mWidth: 539
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .5625
+  aspectRatio: .561458349
 --- !u!1 &1105678051
 GameObject:
   m_ObjectHideFlags: 0
@@ -22280,6 +22286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: f441cd5ac8c8748b0a20a40b3f3e74dd, type: 2}
+  wiggle: 0
 --- !u!114 &1393258434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23965,6 +23972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: b761c7bd27f4f4d168be99fc8e92bcd3, type: 2}
+  wiggle: 0
 --- !u!114 &1495075704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24314,13 +24322,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
   mPivot: 4
-  mWidth: 500
+  mWidth: 499
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.33333302
+  aspectRatio: 8.3166666
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -27703,6 +27711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: ab3546e97f87f43e5a9e1e76fef09ff1, type: 2}
+  wiggle: 0
 --- !u!114 &1728436204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28721,6 +28730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 21421b0c7514349f7b77079a202cda19, type: 2}
+  wiggle: 0
 --- !u!114 &1773872028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30448,6 +30458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 29751b6952957443281c5d084d7d87c9, type: 2}
+  wiggle: 0
 --- !u!114 &1886142925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31406,6 +31417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100158, guid: ffedbd9844a9a46ee92fc70107a1f10d, type: 2}
+  wiggle: 0
 --- !u!114 &1915811473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32860,7 +32872,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2013164176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -258.040344, y: 415.999969, z: 0}
+  m_LocalPosition: {x: -257.726196, y: 415.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1597615473}
@@ -33057,6 +33069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 0}
+  wiggle: 0
 --- !u!114 &2018232408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33218,6 +33231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100020, guid: 8768724e19fa946e6bdf40a00831a53f, type: 2}
+  wiggle: 0
 --- !u!114 &2022883076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33350,6 +33364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   window: {fileID: 100084, guid: 63f9690053371498ca008b70b5c0b32f, type: 2}
+  wiggle: 0
 --- !u!114 &2039405381
 MonoBehaviour:
   m_ObjectHideFlags: 0

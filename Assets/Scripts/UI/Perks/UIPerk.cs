@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class UIPerk : UIEffectItem {
+    private static Color upgradeColor = new Color(1f, 0.9f, 0.53f);
+
     private Perk _perk;
     public Perk perk {
         get { return _perk; }
@@ -41,7 +43,6 @@ public class UIPerk : UIEffectItem {
         perkObj.GetComponent<MeshFilter>().mesh = _perk.mesh;
 
         RenderEffects(_perk.effects);
-        AdjustEffectsHeight();
     }
 
     void SetupUnownedPerk() {
@@ -54,6 +55,9 @@ public class UIPerk : UIEffectItem {
     void SetupOwnedPerk() {
         costLabel.gameObject.SetActive(false);
         buttonLabel.text = "Upgrade";
+        button.defaultColor = upgradeColor;
+        button.hover = upgradeColor;
+        button.pressed = upgradeColor;
         action = DecideUpgrade;
 
         // Disable if there are no more upgrades available.
@@ -62,6 +66,7 @@ public class UIPerk : UIEffectItem {
             buttonLabel.text = "Maxed Out";
         } else if (!_perk.NextAvailable(company)) {
             button.isEnabled = false;
+            buttonLabel.text = "Upgrade Locked";
         } else {
             button.isEnabled = true;
         }
@@ -96,6 +101,7 @@ public class UIPerk : UIEffectItem {
     public void DecideBuy(GameObject obj) {
         UIManager.Instance.Confirm("This perk will cost you " + costLabel.text, delegate() {
                 if (company.BuyPerk(_perk)) {
+                    Debug.Log("Perk bought");
                     DisplayPerk();
                     SetupOwnedPerk();
                 } else {

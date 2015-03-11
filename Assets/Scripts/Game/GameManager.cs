@@ -155,7 +155,7 @@ public class GameManager : Singleton<GameManager> {
         // See Build Settings to get the number for levels/scenes.
         if (Application.loadedLevelName == "Game") {
             StartGame();
-            narrativeManager.InitializeOnboarding();
+            //narrativeManager.InitializeOnboarding();
         }
     }
 
@@ -170,7 +170,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
 
             // Uncomment this if you want to start the game with onboarding.
-            narrativeManager.InitializeOnboarding();
+            //narrativeManager.InitializeOnboarding();
         }
 #endif
 

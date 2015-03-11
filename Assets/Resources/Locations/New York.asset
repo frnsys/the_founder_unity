@@ -11,10 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: New York
   m_EditorClassIdentifier: 
-  description: New York is hard-working and can play to a variety of industries' needs.
-    Entertainment and information companies are at home here - but at a price.
   rotation: {x: -53.5999985, y: -166.699997, z: 0}
   cost: 100
+  description: Entertainment, information and more - New York can do it all.
   market: 0
   capacity:
     keys: 00000000010000000200000003000000
@@ -25,8 +24,6 @@ MonoBehaviour:
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0

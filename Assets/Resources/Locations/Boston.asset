@@ -11,11 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: Boston
   m_EditorClassIdentifier: 
-  description: Cutting-edge products are borne within the top-tier campuses in the
-    Boston area. Brilliant engineering talent for both information and hardware are
-    abound.
   rotation: {x: -50.2999992, y: -167.899994, z: 0}
   cost: 1e+06
+  description: Top-tier campuses in the Boston area make R&D easy.
   market: 0
   capacity:
     keys: 00000000010000000200000003000000
@@ -26,14 +24,12 @@ MonoBehaviour:
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
     research:
       name: Research
-      value: 0
+      value: 1
     opinionEvent:
       name: 
       opinion:

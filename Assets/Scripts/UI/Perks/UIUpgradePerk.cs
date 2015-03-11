@@ -11,7 +11,7 @@ public class UIUpgradePerk : UIEffectAlert {
 
             nameLabel.text = _perk.next.name;
             descLabel.text = _perk.next.description;
-            totalLabel.text = string.Format("${0:n}", _perk.next.cost);
+            totalLabel.text = string.Format("Upgrade for ${0:n}", _perk.next.cost);
 
             perkObj.GetComponent<MeshFilter>().mesh = _perk.next.mesh;
 

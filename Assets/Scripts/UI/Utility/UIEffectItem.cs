@@ -6,14 +6,19 @@ using System.Collections.Generic;
 public class UIEffectItem : MonoBehaviour {
     public UIGrid effectGrid;
     private List<UIWidget> effectWidgets = new List<UIWidget>();
+    private int height;
+
+    void OnEnable() {
+        height = gameObject.GetComponent<UIWidget>().height;
+    }
 
     public GameObject buffEffectPrefab;
     public GameObject unlockEffectPrefab;
     public GameObject productEffectPrefab;
     public void RenderEffects(EffectSet es) {
         // Clear out existing effect elements.
-        while (effectGrid.transform.childCount > 0) {
-            GameObject go = effectGrid.transform.GetChild(0).gameObject;
+        for (int i = effectGrid.transform.childCount - 1; i >= 0; i--) {
+            GameObject go = effectGrid.transform.GetChild(i).gameObject;
             NGUITools.DestroyImmediate(go);
         }
 
@@ -29,7 +34,7 @@ public class UIEffectItem : MonoBehaviour {
 
         // If there are effects, expand the height for them.
         if (count > 0)
-            Extend((int)((count + 1) * effectGrid.cellHeight));
+            Extend((int)(count * effectGrid.cellHeight));
     }
 
     private void RenderBuffEffects(EffectSet es) {
@@ -141,7 +146,7 @@ public class UIEffectItem : MonoBehaviour {
     }
 
     public void Extend(int amount) {
-        gameObject.GetComponent<UIWidget>().height += amount;
+        gameObject.GetComponent<UIWidget>().height = height + amount;
     }
 
     // Call this in the update loop to keep effects at full width.

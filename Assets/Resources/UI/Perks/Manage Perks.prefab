@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 240.5, y: 0, z: 0}
+  m_LocalPosition: {x: 231.499969, y: 0, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -486,13 +486,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 533
+  mWidth: 515
   mHeight: 60
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.88333321
+  aspectRatio: 8.58333302
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -513,6 +513,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -548,13 +551,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: .521568656, b: .980392158, a: 1}
   mPivot: 4
-  mWidth: 558
+  mWidth: 540
   mHeight: 60
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 9.30000019
+  aspectRatio: 9
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -612,7 +615,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -712,14 +715,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 558
+  mWidth: 938
   mHeight: 680
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .820588231
-  childSize: {x: 558, y: 680}
+  aspectRatio: 1.37941182
+  childSize: {x: 938, y: 680}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 280}
 --- !u!114 &11400022
@@ -733,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 558
+  itemSize: 938
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -850,7 +853,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -887,15 +890,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 0, g: 0, b: 0, a: .745098054}
+  mColor: {r: 0, g: .521568656, b: .980392158, a: 1}
   mPivot: 4
-  mWidth: 558
+  mWidth: 540
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .581250012
+  aspectRatio: .5625
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
