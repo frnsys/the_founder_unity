@@ -11,7 +11,7 @@ public class UIRecruiting : UIFullScreenPager {
 
     private void LoadRecruitments() {
         ClearGrid();
-        foreach (Recruitment p in Recruitment.LoadAll().Where(r => !r.robots || GameManager.Instance.automation)) {
+        foreach (Recruitment p in Recruitment.LoadAll().Where(r => !r.robots || GameManager.Instance.automation).OrderBy(r => r.cost)) {
             GameObject recruitmentItem = NGUITools.AddChild(grid.gameObject, recruitmentPrefab);
             recruitmentItem.GetComponent<UIRecruitment>().recruitment = p;
         }

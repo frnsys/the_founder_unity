@@ -126,8 +126,9 @@ public class UIHireWorkers : UIFullScreenPager {
         }
     }
 
-    public void LoadWorkers(IEnumerable<Worker> workers) {
+    public void LoadWorkers(List<Worker> workers) {
         ClearGrid();
+        availableWorkers.Clear();
         bool wi = GameManager.Instance.workerInsight;
         foreach (Worker w in workers) {
             availableWorkers.Add(w);
@@ -135,7 +136,6 @@ public class UIHireWorkers : UIFullScreenPager {
 
             UIWorker uiw = workerItem.GetComponent<UIWorker>();
             Worker worker = w;
-
             UIEventListener.Get(uiw.button.gameObject).onClick += delegate(GameObject obj) {
                 if (worker.robot) {
                     HireRobotWorker(worker);
@@ -144,8 +144,8 @@ public class UIHireWorkers : UIFullScreenPager {
                 }
             };
 
-            if (worker.robot) {
-                uiw.worker = worker;
+            if (w.robot) {
+                uiw.worker = w;
             } else if (!wi) {
                 uiw.SetBasicWorker(w);
             } else {
