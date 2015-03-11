@@ -22,6 +22,9 @@ public class UIUnlockEffect : MonoBehaviour {
             case EffectSet.Special.WorkerInsight:
                 text = "Provides detailed metrics of potential hires";
                 break;
+            case EffectSet.Special.Automation:
+                text = "Allows hiring of automated workers";
+                break;
             case EffectSet.Special.FounderAI:
                 text = "Win the game";
                 break;

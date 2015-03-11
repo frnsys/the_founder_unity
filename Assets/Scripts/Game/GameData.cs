@@ -77,6 +77,7 @@ public class GameData : ScriptableObject {
     public bool immortal;
     public bool cloneable;
     public bool prescient;
+    public bool automation;
     public bool workerInsight;
 
     // ===============================================
@@ -131,6 +132,7 @@ public class GameData : ScriptableObject {
         data.immortal = false;
         data.cloneable = false;
         data.prescient = false;
+        data.automation = false;
         data.workerInsight = false;
 
         // You start your business at 25,

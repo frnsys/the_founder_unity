@@ -78,6 +78,9 @@ public class GameManager : Singleton<GameManager> {
     public bool cloneable {
         get { return data.cloneable; }
     }
+    public bool automation {
+        get { return data.automation; }
+    }
 
     public List<AICompany> activeAICompanies {
         get { return data.otherCompanies.FindAll(a => !a.disabled); }
@@ -256,6 +259,9 @@ public class GameManager : Singleton<GameManager> {
                 break;
             case EffectSet.Special.WorkerInsight:
                 data.workerInsight = true;
+                break;
+            case EffectSet.Special.Automation:
+                data.automation = true;
                 break;
             case EffectSet.Special.FounderAI:
                 narrativeManager.GameWon();

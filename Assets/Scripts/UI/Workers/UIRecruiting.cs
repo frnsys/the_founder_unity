@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 public class UIRecruiting : UIFullScreenPager {
@@ -10,7 +11,7 @@ public class UIRecruiting : UIFullScreenPager {
 
     private void LoadRecruitments() {
         ClearGrid();
-        foreach (Recruitment p in Recruitment.LoadAll()) {
+        foreach (Recruitment p in Recruitment.LoadAll().Where(r => !r.robots || GameManager.Instance.automation)) {
             GameObject recruitmentItem = NGUITools.AddChild(grid.gameObject, recruitmentPrefab);
             recruitmentItem.GetComponent<UIRecruitment>().recruitment = p;
         }
