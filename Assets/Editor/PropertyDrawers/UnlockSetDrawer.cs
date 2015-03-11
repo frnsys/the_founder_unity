@@ -13,8 +13,6 @@ class UnlockSetDrawer : SuperPropertyDrawer {
         "verticals",
         "perks",
         "locations",
-        "promos",
-        "recruitments",
         "companies",
         "specialProjects"
     };

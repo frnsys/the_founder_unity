@@ -25,13 +25,11 @@ static class GameTimer {
     }
     public static void Pause() {
         pauses++;
-        Debug.Log(pauses);
     }
     public static void Resume() {
         pauses--;
         if (pauses < 0)
             pauses = 0;
-        Debug.Log(pauses);
     }
 
     public static IEnumerator Wait(float seconds) {

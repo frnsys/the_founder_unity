@@ -21,6 +21,7 @@ public class Worker : HasStats {
     }
 
     // The worker's avatar in the game world.
+    [HideInInspector]
     public GameObject avatar;
 
     // Each worker has their own style!

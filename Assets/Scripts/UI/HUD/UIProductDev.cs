@@ -15,41 +15,35 @@ public class UIProductDev : MonoBehaviour {
     private List<string> features;
 
     [SerializeField, HideInInspector]
-    private List<int> featureValues;
-
-    [SerializeField, HideInInspector]
-    private int design;
-    [SerializeField, HideInInspector]
-    private int engineering;
-    [SerializeField, HideInInspector]
-    private int marketing;
+    private List<float> featureValues;
 
     [SerializeField, HideInInspector]
     private float multiplier;
 
+    private Company company;
+
+    void OnEnable() {
+        company = GameManager.Instance.playerCompany;
+        SetLabel(designLabel, company.developingProduct.design.value);
+        SetLabel(engineeringLabel, company.developingProduct.engineering.value);
+        SetLabel(marketingLabel, company.developingProduct.marketing.value);
+    }
+
     public void Clear() {
-        design = 0;
-        engineering = 0;
-        marketing = 0;
-
-        SetLabel(designLabel, 0);
-        SetLabel(engineeringLabel, 0);
-        SetLabel(marketingLabel, 0);
-
         ClearCombo();
     }
 
-    public void SetLabel(UILabel label, int value) {
-        label.text = string.Format("{0}", value);
+    public void SetLabel(UILabel label, float value) {
+        label.text = string.Format("{0:0}", value);
     }
 
-    public void Add(string feature, int value) {
+    public void Add(string feature, float value) {
         AudioManager.Instance.PlayLaborFX();
         AddFeature(feature, value);
         AddToCombo(feature, value);
     }
 
-    public void AddFeature(string feature, int value) {
+    public void AddFeature(string feature, float value) {
         switch (feature) {
             case "Design":
                 AddDesign(value);
@@ -67,19 +61,16 @@ public class UIProductDev : MonoBehaviour {
                 break;
         }
     }
-    private void AddDesign(int value) {
-        design += value;
-        SetLabel(designLabel, design);
+    private void AddDesign(float value) {
+        SetLabel(designLabel, company.developingProduct.design.value);
         StartCoroutine(Pulse(designLabel.gameObject, 1f, 1.6f));
     }
-    private void AddEngineering(int value) {
-        engineering += value;
-        SetLabel(engineeringLabel, engineering);
+    private void AddEngineering(float value) {
+        SetLabel(engineeringLabel, company.developingProduct.engineering.value);
         StartCoroutine(Pulse(engineeringLabel.gameObject, 1f, 1.6f));
     }
-    private void AddMarketing(int value) {
-        marketing += value;
-        SetLabel(marketingLabel, marketing);
+    private void AddMarketing(float value) {
+        SetLabel(marketingLabel, company.developingProduct.marketing.value);
         StartCoroutine(Pulse(marketingLabel.gameObject, 1f, 1.6f));
     }
 
@@ -99,15 +90,15 @@ public class UIProductDev : MonoBehaviour {
             AudioManager.Instance.PlayComboFX();
 
         int count = features.Count(f => f == features[0]);
-        float value = (float)(featureValues.Take(count).Average() * multiplier);
+        float value = featureValues.Take(count).Average() * multiplier;
 
         // Bonus
-        AddFeature(features[0], (int)value);
-        GameManager.Instance.playerCompany.AddPointsToDevelopingProduct(features[0], value);
+        AddFeature(features[0], value);
+        company.AddPointsToDevelopingProduct(features[0], value);
         ClearCombo();
     }
 
-    private void AddToCombo(string feature, int value) {
+    private void AddToCombo(string feature, float value) {
         features.Add(feature);
         featureValues.Add(value);
         int count = features.Count;
