@@ -20,7 +20,9 @@ public class UIRecruitment : MonoBehaviour {
     public UITexture image;
 
     public void SelectRecruitment() {
-        GameManager.Instance.playerCompany.StartRecruitment(recruitment_);
+        if (!GameManager.Instance.playerCompany.StartRecruitment(recruitment_)) {
+            UIManager.Instance.Alert("You don't have the cash to recruit this way.");
+        }
     }
 }
 

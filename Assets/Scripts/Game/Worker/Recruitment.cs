@@ -15,4 +15,8 @@ public class Recruitment : SharedResource<Recruitment> {
         if (Completed != null)
             Completed(this);
     }
+
+    public static Recruitment[] LoadAll() {
+        return Resources.LoadAll<Recruitment>("Recruitments");
+    }
 }

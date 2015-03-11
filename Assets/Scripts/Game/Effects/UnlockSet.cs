@@ -12,8 +12,6 @@ public class UnlockSet {
     public List<Perk> perks = new List<Perk>();
     public List<Location> locations = new List<Location>();
     public List<Vertical> verticals = new List<Vertical>();
-    public List<Promo> promos = new List<Promo>();
-    public List<Recruitment> recruitments = new List<Recruitment>();
     public List<MiniCompany> companies = new List<MiniCompany>();
     public List<SpecialProject> specialProjects = new List<SpecialProject>();
 
@@ -38,14 +36,6 @@ public class UnlockSet {
         foreach (Vertical o in us.verticals) {
             if (!Duplicate(o, verticals))
                 verticals.Add(o);
-        }
-        foreach (Promo o in us.promos) {
-            if (!Duplicate(o, promos))
-                promos.Add(o);
-        }
-        foreach (Recruitment o in us.recruitments) {
-            if (!Duplicate(o, recruitments))
-                recruitments.Add(o);
         }
         foreach (MiniCompany o in us.companies) {
             if (!Duplicate(o, companies))

@@ -379,8 +379,12 @@ public class Company : HasStats {
     }
 
 
-    public void StartRecruitment(Recruitment recruitment) {
-        recruitment.Develop();
+    public bool StartRecruitment(Recruitment recruitment) {
+        if (Pay(recruitment.cost)) {
+            recruitment.Develop();
+            return true;
+        }
+        return false;
     }
 
     // ===============================================
@@ -393,9 +397,13 @@ public class Company : HasStats {
         opinionEvents.Add(oe);
     }
 
-    public void StartPromo(Promo promo) {
-        promo.Develop();
-        UIManager.Instance.LaunchHypeMinigame(promo);
+    public bool StartPromo(Promo promo) {
+        if (Pay(promo.cost)) {
+            promo.Develop();
+            UIManager.Instance.LaunchHypeMinigame(promo);
+            return true;
+        }
+        return false;
     }
 
 

@@ -94,13 +94,7 @@ public class UIEffectItem : MonoBehaviour {
         foreach (Vertical i in es.unlocks.verticals) {
             RenderUnlockEffect("the " + i.name + " vertical");
         }
-        foreach (Promo i in es.unlocks.promos) {
-            RenderUnlockEffect(i.name);
-        }
         foreach (Perk i in es.unlocks.perks) {
-            RenderUnlockEffect(i.name);
-        }
-        foreach (Recruitment i in es.unlocks.recruitments) {
             RenderUnlockEffect(i.name);
         }
         foreach (Location i in es.unlocks.locations) {

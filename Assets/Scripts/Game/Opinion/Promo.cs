@@ -14,4 +14,8 @@ public class Promo : SharedResource<Promo> {
         if (Completed != null)
             Completed(this);
     }
+
+    public static Promo[] LoadAll() {
+        return Resources.LoadAll<Promo>("Promos");
+    }
 }

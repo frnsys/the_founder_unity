@@ -20,7 +20,9 @@ public class UIPromo : MonoBehaviour {
     public UITexture image;
 
     public void SelectPromo() {
-        GameManager.Instance.playerCompany.StartPromo(promo_);
+        if (!GameManager.Instance.playerCompany.StartPromo(promo_)) {
+            UIManager.Instance.Alert("You don't have the cash for this campaign.");
+        }
     }
 }
 
