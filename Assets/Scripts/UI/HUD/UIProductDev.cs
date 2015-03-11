@@ -98,7 +98,8 @@ public class UIProductDev : MonoBehaviour {
         if (multiplier > 1f)
             AudioManager.Instance.PlayComboFX();
 
-        float value = (float)(featureValues.Average() * multiplier);
+        int count = features.Count(f => f == features[0]);
+        float value = (float)(featureValues.Take(count).Average() * multiplier);
 
         // Bonus
         AddFeature(features[0], (int)value);
