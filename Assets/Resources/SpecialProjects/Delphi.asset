@@ -21,8 +21,6 @@ MonoBehaviour:
       locations:
       - {fileID: 11400000, guid: e7c7dea82df4e45858edb7bcd07a0b10, type: 2}
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -53,9 +51,7 @@ MonoBehaviour:
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 3
-  requiredInfrastructure:
-    keys: 00000000010000000200000003000000
-    values: 0a000000000000000a0000000a000000
-  mesh: {fileID: 0}
+  requiredProducts: []
+  mesh: {fileID: 4300056, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   texture: {fileID: 0}
   _progress: 0

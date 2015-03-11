@@ -10,9 +10,7 @@ public class SpecialProject : TemplateResource<SpecialProject> {
     public float requiredProgress;
     public EffectSet effects = new EffectSet();
     public ProductRecipe[] requiredProducts;
-
     public Mesh mesh;
-    public Texture texture;
 
     public override string ToString() {
         return name;

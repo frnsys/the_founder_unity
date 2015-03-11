@@ -13,7 +13,6 @@ public class UISpecialProjectCompletedAlert : UIEffectAlert {
             bodyLabel.text = value.description;
 
             projectObject.GetComponent<MeshFilter>().mesh = value.mesh;
-            projectObject.GetComponent<MeshRenderer>().material.mainTexture = value.texture;
 
             Extend(bodyLabel.height);
             RenderEffects(value.effects);

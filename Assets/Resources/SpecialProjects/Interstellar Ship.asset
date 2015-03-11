@@ -23,8 +23,6 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 268ed9f9ea3534a3089bf1a9a58e0300, type: 2}
       - {fileID: 11400000, guid: aac0bf8db8e4b4c659124afab5b83cd7, type: 2}
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -56,6 +54,5 @@ MonoBehaviour:
     aiCompany: {fileID: 0}
     specialEffect: 0
   requiredProducts: []
-  mesh: {fileID: 0}
-  texture: {fileID: 0}
+  mesh: {fileID: 4300064, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   _progress: 0

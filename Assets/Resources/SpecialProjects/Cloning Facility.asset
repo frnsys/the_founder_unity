@@ -20,8 +20,6 @@ MonoBehaviour:
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -53,6 +51,6 @@ MonoBehaviour:
     aiCompany: {fileID: 0}
     specialEffect: 2
   requiredProducts: []
-  mesh: {fileID: 0}
+  mesh: {fileID: 4300062, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   texture: {fileID: 0}
   _progress: 0

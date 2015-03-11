@@ -55,24 +55,6 @@ MonoBehaviour:
     verticals:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-    promos:
-    - {fileID: 11400000, guid: 225af2c0fa20e42e0b70d44148c1f1cb, type: 2}
-    - {fileID: 11400000, guid: 6ac41f3f32e0e44be96e7daa37b15b67, type: 2}
-    - {fileID: 11400000, guid: d255b93be2ae94bf3843f7755e3c3bf1, type: 2}
-    - {fileID: 11400000, guid: 1e9d278a822b1425a96bd0d759f431e5, type: 2}
-    - {fileID: 11400000, guid: 70893a032273146a7bf3b8239c1d6142, type: 2}
-    - {fileID: 11400000, guid: 49c768907855145dba9597ffdba6cc37, type: 2}
-    - {fileID: 11400000, guid: 635ad53bbc37a4b24995655313a72540, type: 2}
-    - {fileID: 11400000, guid: 0b8eadc50e2b74ce5a6ab2166702864c, type: 2}
-    - {fileID: 11400000, guid: 2ddabcbaaed3d4d9489248c6862e6c5d, type: 2}
-    - {fileID: 11400000, guid: 9f7d839127b3d47eaa512c9a012fecb3, type: 2}
-    recruitments:
-    - {fileID: 11400000, guid: 913f70547464646c69428c350a227b8e, type: 2}
-    - {fileID: 11400000, guid: 189ec05b785f24b3bbcfa2cb7bcf735b, type: 2}
-    - {fileID: 11400000, guid: 183c5760606054bf5a7677c8f005ea8a, type: 2}
-    - {fileID: 11400000, guid: 837f80e2e5da446e2860d391c46b0621, type: 2}
-    - {fileID: 11400000, guid: fc5c6608d3c2848b889e125284701a22, type: 2}
-    - {fileID: 11400000, guid: dec7e57705bf347f58ef5618f1eb07b0, type: 2}
     companies:
     - {fileID: 11400000, guid: 68928279bf98d4bda9ca343d2f7ce33b, type: 2}
     - {fileID: 11400000, guid: 390f8a4f0591a4f74b1ec34535738295, type: 2}
@@ -80,6 +62,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 10ad55825aa744c67bfb981050beea2a, type: 2}
     - {fileID: 11400000, guid: 944c8806798a249ed88a92957f7256f9, type: 2}
     - {fileID: 11400000, guid: 43496e73e36d44be2b9f581202876d27, type: 2}
+    - {fileID: 11400000, guid: ba77defe408ed4bd2ba336f7a222f977, type: 2}
+    - {fileID: 11400000, guid: 38c4b7ffa8e664eed926a0e78bfb78f6, type: 2}
+    - {fileID: 11400000, guid: f5a046067da20424b96880c698409c6c, type: 2}
+    - {fileID: 11400000, guid: 14fac2bf305b94688b1d122111f42f71, type: 2}
   economy: 0
   spendingMultiplier: 0
   wageMultiplier: 0
@@ -91,6 +77,7 @@ MonoBehaviour:
     keys: 00000000010000000200000003000000
     values: 00000000000000000000000000000000
   onboardingState:
+    PRODUCTS_OPENED: 0
     PERKS_UNLOCKED: 0
     VERTICALS_UNLOCKED: 0
     LOCATIONS_UNLOCKED: 0
@@ -109,4 +96,5 @@ MonoBehaviour:
   immortal: 0
   cloneable: 0
   prescient: 0
+  automation: 0
   workerInsight: 0
