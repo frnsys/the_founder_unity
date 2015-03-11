@@ -81,8 +81,9 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
                 officeUpgradeTriggered = true;
 
                 // TESTING, the production delay should be longer
-                StartCoroutine(GameEvent.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f));
+                GameManager.Instance.eventManager.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f);
 
+                // TO DO this needs to be properly loaded based on a save game
                 UIManager.Instance.menu.Activate("Upgrade Office");
             }
         }

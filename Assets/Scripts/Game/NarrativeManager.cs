@@ -193,7 +193,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
     private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
-        yield return new WaitForSeconds(delay);
+        yield return StartCoroutine(GameTimer.Wait(delay));
         callback(null);
     }
 

@@ -81,7 +81,7 @@ public class UIHUD : MonoBehaviour {
             }
 
             grid.Reposition();
-            yield return new WaitForSeconds(0.2f);
+            yield return StartCoroutine(GameTimer.Wait(0.2f));
         }
     }
 }

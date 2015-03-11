@@ -1,5 +1,8 @@
 /*
  * Manages events, in particular, events with unique effects (beyond those supported by EffectSet).
+ * Note: Events should NOT be handled via coroutines, because those don't save their state.
+ * So between saves, we may lose events which were supposed to be triggered.
+ * Instead, rely on `event ticks`.
  */
 
 using UnityEngine;
@@ -77,8 +80,8 @@ public class EventManager : MonoBehaviour {
             // Only show one event, the next one will
             // resolve in the following iteration.
             if (ev.ConditionsSatisfied(data.company)) {
-                // Trigger the event, with a delay.
-                StartCoroutine(TriggerSpecialEvent(ev));
+                // We trigger the event by adding it to the regular event pool.
+                DelayTrigger(ev, 45f);
 
                 // Remove it now though so that it doesn't re-trigger.
                 if (!ev.repeatable)
@@ -88,9 +91,9 @@ public class EventManager : MonoBehaviour {
         }
     }
 
-    // Trigger special events with a delay.
-    IEnumerator TriggerSpecialEvent(GameEvent ev) {
-        yield return new WaitForSeconds(45f);
-        GameEvent.Trigger(ev);
+    // It's expected that the event passed in is a clone.
+    public void DelayTrigger(GameEvent ge, float ticks) {
+        ge.countdown = ticks;
+        Add(ge);
     }
 }

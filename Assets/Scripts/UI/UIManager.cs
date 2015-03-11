@@ -62,10 +62,10 @@ public class UIManager : Singleton<UIManager> {
                 Ping p = pendingPings.Dequeue();
                 UIPing ping = NGUITools.AddChild(pingsPanel, pingPrefab).GetComponent<UIPing>();
                 ping.Set(p.note, p.color);
-                yield return new WaitForSeconds(2f);
+                yield return StartCoroutine(GameTimer.Wait(2f));
                 NGUITools.Destroy(ping.gameObject);
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return StartCoroutine(GameTimer.Wait(0.5f));
         }
     }
 
@@ -140,7 +140,7 @@ public class UIManager : Singleton<UIManager> {
 
             // Notify the player that they were missing a tech.
             if (p.techPenalty)
-                StartCoroutine(GameEvent.DelayTrigger(GameEvent.LoadNoticeEvent("Missing Technology"), 25f));
+                GameManager.Instance.eventManager.DelayTrigger(GameEvent.LoadNoticeEvent("Missing Technology"), 25f);
 
         // If it is a competitor's product, show it as an "ad".
         } else {

@@ -167,7 +167,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
 
             // Uncomment this if you want to start the game with onboarding.
-            //narrativeManager.InitializeOnboarding();
+            narrativeManager.InitializeOnboarding();
         }
 #endif
 
@@ -199,6 +199,8 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void StartGame() {
+        StartCoroutine(GameTimer.Start());
+
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
         StartCoroutine(Yearly());
@@ -289,37 +291,30 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void Pause() {
-        pauses++;
-        Time.timeScale = 0;
-        Debug.Log(pauses);
+        GameTimer.Pause();
     }
     public void Resume() {
-        pauses--;
-        if (pauses == 0)
-            Time.timeScale = 1;
-        Debug.Log(pauses);
+        GameTimer.Resume();
     }
-    // So we can keep track of how many pauses have been called.
-    public int pauses;
 
     static public event System.Action<int> YearEnded;
     IEnumerator Yearly() {
         int yearTime = weekTime*4*12;
-        yield return new WaitForSeconds(yearTime);
+        yield return StartCoroutine(GameTimer.Wait(yearTime));
         while(true) {
             data.year++;
 
             if (YearEnded != null)
                 YearEnded(data.year);
 
-            yield return new WaitForSeconds(yearTime);
+            yield return StartCoroutine(GameTimer.Wait(yearTime));
         }
     }
 
     static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> PerformanceReport;
     IEnumerator Monthly() {
         int monthTime = weekTime*4;
-        yield return new WaitForSeconds(monthTime);
+        yield return StartCoroutine(GameTimer.Wait(monthTime));
         while(true) {
             if (data.month == Month.December) {
                 data.month = Month.January;
@@ -350,12 +345,12 @@ public class GameManager : Singleton<GameManager> {
                     //narrativeManager.GameLost();
             }
 
-            yield return new WaitForSeconds(monthTime);
+            yield return StartCoroutine(GameTimer.Wait(monthTime));
         }
     }
 
     IEnumerator PerformanceNews(float growth) {
-        yield return new WaitForSeconds(weekTime);
+        yield return StartCoroutine(GameTimer.Wait(weekTime));
         GameEvent ev = null;
         float target = data.board.desiredGrowth;
         if (growth >= target * 2) {
@@ -371,7 +366,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     IEnumerator Weekly() {
-        yield return new WaitForSeconds(weekTime);
+        yield return StartCoroutine(GameTimer.Wait(weekTime));
         while(true) {
             if (data.week == 3) {
                 data.week = 0;
@@ -412,35 +407,35 @@ public class GameManager : Singleton<GameManager> {
             // Save the game every week.
             //GameData.Save(data);
 
-            yield return new WaitForSeconds(weekTime);
+            yield return StartCoroutine(GameTimer.Wait(weekTime));
         }
     }
 
     IEnumerator ProductDevelopmentCycle() {
-        yield return new WaitForSeconds(cycleTime);
+        yield return StartCoroutine(GameTimer.Wait(cycleTime));
         while(true) {
             playerCompany.DevelopProduct();
 
             // Add a bit of randomness to give things
             // a more "natural" feel.
-            yield return new WaitForSeconds(cycleTime * Random.Range(0.4f, 1.4f));
+            yield return StartCoroutine(GameTimer.Wait(cycleTime * Random.Range(0.4f, 1.4f)));
         }
     }
 
     IEnumerator EventCycle() {
-        yield return new WaitForSeconds(weekTime);
+        yield return StartCoroutine(GameTimer.Wait(weekTime));
         while(true) {
             eventManager.Tick();
             eventManager.EvaluateSpecialEvents();
 
             // Add a bit of randomness to give things
             // a more "natural" feel.
-            yield return new WaitForSeconds(weekTime * Random.Range(0.9f, 1.6f));
+            yield return StartCoroutine(GameTimer.Wait(weekTime * Random.Range(0.9f, 1.6f)));
         }
     }
 
     IEnumerator ProductRevenueCycle() {
-        yield return new WaitForSeconds(cycleTime);
+        yield return StartCoroutine(GameTimer.Wait(cycleTime));
         while(true) {
             // Add a bit of randomness to give things
             // a more "natural" feel.
@@ -449,24 +444,24 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.HarvestProducts(elapsedTime);
             playerCompany.HarvestCompanies();
 
-            yield return new WaitForSeconds(elapsedTime);
+            yield return StartCoroutine(GameTimer.Wait(elapsedTime));
         }
     }
 
     IEnumerator ResearchCycle() {
-        yield return new WaitForSeconds(cycleTime);
+        yield return StartCoroutine(GameTimer.Wait(cycleTime));
         while(true) {
             // Add a bit of randomness to give things
             // a more "natural" feel.
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
             playerCompany.Research();
 
-            yield return new WaitForSeconds(elapsedTime);
+            yield return StartCoroutine(GameTimer.Wait(elapsedTime));
         }
     }
 
     IEnumerator OpinionCycle() {
-        yield return new WaitForSeconds(cycleTime);
+        yield return StartCoroutine(GameTimer.Wait(cycleTime));
         while(true) {
             // Add a bit of randomness to give things
             // a more "natural" feel.
@@ -477,7 +472,7 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.ForgetOpinionEvents();
             playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - 0.1f);
 
-            yield return new WaitForSeconds(elapsedTime);
+            yield return StartCoroutine(GameTimer.Wait(elapsedTime));
         }
     }
 

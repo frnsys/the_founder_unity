@@ -40,10 +40,12 @@ public class UILabor : MonoBehaviour {
     }
 
     void Update() {
-        timer.value -= 0.018f;
+        if (!GameTimer.paused) {
+            timer.value -= 0.018f;
 
-        if (timer.value <= 0 && !captured)
-            StartCoroutine(Scale(1f, 0f, Destroy));
+            if (timer.value <= 0 && !captured)
+                StartCoroutine(Scale(1f, 0f, Destroy));
+        }
     }
 
     void OnClick() {
