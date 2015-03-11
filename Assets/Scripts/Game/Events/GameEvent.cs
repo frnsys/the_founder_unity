@@ -74,10 +74,6 @@ public class GameEvent : ScriptableObject {
             EventTriggered(ge);
         }
     }
-    static public IEnumerator DelayTrigger(GameEvent ge, float seconds) {
-        yield return new WaitForSeconds(seconds);
-        Trigger(ge);
-    }
 
     public bool ConditionsSatisfied(Company company) {
         for (int i=0; i < conditions.Length; i++) {

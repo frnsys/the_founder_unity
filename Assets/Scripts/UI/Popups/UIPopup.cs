@@ -28,10 +28,6 @@ public abstract class UIPopup : MonoBehaviour {
             // SmoothStep gives us a bit of easing.
             target.transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
-
-            // Use this if you need to slow down animations to debug them.
-            // You will have to disable GameManager.Pause.
-            //yield return new WaitForSeconds(1);
         }
 
         if (cb != null) {

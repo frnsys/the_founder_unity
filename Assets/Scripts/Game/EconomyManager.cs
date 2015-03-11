@@ -72,18 +72,18 @@ public class EconomyManager : Singleton<EconomyManager> {
     }
 
     IEnumerator EconomyCycle() {
-        yield return new WaitForSeconds(10);
+        yield return StartCoroutine(GameTimer.Wait(10));
         while (true) {
             // See if the economy changes.
             if (!changing && Random.value < economyChangeProbability) {
                 ChangeEconomy();
             }
-            yield return new WaitForSeconds(72);
+            yield return StartCoroutine(GameTimer.Wait(72));
         }
     }
 
     IEnumerator ScheduleChange(Economy newEconomy, string eventName) {
-        yield return new WaitForSeconds(180 + Random.value * 180f);
+        yield return StartCoroutine(GameTimer.Wait(180 + Random.value * 180f));
 
         // Economic recovery is a special case.
         if ((data.economy == Economy.Recession || data.economy == Economy.Depression) && (newEconomy == Economy.Expansion || newEconomy == Economy.Neutral)) {

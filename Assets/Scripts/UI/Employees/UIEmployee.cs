@@ -55,40 +55,47 @@ public class UIEmployee : MonoBehaviour {
     }
 
     void Update() {
-        // Move to target if not at desk and not idling.
-        if (state == State.GoingToDesk || state == State.Wandering) {
-            line.SetPosition(0, transform.position);
-            agent.SetDestination(target);
+        if (!GameTimer.paused) {
+            agent.Resume();
+            // Move to target if not at desk and not idling.
+            if (state == State.GoingToDesk || state == State.Wandering) {
+                line.SetPosition(0, transform.position);
+                agent.SetDestination(target);
 
-            // May randomly go to desk.
-            if (state == State.Wandering && company.developing && Random.value < 0.05f * worker.productivity.value) {
-                GoToDesk();
-            } else if (state == State.GoingToDesk) {
-                DrawPath(agent.path);
-                line.enabled = true;
-            }
+                // May randomly go to desk.
+                if (state == State.Wandering && company.developing && Random.value < 0.05f * worker.productivity.value) {
+                    GoToDesk();
+                } else if (state == State.GoingToDesk) {
+                    DrawPath(agent.path);
+                    line.enabled = true;
+                }
 
-            // Check if we've reached the destination
-            // For this to work, the stoppingDistance has to be about 1.
-            if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
+                // Check if we've reached the destination
+                // For this to work, the stoppingDistance has to be about 1.
+                if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
 
-                // If going to a desk...
-                if (state == State.GoingToDesk) {
-                    state = State.AtDesk;
-                    line.enabled = false;
+                    // If going to a desk...
+                    if (state == State.GoingToDesk) {
+                        state = State.AtDesk;
+                        line.enabled = false;
 
-                } else {
-                    // Else, continue wandering around.
-                    StartCoroutine(Pause());
-                    target = RandomTarget();
+                    } else {
+                        // Else, continue wandering around.
+                        StartCoroutine(Pause());
+                        target = RandomTarget();
+                    }
                 }
             }
+
+        // Force-stop the agent for pausing.
+        } else {
+            agent.Stop(true);
         }
     }
 
     IEnumerator Pause() {
         state = State.Idling;
-        yield return new WaitForSeconds(1f + Random.value * 3f);
+        yield return StartCoroutine(GameTimer.Wait(1f + Random.value * 3f));
         state = State.Wandering;
     }
 
@@ -180,7 +187,7 @@ public class UIEmployee : MonoBehaviour {
                 UIOfficeManager.Instance.SetupFollowTarget(this, uift);
             }
 
-            yield return new WaitForSeconds(1.4f * Random.value);
+            yield return StartCoroutine(GameTimer.Wait(1.4f * Random.value));
         }
     }
 
