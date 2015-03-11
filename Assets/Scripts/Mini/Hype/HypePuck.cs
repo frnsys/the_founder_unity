@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class HypePuck : MonoBehaviour {
     public static event System.Action Completed;
+    public static event System.Action Fired;
 
     public float speed = 4000f;
     public float speedLimit = 4000f;
@@ -36,6 +37,9 @@ public class HypePuck : MonoBehaviour {
         // TO DO tweak this
         rigidbody2D.AddForce(Vector2.ClampMagnitude(dir * speed, speedLimit));
         fired = true;
+
+        if (Fired != null)
+            Fired();
     }
 
     protected void DoCompleted() {

@@ -640,7 +640,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
-  mWidth: 491
+  mWidth: 492
   mHeight: 820
   mDepth: 0
   autoResizeBoxCollider: 0
@@ -712,11 +712,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: 0, y: -479.934387, z: 539.452393, w: 819.999878}
+  mClipRange: {x: 0, y: -479.934387, z: 540.080688, w: 819.999878}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 220
   mSortingOrder: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3003
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1123,7 +1123,7 @@ MonoBehaviour:
     relative: 0
     absolute: 60
   updateAnchors: 1
-  mColor: {r: .985294104, g: .787835538, b: .434688568, a: 1}
+  mColor: {r: .33088237, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
   mWidth: 691
   mHeight: 60
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 115.166664
+  aspectRatio: 11.5166664
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

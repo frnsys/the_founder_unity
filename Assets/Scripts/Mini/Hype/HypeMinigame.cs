@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HypeMinigame : Singleton<HypeMinigame> {
+public class HypeMinigame : MonoBehaviour {
     public int pucks = 3;
     public HypePuck puck;
     public UILabel pitchesLabel;
@@ -17,6 +17,10 @@ public class HypeMinigame : Singleton<HypeMinigame> {
         level = Instantiate(promo.level) as GameObject;
         level.transform.parent = gameBoard;
 
+        foreach (HypeTarget ht in GetComponentsInChildren<HypeTarget>()) {
+            ht.Setup(this);
+        }
+
         // This is a hack so that the mentor message
         // doesn't have to deal with layering issues with the blebs.
         level.SetActive(false);
@@ -31,6 +35,7 @@ public class HypeMinigame : Singleton<HypeMinigame> {
         HypeTarget.Scored += Scored;
         HypeTarget.Completed += Completed;
         HypePuck.Completed += Completed;
+        HypePuck.Fired += Fired;
         UpdateLabels();
     }
 
@@ -46,9 +51,13 @@ public class HypeMinigame : Singleton<HypeMinigame> {
         UpdateLabels();
     }
 
+    void Fired() {
+        pucks--;
+        UpdateLabels();
+    }
+
     void Completed() {
-        if (pucks > 0) {
-            pucks--;
+        if (pucks >= 0) {
             puck.Reset();
         } else {
             // Game Over
@@ -59,8 +68,8 @@ public class HypeMinigame : Singleton<HypeMinigame> {
     }
 
     void UpdateLabels() {
-        pitchesLabel.text = string.Format("Pitches: {0}", pucks);
-        scoreLabel.text = string.Format("Hype: {0}, PR: {1}", hypeScore, opinionScore);
+        pitchesLabel.text = string.Format("Pitches: [c][EFD4F1]{0}[-][/c]", pucks + 1);
+        scoreLabel.text = string.Format("Hype: [c][FD6A6A]{0}[-][/c], PR: [c][56FB92]{1}[-][/c]", hypeScore, opinionScore);
     }
 
     void EndGame() {

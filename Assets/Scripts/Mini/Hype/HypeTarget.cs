@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class HypeTarget : MonoBehaviour {
     public static Color cascadeColor = new Color(0.74f, 1.0f, 0.95f, 0.2f);
     public static Color firstColor = new Color(0.74f, 1.0f, 0.95f, 0.4f);
+    public static Color hypeColor = new Color(1f, 0.33f, 0.33f);
+    public static Color prColor = new Color(0.34f, 0.98f, 0.57f);
 
     public enum Function {
         Linear,
@@ -24,6 +26,8 @@ public class HypeTarget : MonoBehaviour {
     public GameObject model;
     public GameObject hypeTargetPuckPrefab;
     public HUDText hudtext;
+
+    private Transform gameBoard;
 
     private Vector2 start;
     new private bool enabled = true;
@@ -50,9 +54,16 @@ public class HypeTarget : MonoBehaviour {
         rangeDisplay.transform.localScale = Vector2.zero;
         rangeDisplay.GetComponent<SpriteRenderer>().color = cascadeColor;
 
-        model.renderer.material.mainTexture = HypeMinigame.Instance.blebTextures[Random.Range(0, HypeMinigame.Instance.blebTextures.Length - 1)];
+        UIFollowTarget uift = hudtext.GetComponent<UIFollowTarget>();
+        uift.gameCamera = UIManager.Instance.uiCamera;
+        uift.uiCamera = UIManager.Instance.uiCamera;
+        hudtext.fontSize = 48;
 
         StartCoroutine("Move");
+    }
+    public void Setup(HypeMinigame hg) {
+        model.renderer.material.mainTexture = hg.blebTextures[Random.Range(0, hg.blebTextures.Length - 1)];
+        gameBoard = hg.gameBoard;
     }
 
     IEnumerator Move() {
@@ -110,7 +121,7 @@ public class HypeTarget : MonoBehaviour {
         // Spawn pucks.
         for (int i=0; i<numPucks; i++) {
             GameObject puckObj = Instantiate(hypeTargetPuckPrefab) as GameObject;
-            puckObj.transform.parent = HypeMinigame.Instance.gameBoard;
+            puckObj.transform.parent = gameBoard;
             puckObj.transform.position = transform.position;
             HypeTargetPuck htp = puckObj.GetComponent<HypeTargetPuck>();
             htp.owner = this;
@@ -123,9 +134,9 @@ public class HypeTarget : MonoBehaviour {
     }
 
     IEnumerator ShowPoints() {
-        hudtext.Add(hypePoints, new Color(1f,0.9f,0.53f), 0f);
+        hudtext.Add(hypePoints, hypeColor, 0f);
         yield return new WaitForSeconds(2f);
-        hudtext.Add(opinionPoints, new Color(0.07f,0.62f,0.95f), 0f);
+        hudtext.Add(opinionPoints, prColor, 0f);
     }
 
     // Highlight the target.
@@ -143,8 +154,8 @@ public class HypeTarget : MonoBehaviour {
 
     // Show the circular pop around the target.
     IEnumerator ShowHit() {
-        Vector2 endScale = transform.localScale * cascadeRadius * 2;
-        float step = 0.04f;
+        Vector2 endScale = transform.localScale * cascadeRadius * 6;
+        float step = 0.06f;
         for (float f = 0f; f <= 1f + step; f += step) {
             rangeDisplay.transform.localScale = Vector2.Lerp(rangeDisplay.transform.localScale, endScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
