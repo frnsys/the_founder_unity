@@ -126,6 +126,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         OPENED_HIRING,
         INFRASTRUCTURE,
         RESEARCH,
+        GAME_GOALS,
         OTHER_PRODUCT_ASPECTS
     }
     private OBS obs = OBS.START;
@@ -202,14 +203,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         MentorMessages(new string[] {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
-            "[c][FC5656]The Board[-][/c] sets annual profit targets for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c]. You [i]must[/i] hit these targets.",
-            "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will dismiss you from the company.",
-            "You can keep track of your profit and other accounting in the [c][4B2FF8]Accounting[-][/c] menu item.",
             "You're not much of a business if haven't got anything to sell. Let's create a product.",
             "Open the menu up and select [c][4B2FF8]New Product[-][/c]."
         });
         UIManager.Instance.menu.Activate("New Product");
-        UIManager.Instance.menu.Activate("Accounting");
     }
 
     // Checks if it is appropriate to execute the specified stage,
@@ -256,7 +253,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Here is where you can recruit some new candidates to hire.",
                         "There are a few different recruiting methods which vary in cost and quality of candidate.",
-                        "For now you should probably keep costs low and go by word-of-mouth. Give it a try. You'll be notified about the candidates when recruiting has finished."
+                        "Give it a try!"
                     });
                 }
                 break;
@@ -266,7 +263,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Here are the candidates from your recruiting effort.",
                         "To hire an candidate, you must give them an offer they find acceptable. You have three tries before they take an offer elsewhere.",
-                        "The minimum salary an candidate is willing to accept is affected by a few things. If your employees are happier than they are, candidates will be willing to take a lower salary. General global salary averages and their current salary, if they are employed, will also have an impact.",
+                        "The minimum salary an candidate is willing to accept is affected by a few things.",
+                        "Generally, more skilled employees will expect more money.",
+                        "Hiring competition amongst companies can drive salary expectations up.",
+                        "However, your employees are exceptionally happy, candidates will be willing to take a lower salary.",
                         "Don't forget - you're fighting to keep a high profit margin - so negotiate with that in mind!"
                     });
                 }
@@ -314,12 +314,24 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Congratulations! You've completed your first product.",
-                        "It will start generating revenue, depending on its final design, engineering, and marketing values.",
+                        "It will start generating revenue, depending on its final :DESIGN: [c][0078E1]design[-][/c], :ENGINEERING: [c][0078E1]engineering[-][/c], and :MARKETING: [c][0078E1]marketing[-][/c] values.",
                         "Better products, of course, will make more money.",
                         "To make better products you need to assemble a talented team.",
                         "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
                     });
                     UIManager.Instance.menu.Activate("Recruiting");
+                }, 3f));
+            } else if (Stage(OBS.GAME_GOALS)) {
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    MentorMessages(new string[] {
+                        "Now that you've got some experience with building products, [c][FC5656]The Board[-][/c] has asked me to explain their expectations for your company.",
+                        "[c][FC5656]The Board[-][/c] sets annual profit targets for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c].",
+                        "You [i]must[/i] hit these targets.",
+                        "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will dismiss you from the company.",
+                        "Your current profit and target profit are shown in the bar below.",
+                        "You can keep more detailed track of your profit and other accounting in the [c][4B2FF8]Accounting[-][/c] menu item.",
+                    });
+                    UIManager.Instance.menu.Activate("Accounting");
                 }, 3f));
             } else if (Stage(OBS.OTHER_PRODUCT_ASPECTS)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
