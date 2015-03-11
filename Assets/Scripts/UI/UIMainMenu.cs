@@ -81,6 +81,11 @@ public class UIMainMenu : Singleton<UIMainMenu> {
         // Switch to the game scene.
         Application.LoadLevel("Game");
     }
+
+    public void Settings(GameObject settingsPrefab) {
+        GameObject window = NGUITools.AddChild(gameObject, settingsPrefab);
+        window.GetComponent<UIWidget>().SetAnchor(gameObject, 0, 0, 0, 0);
+    }
 }
 
 
