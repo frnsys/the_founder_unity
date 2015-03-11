@@ -21,8 +21,8 @@ public class UIMenuButton : MonoBehaviour {
 
     private IEnumerator Pulse() {
         Vector3 fromScale = new Vector3(1f, 1f, 1f);
-        Vector3 toScale = new Vector3(1.1f, 1.1f, 1.1f);
-        float step = 0.024f;
+        Vector3 toScale = new Vector3(1.2f, 1.2f, 1.2f);
+        float step = 0.03f;
 
         while (true) {
             for (float f = 0f; f <= 1f + step; f += step) {

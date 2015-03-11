@@ -315,8 +315,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Congratulations! You've completed your first product.",
                         "It will start generating revenue, depending on its final design, engineering, and marketing values.",
-                        "Next to the product's revenue is the market share of the product. Products make more money if they have a larger share of the market.",
-                        "You can increase your market share by expanding to new locations and building better products.",
+                        "Better products, of course, will make more money.",
                         "To make better products you need to assemble a talented team.",
                         "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
                     });
@@ -405,7 +404,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
         } else if (us.locations.Count > 0 && !ob.LOCATIONS_UNLOCKED) {
             MentorMessages(new string[] {
-                "A new location is available for you to expand to. Locations allow you to increase your share of existing markets or establish a foothold in new ones, and also provide capacity for more infrastructure. Some locations have special bonuses too. Manage your locations in the [c][4B2FF8]Location[-][/c] menu item."
+                "A new location is available for you to expand to!",
+                "Locations allow you to increase your share of existing markets or establish a foothold in new ones.",
+                "The more locations you have for a market, the more money you will make.",
+                "Locations also provide capacity for more infrastructure. Some locations have special bonuses too.",
+                "Manage your locations in the [c][4B2FF8]Location[-][/c] menu item."
             });
             UIManager.Instance.menu.Activate("Locations");
             ob.LOCATIONS_UNLOCKED = true;
