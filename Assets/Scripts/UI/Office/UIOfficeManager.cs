@@ -114,11 +114,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         SetupFollowTarget(uie, uift);
         uie.happinessLabel = happiness.GetComponent<UILabel>();
 
-        Transform hudtext = hud.transform.Find("HUDText");
-        uift = hudtext.GetComponent<UIFollowTarget>();
-        SetupFollowTarget(uie, uift);
-        uie.hudtext = hudtext.GetComponent<HUDText>();
-
         uie.HUDgroup = hud;
     }
 

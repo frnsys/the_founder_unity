@@ -9,8 +9,6 @@ public class UIEmployee : MonoBehaviour {
     [HideInInspector]
     public GameObject HUDgroup;
     [HideInInspector]
-    public HUDText hudtext;
-    [HideInInspector]
     public UILabel happinessLabel;
 
     [HideInInspector]

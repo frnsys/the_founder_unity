@@ -16,23 +16,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100002
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400002}
-  - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
-  m_Layer: 0
-  m_Name: HUDText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100004
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,21 +43,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400002}
   - {fileID: 400004}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &400002
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.4486237, y: -1750.24146, z: 4870.08057}
-  m_LocalScale: {x: 479.999969, y: 479.999969, z: 479.999969}
-  m_Children: []
-  m_Father: {fileID: 400000}
   m_RootOrder: 0
 --- !u!4 &400004
 Transform:
@@ -87,88 +57,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
-  m_RootOrder: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13e6525715fcfe34eb1fa8e16533b3f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  gameCamera: {fileID: 0}
-  uiCamera: {fileID: 0}
-  disableIfInvisible: 0
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebbf080627224a44786e958729eb7601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  font: {fileID: 0}
-  bitmapFont: {fileID: 0}
-  trueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
-  fontSize: 20
-  fontStyle: 0
-  applyGradient: 0
-  gradientTop: {r: 1, g: 1, b: 1, a: 1}
-  gradienBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
-  effect: 0
-  effectColor: {r: 0, g: 0, b: 0, a: 1}
-  offsetCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: .0797464326
-      value: .0689212233
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  alphaCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 1
-      value: .997787893
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1.14890122
-      value: -.00617187563
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  scaleCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: .00250001531
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: .0711284727
-      value: .00249998551
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
+  m_RootOrder: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

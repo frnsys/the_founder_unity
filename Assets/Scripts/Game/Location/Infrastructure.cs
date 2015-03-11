@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -44,10 +45,7 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         return "infrastructures";
     }
 
-    // Each piece of infrastructure costs 1000.
-    public static int baseCost {
-        get { return 1000; }
-    }
+    public static int baseCost = 1000;
 
     // Returns the cost for this set of infrastructure.
     public int cost {
@@ -61,13 +59,7 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
     }
 
     public bool isEmpty {
-        get {
-            foreach(KeyValuePair<Type, int> item in this) {
-                if (item.Value > 0)
-                    return false;
-            }
-            return true;
-        }
+        get { return !Values.Any(v => v > 0); }
     }
 
     public override string ToString() {
@@ -90,11 +82,7 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
     }
 
     public bool Equals(Infrastructure right) {
-        foreach(KeyValuePair<Type, int> item in this) {
-            if (item.Value != right[item.Key])
-                return false;
-        }
-        return true;
+        return !Keys.Any(k => this[k] != right[k]);
     }
 
     // Gets the intersection of two infrastructures.
@@ -108,43 +96,23 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
 
     // Returns true if _any_ values in this is greater than the corresponding value in `right`.
     public bool AnyGreater(Infrastructure right) {
-        foreach(KeyValuePair<Type, int> item in this) {
-            if (item.Value > right[item.Key])
-                return true;
-        }
-        return false;
+        return Keys.Any(k => this[k] > right[k]);
     }
 
     public static bool operator <=(Infrastructure left, Infrastructure right) {
-        foreach(KeyValuePair<Type, int> item in left) {
-            if (item.Value > right[item.Key])
-                return false;
-        }
-        return true;
+        return !left.Keys.Any(k => left[k] > right[k]);
     }
 
     public static bool operator >=(Infrastructure left, Infrastructure right) {
-        foreach(KeyValuePair<Type, int> item in left) {
-            if (item.Value < right[item.Key])
-                return false;
-        }
-        return true;
+        return !left.Keys.Any(k => left[k] < right[k]);
     }
 
     public static bool operator >(Infrastructure left, Infrastructure right) {
-        foreach(KeyValuePair<Type, int> item in left) {
-            if (item.Value <= right[item.Key])
-                return false;
-        }
-        return true;
+        return !left.Keys.Any(k => left[k] <= right[k]);
     }
 
     public static bool operator <(Infrastructure left, Infrastructure right) {
-        foreach(KeyValuePair<Type, int> item in left) {
-            if (item.Value >= right[item.Key])
-                return false;
-        }
-        return true;
+        return !left.Keys.Any(k => left[k] >= right[k]);
     }
 
     public static Infrastructure operator +(Infrastructure left, Infrastructure right) {
@@ -158,11 +126,8 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
     public static Infrastructure operator -(Infrastructure left, Infrastructure right) {
         Infrastructure result = new Infrastructure();
         foreach(KeyValuePair<Type, int> item in left) {
-            result[item.Key] = item.Value - right[item.Key];
-
             // The smallest is 0, no negatives.
-            if (result[item.Key] < 0)
-                result[item.Key] = 0;
+            result[item.Key] = Math.Max(item.Value - right[item.Key], 0);
         }
         return result;
     }
