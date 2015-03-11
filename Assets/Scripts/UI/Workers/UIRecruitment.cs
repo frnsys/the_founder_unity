@@ -20,14 +20,7 @@ public class UIRecruitment : MonoBehaviour {
     public UITexture image;
 
     public void SelectRecruitment() {
-        Company company = GameManager.Instance.playerCompany;
-        if (company.developingRecruitment != null && company.developingRecruitment != recruitment_) {
-            UIManager.Instance.Confirm("Are you sure want to change the current recruitment strategy? You will lose accumulated progress for the current one.", delegate() {
-                company.StartRecruitment(recruitment_);
-            }, null);
-        } else {
-            company.StartRecruitment(recruitment_);
-        }
+        GameManager.Instance.playerCompany.StartRecruitment(recruitment_);
     }
 }
 

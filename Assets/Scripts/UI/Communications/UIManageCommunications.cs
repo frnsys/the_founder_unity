@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class UIManageCommunications : UIFullScreenPager {
     private GameManager gm;
-
     public GameObject promoPrefab;
 
     void OnEnable() {

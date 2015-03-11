@@ -380,20 +380,8 @@ public class Company : HasStats {
 
 
     public void StartRecruitment(Recruitment recruitment) {
-        developingRecruitment = recruitment.Clone();
+        recruitment.Develop();
     }
-
-    public Recruitment developingRecruitment;
-    public void DevelopRecruitment() {
-        if (developingRecruitment != null) {
-            bool completed = developingRecruitment.Develop();
-
-            if (completed) {
-                developingRecruitment = null;
-            }
-        }
-    }
-
 
     // ===============================================
     // Hype Management ===============================

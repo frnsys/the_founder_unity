@@ -421,8 +421,6 @@ public class GameManager : Singleton<GameManager> {
         while(true) {
             playerCompany.DevelopProduct();
 
-            //playerCompany.DevelopRecruitment(); // trying without developing recruitment time
-
             // Add a bit of randomness to give things
             // a more "natural" feel.
             yield return new WaitForSeconds(cycleTime * Random.Range(0.4f, 1.4f));
