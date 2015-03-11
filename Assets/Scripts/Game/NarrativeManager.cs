@@ -266,7 +266,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "The minimum salary an candidate is willing to accept is affected by a few things.",
                         "Generally, more skilled employees will expect more money.",
                         "Hiring competition amongst companies can drive salary expectations up.",
-                        "However, your employees are exceptionally happy, candidates will be willing to take a lower salary.",
+                        "However, if your employees are exceptionally happy, candidates will be willing to take a lower salary.",
                         "Don't forget - you're fighting to keep a high profit margin - so negotiate with that in mind!"
                     });
                 }
@@ -299,8 +299,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         ":INTERACT: [c][1CD05E]double-tap[-][/c] an employee to get them to go to their desk.",
                         "To develop the product, capture the value your employees produce by :INTERACT: [c][1CD05E]tapping[-][/c] on the icons that appear above them.",
                         "Employees can produce\n:DESIGN: [c][0078E1]design[-][/c],\n:ENGINEERING: [c][0078E1]engineering[-][/c], or\n:MARKETING: [c][0078E1]marketing[-][/c]\npoints for your products.",
-                        "Certain products rely more on heavily on some of these features. Happy employees may have :BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
-                        "Try to get bonus multipliers by chaining feature points together!"
+                        "Different products rely more on heavily on one of these kinds of points.",
+                        "Happy employees may have :BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
+                        "The points you capture are shown below. Try to get bonus multipliers by chaining feature points together!"
                     });
                 }, 2f));
             }

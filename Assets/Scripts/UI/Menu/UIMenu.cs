@@ -10,9 +10,13 @@ public class UIMenu : MonoBehaviour {
     }
 
     public void Activate(string item) {
-        grid.transform.Find(item).gameObject.SetActive(true);
+        GameObject menuItem = grid.transform.Find(item).gameObject;
+        menuItem.SetActive(true);
+
         grid.Reposition();
+
         menuButton.Wiggle();
+        menuItem.GetComponent<UIMenuItem>().wiggle = true;
     }
 
     public void Deactivate(string item) {
