@@ -3,22 +3,7 @@
  *
  * The AI company has a minimal set of things it actually does
  * to simulate competition with the player.
- *
- * Everything else is faked:
- * - No acquisitions
- * - Ignores infrastructure
- *   - can build products w/o it
- *   - instead, there is a max product limit
- * - Events don't happen to them
- * - No perks - instead, only the fixed bonuses at the start
- * - Locations and markets are fixed
- * - Opinion & publicity increase at fixed rates
- *   - no opinion czar
- *   - over time, the player company will overtake these rates
- * - No research
- *   - AI companies have access to all product types from the start
- * - Verticals are fixed
- * - Recruiting is ignored - company has access to all workers
+ * Everything else is faked.
  */
 
 using UnityEngine;

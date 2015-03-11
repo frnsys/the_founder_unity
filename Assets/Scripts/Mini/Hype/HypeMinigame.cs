@@ -14,7 +14,6 @@ public class HypeMinigame : Singleton<HypeMinigame> {
 
     private GameObject level;
     public void Setup(Promo promo) {
-        promo = promo;
         level = Instantiate(promo.level) as GameObject;
         level.transform.parent = gameBoard;
 

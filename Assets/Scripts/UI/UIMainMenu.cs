@@ -18,7 +18,6 @@ public class UIMainMenu : Singleton<UIMainMenu> {
             continueButton.SetActive(false);
         }
         menu.Reposition();
-
         AudioManager.Instance.PlayMenuMusic();
     }
 

@@ -6,17 +6,10 @@ using System.Collections.Generic;
 public class Vertical : SharedResource<Vertical> {
     public float cost = 10000000;
     public string description;
-
     public Mesh mesh;
 
-    public bool isAvailable(Company company) {
-        if (company.verticals.Count < company.locations.Count)
-            return true;
-        return false;
-    }
-
     public static new Vertical Load(string name) {
-        return Resources.Load("Verticals/" + name) as Vertical;
+        return Resources.Load<Vertical>("Verticals/" + name);
     }
 
     public static List<Vertical> LoadAll() {

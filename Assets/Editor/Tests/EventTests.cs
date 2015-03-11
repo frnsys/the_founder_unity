@@ -9,7 +9,6 @@ namespace UnityTest
 {
     internal class TestEventListener
     {
-        public GameEvent gameEvent;
         public GameEvent triggeredEvent;
 
         public TestEventListener() {
@@ -34,7 +33,9 @@ namespace UnityTest
 
         [SetUp]
         public void SetUp() {
-            gE = new GameEvent("Some event", 1f);
+            gE = ScriptableObject.CreateInstance<GameEvent>();
+            gE.name = "Some event";
+            gE.probability = 1f;
 
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
@@ -105,9 +106,10 @@ namespace UnityTest
             gE.probability = 1;
             em.Add(gE);
 
-            GameEvent gE_ = new GameEvent("Some event", 1f);
+            GameEvent gE_ = ScriptableObject.CreateInstance<GameEvent>();
+            gE_.name = "Some event";
+            gE_.probability = 1f;
             gE_.delay = 1;
-            gE_.probability = 1;
             em.Add(gE_);
 
             Assert.AreEqual(gd.eventsPool.Count, 2);

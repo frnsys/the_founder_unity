@@ -42,7 +42,6 @@ public class GameEvent : ScriptableObject {
     public string from;
     public Texture image;
 
-    [HideInInspector]
     public float delay {
         get { return _delay; }
         set {
@@ -50,6 +49,7 @@ public class GameEvent : ScriptableObject {
             countdown = value;
         }
     }
+
     [SerializeField]
     private float _delay;
     public float countdown;
@@ -59,11 +59,6 @@ public class GameEvent : ScriptableObject {
     public EffectSet effects = new EffectSet();
     public Action[] actions;
     public Condition[] conditions;
-
-    public GameEvent(string name_, float probability_) {
-        name = name_;
-        probability = Mathf.Clamp(probability_, 0, 1);
-    }
 
     // An event which is broadcast for each event.
     static public event System.Action<GameEvent> EventTriggered;
@@ -157,7 +152,6 @@ public class GameEvent : ScriptableObject {
     public class Action {
         public string name;
         public EffectSet effects;
-
         public Action() {}
     }
 }

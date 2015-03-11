@@ -84,10 +84,14 @@ namespace UnityTest
             data.spendingMultiplier = 10;
             data.economicStability = 10;
 
-            GameEvent ev = new GameEvent("TESTEVENT", 1f);
+            GameEvent ev = ScriptableObject.CreateInstance<GameEvent>();
+            ev.name = "TESTEVENT";
+            ev.probability = 1f;
             data.eventsPool.Add(ev);
 
-            GameEvent sev = new GameEvent("TESTSPECIALEVENT", 1f);
+            GameEvent sev = ScriptableObject.CreateInstance<GameEvent>();
+            sev.name = "TESTSPECIALEVENT";
+            sev.probability = 1f;
             data.specialEventsPool.Add(sev);
 
             // TO DO AI companies

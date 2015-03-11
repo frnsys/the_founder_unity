@@ -18,12 +18,12 @@ public class UIHireWorkers : UIFullScreenPager {
 
         // Pause the hiring window,
         // so AI companies aren't hiring candidates you're reviewing.
-        if (GameManager.Instance != null)
+        if (GameManager.hasInstance)
             GameManager.Instance.Pause();
     }
 
     void OnDisable() {
-        if (GameManager.Instance != null)
+        if (GameManager.hasInstance)
             GameManager.Instance.Resume();
     }
 

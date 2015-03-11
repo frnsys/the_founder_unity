@@ -16,24 +16,18 @@ public class UISettings : UIWindow {
     }
 
     public void ToggleMusic() {
-        int val = PlayerPrefs.GetInt("Music", 1) == 1 ? 0 : 1;
-        PlayerPrefs.SetInt("Music", val);
-        UpdateButton("Music", musicButton);
-        AudioManager.Instance.UpdatePrefs();
+        Toggle("Music", fxButton);
     }
 
     public void ToggleFX() {
-        int val = PlayerPrefs.GetInt("FX", 1) == 1 ? 0 : 1;
-        PlayerPrefs.SetInt("FX", val);
-        UpdateButton("FX", fxButton);
-        AudioManager.Instance.UpdatePrefs();
+        Toggle("FX", fxButton);
     }
 
-    private void SetButtonColor(UIButton b, Color c) {
-        b.defaultColor = c;
-        b.pressed = c;
-        b.hover = c;
-        b.disabledColor = c;
+    private void Toggle(string key, UIButton button) {
+        int val = PlayerPrefs.GetInt(key, 1) == 1 ? 0 : 1;
+        PlayerPrefs.SetInt(key, val);
+        UpdateButton(key, button);
+        AudioManager.Instance.UpdatePrefs();
     }
 
     private void UpdateButton(string key, UIButton button) {
@@ -41,5 +35,12 @@ public class UISettings : UIWindow {
             SetButtonColor(button, activeColor);
         else
             SetButtonColor(button, inactiveColor);
+    }
+
+    private void SetButtonColor(UIButton b, Color c) {
+        b.defaultColor = c;
+        b.pressed = c;
+        b.hover = c;
+        b.disabledColor = c;
     }
 }

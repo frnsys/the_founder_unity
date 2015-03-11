@@ -21,10 +21,6 @@ public class StatBuff {
     }
 
     public bool Equals(StatBuff sb) {
-        if (name != sb.name)
-            return false;
-        else if (value != sb.value)
-            return false;
-        return true;
+        return name == sb.name && value == sb.value;
     }
 }

@@ -73,12 +73,6 @@ namespace UnityTest
 
           worker.creativity.baseValue = 20;
 
-          // Prepare a product to check that hiring/firing workers automatically updates
-          // progress required for developing products.
-          ProductType pt = ScriptableObject.CreateInstance<ProductType>();
-          c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
-          Product p = c.products[0];
-
           c.baseSizeLimit = 0;
           c.HireWorker(worker);
           Assert.AreEqual(c.workers.Count, 0);

@@ -5,16 +5,13 @@ using System.Collections.Generic;
 public class Technology : SharedResource<Technology> {
     public string description;
     public Texture icon;
-
     public int cost = 1000;
-
-    public EffectSet effects = new EffectSet();
-
     public Vertical requiredVertical;
     public List<Technology> requiredTechnologies;
+    public EffectSet effects = new EffectSet();
 
     public static new Technology Load(string name) {
-        return Resources.Load("Technologies/" + name) as Technology;
+        return Resources.Load<Technology>("Technologies/" + name);
     }
 
     public static List<Technology> LoadAll() {

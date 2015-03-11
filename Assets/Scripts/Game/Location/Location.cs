@@ -3,17 +3,15 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class Location : SharedResource<Location> {
-    public string description;
-
     // Rotation on the earth.
     public Vector3 rotation;
     public float cost = 1000000;
+    public string description;
     public MarketManager.Market market = MarketManager.Market.NorthAmerica;
-
     public Infrastructure capacity = new Infrastructure();
     public EffectSet effects = new EffectSet();
 
-    public static Location Load(string name) {
+    public static new Location Load(string name) {
         return Resources.Load<Location>("Locations/" + name);
     }
 

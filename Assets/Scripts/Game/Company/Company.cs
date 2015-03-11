@@ -623,14 +623,7 @@ public class Company : HasStats {
         // Disable products which rely on infrastructure which is overloaded.
         // Re-enable products which rely on infrastructure which is no longer overloaded.
         foreach (Product p in supportedProducts) {
-            bool set = false;
-            foreach (Infrastructure.Type t in overloadedTypes) {
-                if (p.requiredInfrastructure[t] > 0) {
-                    set = true;
-                    break;
-                }
-            }
-            p.disabled = set;
+            p.disabled = overloadedTypes.Any(t => p.requiredInfrastructure[t] > 0);
         }
     }
 
