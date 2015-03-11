@@ -654,10 +654,10 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
-  mText: continue
+  mText: '>>'
   mFontSize: 18
   mFontStyle: 0
-  mAlignment: 2
+  mAlignment: 3
   mEncoding: 1
   mMaxLineCount: 0
   mEffectStyle: 0
@@ -719,7 +719,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
-  mText: back
+  mText: <<
   mFontSize: 18
   mFontStyle: 0
   mAlignment: 2

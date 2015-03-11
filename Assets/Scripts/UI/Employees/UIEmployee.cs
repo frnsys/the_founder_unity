@@ -158,7 +158,7 @@ public class UIEmployee : MonoBehaviour {
             // or leave the desk.
             // Robots don't leave their desk.
             // TO DO may need to tweak this value.
-            if (state == State.AtDesk && !worker.robot && Random.value < 0.8f/worker.productivity.value) {
+            if (state == State.AtDesk && !worker.robot && Random.value < 0.25f/worker.productivity.value) {
                     LeaveDesk();
             } else if (company.developing && state == State.AtDesk && laborObj == null) {
                 laborObj = NGUITools.AddChild(HUDgroup, laborPrefab);
