@@ -63,7 +63,6 @@ public class UIAccounting : MonoBehaviour {
         float cost = company.annualCosts;
         currentRevenue.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
         currentProfit.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
-        researchBudget.text = company.researchInvestment.ToString();
         lifetimeRevenue.text = string.Format("Lifetime Revenue: [c][6A53F7]{0:C0}[-][/c]", company.lifetimeRevenue);
         totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
         deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
@@ -74,15 +73,6 @@ public class UIAccounting : MonoBehaviour {
         forgettingRate.text = string.Format("Public Forgetting Rate: [c][20D060]{0:F2}x[-][/c]", gm.forgettingRate);
     }
 
-    public void IncreaseResearchBudget() {
-        company.researchInvestment += 10000;
-    }
-
-    public void DecreaseResearchBudget() {
-        company.researchInvestment -= 10000;
-        if (company.researchInvestment < 0)
-            company.researchInvestment = 0;
-    }
 
     public UILabel salaries;
     public UILabel rent;
@@ -92,7 +82,6 @@ public class UIAccounting : MonoBehaviour {
     public UILabel currentProfit;
     public UILabel pastRevenue;
     public UILabel pastProfit;
-    public UILabel researchBudget;
     public UILabel lifetimeRevenue;
     public UILabel totalMarketShare;
     public UILabel deathToll;

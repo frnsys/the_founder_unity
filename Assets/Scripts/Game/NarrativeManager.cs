@@ -124,10 +124,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         COMPLETED_PRODUCT,
         OPENED_RECRUITING,
         OPENED_HIRING,
+        HIRED_EMPLOYEE,
         INFRASTRUCTURE,
         RESEARCH,
         GAME_GOALS,
-        OTHER_PRODUCT_ASPECTS
     }
     private OBS obs = OBS.START;
 
@@ -152,7 +152,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         uim.menu.Deactivate("Accounting");
         uim.menu.Deactivate("Special Projects");
         uim.menu.Deactivate("Infrastructure");
-        uim.menu.Deactivate("Products");
+        uim.menu.Deactivate("Existing Products");
         uim.menu.Deactivate("Locations");
         uim.menu.Deactivate("Verticals");
         uim.menu.Deactivate("Acquisitions");
@@ -230,21 +230,23 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Some combinations work well and give bonuses. Some don't.",
                         string.Format("You will have to {0} and experiment with different combinations.", innovate),
                         "Right now you only have a few types available, but that will change over time.",
+                        "Products require different kinds of infrastructure to support their growth.",
+                        "They might require\n:DATACENTER: [c][0078E1]datacenters[-][/c],\n:FACTORY: [c][0078E1]factories[-][/c],\n:LAB: [c][0078E1]labs[-][/c], or\n:STUDIO: [c][0078E1]studios[-][/c].",
+                        "All product types have some minimum necessary infrastructure before you can use them.",
+                        "You have some infrastructure to start, shown at the bottom of the screen, so no need to worry now.",
                         "Pick two product types and hit the button below to start developing the product."
                     });
 
                 } else if (Stage(OBS.INFRASTRUCTURE)) {
                     MentorMessages(new string[] {
-                        "Products require different kinds of infrastructure to support their growth.",
-                        "They might require\n:DATACENTER: [c][0078E1]datacenters[-][/c],\n:FACTORY: [c][0078E1]factories[-][/c],\n:LAB: [c][0078E1]labs[-][/c], or\n:STUDIO: [c][0078E1]studios[-][/c].",
-                        "All product types have some minimum necessary infrastructure before you can use them.",
+                        "It looks like you don't have enough infrastructure to start a new product!",
                         "As products grow in the market, they will use more infrastructure. If there isn't any infrastructure available, products will stop growing and you'll be leaving money on the table.",
                         "You can buy more infrastructure in the [c][4B2FF8]Infrastructure[-][/c] menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.",
-                        "The amount of infrastructure you can buy is limited, but you can increase this limit by expanding to new locations - some locations are better for certain infrastructure.",
+                        //MOVE THIS "The amount of infrastructure you can buy is limited, but you can increase this limit by expanding to new locations - some locations are better for certain infrastructure.",
                         "Remember that you can shutdown products in the [c][4B2FF8]Products[-][/c] menu item to reclaim their infrastructure."
                     });
                     UIManager.Instance.menu.Activate("Infrastructure");
-                    UIManager.Instance.menu.Activate("Products");
+                    UIManager.Instance.menu.Activate("Existing Products");
                 }
                 break;
 
@@ -300,7 +302,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "To develop the product, capture the value your employees produce by :INTERACT: [c][1CD05E]tapping[-][/c] on the icons that appear above them.",
                         "Employees can produce\n:DESIGN: [c][0078E1]design[-][/c],\n:ENGINEERING: [c][0078E1]engineering[-][/c], or\n:MARKETING: [c][0078E1]marketing[-][/c]\npoints for your products.",
                         "Different products rely more on heavily on one of these kinds of points.",
-                        "Happy employees may have :BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
+                        "Happy employees may have \n:BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
                         "The points you capture are shown below. Try to get bonus multipliers by chaining feature points together!"
                     });
                 }, 2f));
@@ -329,26 +331,18 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "[c][FC5656]The Board[-][/c] sets annual profit targets for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c].",
                         "You [i]must[/i] hit these targets.",
                         "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will dismiss you from the company.",
+                        "Making money is simple -  just make better and better products!",
                         "Your current profit and target profit are shown in the bar below.",
                         "You can keep more detailed track of your profit and other accounting in the [c][4B2FF8]Accounting[-][/c] menu item.",
                     });
                     UIManager.Instance.menu.Activate("Accounting");
                 }, 3f));
-            } else if (Stage(OBS.OTHER_PRODUCT_ASPECTS)) {
-                StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
-                        "There are a few other factors which can affect a product's in-market performance.",
-                        "All products will be affected by the state of the economy. During downturns, consumers spend less and so your products will generate less revenue. In boom times, the opposite is true.",
-                        "Sometimes you may have a brilliant product combination, but lack the necessary technology to really make it work. In this case, the product just won't perform as well - research the missing technology and try again.",
-                        "Finally, some products compliment each other when they are in the market together. The synergy of these products will cause them both to sell a lot better. You'll have to experiment to see what works!"
-                    });
-                }, 6f));
             } else if (Stage(OBS.RESEARCH)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge research.",
-                        "You can manage your research budget in the [c][4B2FF8]Accounting[-][/c] menu item, which influences how much research points you generate.",
-                        "Spend research points to purchase new technologies in the [c][4B2FF8]Research[-][/c] menu item. New technologies can unlock new product types, special projects, and provide other bonuses. Stay ahead of the competition!"
+                        "Spend research points to purchase new technologies in the [c][4B2FF8]Research[-][/c] menu item. New technologies can unlock new product types, special projects, and provide other bonuses.",
+                        "You can manage your research budget in the [c][4B2FF8]Research[-][/c] menu item, which influences how much research points you generate. Stay ahead of the competition!"
                     });
                     UIManager uim = UIManager.Instance;
                     uim.statusBar.researchLabel.gameObject.SetActive(true);
@@ -360,16 +354,24 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     void WorkerHired(Worker w, Company c) {
-        if (c == data.company && !ob.PERKS_UNLOCKED && c.workers.Count >= 2) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                MentorMessages(new string[] {
-                    "Now that you have a few employees, you want to maximize their productivity and happiness.",
-                    "Productive employees are easier to manage and happy employees can have valuable breakthroughs during product development and attract better talent.",
-                    "A great way to accomplish this is through perks. You can purchase and upgrade perks for your company through the [c][4B2FF8]Perks[-][/c] menu item."
-                });
-                UIManager.Instance.menu.Activate("Perks");
-                ob.PERKS_UNLOCKED = true;
-            }, 6f));
+        if (c == data.company) {
+            if (Stage(OBS.HIRED_EMPLOYEE)) {
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    MentorMessages(new string[] {
+                        "Great, you have an employee now. See if you can build a new, better product."
+                    });
+                }, 6f));
+            } else if (!ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    MentorMessages(new string[] {
+                        "Now that you have a few employees, you want to maximize their productivity and happiness.",
+                        "Productive employees are easier to manage and happy employees can have valuable breakthroughs during product development and attract better talent.",
+                        "A great way to accomplish this is through perks. You can purchase and upgrade perks for your company through the [c][4B2FF8]Perks[-][/c] menu item."
+                    });
+                    UIManager.Instance.menu.Activate("Perks");
+                    ob.PERKS_UNLOCKED = true;
+                }, 6f));
+            }
         }
     }
 

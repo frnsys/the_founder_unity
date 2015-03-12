@@ -155,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -192, z: 0}
+  m_LocalPosition: {x: 0, y: -212, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -167,7 +167,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 34, z: 0}
+  m_LocalPosition: {x: 0, y: 33.9999962, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -179,7 +179,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -80, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -195,7 +195,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 80, z: 0}
+  m_LocalPosition: {x: 0, y: 160, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -234,7 +234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -322, z: 0}
+  m_LocalPosition: {x: 0, y: -268, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400010}
@@ -247,7 +247,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.00000763, z: 0}
+  m_LocalPosition: {x: 0, y: -4.00000381, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -274,7 +274,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 140, y: 36, z: 0}
+  m_Size: {x: 140, y: 48, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -298,11 +298,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400008}
     relative: 0
-    absolute: 48
+    absolute: 108
   topAnchor:
     target: {fileID: 400008}
     relative: 0
-    absolute: 68
+    absolute: 128
   updateAnchors: 1
   mColor: {r: 1, g: .898039222, b: .529411793, a: 1}
   mPivot: 1
@@ -312,7 +312,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 14
+  aspectRatio: 140
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -430,11 +430,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: -140
+    absolute: -60
   topAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: -20
+    absolute: 60
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
@@ -444,7 +444,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.33333325
+  aspectRatio: 4.24242401
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -467,11 +467,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: 0
+    absolute: 80
   topAnchor:
     target: {fileID: 400008}
     relative: .5
-    absolute: 160
+    absolute: 240
   updateAnchors: 1
   mColor: {r: 0, g: .882352948, b: .882352948, a: 1}
   mPivot: 4
@@ -481,7 +481,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: 80
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -677,21 +677,21 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400008}
     relative: 0
-    absolute: 0
+    absolute: 48
   topAnchor:
     target: {fileID: 400008}
     relative: 0
-    absolute: 36
+    absolute: 96
   updateAnchors: 1
   mColor: {r: 1, g: .41911763, b: .41911763, a: 1}
   mPivot: 4
   mWidth: 140
-  mHeight: 36
+  mHeight: 48
   mDepth: 255
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.88888884
+  aspectRatio: 70
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
