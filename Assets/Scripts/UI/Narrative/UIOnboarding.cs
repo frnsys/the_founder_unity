@@ -82,8 +82,11 @@ public class UIOnboarding : MonoBehaviour {
         if (!didShowVerticals) {
             string[] messages = new string[] {
                 "It's the year 2001. The dot-com bubble has just burst, leaving many companies to shutter their operations.",
-                "A few stronger enterprises - Spügle, Coralzon, and others - have managed to survive.",
-                "But their weakened state and the void left by mass bankruptcy means the business world is ripe for disruption.",
+                string.Format("A few stronger enterprises - {0}, {1}, {2}, and others - have managed to survive.",
+                        gm.narrativeManager.ConceptHighlight("Kougle"),
+                        gm.narrativeManager.ConceptHighlight("Coralzon"),
+                        gm.narrativeManager.ConceptHighlight("Carrot Inc.")),
+                string.Format("But their weakened state and the void left by mass bankruptcy means the business world is ripe for {0}.", gm.narrativeManager.SpecialHighlight("disruption")),
                 "I have a good feeling about you - so I've given you some starting funds to take advantage of this time and build a powerful company yourself.",
                 "First, what kind of business do you want to create?",
                 "Remember that a lot of companies start doing one thing and grow to do many."

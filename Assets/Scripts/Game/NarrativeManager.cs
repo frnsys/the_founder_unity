@@ -481,13 +481,13 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    private string MenuHighlight(string s) {
+    public string MenuHighlight(string s) {
         return string.Format("[c][4B2FF8]{0}[-][/c]", s);
     }
-    private string InteractHighlight(string s) {
+    public string InteractHighlight(string s) {
         return string.Format(":INTERACT: [c][1CD05E]{0}[-][/c]", s);
     }
-    private string SpecialHighlight(string s) {
+    public string SpecialHighlight(string s) {
         string[] colors = new string[] {
             "FC5656", "FFC800", "78E09E", "79ECDD", "4B2FF8", "FD7EFF"
         };
@@ -497,7 +497,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
         return string.Format("[c]{0}[/c]", string.Concat(result.ToArray()));
     }
-    private string ConceptHighlight(string s) {
+    public string ConceptHighlight(string s) {
         return string.Format("[c][0078E1]{0}[-][/c]", s);
     }
 
