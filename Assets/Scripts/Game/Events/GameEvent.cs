@@ -116,6 +116,18 @@ public class GameEvent : ScriptableObject {
             case Condition.Type.Pollution:
                 comparison = c.pollution;
                 break;
+            case Condition.Type.Debt:
+                comparison = c.debtOwned;
+                break;
+            case Condition.Type.Distractedness:
+                comparison = GameManager.Instance.forgettingRate;
+                break;
+            case Condition.Type.Wages:
+                comparison = GameManager.Instance.wageMultiplier;
+                break;
+            case Condition.Type.Spending:
+                comparison = GameManager.Instance.spendingMultiplier;
+                break;
         }
 
         if (cond.greater)
@@ -142,7 +154,11 @@ public class GameEvent : ScriptableObject {
             OfficeLevel,
             TechnologiesResearched,
             DeathToll,
-            Pollution
+            Pollution,
+            Debt,
+            Distractedness,
+            Wages,
+            Spending
         }
 
         public Condition() {}
