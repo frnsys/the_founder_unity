@@ -99,6 +99,15 @@ public class AICompany : Company {
     // Product Management ============================
     // ===============================================
 
+    public Product CreateProductForTypes(List<ProductType> pts) {
+        int design = Random.Range(0, designSkill) + designSkill/2;
+        int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
+        int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
+        Product product = ScriptableObject.CreateInstance<Product>();
+        product.Init(pts, design, marketing, engineering, this);
+        return product;
+    }
+
     private void DecideProducts() {
         List<Product> candidates = new List<Product>();
         List<Product> stale = new List<Product>(products);

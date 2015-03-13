@@ -15,6 +15,7 @@ public class UIManager : Singleton<UIManager> {
     private GameManager gm;
 
     public Camera uiCamera;
+    public TheMarket theMarket;
     public GameObject windowsPanel;
     public GameObject alertsPanel;
     public GameObject pingsPanel;
@@ -142,6 +143,11 @@ public class UIManager : Singleton<UIManager> {
             if (p.techPenalty)
                 GameManager.Instance.eventManager.DelayTrigger(GameEvent.LoadNoticeEvent("Missing Technology"), 25f);
 
+            // Hack to show The Market after the player has hit OK on the product completed alert.
+            StartCoroutine(Delay(delegate {
+                theMarket.Setup(p);
+            }, 0.1f));
+
         // If it is a competitor's product, show it as an "ad".
         } else {
             GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);
@@ -262,6 +268,11 @@ public class UIManager : Singleton<UIManager> {
     public UIProductDev productHud;
     public void AddPointsToDevelopingProduct(string feature, float value) {
         productHud.Add(feature, (int)value);
+    }
+
+    private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
+        yield return StartCoroutine(GameTimer.Wait(delay));
+        callback(null);
     }
 }
 

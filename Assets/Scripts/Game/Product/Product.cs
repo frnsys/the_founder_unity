@@ -35,6 +35,7 @@ public class Product : HasStats {
     public bool pollutes;
     public bool techPenalty;
     public bool synergy;
+    public float marketShare;
 
     public Mesh[] meshes;
 
@@ -144,7 +145,8 @@ public class Product : HasStats {
 
         // This is 8 weeks at 12cycles/week.
         // Each progress is one cycle.
-        requiredProgress = 96f;
+        //requiredProgress = 96f;
+        requiredProgress = 0f;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {

@@ -17,10 +17,14 @@ public class UIMentor : UIPopup {
         overlay.gameObject.SetActive(true);
         StartCoroutine(FadeOverlay(0f, overlayAlpha));
         StartCoroutine(ScaleModel(new Vector3(40, 0, 40), new Vector3(40, 40, 40)));
+
+        // Mentors pause everything.
+        Time.timeScale = 0;
     }
 
     public void Hide() {
         GameManager.Instance.Resume();
+        Time.timeScale = 1;
         StartCoroutine(FadeOverlay(overlayAlpha, 0f));
         StartCoroutine(ScaleModel(model.transform.localScale, new Vector3(40, 0, 40)));
         base.Hide(box);

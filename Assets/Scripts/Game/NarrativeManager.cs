@@ -122,6 +122,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         OPENED_NEW_PRODUCT,
         STARTED_PRODUCT,
         COMPLETED_PRODUCT,
+        THE_MARKET,
+        THE_MARKET_DONE,
         OPENED_RECRUITING,
         OPENED_HIRING,
         HIRED_EMPLOYEE,
@@ -142,6 +144,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         Promo.Completed += PromoCompleted;
         GameEvent.EventTriggered += OnEvent;
         UnlockSet.Unlocked += OnUnlocked;
+        TheMarket.Started += OnMarketStarted;
+        TheMarket.Done += OnMarketDone;
         UIOfficeManager.OfficeUpgraded += OfficeUpgraded;
 
         // Hide some menu and status bar items.
@@ -164,6 +168,31 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
         // Show the game intro.
         Intro();
+    }
+
+    void OnMarketStarted() {
+        if (Stage(OBS.THE_MARKET)) {
+            MentorMessages(new string[] {
+                "Now that your product is completed, it is released into The Market.",
+                "Competitors will release products like the ones you create to edge out your profits.",
+                "Consumers will flock to the products they think are the best.",
+                "Naturally, if your products are better, you'll have the upper hand.",
+                "Let's see how they respond."
+            });
+            TheMarket.Started -= OnMarketStarted;
+        }
+    }
+    void OnMarketDone() {
+        if (Stage(OBS.THE_MARKET_DONE)) {
+            MentorMessages(new string[] {
+                "Hmph. Consumers aren't really into it. That percentage you saw was the market share of your product.",
+                "Your product could be better.",
+                "To make better products you need to assemble a talented team.",
+                "Search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
+            });
+            UIManager.Instance.menu.Activate("Recruiting");
+            TheMarket.Done -= OnMarketDone;
+        }
     }
 
     void OnEvent(GameEvent ev) {
@@ -318,11 +347,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Congratulations! You've completed your first product.",
                         "It will start generating revenue, depending on its final :DESIGN: [c][0078E1]design[-][/c], :ENGINEERING: [c][0078E1]engineering[-][/c], and :MARKETING: [c][0078E1]marketing[-][/c] values.",
-                        "Better products, of course, will make more money.",
-                        "To make better products you need to assemble a talented team.",
-                        "You can search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
+                        "After you finish a product, you will be taken to The Market to see how it will perform.",
+                        "Let's take a look."
                     });
-                    UIManager.Instance.menu.Activate("Recruiting");
                 }, 3f));
             } else if (Stage(OBS.GAME_GOALS)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {

@@ -28,8 +28,6 @@ MonoBehaviour:
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -62,6 +60,6 @@ MonoBehaviour:
     specialEffect: 0
   actions: []
   conditions:
-  - value: 4
+  - value: 2001081
     greater: 1
-    type: 5
+    type: 4
