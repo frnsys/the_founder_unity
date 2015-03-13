@@ -8,6 +8,7 @@ public class TheMarket : MonoBehaviour {
     public Transform consumerGroup;
     public GameObject[] consumerPrefabs;
     public Transform[] pedestals;
+    public Transform[] pedestalGroups;
     public MeshFilter[] products;
     public TextMesh[] companyLabels;
     public TextMesh[] marketLabels;
@@ -28,15 +29,16 @@ public class TheMarket : MonoBehaviour {
 
         // Try to find two AI companies which are suitable competitors for this product.
         List<AICompany> competitors = new List<AICompany>();
-        List<AICompany> candidates = AICompany.all.Where(c => c.specialtyVerticals.Intersect(p.requiredVerticals).Count() > 0).ToList();
+        List<AICompany> active = AICompany.all.Where(c => !c.disabled).ToList();
+        List<AICompany> candidates = active.Where(c => c.specialtyVerticals.Intersect(p.requiredVerticals).Count() > 0).ToList();
 
         switch (candidates.Count) {
             case 0:
-                competitors = AICompany.all.OrderBy(c => Random.value).Take(2).ToList();
+                competitors = active.OrderBy(c => Random.value).Take(2).ToList();
                 break;
             case 1:
                 competitors = candidates;
-                competitors.Add(AICompany.all.OrderBy(c => Random.value).First(c => c != candidates[0]));
+                competitors.Add(active.OrderBy(c => Random.value).First(c => c != candidates[0]));
                 break;
             case 2:
                 competitors = candidates;
@@ -61,14 +63,25 @@ public class TheMarket : MonoBehaviour {
                 companyLabels[i].text = GameManager.Instance.playerCompany.name;
             } else {
                 companyLabels[i].text = competitors[i-1].name;
+                Debug.Log(competitors[i-1].name);
             }
+
             products[i].mesh = p.meshes[0];
             marketLabels[i].text = string.Format("{0:P1}", marketShares[i]);
             marketLabels[i].transform.localScale = Vector3.zero;
+            Debug.Log(marketShares[i]);
+
+            // Reset then raise the pedestals.
+            Vector3 pos = pedestalGroups[i].localPosition;
+            pos.y = -0.8f;
+            pedestalGroups[i].localPosition = pos;
+            float y = -0.8f * (1 - marketShares[i]);
+            StartCoroutine(RaisePedestal(pedestalGroups[i], y));
 
             // Spawn consumers.
             for (int j=0; j <= (int)(100 * marketShares[i]); j++) {
-                Transform target = pedestals[i];
+                Vector3 target = pedestals[i].localPosition;
+                target.y = 0;
                 SpawnConsumer(target);
             }
         }
@@ -87,10 +100,10 @@ public class TheMarket : MonoBehaviour {
         }
     }
 
-    private void SpawnConsumer(Transform target) {
+    private void SpawnConsumer(Vector3 target) {
         GameObject consumer = Instantiate(consumerPrefabs[Random.Range(0, consumerPrefabs.Length)]) as GameObject;
         consumer.transform.parent = consumerGroup;
-        consumer.GetComponent<Consumer>().target = target.localPosition;
+        consumer.GetComponent<Consumer>().target = target;
     }
 
     void Update() {
@@ -126,6 +139,18 @@ public class TheMarket : MonoBehaviour {
 
         for (float f = 0f; f <= 1f + step; f += step) {
             t.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
+        }
+    }
+
+    private IEnumerator RaisePedestal(Transform t, float y) {
+        Vector3 fromPos = t.localPosition;
+        Vector3 toPos = t.localPosition;
+        toPos.y = y;
+        float step = 0.005f;
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            t.localPosition = Vector3.Lerp(fromPos, toPos, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
     }
