@@ -15,18 +15,21 @@ public class UILocationItem : UIEffectItem {
     private void DisplayLocation() {
         label.text = location_.name;
         description.text = location_.description;
+
+        if (location_.infrastructureCapacity > 0) {
+            infrastructure.text = string.Format("Adds capacity for {0} :DATACENTER:, :FACTORY:, :LAB:, or :STUDIO:", location_.infrastructureCapacity);
+        } else {
+            infrastructure.gameObject.SetActive(false);
+        }
         market.text = string.Format("Increases {0} market share.", MarketManager.NameForMarket(location_.market));
 
         if (playerCompany.HasLocation(location_)) {
             cost.text = "owned";
             expandButton.SetActive(false);
-            grid.gameObject.SetActive(true);
         } else {
             cost.text = string.Format("{0:C0}", location_.cost);
             expandButton.SetActive(true);
-            grid.gameObject.SetActive(false);
         }
-        ShowInfrastructure();
 
         RenderEffects(location_.effects);
         AdjustEffectsHeight();
@@ -53,22 +56,10 @@ public class UILocationItem : UIEffectItem {
     public UILabel label;
     public UILabel description;
     public UILabel market;
+    public UILabel infrastructure;
     public GameObject expandButton;
 
-    public List<UIInfrastructureItem> infItems;
-    public UIGrid grid;
     private Company playerCompany;
-    private void ShowInfrastructure() {
-        foreach (UIInfrastructureItem infItem in infItems) {
-            Infrastructure.Type t = infItem.type;
-            if (location.capacity[t] == 0) {
-                infItem.gameObject.SetActive(false);
-            } else {
-                infItem.amountLabel.text = string.Format("{0}", location.capacity[t]);
-            }
-        }
-        grid.Reposition();
-    }
 
     void Update() {
         UpdateEffectWidths();

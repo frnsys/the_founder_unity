@@ -133,6 +133,7 @@ public class UIEffectAlert : UIAlert {
             if (pe.buff.value != 0) {
                 GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
                 effectObj.GetComponent<UIProductEffect>().Set(pe);
+                effectWidgets.Add(effectObj.GetComponent<UIWidget>());
             }
         }
     }
@@ -146,21 +147,25 @@ public class UIEffectAlert : UIAlert {
     private void RenderUnlockEffect(string name) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, effectPrefab);
         effectObj.GetComponent<UIEffect>().SetUnlock(name);
+        effectWidgets.Add(effectObj.GetComponent<UIWidget>());
     }
 
     private void RenderSpecialEffect(EffectSet.Special effect) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, effectPrefab);
         effectObj.GetComponent<UIEffect>().SetSpecial(effect);
+        effectWidgets.Add(effectObj.GetComponent<UIWidget>());
     }
 
     private void RenderBuffEffect(StatBuff buff, string target) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
         effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
+        effectWidgets.Add(effectObj.GetComponent<UIWidget>());
     }
 
     private void RenderEffect(string desc) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, effectPrefab);
         effectObj.GetComponent<UIEffect>().Set(desc);
+        effectWidgets.Add(effectObj.GetComponent<UIWidget>());
     }
 
     protected override void Extend(int amount) {

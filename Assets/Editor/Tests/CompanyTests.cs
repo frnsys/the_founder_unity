@@ -36,9 +36,7 @@ namespace UnityTest
             // Create a starting location with some infrastructure capacity.
             startLoc = ScriptableObject.CreateInstance<Location>();
             startLoc.cost = 0;
-            startLoc.capacity = new Infrastructure();
-            startLoc.capacity[Infrastructure.Type.Datacenter] = 1;
-            startLoc.capacity[Infrastructure.Type.Factory]    = 1;
+            startLoc.infrastructureCapacity = 2;
             c.ExpandToLocation(startLoc);
 
             pts = new List<ProductType>() {
@@ -176,7 +174,8 @@ namespace UnityTest
 
         [Test]
         public void ManageInfrastructure() {
-            int baseDatacenterCapacity = startLoc.capacity[Infrastructure.Type.Datacenter];
+            startLoc.infrastructureCapacity = 2;
+            int baseDatacenterCapacity = startLoc.infrastructureCapacity;
             Infrastructure zeroInf = new Infrastructure();
 
             // All capacity should be available.
@@ -190,8 +189,7 @@ namespace UnityTest
             Location newLoc = ScriptableObject.CreateInstance<Location>();
             newLoc.name = "Belize";
             newLoc.cost = 0;
-            newLoc.capacity = new Infrastructure();
-            newLoc.capacity[Infrastructure.Type.Datacenter] = 1;
+            startLoc.infrastructureCapacity = 2;
             c.ExpandToLocation(newLoc);
 
             // Can't buy the infrastructure, not enough cash.
@@ -235,17 +233,15 @@ namespace UnityTest
             Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
             Assert.IsTrue(c.availableInfrastructure.Equals(c.infrastructure));
 
-            int oldDatacenterCapacity = c.infrastructureCapacity[Infrastructure.Type.Datacenter];
+            int oldDatacenterCapacity = c.infrastructureCapacity;
 
             Location loc = ScriptableObject.CreateInstance<Location>();
-            Infrastructure cap = new Infrastructure();
-            cap[Infrastructure.Type.Datacenter] = 10;
-            loc.capacity = cap;
+            loc.infrastructureCapacity = 10;
             loc.cost = 0;
             c.ExpandToLocation(loc);
 
             // Adding a location should have increased the capacity by the amount the location gives.
-            Assert.AreEqual(c.infrastructureCapacity[Infrastructure.Type.Datacenter], oldDatacenterCapacity + 10);
+            Assert.AreEqual(c.infrastructureCapacity, oldDatacenterCapacity + 10);
 
             c.DestroyInfrastructure(i);
 

@@ -42,9 +42,7 @@ namespace UnityTest
             // Create a starting location with some infrastructure capacity.
             Location startLoc = ScriptableObject.CreateInstance<Location>();
             startLoc.cost = 0;
-            startLoc.capacity = new Infrastructure();
-            startLoc.capacity[Infrastructure.Type.Datacenter] = 2;
-            startLoc.capacity[Infrastructure.Type.Factory]    = 1;
+            startLoc.infrastructureCapacity = 3;
             gd.company.ExpandToLocation(startLoc);
 
             // The company does not yet have the required vertical.

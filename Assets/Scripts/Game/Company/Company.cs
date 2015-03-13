@@ -548,25 +548,13 @@ public class Company : HasStats {
     }
 
     // Total infrastructure capacity.
-    public Infrastructure infrastructureCapacity {
-        get {
-            IEnumerable<Infrastructure> locationCapacities = locations.Select(i => i.capacity);
-            if (locationCapacities.Count() > 0) {
-                Infrastructure baseInf = new Infrastructure();
-                if (verticals[0].name == "Information") {
-                    baseInf[Infrastructure.Type.Datacenter] = 6;
-                } else {
-                    baseInf[Infrastructure.Type.Factory] = 6;
-                }
-                return locationCapacities.Aggregate((x,y) => x + y) + baseInf;
-            }
-            return new Infrastructure();
-        }
+    public int infrastructureCapacity {
+        get { return 8 + locations.Sum(i => i.infrastructureCapacity); }
     }
 
     // Infrastructure capacity which is unused.
-    public Infrastructure availableInfrastructureCapacity {
-        get { return infrastructureCapacity - infrastructure; }
+    public int availableInfrastructureCapacity {
+        get { return infrastructureCapacity - infrastructure.total; }
     }
 
     public bool BuyInfrastructure(Infrastructure i) {
@@ -613,7 +601,7 @@ public class Company : HasStats {
     }
 
     public bool HasCapacityFor(Infrastructure i) {
-        return availableInfrastructureCapacity >= i;
+        return availableInfrastructureCapacity >= i.total;
     }
 
 

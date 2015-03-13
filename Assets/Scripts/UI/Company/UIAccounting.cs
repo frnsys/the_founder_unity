@@ -48,7 +48,7 @@ public class UIAccounting : MonoBehaviour {
         }
         economicHealth.text = string.Format("The economy is {0}.", economy);
         lifetimeRevenue.text = string.Format("Lifetime Revenue: [c][6A53F7]{0:C0}[-][/c]", company.lifetimeRevenue);
-        totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
+        totalMarketShare.text = string.Format("Global Coverage: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
         deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
         debtOwned.text = string.Format("World Debt Owned by Company: [c][EF4542]{0}[-][/c]", company.debtOwned);
         pollution.text = string.Format("Pollution Emitted: [c][EF4542]{0:0}[-][/c] metric tons", company.pollution);
@@ -64,7 +64,7 @@ public class UIAccounting : MonoBehaviour {
         currentRevenue.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
         currentProfit.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
         lifetimeRevenue.text = string.Format("Lifetime Revenue: [c][6A53F7]{0:C0}[-][/c]", company.lifetimeRevenue);
-        totalMarketShare.text = string.Format("Total Market Share: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
+        totalMarketShare.text = string.Format("Global Coverage: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
         deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
         debtOwned.text = string.Format("World Debt Owned by Company: [c][EF4542]{0}[-][/c]", company.debtOwned);
         pollution.text = string.Format("Pollution Emitted: [c][EF4542]{0:0}[-][/c] metric tons", company.pollution);

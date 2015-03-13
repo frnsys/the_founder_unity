@@ -61,6 +61,9 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
     public bool isEmpty {
         get { return !Values.Any(v => v > 0); }
     }
+    public int total {
+        get { return Values.Sum(); }
+    }
 
     public override string ToString() {
         string repr = "";

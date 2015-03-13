@@ -33,9 +33,7 @@ internal class LocationInspector : Editor {
         EditorGUILayout.Space();
 
         EditorGUILayout.LabelField("Infrastructure Capacity");
-        foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
-            i.capacity[t] =  EditorGUILayout.IntField(t.ToString(), i.capacity[t]);
-        }
+        i.infrastructureCapacity = EditorGUILayout.IntField("Infrastructure Capacity", i.infrastructureCapacity);
 
         EditorGUILayout.Space();
         if (i.effects == null)

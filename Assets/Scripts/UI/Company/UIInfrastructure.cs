@@ -3,74 +3,93 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIInfrastructure : MonoBehaviour {
-    public List<UIInfrastructureItem> infItems;
-    public UIGrid grid;
-    private Company playerCompany;
-    private Infrastructure capacity;
+    public UISimpleGrid grid;
+    public UILabel infrastructureLabel;
+    public GameObject infrastructureItemPrefab;
+    private Company company;
 
     void Awake() {
-        playerCompany = GameManager.Instance.playerCompany;
-        capacity = playerCompany.infrastructureCapacity;
+        company = GameManager.Instance.playerCompany;
         ShowInfrastructure();
+        SetupPrompt();
     }
 
     private void ShowInfrastructure() {
-        foreach (UIInfrastructureItem infItem in infItems) {
-            Infrastructure.Type t = infItem.type;
-            infItem.costLabel.text = string.Format("{0:C0}/mo each", Infrastructure.baseCost * (GameManager.Instance.infrastructureCostMultiplier[t]/100f));
-
-            // Setup button actions.
-            Infrastructure.Type lT = t;
-            UIEventListener.VoidDelegate buyInf = delegate(GameObject obj) {
-                Infrastructure inf = Infrastructure.ForType(lT);
-                if (!playerCompany.BuyInfrastructure(inf)) {
-                    UIManager.Instance.Alert("You don't have enough capital for a new piece of infrastructure.");
-                };
-                UpdateButtons();
-            };
-            UIEventListener.VoidDelegate desInf = delegate(GameObject obj) {
-                Infrastructure inf = Infrastructure.ForType(lT);
-                playerCompany.DestroyInfrastructure(inf);
-                UpdateButtons();
-            };
-
-            // Bind actions to buttons.
-            UIEventListener.Get(infItem.buyButton.gameObject).onClick += buyInf;
-            UIEventListener.Get(infItem.desButton.gameObject).onClick += desInf;
+        // Create owned items.
+        foreach (Infrastructure.Type t in Infrastructure.Types) {
+            for (int i=0; i < company.usedInfrastructure[t]; i++) {
+                GameObject infItem = NGUITools.AddChild(grid.gameObject, infrastructureItemPrefab);
+                infItem.GetComponent<UIInfrastructureItem>().type = t;
+                infItem.GetComponent<UIInfrastructureItem>().used = true;
+                SetupButton(infItem);
+            }
         }
 
-        UpdateButtons();
+        foreach (Infrastructure.Type t in Infrastructure.Types) {
+            for (int i=0; i < company.availableInfrastructure[t]; i++) {
+                GameObject infItem = NGUITools.AddChild(grid.gameObject, infrastructureItemPrefab);
+                infItem.GetComponent<UIInfrastructureItem>().type = t;
+                SetupButton(infItem);
+            }
+        }
+
+        // Create empty spaces.
+        for (int i=0; i < company.availableInfrastructureCapacity; i++) {
+            GameObject infItem = NGUITools.AddChild(grid.gameObject, infrastructureItemPrefab);
+            infItem.GetComponent<UIInfrastructureItem>().empty = true;
+                SetupButton(infItem);
+        }
+
         grid.Reposition();
     }
 
-    private void UpdateButtons() {
-        // Update the buy/destroy buttons for infrastructure (disable/enable them).
-        foreach (UIInfrastructureItem infItem in infItems) {
-            Infrastructure.Type t = infItem.type;
-            Infrastructure inf = Infrastructure.ForType(t);
-            infItem.buyButton.isEnabled = playerCompany.HasCapacityFor(inf);
-            infItem.desButton.isEnabled = !(playerCompany.infrastructure[t] == 0);
+    private void SetupButton(GameObject button) {
+        UIEventListener.VoidDelegate showPrompt = delegate(GameObject obj) {
+            UIInfrastructureItem item = button.GetComponent<UIInfrastructureItem>();
+            if (!item.used) {
+                prompt.SetActive(true);
+                currentItem = item;
+            } else {
+                UIManager.Instance.Alert("This infrastructure is being used by a product. Shutdown the product or wait for it to be discontinued to reclaim the infrastructure.");
+            }
+        };
+        UIEventListener.Get(button).onClick += showPrompt;
+    }
+
+    private UIInfrastructureItem currentItem;
+    public GameObject prompt;
+    public UILabel[] costLabels;
+
+    public void BuyInfrastructure(Infrastructure.Type t) {
+        Infrastructure inf = Infrastructure.ForType(t);
+
+        // If the this slot is currently occupied
+        // and the company will be able to afford the new infrastructure,
+        // destroy the existing one first.
+        if (!currentItem.empty && company.cash.value >= inf.cost) {
+            company.DestroyInfrastructure(Infrastructure.ForType(currentItem.type));
         }
 
-        // Update the amount of infrastructure against the total capacity.
-        Infrastructure used = playerCompany.usedInfrastructure;
-        Infrastructure infra = playerCompany.infrastructure;
-        Infrastructure avail = capacity - infra;
-        foreach (UIInfrastructureItem infItem in infItems) {
-            Infrastructure.Type t = infItem.type;
-            string plural = Infrastructure.Plural(t);
-
-            string use = string.Format("Using [c][1685FA]{0}[-][/c] out of [c][6A53F7]{1}[-][/c] {2}.", used[t], infra[t], plural);
-            if (used[t] == infra[t]) {
-                use = string.Format("Using [c][EF4542]{0}[-][/c] out of [c][EF4542]{1}[-][/c] {2}.", used[t], infra[t], plural);
-            }
-
-            string cap = string.Format("Room to buy [c][56FB92]{0}[-][/c] more {1}.", avail[t], plural);
-            if (avail[t] == 0) {
-                cap = string.Format("Room to buy [c][EF4542]{0}[-][/c] more {1}.", avail[t], plural);
-            }
-            infItem.amountLabel.text = string.Format("{0}\n{1}", use, cap);
+        if (!company.BuyInfrastructure(inf)) {
+            UIManager.Instance.Alert("You don't have enough capital for a new piece of that infrastructure.");
+        } else {
+            currentItem.type = t;
+            prompt.SetActive(false);
         }
+    }
+    public void ClosePrompt() {
+        currentItem = null;
+        prompt.SetActive(false);
+    }
+
+    private void SetupPrompt() {
+        foreach (Infrastructure.Type t in Infrastructure.Types) {
+            costLabels[(int)t].text = string.Format("{0:C0}/mo", Infrastructure.baseCost * (GameManager.Instance.infrastructureCostMultiplier[t]/100f));
+        }
+    }
+
+    void Update() {
+        infrastructureLabel.text = company.infrastructure.ToStringWithEmpty();
     }
 }
 
