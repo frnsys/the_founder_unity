@@ -202,10 +202,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "Congratulations! This is your first write-up in a major publication.",
                     "This kind of mention has driven up the hype for your company.",
                     "Hype is central to your company's success. A hyped company's products sell much better.",
-                    "But hype is always deflating. Keep hyping your company and shape it's public image by launching promotional campaigns from the [c][4B2FF8]Communications[-][/c] menu item.",
+                    "But hype is always deflating. Keep hyping your company by launching promotional campaigns from the [c][4B2FF8]MarComm[-][/c] button below.",
                     "But note that some press can be negative, and hurt your company's image.",
                     "Consumers aren't going to buy your products if they disagree with your decisions.",
-                    "Consumers forget things over time, and promotional campaigns can also help expedite that process."
+                    "Fortunately, consumers forget things over time, and hype can counteract bad publicity."
                 });
                 UIManager uim = UIManager.Instance;
                 uim.statusBar.hypeLabel.gameObject.SetActive(true);
@@ -370,7 +370,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge research.",
                         "Spend research points to purchase new technologies in the [c][4B2FF8]Research[-][/c] menu item. New technologies can unlock new product types, special projects, and provide other bonuses.",
-                        "You can manage your research budget in the [c][4B2FF8]Research[-][/c] menu item, which influences how much research points you generate. Stay ahead of the competition!"
+                        "You can manage your research budget in the [c][4B2FF8]Research[-][/c] button below, which influences how much research points you generate. Stay ahead of the competition!"
                     });
                     UIManager uim = UIManager.Instance;
                     uim.statusBar.researchLabel.gameObject.SetActive(true);
@@ -406,7 +406,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     void PromoCompleted(Promo p) {
         if (!ob.HYPE_MINIGAME) {
             MentorMessages(new string[] {
-                "Completing promotional campaigns gives you the opportunity to garner some allies in the media. The more you have, the better your public image, and the greater the hype around your company.",
+                "Completing promotional campaigns gives you the opportunity to garner some allies in the media and hype up your company.",
                 ":INTERACT: [c][1CD05E]Flick[-][/c] the puck and hit some influencers to get them on your side. More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
             });
             ob.HYPE_MINIGAME = true;

@@ -26,7 +26,7 @@ public class UIStatusBar : MonoBehaviour {
 
     void Update() {
         cashLabel.text = string.Format("{0:C0}", gm.playerCompany.cash.value);
-        hypeLabel.text = string.Format("{0:F0} hype", gm.playerCompany.publicity.value);
+        hypeLabel.text = string.Format("{0:F1}x hype bonus", gm.playerCompany.publicity.value);
         researchLabel.text = string.Format("{0:0} research", gm.playerCompany.researchPoints);
         yearLabel.text = gm.year.ToString();
         monthLabel.text = gm.month.ToUpper();

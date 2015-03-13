@@ -6,8 +6,7 @@ using System.Collections.Generic;
 public class HypeTarget : MonoBehaviour {
     public static Color cascadeColor = new Color(0.74f, 1.0f, 0.95f, 0.2f);
     public static Color firstColor = new Color(0.74f, 1.0f, 0.95f, 0.4f);
-    public static Color hypeColor = new Color(1f, 0.33f, 0.33f);
-    public static Color prColor = new Color(0.34f, 0.98f, 0.57f);
+    public static Color hypeColor = new Color(0.34f, 0.98f, 0.57f);
 
     public enum Function {
         Linear,
@@ -16,7 +15,6 @@ public class HypeTarget : MonoBehaviour {
     }
 
     public float hypePoints = 1f;
-    public float opinionPoints = 1f;
     public float speed = 1f;
     public float distance = 5f;
     public float cascadeRadius = 10f;
@@ -32,7 +30,7 @@ public class HypeTarget : MonoBehaviour {
     private Vector2 start;
     new private bool enabled = true;
 
-    public static event System.Action<float, float> Scored;
+    public static event System.Action<float> Scored;
     public static event System.Action Completed;
     public static int activePucks = 0;
     private static int[] notes = new int[] { 0, 5, 7, -3, -5, -7, -12, -24, -19, -17, -15 };
@@ -113,10 +111,10 @@ public class HypeTarget : MonoBehaviour {
 
     public void Cascade() {
         StartCoroutine(Highlight());
-        StartCoroutine(ShowPoints());
+        hudtext.Add(hypePoints, hypeColor, 0f);
 
         if (Scored != null)
-            Scored(hypePoints, opinionPoints);
+            Scored(hypePoints);
 
         // Spawn pucks.
         for (int i=0; i<numPucks; i++) {
@@ -131,12 +129,6 @@ public class HypeTarget : MonoBehaviour {
             // everything is finished.
             activePucks++;
         }
-    }
-
-    IEnumerator ShowPoints() {
-        hudtext.Add(hypePoints, hypeColor, 0f);
-        yield return new WaitForSeconds(2f);
-        hudtext.Add(opinionPoints, prColor, 0f);
     }
 
     // Highlight the target.

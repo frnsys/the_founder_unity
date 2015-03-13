@@ -275,14 +275,14 @@ public class Product : HasStats {
             revenue *= GameManager.Instance.spendingMultiplier;
             //Debug.Log(string.Format("After consumer spending: {0}", revenue));
 
-            // Hype impact.
-            revenue *= 1 + company.publicity.value/100f;
+            // Hype buffs against public opinion.
+            revenue *= 1 + company.publicity.value;
 
             // Public opinion's impact.
             revenue *= 1 + company.opinion.value/100f;
             //Debug.Log(string.Format("After opinion: {0}", revenue));
 
-            revenue *= company.marketShare;
+            revenue *= marketShare;
             //Debug.Log(string.Format("After market share: {0}", revenue));
 
             if (techPenalty)

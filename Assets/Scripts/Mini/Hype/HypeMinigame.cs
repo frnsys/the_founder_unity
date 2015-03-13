@@ -10,7 +10,6 @@ public class HypeMinigame : MonoBehaviour {
     public Texture[] blebTextures;
 
     private float hypeScore = 0;
-    private float opinionScore = 0;
 
     private GameObject level;
     public void Setup(Promo promo) {
@@ -45,9 +44,8 @@ public class HypeMinigame : MonoBehaviour {
         HypePuck.Completed -= Completed;
     }
 
-    void Scored(float hypePoints, float opinionPoints) {
+    void Scored(float hypePoints) {
         hypeScore += hypePoints;
-        opinionScore += opinionPoints;
         UpdateLabels();
     }
 
@@ -69,16 +67,16 @@ public class HypeMinigame : MonoBehaviour {
 
     void UpdateLabels() {
         pitchesLabel.text = string.Format("Pitches: [c][EFD4F1]{0}[-][/c]", pucks + 1);
-        scoreLabel.text = string.Format("Hype: [c][FD6A6A]{0}[-][/c], PR: [c][56FB92]{1}[-][/c]", hypeScore, opinionScore);
+        scoreLabel.text = string.Format("Hype: [c][56FB92]{0}[-][/c]", hypeScore);
     }
 
     void EndGame() {
         int numPeople = (int)(Mathf.Pow(hypeScore, 2) * 1000 * (Random.value + 0.75f));
 
         GameEvent ev = GameEvent.LoadNoticeEvent("Promo Failure");
-        if (hypeScore + opinionScore >= 8) {
+        if (hypeScore >= 8) {
             ev = GameEvent.LoadNoticeEvent("Promo Success");
-        } else if (hypeScore + opinionScore >= 28) {
+        } else if (hypeScore >= 28) {
             ev = GameEvent.LoadNoticeEvent("Promo Major Success");
         }
 
@@ -86,7 +84,7 @@ public class HypeMinigame : MonoBehaviour {
         GameEvent.Trigger(ev);
 
         // Apply the results to the company.
-        OpinionEvent oe = new OpinionEvent(opinionScore, hypeScore);
+        OpinionEvent oe = new OpinionEvent(0, hypeScore);
         oe.name = promo.name;
         GameManager.Instance.playerCompany.ApplyOpinionEvent(oe);
 
