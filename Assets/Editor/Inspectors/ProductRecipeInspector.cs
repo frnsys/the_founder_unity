@@ -28,14 +28,8 @@ internal class ProductRecipeInspector : Editor {
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("synergies"), true);
 
-        p.design_W = EditorGUILayout.FloatField("Design Weight", p.design_W);
-        p.marketing_W = EditorGUILayout.FloatField("Marketing Weight", p.marketing_W);
-        p.engineering_W = EditorGUILayout.FloatField("Engineering Weight", p.engineering_W);
-        EditorGUILayout.Space();
-
-        p.design_I = EditorGUILayout.FloatField("Design Ideal", p.design_I);
-        p.marketing_I = EditorGUILayout.FloatField("Marketing Ideal", p.marketing_I);
-        p.engineering_I = EditorGUILayout.FloatField("Engineering Ideal", p.engineering_I);
+        p.primaryFeature = (ProductRecipe.Feature)EditorGUILayout.EnumPopup("Primary Feature", p.primaryFeature);
+        p.featureIdeal = EditorGUILayout.FloatField("Ideal Feature Value", p.featureIdeal);
         EditorGUILayout.Space();
 
         p.maxLongevity = EditorGUILayout.FloatField("Max Longevity (14/week)", p.maxLongevity);

@@ -216,21 +216,19 @@ public class Product : HasStats {
         float P = engineering.value;
 
         // Weights
-        float a_w = recipe.design_W;
-        float u_w = recipe.marketing_W;
-        float p_w = recipe.engineering_W;
+        float a_w = recipe.primaryFeature == ProductRecipe.Feature.Design ? 2f : 1f;
+        float u_w = recipe.primaryFeature == ProductRecipe.Feature.Marketing ? 2f : 1f;
+        float p_w = recipe.primaryFeature == ProductRecipe.Feature.Engineering ? 2f : 1f;
 
-        // Ideals
-        float a_i = recipe.design_I;
-        float u_i = recipe.marketing_I;
-        float p_i = recipe.engineering_I;
+        // Ideal
+        float i = recipe.featureIdeal;
 
         // Calculate the score, i.e. the percent achieve of the ideal product values.
         // The maximum score is 1.0. We cap each value individually so that
         // they don't "bleed over" into others.
-        float A_ = Mathf.Min((A/a_i) * a_w, 1f);
-        float U_ = Mathf.Min((U/u_i) * u_w, 1f);
-        float P_ = Mathf.Min((P/p_i) * p_w, 1f);
+        float A_ = Mathf.Min((A/i) * a_w, 1f);
+        float U_ = Mathf.Min((U/i) * u_w, 1f);
+        float P_ = Mathf.Min((P/i) * p_w, 1f);
         float score = (A_ + U_ + P_)/(a_w + u_w + p_w);
 
         // Revenue model modifications:

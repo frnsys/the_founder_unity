@@ -10,6 +10,12 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class ProductRecipe : SharedResource<ProductRecipe> {
+    public enum Feature {
+        Design,
+        Engineering,
+        Marketing
+    }
+
     // Comma-delimited list of names.
     public string names;
     public string description;
@@ -18,14 +24,10 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     public ProductRecipe[] synergies;
 
     // Weights: how important a given feature is to the product's performance.
-    public float design_W = 1;
-    public float marketing_W = 1;
-    public float engineering_W = 1;
+    public Feature primaryFeature;
 
     // Ideals: some minimum value a feature must achieve for good performance.
-    public float design_I = 100;
-    public float marketing_I = 100;
-    public float engineering_I = 100;
+    public float featureIdeal = 100;
 
     // How long this product will be profitable on the market.
     // This is used to modify the revenue model curve such that
