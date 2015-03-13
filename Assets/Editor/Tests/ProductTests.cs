@@ -91,7 +91,7 @@ namespace UnityTest
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
-            p.Launch();
+            p.Launch(c);
 
             Assert.IsTrue(p.Revenue(4, c) > 0);
         }
@@ -105,7 +105,7 @@ namespace UnityTest
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
-            p.Launch();
+            p.Launch(c);
 
             rev = p.Revenue(4, c);
             Assert.IsTrue(rev > 0);
@@ -125,7 +125,7 @@ namespace UnityTest
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
-            p.Launch();
+            p.Launch(c);
 
             //p.marketShare = 1;
             float r = p.Revenue(4, c);
@@ -142,7 +142,7 @@ namespace UnityTest
             p.marketing.baseValue = 0;
             p.engineering.baseValue = 0;
 
-            p.Launch();
+            p.Launch(c);
 
             float zeroRev = p.Revenue(4, c);
 
@@ -155,7 +155,7 @@ namespace UnityTest
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
-            p.Launch();
+            p.Launch(c);
 
             Assert.IsTrue(p.Revenue(4, c) > zeroRev);
         }
@@ -166,7 +166,7 @@ namespace UnityTest
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
-            p.Launch();
+            p.Launch(c);
 
             p.disabled = true;
             Assert.AreEqual(p.Revenue(4, c), 0);

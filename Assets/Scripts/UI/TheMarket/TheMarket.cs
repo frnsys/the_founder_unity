@@ -46,10 +46,12 @@ public class TheMarket : MonoBehaviour {
                 break;
         }
 
-        // Generate random competitor products.
-        foreach (AICompany c in competitors) {
-            Product cp = c.CreateProductForTypes(p.productTypes);
-        }
+        float aiMarketShare = Random.value * (1 - p.marketShare);
+        float[] marketShares = new float[] {
+            p.marketShare,
+            aiMarketShare,
+            1 - p.marketShare - aiMarketShare
+        };
 
 
         // Setup the products on the pedestals.
@@ -61,15 +63,16 @@ public class TheMarket : MonoBehaviour {
                 companyLabels[i].text = competitors[i-1].name;
             }
             products[i].mesh = p.meshes[0];
+            marketLabels[i].text = string.Format("{0:P1}", marketShares[i]);
             marketLabels[i].transform.localScale = Vector3.zero;
+
+            // Spawn consumers.
+            for (int j=0; j <= (int)(100 * marketShares[i]); j++) {
+                Transform target = pedestals[i];
+                SpawnConsumer(target);
+            }
         }
 
-        // Spawn consumers.
-        for (int i=0; i <= 100; i++) {
-            // TEMP
-            Transform target = pedestals[Random.Range(0, pedestals.Length)];
-            SpawnConsumer(target);
-        }
 
         if (Started != null)
             Started();

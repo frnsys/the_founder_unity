@@ -196,7 +196,7 @@ public class Product : HasStats {
             _progress += newProgress;
 
             if (_progress >= requiredProgress) {
-                Launch();
+                Launch(company);
                 // Trigger completed event.
                 if (Completed != null) {
                     Completed(this, company);
@@ -207,7 +207,7 @@ public class Product : HasStats {
         return false;
     }
 
-    public void Launch() {
+    public void Launch(Company company) {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
 
@@ -234,8 +234,20 @@ public class Product : HasStats {
         // Revenue model modifications:
         longevity = recipe.maxLongevity;
 
+        marketShare = company.marketSharePercent * score;
+        if (techPenalty)
+            marketShare *= 0.1f;
+
+        // Hype buffs against public opinion.
+        marketShare *= 1 + company.publicity.value;
+
+        // Public opinion's impact.
+        marketShare *= 1 + company.opinion.value/100f;
+
+        marketShare = Mathf.Min(marketShare, 1f);
+
         // Maxmimum lifetime revenue of the product.
-        maxRevenue = recipe.maxRevenue * score;
+        maxRevenue = recipe.maxRevenue * marketShare;
 
         // Effect modifications.
         effects = recipe.effects.Clone();
@@ -274,19 +286,6 @@ public class Product : HasStats {
             // Consumer spending impact.
             revenue *= GameManager.Instance.spendingMultiplier;
             //Debug.Log(string.Format("After consumer spending: {0}", revenue));
-
-            // Hype buffs against public opinion.
-            revenue *= 1 + company.publicity.value;
-
-            // Public opinion's impact.
-            revenue *= 1 + company.opinion.value/100f;
-            //Debug.Log(string.Format("After opinion: {0}", revenue));
-
-            revenue *= marketShare;
-            //Debug.Log(string.Format("After market share: {0}", revenue));
-
-            if (techPenalty)
-                revenue *= 0.1f;
 
             if (synergy)
                 revenue *= 1.5f;

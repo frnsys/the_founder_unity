@@ -78,20 +78,20 @@ public class UIEffectAlert : UIAlert {
         }
 
         if (es.forgettingRate != 0) {
-            RenderEffect(string.Format("Consumers forget bad publicity {0}% {1}",
-                            Mathf.Abs(es.forgettingRate * 100),
+            RenderEffect(string.Format("Consumers forget bad publicity {0:P1} {1}",
+                            Mathf.Abs(es.forgettingRate),
                             es.forgettingRate > 0 ? "faster" : "slower"));
         }
 
         if (es.spendingMultiplier != 0) {
-            RenderEffect(string.Format("Consumers consume {0}% {1} stuff",
-                            Mathf.Abs(es.spendingMultiplier * 100),
+            RenderEffect(string.Format("Consumers consume {0:P1} {1} stuff",
+                            Mathf.Abs(es.spendingMultiplier),
                             es.spendingMultiplier > 0 ? "more" : "less"));
         }
 
         if (es.wageMultiplier != 0) {
-            RenderEffect(string.Format("Wages {1} by {0}%",
-                            Mathf.Abs(es.wageMultiplier * 100),
+            RenderEffect(string.Format("Wages {1} by {0:P1}",
+                            Mathf.Abs(es.wageMultiplier),
                             es.wageMultiplier > 0 ? "increase" : "fall"));
         }
 
@@ -101,15 +101,15 @@ public class UIEffectAlert : UIAlert {
         }
 
         if (es.taxRate != 0) {
-            RenderEffect(string.Format("Taxes {1} by {0}%",
-                            Mathf.Abs(es.taxRate * 100),
+            RenderEffect(string.Format("Taxes {1} by {0:P1}",
+                            Mathf.Abs(es.taxRate),
                             es.taxRate > 0 ? "increases" : "fall"));
         }
 
         if (es.expansionCostMultiplier != 0) {
             RenderBuffEffect(new StatBuff("Expansion Costs", es.expansionCostMultiplier), null);
-            RenderEffect(string.Format("New locations are {0}% {1}",
-                            Mathf.Abs(es.expansionCostMultiplier * 100),
+            RenderEffect(string.Format("New locations are {0:P1} {1}",
+                            Mathf.Abs(es.expansionCostMultiplier),
                             es.expansionCostMultiplier > 0 ? "more expensive" : "cheaper"));
         }
 

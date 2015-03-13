@@ -342,7 +342,7 @@ namespace UnityTest
 
             float r = Random.Range(0,1);
             if (r > 0.33) {
-                product.Launch();
+                product.Launch(data.company);
                 product.Revenue(5, data.company);
 
                 if (Random.Range(0,1) > 0.5) {

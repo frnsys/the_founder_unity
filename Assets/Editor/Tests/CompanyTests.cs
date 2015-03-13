@@ -319,7 +319,7 @@ namespace UnityTest
             Product p = c.products[0];
             c.DevelopProduct();
 
-            p.Launch();
+            p.Launch(c);
             Assert.AreEqual(c.activeProducts[0], p);
 
             c.HarvestProducts(2);
