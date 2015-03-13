@@ -14,7 +14,8 @@ public class UIEffectAlert : UIAlert {
     public GameObject productEffectPrefab;
 
     void OnEnable() {
-        height = gameObject.GetComponent<UIWidget>().height;
+        base.Show();
+        height = window.GetComponent<UIWidget>().height;
     }
 
     public void RenderEffects(EffectSet es) {

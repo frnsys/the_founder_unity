@@ -29,13 +29,10 @@ public class UIMenu : MonoBehaviour {
         switch (item) {
             case "New Product":
                 return hudButtons[0];
-                break;
             case "Research":
                 return hudButtons[1];
-                break;
             case "Communications":
                 return hudButtons[2];
-                break;
             default:
                 return grid.transform.Find(item).gameObject.GetComponent<UIMenuItem>();
         }

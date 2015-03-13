@@ -139,8 +139,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
         // Listen to some events.
         Company.BeganProduct += BeganProduct;
-        Product.Completed += CompletedProduct;
         Company.WorkerHired += WorkerHired;
+        Company.BoughtInfrastructure += InfrastructureBought;
+        Product.Completed += CompletedProduct;
         Promo.Completed += PromoCompleted;
         GameEvent.EventTriggered += OnEvent;
         UnlockSet.Unlocked += OnUnlocked;
@@ -173,8 +174,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     void OnMarketStarted() {
         if (Stage(OBS.THE_MARKET)) {
             MentorMessages(new string[] {
-                "Now that your product is completed, it is released into The Market.",
-                "Competitors will release products like the ones you create to edge out your profits.",
+                string.Format("Now that your product is completed, it is released into {0}.", ConceptHighlight("The Market")),
+                string.Format("{0} will release products like the ones you create to edge out your profits.", ConceptHighlight("Competitors")),
                 "Consumers will flock to the products they think are the best.",
                 "Naturally, if your products are better, you'll have the upper hand.",
                 "Let's see how they respond."
@@ -188,7 +189,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 "Hmph. Consumers aren't really into it. That percentage you saw was the market share of your product.",
                 "Your product could be better.",
                 "To make better products you need to assemble a talented team.",
-                "Search for candidates by opening [c][4B2FF8]Recruiting[-][/c] in the menu.",
+                string.Format("Search for candidates by opening {0} in the menu.", MenuHighlight("Recruiting"))
             });
             UIManager.Instance.menu.Activate("Recruiting");
             TheMarket.Done -= OnMarketDone;
@@ -200,10 +201,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             StartCoroutine(Delay(delegate(GameObject obj) {
                 MentorMessages(new string[] {
                     "Congratulations! This is your first write-up in a major publication.",
-                    "This kind of mention has driven up the hype for your company.",
+                    string.Format("This kind of mention has driven up the {0} for your company.", ConceptHighlight("hype")),
                     "Hype is central to your company's success. A hyped company's products sell much better.",
-                    "But hype is always deflating. Keep hyping your company by launching promotional campaigns from the [c][4B2FF8]MarComm[-][/c] button below.",
-                    "But note that some press can be negative, and hurt your company's image.",
+                    string.Format("But hype is always deflating. Keep hyping your company by launching {0} from the {1} button below.", ConceptHighlight("promotional campaigns"), MenuHighlight("MarComm")),
+                    string.Format("But note that some press can be negative. {0} hurts your company's image.", ConceptHighlight("Bad publicity")),
                     "Consumers aren't going to buy your products if they disagree with your decisions.",
                     "Fortunately, consumers forget things over time, and hype can counteract bad publicity."
                 });
@@ -215,8 +216,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         } else if (ev.name == "RIVALCORP Founded") {
             StartCoroutine(Delay(delegate(GameObject obj) {
                 MentorMessages(new string[] {
-                    "Now seems like a good time to mention that you have some competition.",
-                    "Competitors will copy your successful products and steal market share from away from you. If you keep your products better than them, you won't have to worry.",
+                    "Uh oh. Looks like you have some enemies.",
                     "Competitors will also poach your employees. This kind of activity can drive wages up. This is a lose-lose for everyone - other companies can be cooperative when it comes to dealing with this."
                 });
             }));
@@ -232,8 +232,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         MentorMessages(new string[] {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
-            "You're not much of a business if haven't got anything to sell. Let's create a product.",
-            "To start creating a product, \n:INTERACT: tap the [c][4B2FF8]New Product[-][/c] button below."
+            string.Format("You're not much of a business if haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
+            string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
         });
         UIManager.Instance.menu.Activate("New Product");
     }
@@ -255,11 +255,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             case "New Product":
                 if (Stage(OBS.OPENED_NEW_PRODUCT)) {
                     MentorMessages(new string[] {
-                        "Products are created by combining two product types.",
-                        "Some combinations work well and give bonuses. Some don't.",
-                        string.Format("You will have to {0} and experiment with different combinations.", innovate),
+                        string.Format("Products are created by combining two {0}.", ConceptHighlight("product types")),
+                        string.Format("Some combinations work well and give {0}. Some don't.", ConceptHighlight("bonuses")),
+                        string.Format("You will have to {0} and experiment with different combinations.", SpecialHighlight("innovate")),
                         "Right now you only have a few types available, but that will change over time.",
-                        "Products require different kinds of infrastructure to support their growth.",
+                        string.Format("Products require different kinds of {0} to support their growth.", ConceptHighlight("infrastructure")),
                         "They might require\n:DATACENTER: [c][0078E1]datacenters[-][/c],\n:FACTORY: [c][0078E1]factories[-][/c],\n:LAB: [c][0078E1]labs[-][/c], or\n:STUDIO: [c][0078E1]studios[-][/c].",
                         "All product types have some minimum necessary infrastructure before you can use them.",
                         "You have some infrastructure to start, shown at the bottom of the screen, so no need to worry now.",
@@ -269,10 +269,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 } else if (Stage(OBS.INFRASTRUCTURE)) {
                     MentorMessages(new string[] {
                         "It looks like you don't have enough infrastructure to start a new product!",
-                        "As products grow in the market, they will use more infrastructure. If there isn't any infrastructure available, products will stop growing and you'll be leaving money on the table.",
-                        "You can buy more infrastructure in the [c][4B2FF8]Infrastructure[-][/c] menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.",
-                        //MOVE THIS "The amount of infrastructure you can buy is limited, but you can increase this limit by expanding to new locations - some locations are better for certain infrastructure.",
-                        "Remember that you can shutdown products in the [c][4B2FF8]Products[-][/c] menu item to reclaim their infrastructure."
+                        string.Format("You can buy more infrastructure in the {0} menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.", MenuHighlight("Infrastructure")),
+                        string.Format("You can also shutdown products in the {0} menu item to reclaim their infrastructure.", MenuHighlight("Existing Products"))
                     });
                     UIManager.Instance.menu.Activate("Infrastructure");
                     UIManager.Instance.menu.Activate("Existing Products");
@@ -294,7 +292,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Here are the candidates from your recruiting effort.",
                         "To hire an candidate, you must give them an offer they find acceptable. You have three tries before they take an offer elsewhere.",
-                        "The minimum salary an candidate is willing to accept is affected by a few things.",
+                        string.Format("The {0} an candidate is willing to accept is affected by a few things.", ConceptHighlight("minimum salary")),
                         "Generally, more skilled employees will expect more money.",
                         "Hiring competition amongst companies can drive salary expectations up.",
                         "However, if your employees are exceptionally happy, candidates will be willing to take a lower salary.",
@@ -326,13 +324,14 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Great! You've started developing your first product.",
                         "You need employees at their desks so they can work on the product.",
-                        "Productive workers will diligently head to their desk, but others must be nudged.",
-                        ":INTERACT: [c][1CD05E]double-tap[-][/c] an employee to get them to go to their desk.",
-                        "To develop the product, capture the value your employees produce by :INTERACT: [c][1CD05E]tapping[-][/c] on the icons that appear above them.",
+                        string.Format("{0} workers will diligently head to their desk, but others must be nudged.", ConceptHighlight("Productive")),
+                        string.Format("{0} an employee to get them to go to their desk.", InteractHighlight("double-tap")),
+                        string.Format("To develop the product, capture the value your employees produce by {0} on the icons that appear above them.", InteractHighlight("tapping")),
                         "Employees can produce\n:DESIGN: [c][0078E1]design[-][/c],\n:ENGINEERING: [c][0078E1]engineering[-][/c], or\n:MARKETING: [c][0078E1]marketing[-][/c]\npoints for your products.",
                         "Different products rely more on heavily on one of these kinds of points.",
-                        "Happy employees may have \n:BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.",
-                        "The points you capture are shown below. Try to get bonus multipliers by chaining feature points together!"
+                        string.Format("{0} employees may have \n:BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.", ConceptHighlight("Happy")),
+                        string.Format("The points you capture are shown below. Try to get {0} by chaining feature points together!", ConceptHighlight("bonus multipliers")),
+                        "The bar below indicates how far along product development is. When it fills up, your product will be released to The Market!"
                     });
                 }, 2f));
             }
@@ -346,8 +345,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Congratulations! You've completed your first product.",
-                        "It will start generating revenue, depending on its final :DESIGN: [c][0078E1]design[-][/c], :ENGINEERING: [c][0078E1]engineering[-][/c], and :MARKETING: [c][0078E1]marketing[-][/c] values.",
-                        "After the product has run its course, it will get pulled from the market and free up the infrastructure it was using.",
+                        string.Format("It will start generating {0}, depending on its final :DESIGN: [c][0078E1]design[-][/c], :ENGINEERING: [c][0078E1]engineering[-][/c], and :MARKETING: [c][0078E1]marketing[-][/c] values.", ConceptHighlight("revenue")),
+                        "After the product has run its course, it will get pulled from The Market and free up the infrastructure it was using.",
                         "After you finish a product, you will be taken to The Market to see how it will perform.",
                         "Let's take a look."
                     });
@@ -356,21 +355,22 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Now that you've got some experience with building products, [c][FC5656]The Board[-][/c] has asked me to explain their expectations for your company.",
-                        "[c][FC5656]The Board[-][/c] sets annual profit targets for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c].",
+                        string.Format("[c][FC5656]The Board[-][/c] sets {0} for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c].", ConceptHighlight("annual profit targets")),
                         "You [i]must[/i] hit these targets.",
-                        "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will dismiss you from the company.",
+                        "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will [c][1A9EF2]dismiss you from the company[-][/c].",
                         "Making money is simple -  just make better and better products!",
-                        "Your current profit and target profit are shown in the bar below.",
-                        "You can keep more detailed track of your profit and other accounting in the [c][4B2FF8]Accounting[-][/c] menu item.",
+                        string.Format("Your {0} and {1} are shown in the bar below.", ConceptHighlight("current profit"), ConceptHighlight("target profit")),
+                        string.Format("You can keep more detailed track of your profit and other accounting in the {0} menu item.", MenuHighlight("Accounting"))
                     });
                     UIManager.Instance.menu.Activate("Accounting");
                 }, 3f));
             } else if (Stage(OBS.RESEARCH)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
-                        "You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge research.",
-                        "Spend research points to purchase new technologies in the [c][4B2FF8]Research[-][/c] menu item. New technologies can unlock new product types, special projects, and provide other bonuses.",
-                        "You can manage your research budget in the [c][4B2FF8]Research[-][/c] button below, which influences how much research points you generate. Stay ahead of the competition!"
+                        string.Format("You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge {0}.", ConceptHighlight("research")),
+                        string.Format("You can manage your research budget in the {0} button below, which influences how many research points you generate.", MenuHighlight("Research")),
+                        "There you can spend your research points to purchase new technologies. New technologies can unlock new product types, special projects, and provide other bonuses.",
+                        "Don't neglect research! Stay ahead of the competition!"
                     });
                     UIManager uim = UIManager.Instance;
                     uim.statusBar.researchLabel.gameObject.SetActive(true);
@@ -392,9 +392,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             } else if (!ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
-                        "Now that you have a few employees, you want to maximize their productivity and happiness.",
+                        string.Format("Now that you have a few employees, you want to maximize their {0} and {1}.", ConceptHighlight("productivity"), ConceptHighlight("happiness")),
                         "Productive employees are easier to manage and happy employees can have valuable breakthroughs during product development and attract better talent.",
-                        "A great way to accomplish this is through perks. You can purchase and upgrade perks for your company through the [c][4B2FF8]Perks[-][/c] menu item."
+                        string.Format("A great way to accomplish this is through {0}. You can purchase and upgrade perks for your company through the {0} menu item.", ConceptHighlight("perks"), MenuHighlight("Perks"))
                     });
                     UIManager.Instance.menu.Activate("Perks");
                     ob.PERKS_UNLOCKED = true;
@@ -407,7 +407,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         if (!ob.HYPE_MINIGAME) {
             MentorMessages(new string[] {
                 "Completing promotional campaigns gives you the opportunity to garner some allies in the media and hype up your company.",
-                ":INTERACT: [c][1CD05E]Flick[-][/c] the puck and hit some influencers to get them on your side. More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
+                string.Format("{0} the puck and hit some {1} to get them on your side. More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!", InteractHighlight("Flick"), ConceptHighlight("influencers"))
             });
             ob.HYPE_MINIGAME = true;
         }
@@ -419,25 +419,25 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 case "Finance":
                     MentorMessages(new string[] {
                         "Financial products can be extremely useful in your growth strategy.",
-                        "Through credit cards and other financial schemes, you can fund consumption well beyond consumers' means. Financial products will typically increase consumer spending, thus making all your products more profitable!",
+                        string.Format("Through credit cards and other financial schemes, you can fund consumption well beyond consumers' means. Financial products will typically increase {0}, thus making all your products more profitable!", ConceptHighlight("consumer spending")),
                     });
                     break;
                 case "Defense":
                     MentorMessages(new string[] {
-                        "Building defense products may seem unethical, but they generally lead to lucrative government contract lump-sums which are invaluable for funding your continued expansion."
+                        string.Format("Building defense products may seem unethical, but they generally lead to lucrative government contract {0} which are invaluable for funding your continued expansion.", ConceptHighlight("cash bonuses"))
                     });
                     break;
                 case "Entertainment":
                     MentorMessages(new string[] {
                         "Promotional campaigns are great, but the most efficient way to manage public perception is through entertainment and media companies.",
-                        "Entertainment products help consumers forget the dreariness or difficulty of their lives. Fortunately, these distractions also help them forget about your company's transgressions more quickly."
+                        string.Format("Entertainment products help consumers forget the dreariness or difficulty of their lives. Fortunately, these distractions also help them {0} about your company's transgressions more quickly.", ConceptHighlight("forget"))
                     });
                     break;
                 default:
                     if (!ob.VERTICALS_UNLOCKED) {
                         MentorMessages(new string[] {
                             "Now that you've unlocked another vertical, you should consider saving up some capital to expand into it.",
-                            string.Format("Verticals provide access to new product types and technologies so you can {0} even further. Manage your verticals in the [c][4B2FF8]Vertical[-][/c] menu item.", innovate)
+                            string.Format("{0} provide access to new product types and technologies so you can {1} even further. Manage your verticals in the {2} menu item.", ConceptHighlight("Verticals"), SpecialHighlight("innovate"), MenuHighlight("Verticals"))
                         });
                         UIManager.Instance.menu.Activate("Verticals");
                         ob.VERTICALS_UNLOCKED = true;
@@ -445,23 +445,29 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     break;
             }
 
-        } else if (us.locations.Count > 0 && !ob.LOCATIONS_UNLOCKED) {
-            MentorMessages(new string[] {
-                "A new location is available for you to expand to!",
-                "Locations allow you to increase your share of existing markets or establish a foothold in new ones.",
-                "The more locations you have for a market, the more money you will make.",
-                "Locations also provide capacity for more infrastructure. Some locations have special bonuses too.",
-                "Manage your locations in the [c][4B2FF8]Location[-][/c] menu item."
-            });
-            UIManager.Instance.menu.Activate("Locations");
-            ob.LOCATIONS_UNLOCKED = true;
-
         } else if (us.specialProjects.Count > 0 && !ob.SPECIALPROJECTS_UNLOCKED) {
             MentorMessages(new string[] {
-                "Your first special project is available. Special projects are one-off products which can have world-changing effects. In order to build one, you need to have built some prerequisite products beforehand. Manage special projects in the [c][4B2FF8]Special Projects[-][/c] menu item."
+                string.Format("Your first special project is available. {0} are one-off products which can have world-changing effects. In order to build one, you need to have built some prerequisite products beforehand.", ConceptHighlight("Special projects")),
+                string.Format("Manage special projects in the {0} menu item.", MenuHighlight("Special Projects"))
             });
             UIManager.Instance.menu.Activate("Special Projects");
             ob.SPECIALPROJECTS_UNLOCKED = true;
+        }
+    }
+
+    void InfrastructureBought(Company c, Infrastructure i) {
+        if (c.availableInfrastructureCapacity == 0 && !ob.LOCATIONS_UNLOCKED) {
+            MentorMessages(new string[] {
+                "It looks like you've run out space for new infrastructure!",
+                "That's ok - if you need more room for infrastructure, you can expand to new locations.",
+                string.Format("{0} also provide capacity for more infrastructure. Some locations have special bonuses too.", ConceptHighlight("Locations")),
+                string.Format("They also allow you to increase your share of existing {0} or establish a foothold in new ones.", ConceptHighlight("markets")),
+                "The more locations you have for a market, the more money you will make!",
+                string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
+            });
+            UIManager.Instance.menu.Activate("Locations");
+            ob.LOCATIONS_UNLOCKED = true;
+            Company.BoughtInfrastructure -= InfrastructureBought;
         }
     }
 
@@ -469,13 +475,31 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         if (o.type == Office.Type.Campus) {
             MentorMessages(new string[] {
                 "Your company is impressively large now! But it could still be larger.",
-                "It's harder to innovate on your own, but with all of your capital you can buy up other companies now. Manage these purchases through the [c][4B2FF8]Acquisitions[-][/c]"
+                string.Format("It's harder to {0} on your own, but with all of your capital you can {1} other companies now. Manage these purchases through the {2}", SpecialHighlight("innovate"), ConceptHighlight("aquire"), MenuHighlight("Acquisitions"))
             });
             UIManager.Instance.menu.Activate("Acquisitions");
         }
     }
 
-    string innovate = "[c][FC5656]i[-][FFC800]n[-][78E09E]n[-][79ECDD]o[-][4B2FF8]v[-][FD7EFF]a[-][FC5656]t[-][FFC800]e[-][/c]";
+    private string MenuHighlight(string s) {
+        return string.Format("[c][4B2FF8]{0}[-][/c]", s);
+    }
+    private string InteractHighlight(string s) {
+        return string.Format(":INTERACT: [c][1CD05E]{0}[-][/c]", s);
+    }
+    private string SpecialHighlight(string s) {
+        string[] colors = new string[] {
+            "FC5656", "FFC800", "78E09E", "79ECDD", "4B2FF8", "FD7EFF"
+        };
+        List<string> result = new List<string>();
+        for (int i=0; i<s.Length; i++) {
+            result.Add(string.Format("[{0}]{1}[-]", colors[i % colors.Length], s[i]));
+        }
+        return string.Format("[c]{0}[/c]", string.Concat(result.ToArray()));
+    }
+    private string ConceptHighlight(string s) {
+        return string.Format("[c][0078E1]{0}[-][/c]", s);
+    }
 
     public void GameLost() {
         MentorMessages(new string[] {

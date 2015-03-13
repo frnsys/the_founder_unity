@@ -36,6 +36,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject hiringPrefab;
 
     public UIMenu menu;
+    public GameObject menuButton;
     public void OpenMenu() {
         menu.gameObject.SetActive(true);
     }
@@ -125,6 +126,7 @@ public class UIManager : Singleton<UIManager> {
         if (c == gm.playerCompany) {
             productHud.Clear();
             productHud.gameObject.SetActive(true);
+            menuButton.SetActive(false);
             actionsHud.SetActive(false);
         }
     }
@@ -138,6 +140,7 @@ public class UIManager : Singleton<UIManager> {
 
             // Clear/hide the product HUD.
             actionsHud.SetActive(true);
+            menuButton.SetActive(true);
             productHud.gameObject.SetActive(false);
             productHud.Clear();
 
@@ -148,7 +151,7 @@ public class UIManager : Singleton<UIManager> {
             // Hack to show The Market after the player has hit OK on the product completed alert.
             StartCoroutine(Delay(delegate {
                 theMarket.Setup(p);
-            }, 0.1f));
+            }, 0.6f));
 
         // If it is a competitor's product, show it as an "ad".
         } else {

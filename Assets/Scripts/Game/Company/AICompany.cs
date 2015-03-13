@@ -90,7 +90,6 @@ public class AICompany : Company {
 
     public void Decide() {
         Debug.Log("AI Company " + name + " is deciding...");
-        DecideProducts();
         DecideWorkers();
     }
 
@@ -106,68 +105,6 @@ public class AICompany : Company {
         Product product = ScriptableObject.CreateInstance<Product>();
         product.Init(pts, design, marketing, engineering, this);
         return product;
-    }
-
-    private void DecideProducts() {
-        List<Product> candidates = new List<Product>();
-        List<Product> stale = new List<Product>(products);
-
-        // AI companies basically exist to compete with the player.
-        // Ignore products for which the company already has a matching product.
-        //foreach (Product p in GameManager.Instance.playerCompany.activeProducts
-        foreach (Product p in GameManager.Instance.playerCompany.activeProducts) {
-            Product matching = MatchingProduct(p);
-            if (matching == null) {
-                candidates.Add(p);
-            } else {
-                // Remove products from the stale list,
-                // so that the only ones left over are ones to delete.
-                stale.Remove(matching);
-            }
-        }
-
-        if (candidates.Count > 0) {
-            Debug.Log(name + " is starting a new competing product...");
-
-            int design = Random.Range(0, designSkill) + designSkill/2;
-            int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
-            int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
-
-            // Find a product to copy - but only copy products after
-            // they have been in the market for a little while.
-            Product product = candidates.Where(p => p.timeSinceLaunch >= 2000)
-                    .OrderBy(p => ScoreProduct(p)).FirstOrDefault();
-            if (product != null) {
-                // Create it and launch it immediately.
-                Product newProduct = StartNewProduct(product.productTypes , design, engineering, marketing);
-                newProduct.Develop(newProduct.requiredProgress, this);
-            }
-        }
-
-        // Cleanup any "stale" products.
-        for (int i=stale.Count; i >= 0; i--) {
-            products.Remove(stale[i]);
-        }
-    }
-
-    private Product MatchingProduct(Product p) {
-        // Only need to return the first, since AI companies will
-        // create only one competing product for a combo.
-        return activeProducts.FirstOrDefault(p_ => p_.comboID == p.comboID);
-    }
-
-    private float ScoreProduct(Product p) {
-        float score = p.revenueEarned/p.timeSinceLaunch;
-        foreach (ProductType pt in p.productTypes) {
-            if (specialtyProductTypes.Contains(pt))
-                score *= 1.2f;
-        }
-        foreach (Vertical v in p.requiredVerticals) {
-            if (specialtyVerticals.Contains(v))
-                score *= 1.2f;
-        }
-
-        return score;
     }
 
     // ===============================================

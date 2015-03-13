@@ -557,10 +557,13 @@ public class Company : HasStats {
         get { return infrastructureCapacity - infrastructure.total; }
     }
 
+    static public event System.Action<Company, Infrastructure> BoughtInfrastructure;
     public bool BuyInfrastructure(Infrastructure i) {
         if (HasCapacityFor(i) && Pay(i.cost)) {
             infrastructure += i;
             UpdateProductStatuses();
+            if (BoughtInfrastructure != null)
+                BoughtInfrastructure(this, i);
             return true;
         }
         return false;

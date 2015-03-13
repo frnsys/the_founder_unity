@@ -170,7 +170,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
 
             // Uncomment this if you want to start the game with onboarding.
-            //narrativeManager.InitializeOnboarding();
+            narrativeManager.InitializeOnboarding();
         }
 #endif
 
@@ -190,8 +190,6 @@ public class GameManager : Singleton<GameManager> {
         }
 
         data.company.SetHQ(location);
-        data.unlocked.locations = new List<Location> { location };
-
         data.company.founders.Add(cofounder);
         ApplyEffectSet(cofounder.bonuses);
 
