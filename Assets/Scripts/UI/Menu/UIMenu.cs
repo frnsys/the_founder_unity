@@ -4,23 +4,40 @@ using System.Collections;
 public class UIMenu : MonoBehaviour {
     public UIGrid grid;
     public UIMenuButton menuButton;
+    public UIMenuItem[] hudButtons;
 
     void OnEnable() {
         grid.Reposition();
     }
 
     public void Activate(string item) {
-        GameObject menuItem = grid.transform.Find(item).gameObject;
-        menuItem.SetActive(true);
-
+        UIMenuItem menuItem = GetItem(item);
+        menuItem.wiggle = true;
+        menuItem.gameObject.SetActive(true);
         grid.Reposition();
 
-        menuButton.Wiggle();
-        menuItem.GetComponent<UIMenuItem>().wiggle = true;
+        if (item != "New Product" && item != "Research" && item != "Communications")
+            menuButton.Wiggle();
     }
 
     public void Deactivate(string item) {
-        grid.transform.Find(item).gameObject.SetActive(false);
+        GetItem(item).gameObject.SetActive(false);
         grid.Reposition();
+    }
+
+    private UIMenuItem GetItem(string item) {
+        switch (item) {
+            case "New Product":
+                return hudButtons[0];
+                break;
+            case "Research":
+                return hudButtons[1];
+                break;
+            case "Communications":
+                return hudButtons[2];
+                break;
+            default:
+                return grid.transform.Find(item).gameObject.GetComponent<UIMenuItem>();
+        }
     }
 }

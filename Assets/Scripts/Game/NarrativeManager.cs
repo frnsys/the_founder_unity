@@ -233,7 +233,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
             "You're not much of a business if haven't got anything to sell. Let's create a product.",
-            "Open the menu up and select [c][4B2FF8]New Product[-][/c]."
+            "To start creating a product, \n:INTERACT: tap the [c][4B2FF8]New Product[-][/c] button below."
         });
         UIManager.Instance.menu.Activate("New Product");
     }

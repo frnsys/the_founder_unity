@@ -125,6 +125,7 @@ public class UIManager : Singleton<UIManager> {
         if (c == gm.playerCompany) {
             productHud.Clear();
             productHud.gameObject.SetActive(true);
+            actionsHud.SetActive(false);
         }
     }
 
@@ -136,6 +137,7 @@ public class UIManager : Singleton<UIManager> {
             popup.GetComponent<UIProductCompletedAlert>().product = p;
 
             // Clear/hide the product HUD.
+            actionsHud.SetActive(true);
             productHud.gameObject.SetActive(false);
             productHud.Clear();
 
@@ -266,6 +268,7 @@ public class UIManager : Singleton<UIManager> {
     }
 
     public UIProductDev productHud;
+    public GameObject actionsHud;
     public void AddPointsToDevelopingProduct(string feature, float value) {
         productHud.Add(feature, (int)value);
     }
