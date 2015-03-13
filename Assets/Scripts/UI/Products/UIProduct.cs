@@ -47,6 +47,8 @@ public class UIProduct : UIEffectItem {
             name.text = product_.genericName;
             status.text = "Developing...";
             description.gameObject.SetActive(false);
+            shutdown.transform.Find("Label").GetComponent<UILabel>().text = "Cancel";
+
             for (int i=0; i<product_.meshes.Length; i++) {
                 productObjects[i].SetActive(false);
             }
@@ -54,6 +56,7 @@ public class UIProduct : UIEffectItem {
             name.text = product_.name;
             progress.gameObject.SetActive(false);
             description.gameObject.SetActive(true);
+            shutdown.transform.Find("Label").GetComponent<UILabel>().text = "Discontinue";
 
             for (int i=0; i<product_.meshes.Length; i++) {
                 productObjects[i].GetComponent<MeshFilter>().mesh = product_.meshes[i];
