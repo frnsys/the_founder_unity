@@ -2549,7 +2549,6 @@ Transform:
   - {fileID: 1513043833}
   - {fileID: 16888524}
   - {fileID: 751253638}
-  - {fileID: 921502547}
   - {fileID: 189669550}
   - {fileID: 273724436}
   m_Father: {fileID: 1278708169}
@@ -2633,11 +2632,6 @@ MonoBehaviour:
   weekGrid: {fileID: 1005929634}
   activeWeekColor: {r: .889705896, g: .274762124, b: .274762124, a: 1}
   defaultWeekColor: {r: .845588207, g: .845588207, b: .845588207, a: 1}
-  depressionColor: {r: 1, g: .33088237, b: .33088237, a: 1}
-  recessionColor: {r: .937254906, g: .709803939, b: .258823544, a: 1}
-  neutralColor: {r: 1, g: .898039222, b: .529411793, a: 1}
-  expansionColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
-  economyIcon: {fileID: 921502548}
 --- !u!1 &130821373
 GameObject:
   m_ObjectHideFlags: 0
@@ -3493,7 +3487,7 @@ Transform:
   - {fileID: 1171145224}
   - {fileID: 1753126655}
   m_Father: {fileID: 127671519}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!114 &189669551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4607,7 +4601,7 @@ Transform:
   m_LocalScale: {x: .999987006, y: .999987006, z: .999987006}
   m_Children: []
   m_Father: {fileID: 127671519}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &273724437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11190,7 +11184,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3006
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -14480,7 +14474,7 @@ MonoBehaviour:
   mText: MONTH
   mFontSize: 14
   mFontStyle: 0
-  mAlignment: 3
+  mAlignment: 1
   mEncoding: 1
   mMaxLineCount: 0
   mEffectStyle: 1
@@ -15258,92 +15252,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1650665260}
   m_GameObject: {fileID: 920784073}
   m_Mesh: {fileID: 4300156, guid: e9796bf3602d74003b68d472c9f1a480, type: 3}
---- !u!1 &921502546
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 921502547}
-  - 114: {fileID: 921502548}
-  m_Layer: 8
-  m_Name: Economy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &921502547
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 921502546}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -87.1067429, y: 450.011658, z: 0}
-  m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
-  m_Children: []
-  m_Father: {fileID: 127671519}
-  m_RootOrder: 3
---- !u!114 &921502548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 921502546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c5ca47aa5c01740810b7c66662099f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftAnchor:
-    target: {fileID: 189669550}
-    relative: 1
-    absolute: 12
-  rightAnchor:
-    target: {fileID: 189669550}
-    relative: 1
-    absolute: 24
-  bottomAnchor:
-    target: {fileID: 189669550}
-    relative: .5
-    absolute: -6
-  topAnchor:
-    target: {fileID: 189669550}
-    relative: .5
-    absolute: 6
-  updateAnchors: 1
-  mColor: {r: .937254906, g: .709803939, b: .258823544, a: 1}
-  mPivot: 4
-  mWidth: 12
-  mHeight: 12
-  mDepth: 2
-  autoResizeBoxCollider: 0
-  hideIfOffScreen: 0
-  keepAspectRatio: 0
-  aspectRatio: 1
-  mType: 0
-  mFillDirection: 4
-  mFillAmount: 1
-  mInvert: 0
-  mFlip: 0
-  centerType: 1
-  leftType: 1
-  rightType: 1
-  bottomType: 1
-  topType: 1
-  mRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  mTexture: {fileID: 2800000, guid: 7d5a0c268df7f49c38e1bab0eab3d831, type: 3}
-  mMat: {fileID: 0}
-  mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
-  mBorder: {x: 0, y: 0, z: 0, w: 0}
-  mFixedAspect: 0
 --- !u!1 &927317270
 GameObject:
   m_ObjectHideFlags: 0
@@ -29057,7 +28965,7 @@ MonoBehaviour:
   mText: YEAR
   mFontSize: 14
   mFontStyle: 0
-  mAlignment: 1
+  mAlignment: 3
   mEncoding: 1
   mMaxLineCount: 0
   mEffectStyle: 1

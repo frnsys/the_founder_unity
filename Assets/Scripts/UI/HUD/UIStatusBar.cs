@@ -16,13 +16,6 @@ public class UIStatusBar : MonoBehaviour {
     public Color activeWeekColor;
     public Color defaultWeekColor;
 
-    // Economy icon.
-    public Color depressionColor;
-    public Color recessionColor;
-    public Color neutralColor;
-    public Color expansionColor;
-    public UITexture economyIcon;
-
     private int week;
 
     void OnEnable() {
@@ -37,21 +30,6 @@ public class UIStatusBar : MonoBehaviour {
         researchLabel.text = string.Format("{0:0} research", gm.playerCompany.researchPoints);
         yearLabel.text = gm.year.ToString();
         monthLabel.text = gm.month.ToUpper();
-
-        switch (gm.economy) {
-            case Economy.Depression:
-                economyIcon.color = depressionColor;
-                break;
-            case Economy.Recession:
-                economyIcon.color = recessionColor;
-                break;
-            case Economy.Neutral:
-                economyIcon.color = neutralColor;
-                break;
-            case Economy.Expansion:
-                economyIcon.color = expansionColor;
-                break;
-        }
 
         // If the week has changed,
         // update the UI.
