@@ -347,6 +347,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Congratulations! You've completed your first product.",
                         "It will start generating revenue, depending on its final :DESIGN: [c][0078E1]design[-][/c], :ENGINEERING: [c][0078E1]engineering[-][/c], and :MARKETING: [c][0078E1]marketing[-][/c] values.",
+                        "After the product has run its course, it will get pulled from the market and free up the infrastructure it was using.",
                         "After you finish a product, you will be taken to The Market to see how it will perform.",
                         "Let's take a look."
                     });
