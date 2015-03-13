@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: Singapore
   m_EditorClassIdentifier: 
-  description: 
   rotation: {x: 0, y: 0, z: 0}
   cost: 1e+06
+  description: 
   market: 2
   capacity:
     keys: 00000000010000000200000003000000
@@ -24,8 +24,6 @@ MonoBehaviour:
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0

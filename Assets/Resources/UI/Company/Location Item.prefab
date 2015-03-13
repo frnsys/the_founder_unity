@@ -1024,9 +1024,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aab85eaed4b74cf4ac00d5d59e62543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  window: {fileID: 0}
+  overlay: {fileID: 0}
+  body: {fileID: 0}
+  bodyLabel: {fileID: 0}
   effectGrid: {fileID: 11400004}
+  effectPrefab: {fileID: 100008, guid: 356d62bb98d1c4622b801d0d43022fb7, type: 2}
   buffEffectPrefab: {fileID: 100000, guid: 75fc8a3a57b014758ac27337a73251ec, type: 2}
-  unlockEffectPrefab: {fileID: 100008, guid: 356d62bb98d1c4622b801d0d43022fb7, type: 2}
   productEffectPrefab: {fileID: 100000, guid: 39b9fab38ff9d4956bf988f948c90648, type: 2}
   cost: {fileID: 11400000}
   label: {fileID: 11400006}

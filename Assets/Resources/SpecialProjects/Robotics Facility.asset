@@ -14,7 +14,6 @@ MonoBehaviour:
   description: A robotics facility will give us access to new heights of automated
     labor.
   cost: 5e+07
-  requiredProgress: 80000
   effects:
     unlocks:
       productTypes:
@@ -51,8 +50,6 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
-    specialEffect: 2
+    specialEffect: 6
   requiredProducts: []
   mesh: {fileID: 4300060, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
-  texture: {fileID: 0}
-  _progress: 0

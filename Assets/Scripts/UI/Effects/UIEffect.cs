@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class UIUnlockEffect : MonoBehaviour {
+public class UIEffect : MonoBehaviour {
     public UILabel label;
 
-    public void Set(string name) {
+    public void SetUnlock(string name) {
         label.text = "Unlocks " + name;
     }
 
@@ -29,6 +29,10 @@ public class UIUnlockEffect : MonoBehaviour {
                 text = "Win the game";
                 break;
         }
+        label.text = text;
+    }
+
+    public void Set(string text) {
         label.text = text;
     }
 }

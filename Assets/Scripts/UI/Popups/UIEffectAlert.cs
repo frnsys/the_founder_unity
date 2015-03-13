@@ -1,19 +1,26 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 // A text alert popup which supports rendering effects.
 public class UIEffectAlert : UIAlert {
     public UIGrid effectGrid;
+    private List<UIWidget> effectWidgets = new List<UIWidget>();
+    protected int height;
 
+    public GameObject effectPrefab;
     public GameObject buffEffectPrefab;
-    public GameObject unlockEffectPrefab;
     public GameObject productEffectPrefab;
+
+    void OnEnable() {
+        height = gameObject.GetComponent<UIWidget>().height;
+    }
 
     public void RenderEffects(EffectSet es) {
         // Clear out existing effect elements.
-        while (effectGrid.transform.childCount > 0) {
-            GameObject go = effectGrid.transform.GetChild(0).gameObject;
+        for (int i = effectGrid.transform.childCount - 1; i >= 0; i--) {
+            GameObject go = effectGrid.transform.GetChild(i).gameObject;
             NGUITools.DestroyImmediate(go);
         }
 
@@ -21,11 +28,15 @@ public class UIEffectAlert : UIAlert {
         RenderBuffEffects(es);
         RenderProductEffects(es);
         RenderSpecialEffects(es);
+        effectGrid.Reposition();
     }
 
     public void AdjustEffectsHeight() {
-        // -1 because by default there is space for about 1 effect.
-        Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
+        int count = effectGrid.GetChildList().Count;
+
+        // If there are effects, expand the height for them.
+        if (count > 0)
+            Extend((int)(count * effectGrid.cellHeight));
     }
 
     private void RenderUnlockEffects(EffectSet es) {
@@ -54,7 +65,8 @@ public class UIEffectAlert : UIAlert {
 
     private void RenderBuffEffects(EffectSet es) {
         foreach (StatBuff buff in es.workerEffects) {
-            RenderBuffEffect(buff, "workers");
+            if (buff.value != 0)
+                RenderBuffEffect(buff, "workers");
         }
 
         if (es.research.value != 0) {
@@ -66,27 +78,39 @@ public class UIEffectAlert : UIAlert {
         }
 
         if (es.forgettingRate != 0) {
-            RenderBuffEffect(new StatBuff("Forgetting Rate", es.forgettingRate), null);
+            RenderEffect(string.Format("Consumers forget bad publicity {0}% {1}",
+                            Mathf.Abs(es.forgettingRate * 100),
+                            es.forgettingRate > 0 ? "faster" : "slower"));
         }
 
         if (es.spendingMultiplier != 0) {
-            RenderBuffEffect(new StatBuff("Consumer Spending", es.spendingMultiplier), null);
+            RenderEffect(string.Format("Consumers consume {0}% {1} stuff",
+                            Mathf.Abs(es.spendingMultiplier * 100),
+                            es.spendingMultiplier > 0 ? "more" : "less"));
         }
 
         if (es.wageMultiplier != 0) {
-            RenderBuffEffect(new StatBuff("Wage Multiplier", es.wageMultiplier), null);
+            RenderEffect(string.Format("Wages {1} by {0}%",
+                            Mathf.Abs(es.wageMultiplier * 100),
+                            es.wageMultiplier > 0 ? "increase" : "fall"));
         }
 
         if (es.economicStability != 0) {
-            RenderBuffEffect(new StatBuff("Economic Stability", es.economicStability), null);
+            RenderEffect(string.Format("Economic stability {0}",
+                            es.economicStability > 0 ? "increases" : "decreases"));
         }
 
         if (es.taxRate != 0) {
-            RenderBuffEffect(new StatBuff("Tax Rate", es.taxRate), null);
+            RenderEffect(string.Format("Taxes {1} by {0}%",
+                            Mathf.Abs(es.taxRate * 100),
+                            es.taxRate > 0 ? "increases" : "fall"));
         }
 
         if (es.expansionCostMultiplier != 0) {
             RenderBuffEffect(new StatBuff("Expansion Costs", es.expansionCostMultiplier), null);
+            RenderEffect(string.Format("New locations are {0}% {1}",
+                            Mathf.Abs(es.expansionCostMultiplier * 100),
+                            es.expansionCostMultiplier > 0 ? "more expensive" : "cheaper"));
         }
 
         if (es.opinionEvent.opinion.value != 0) {
@@ -106,8 +130,10 @@ public class UIEffectAlert : UIAlert {
 
     private void RenderProductEffects(EffectSet es) {
         foreach (ProductEffect pe in es.productEffects) {
-            GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
-            effectObj.GetComponent<UIProductEffect>().Set(pe);
+            if (pe.buff.value != 0) {
+                GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, productEffectPrefab);
+                effectObj.GetComponent<UIProductEffect>().Set(pe);
+            }
         }
     }
 
@@ -118,18 +144,23 @@ public class UIEffectAlert : UIAlert {
     }
 
     private void RenderUnlockEffect(string name) {
-        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
-        effectObj.GetComponent<UIUnlockEffect>().Set(name);
+        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, effectPrefab);
+        effectObj.GetComponent<UIEffect>().SetUnlock(name);
     }
 
     private void RenderSpecialEffect(EffectSet.Special effect) {
-        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, unlockEffectPrefab);
-        effectObj.GetComponent<UIUnlockEffect>().SetSpecial(effect);
+        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, effectPrefab);
+        effectObj.GetComponent<UIEffect>().SetSpecial(effect);
     }
 
     private void RenderBuffEffect(StatBuff buff, string target) {
         GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, buffEffectPrefab);
         effectObj.GetComponent<UIBuffEffect>().Set(buff, target);
+    }
+
+    private void RenderEffect(string desc) {
+        GameObject effectObj = NGUITools.AddChild(effectGrid.gameObject, effectPrefab);
+        effectObj.GetComponent<UIEffect>().Set(desc);
     }
 
     protected override void Extend(int amount) {
@@ -138,5 +169,13 @@ public class UIEffectAlert : UIAlert {
         int currentTop = body.topAnchor.absolute;
         body.bottomAnchor.Set(window.transform, 0, currentBottom-amount);
         body.topAnchor.Set(window.transform, 0, currentTop+amount);
+    }
+
+    // Call this in the update loop to keep effects at full width.
+    protected void UpdateEffectWidths() {
+        int w = effectGrid.GetComponent<UIWidget>().width;
+        foreach (UIWidget widget in effectWidgets) {
+            widget.width = w;
+        }
     }
 }
