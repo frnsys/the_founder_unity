@@ -46,8 +46,11 @@ public class UIOnboarding : MonoBehaviour {
     }
 
     void Intro() {
-        backButton.GetComponent<UIButton>().isEnabled = false;
         VerticalSelection(null);
+    }
+
+    void BackToMainMenu(GameObject obj) {
+        Application.LoadLevel("MainMenu");
     }
 
 
@@ -58,6 +61,7 @@ public class UIOnboarding : MonoBehaviour {
      */
     void VerticalSelection(GameObject obj) {
         title.text = "Select starting vertical";
+        back = BackToMainMenu;
 
         ClearGrid();
         foreach (Vertical v in startingVerticals) {
@@ -71,7 +75,6 @@ public class UIOnboarding : MonoBehaviour {
         }
         grid.Reposition();
 
-        backButton.GetComponent<UIButton>().isEnabled = false;
         next = ConfirmVertical;
 
         // If no game object is present, it's because we're calling it manually.
@@ -103,8 +106,6 @@ public class UIOnboarding : MonoBehaviour {
     void ConfirmVertical(GameObject obj) {
         if (selectedVertical == null)
             return;
-
-        backButton.GetComponent<UIButton>().isEnabled = true;
 
         LocationSelection(null);
     }

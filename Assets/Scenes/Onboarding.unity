@@ -956,8 +956,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1063021703}
-  hover: {r: .937254906, g: .709803939, b: .258823544, a: 1}
-  pressed: {r: .852941155, g: .625857532, b: .17560555, a: 1}
+  hover: {r: .470588237, g: .87843138, b: .619607866, a: 1}
+  pressed: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -1013,7 +1013,7 @@ MonoBehaviour:
     relative: 0
     absolute: 60
   updateAnchors: 1
-  mColor: {r: .937254906, g: .709803939, b: .258823544, a: 1}
+  mColor: {r: .470588237, g: .87843138, b: .619607866, a: 1}
   mPivot: 4
   mWidth: 190
   mHeight: 60

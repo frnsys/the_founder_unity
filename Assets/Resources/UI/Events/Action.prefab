@@ -100,7 +100,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .926470578, g: .27930361, b: .27930361, a: 1}
+  mColor: {r: .445772052, g: .513755083, b: .625, a: 1}
   mPivot: 4
   mWidth: 400
   mHeight: 60
@@ -187,6 +187,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -216,8 +219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100002}
-  hover: {r: .937254906, g: .270588249, b: .258823544, a: 1}
-  pressed: {r: .867647052, g: .21565792, b: .204152241, a: 1}
+  hover: {r: .445772052, g: .513755083, b: .625, a: 1}
+  pressed: {r: .445772052, g: .513755083, b: .625, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
 --- !u!1001 &100100000
