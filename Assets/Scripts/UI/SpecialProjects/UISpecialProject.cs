@@ -60,7 +60,7 @@ public class UISpecialProject : UIEffectItem {
     void SetupNewProject() {
         costLabel.gameObject.SetActive(true);
         costLabel.text = string.Format("{0:C0}", _specialProject.cost);
-        buttonLabel.text = "Begin Development";
+        buttonLabel.text = "Buy";
 
         if (!_specialProject.isAvailable(company)) {
             button.isEnabled = false;
@@ -70,7 +70,7 @@ public class UISpecialProject : UIEffectItem {
     void SetupCompletedProject() {
         costLabel.gameObject.SetActive(false);
         button.isEnabled = false;
-        buttonLabel.text = "Completed";
+        buttonLabel.text = "Owned";
     }
 
     void Awake() {
@@ -91,7 +91,7 @@ public class UISpecialProject : UIEffectItem {
 
     public void BeginProject(GameObject obj) {
         UIManager.Instance.Confirm("This project will cost " + costLabel.text + " to develop.", delegate() {
-            if (!company.StartSpecialProject(_specialProject)) {
+            if (!company.BuySpecialProject(_specialProject)) {
                 UIManager.Instance.Alert("You can't afford the cost for this project.");
             }
         }, null);

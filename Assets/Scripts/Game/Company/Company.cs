@@ -239,7 +239,7 @@ public class Company : HasStats {
         get { return products.FindAll(p => !p.developing); }
     }
     public bool developing {
-        get { return developingSpecialProject != null || developingProduct != null; }
+        get { return developingProduct != null; }
     }
 
     public bool HasProduct(ProductRecipe r ) {
@@ -350,29 +350,14 @@ public class Company : HasStats {
     // Other Management ==============================
     // ===============================================
 
-    public SpecialProject developingSpecialProject;
     public List<SpecialProject> specialProjects;
-    public void DevelopSpecialProject() {
-        if (developingSpecialProject != null) {
-            float progress = 0;
-            foreach (Worker worker in allWorkers) {
-                progress += worker.productivity.value * Random.Range(0.90f, 1.05f);
-                float breakthroughChance = worker.happiness.value/10/workers.Count/100;
-                if (Random.value < breakthroughChance) {
-                    progress += worker.productivity.value * 0.5f;
-                }
-            }
-            bool completed = developingSpecialProject.Develop(progress);
-
-            if (completed) {
-                developingSpecialProject = null;
-                specialProjects.Add(developingSpecialProject);
-            }
-        }
-    }
-    public bool StartSpecialProject(SpecialProject p) {
+    public bool BuySpecialProject(SpecialProject p) {
         if (Pay(p.cost)) {
-            developingSpecialProject = p.Clone();
+            SpecialProject sp = p.Clone();
+            specialProjects.Add(sp);
+            sp.Develop();
+
+            // The product's effects are applied by the GameManager.
             return true;
         }
         return false;

@@ -13,10 +13,8 @@ public class UIHUD : MonoBehaviour {
     public Color highlightColor;
 
     public GameObject productIndicator;
-    public GameObject specialProjectIndicator;
 
     public UIProgressBar productProgressBar;
-    public UIProgressBar specialProjectProgressBar;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -70,14 +68,6 @@ public class UIHUD : MonoBehaviour {
                 productProgressBar.value = company.developingProduct.progress;
             } else {
                 productIndicator.SetActive(false);
-            }
-
-            // Developing special project info.
-            if (company.developingSpecialProject != null) {
-                specialProjectIndicator.SetActive(true);
-                specialProjectProgressBar.value = company.developingSpecialProject.progress;
-            } else {
-                specialProjectIndicator.SetActive(false);
             }
 
             grid.Reposition();

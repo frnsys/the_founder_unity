@@ -19,7 +19,6 @@ internal class SpecialProjectInspector : Editor {
         p.name = EditorGUILayout.TextField("Name", p.name);
         p.description = EditorGUILayout.TextField("Description", p.description);
         p.cost = EditorGUILayout.FloatField("Cost", p.cost);
-        p.requiredProgress = EditorGUILayout.FloatField("Required Progress", p.requiredProgress);
         p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("requiredProducts"), true);
