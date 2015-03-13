@@ -12,10 +12,6 @@ public class UIHUD : MonoBehaviour {
     public GameObject activeProductPrefab;
     public Color highlightColor;
 
-    public GameObject productIndicator;
-
-    public UIProgressBar productProgressBar;
-
     void OnEnable() {
         gm = GameManager.Instance;
         company = gm.playerCompany;
@@ -60,14 +56,6 @@ public class UIHUD : MonoBehaviour {
                     productObjects.Add(productItem);
                     revenueLabels.Add(revenueLabel);
                 }
-            }
-
-            // Developing product info.
-            if (company.developingProduct != null) {
-                productIndicator.SetActive(true);
-                productProgressBar.value = company.developingProduct.progress;
-            } else {
-                productIndicator.SetActive(false);
             }
 
             grid.Reposition();

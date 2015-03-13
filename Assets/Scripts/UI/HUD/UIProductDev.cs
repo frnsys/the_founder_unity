@@ -29,6 +29,11 @@ public class UIProductDev : MonoBehaviour {
         SetLabel(marketingLabel, company.developingProduct.marketing.value);
     }
 
+    public UIProgressBar productProgressBar;
+    void Update() {
+        productProgressBar.value = company.developingProduct.progress;
+    }
+
     public void Clear() {
         ClearCombo();
     }
