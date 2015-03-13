@@ -15,6 +15,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     [System.Serializable]
     public struct OnboardingState {
         public bool PRODUCTS_OPENED;
+        public bool INFRASTRUCTURE_OPENED;
         public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
         public bool LOCATIONS_UNLOCKED;
@@ -186,7 +187,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     void OnMarketDone() {
         if (Stage(OBS.THE_MARKET_DONE)) {
             MentorMessages(new string[] {
-                "Hmph. Consumers aren't really into it. That percentage you saw was the market share of your product.",
+                string.Format("Hmph. Consumers aren't really into it. That percentage you saw was the {0} of your product.", ConceptHighlight("market share")),
                 "Your product could be better.",
                 "To make better products you need to assemble a talented team.",
                 string.Format("Search for candidates by opening {0} in the menu.", MenuHighlight("Recruiting"))
@@ -309,6 +310,19 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Shutdown products stop generating revenue for you. But their bonus effects are permanent!"
                     });
                     ob.PRODUCTS_OPENED = true;
+                }
+                break;
+
+            case "Infrastructure":
+                if (!ob.INFRASTRUCTURE_OPENED) {
+                    MentorMessages(new string[] {
+                        "Here's where you can manage your infrastructure.",
+                        "You pay for infrastructure on a per-month basis.",
+                        "You have a limit to how much infrastructure you can have at a given time, but you can swap out infrastructure when you need it.",
+                        "Just note that infrastructure has a purchasing fee in addition to its monthly cost.",
+                        "Infrastructure highlighted in green is currently being used by products, so you can't swap those out until they are no longer being used."
+                    });
+                    ob.INFRASTRUCTURE_OPENED = true;
                 }
                 break;
 
