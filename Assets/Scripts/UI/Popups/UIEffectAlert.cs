@@ -124,7 +124,7 @@ public class UIEffectAlert : UIAlert {
 
         foreach (Infrastructure.Type t in Infrastructure.Types) {
             if (es.infrastructureCostMultiplier[t] != 0) {
-                RenderEffect(string.Format("{0} {1} {2} costs",
+                RenderEffect(string.Format("{0:P1} {1} {2} costs",
                                 Mathf.Abs(es.infrastructureCostMultiplier[t]/100f),
                                 es.infrastructureCostMultiplier[t] > 0 ? "more expensive" : "cheaper",
                                 t));

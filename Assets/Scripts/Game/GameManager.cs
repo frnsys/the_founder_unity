@@ -165,7 +165,7 @@ public class GameManager : Singleton<GameManager> {
         if (Application.loadedLevelName == "Game") {
             Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
             Location location = Location.Load("San Francisco");
-            Vertical vertical = Vertical.Load("Information");
+            Vertical vertical = Vertical.Load("Hardware");
             InitializeGame(cofounder, location, vertical);
             StartGame();
 

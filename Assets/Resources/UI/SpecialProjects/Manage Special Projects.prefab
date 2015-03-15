@@ -411,7 +411,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .0220588446, g: .0220588446, b: .0220588446, a: .345098048}
+  mColor: {r: 1, g: 1, b: 1, a: .203921571}
   mPivot: 4
   mWidth: 27
   mHeight: 27
@@ -456,8 +456,6 @@ MonoBehaviour:
   gridCenter: {fileID: 11400026}
   scrollView: {fileID: 11400028}
   specialProjectPrefab: {fileID: 100008, guid: 21d81d93f28084d45879dbb3181b8bd4, type: 2}
-  blackout: {fileID: 0}
-  progressBar: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -551,7 +549,7 @@ MonoBehaviour:
     relative: 0
     absolute: 60
   updateAnchors: 1
-  mColor: {r: 0, g: .521568656, b: .980392158, a: 1}
+  mColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: 1}
   mPivot: 4
   mWidth: 539
   mHeight: 60
@@ -617,7 +615,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3007
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -717,14 +715,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1013
+  mWidth: 1649
   mHeight: 680
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.48970592
-  childSize: {x: 1013, y: 680}
+  aspectRatio: 2.42499995
+  childSize: {x: 1649, y: 680}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 280}
 --- !u!114 &11400022
@@ -738,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 1013
+  itemSize: 1649
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -790,8 +788,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35d721694fa0ee48a2d14bddfcbf4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  springStrength: 8
-  nextPageThreshold: 1200
+  springStrength: 4
+  nextPageThreshold: 300
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -810,7 +808,7 @@ MonoBehaviour:
   smoothDragStart: 1
   iOSDragEmulation: 1
   scrollWheelFactor: .25
-  momentumAmount: 0
+  momentumAmount: 120
   horizontalScrollBar: {fileID: 0}
   verticalScrollBar: {fileID: 0}
   showScrollBars: 1
@@ -855,7 +853,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3007
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -892,7 +890,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 0, g: 0, b: 0, a: .745098054}
+  mColor: {r: .0882353187, g: .0882353187, b: .0882353187, a: 1}
   mPivot: 4
   mWidth: 539
   mHeight: 960

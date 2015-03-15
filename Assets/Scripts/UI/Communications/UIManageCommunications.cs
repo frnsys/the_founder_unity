@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 public class UIManageCommunications : UIFullScreenPager {
@@ -10,7 +11,7 @@ public class UIManageCommunications : UIFullScreenPager {
 
     private void LoadPromos() {
         ClearGrid();
-        foreach (Promo p in Promo.LoadAll()) {
+        foreach (Promo p in Promo.LoadAll().OrderBy(p => p.cost)) {
             GameObject promoItem = NGUITools.AddChild(grid.gameObject, promoPrefab);
             promoItem.GetComponent<UIPromo>().promo = p;
         }
