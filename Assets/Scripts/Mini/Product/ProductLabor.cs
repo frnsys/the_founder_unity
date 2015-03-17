@@ -20,6 +20,7 @@ public class ProductLabor : MonoBehaviour {
         Charisma
     }
     public Type type;
+    public float points = 1;
 
     public static Type RandomType {
         get {
@@ -35,7 +36,7 @@ public class ProductLabor : MonoBehaviour {
     }
 
     void OnEnable() {
-        StartCoroutine(Scale(0f, 0.1f));
+        StartCoroutine(Scale(0f, 0.1f * points));
     }
 
     void Update() {

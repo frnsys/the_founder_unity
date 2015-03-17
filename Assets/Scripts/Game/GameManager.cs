@@ -159,6 +159,8 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
+    public ProductMinigame pm;
+
     void Start() {
 #if UNITY_EDITOR
         // TESTING start a test game.

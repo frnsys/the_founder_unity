@@ -9,6 +9,8 @@ public class ProductTarget : MonoBehaviour {
         transform.Rotate(-50*Time.deltaTime, 0, 0);
     }
 
+    static public event System.Action<ProductLabor.Type, float> Scored;
+
     void OnTriggerEnter(Collider other) {
         // "Capture" the labor value.
         if (other.name == "Labor" && !other.rigidbody.isKinematic) {
@@ -16,6 +18,9 @@ public class ProductTarget : MonoBehaviour {
             other.rigidbody.velocity = Vector3.zero;
             other.rigidbody.angularVelocity = Vector3.zero;
             other.rigidbody.isKinematic = true;
+
+            ProductLabor pl = other.GetComponent<ProductLabor>();
+            Scored(pl.type, pl.points);
         }
     }
 }

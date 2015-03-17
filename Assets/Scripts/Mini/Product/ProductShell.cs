@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class ProductShell : MonoBehaviour {
-
     public ProductLabor.Type type_;
     public ProductLabor.Type type {
         get { return type_; }
@@ -12,29 +11,33 @@ public class ProductShell : MonoBehaviour {
             switch (type) {
                 // Creativity is harder to break.
                 case ProductLabor.Type.Creativity:
-                    health = 40;
+                    maxHealth = 40;
                     mesh = shellMeshes[0];
                     break;
 
                 case ProductLabor.Type.Charisma:
-                    health = 20;
+                    maxHealth = 20;
                     mesh = shellMeshes[1];
                     break;
 
                 // Cleverness is weaker.
                 case ProductLabor.Type.Cleverness:
-                    health = 10;
+                    maxHealth = 10;
                     mesh = shellMeshes[2];
                     break;
             }
+            health = maxHealth;
             meshFilter.mesh = mesh;
         }
     }
     public float health;
+    public float maxHealth;
     public MeshFilter meshFilter;
     public Mesh hitMesh;
     public Mesh[] shellMeshes;
     private Mesh mesh;
+
+    static public event System.Action Bug;
 
     void Update() {
         transform.Rotate(-50*Time.deltaTime, 0, 0);
@@ -43,27 +46,19 @@ public class ProductShell : MonoBehaviour {
         if (type == ProductLabor.Type.Charisma && health < 10) {
             health += 0.01f;
 
-        // TO DO Possibility of bugs
-        } else if (type == ProductLabor.Type.Cleverness) {
+        // Cleverness can cause bugs.
+        } else if (type == ProductLabor.Type.Cleverness && Random.value < 1f) {
+            if (Bug != null)
+                Bug();
         }
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.name == "Labor") {
-            if (other.GetComponent<ProductLabor>().type == type) {
-                health -= 1;
-
-                Debug.Log(health);
-
-                // Destroyed.
-                if (health <= 0) {
-                    Debug.Log("SHELL BROKEN!!");
-                    gameObject.SetActive(false);
-
-                // Show hit.
-                } else {
-                    StartCoroutine(Pulse(1.6f, 1.8f));
-                }
+            ProductLabor pl = other.GetComponent<ProductLabor>();
+            if (pl.type == type) {
+                health -= pl.points;
+                StartCoroutine(Pulse(1.6f, 1.8f));
             }
             Destroy(other.gameObject);
         }
@@ -102,5 +97,10 @@ public class ProductShell : MonoBehaviour {
         }
 
         meshFilter.mesh = mesh;
+
+        // Destroyed.
+        if (health <= 0) {
+            gameObject.SetActive(false);
+        }
     }
 }

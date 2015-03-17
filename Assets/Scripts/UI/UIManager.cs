@@ -12,6 +12,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager> {
+    public ProductMinigame pm;
+    public void LaunchProductMinigame(Product p) {
+        pm.gameObject.SetActive(true);
+        pm.Setup(p);
+    }
+
     private GameManager gm;
 
     public Camera uiCamera;
@@ -124,10 +130,9 @@ public class UIManager : Singleton<UIManager> {
 
     void OnBeganProduct(Product p, Company c) {
         if (c == gm.playerCompany) {
-            productHud.Clear();
-            productHud.gameObject.SetActive(true);
-            menuButton.SetActive(false);
-            actionsHud.SetActive(false);
+            productHud.SetActive(true);
+            hud.SetActive(false);
+            LaunchProductMinigame(p);
         }
     }
 
@@ -139,10 +144,8 @@ public class UIManager : Singleton<UIManager> {
             popup.GetComponent<UIProductCompletedAlert>().product = p;
 
             // Clear/hide the product HUD.
-            actionsHud.SetActive(true);
-            menuButton.SetActive(true);
-            productHud.gameObject.SetActive(false);
-            productHud.Clear();
+            hud.SetActive(true);
+            productHud.SetActive(false);
 
             // Notify the player that they were missing a tech.
             if (p.techPenalty)
@@ -270,10 +273,10 @@ public class UIManager : Singleton<UIManager> {
         }
     }
 
-    public UIProductDev productHud;
-    public GameObject actionsHud;
+    public GameObject productHud;
+    public GameObject hud;
     public void AddPointsToDevelopingProduct(string feature, float value) {
-        productHud.Add(feature, (int)value);
+        //productHud.Add(feature, (int)value);
     }
 
     private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {

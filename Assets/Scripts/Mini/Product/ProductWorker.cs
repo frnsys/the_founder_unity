@@ -7,12 +7,16 @@ public class ProductWorker : MonoBehaviour {
     public float stamina;
     public float fatigue;
     public float laborProgress;
+    public float debugging;
     private bool recovering;
+    private float debugRate = 1f;
     private float staminaRate = 1f;
+    private Worker worker;
+
     public GameObject[] laborPrefabs;
     private List<ProductLabor> labors;
     private ProductLabor.Type laborType;
-    public float productivity;
+
 
     void Start() {
         labors = new List<ProductLabor>();
@@ -21,8 +25,9 @@ public class ProductWorker : MonoBehaviour {
 
     public void Setup(Worker w) {
         maxStamina = w.productivity.value;
-        productivity = w.productivity.value/100;
+        debugRate = w.cleverness.value/100;
         stamina = maxStamina;
+        worker = w;
 
         if (w.robot)
             staminaRate = 0;
@@ -30,12 +35,26 @@ public class ProductWorker : MonoBehaviour {
             staminaRate = 0.1f;
     }
 
+    public void StartDebugging() {
+        debugging = Random.value * 10;
+        renderer.material.color = new Color(0, 0, 1f);
+    }
+
     void Update() {
+        // Debugging...
+        if (!recovering && stamina > 0 && debugging > 0) {
+            debugging -= debugRate * Time.deltaTime;
+
+            if (debugging <= 0) {
+                debugging = 0;
+                renderer.material.color = new Color(1f, 1f, 1f);
+            }
+
         // Working...
-        if (!recovering && labors.Count < 4 && stamina > 0) {
+        } else if (!recovering && labors.Count < 4 && stamina > 0) {
             if (laborProgress < 1) {
                 stamina -= staminaRate * Time.deltaTime;
-                laborProgress += productivity * Time.deltaTime;
+                laborProgress += worker.productivity.value/10 * Time.deltaTime;
 
                 renderer.material.color = new Color(stamina/maxStamina, stamina/maxStamina, stamina/maxStamina);
 
@@ -52,7 +71,6 @@ public class ProductWorker : MonoBehaviour {
                 GameObject labor = Instantiate(laborPrefabs[(int)laborType]) as GameObject;
                 labor.name = "Labor";
                 labor.transform.parent = transform;
-                labor.SetActive(true);
 
                 Vector3 pos = Vector3.zero;
                 pos.y = 3.2f + labors.Count * 1.2f;
@@ -61,9 +79,24 @@ public class ProductWorker : MonoBehaviour {
 
                 ProductLabor pl = labor.GetComponent<ProductLabor>();
                 pl.type = laborType;
-                labors.Add(pl);
 
-                Debug.Log(string.Format("Worker has {0} labors.", labors.Count));
+                switch (laborType) {
+                    case ProductLabor.Type.Creativity:
+                        pl.points = Random.value * worker.creativity.value;
+                        break;
+
+                    case ProductLabor.Type.Charisma:
+                        pl.points = Random.value * worker.charisma.value;
+                        break;
+
+                    case ProductLabor.Type.Cleverness:
+                        pl.points = Random.value * worker.cleverness.value;
+                        break;
+                }
+
+                pl.points = Mathf.Max(Mathf.Sqrt(pl.points), 0.5f);
+                labors.Add(pl);
+                labor.SetActive(true);
             }
 
         // Recovering...
@@ -83,8 +116,6 @@ public class ProductWorker : MonoBehaviour {
     }
 
     void OnClick() {
-        Debug.Log("WAS CLICKED");
-
         // Release points.
         foreach (ProductLabor l in labors) {
             l.Fire();

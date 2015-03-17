@@ -34,10 +34,6 @@ public class UIProductDev : MonoBehaviour {
         productProgressBar.value = company.developingProduct.progress;
     }
 
-    public void Clear() {
-        ClearCombo();
-    }
-
     public void SetLabel(UILabel label, float value) {
         label.text = string.Format("{0:0}", value);
     }
@@ -45,7 +41,6 @@ public class UIProductDev : MonoBehaviour {
     public void Add(string feature, float value) {
         AudioManager.Instance.PlayLaborFX();
         AddFeature(feature, value);
-        AddToCombo(feature, value);
     }
 
     public void AddFeature(string feature, float value) {
@@ -77,50 +72,6 @@ public class UIProductDev : MonoBehaviour {
     private void AddMarketing(float value) {
         SetLabel(marketingLabel, company.developingProduct.marketing.value);
         StartCoroutine(Pulse(marketingLabel.gameObject, 1f, 1.6f));
-    }
-
-    private void ClearCombo() {
-        int children = comboGrid.transform.childCount;
-        for (int i=0;i<children;i++) {
-            comboGrid.transform.GetChild(i).gameObject.SetActive(false);
-        }
-        features.Clear();
-        featureValues.Clear();
-        multiplier = 1f;
-        multiplierLabel.text = "";
-    }
-
-    private void ResolveCombo() {
-        if (multiplier > 1f)
-            AudioManager.Instance.PlayComboFX();
-
-        int count = features.Count(f => f == features[0]);
-        float value = featureValues.Take(count).Average() * multiplier;
-
-        // Bonus
-        AddFeature(features[0], value);
-        company.AddPointsToDevelopingProduct(features[0], value);
-        ClearCombo();
-    }
-
-    private void AddToCombo(string feature, float value) {
-        features.Add(feature);
-        featureValues.Add(value);
-        int count = features.Count;
-
-        UISprite sprite = comboSprites[count - 1];
-        sprite.spriteName = feature.ToLower();
-        sprite.gameObject.SetActive(true);
-        StartCoroutine(Pulse(sprite.gameObject, 1f, 1.6f));
-
-        if ((count > 1 && features[count - 1] != features[count - 2]) || count >= 5) {
-            // As soon as a streak is broke or it is of length 5, resolve.
-            Invoke("ResolveCombo", 0.25f);
-        } else if (count >= 2) {
-            // Otherwise, increase the multiplier.
-            multiplier += 0.25f;
-            multiplierLabel.text = string.Format("{0}x", multiplier);
-        }
     }
 
     private IEnumerator Pulse(GameObject target, float from, float to) {
