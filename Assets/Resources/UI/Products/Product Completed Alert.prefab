@@ -857,7 +857,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 539, y: 958, z: 0}
+  m_Size: {x: 540, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -1583,8 +1583,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 0}
   mPivot: 4
-  mWidth: 539
-  mHeight: 958
+  mWidth: 540
+  mHeight: 960
   mDepth: -1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -1834,7 +1834,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11400000, guid: 244fd65ecb18f4109b533e489d7e78eb, type: 2}
-  mSpriteName: marketing
+  mSpriteName: charisma
   mFillCenter: 1
 --- !u!114 &11400042
 MonoBehaviour:
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11400000, guid: 244fd65ecb18f4109b533e489d7e78eb, type: 2}
-  mSpriteName: engineering
+  mSpriteName: cleverness
   mFillCenter: 1
 --- !u!114 &11400048
 MonoBehaviour:
@@ -2138,7 +2138,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11400000, guid: 244fd65ecb18f4109b533e489d7e78eb, type: 2}
-  mSpriteName: design
+  mSpriteName: creativity
   mFillCenter: 1
 --- !u!114 &11400054
 MonoBehaviour:
