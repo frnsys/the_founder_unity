@@ -10,11 +10,12 @@ public class ProductMinigame : MonoBehaviour {
     public GameObject workerGroup;
     public ProductShell shell;
     public ProductTarget target;
-    public UIProgressBar shellHealth;
     public ProductLabor.Type primaryType;
 
     public GameObject officeCamera;
     public GameObject officeCameraController;
+
+    private float shellChance;
 
     public void Setup(Product p) {
         officeCamera.SetActive(false);
@@ -38,6 +39,8 @@ public class ProductMinigame : MonoBehaviour {
             worker.transform.parent = workerGroup.transform;
             worker.transform.localPosition = Vector3.zero;
         }
+
+        shellChance = 0.001f * p.Recipe.featureIdeal;
     }
 
     void OnDisable() {
@@ -123,6 +126,7 @@ public class ProductMinigame : MonoBehaviour {
     }
 
 
+    public UIProgressBar shellHealth;
     public UIProgressBar productProgressBar;
     public UIProgressBar creativityBar;
     public UIProgressBar charismaBar;
@@ -133,9 +137,8 @@ public class ProductMinigame : MonoBehaviour {
         charismaBar.value = charismaPoints/200;
         clevernessBar.value = clevernessPoints/200;
 
-        // TO DO The possibility of this should scale with difficulty.
         // Randomly spawn shells.
-        if (!shell.active && Random.value < 0.004) {
+        if (!shell.active && Random.value < shellChance) {
             if (Random.value < 0.5) {
                 shell.type = primaryType;
             } else {

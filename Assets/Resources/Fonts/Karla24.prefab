@@ -1024,6 +1024,12 @@ MonoBehaviour:
     spriteName: marketing
   - sequence: ':INTERACT:'
     spriteName: interact
+  - sequence: ':CHARISMA:'
+    spriteName: charisma
+  - sequence: ':CLEVERNESS:'
+    spriteName: cleverness
+  - sequence: ':CREATIVITY:'
+    spriteName: creativity
   mDynamicFont: {fileID: 0}
   mDynamicFontSize: 16
   mDynamicFontStyle: 0

@@ -43,7 +43,7 @@ public class ProductShell : MonoBehaviour {
         transform.Rotate(-50*Time.deltaTime, 0, 0);
 
         // Charisma regens health.
-        if (type == ProductLabor.Type.Charisma && health < 10) {
+        if (type == ProductLabor.Type.Charisma && health < maxHealth) {
             health += 0.01f;
 
         // Cleverness can cause bugs.
