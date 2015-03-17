@@ -17,7 +17,8 @@ public class ProductLabor : MonoBehaviour {
     public enum Type {
         Creativity,
         Cleverness,
-        Charisma
+        Charisma,
+        Breakthrough
     }
     public Type type;
     public float points = 1;
@@ -25,7 +26,8 @@ public class ProductLabor : MonoBehaviour {
     public static Type RandomType {
         get {
             Array types = Enum.GetValues(typeof(Type));
-            return (Type)types.GetValue(UnityEngine.Random.Range(0, types.Length));
+            // types.Length - 1 because w don't want to include Breakthrough.
+            return (Type)types.GetValue(UnityEngine.Random.Range(0, types.Length - 1));
         }
     }
 
@@ -56,9 +58,8 @@ public class ProductLabor : MonoBehaviour {
     }
 
     private IEnumerator Scale(float from, float to) {
-        // You must set the parent, _then_ enable the ProductLabor gameObject.
-        Vector3 fromScale = new Vector3(from,from,from) / transform.parent.localScale.x;
-        Vector3 toScale = new Vector3(to,to,to) / transform.parent.localScale.x;
+        Vector3 fromScale = new Vector3(from,from,from);
+        Vector3 toScale = new Vector3(to,to,to);
         Vector3 toScale_ = toScale * 1.2f;
         float step = 0.1f;
 

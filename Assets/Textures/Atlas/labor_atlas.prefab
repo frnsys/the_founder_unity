@@ -42,7 +42,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 3fcb9a339ecad449f9c27f654e40f160, type: 2}
   mSprites:
   - name: breakthrough
-    x: 206
+    x: 189
     y: 496
     width: 16
     height: 16
@@ -55,7 +55,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: charisma
-    x: 223
+    x: 206
     y: 496
     width: 16
     height: 16
@@ -81,7 +81,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cleverness
-    x: 189
+    x: 223
     y: 496
     width: 16
     height: 16

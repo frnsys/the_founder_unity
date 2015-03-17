@@ -20,7 +20,9 @@ public class ProductTarget : MonoBehaviour {
             other.rigidbody.isKinematic = true;
 
             ProductLabor pl = other.GetComponent<ProductLabor>();
-            Scored(pl.type, pl.points);
+
+            if (pl.type != ProductLabor.Type.Breakthrough)
+                Scored(pl.type, pl.points);
         }
     }
 }

@@ -42,6 +42,7 @@ public class ProductMinigame : MonoBehaviour {
 
             Vector3 pos = Vector3.zero;
             pos.x = i * workerWidth - ((workerWidth * workers.Count)/2);
+            pos.y = 0.3f;
             worker.transform.localPosition = pos;
         }
 
@@ -79,6 +80,7 @@ public class ProductMinigame : MonoBehaviour {
         //StartCoroutine(Spawn());
 
         ProductShell.Bug += Debugging;
+        ProductShell.Broken += Broken;
         ProductTarget.Scored += Scored;
         Product.Completed += Completed;
         workers = new List<ProductWorker>();
@@ -135,6 +137,11 @@ public class ProductMinigame : MonoBehaviour {
                 clevernessPoints += points;
                 break;
         }
+    }
+
+    // Breaking shells scores you points for that shell's type.
+    void Broken(ProductLabor.Type t) {
+        Scored(t, 50);
     }
 
 

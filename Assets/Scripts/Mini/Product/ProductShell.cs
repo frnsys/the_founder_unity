@@ -44,6 +44,7 @@ public class ProductShell : MonoBehaviour {
     public float time;
 
     static public event System.Action Bug;
+    static public event System.Action<ProductLabor.Type> Broken;
 
     void Update() {
         transform.Rotate(-50*Time.deltaTime, 0, 0);
@@ -65,10 +66,13 @@ public class ProductShell : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.name == "Labor") {
+        if (other.name == "Labor" && !other.rigidbody.isKinematic) {
             ProductLabor pl = other.GetComponent<ProductLabor>();
             if (pl.type == type) {
                 health -= pl.points;
+                StartCoroutine(Pulse(1.6f, 1.8f));
+            } else if (pl.type == ProductLabor.Type.Breakthrough) {
+                health -= 6;
                 StartCoroutine(Pulse(1.6f, 1.8f));
             }
             Destroy(other.gameObject);
@@ -112,7 +116,8 @@ public class ProductShell : MonoBehaviour {
         // Destroyed.
         if (health <= 0) {
             gameObject.SetActive(false);
-            StopCoroutine("TimeOut");
+            if (Broken != null)
+                Broken(type_);
         }
     }
 }

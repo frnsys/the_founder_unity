@@ -11779,7 +11779,7 @@ Transform:
   m_Children:
   - {fileID: 1465056497}
   m_Father: {fileID: 1278708169}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!114 &702503694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20322,11 +20322,11 @@ MonoBehaviour:
   laborGroup: {fileID: 713065174}
   workerGroup: {fileID: 213621617}
   shell: {fileID: 863705835}
-  target: {fileID: 0}
+  target: {fileID: 1198256949}
   primaryType: 0
   officeCamera: {fileID: 428045957}
   officeCameraController: {fileID: 1105655467}
-  workerPrefab: {fileID: 100000, guid: 35c0c2259baad4c59bf0742d2e84627f, type: 2}
+  workerPrefab: {fileID: 100000, guid: bc3698d744b7e411ca18510bd199bb5a, type: 2}
   shellHealth: {fileID: 436008136}
   shellTimer: {fileID: 884308722}
   productProgressBar: {fileID: 665927771}
@@ -21984,7 +21984,6 @@ Transform:
   - {fileID: 2054914623}
   - {fileID: 2088398872}
   - {fileID: 1105655468}
-  - {fileID: 1858312109}
   - {fileID: 702503693}
   - {fileID: 1379909260}
   - {fileID: 1485549296}
@@ -23680,7 +23679,7 @@ Transform:
   - {fileID: 1182224613}
   - {fileID: 239811034}
   m_Father: {fileID: 1278708169}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!114 &1379909262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25737,8 +25736,9 @@ Transform:
   - {fileID: 4178606}
   - {fileID: 291774581}
   - {fileID: 374129707}
+  - {fileID: 1858312109}
   m_Father: {fileID: 1278708169}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!1 &1486476882
 GameObject:
   m_ObjectHideFlags: 0
@@ -32022,8 +32022,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1278708169}
-  m_RootOrder: 6
+  m_Father: {fileID: 1485549296}
+  m_RootOrder: 5
 --- !u!114 &1858312110
 MonoBehaviour:
   m_ObjectHideFlags: 0

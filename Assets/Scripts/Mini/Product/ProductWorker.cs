@@ -54,7 +54,7 @@ public class ProductWorker : MonoBehaviour {
             }
 
         // Working...
-        } else if (!recovering && labors.Count < 4 && stamina > 0) {
+        } else if (!recovering && stamina > 0 && ((labors.Count < 1 && laborType == ProductLabor.Type.Breakthrough) || (labors.Count < 4 && laborType != ProductLabor.Type.Breakthrough))) {
             if (laborProgress < 1) {
                 stamina -= staminaRate * Time.deltaTime;
                 laborProgress += worker.productivity.value/10 * Time.deltaTime;
@@ -69,14 +69,13 @@ public class ProductWorker : MonoBehaviour {
             } else {
                 laborProgress = 0;
 
-                // TO DO Generate a labor sphere.
                 // Spawn points above the employee.
                 GameObject labor = Instantiate(laborPrefabs[(int)laborType]) as GameObject;
                 labor.name = "Labor";
                 labor.transform.parent = transform;
 
                 Vector3 pos = Vector3.zero;
-                pos.y = 3.2f + labors.Count * 1.2f;
+                pos.y = 0.6f + labors.Count * 0.2f;
                 labor.transform.localPosition = pos;
                 labor.rigidbody.isKinematic = true;
 
@@ -124,14 +123,17 @@ public class ProductWorker : MonoBehaviour {
             l.Fire();
         }
         labors.Clear();
-        laborType = ProductLabor.RandomType;
+
+        if (Random.value < worker.happiness.value/100) {
+            laborType = ProductLabor.Type.Breakthrough;
+        } else {
+            laborType = ProductLabor.RandomType;
+        }
     }
 
     void OnDrag(Vector2 delta) {
-        Debug.Log("Dragged");
         Vector3 drag = Vector3.zero;
         drag.x = delta.x * 0.01f;
-        Debug.Log(drag);
         workerGroup.transform.localPosition = workerGroup.transform.localPosition + drag;
     }
 }
