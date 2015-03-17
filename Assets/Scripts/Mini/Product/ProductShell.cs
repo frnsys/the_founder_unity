@@ -1,0 +1,106 @@
+using UnityEngine;
+using System.Collections;
+
+public class ProductShell : MonoBehaviour {
+
+    public ProductLabor.Type type_;
+    public ProductLabor.Type type {
+        get { return type_; }
+        set {
+            type_ = value;
+
+            switch (type) {
+                // Creativity is harder to break.
+                case ProductLabor.Type.Creativity:
+                    health = 40;
+                    mesh = shellMeshes[0];
+                    break;
+
+                case ProductLabor.Type.Charisma:
+                    health = 20;
+                    mesh = shellMeshes[1];
+                    break;
+
+                // Cleverness is weaker.
+                case ProductLabor.Type.Cleverness:
+                    health = 10;
+                    mesh = shellMeshes[2];
+                    break;
+            }
+            meshFilter.mesh = mesh;
+        }
+    }
+    public float health;
+    public MeshFilter meshFilter;
+    public Mesh hitMesh;
+    public Mesh[] shellMeshes;
+    private Mesh mesh;
+
+    void Update() {
+        transform.Rotate(-50*Time.deltaTime, 0, 0);
+
+        // Charisma regens health.
+        if (type == ProductLabor.Type.Charisma && health < 10) {
+            health += 0.01f;
+
+        // TO DO Possibility of bugs
+        } else if (type == ProductLabor.Type.Cleverness) {
+        }
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.name == "Labor") {
+            if (other.GetComponent<ProductLabor>().type == type) {
+                health -= 1;
+
+                Debug.Log(health);
+
+                // Destroyed.
+                if (health <= 0) {
+                    Debug.Log("SHELL BROKEN!!");
+                    gameObject.SetActive(false);
+
+                // Show hit.
+                } else {
+                    StartCoroutine(Pulse(1.6f, 1.8f));
+                }
+            }
+            Destroy(other.gameObject);
+        }
+    }
+
+    void OnEnable() {
+        StartCoroutine(Scale(0f, 1.6f));
+        mesh = meshFilter.mesh;
+    }
+
+    private IEnumerator Scale(float from, float to) {
+        Vector3 fromScale = new Vector3(from,from,from);
+        Vector3 toScale = new Vector3(to,to,to);
+        float step = 0.1f;
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
+        }
+    }
+
+    private IEnumerator Pulse(float from, float to) {
+        Vector3 fromScale = new Vector3(from,from,from);
+        Vector3 toScale = new Vector3(to,to,to);
+        float step = 0.2f;
+        meshFilter.mesh = hitMesh;
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
+        }
+
+        for (float f = 0f; f <= 1f + step; f += step) {
+            transform.localScale = Vector3.Lerp(toScale, fromScale, Mathf.SmoothStep(0f, 1f, f));
+            yield return null;
+        }
+
+        meshFilter.mesh = mesh;
+    }
+}
