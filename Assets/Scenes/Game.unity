@@ -291,7 +291,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: -449.999969, z: 539.999939, w: 60}
+  mClipRange: {x: 0, y: -449.999969, z: 540.159973, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 10
   mSortingOrder: 0
@@ -2796,7 +2796,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: .625, y: 449.999969, z: 499.999939, w: 60}
+  mClipRange: {x: .625, y: 449.999969, z: 500.159973, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 2000
   mSortingOrder: 0
@@ -3616,7 +3616,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189669549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -177.378204, y: 450.005798, z: 0}
+  m_LocalPosition: {x: -177.458237, y: 450.005798, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children:
   - {fileID: 893560091}
@@ -4966,7 +4966,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291774580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 233.999969, y: -377.999969, z: 0}
+  m_LocalPosition: {x: 234.079987, y: -377.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1485549296}
@@ -7483,7 +7483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &436008135
 Transform:
   m_ObjectHideFlags: 0
@@ -15048,7 +15048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &863705834
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20146,11 +20146,11 @@ MonoBehaviour:
   workerGroup: {fileID: 213621617}
   shell: {fileID: 863705835}
   target: {fileID: 0}
-  shellHealth: {fileID: 436008136}
   primaryType: 0
   officeCamera: {fileID: 428045957}
   officeCameraController: {fileID: 1105655467}
   workerPrefab: {fileID: 100000, guid: 35c0c2259baad4c59bf0742d2e84627f, type: 2}
+  shellHealth: {fileID: 436008136}
   productProgressBar: {fileID: 665927771}
   creativityBar: {fileID: 1021549560}
   charismaBar: {fileID: 239811035}
@@ -34720,7 +34720,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2013164176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -257.999969, y: 415.999969, z: 0}
+  m_LocalPosition: {x: -258.079987, y: 415.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265441295}

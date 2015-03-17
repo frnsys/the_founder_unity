@@ -340,14 +340,15 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "The spinning sphere at the top is the undeveloped product.",
                         "You need to launch the value your employees produce towards the product.",
                         "Employees can produce\n:CREATIVITY: [c][0078E1]design[-][/c],\n:CLEVERNESS: [c][0078E1]engineering[-][/c], or\n:CHARISMA: [c][0078E1]marketing[-][/c]\npoints for your products.",
+                        "Employees generate points depending on their skills. For instance, more creative employees generate more creativity points. More points = larger globs.",
                         string.Format("The rate at which they produce these points depends on their {0}.", ConceptHighlight("productivity")),
                         string.Format("{0} an employee to capture the value they've produced.", InteractHighlight("tap")),
                         string.Format("Employees get {0} from working. If you don't let them rest, they will take extra time recovering.", ConceptHighlight("tired")),
                         string.Format("As products get more difficult, you will start to encounter {0} which inhibit continued development.", ConceptHighlight("walls")),
                         "Each wall has some hit points and corresponds to a particular skill.",
-                        ":CREATIVITY: [c][0078E1]design[-][/c] walls require a lot of creativity to break through.",
-                        ":CLEVERNESS: [c][0078E1]engineering[-][/c] walls require a bit of cleverness, but can tie your employees up with bugs.",
-                        ":CHARISMA: [c][0078E1]marketing[-][/c] walls need to be torn down quickly, becase they will regenerate their health.",
+                        string.Format(":CREATIVITY: [c][0078E1]design[-][/c] walls are tough and require a lot of {0} to break through.", ConceptHighlight("creativity")),
+                        string.Format(":CLEVERNESS: [c][0078E1]engineering[-][/c] walls require a bit of {0}, but can tie your employees up with bugs.", ConceptHighlight("cleverness")),
+                        string.Format(":CHARISMA: [c][0078E1]marketing[-][/c] walls need to be charmed quickly with {0}, becase they will regenerate their health.", ConceptHighlight("charisma")),
                         string.Format("Finally, {0} employees occasionally generate special\n:BREAKTHROUGH: [c][0078E1]breakthroughs[-][/c] which don't add any points to your product, but are especially potent against walls.", ConceptHighlight("happy")),
                         "The bar below indicates how far along product development is. When it fills up, your product will be released to The Market!"
                     });
