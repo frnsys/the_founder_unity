@@ -14,10 +14,6 @@ public class UIEmployee : MonoBehaviour {
     [HideInInspector]
     public Worker worker;
 
-    [HideInInspector]
-    public GameObject laborObj;
-    public GameObject laborPrefab;
-
     [SerializeField, HideInInspector]
     private Office.Desk desk;
     [SerializeField, HideInInspector]
@@ -152,37 +148,6 @@ public class UIEmployee : MonoBehaviour {
             } else {
                 happinessLabel.text = ">:(";
                 happinessLabel.color = unhappyColor;
-            }
-
-            // Decide whether or not to work
-            // or leave the desk.
-            // Robots don't leave their desk.
-            // TO DO may need to tweak this value.
-            if (state == State.AtDesk && !worker.robot && Random.value < 0.25f/worker.productivity.value) {
-                    LeaveDesk();
-            } else if (company.developing && state == State.AtDesk && laborObj == null) {
-                laborObj = NGUITools.AddChild(HUDgroup, laborPrefab);
-
-                Stat stat;
-                if (Random.value <= 0.02f * worker.happiness.value) {
-                    stat = new Stat("Breakthrough", Randomize(
-                        (worker.creativity.value + worker.cleverness.value + worker.charisma.value)/3f
-                    ));
-                } else {
-                    float roll = Random.value;
-                    if (roll <= 0.33f) {
-                        stat = new Stat("Design", Randomize(worker.creativity.value ));
-                    } else if (roll <= 0.66f) {
-                        stat = new Stat("Engineering", Randomize(worker.cleverness.value ));
-                    } else {
-                        stat = new Stat("Marketing", Randomize(worker.charisma.value ));
-                    }
-                }
-
-                laborObj.GetComponent<UILabor>().stat = stat;
-
-                UIFollowTarget uift = laborObj.GetComponent<UIFollowTarget>();
-                UIOfficeManager.Instance.SetupFollowTarget(this, uift);
             }
 
             yield return StartCoroutine(GameTimer.Wait(1.4f * Random.value));

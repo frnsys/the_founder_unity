@@ -42,16 +42,29 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 3fcb9a339ecad449f9c27f654e40f160, type: 2}
   mSprites:
   - name: breakthrough
-    x: 145
-    y: 473
-    width: 13
+    x: 189
+    y: 496
+    width: 16
     height: 16
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 2
-    paddingRight: 1
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: charisma
+    x: 206
+    y: 496
+    width: 16
+    height: 16
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: circle
@@ -59,6 +72,32 @@ MonoBehaviour:
     y: 161
     width: 128
     height: 128
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cleverness
+    x: 223
+    y: 496
+    width: 16
+    height: 16
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: creativity
+    x: 145
+    y: 473
+    width: 16
+    height: 16
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -81,8 +120,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: design
-    x: 189
-    y: 496
+    x: 162
+    y: 473
     width: 16
     height: 16
     borderLeft: 0
@@ -94,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: engineering
-    x: 206
-    y: 496
+    x: 179
+    y: 473
     width: 16
     height: 16
     borderLeft: 0
@@ -159,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: marketing
-    x: 223
-    y: 496
+    x: 196
+    y: 473
     width: 16
     height: 16
     borderLeft: 0

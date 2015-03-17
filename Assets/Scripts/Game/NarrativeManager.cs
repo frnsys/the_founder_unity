@@ -337,14 +337,19 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Great! You've started developing your first product.",
-                        "You need employees at their desks so they can work on the product.",
-                        string.Format("{0} workers will diligently head to their desk, but others must be nudged.", ConceptHighlight("Productive")),
-                        string.Format("{0} an employee to get them to go to their desk.", InteractHighlight("double-tap")),
-                        string.Format("To develop the product, capture the value your employees produce by {0} on the icons that appear above them.", InteractHighlight("tapping")),
-                        "Employees can produce\n:DESIGN: [c][0078E1]design[-][/c],\n:ENGINEERING: [c][0078E1]engineering[-][/c], or\n:MARKETING: [c][0078E1]marketing[-][/c]\npoints for your products.",
-                        "Different products rely more on heavily on one of these kinds of points.",
-                        string.Format("{0} employees may have \n:BREAKTHROUGH: [c][FC5656]breakthroughs[-][/c], in which case they produce all three.", ConceptHighlight("Happy")),
-                        string.Format("The points you capture are shown below. Try to get {0} by chaining feature points together!", ConceptHighlight("bonus multipliers")),
+                        "The spinning sphere at the top is the undeveloped product.",
+                        "You need to launch the value your employees produce towards the product.",
+                        "Employees can produce\n:CREATIVITY: [c][0078E1]design[-][/c],\n:CLEVERNESS: [c][0078E1]engineering[-][/c], or\n:CHARISMA: [c][0078E1]marketing[-][/c]\npoints for your products.",
+                        "Employees generate points depending on their skills. For instance, more creative employees generate more creativity points. More points = larger globs.",
+                        string.Format("The rate at which they produce these points depends on their {0}.", ConceptHighlight("productivity")),
+                        string.Format("{0} an employee to capture the value they've produced.", InteractHighlight("tap")),
+                        string.Format("Employees get {0} from working. If you don't let them rest, they will take extra time recovering.", ConceptHighlight("tired")),
+                        string.Format("As products get more difficult, you will start to encounter {0} which inhibit continued development.", ConceptHighlight("walls")),
+                        "Each wall has some hit points and corresponds to a particular skill.",
+                        string.Format(":CREATIVITY: [c][0078E1]design[-][/c] walls are tough and require a lot of {0} to break through.", ConceptHighlight("creativity")),
+                        string.Format(":CLEVERNESS: [c][0078E1]engineering[-][/c] walls require a bit of {0}, but can tie your employees up with bugs.", ConceptHighlight("cleverness")),
+                        string.Format(":CHARISMA: [c][0078E1]marketing[-][/c] walls need to be charmed quickly with {0}, becase they will regenerate their health.", ConceptHighlight("charisma")),
+                        string.Format("Finally, {0} employees occasionally generate special\n:BREAKTHROUGH: [c][0078E1]breakthroughs[-][/c] which don't add any points to your product, but are especially potent against walls.", ConceptHighlight("happy")),
                         "The bar below indicates how far along product development is. When it fills up, your product will be released to The Market!"
                     });
                 }, 2f));

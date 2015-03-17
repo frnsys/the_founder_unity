@@ -14,12 +14,8 @@ MonoBehaviour:
   names: yPhone
   description: Smartphones
   synergies: []
-  design_W: 2
-  marketing_W: 1
-  engineering_W: 2
-  design_I: 30
-  marketing_I: 25
-  engineering_I: 40
+  primaryFeature: 0
+  featureIdeal: 3
   maxLongevity: 1000
   maxRevenue: 10000
   revenueModel:
@@ -45,35 +41,26 @@ MonoBehaviour:
   productTypes:
   - {fileID: 11400000, guid: 60cbdd04cc2fd45df87ef04037b32f3f, type: 2}
   - {fileID: 11400000, guid: 9e2030786d1944c6f8bea608a2f2f237, type: 2}
-  mesh: {fileID: 4300008, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -86,9 +73,6 @@ MonoBehaviour:
     infrastructureCostMultiplier:
       keys: 00000000010000000200000003000000
       values: 00000000000000000000000000000000
-      baseCosts:
-        keys: 00000000010000000200000003000000
-        values: e8030000e8030000e8030000e8030000
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

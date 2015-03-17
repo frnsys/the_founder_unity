@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: .716362655, z: 0, w: -.697728217}
   m_LocalPosition: {x: 6.48999977, y: 0, z: -3.30999994}
-  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
@@ -112,16 +112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HUDtarget: {fileID: 400000}
-  workColor: {r: .87843138, g: 1, b: .984313726, a: 1}
-  breakthroughColor: {r: 1, g: .898039222, b: .529411793, a: 1}
   unhappyColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
   happyColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
   HUDgroup: {fileID: 0}
-  hudtext: {fileID: 0}
   happinessLabel: {fileID: 0}
   worker: {fileID: 0}
-  laborObj: {fileID: 0}
-  laborPrefab: {fileID: 100010, guid: 056183343dc2b4528839bf8d45860758, type: 2}
   desk:
     occupied: 0
     transform: {fileID: 0}
@@ -177,7 +172,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 3
-  m_BaseOffset: .908643007
+  m_BaseOffset: .100000001
   m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &100100000
