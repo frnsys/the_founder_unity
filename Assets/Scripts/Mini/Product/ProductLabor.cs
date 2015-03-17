@@ -33,6 +33,9 @@ public class ProductLabor : MonoBehaviour {
         rigidbody.isKinematic = false;
         Vector3 dir = new Vector3(UnityEngine.Random.value - 0.5f, 1, 0);
         rigidbody.AddForce(Vector3.ClampMagnitude(dir * speed, speedLimit));
+
+        // Hacky, but reparent the Labor so that it doesn't move with the worker group.
+        transform.parent = transform.parent.parent.parent;
     }
 
     void OnEnable() {

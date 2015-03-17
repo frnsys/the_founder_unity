@@ -23,11 +23,14 @@ public class ProductWorker : MonoBehaviour {
         laborType = ProductLabor.RandomType;
     }
 
-    public void Setup(Worker w) {
+    private GameObject workerGroup;
+    public void Setup(Worker w, GameObject wg) {
+        workerGroup = wg;
         maxStamina = w.productivity.value;
         debugRate = w.cleverness.value/100;
         stamina = maxStamina;
         worker = w;
+        renderer.material = w.material;
 
         if (w.robot)
             staminaRate = 0;
@@ -122,5 +125,13 @@ public class ProductWorker : MonoBehaviour {
         }
         labors.Clear();
         laborType = ProductLabor.RandomType;
+    }
+
+    void OnDrag(Vector2 delta) {
+        Debug.Log("Dragged");
+        Vector3 drag = Vector3.zero;
+        drag.x = delta.x * 0.01f;
+        Debug.Log(drag);
+        workerGroup.transform.localPosition = workerGroup.transform.localPosition + drag;
     }
 }

@@ -28,6 +28,9 @@ public class ProductShell : MonoBehaviour {
             }
             health = maxHealth;
             meshFilter.mesh = mesh;
+
+            maxTime = 10f;
+            time = maxTime;
         }
     }
     public float health;
@@ -36,6 +39,9 @@ public class ProductShell : MonoBehaviour {
     public Mesh hitMesh;
     public Mesh[] shellMeshes;
     private Mesh mesh;
+
+    public float maxTime;
+    public float time;
 
     static public event System.Action Bug;
 
@@ -50,6 +56,11 @@ public class ProductShell : MonoBehaviour {
         } else if (type == ProductLabor.Type.Cleverness && Random.value < 1f) {
             if (Bug != null)
                 Bug();
+        }
+
+        time -= 1f * Time.deltaTime;
+        if (time <= 0) {
+            gameObject.SetActive(false);
         }
     }
 
@@ -101,6 +112,7 @@ public class ProductShell : MonoBehaviour {
         // Destroyed.
         if (health <= 0) {
             gameObject.SetActive(false);
+            StopCoroutine("TimeOut");
         }
     }
 }

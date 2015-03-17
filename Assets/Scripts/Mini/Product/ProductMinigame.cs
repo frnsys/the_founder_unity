@@ -33,14 +33,20 @@ public class ProductMinigame : MonoBehaviour {
                 break;
         }
 
-        foreach (Worker w in GameManager.Instance.playerCompany.allWorkers) {
+        float workerWidth = 0.5f;
+        List<Worker> workers = GameManager.Instance.playerCompany.allWorkers.ToList();
+        for (int i=0; i < workers.Count; i++) {
             GameObject worker = Instantiate(workerPrefab) as GameObject;
-            worker.GetComponent<ProductWorker>().Setup(w);
+            worker.GetComponent<ProductWorker>().Setup(workers[i], workerGroup);
             worker.transform.parent = workerGroup.transform;
-            worker.transform.localPosition = Vector3.zero;
+
+            Vector3 pos = Vector3.zero;
+            pos.x = i * workerWidth - ((workerWidth * workers.Count)/2);
+            worker.transform.localPosition = pos;
         }
 
-        shellChance = 0.001f * p.Recipe.featureIdeal;
+        // Probability of a shell appearing is based on product difficulty.
+        shellChance = 0.0001f * p.Recipe.featureIdeal;
     }
 
     void OnDisable() {
@@ -61,11 +67,17 @@ public class ProductMinigame : MonoBehaviour {
             GameObject go = laborGroup.transform.GetChild(i).gameObject;
             Destroy(go);
         }
+
+        creativityPoints = 0;
+        charismaPoints = 0;
+        clevernessPoints = 0;
     }
 
     private Company company;
     void Start() {
-        StartCoroutine(Spawn());
+        // This is for testing.
+        //StartCoroutine(Spawn());
+
         ProductShell.Bug += Debugging;
         ProductTarget.Scored += Scored;
         Product.Completed += Completed;
@@ -127,6 +139,7 @@ public class ProductMinigame : MonoBehaviour {
 
 
     public UIProgressBar shellHealth;
+    public UIProgressBar shellTimer;
     public UIProgressBar productProgressBar;
     public UIProgressBar creativityBar;
     public UIProgressBar charismaBar;
@@ -146,12 +159,15 @@ public class ProductMinigame : MonoBehaviour {
             }
             shell.gameObject.SetActive(true);
             shellHealth.gameObject.SetActive(true);
+            shellTimer.gameObject.SetActive(true);
         }
 
         if (shell.active) {
             shellHealth.value = shell.health/shell.maxHealth;
+            shellTimer.value = shell.time/shell.maxTime;
         } else {
             shellHealth.gameObject.SetActive(false);
+            shellTimer.gameObject.SetActive(false);
         }
     }
 
