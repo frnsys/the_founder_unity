@@ -13998,15 +13998,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6513282d1d2748d7969c43e9de702b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStamina: 100
-  stamina: 100
+  maxStamina: 10
+  stamina: 10
   fatigue: 0
   laborProgress: 0
   laborPrefabs:
   - {fileID: 100000, guid: a5e66ef9dfc4446df82c116e7bb20965, type: 2}
   - {fileID: 100000, guid: cd8c30451b0a54567b563efa66c6834b, type: 2}
   - {fileID: 100000, guid: 71976c581abc44caeb765073e540c66b, type: 2}
-  productivity: 10
+  productivity: 1
 --- !u!23 &811192096
 Renderer:
   m_ObjectHideFlags: 0

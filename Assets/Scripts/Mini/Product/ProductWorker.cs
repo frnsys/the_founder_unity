@@ -7,7 +7,8 @@ public class ProductWorker : MonoBehaviour {
     public float stamina;
     public float fatigue;
     public float laborProgress;
-    private float staminaRate;
+    private bool recovering;
+    private float staminaRate = 1f;
     public GameObject[] laborPrefabs;
     private List<ProductLabor> labors;
     private ProductLabor.Type laborType;
@@ -20,7 +21,7 @@ public class ProductWorker : MonoBehaviour {
 
     public void Setup(Worker w) {
         maxStamina = w.productivity.value;
-        productivity = w.productivity.value/10;
+        productivity = w.productivity.value/100;
         stamina = maxStamina;
 
         if (w.robot)
@@ -31,10 +32,12 @@ public class ProductWorker : MonoBehaviour {
 
     void Update() {
         // Working...
-        if (labors.Count < 4 && stamina > 0) {
+        if (!recovering && labors.Count < 4 && stamina > 0) {
             if (laborProgress < 1) {
                 stamina -= staminaRate * Time.deltaTime;
                 laborProgress += productivity * Time.deltaTime;
+
+                renderer.material.color = new Color(stamina/maxStamina, stamina/maxStamina, stamina/maxStamina);
 
                 // If stamina hits 0, there
                 // is a recovery penalty.
@@ -66,9 +69,15 @@ public class ProductWorker : MonoBehaviour {
         // Recovering...
         } else {
             if (fatigue > 0) {
-                fatigue -= 0.1f * Time.deltaTime;
+                recovering = true;
+                fatigue -= 1f * Time.deltaTime;
+                // TO DO flash red
+                renderer.material.color = new Color(1f, 0.5f, 0.5f);
             } else if (stamina < maxStamina) {
                 stamina += staminaRate * Time.deltaTime;
+                renderer.material.color = new Color(stamina/maxStamina, stamina/maxStamina, stamina/maxStamina);
+            } else if (stamina >= maxStamina) {
+                recovering = false;
             }
         }
     }
