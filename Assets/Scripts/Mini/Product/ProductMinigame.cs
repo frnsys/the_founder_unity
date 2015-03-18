@@ -72,6 +72,8 @@ public class ProductMinigame : MonoBehaviour {
         creativityPoints = 0;
         charismaPoints = 0;
         clevernessPoints = 0;
+
+        target.Reset();
     }
 
     private Company company;

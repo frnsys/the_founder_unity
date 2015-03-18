@@ -11,10 +11,11 @@ public class ProductTarget : MonoBehaviour {
 
     static public event System.Action<ProductLabor.Type, float> Scored;
 
+    public Transform laborGroup;
     void OnTriggerEnter(Collider other) {
         // "Capture" the labor value.
         if (other.name == "Labor" && !other.rigidbody.isKinematic) {
-            other.transform.parent = transform;
+            other.transform.parent = laborGroup;
             other.rigidbody.velocity = Vector3.zero;
             other.rigidbody.angularVelocity = Vector3.zero;
             other.rigidbody.isKinematic = true;
@@ -23,6 +24,13 @@ public class ProductTarget : MonoBehaviour {
 
             if (pl.type != ProductLabor.Type.Breakthrough)
                 Scored(pl.type, pl.points);
+        }
+    }
+
+    public void Reset() {
+        for (int i = laborGroup.transform.childCount - 1; i >= 0; i--) {
+            GameObject go = laborGroup.transform.GetChild(i).gameObject;
+            Destroy(go);
         }
     }
 }

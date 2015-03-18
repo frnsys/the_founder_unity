@@ -37,7 +37,7 @@ public class ProductLabor : MonoBehaviour {
         rigidbody.AddForce(Vector3.ClampMagnitude(dir * speed, speedLimit));
 
         // Hacky, but reparent the Labor so that it doesn't move with the worker group.
-        transform.parent = transform.parent.parent.parent;
+        transform.parent = transform.parent.parent.parent.Find("Labor Group");
     }
 
     void OnEnable() {
