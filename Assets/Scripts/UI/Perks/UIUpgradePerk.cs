@@ -26,8 +26,7 @@ public class UIUpgradePerk : UIEffectAlert {
     public GameObject perkObj;
 
     void Update() {
-        // Rotate the product, fancy.
-        perkObj.transform.Rotate(0,0,0.5f);
+        UIAnimator.Rotate(perkObj);
     }
 
     public Action callback;

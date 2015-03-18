@@ -147,13 +147,13 @@ public class HypeTarget : MonoBehaviour {
     // Show the circular pop around the target.
     IEnumerator ShowHit() {
         Vector2 endScale = transform.localScale * cascadeRadius * 6;
-        float step = 0.06f;
-        for (float f = 0f; f <= 1f + step; f += step) {
+        float step = 4f;
+        for (float f = 0f; f <= 1f + step * Time.deltaTime; f += step * Time.deltaTime) {
             rangeDisplay.transform.localScale = Vector2.Lerp(rangeDisplay.transform.localScale, endScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
 
-        for (float f = 0f; f <= 1f + step; f += step) {
+        for (float f = 0f; f <= 1f + step * Time.deltaTime; f += step * Time.deltaTime) {
             rangeDisplay.transform.localScale = Vector2.Lerp(endScale, Vector2.zero, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }

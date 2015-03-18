@@ -38,8 +38,7 @@ public class UIVerticalItem : MonoBehaviour {
     public GameObject expandButton;
 
     void Update() {
-        // Rotate the product, fancy.
-        displayObject.transform.Rotate(0,0,-50*Time.deltaTime);
+        UIAnimator.Rotate(displayObject);
     }
 }
 

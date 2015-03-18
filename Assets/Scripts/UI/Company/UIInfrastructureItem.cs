@@ -38,8 +38,7 @@ public class UIInfrastructureItem : MonoBehaviour {
     public GameObject addLabel;
 
     void Update() {
-        // Rotate the product, fancy.
-        displayObject.transform.Rotate(0,0,-50*Time.deltaTime);
+        UIAnimator.Rotate(displayObject);
     }
 }
 

@@ -79,8 +79,7 @@ public class UISpecialProject : UIEffectItem {
     }
 
     void Update() {
-        // Rotate the product, fancy.
-        projectObj.transform.Rotate(0,0,-50*Time.deltaTime);
+        UIAnimator.Rotate(projectObj);
         UpdateEffectWidths();
 
         int w = requiredProductsGrid.GetComponent<UIWidget>().width;

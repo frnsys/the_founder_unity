@@ -15,18 +15,17 @@ public class UIMentor : UIPopup {
         Show(shadow);
 
         overlay.gameObject.SetActive(true);
-        StartCoroutine(FadeOverlay(0f, overlayAlpha));
-        StartCoroutine(ScaleModel(new Vector3(40, 0, 40), new Vector3(40, 40, 40)));
+        StartCoroutine(Fade(overlay, 0f, overlayAlpha));
+        StartCoroutine(UIAnimator.BloopUI(model, new Vector3(200, 0, 200), new Vector3(200, 200, 200)));
 
         // Mentors pause everything.
         Time.timeScale = 0;
     }
 
     public void Hide() {
-        GameManager.Instance.Resume();
         Time.timeScale = 1;
-        StartCoroutine(FadeOverlay(overlayAlpha, 0f));
-        StartCoroutine(ScaleModel(model.transform.localScale, new Vector3(40, 0, 40)));
+        StartCoroutine(Fade(overlay, overlayAlpha, 0f));
+        StartCoroutine(UIAnimator.BloopUI(model, model.transform.localScale, new Vector3(200, 0, 200)));
         base.Hide(box);
         base.Hide(shadow);
     }
@@ -41,31 +40,5 @@ public class UIMentor : UIPopup {
         set {
             box.GetComponent<UITexture>().material.color = value;
         }
-    }
-
-    private IEnumerator FadeOverlay(float from, float to) {
-        float step = 0.1f;
-        for (float f = 0f; f <= 1f + step; f += step) {
-            overlay.alpha = Mathf.Lerp(from, to, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-    }
-
-    private IEnumerator ScaleModel(Vector3 from, Vector3 to) {
-        // Scale the model up and down, with a little bounciness.
-        float step = 0.1f;
-        Vector3 to_ = to * 1.1f;
-        for (float f = 0f; f <= 1f + step; f += step) {
-            model.transform.localScale = Vector3.Lerp(from, to_, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-
-        step = 4f;
-        for (float f = 0f; f <= 1f + step; f += step) {
-            model.transform.localScale = Vector3.Lerp(to_, to, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-
-        GameManager.Instance.Pause();
     }
 }

@@ -26,7 +26,7 @@ public class UIAlert : UIPopup {
         if (GameManager.hasInstance)
             GameManager.Instance.Resume();
 
-        StartCoroutine(FadeOverlay(overlayAlpha, 0f));
+        StartCoroutine(Fade(overlay, overlayAlpha, 0f));
         Hide(window);
     }
     public void Close(GameObject obj) {
@@ -34,7 +34,7 @@ public class UIAlert : UIPopup {
     }
 
     public void Show() {
-        StartCoroutine(FadeOverlay(0f, overlayAlpha));
+        StartCoroutine(Fade(overlay, 0f, overlayAlpha));
 
         base.Show(window);
 
@@ -47,12 +47,5 @@ public class UIAlert : UIPopup {
         body.bottomAnchor.Set(window.transform, 0, -amount);
         body.topAnchor.Set(window.transform, 0, amount);
     }
-
-    private IEnumerator FadeOverlay(float from, float to) {
-        float step = 0.1f;
-        for (float f = 0f; f <= 1f + step; f += step) {
-            overlay.alpha = Mathf.Lerp(from, to, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-    }
 }
+

@@ -17,7 +17,7 @@ public class UIUsedInfrastructure : MonoBehaviour {
     void Update() {
         // Rotate the product, fancy.
         foreach (GameObject obj in objects) {
-            obj.transform.Rotate(0,0,-50*Time.deltaTime);
+            UIAnimator.Rotate(obj);
         }
 
         Infrastructure usedInf = company.usedInfrastructure;

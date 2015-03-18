@@ -80,33 +80,22 @@ public class ProductShell : MonoBehaviour {
     }
 
     void OnEnable() {
-        StartCoroutine(Scale(0f, 1.6f));
+        StartCoroutine(UIAnimator.Scale(transform, 0f, 1.6f, 12f));
         mesh = meshFilter.mesh;
-    }
-
-    private IEnumerator Scale(float from, float to) {
-        Vector3 fromScale = new Vector3(from,from,from);
-        Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.1f;
-
-        for (float f = 0f; f <= 1f + step; f += step) {
-            transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
     }
 
     private IEnumerator Pulse(float from, float to) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.2f;
+        float step = 12f;
         meshFilter.mesh = hitMesh;
 
-        for (float f = 0f; f <= 1f + step; f += step) {
+        for (float f = 0f; f <= 1f + step * Time.deltaTime; f += step * Time.deltaTime) {
             transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
 
-        for (float f = 0f; f <= 1f + step; f += step) {
+        for (float f = 0f; f <= 1f + step * Time.deltaTime; f += step * Time.deltaTime) {
             transform.localScale = Vector3.Lerp(toScale, fromScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }

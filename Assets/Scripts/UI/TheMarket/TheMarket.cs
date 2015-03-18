@@ -76,7 +76,7 @@ public class TheMarket : MonoBehaviour {
             pos.y = -0.8f;
             pedestalGroups[i].localPosition = pos;
             float y = -0.8f * (1 - marketShares[i]);
-            StartCoroutine(RaisePedestal(pedestalGroups[i], y));
+            StartCoroutine(UIAnimator.Raise(pedestalGroups[i], y, 2f));
 
             // Spawn consumers.
             for (int j=0; j <= (int)(100 * marketShares[i]); j++) {
@@ -108,7 +108,7 @@ public class TheMarket : MonoBehaviour {
 
     void Update() {
         for (int i=0; i < products.Length; i++) {
-            products[i].transform.Rotate(0,0,-50*Time.deltaTime);
+            UIAnimator.Rotate(products[i].gameObject);
         }
     }
 
@@ -119,7 +119,7 @@ public class TheMarket : MonoBehaviour {
 
         // Show the market labels.
         for (int i=0; i < marketLabels.Length; i++) {
-            StartCoroutine(Scale(marketLabels[i].transform, 0.12f));
+            StartCoroutine(UIAnimator.Scale(marketLabels[i].transform, 0, 0.12f, 4f));
         }
 
         yield return new WaitForSeconds(5f);
@@ -130,28 +130,5 @@ public class TheMarket : MonoBehaviour {
         // Emit the done event.
         if (Done != null)
             Done();
-    }
-
-    private IEnumerator Scale(Transform t, float to) {
-        Vector3 fromScale = t.localScale;
-        Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.05f;
-
-        for (float f = 0f; f <= 1f + step; f += step) {
-            t.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-    }
-
-    private IEnumerator RaisePedestal(Transform t, float y) {
-        Vector3 fromPos = t.localPosition;
-        Vector3 toPos = t.localPosition;
-        toPos.y = y;
-        float step = 0.005f;
-
-        for (float f = 0f; f <= 1f + step; f += step) {
-            t.localPosition = Vector3.Lerp(fromPos, toPos, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
     }
 }

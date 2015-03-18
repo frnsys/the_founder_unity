@@ -115,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: -.0507306792, y: .0696662143, z: .0035474347, w: .996273279}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 400006}
@@ -336,10 +336,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hypePoints: 1
-  opinionPoints: 1
   speed: 2
   distance: .600000024
   cascadeRadius: 60
+  numPucks: 0
   function: 0
   rangeDisplay: {fileID: 100008}
   model: {fileID: 100004}

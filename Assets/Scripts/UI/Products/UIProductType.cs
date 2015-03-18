@@ -14,8 +14,7 @@ public class UIProductType : MonoBehaviour {
     }
 
     void Update() {
-        // Rotate the product, fancy.
-        productObject.transform.Rotate(0,0,-50*Time.deltaTime);
+        UIAnimator.Rotate(productObject);
     }
 
     public UILabel label;

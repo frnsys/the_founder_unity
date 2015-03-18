@@ -22,10 +22,8 @@ public class UISpecialProjectCompletedAlert : UIEffectAlert {
         }
     }
 
-
     void Update() {
-        // Rotate the product, fancy.
-        projectObject.transform.Rotate(0,0,0.5f);
+        UIAnimator.Rotate(projectObject);
     }
 }
 

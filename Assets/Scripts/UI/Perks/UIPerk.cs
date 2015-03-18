@@ -78,8 +78,7 @@ public class UIPerk : UIEffectItem {
     }
 
     void Update() {
-        // Rotate the product, fancy.
-        perkObj.transform.Rotate(0,0,-50*Time.deltaTime);
+        UIAnimator.Rotate(perkObj);
     }
 
     public void DecideUpgrade(GameObject obj) {

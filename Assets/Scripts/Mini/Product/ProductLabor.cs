@@ -41,7 +41,7 @@ public class ProductLabor : MonoBehaviour {
     }
 
     void OnEnable() {
-        StartCoroutine(Scale(0f, 0.1f * points));
+        StartCoroutine(UIAnimator.Bloop(transform, 0f, 0.1f * points));
     }
 
     void Update() {
@@ -54,24 +54,6 @@ public class ProductLabor : MonoBehaviour {
         // it's attached to the product.
         if (!isVisible && !rigidbody.isKinematic) {
             Destroy(gameObject);
-        }
-    }
-
-    private IEnumerator Scale(float from, float to) {
-        Vector3 fromScale = new Vector3(from,from,from);
-        Vector3 toScale = new Vector3(to,to,to);
-        Vector3 toScale_ = toScale * 1.2f;
-        float step = 0.1f;
-
-        for (float f = 0f; f <= 1f + step; f += step) {
-            transform.localScale = Vector3.Lerp(fromScale, toScale_, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-
-        step = 4f;
-        for (float f = 0f; f <= 1f + step; f += step) {
-            transform.localScale = Vector3.Lerp(toScale_, toScale, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
         }
     }
 }

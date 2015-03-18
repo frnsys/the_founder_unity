@@ -20,18 +20,12 @@ public abstract class UIPopup : MonoBehaviour {
     protected virtual void Setup(GameObject obj) {}
 
     protected IEnumerator Scale(GameObject target, float from, float to, Action<GameObject> cb = null) {
-        Vector3 fromScale = new Vector3(from,from,from);
-        Vector3 toScale = new Vector3(to,to,to);
-        float step = 0.15f;
-
-        for (float f = 0f; f <= 1f + step; f += step) {
-            // SmoothStep gives us a bit of easing.
-            target.transform.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
-            yield return null;
-        }
-
-        if (cb != null) {
+        return UIAnimator.ScaleUI(target, from, to, delegate() {
             cb(gameObject);
-        }
+        });
+    }
+
+    protected IEnumerator Fade(UITexture texture, float from, float to) {
+        return UIAnimator.FadeUI(texture, from, to);
     }
 }
