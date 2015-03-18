@@ -81,6 +81,7 @@ public class UIManager : Singleton<UIManager> {
         gm = GameManager.Instance;
         GameEvent.EventTriggered += OnEvent;
         Product.Completed += OnProductCompleted;
+        TheMarket.Done += OnMarketDone;
         SpecialProject.Completed += OnSpecialProjectCompleted;
         Recruitment.Completed += OnRecruitmentCompleted;
         GameManager.YearEnded += OnYearEnded;
@@ -144,7 +145,6 @@ public class UIManager : Singleton<UIManager> {
             popup.GetComponent<UIProductCompletedAlert>().product = p;
 
             // Clear/hide the product HUD.
-            hud.SetActive(true);
             productHud.SetActive(false);
 
             // Notify the player that they were missing a tech.
@@ -176,6 +176,10 @@ public class UIManager : Singleton<UIManager> {
         GameObject window = NGUITools.AddChild(windowsPanel, hiringPrefab);
         window.GetComponent<UIWidget>().SetAnchor(windowsPanel.gameObject, 0, 0, 0, 0);
         window.GetComponent<UIHireWorkers>().LoadWorkers(workers);
+    }
+
+    void OnMarketDone() {
+        hud.SetActive(true);
     }
 
     void OnPerformanceReport(int year, PerformanceDict results, PerformanceDict deltas, TheBoard board) {

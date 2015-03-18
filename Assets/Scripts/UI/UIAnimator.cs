@@ -88,7 +88,7 @@ public class UIAnimator : MonoBehaviour {
     public static IEnumerator ScaleUI(GameObject target, float from, float to, Action cb = null) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
-        float step = 6f;
+        float step = 12f;
 
         TimeKeep time = new TimeKeep(0);
         for (float f = 0f; f <= 1f + step * time.diff; f += step * time.diff) {
