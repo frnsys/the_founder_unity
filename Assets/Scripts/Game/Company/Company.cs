@@ -264,10 +264,6 @@ public class Company : HasStats {
         return product;
     }
 
-    public void AddPointsToDevelopingProduct(string feature, float value) {
-        developingProduct.StatByName(feature).baseValue += value;
-    }
-
     public void HarvestProducts(float elapsedTime) {
         float newRevenue = 0;
         foreach (Product product in products.Where(p => p.launched)) {

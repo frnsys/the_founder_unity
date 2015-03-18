@@ -114,15 +114,6 @@ public class ProductMinigame : MonoBehaviour {
 
     void Completed(Product p, Company c) {
         if (c == company) {
-            Debug.Log(string.Format("Design: {0}", Mathf.Sqrt(creativityPoints/2)));
-            Debug.Log(string.Format("Marketing: {0}", Mathf.Sqrt(charismaPoints/2)));
-            Debug.Log(string.Format("Engineering: {0}", Mathf.Sqrt(clevernessPoints/2)));
-
-            // Convert points into DEM points.
-            company.AddPointsToDevelopingProduct("Design", Mathf.Sqrt(creativityPoints/2));
-            company.AddPointsToDevelopingProduct("Marketing", Mathf.Sqrt(charismaPoints/2));
-            company.AddPointsToDevelopingProduct("Engineering", Mathf.Sqrt(clevernessPoints/2));
-
             // End the game.
             gameObject.SetActive(false);
         }
@@ -135,12 +126,15 @@ public class ProductMinigame : MonoBehaviour {
         switch (t) {
             case ProductLabor.Type.Creativity:
                 creativityPoints += points;
+                company.developingProduct.design.baseValue = Mathf.Sqrt(creativityPoints/2);
                 break;
             case ProductLabor.Type.Charisma:
                 charismaPoints += points;
+                company.developingProduct.marketing.baseValue = Mathf.Sqrt(charismaPoints/2);
                 break;
             case ProductLabor.Type.Cleverness:
                 clevernessPoints += points;
+                company.developingProduct.engineering.baseValue = Mathf.Sqrt(clevernessPoints/2);
                 break;
         }
     }
