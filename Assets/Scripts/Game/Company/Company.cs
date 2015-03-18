@@ -300,9 +300,11 @@ public class Company : HasStats {
         }
     }
 
+    static public event System.Action Synergy;
     private void UpdateProductSynergies() {
         List<ProductRecipe> activeRecipes = activeProducts.Select(p => p.Recipe).ToList();
         foreach (Product p in activeProducts) {
+            p.synergy = true;
             if (p.synergies.Length == 0) {
                 p.synergy = false;
             } else {
@@ -313,6 +315,8 @@ public class Company : HasStats {
                     }
                 }
             }
+            if (p.synergy && Synergy != null)
+                Synergy();
         }
     }
 

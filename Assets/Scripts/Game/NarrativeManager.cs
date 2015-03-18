@@ -21,6 +21,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         public bool LOCATIONS_UNLOCKED;
         public bool SPECIALPROJECTS_UNLOCKED;
         public bool HYPE_MINIGAME;
+        public bool SYNERGY;
     }
 
     // Disable the constructor.
@@ -142,6 +143,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         Company.BeganProduct += BeganProduct;
         Company.WorkerHired += WorkerHired;
         Company.BoughtInfrastructure += InfrastructureBought;
+        Company.Synergy += Synergy;
         Product.Completed += CompletedProduct;
         Promo.Completed += PromoCompleted;
         GameEvent.EventTriggered += OnEvent;
@@ -497,6 +499,20 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 string.Format("It's harder to {0} on your own, but with all of your capital you can {1} other companies now. Manage these purchases through the {2}", SpecialHighlight("innovate"), ConceptHighlight("aquire"), MenuHighlight("Acquisitions"))
             });
             UIManager.Instance.menu.Activate("Acquisitions");
+        }
+    }
+
+    void Synergy() {
+        if (ob.SYNERGY == false) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                MentorMessages(new string[] {
+                    string.Format("Wow! That product you just released is {0} with another one in The Market.", SpecialHighlight("synergetic")),
+                    string.Format("Products with {0} make a lot more money when they're in The Market together.", SpecialHighlight("synergy")),
+                    "Use your Entrepeneurial Sense and try to figure out what combinations work best!"
+                });
+            }, 6f));
+            ob.SYNERGY = true;
+            Company.Synergy -= Synergy;
         }
     }
 
