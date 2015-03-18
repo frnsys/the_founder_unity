@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,25 @@ public class HypeTarget : MonoBehaviour {
         Linear,
         Sin,
         Cos
+    }
+    public static Function RandomFunction {
+        get {
+            Array funcs = Enum.GetValues(typeof(Function));
+            return (Function)funcs.GetValue(UnityEngine.Random.Range(0, funcs.Length));
+        }
+    }
+
+    public enum Type {
+        FriendFamily,
+        Blogger,
+        Journalist,
+        ThoughtLeader
+    }
+    public static Type RandomType {
+        get {
+            Array types = Enum.GetValues(typeof(Type));
+            return (Type)types.GetValue(UnityEngine.Random.Range(0, types.Length));
+        }
     }
 
     public float hypePoints = 1f;
@@ -34,6 +54,7 @@ public class HypeTarget : MonoBehaviour {
     public static event System.Action Completed;
     public static int activePucks = 0;
     private static int[] notes = new int[] { 0, 5, 7, -3, -5, -7, -12, -24, -19, -17, -15 };
+    private bool hit;
 
     float Y(float x) {
         switch (function) {
@@ -48,7 +69,6 @@ public class HypeTarget : MonoBehaviour {
     }
 
     void Start() {
-        start = transform.position;
         rangeDisplay.transform.localScale = Vector2.zero;
         rangeDisplay.GetComponent<SpriteRenderer>().color = cascadeColor;
 
@@ -59,9 +79,20 @@ public class HypeTarget : MonoBehaviour {
 
         StartCoroutine("Move");
     }
-    public void Setup(HypeMinigame hg) {
-        model.renderer.material.mainTexture = hg.blebTextures[Random.Range(0, hg.blebTextures.Length - 1)];
+    public void Setup(HypeMinigame hg, Type type) {
+        model.renderer.material.mainTexture = hg.blebTextures[UnityEngine.Random.Range(0, hg.blebTextures.Length - 1)];
+        function = RandomFunction;
+        distance = 0.2f + UnityEngine.Random.value * 1.2f;
+
+        int type_i = (int)type;
+        speed = 1 + UnityEngine.Random.value * (type_i + 1);
+        numPucks = 1 + type_i * 2;
+        hypePoints = (int)(1 + type_i + UnityEngine.Random.value * (type_i + 1));
+
         gameBoard = hg.gameBoard;
+
+        transform.localPosition = new Vector2(-0.5f + UnityEngine.Random.value, -0.4f + (type_i * 0.4f));
+        start = transform.position;
     }
 
     IEnumerator Move() {
@@ -111,10 +142,13 @@ public class HypeTarget : MonoBehaviour {
 
     public void Cascade() {
         StartCoroutine(Highlight());
-        hudtext.Add(hypePoints, hypeColor, 0f);
 
+        float points = hit ? hypePoints/10 : hypePoints;
+
+        hit = true;
+        hudtext.Add(string.Format("+{0:0.#}", points), hypeColor, 0f);
         if (Scored != null)
-            Scored(hypePoints);
+            Scored(points);
 
         // Spawn pucks.
         for (int i=0; i<numPucks; i++) {
@@ -135,7 +169,7 @@ public class HypeTarget : MonoBehaviour {
     public IEnumerator Highlight() {
         StartCoroutine(ShowHit());
 
-        float note = notes[Random.Range(0, notes.Length)];
+        float note = notes[UnityEngine.Random.Range(0, notes.Length)];
         audio.pitch =  Mathf.Pow(2, note/12.0f);
         audio.Play();
 

@@ -8,22 +8,26 @@ public class HypeMinigame : MonoBehaviour {
     public Transform gameBoard;
     public Promo promo;
     public Texture[] blebTextures;
+    public GameObject hypeTargetPrefab;
+    public Transform[] tiers;
 
     private float hypeScore = 0;
 
-    private GameObject level;
+    public GameObject level;
     public void Setup(Promo promo) {
-        level = Instantiate(promo.level) as GameObject;
-        level.transform.parent = gameBoard;
-
-        foreach (HypeTarget ht in GetComponentsInChildren<HypeTarget>()) {
-            ht.Setup(this);
-        }
-
         // This is a hack so that the mentor message
         // doesn't have to deal with layering issues with the blebs.
         level.SetActive(false);
         Invoke("StartGame", 0.5f);
+
+        for (int i=0; i < (int)(promo.cost/2000); i++) {
+            GameObject hypeTarget = Instantiate(hypeTargetPrefab) as GameObject;
+            HypeTarget ht = hypeTarget.GetComponent<HypeTarget>();
+
+            HypeTarget.Type t = HypeTarget.RandomType;
+            ht.transform.parent = tiers[(int)t];
+            ht.Setup(this, t);
+        }
     }
 
     void StartGame() {
@@ -71,12 +75,12 @@ public class HypeMinigame : MonoBehaviour {
     }
 
     void EndGame() {
-        int numPeople = (int)(Mathf.Pow(hypeScore, 2) * 1000 * (Random.value + 0.75f));
+        int numPeople = (int)(Mathf.Pow(hypeScore, 2) * 100 * (Random.value + 0.75f));
 
         GameEvent ev = GameEvent.LoadNoticeEvent("Promo Failure");
-        if (hypeScore >= 8) {
+        if (hypeScore >= 25) {
             ev = GameEvent.LoadNoticeEvent("Promo Success");
-        } else if (hypeScore >= 28) {
+        } else if (hypeScore >= 60) {
             ev = GameEvent.LoadNoticeEvent("Promo Major Success");
         }
 

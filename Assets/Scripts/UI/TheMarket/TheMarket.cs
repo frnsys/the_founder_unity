@@ -25,6 +25,7 @@ public class TheMarket : MonoBehaviour {
 
     // Setup the market for a product.
     public void Setup(Product p) {
+        Reset();
         gameObject.SetActive(true);
 
         // Try to find two AI companies which are suitable competitors for this product.

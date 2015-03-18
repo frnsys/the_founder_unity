@@ -41,7 +41,7 @@ public class ProductLabor : MonoBehaviour {
     }
 
     void OnEnable() {
-        StartCoroutine(UIAnimator.Bloop(transform, 0f, 0.1f * points));
+        StartCoroutine(UIAnimator.Bloop(transform, 0f, 0.1f * points, 4f));
     }
 
     void Update() {

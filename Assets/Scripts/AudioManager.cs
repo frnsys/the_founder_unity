@@ -13,8 +13,8 @@ public class AudioManager : Singleton<AudioManager> {
         music = gameObject.AddComponent<AudioSource>();
         fx = gameObject.AddComponent<AudioSource>();
 
-        comboAudioClip = Resources.Load<AudioClip>("Sounds/Combo");
-        laborAudioClips = Resources.LoadAll<AudioClip>("Sounds/Labor/");
+        laborAudioClips = Resources.LoadAll<AudioClip>("Sounds/Labor/Make");
+        laborHitAudioClips = Resources.LoadAll<AudioClip>("Sounds/Labor/Hit");
         employeeTouchClips = Resources.LoadAll<AudioClip>("Sounds/Employee/");
 
         menuClip = Resources.Load<AudioClip>("Sounds/Music/Menu");
@@ -28,20 +28,36 @@ public class AudioManager : Singleton<AudioManager> {
     }
 
     public AudioClip[] laborAudioClips;
-    public AudioClip comboAudioClip;
+    public AudioClip[] laborHitAudioClips;
     public AudioClip[] employeeTouchClips;
     public AudioClip menuClip;
-
-    public void PlayComboFX() {
-        fx.PlayOneShot(comboAudioClip);
-    }
 
     public void PlayLaborFX() {
         fx.PlayOneShot(laborAudioClips[Random.Range(0, laborAudioClips.Length)]);
     }
+    public void PlayLaborHitFX() {
+        fx.PlayOneShot(laborHitAudioClips[Random.Range(0, laborHitAudioClips.Length)]);
+    }
 
     public void PlayEmployeeTouchedFX() {
         fx.PlayOneShot(employeeTouchClips[Random.Range(0, employeeTouchClips.Length)]);
+    }
+
+    public void PlayProductShellFX(string clip) {
+        switch (clip) {
+            case "Reveal":
+                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_reveal"));
+                break;
+            case "Destroy":
+                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_destroy"));
+                break;
+            case "Hit":
+                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_hit"));
+                break;
+            case "Fizzle":
+                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_fizzle"));
+                break;
+        }
     }
 
     public void PlayMenuMusic() {

@@ -61,6 +61,7 @@ public class ProductShell : MonoBehaviour {
 
         time -= 1f * Time.deltaTime;
         if (time <= 0) {
+            AudioManager.Instance.PlayProductShellFX("Fizzle");
             gameObject.SetActive(false);
         }
     }
@@ -71,6 +72,7 @@ public class ProductShell : MonoBehaviour {
             if (pl.type == type) {
                 health -= pl.points;
                 StartCoroutine(Pulse(1.6f, 1.8f));
+                AudioManager.Instance.PlayProductShellFX("Hit");
             } else if (pl.type == ProductLabor.Type.Breakthrough) {
                 health -= 6;
                 StartCoroutine(Pulse(1.6f, 1.8f));
@@ -81,6 +83,7 @@ public class ProductShell : MonoBehaviour {
 
     void OnEnable() {
         StartCoroutine(UIAnimator.Scale(transform, 0f, 1.6f, 12f));
+        AudioManager.Instance.PlayProductShellFX("Reveal");
         mesh = meshFilter.mesh;
     }
 
@@ -104,6 +107,7 @@ public class ProductShell : MonoBehaviour {
 
         // Destroyed.
         if (health <= 0) {
+            AudioManager.Instance.PlayProductShellFX("Destroy");
             gameObject.SetActive(false);
             if (Broken != null)
                 Broken(type_);

@@ -35,11 +35,10 @@ public class UIAnimator : MonoBehaviour {
         }
     }
 
-    public static IEnumerator Bloop(Transform t, float from, float to) {
+    public static IEnumerator Bloop(Transform t, float from, float to, float step) {
         Vector3 fromScale = new Vector3(from,from,from);
         Vector3 toScale = new Vector3(to,to,to);
         Vector3 toScale_ = toScale * 1.2f;
-        float step = 2f;
 
         for (float f = 0f; f <= 1f + step * Time.deltaTime; f += step * Time.deltaTime) {
             t.localScale = Vector3.Lerp(fromScale, toScale_, Mathf.SmoothStep(0f, 1f, f));

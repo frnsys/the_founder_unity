@@ -22,8 +22,10 @@ public class ProductTarget : MonoBehaviour {
 
             ProductLabor pl = other.GetComponent<ProductLabor>();
 
-            if (pl.type != ProductLabor.Type.Breakthrough)
+            if (pl.type != ProductLabor.Type.Breakthrough) {
+                AudioManager.Instance.PlayLaborHitFX();
                 Scored(pl.type, pl.points);
+            }
         }
     }
 
