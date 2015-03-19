@@ -165,6 +165,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         uim.menu.Deactivate("Locations");
         uim.menu.Deactivate("Verticals");
         uim.menu.Deactivate("Acquisitions");
+        uim.menu.Deactivate("Lobbying");
         uim.menu.Deactivate("Recruiting");
         uim.menu.Deactivate("Employees");
         uim.menu.Deactivate("Perks");
@@ -260,6 +261,16 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "Uh oh. Looks like you have some enemies.",
                     "Competitors will also poach your employees. This kind of activity can drive wages up. This is a lose-lose for everyone - other companies can be cooperative when it comes to dealing with this."
                 });
+            }));
+        } else if (ev.name == "Data access") {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                MentorMessages(new string[] {
+                    "It looks like you're on the government's radar now.",
+                    "This presents a great opportunity.",
+                    string.Format("With some contacts in government, you can start {0} them.", ConceptHighlight("lobbying")),
+                    string.Format("You can access this through the {0} menu item.", MenuHighlight("Lobbying"))
+                });
+                UIManager.Instance.menu.Activate("Lobbying");
             }));
         }
     }
