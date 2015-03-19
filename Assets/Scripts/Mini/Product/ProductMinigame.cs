@@ -34,7 +34,7 @@ public class ProductMinigame : MonoBehaviour {
         }
 
         float workerWidth = 0.5f;
-        List<Worker> workers = GameManager.Instance.playerCompany.allWorkers.ToList();
+        List<Worker> workers = GameManager.Instance.playerCompany.productWorkers.ToList();
         for (int i=0; i < workers.Count; i++) {
             GameObject worker = Instantiate(workerPrefab) as GameObject;
             worker.GetComponent<ProductWorker>().Setup(workers[i], workerGroup);

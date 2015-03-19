@@ -24,6 +24,7 @@ public class Company : HasStats {
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 0);
         researchPoints = 0;
+        researchers = new List<Worker>();
         deathToll = 0;
         debtOwned = 0;
         taxesAvoided = 0;
@@ -74,6 +75,9 @@ public class Company : HasStats {
     }
     public IEnumerable<Worker> allWorkers {
         get { return _workers.Concat(founders.Cast<Worker>()); }
+    }
+    public IEnumerable<Worker> productWorkers {
+        get { return _workers.Where(w => !researchers.Contains(w)).Concat(founders.Cast<Worker>()); }
     }
     public List<Founder> founders;
 
@@ -421,7 +425,7 @@ public class Company : HasStats {
         // Skip the first location's rent since it is our HQ and considered free.
         float salaries = workers.Sum(w => w.monthlyPay);
         float rent = locations.Skip(1).Sum(l => l.cost) + infrastructure.cost;
-        toPay += salaries + rent + researchInvestment;
+        toPay += salaries + rent;
 
         // Taxes
         float taxes = lastMonthRevenue * GameManager.Instance.taxRate;
@@ -442,7 +446,6 @@ public class Company : HasStats {
         if (Paid != null) {
             Paid(salaries, "in salaries");
             Paid(rent, "in rent");
-            Paid(researchInvestment, "for research");
             Paid(taxes, "in taxes");
         }
     }
@@ -636,12 +639,25 @@ public class Company : HasStats {
     [SerializeField]
     public Stat research;
     public int researchPoints;
-    public float researchInvestment = 0;
     public List<Technology> technologies;
+    public List<Worker> researchers;
 
     public void Research() {
-        // TO DO this investment calculation should make more sense.
-        researchPoints += (int)(research.value + researchInvestment/1000f);
+        foreach (Worker w in researchers) {
+            w.Research(research.value);
+        }
+    }
+    public void CaptureResearch(Worker w) {
+        researchPoints +=  w.research;
+        w.research = 0;
+    }
+    public void AddResearcher(Worker w) {
+        w.research = 0;
+        researchers.Add(w);
+    }
+    public void RemoveResearcher(Worker w) {
+        w.research = 0;
+        researchers.Remove(w);
     }
 
     static public event System.Action<Technology> ResearchCompleted;

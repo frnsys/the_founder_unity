@@ -30,6 +30,12 @@ public class Worker : HasStats {
     // Later on, there are robotic workers.
     public bool robot = false;
 
+    public int research;
+    public void Research(float bonus) {
+        if (research < Mathf.Pow(10*cleverness.value,2))
+            research += 1 + (int)((cleverness.value * productivity.value) + bonus)/10;
+    }
+
     public float salary;
     public float hiringFee {
         get {

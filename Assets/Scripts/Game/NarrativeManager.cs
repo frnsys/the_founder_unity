@@ -392,7 +392,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "You need to launch the value your employees produce towards the product.",
                         "Employees can produce\n:CREATIVITY: [c][0078E1]design[-][/c],\n:CLEVERNESS: [c][0078E1]engineering[-][/c], or\n:CHARISMA: [c][0078E1]marketing[-][/c]\npoints for your products.",
                         "Employees generate points depending on their skills. For instance, more creative employees generate more creativity points. More points = larger globs.",
-                        string.Format("The rate at which they produce these points depends on their {0}.", ConceptHighlight("productivity")),
+                        string.Format("The rate at which they produce these points depends on their :PRODUCTIVITY: {0}.", ConceptHighlight("productivity")),
                         string.Format("{0} an employee to capture the value they've produced.", InteractHighlight("tap")),
                         string.Format("Employees get {0} from working. If you don't let them rest, they will take extra time recovering.", ConceptHighlight("tired")),
                         string.Format("As products get more difficult, you will start to encounter {0} which inhibit continued development.", ConceptHighlight("walls")),
