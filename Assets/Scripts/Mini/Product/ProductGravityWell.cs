@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ProductGravity : MonoBehaviour {
+public class ProductGravityWell : MonoBehaviour {
 
     public float gravity = 0.2f;
 
@@ -10,7 +10,8 @@ public class ProductGravity : MonoBehaviour {
 
     void OnTriggerStay(Collider other) {
         if (other.name == "Labor") {
-            other.rigidbody.AddForce(Force(other.transform));
+            Vector3 diff = transform.position - other.transform.position;
+            other.rigidbody.AddForce(diff.normalized * 10);
         }
     }
 }

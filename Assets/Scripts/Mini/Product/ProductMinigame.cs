@@ -11,6 +11,7 @@ public class ProductMinigame : MonoBehaviour {
     public ProductShell shell;
     public ProductTarget target;
     public ProductLabor.Type primaryType;
+    public GameObject blackHole;
 
     public GameObject officeCamera;
     public GameObject officeCameraController;
@@ -170,6 +171,11 @@ public class ProductMinigame : MonoBehaviour {
             shell.gameObject.SetActive(true);
             shellHealth.gameObject.SetActive(true);
             shellTimer.gameObject.SetActive(true);
+
+        } else if (!blackHole.active && Random.value < 0.00001f) {
+            // Black hole
+            blackHole.SetActive(true);
+            blackHole.transform.localPosition = new Vector3(-1.8f + Random.value * 3.6f, 2.25f + Random.value * 2.25f, 0);
         }
 
         if (shell.active) {
