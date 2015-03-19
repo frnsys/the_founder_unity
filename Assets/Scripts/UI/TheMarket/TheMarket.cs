@@ -96,8 +96,8 @@ public class TheMarket : MonoBehaviour {
 
     void Reset() {
         // Clean up consumers.
-        for (int i=0; i < consumerGroup.transform.childCount; i++) {
-            Destroy(consumerGroup.transform.GetChild(0).gameObject);
+        foreach (Transform child in consumerGroup) {
+            Destroy(child.gameObject);
         }
     }
 
