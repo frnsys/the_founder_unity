@@ -156,7 +156,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         // Hide some menu and status bar items.
         UIManager uim = UIManager.Instance;
         uim.statusBar.hypeLabel.gameObject.SetActive(false);
-        uim.statusBar.researchLabel.gameObject.SetActive(false);
         uim.menu.Deactivate("New Product");
         uim.menu.Deactivate("Accounting");
         uim.menu.Deactivate("Special Projects");
@@ -443,7 +442,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Don't neglect research! Stay ahead of the competition!"
                     });
                     UIManager uim = UIManager.Instance;
-                    uim.statusBar.researchLabel.gameObject.SetActive(true);
                     uim.menu.Activate("Research");
                 }, 12f));
                 Product.Completed -= CompletedProduct;

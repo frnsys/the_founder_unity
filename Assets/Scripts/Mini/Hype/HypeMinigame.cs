@@ -35,6 +35,7 @@ public class HypeMinigame : MonoBehaviour {
     }
 
     void OnEnable() {
+        EventTimer.Pause();
         HypeTarget.Scored += Scored;
         HypeTarget.Completed += Completed;
         HypePuck.Completed += Completed;
@@ -46,6 +47,7 @@ public class HypeMinigame : MonoBehaviour {
         HypeTarget.Scored -= Scored;
         HypeTarget.Completed -= Completed;
         HypePuck.Completed -= Completed;
+        EventTimer.Resume();
     }
 
     void Scored(float hypePoints) {

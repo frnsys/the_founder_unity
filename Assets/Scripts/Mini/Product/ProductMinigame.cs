@@ -48,11 +48,14 @@ public class ProductMinigame : MonoBehaviour {
 
         // Probability of a shell appearing is based on product difficulty.
         shellChance = 0.0001f * p.Recipe.featureIdeal;
+
+        EventTimer.Pause();
     }
 
     void OnDisable() {
         officeCamera.SetActive(true);
         officeCameraController.SetActive(true);
+        EventTimer.Resume();
         Reset();
     }
 

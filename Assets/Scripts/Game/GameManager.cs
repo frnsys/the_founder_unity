@@ -203,6 +203,7 @@ public class GameManager : Singleton<GameManager> {
 
     void StartGame() {
         StartCoroutine(GameTimer.Start());
+        StartCoroutine(EventTimer.Start());
 
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
@@ -298,9 +299,11 @@ public class GameManager : Singleton<GameManager> {
 
     public void Pause() {
         GameTimer.Pause();
+        EventTimer.Pause();
     }
     public void Resume() {
         GameTimer.Resume();
+        EventTimer.Resume();
     }
 
     static public event System.Action<int> YearEnded;
@@ -429,14 +432,15 @@ public class GameManager : Singleton<GameManager> {
     }
 
     IEnumerator EventCycle() {
-        yield return StartCoroutine(GameTimer.Wait(weekTime));
+        // Events are on a separate timer so they can be paused independently.
+        yield return StartCoroutine(EventTimer.Wait(weekTime));
         while(true) {
             eventManager.Tick();
             eventManager.EvaluateSpecialEvents();
 
             // Add a bit of randomness to give things
             // a more "natural" feel.
-            yield return StartCoroutine(GameTimer.Wait(weekTime * Random.Range(0.9f, 1.6f)));
+            yield return StartCoroutine(EventTimer.Wait(weekTime * Random.Range(0.9f, 1.6f)));
         }
     }
 
