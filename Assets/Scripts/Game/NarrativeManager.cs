@@ -177,7 +177,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     void LaunchedProduct(Product p, Company c, float score) {
         ProductRecipe r = p.Recipe;
-        if (c == data.company) {
+        // Product hints appear sporadically, and only after onboarding is finished.
+        if (c == data.company && Random.value < 0.4f && obs == OBS.GAME_GOALS) {
             if (score < 0.6f) {
                 switch(r.primaryFeature) {
                     case ProductRecipe.Feature.Design:
