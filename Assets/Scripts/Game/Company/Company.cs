@@ -43,6 +43,7 @@ public class Company : HasStats {
         _verticals = new List<Vertical>();
         technologies = new List<Technology>();
         specialProjects = new List<SpecialProject>();
+        lobbies = new List<Lobby>();
         markets = new List<MarketManager.Market>();
         marketShare = 0;
         marketSharePercent = 0;
@@ -361,6 +362,16 @@ public class Company : HasStats {
     public bool StartRecruitment(Recruitment recruitment) {
         if (Pay(recruitment.cost)) {
             recruitment.Develop();
+            return true;
+        }
+        return false;
+    }
+
+    public List<Lobby> lobbies;
+    public bool BuyLobby(Lobby l) {
+        if (Pay(l.cost)) {
+            lobbies.Add(l);
+            l.effects.Apply(this);
             return true;
         }
         return false;
