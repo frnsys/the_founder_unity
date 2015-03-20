@@ -15,6 +15,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     [System.Serializable]
     public struct OnboardingState {
         public bool PRODUCTS_OPENED;
+        public bool INFRASTRUCTURE;
         public bool INFRASTRUCTURE_OPENED;
         public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
@@ -123,13 +124,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         GAME_INTRO,
         OPENED_NEW_PRODUCT,
         STARTED_PRODUCT,
-        COMPLETED_PRODUCT,
         THE_MARKET,
         THE_MARKET_DONE,
         OPENED_RECRUITING,
         OPENED_HIRING,
         HIRED_EMPLOYEE,
-        INFRASTRUCTURE,
         RESEARCH,
         GAME_GOALS,
     }
@@ -229,6 +228,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         if (Stage(OBS.THE_MARKET_DONE)) {
             MentorMessages(new string[] {
                 string.Format("Hmph. Consumers aren't really into it. That percentage you saw was the {0} of your product.", ConceptHighlight("market share")),
+                "Market share determines how much revenue your product will generate.",
+                "This one will generate some revenue, but not nearly as much as it could have.",
                 "Your product could be better.",
                 "To make better products you need to assemble a talented team.",
                 string.Format("Search for candidates by opening {0} in the menu.", MenuHighlight("Recruiting"))
@@ -318,7 +319,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Pick two product types and hit the button below to start developing the product."
                     });
 
-                } else if (Stage(OBS.INFRASTRUCTURE)) {
+                } else if (data.company.availableInfrastructureCapacity < 2 && !ob.INFRASTRUCTURE) {
                     MentorMessages(new string[] {
                         "It looks like you don't have enough infrastructure to start a new product!",
                         string.Format("You can buy more infrastructure in the {0} menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.", MenuHighlight("Infrastructure")),
@@ -326,6 +327,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                     UIManager.Instance.menu.Activate("Infrastructure");
                     UIManager.Instance.menu.Activate("Existing Products");
+                    ob.INFRASTRUCTURE = true;
                 }
                 break;
 
@@ -411,17 +413,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     void CompletedProduct(Product p, Company c) {
         if (c == data.company) {
-            if (Stage(OBS.COMPLETED_PRODUCT)) {
-                StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
-                        "Congratulations! You've completed your first product.",
-                        string.Format("It will start generating {0}, depending on its final :DESIGN: [c][0078E1]design[-][/c], :ENGINEERING: [c][0078E1]engineering[-][/c], and :MARKETING: [c][0078E1]marketing[-][/c] values.", ConceptHighlight("revenue")),
-                        "After the product has run its course, it will get pulled from The Market and free up the infrastructure it was using.",
-                        "After you finish a product, you will be taken to The Market to see how it will perform.",
-                        "Let's take a look."
-                    });
-                }, 3f));
-            } else if (Stage(OBS.GAME_GOALS)) {
+            if (Stage(OBS.GAME_GOALS)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Now that you've got some experience with building products, [c][FC5656]The Board[-][/c] has asked me to explain their expectations for your company.",
@@ -438,8 +430,12 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         string.Format("You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge {0}.", ConceptHighlight("research")),
-                        string.Format("You can manage your research budget in the {0} button below, which influences how many research points you generate.", MenuHighlight("Research")),
-                        "There you can spend your research points to purchase new technologies. New technologies can unlock new product types, special projects, and provide other bonuses.",
+                        string.Format("You can manage your Innovation Labs in the {0} button below.", MenuHighlight("Research")),
+                        string.Format("There you can assign workers to conduct research. They won't be available for product development, but over time they will generate {0}!", ConceptHighlight("research points")),
+                        "A researcher's skill spends on their cleverness and productivity.",
+                        "Once you assign a researcher, leave them be for a bit while they generate research points.",
+                        "Check back often though, because researchers can only work so much before they have to rest!",
+                        "You can spend these research points to purchase new technologies. New technologies can unlock new product types, special projects, and provide other bonuses.",
                         "Don't neglect research! Stay ahead of the competition!"
                     });
                     UIManager uim = UIManager.Instance;
@@ -457,7 +453,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Great, you have an employee now. See if you can build a new, better product."
                     });
-                }, 6f));
+                }, 1f));
             } else if (!ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
