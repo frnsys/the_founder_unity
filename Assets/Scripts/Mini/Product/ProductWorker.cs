@@ -30,7 +30,7 @@ public class ProductWorker : MonoBehaviour {
     public void Setup(Worker w, GameObject wg) {
         workerGroup = wg;
         maxStamina = Mathf.Sqrt(w.productivity.value)/2;
-        debugRate = w.cleverness.value/100;
+        debugRate = w.cleverness.value/10;
         stamina = maxStamina;
         worker = w;
         renderer.material = w.material;
@@ -42,7 +42,11 @@ public class ProductWorker : MonoBehaviour {
     }
 
     public void StartDebugging() {
-        maxDebugging = Random.value * 10;
+        foreach (ProductLabor l in labors) {
+            Destroy(l.gameObject);
+        }
+        labors.Clear();
+        maxDebugging = 0.1f + Random.value;
         debugging = maxDebugging;
         bug.SetActive(true);
     }

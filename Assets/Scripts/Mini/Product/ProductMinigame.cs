@@ -35,16 +35,20 @@ public class ProductMinigame : MonoBehaviour {
         }
 
         float workerWidth = 0.5f;
-        List<Worker> workers = GameManager.Instance.playerCompany.productWorkers.ToList();
-        for (int i=0; i < workers.Count; i++) {
+        workers = new List<ProductWorker>();
+        List<Worker> ws = GameManager.Instance.playerCompany.productWorkers.ToList();
+        for (int i=0; i < ws.Count; i++) {
             GameObject worker = Instantiate(workerPrefab) as GameObject;
-            worker.GetComponent<ProductWorker>().Setup(workers[i], workerGroup);
+            ProductWorker pw = worker.GetComponent<ProductWorker>();
+            pw.Setup(ws[i], workerGroup);
             worker.transform.parent = workerGroup.transform;
 
             Vector3 pos = Vector3.zero;
-            pos.x = i * workerWidth - ((workerWidth * workers.Count)/2);
+            pos.x = i * workerWidth - ((workerWidth * ws.Count)/2);
             pos.y = 0.3f;
             worker.transform.localPosition = pos;
+
+            workers.Add(pw);
         }
 
         // Probability of a shell appearing is based on product difficulty.
@@ -89,7 +93,6 @@ public class ProductMinigame : MonoBehaviour {
         ProductShell.Broken += Broken;
         ProductTarget.Scored += Scored;
         Product.Completed += Completed;
-        workers = new List<ProductWorker>();
         company = GameManager.Instance.playerCompany;
     }
 

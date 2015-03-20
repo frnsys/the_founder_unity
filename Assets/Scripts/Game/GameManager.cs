@@ -186,9 +186,9 @@ public class GameManager : Singleton<GameManager> {
         data.company.verticals = new List<Vertical> { vertical };
 
         if (vertical.name == "Information") {
-            data.company.infrastructure[Infrastructure.Type.Datacenter] = 6;
+            data.company.infrastructure[Infrastructure.Type.Datacenter] = 4;
         } else {
-            data.company.infrastructure[Infrastructure.Type.Factory] = 6;
+            data.company.infrastructure[Infrastructure.Type.Factory] = 4;
         }
 
         data.company.SetHQ(location);

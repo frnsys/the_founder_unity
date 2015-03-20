@@ -54,7 +54,7 @@ public class ProductShell : MonoBehaviour {
             health += 0.01f;
 
         // Cleverness can cause bugs.
-        } else if (type == ProductLabor.Type.Cleverness && Random.value < 1f) {
+        } else if (type == ProductLabor.Type.Cleverness && Random.value < 0.003f) {
             if (Bug != null)
                 Bug();
         }
