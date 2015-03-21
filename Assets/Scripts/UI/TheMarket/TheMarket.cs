@@ -24,9 +24,11 @@ public class TheMarket : MonoBehaviour {
     }
 
     // Setup the market for a product.
+    private Product product;
     public void Setup(Product p) {
         Reset();
         gameObject.SetActive(true);
+        product = p;
 
         // Try to find two AI companies which are suitable competitors for this product.
         List<AICompany> competitors = new List<AICompany>();
@@ -99,6 +101,7 @@ public class TheMarket : MonoBehaviour {
         foreach (Transform child in consumerGroup) {
             Destroy(child.gameObject);
         }
+        marketAnalysis.gameObject.SetActive(false);
     }
 
     private void SpawnConsumer(Vector3 target) {
@@ -125,6 +128,12 @@ public class TheMarket : MonoBehaviour {
 
         yield return new WaitForSeconds(5f);
 
+        marketAnalysis.Setup(product);
+        marketAnalysis.gameObject.SetActive(true);
+    }
+    public MarketAnalysis marketAnalysis;
+
+    public void Close() {
         Reset();
         gameObject.SetActive(false);
 

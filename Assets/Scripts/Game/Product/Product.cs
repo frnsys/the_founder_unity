@@ -206,6 +206,7 @@ public class Product : HasStats {
 
 
     static public event System.Action<Product, Company, float> Launched;
+    public float score;
     public void Launch(Company company) {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
@@ -228,7 +229,7 @@ public class Product : HasStats {
         float A_ = Mathf.Min((A/i) * a_w, 1f);
         float U_ = Mathf.Min((U/i) * u_w, 1f);
         float P_ = Mathf.Min((P/i) * p_w, 1f);
-        float score = (A_ + U_ + P_)/(a_w + u_w + p_w);
+        score = (A_ + U_ + P_)/(a_w + u_w + p_w);
 
         // Revenue model modifications:
         longevity = recipe.maxLongevity;
