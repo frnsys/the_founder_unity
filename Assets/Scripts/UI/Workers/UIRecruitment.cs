@@ -10,18 +10,29 @@ public class UIRecruitment : MonoBehaviour {
             label.text = recruitment_.name;
             image.mainTexture = recruitment_.icon;
             cost.text = string.Format("{0:C0}", recruitment_.cost);
-            description.text = recruitment_.description;
         }
     }
 
     public UILabel label;
     public UILabel cost;
-    public UILabel description;
     public UITexture image;
+    public UIGrid starsGrid;
 
-    public void SelectRecruitment() {
-        if (!GameManager.Instance.playerCompany.StartRecruitment(recruitment_)) {
-            UIManager.Instance.Alert("You don't have the cash to recruit this way.");
+    void OnClick() {
+        UIManager.Instance.Confirm(string.Format("Are you sure want to recruit this way? It will cost you {0:C0}.", recruitment_.cost), delegate() {
+            if (!GameManager.Instance.playerCompany.StartRecruitment(recruitment_)) {
+                UIManager.Instance.Alert("You don't have the cash to recruit this way.");
+            }
+        }, null);
+    }
+
+    public int stars {
+        set {
+            int v = value + 1;
+            for (int i=0; i < v; i++) {
+                starsGrid.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            starsGrid.Reposition();
         }
     }
 }
