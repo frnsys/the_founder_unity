@@ -5,6 +5,7 @@ public class UIMenuItem : MonoBehaviour {
     public GameObject window;
     public bool wiggle;
     private IEnumerator wiggler;
+    public GameObject display;
 
     void OnClick() {
         if (wiggler != null) {
@@ -25,5 +26,10 @@ public class UIMenuItem : MonoBehaviour {
             wiggler = UIAnimator.PulseUI(transform, 1f, 1.05f, 4f);
             StartCoroutine(wiggler);
         }
+    }
+
+    void Update() {
+        if (display != null)
+            UIAnimator.Rotate(display);
     }
 }
