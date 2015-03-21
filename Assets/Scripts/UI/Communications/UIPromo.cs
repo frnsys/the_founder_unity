@@ -10,18 +10,34 @@ public class UIPromo : MonoBehaviour {
             label.text = promo_.name;
             image.mainTexture = promo_.icon;
             cost.text = string.Format("{0:C0}", promo_.cost);
-            description.text = promo_.description;
         }
     }
 
     public UILabel label;
     public UILabel cost;
-    public UILabel description;
     public UITexture image;
+    public UIGrid starsGrid;
 
-    public void SelectPromo() {
-        if (!GameManager.Instance.playerCompany.StartPromo(promo_)) {
-            UIManager.Instance.Alert("You don't have the cash for this campaign.");
+    void OnClick() {
+        UIManager.Instance.Confirm(string.Format("Are you sure want to run this campaign? It will cost you {0:C0}.", promo_.cost), delegate() {
+            if (!GameManager.Instance.playerCompany.StartPromo(promo_)) {
+                UIManager.Instance.Alert("You don't have the cash for this campaign.");
+            }
+        }, null);
+    }
+
+    public int stars {
+        set {
+            int v = value + 1;
+
+            // Odd values have half stars.
+            if (v % 2 == 1) {
+                starsGrid.transform.GetChild(starsGrid.transform.childCount - 1).gameObject.SetActive(true);
+            }
+            for (int i=0; i < v/2; i++) {
+                starsGrid.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            starsGrid.Reposition();
         }
     }
 }

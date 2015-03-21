@@ -42,8 +42,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 3fcb9a339ecad449f9c27f654e40f160, type: 2}
   mSprites:
   - name: breakthrough
-    x: 206
-    y: 496
+    x: 213
+    y: 473
     width: 16
     height: 16
     borderLeft: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: charisma
-    x: 223
-    y: 496
+    x: 196
+    y: 473
     width: 16
     height: 16
     borderLeft: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cleverness
-    x: 145
+    x: 179
     y: 473
     width: 16
     height: 16
@@ -120,7 +120,7 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: design
-    x: 179
+    x: 145
     y: 473
     width: 16
     height: 16
@@ -133,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: engineering
-    x: 196
-    y: 473
+    x: 223
+    y: 496
     width: 16
     height: 16
     borderLeft: 0
@@ -198,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: marketing
-    x: 213
-    y: 473
+    x: 206
+    y: 496
     width: 16
     height: 16
     borderLeft: 0
@@ -221,6 +221,32 @@ MonoBehaviour:
     borderBottom: 0
     paddingLeft: 0
     paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: star
+    x: 230
+    y: 473
+    width: 16
+    height: 16
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: star_half
+    x: 247
+    y: 473
+    width: 8
+    height: 16
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 8
     paddingTop: 0
     paddingBottom: 0
   - name: studio

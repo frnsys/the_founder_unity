@@ -2,20 +2,26 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-public class UIManageCommunications : UIFullScreenPager {
+public class UIManageCommunications : MonoBehaviour {
     public GameObject promoPrefab;
+    public UISimpleGrid grid;
+    public UIScrollView scrollView;
 
     void OnEnable() {
         LoadPromos();
     }
 
     private void LoadPromos() {
-        ClearGrid();
+        int i = 0;
         foreach (Promo p in Promo.LoadAll().OrderBy(p => p.cost)) {
             GameObject promoItem = NGUITools.AddChild(grid.gameObject, promoPrefab);
-            promoItem.GetComponent<UIPromo>().promo = p;
+            UIPromo uip = promoItem.GetComponent<UIPromo>();
+            promoItem.GetComponent<UIDragScrollView>().scrollView = scrollView;
+            uip.promo = p;
+            uip.stars = i;
+            i++;
         }
-        Adjust();
+        grid.Reposition();
     }
 
     public GameObject historyPrefab;

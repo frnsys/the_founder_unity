@@ -9,13 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45c822bb302384127bfc904445600049, type: 3}
-  m_Name: Astroturfing Campaign
+  m_Name: Astroturfing
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: 2e98505adc1b547c9a6134bba08b1671, type: 3}
   description: Hire a large group of folks to simulate popularity of our products
     on social media.
   cost: 45000
-  requiredProgress: 36
-  influence: 10
-  level: {fileID: 100138, guid: a034a3dd4847b46159207b4e59c5988d, type: 2}
-  _progress: 0
