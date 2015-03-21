@@ -12307,7 +12307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &702503693
 Transform:
   m_ObjectHideFlags: 0
@@ -36442,7 +36442,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e016263659da545728cf3e6c9d3843da, type: 2}
   - {fileID: 2100000, guid: 8e92be578a8874947b40e121e22875bf, type: 2}
   dayColor: {r: .658682942, g: .963235319, b: .923938215, a: 1}
-  nightColor: {r: 0, g: .521568656, b: .980392158, a: 1}
+  nightColor: {r: .143382341, g: .197768748, b: .286764681, a: 1}
 --- !u!1 &2089191075
 GameObject:
   m_ObjectHideFlags: 0

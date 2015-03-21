@@ -363,7 +363,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 794, y: 1412, z: 0}
+  m_Size: {x: 539, y: 958, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -422,6 +422,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -455,7 +458,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .926470578, g: .27930361, b: .27930361, a: 1}
+  mColor: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
   mPivot: 4
   mWidth: 400
   mHeight: 60
@@ -497,8 +500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 100002}
-  hover: {r: .937254906, g: .270588249, b: .258823544, a: 1}
-  pressed: {r: .866666675, g: .215686277, b: .203921571, a: 1}
+  hover: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
+  pressed: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
   disabledColor: {r: .5, g: .5, b: .5, a: 1}
   duration: .200000003
   dragHighlight: 0
@@ -702,6 +705,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -935,8 +941,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 0}
   mPivot: 4
-  mWidth: 794
-  mHeight: 1412
+  mWidth: 539
+  mHeight: 958
   mDepth: -1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
