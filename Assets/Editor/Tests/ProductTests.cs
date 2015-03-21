@@ -36,6 +36,10 @@ namespace UnityTest
             c = gd.company;
             pts = new List<ProductType>() { pt, pt_ };
 
+            Location startLoc = ScriptableObject.CreateInstance<Location>();
+            startLoc.cost = 0;
+            c.ExpandToLocation(startLoc);
+
             p = ScriptableObject.CreateInstance<Product>();
             p.Init(pts, 0, 0, 0, c);
             pr = ProductRecipe.LoadFromTypes(pts);
@@ -44,6 +48,7 @@ namespace UnityTest
         [TearDown]
         public void TearDown() {
             UnityEngine.Object.DestroyImmediate(gameObj);
+            c = null;
             gm = null;
             p = null;
             pr = null;
@@ -100,67 +105,83 @@ namespace UnityTest
         }
 
 		[Test]
-		public void Revenue_PublicOpinion() {
-            float rev;
-            float rev_;
-
+		public void MarketShare_PublicOpinion() {
             p.design.baseValue = 100;
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
-
             p.Launch(c);
 
-            rev = p.Revenue(4, c);
-            Assert.IsTrue(rev > 0);
-
+            Product p_ = ScriptableObject.CreateInstance<Product>();
+            p_.Init(pts, 100, 100, 100, c);
             c.opinion.baseValue = -1000;
-            rev_ = p.Revenue(4, c);
-            Assert.IsTrue(rev_ < rev);
+            p_.Launch(c);
 
-            c.opinion.baseValue = 1000;
-            rev_ = p.Revenue(4, c);
-            Assert.IsTrue(rev_ > rev);
+            Assert.IsTrue(p.marketShare > p_.marketShare);
         }
 
 		[Test]
-		public void Revenue_MarketShare() {
+		public void MarketShare_MarketReach() {
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
+            p.Launch(c);
+
+            Product p_ = ScriptableObject.CreateInstance<Product>();
+            p_.Init(pts, 100, 100, 100, c);
+
+            Location newLoc = ScriptableObject.CreateInstance<Location>();
+            newLoc.cost = 0;
+            c.ExpandToLocation(newLoc);
+            p_.Launch(c);
+
+            Assert.IsTrue(p.marketShare < p_.marketShare);
+        }
+
+		[Test]
+		public void MarketShare_TechPenalty() {
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
+            p.Launch(c);
+
+            Product p_ = ScriptableObject.CreateInstance<Product>();
+            pr.requiredTechnologies.Add(ScriptableObject.CreateInstance<Technology>());
+            p_.Init(pts, 100, 100, 100, c);
+            p_.Launch(c);
+
+            Assert.IsTrue(p.marketShare > p_.marketShare);
+        }
+
+		[Test]
+		public void MarketShare_Hype() {
+            p.design.baseValue = 100;
+            p.marketing.baseValue = 100;
+            p.engineering.baseValue = 100;
+            p.Launch(c);
+
+            Product p_ = ScriptableObject.CreateInstance<Product>();
+            p_.Init(pts, 100, 100, 100, c);
+            c.publicity.baseValue = 10;
+            p_.Launch(c);
+
+            Assert.IsTrue(p.marketShare < p_.marketShare);
+        }
+
+		[Test]
+		public void Revenue_ConsumerSpending() {
             p.design.baseValue = 100;
             p.marketing.baseValue = 100;
             p.engineering.baseValue = 100;
 
             p.Launch(c);
 
-            //p.marketShare = 1;
+            gm.spendingMultiplier = 1;
             float r = p.Revenue(4, c);
 
-            //p.marketShare = 2;
+            gm.spendingMultiplier = 10;
             float r_ = p.Revenue(4, c);
 
             Assert.IsTrue(r_ > r);
-        }
-
-		[Test]
-		public void Revenue_ZeroStats() {
-            p.design.baseValue = 0;
-            p.marketing.baseValue = 0;
-            p.engineering.baseValue = 0;
-
-            p.Launch(c);
-
-            float zeroRev = p.Revenue(4, c);
-
-            // You still make a little money.
-            Assert.IsTrue(zeroRev > 0);
-
-
-            // But it should be less than a product with more stats.
-            p.design.baseValue = 100;
-            p.marketing.baseValue = 100;
-            p.engineering.baseValue = 100;
-
-            p.Launch(c);
-
-            Assert.IsTrue(p.Revenue(4, c) > zeroRev);
         }
 
 		[Test]

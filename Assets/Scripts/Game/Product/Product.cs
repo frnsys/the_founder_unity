@@ -234,6 +234,7 @@ public class Product : HasStats {
         longevity = recipe.maxLongevity;
 
         marketShare = company.marketSharePercent * score;
+
         if (techPenalty)
             marketShare *= 0.1f;
 

@@ -175,8 +175,7 @@ namespace UnityTest
 
         [Test]
         public void ManageInfrastructure() {
-            startLoc.infrastructureCapacity = 2;
-            int baseDatacenterCapacity = startLoc.infrastructureCapacity;
+            int baseCapacity = c.availableInfrastructureCapacity;
             Infrastructure zeroInf = new Infrastructure();
 
             // All capacity should be available.
@@ -185,13 +184,7 @@ namespace UnityTest
             Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
 
             Infrastructure i = new Infrastructure();
-            i[Infrastructure.Type.Datacenter] = baseDatacenterCapacity + 1;
-
-            Location newLoc = ScriptableObject.CreateInstance<Location>();
-            newLoc.name = "Belize";
-            newLoc.cost = 0;
-            startLoc.infrastructureCapacity = 2;
-            c.ExpandToLocation(newLoc);
+            i[Infrastructure.Type.Datacenter] = baseCapacity + 1;
 
             // Can't buy the infrastructure, not enough cash.
             c.cash.baseValue = 0;
@@ -215,18 +208,19 @@ namespace UnityTest
             Assert.IsTrue(c.availableInfrastructure.Equals(c.infrastructure));
             Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
 
-            ProductType pt = ScriptableObject.CreateInstance<ProductType>();
+            ProductType pt  = ScriptableObject.CreateInstance<ProductType>();
+            ProductType pt_ = ScriptableObject.CreateInstance<ProductType>();
             Infrastructure required = new Infrastructure();
-            required[Infrastructure.Type.Datacenter] = baseDatacenterCapacity;
+            required[Infrastructure.Type.Datacenter] = baseCapacity;
             pt.requiredInfrastructure = required;
-            c.StartNewProduct(new List<ProductType> { pt }, 0, 0, 0);
+            c.StartNewProduct(new List<ProductType> { pt, pt_ }, 0, 0, 0);
 
             // All infrastructure is being used now,
             // so none of it is available.
             // The amount used should equal the amount the product needed.
             Assert.IsFalse(c.usedInfrastructure.Equals(zeroInf));
             Assert.IsTrue(c.availableInfrastructure.Equals(zeroInf));
-            Assert.AreEqual(c.usedInfrastructure[Infrastructure.Type.Datacenter], baseDatacenterCapacity);
+            Assert.AreEqual(c.usedInfrastructure[Infrastructure.Type.Datacenter], baseCapacity);
 
             c.ShutdownProduct(c.products[0]);
 
