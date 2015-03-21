@@ -22,7 +22,7 @@ public class ProductType : SharedResource<ProductType> {
 
     // Note: we don't have required technologies because a technology is necessary
     // for *unlocking* a product. Technologies don't disappear so it never needs to be checked again after the product is unlocked.
-    public List<Vertical> requiredVerticals;
+    public List<Vertical> requiredVerticals = new List<Vertical>();
     public Infrastructure requiredInfrastructure;
     public bool isAvailable(Company company) {
         // Check that all required verticals are active on the company.
@@ -31,16 +31,5 @@ public class ProductType : SharedResource<ProductType> {
 
         // Check that the required infrastructure is available.
         return company.availableInfrastructure >= requiredInfrastructure;
-    }
-
-    // Generalize a "points" metric which is just the total number of infrastructure required.
-    public int points {
-        get {
-            int total = 0;
-            foreach(KeyValuePair<Infrastructure.Type, int> i in requiredInfrastructure) {
-                total += i.Value;
-            }
-            return total;
-        }
     }
 }

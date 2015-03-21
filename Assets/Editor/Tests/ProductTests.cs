@@ -19,12 +19,14 @@ namespace UnityTest
         private Product p = null;
         private ProductRecipe pr = null;
         private ProductType pt;
+        private ProductType pt_;
         private List<ProductType> pts;
         private Company c;
 
         [SetUp]
         public void SetUp() {
-            pt = ScriptableObject.Instantiate(ProductType.Load("Social Network")) as ProductType;
+            pt  = ScriptableObject.Instantiate(ProductType.Load("Social Network")) as ProductType;
+            pt_ = ScriptableObject.Instantiate(ProductType.Load("Virtual Reality")) as ProductType;
 
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
@@ -32,7 +34,7 @@ namespace UnityTest
             gm.Load(gd);
 
             c = gd.company;
-            pts = new List<ProductType>() { pt };
+            pts = new List<ProductType>() { pt, pt_ };
 
             p = ScriptableObject.CreateInstance<Product>();
             p.Init(pts, 0, 0, 0, c);
@@ -46,6 +48,7 @@ namespace UnityTest
             p = null;
             pr = null;
             pt = null;
+            pt_ = null;
             pts = null;
         }
 
@@ -177,11 +180,6 @@ namespace UnityTest
             p.Shutdown();
 
             Assert.AreEqual(p.state, Product.State.RETIRED);
-        }
-
-        [Test]
-        public void Points() {
-            Assert.AreEqual(p.points, p.productTypes.Sum(t => t.points));
         }
 
         [Test]

@@ -49,8 +49,8 @@ public class EffectSet {
     // This by default starts at 1 for each Infrastructure type, so we count 1 as our 0.
     public Infrastructure infrastructureCostMultiplier = new Infrastructure();
 
-    public List<ProductEffect> productEffects;
-    public List<StatBuff> workerEffects;
+    public List<ProductEffect> productEffects = new List<ProductEffect>();
+    public List<StatBuff> workerEffects = new List<StatBuff>();
 
     public AICompany aiCompany;
 

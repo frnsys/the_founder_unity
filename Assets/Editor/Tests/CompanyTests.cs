@@ -40,7 +40,8 @@ namespace UnityTest
             c.ExpandToLocation(startLoc);
 
             pts = new List<ProductType>() {
-                ProductType.Load("Social Network")
+                ProductType.Load("Social Network"),
+                ProductType.Load("Virtual Reality")
             };
 
             worker = ScriptableObject.CreateInstance<Worker>();
@@ -304,14 +305,8 @@ namespace UnityTest
 		[Test]
 		public void HarvestProduct() {
             c.cash.baseValue = 2000;
-            c.HireWorker(worker);
 
-            worker.productivity.baseValue = 100;
-            worker.charisma.baseValue = 100;
-            worker.creativity.baseValue = 100;
-            worker.cleverness.baseValue = 100;
-
-            c.StartNewProduct(pts, 0, 0, 0);
+            c.StartNewProduct(pts, 1, 1, 1);
             Product p = c.products[0];
             c.DevelopProduct();
 

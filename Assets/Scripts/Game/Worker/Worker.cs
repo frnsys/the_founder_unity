@@ -109,17 +109,6 @@ public class Worker : HasStats {
         return minSalary * GameManager.Instance.wageMultiplier;
     }
 
-    public Stat bestStat {
-        get {
-            Stat max = charisma;
-            if (creativity.value > max.value)
-                max = creativity;
-            if (cleverness.value > max.value)
-                max = cleverness;
-            return max;
-        }
-    }
-
     // How many weeks the worker is off the job market for.
     // Recent offers the player has made.
     public int offMarketTime;
@@ -180,6 +169,14 @@ public class Worker : HasStats {
                 return null;
         }
     }
+
+
+
+
+
+
+
+    // WORKER BIO GENERATION ---------------------------
 
     private static Dictionary<string, Dictionary<string, string[]>> bioMap = new Dictionary<string, Dictionary<string, string[]>> {
         {

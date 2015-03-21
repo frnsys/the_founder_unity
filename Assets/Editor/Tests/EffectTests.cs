@@ -118,7 +118,10 @@ namespace UnityTest
             e.productEffects.Add(pe);
 
             ProductType pt = ScriptableObject.CreateInstance<ProductType>();
-            List<ProductType> pts = new List<ProductType>() { pt };
+            pt.requiredVerticals = new List<Vertical>();
+            ProductType pt_ = ScriptableObject.CreateInstance<ProductType>();
+            pt_.requiredVerticals = new List<Vertical>();
+            List<ProductType> pts = new List<ProductType>() { pt, pt_ };
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];

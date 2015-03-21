@@ -58,9 +58,6 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
         }
     }
 
-    public bool isEmpty {
-        get { return !Values.Any(v => v > 0); }
-    }
     public int total {
         get { return Values.Sum(); }
     }
@@ -86,20 +83,6 @@ public class Infrastructure : SerializableDictionary<Infrastructure.Type, int> {
 
     public bool Equals(Infrastructure right) {
         return !Keys.Any(k => this[k] != right[k]);
-    }
-
-    // Gets the intersection of two infrastructures.
-    public Infrastructure Intersection(Infrastructure right) {
-        Infrastructure result = new Infrastructure();
-        foreach(KeyValuePair<Type, int> item in this) {
-            result[item.Key] = Math.Min(item.Value, right[item.Key]);
-        }
-        return result;
-    }
-
-    // Returns true if _any_ values in this is greater than the corresponding value in `right`.
-    public bool AnyGreater(Infrastructure right) {
-        return Keys.Any(k => this[k] > right[k]);
     }
 
     public static bool operator <=(Infrastructure left, Infrastructure right) {

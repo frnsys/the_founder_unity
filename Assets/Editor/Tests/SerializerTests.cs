@@ -225,7 +225,6 @@ namespace UnityTest
                 Assert.AreEqual(p.revenueEarned,      p_.revenueEarned);
                 Assert.AreEqual(p.requiredProgress,   p_.requiredProgress);
                 Assert.AreEqual(p.lastRevenue,        p_.lastRevenue);
-                Assert.AreEqual(p.points,             p_.points);
 
                 Assert.AreEqual(p.design.value,       p_.design.value);
                 Assert.AreEqual(p.marketing.value,    p_.marketing.value);
@@ -329,10 +328,11 @@ namespace UnityTest
         }
 
         private Product CreateProduct() {
-            ProductType pt = ProductType.Load("Social Network");
+            ProductType pt  = ProductType.Load("Social Network");
+            ProductType pt_ = ProductType.Load("Virtual Reality");
             Vertical v     = Vertical.Load("Information");
             pt.requiredVerticals = new List<Vertical>() { v };
-            List<ProductType> pts = new List<ProductType>() { pt };
+            List<ProductType> pts = new List<ProductType>() { pt, pt_ };
 
             Product product = ScriptableObject.CreateInstance<Product>();
             product.Init(pts, 0, 0, 0, data.company);

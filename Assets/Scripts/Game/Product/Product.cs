@@ -52,10 +52,6 @@ public class Product : HasStats {
     // A disabled product generates no revenue and does not continue developing.
     public bool disabled = false;
 
-    // Infrastructure, in points, used by the product.
-    public int points {
-        get { return productTypes.Sum(p => p.points); }
-    }
     public Infrastructure requiredInfrastructure {
         get {
             Infrastructure infras = new Infrastructure();

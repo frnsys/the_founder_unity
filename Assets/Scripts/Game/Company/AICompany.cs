@@ -21,7 +21,6 @@ public class AICompany : Company {
     public EffectSet bonuses;
     public List<Vertical> specialtyVerticals;
     public List<ProductType> specialtyProductTypes;
-    public List<Location> startLocations;
 
     public int designSkill;
     public int engineeringSkill;
@@ -60,19 +59,12 @@ public class AICompany : Company {
         // Initialize stuff.
         unlocked = new UnlockSet();
         bonuses = new EffectSet();
-        startLocations = new List<Location>();
 
         return this;
     }
 
     // Call `Setup()` if instantiating an AICompany from an asset.
     public void Setup() {
-        foreach (Location l in startLocations) {
-            // Give the company enough to open them.
-            cash.baseValue += l.cost;
-            ExpandToLocation(l);
-        }
-
         specialtyVerticals = new List<Vertical>();
         specialtyProductTypes = new List<ProductType>();
         foreach (ProductEffect pe in bonuses.productEffects) {
