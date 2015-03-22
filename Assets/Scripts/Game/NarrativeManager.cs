@@ -23,6 +23,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         public bool SPECIALPROJECTS_UNLOCKED;
         public bool HYPE_MINIGAME;
         public bool SYNERGY;
+        public bool BLACK_HOLE;
+        public bool SHELL;
+        public bool CREATIVITY_SHELL;
+        public bool CLEVERNESS_SHELL;
+        public bool CHARISMA_SHELL;
     }
 
     // Disable the constructor.
@@ -151,6 +156,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         TheMarket.Started += OnMarketStarted;
         TheMarket.Done += OnMarketDone;
         UIOfficeManager.OfficeUpgraded += OfficeUpgraded;
+        ProductMinigame.Shell += OnShell;
+        ProductMinigame.BlackHole += OnBlackHole;
 
         // Hide some menu and status bar items.
         UIManager uim = UIManager.Instance;
@@ -172,6 +179,75 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
         // Show the game intro.
         Intro();
+    }
+
+    void OnShell(ProductLabor.Type type) {
+        string[] shellInfo = new string[] {
+            string.Format("A {0} has appeared!", ConceptHighlight("wall")),
+            string.Format("As products get more difficult, you will start to encounter {0} which inhibit continued development.", ConceptHighlight("walls")),
+            "Each wall has some hit points and can be damaged by either creativity, charisma, or cleverness points, depending on what kind of wall it is.",
+            "The wall will destroy all other kinds of points.",
+            string.Format("{0} employees occasionally generate special\n:BREAKTHROUGH: [c][0078E1]breakthroughs[-][/c] which don't add any points to your product, but are especially potent against walls.", ConceptHighlight("Happy")),
+            "If you successfully break through a wall, you will get a large bonus!"
+        };
+
+        switch (type) {
+            // Creativity is harder to break.
+            case ProductLabor.Type.Creativity:
+                if (!ob.CREATIVITY_SHELL) {
+                    string[] creInfo = new string[] {
+                        string.Format(":CREATIVITY: [c][0078E1]design[-][/c] walls are tough and require a lot of {0} to break through.", ConceptHighlight("creativity")),
+                        string.Format("If you break through it, you'll get a large bonus of :CREATIVITY: [c][0078E1]creativity[-][/c] points for your product!")
+                    };
+                    if (!ob.SHELL) {
+                        creInfo = shellInfo.Concat(creInfo).ToArray();
+                        ob.SHELL = true;
+                    }
+                    MentorMessages(creInfo);
+                    ob.CREATIVITY_SHELL = true;
+                }
+                break;
+
+            case ProductLabor.Type.Charisma:
+                if (!ob.CHARISMA_SHELL) {
+                    string[] chaInfo = new string[] {
+                        string.Format(":CHARISMA: [c][0078E1]marketing[-][/c] walls need to be charmed quickly with {0}, becase they will regenerate their health.", ConceptHighlight("charisma")),
+                        string.Format("If you break through it, you'll get a large bonus of :CHARISMA: [c][0078E1]charisma[-][/c] points for your product!")
+                    };
+                    if (!ob.SHELL) {
+                        chaInfo = shellInfo.Concat(chaInfo).ToArray();
+                        ob.SHELL = true;
+                    }
+                    MentorMessages(chaInfo);
+                    ob.CHARISMA_SHELL = true;
+                }
+                break;
+
+            case ProductLabor.Type.Cleverness:
+                if (!ob.CLEVERNESS_SHELL) {
+                    string[] cleInfo = new string[] {
+                        string.Format(":CLEVERNESS: [c][0078E1]engineering[-][/c] walls require a bit of {0}, but can tie your employees up with bugs.", ConceptHighlight("cleverness")),
+                        string.Format("If you break through it, you'll get a large bonus of :CLEVERNESS: [c][0078E1]cleverness[-][/c] points for your product!")
+                    };
+                    if (!ob.SHELL) {
+                        cleInfo = shellInfo.Concat(cleInfo).ToArray();
+                        ob.SHELL = true;
+                    }
+                    MentorMessages(cleInfo);
+                    ob.CLEVERNESS_SHELL = true;
+                }
+                break;
+        }
+    }
+    void OnBlackHole() {
+        if (!ob.BLACK_HOLE) {
+            MentorMessages(new string[] {
+                string.Format("A {0} has appeared!", ConceptHighlight("black hole")),
+                "Black holes waste your employee's productivity by sucking up the points they produce.",
+                string.Format("You can {0} on the screen to keep points away from black holes.", InteractHighlight("tap"))
+            });
+            ob.BLACK_HOLE = true;
+        }
     }
 
     void LaunchedProduct(Product p, Company c, float score) {
@@ -397,12 +473,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         string.Format("The rate at which they produce these points depends on their :PRODUCTIVITY: {0}.", ConceptHighlight("productivity")),
                         string.Format("{0} an employee to capture the value they've produced.", InteractHighlight("tap")),
                         string.Format("Employees get {0} from working. If you don't let them rest, they will take extra time recovering.", ConceptHighlight("tired")),
-                        string.Format("As products get more difficult, you will start to encounter {0} which inhibit continued development.", ConceptHighlight("walls")),
-                        "Each wall has some hit points and corresponds to a particular skill.",
-                        string.Format(":CREATIVITY: [c][0078E1]design[-][/c] walls are tough and require a lot of {0} to break through.", ConceptHighlight("creativity")),
-                        string.Format(":CLEVERNESS: [c][0078E1]engineering[-][/c] walls require a bit of {0}, but can tie your employees up with bugs.", ConceptHighlight("cleverness")),
-                        string.Format(":CHARISMA: [c][0078E1]marketing[-][/c] walls need to be charmed quickly with {0}, becase they will regenerate their health.", ConceptHighlight("charisma")),
-                        string.Format("Finally, {0} employees occasionally generate special\n:BREAKTHROUGH: [c][0078E1]breakthroughs[-][/c] which don't add any points to your product, but are especially potent against walls.", ConceptHighlight("happy")),
                         "The bar below indicates how far along product development is. When it fills up, your product will be released to The Market!"
                     });
                 }, 2f));
@@ -547,7 +617,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     void Synergy() {
-        if (ob.SYNERGY == false) {
+        if (!ob.SYNERGY) {
             StartCoroutine(Delay(delegate(GameObject obj) {
                 MentorMessages(new string[] {
                     string.Format("Wow! That product you just released is {0} with another one in The Market.", SpecialHighlight("synergetic")),

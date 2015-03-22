@@ -17,6 +17,7 @@ public class ProductMinigame : MonoBehaviour {
     public GameObject officeCameraController;
 
     private float shellChance;
+    private float blackholeChance;
 
     public void Setup(Product p) {
         officeCamera.SetActive(false);
@@ -53,6 +54,13 @@ public class ProductMinigame : MonoBehaviour {
 
         // Probability of a shell appearing is based on product difficulty.
         shellChance = 0.0001f * p.Recipe.featureIdeal;
+        blackholeChance = 0.00001f;
+
+        // But for the company's first product, the chance is zero (shells are introduced later).
+        if (GameManager.Instance.playerCompany.products.Count == 1) {
+            shellChance = 0;
+            blackholeChance = 0;
+        }
 
         EventTimer.Pause();
     }
@@ -175,10 +183,16 @@ public class ProductMinigame : MonoBehaviour {
             shellHealth.gameObject.SetActive(true);
             shellTimer.gameObject.SetActive(true);
 
-        } else if (!blackHole.active && Random.value < 0.00001f) {
+            if (Shell != null)
+                Shell(shell.type);
+
+        } else if (!blackHole.active && Random.value < blackholeChance) {
             // Black hole
             blackHole.SetActive(true);
             blackHole.transform.localPosition = new Vector3(-1.8f + Random.value * 3.6f, 2.25f + Random.value * 2.25f, 0);
+
+            if (BlackHole != null)
+                BlackHole();
         }
 
         if (shell.active) {
@@ -189,5 +203,7 @@ public class ProductMinigame : MonoBehaviour {
             shellTimer.gameObject.SetActive(false);
         }
     }
+    static public event System.Action<ProductLabor.Type> Shell;
+    static public event System.Action BlackHole;
 
 }
