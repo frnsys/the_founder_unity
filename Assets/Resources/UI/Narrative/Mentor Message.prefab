@@ -356,7 +356,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
   mText: Picking the cofounder is one of the most important decisions for a business.
-  mFontSize: 24
+  mFontSize: 32
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -466,7 +466,7 @@ MonoBehaviour:
     relative: .5
     absolute: 200
   updateAnchors: 1
-  mColor: {r: .87843138, g: 1, b: .984313726, a: 1}
+  mColor: {r: .956862748, g: .956862748, b: .956862748, a: 1}
   mPivot: 4
   mWidth: 400
   mHeight: 400

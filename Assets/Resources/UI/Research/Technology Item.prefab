@@ -259,7 +259,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -103, z: 0}
+  m_LocalPosition: {x: 0, y: -104, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -312,7 +312,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 140
+  aspectRatio: 14
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -384,7 +384,7 @@ MonoBehaviour:
   mText: 'technology
 
     name'
-  mFontSize: 24
+  mFontSize: 28
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -444,7 +444,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.24242401
+  aspectRatio: 2.33333325
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -481,7 +481,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 80
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -695,7 +695,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 70
+  aspectRatio: 2.91666675
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -739,7 +739,7 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400002}
     relative: 0
-    absolute: -79
+    absolute: -80
   topAnchor:
     target: {fileID: 400002}
     relative: 0
@@ -748,12 +748,12 @@ MonoBehaviour:
   mColor: {r: .219584107, g: .180525541, b: .463235319, a: 1}
   mPivot: 1
   mWidth: 280
-  mHeight: 67
+  mHeight: 68
   mDepth: 254
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.17910433
+  aspectRatio: 140
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}

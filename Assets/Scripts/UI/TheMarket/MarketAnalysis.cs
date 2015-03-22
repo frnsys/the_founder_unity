@@ -38,5 +38,10 @@ public class MarketAnalysis : UIAlert {
         techPenalty.SetActive(p.techPenalty);
         grid.Reposition();
     }
+
+    public void Close_() {
+        if (GameManager.hasInstance)
+            GameManager.Instance.Resume();
+    }
 }
 

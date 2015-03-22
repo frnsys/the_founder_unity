@@ -14,7 +14,7 @@ public class UIMenuButton : MonoBehaviour {
 
     public void Wiggle() {
         if (wiggler == null) {
-            wiggler = UIAnimator.PulseUI(transform, 1f, 1.3f, 4f);
+            wiggler = UIAnimator.PulseUI(transform, 1f, 1.8f, 4f);
             StartCoroutine(wiggler);
         }
     }

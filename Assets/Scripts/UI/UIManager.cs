@@ -105,7 +105,7 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnPaid(float amount, string name) {
-        SendPing(string.Format("Paid {0:C0} {1}", amount, name), Color.red);
+        SendPing(string.Format("-{0:C0} {1}", amount, name), Color.red);
     }
 
     // Show an event notification.

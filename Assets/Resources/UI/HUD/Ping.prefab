@@ -117,18 +117,18 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .889705896, g: 1, b: .985768497, a: 1}
   mPivot: 4
-  mWidth: 216
+  mWidth: 196
   mHeight: 24
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 9
+  aspectRatio: 5.66666651
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
-  mText: Paid $20,000 in salaries
-  mFontSize: 18
+  mText: -$20,000 for salaries
+  mFontSize: 20
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 0
@@ -203,11 +203,11 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 400002}
     relative: .5
-    absolute: -120
+    absolute: -110
   rightAnchor:
     target: {fileID: 400002}
     relative: .5
-    absolute: 120
+    absolute: 110
   bottomAnchor:
     target: {fileID: 400002}
     relative: 1
@@ -219,13 +219,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .33088237, b: .33088237, a: 1}
   mPivot: 4
-  mWidth: 240
+  mWidth: 220
   mHeight: 40
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6
+  aspectRatio: 3.0250001
   mType: 0
   mFillDirection: 4
   mFillAmount: 1

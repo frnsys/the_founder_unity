@@ -180,6 +180,9 @@ public class GameManager : Singleton<GameManager> {
         System.Globalization.CultureInfo modCulture = new System.Globalization.CultureInfo("en-US");
         modCulture.NumberFormat.CurrencyNegativePattern = 1;
         Thread.CurrentThread.CurrentCulture = modCulture;
+
+        // Limit the FPS for better battery life.
+        Application.targetFrameRate = 30;
     }
 
     public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
@@ -275,7 +278,7 @@ public class GameManager : Singleton<GameManager> {
     // ===============================================
 
     // In seconds
-    private static int weekTime = 6;
+    private static int weekTime = 3;
     private static float cycleTime = weekTime/12f;
     public static float CycleTime {
         get { return cycleTime; }

@@ -241,7 +241,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -136.5, z: 0}
+  m_LocalPosition: {x: 0, y: -152.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400012}
@@ -363,7 +363,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 539, y: 958, z: 0}
+  m_Size: {x: 540, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -483,7 +483,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: OK
-  mFontSize: 18
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -732,26 +732,20 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 1
   mWidth: 350
-  mHeight: 272
+  mHeight: 288
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.28676474
+  aspectRatio: 1.04166663
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: This is the message content. is the message content. is the message content.
     is the message content. is the message content. is the message content. is the
     message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-    is the message content. is the message content. is the message content. is the
-    message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-    is the message content. is the message content. is the message content. is the
-    message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-  mFontSize: 16
+    content. is the message content. is the message content.
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -827,7 +821,7 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 57
+  mHeight: 998474
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -958,8 +952,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 0}
   mPivot: 4
-  mWidth: 539
-  mHeight: 958
+  mWidth: 540
+  mHeight: 960
   mDepth: -1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0

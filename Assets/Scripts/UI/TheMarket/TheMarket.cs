@@ -135,6 +135,7 @@ public class TheMarket : MonoBehaviour {
 
     public void Close() {
         Reset();
+        marketAnalysis.Close_();
         gameObject.SetActive(false);
 
         // Emit the done event.

@@ -241,7 +241,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -168.5, z: 0}
+  m_LocalPosition: {x: 0, y: -176.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400012}
@@ -363,7 +363,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 539, y: 958, z: 0}
+  m_Size: {x: 540, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -406,7 +406,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
   mText: OK
-  mFontSize: 18
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -670,26 +670,20 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 1
   mWidth: 350
-  mHeight: 304
+  mHeight: 312
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.15131581
+  aspectRatio: 1.12179482
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
-  mText: This is the message content. is the message content. is the message content.
+  mText: 'This is the message content. is the message content. is the message content.
     is the message content. is the message content. is the message content. is the
     message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-    is the message content. is the message content. is the message content. is the
-    message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-    is the message content. is the message content. is the message content. is the
-    message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-  mFontSize: 16
+    content. is the message content. is the message content. is the message content. '
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -765,12 +759,12 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 25
+  mHeight: 482
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 14.3999996
+  aspectRatio: .746887982
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -941,8 +935,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 0}
   mPivot: 4
-  mWidth: 539
-  mHeight: 958
+  mWidth: 540
+  mHeight: 960
   mDepth: -1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0

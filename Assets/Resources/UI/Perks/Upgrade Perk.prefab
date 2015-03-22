@@ -285,7 +285,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -103.499847, z: 0}
+  m_LocalPosition: {x: 0, y: -115.49984, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400024}
@@ -635,7 +635,7 @@ MonoBehaviour:
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 1
   mWidth: 360
-  mHeight: 220
+  mHeight: 208
   mDepth: 9
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -730,17 +730,17 @@ MonoBehaviour:
   mColor: {r: .227941155, g: .227941155, b: .227941155, a: 1}
   mPivot: 1
   mWidth: 350
-  mHeight: 22
+  mHeight: 24
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 15.909091
+  aspectRatio: 175
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: Some Product
-  mFontSize: 22
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -1135,8 +1135,8 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: UPGRADE
-  mFontSize: 18
+  mText: Upgrade
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1360,18 +1360,18 @@ MonoBehaviour:
   mColor: {r: .220588207, g: .220588207, b: .220588207, a: 1}
   mPivot: 1
   mWidth: 350
-  mHeight: 54
+  mHeight: 66
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.48148155
+  aspectRatio: 175
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: A state-of-the-art neural-interface multiplexed dilithium-based multicore
     server.
-  mFontSize: 18
+  mFontSize: 22
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1

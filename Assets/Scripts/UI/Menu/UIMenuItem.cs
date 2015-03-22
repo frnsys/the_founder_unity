@@ -23,7 +23,7 @@ public class UIMenuItem : MonoBehaviour {
 
     void OnEnable() {
         if (wiggle && wiggler == null) {
-            wiggler = UIAnimator.PulseUI(transform, 1f, 1.05f, 4f);
+            wiggler = UIAnimator.PulseUI(transform, 1f, 1.25f, 4f);
             StartCoroutine(wiggler);
         }
     }

@@ -814,7 +814,7 @@ MonoBehaviour:
     relative: 0
     absolute: -12
   updateAnchors: 1
-  mColor: {r: .139705896, g: .139705896, b: .139705896, a: 1}
+  mColor: {r: .139705896, g: .139705896, b: .139705896, a: .65882355}
   mPivot: 1
   mWidth: 216
   mHeight: 104
@@ -827,7 +827,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: description
-  mFontSize: 18
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -843,6 +843,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0
@@ -932,6 +935,9 @@ MonoBehaviour:
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
   mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
   mShrinkToFit: 0
   mMaxLineWidth: 0
   mMaxLineHeight: 0

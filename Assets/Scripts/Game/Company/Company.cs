@@ -445,9 +445,9 @@ public class Company : HasStats {
         lastMonthRevenue = 0;
 
         if (Paid != null) {
-            Paid(salaries, "in salaries");
-            Paid(rent, "in rent");
-            Paid(taxes, "in taxes");
+            Paid(salaries, "for salaries");
+            Paid(rent, "for rent");
+            Paid(taxes, "for taxes");
         }
     }
 

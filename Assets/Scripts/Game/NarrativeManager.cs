@@ -203,7 +203,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         creInfo = shellInfo.Concat(creInfo).ToArray();
                         ob.SHELL = true;
                     }
-                    MentorMessages(creInfo);
+                    StartCoroutine(Delay(delegate(GameObject obj) { MentorMessages(creInfo); }, 1f));
                     ob.CREATIVITY_SHELL = true;
                 }
                 break;
@@ -218,7 +218,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         chaInfo = shellInfo.Concat(chaInfo).ToArray();
                         ob.SHELL = true;
                     }
-                    MentorMessages(chaInfo);
+                    StartCoroutine(Delay(delegate(GameObject obj) { MentorMessages(chaInfo); }, 1f));
                     ob.CHARISMA_SHELL = true;
                 }
                 break;
@@ -233,7 +233,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         cleInfo = shellInfo.Concat(cleInfo).ToArray();
                         ob.SHELL = true;
                     }
-                    MentorMessages(cleInfo);
+                    StartCoroutine(Delay(delegate(GameObject obj) { MentorMessages(cleInfo); }, 1f));
                     ob.CLEVERNESS_SHELL = true;
                 }
                 break;
@@ -395,7 +395,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Pick two product types and hit the button below to start developing the product."
                     });
 
-                } else if (data.company.availableInfrastructureCapacity < 2 && !ob.INFRASTRUCTURE) {
+                } else if (data.company.availableInfrastructure.total < 2 && !ob.INFRASTRUCTURE) {
                     MentorMessages(new string[] {
                         "It looks like you don't have enough infrastructure to start a new product!",
                         string.Format("You can buy more infrastructure in the {0} menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.", MenuHighlight("Infrastructure")),

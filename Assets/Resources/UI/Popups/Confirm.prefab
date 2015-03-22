@@ -374,7 +374,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 539, y: 958, z: 0}
+  m_Size: {x: 540, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -517,7 +517,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
   mText: No
-  mFontSize: 18
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -582,7 +582,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
   mText: Yes
-  mFontSize: 18
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -757,26 +757,20 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 1
   mWidth: 350
-  mHeight: 304
+  mHeight: 312
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.15131581
+  aspectRatio: .441919178
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
-  mText: This is the message content. is the message content. is the message content.
+  mText: 'This is the message content. is the message content. is the message content.
     is the message content. is the message content. is the message content. is the
     message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-    is the message content. is the message content. is the message content. is the
-    message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-    is the message content. is the message content. is the message content. is the
-    message content. is the message content. is the message content. is the message
-    content. is the message content. is the message content. is the message content.
-  mFontSize: 16
+    content. is the message content. is the message content. is the message content. '
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -1028,8 +1022,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 0}
   mPivot: 4
-  mWidth: 539
-  mHeight: 958
+  mWidth: 540
+  mHeight: 960
   mDepth: -1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0

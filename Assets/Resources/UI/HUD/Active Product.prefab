@@ -108,32 +108,32 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400008}
     relative: 0
-    absolute: 0
+    absolute: -4
   topAnchor:
     target: {fileID: 400008}
     relative: 1
-    absolute: 0
+    absolute: 4
   updateAnchors: 1
-  mColor: {r: .196078435, g: .196078435, b: .196078435, a: 1}
+  mColor: {r: .707720578, g: .771171391, b: .808823526, a: 1}
   mPivot: 4
   mWidth: 160
-  mHeight: 24
+  mHeight: 32
   mDepth: 22
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.66666651
+  aspectRatio: 5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
   mText: PRODUCT NAME
-  mFontSize: 16
+  mFontSize: 24
   mFontStyle: 1
   mAlignment: 1
   mEncoding: 1
   mMaxLineCount: 0
   mEffectStyle: 1
-  mEffectColor: {r: .845588207, g: .845588207, b: .845588207, a: 1}
+  mEffectColor: {r: 0, g: 0, b: 0, a: .443137258}
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
@@ -187,12 +187,12 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3
+  aspectRatio: 5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
   mFont: {fileID: 0}
   mText: $10,000
-  mFontSize: 16
+  mFontSize: 24
   mFontStyle: 1
   mAlignment: 3
   mEncoding: 0

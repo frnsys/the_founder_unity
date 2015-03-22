@@ -311,7 +311,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: Buy
-  mFontSize: 18
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -396,7 +396,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 215
+  aspectRatio: 7.16666651
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -614,7 +614,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.76851857
+  aspectRatio: 2.44871783
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -714,7 +714,7 @@ MonoBehaviour:
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: description
-  mFontSize: 20
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1

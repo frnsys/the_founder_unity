@@ -26,10 +26,6 @@ public class ProductType : SharedResource<ProductType> {
     public Infrastructure requiredInfrastructure;
     public bool isAvailable(Company company) {
         // Check that all required verticals are active on the company.
-        if (requiredVerticals.Except(company.verticals).Any())
-            return false;
-
-        // Check that the required infrastructure is available.
-        return company.availableInfrastructure >= requiredInfrastructure;
+        return !requiredVerticals.Except(company.verticals).Any();
     }
 }
