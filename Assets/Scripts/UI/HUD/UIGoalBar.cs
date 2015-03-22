@@ -18,7 +18,7 @@ public class UIGoalBar : MonoBehaviour {
     }
 
     void Update() {
-        goalLabel.text = string.Format("This year's Profit Target: {0:C0}/{1:C0}", company.annualProfit, gm.profitTarget);
+        goalLabel.text = string.Format("{0} Profit Target: {1:C0}/{2:C0}", GameManager.Instance.year, company.annualProfit, gm.profitTarget);
 
         if (company.annualProfit < 0) {
             background.color = dangerColor;

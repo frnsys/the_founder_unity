@@ -322,7 +322,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "Congratulations! This is your first write-up in a major publication.",
                     string.Format("This kind of mention has driven up the {0} for your company.", ConceptHighlight("hype")),
                     "Hype is central to your company's success. A hyped company's products sell much better.",
-                    string.Format("But hype is always deflating. Keep hyping your company by launching {0} from the {1} button below.", ConceptHighlight("promotional campaigns"), MenuHighlight("MarComm")),
+                    string.Format("But hype is always deflating. Keep hyping your company by launching {0} from the {1} below.", ConceptHighlight("promotional campaigns"), MenuHighlight("megaphone")),
                     string.Format("But note that some press can be negative. {0} hurts your company's image.", ConceptHighlight("Bad publicity")),
                     "Consumers aren't going to buy your products if they disagree with your decisions.",
                     "Fortunately, consumers forget things over time, and hype can counteract bad publicity."
@@ -330,7 +330,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 UIManager uim = UIManager.Instance;
                 uim.statusBar.hypeLabel.gameObject.SetActive(true);
                 uim.menu.Activate("Communications");
-            }));
+            }, 6f));
 
         } else if (ev.name == "RIVALCORP Founded") {
             StartCoroutine(Delay(delegate(GameObject obj) {
@@ -350,10 +350,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 UIManager.Instance.menu.Activate("Lobbying");
             }));
         }
-    }
-    private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
-        yield return StartCoroutine(GameTimer.Wait(delay));
-        callback(null);
     }
 
     public void Intro() {
@@ -469,13 +465,15 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "The spinning sphere at the top is the undeveloped product.",
                         "You need to launch the value your employees produce towards the product.",
                         "Employees can produce\n:CREATIVITY: [c][0078E1]design[-][/c],\n:CLEVERNESS: [c][0078E1]engineering[-][/c], or\n:CHARISMA: [c][0078E1]marketing[-][/c]\npoints for your products.",
-                        "Employees generate points depending on their skills. For instance, more creative employees generate more creativity points. More points = larger globs.",
-                        string.Format("The rate at which they produce these points depends on their :PRODUCTIVITY: {0}.", ConceptHighlight("productivity")),
+                        "Employees generate points depending on their skills.",
+                        "For instance, more creative employees generate more creativity points.",
+                        "Larger globs are worth more points.",
+                        string.Format("The rate at which employees produce these points depends on their :PRODUCTIVITY: {0}.", ConceptHighlight("productivity")),
                         string.Format("{0} an employee to capture the value they've produced.", InteractHighlight("tap")),
                         string.Format("Employees get {0} from working. If you don't let them rest, they will take extra time recovering.", ConceptHighlight("tired")),
                         "The bar below indicates how far along product development is. When it fills up, your product will be released to The Market!"
                     });
-                }, 2f));
+                }, 1f));
             }
             Company.BeganProduct -= BeganProduct;
         }
@@ -505,7 +503,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "A researcher's skill spends on their cleverness and productivity.",
                         "Once you assign a researcher, leave them be for a bit while they generate research points.",
                         "Check back often though, because researchers can only work so much before they have to rest!",
-                        "You can spend these research points to purchase new technologies. New technologies can unlock new product types, special projects, and provide other bonuses.",
+                        string.Format("You can spend these research points to purchase new {0}.", ConceptHighlight("technologies")),
+                        string.Format("New technologies can unlock new {0}, {1}, and provide other bonuses.", ConceptHighlight("product types"), ConceptHighlight("special projects")),
                         "Don't neglect research! Stay ahead of the competition!"
                     });
                     UIManager uim = UIManager.Instance;
@@ -630,26 +629,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    public string MenuHighlight(string s) {
-        return string.Format("[c][4B2FF8]{0}[-][/c]", s);
-    }
-    public string InteractHighlight(string s) {
-        return string.Format(":INTERACT: [c][1CD05E]{0}[-][/c]", s);
-    }
-    public string SpecialHighlight(string s) {
-        string[] colors = new string[] {
-            "FC5656", "FFC800", "78E09E", "79ECDD", "4B2FF8", "FD7EFF"
-        };
-        List<string> result = new List<string>();
-        for (int i=0; i<s.Length; i++) {
-            result.Add(string.Format("[{0}]{1}[-]", colors[i % colors.Length], s[i]));
-        }
-        return string.Format("[c]{0}[/c]", string.Concat(result.ToArray()));
-    }
-    public string ConceptHighlight(string s) {
-        return string.Format("[c][0078E1]{0}[-][/c]", s);
-    }
-
     public void GameLost() {
         MentorMessages(new string[] {
             "Appalled by your inability to maintain the growth they are legally entitled to, the board has forced your resignation. You lose.",
@@ -676,5 +655,30 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }, delegate(GameObject obj) {
             Application.LoadLevel("MainMenu");
         });
+    }
+
+    public string MenuHighlight(string s) {
+        return string.Format("[c][4B2FF8]{0}[-][/c]", s);
+    }
+    public string InteractHighlight(string s) {
+        return string.Format(":INTERACT: [c][1CD05E]{0}[-][/c]", s);
+    }
+    public string SpecialHighlight(string s) {
+        string[] colors = new string[] {
+            "FC5656", "FFC800", "78E09E", "79ECDD", "4B2FF8", "FD7EFF"
+        };
+        List<string> result = new List<string>();
+        for (int i=0; i<s.Length; i++) {
+            result.Add(string.Format("[{0}]{1}[-]", colors[i % colors.Length], s[i]));
+        }
+        return string.Format("[c]{0}[/c]", string.Concat(result.ToArray()));
+    }
+    public string ConceptHighlight(string s) {
+        return string.Format("[c][0078E1]{0}[-][/c]", s);
+    }
+
+    private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
+        yield return StartCoroutine(GameTimer.Wait(delay));
+        callback(null);
     }
 }

@@ -10,8 +10,9 @@ public class TheMarket : MonoBehaviour {
     public Transform[] pedestals;
     public Transform[] pedestalGroups;
     public MeshFilter[] products;
-    public TextMesh[] companyLabels;
+    public UILabel[] companyLabels;
     public TextMesh[] marketLabels;
+    public GameObject marketHud;
 
     void OnEnable() {
         if (GameManager.hasInstance)
@@ -28,6 +29,7 @@ public class TheMarket : MonoBehaviour {
     public void Setup(Product p) {
         Reset();
         gameObject.SetActive(true);
+        marketHud.SetActive(true);
         product = p;
 
         // Try to find two AI companies which are suitable competitors for this product.
@@ -136,6 +138,7 @@ public class TheMarket : MonoBehaviour {
     public void Close() {
         Reset();
         marketAnalysis.Close_();
+        marketHud.SetActive(false);
         gameObject.SetActive(false);
 
         // Emit the done event.

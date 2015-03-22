@@ -81,7 +81,10 @@ public class EventManager : MonoBehaviour {
             // resolve in the following iteration.
             if (ev.ConditionsSatisfied(data.company)) {
                 // We trigger the event by adding it to the regular event pool.
-                DelayTrigger(ev, 45f);
+                ev.probability = 1f;
+
+                // This is in number of weeks.
+                DelayTrigger(ev, 5f);
 
                 // Remove it now though so that it doesn't re-trigger.
                 if (!ev.repeatable)
