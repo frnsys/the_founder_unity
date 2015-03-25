@@ -13,11 +13,11 @@ public class OpinionEvent {
     public StatBuff publicity;
 
     public OpinionEvent() {
-        opinion   = new StatBuff("Opinion", 0);
+        opinion   = new StatBuff("Outrage", 0);
         publicity = new StatBuff("Hype", 0);
     }
     public OpinionEvent(float o, float p) {
-        opinion   = new StatBuff("Opinion", o);
+        opinion   = new StatBuff("Outrage", o);
         publicity = new StatBuff("Hype", p);
     }
 

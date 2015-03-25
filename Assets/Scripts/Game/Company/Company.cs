@@ -49,7 +49,7 @@ public class Company : HasStats {
         marketShare = 0;
         marketSharePercent = 0;
 
-        opinion = new Stat("Opinion", 1);
+        opinion = new Stat("Outrage", 1);
         opinionEvents = new List<OpinionEvent>();
         publicity = new Stat("Hype", 0);
 
