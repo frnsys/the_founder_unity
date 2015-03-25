@@ -3,11 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ProductScroller : MonoBehaviour {
-    public GameObject workerGroup;
+    public GameObject player;
+
+    void OnEnable() {
+        // TO DO set box collider to be full screen
+    }
 
     void OnDrag(Vector2 delta) {
+        // TO DO add bounding to movement
+        // TO DO tilt left/right
         Vector3 drag = Vector3.zero;
         drag.x = delta.x * 0.005f;
-        workerGroup.transform.localPosition = workerGroup.transform.localPosition + drag;
+        drag.y = delta.y * 0.005f;
+        player.transform.localPosition += drag;
     }
 }

@@ -120,12 +120,10 @@ public class UIEmployee : MonoBehaviour {
     }
 
     public void GoToDesk() {
-        Debug.Log("GOING TO DESK!");
         state = State.GoingToDesk;
         target = transform.parent.TransformDirection(desk.transform.position);
     }
     public void LeaveDesk() {
-        Debug.Log("LEAVING DESK!");
         state = State.Wandering;
         target = RandomTarget();
     }

@@ -13,9 +13,9 @@ using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager> {
     public ProductMinigame pm;
-    public void LaunchProductMinigame(Product p) {
+    public void LaunchProductMinigame(Product p, Company c) {
         pm.gameObject.SetActive(true);
-        pm.Setup(p);
+        pm.Setup(p, c);
     }
 
     private GameManager gm;
@@ -133,7 +133,7 @@ public class UIManager : Singleton<UIManager> {
         if (c == gm.playerCompany) {
             productHud.SetActive(true);
             hud.SetActive(false);
-            LaunchProductMinigame(p);
+            LaunchProductMinigame(p, c);
         }
     }
 

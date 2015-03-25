@@ -284,22 +284,15 @@ public class Company : HasStats {
         lifetimeRevenue += newRevenue;
     }
 
-    public void DevelopProduct() {
-        if (developingProduct != null) {
-            bool completed = developingProduct.Develop(1f, this);
-            if (completed) {
-                UpdateProductSynergies();
+    public void CompletedProduct(Product p) {
+        UpdateProductSynergies();
 
-                // Apply relevant effects to the product
-                foreach (EffectSet es in activeEffects) {
-                    es.Apply(developingProduct);
-                }
-
-                developingProduct = null;
-
-                // The product's effects are applied by the GameManager.
-            }
+        // Apply relevant effects to the product
+        foreach (EffectSet es in activeEffects) {
+            es.Apply(p);
         }
+
+        // The product's effects are applied by the GameManager.
     }
 
     static public event System.Action Synergy;

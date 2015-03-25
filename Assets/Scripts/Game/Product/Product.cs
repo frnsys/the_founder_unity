@@ -188,20 +188,12 @@ public class Product : HasStats {
 
 
     static public event System.Action<Product, Company> Completed;
-    public bool Develop(float newProgress, Company company) {
-        if (developing && !disabled) {
-            _progress += newProgress;
-
-            if (_progress >= requiredProgress) {
-                Launch(company);
-                // Trigger completed event.
-                if (Completed != null) {
-                    Completed(this, company);
-                }
-                return true;
-            }
+    public void Complete(Company company) {
+        Launch(company);
+        // Trigger completed event.
+        if (Completed != null) {
+            Completed(this, company);
         }
-        return false;
     }
 
 
