@@ -29,9 +29,7 @@ public class ProductPlayer : MonoBehaviour {
             ProductLabor pl = other.GetComponent<ProductLabor>();
             if (!shield) {
                 Hit(pl.type, pl.points);
-                health -= 0.4f;
-                if (health <= 0 && Died != null)
-                    Died();
+                Died();
             }
             pl.Reset();
 
@@ -58,13 +56,17 @@ public class ProductPlayer : MonoBehaviour {
         maxHealth = w.productivity.value;
         health = maxHealth;
         StartCoroutine(UIAnimator.Bloop(transform, 0, 1f, 4f));
+        dead = false;
     }
 
     void Update() {
         health -= 0.4f * Time.deltaTime;
-        if (health <= 0 && Died != null)
+        if (health <= 0 && !dead && Died != null) {
+            dead = true;
             Died();
+        }
     }
+    private bool dead = false;
 
     void OnDrag(Vector2 delta) {
         // TO DO add bounding to movement

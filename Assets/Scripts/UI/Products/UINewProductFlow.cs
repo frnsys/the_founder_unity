@@ -136,7 +136,7 @@ public class UINewProductFlow : MonoBehaviour {
         return (gm.playerCompany.availableInfrastructure - SelectedInfrastructure()) >= pt.requiredInfrastructure;
     }
     private Infrastructure MissingInfrastructureFor(ProductType pt) {
-        return pt.requiredInfrastructure - gm.playerCompany.availableInfrastructure - SelectedInfrastructure();
+        return pt.requiredInfrastructure - (gm.playerCompany.availableInfrastructure - SelectedInfrastructure());
     }
     private Infrastructure SelectedInfrastructure() {
         Infrastructure selectionInf = new Infrastructure();

@@ -23,6 +23,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         public bool SPECIALPROJECTS_UNLOCKED;
         public bool RESEARCH_OPENED;
         public bool HYPE_MINIGAME;
+        public bool HIRED_EMPLOYEE;
         public bool SYNERGY;
     }
 
@@ -129,7 +130,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         THE_MARKET_DONE,
         OPENED_RECRUITING,
         OPENED_HIRING,
-        HIRED_EMPLOYEE,
         RESEARCH,
         GAME_GOALS,
     }
@@ -401,16 +401,17 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Great! You've started developing your first product.",
-                        "The spinning sphere at the top is the undeveloped product.",
-                        "You need to launch the value your employees produce towards the product.",
-                        "Employees can produce\n:CREATIVITY: [c][0078E1]design[-][/c],\n:CLEVERNESS: [c][0078E1]engineering[-][/c], or\n:CHARISMA: [c][0078E1]marketing[-][/c]\npoints for your products.",
-                        "Employees generate points depending on their skills.",
-                        "For instance, more creative employees generate more creativity points.",
+                        "Now you are in the zone to build something great.",
+                        "Collect as many product points as you can.",
+                        "There are \n:CREATIVITY: [c][0078E1]design[-][/c],\n:CLEVERNESS: [c][0078E1]engineering[-][/c], or\n:CHARISMA: [c][0078E1]marketing[-][/c]\nproduct points available.",
                         "Larger globs are worth more points.",
-                        string.Format("The rate at which employees produce these points depends on their :PRODUCTIVITY: {0}.", ConceptHighlight("productivity")),
-                        string.Format("{0} an employee to capture the value they've produced.", InteractHighlight("tap")),
-                        string.Format("Employees get {0} from working. If you don't let them rest, they will take extra time recovering.", ConceptHighlight("tired")),
-                        "The bar below indicates how far along product development is. When it fills up, your product will be released to The Market!"
+                        "Your employees will take turns collecting points.",
+                        string.Format("They will last a limited amount of time depending on their {0}.", ConceptHighlight("productivity")),
+                        string.Format("Sometimes you will see {0} to help your employees out.", ConceptHighlight("powerups")),
+                        string.Format("The {0} your employees are, the more powerups you'll see.", ConceptHighlight("happier")),
+                        string.Format("Finally, you may encounter {0} which will tire your employees out and cost you hard-earned points.", ConceptHighlight("hazards")),
+                        string.Format("The more {0} there is towards your company, the more likely you are to encounter hazards.", ConceptHighlight("outrage")),
+                        string.Format("When all your employees have gone, your product will be released to {0}!", SpecialHighlight("The Market"))
                     });
                 }, 1f));
             }
@@ -450,12 +451,14 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     void WorkerHired(Worker w, Company c) {
         if (c == data.company) {
-            if (Stage(OBS.HIRED_EMPLOYEE)) {
+            if (!ob.HIRED_EMPLOYEE) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Great, you have an employee now. See if you can build a new, better product."
                     });
+                    UIManager.Instance.menu.Deactivate("New Product");
                     UIManager.Instance.menu.Activate("New Product");
+                    ob.HIRED_EMPLOYEE = true;
                 }, 1f));
             } else if (!ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
                 StartCoroutine(Delay(delegate(GameObject obj) {

@@ -32,11 +32,8 @@ public class WorkerManager : MonoBehaviour {
     }
 
     public List<Worker> WorkersForRecruitment(Recruitment r) {
-        // This randomly sorts the available workers,
-        // takes the first 10, and then randomly selects them based on their
-        // scores and the recruitment strategy's target score.
-        return AvailableWorkers.OrderBy(i => Random.value).Take(10)
-            .Where(w => w.robot == r.robots && Random.value < 1 - Mathf.Abs(w.score - r.targetScore)/r.targetScore).ToList();
+        IEnumerable<Worker> ws = AvailableWorkers.Where(w => w.robot == r.robots && Random.value < 1 - Mathf.Abs(w.score - r.targetScore)/r.targetScore).OrderBy(i => Random.value);
+        return ws.Take(Random.Range(1, ws.Count())).ToList();
     }
 
     // If a worker is at a company,

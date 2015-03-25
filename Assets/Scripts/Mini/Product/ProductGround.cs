@@ -15,7 +15,7 @@ public class ProductGround : MonoBehaviour {
     private int lastRow;
     private GameObject lastRowRep;
 
-    private float side = 2;
+    private float side = 6;
     private float z;
     private Vector3 refPoint;
     private Vector3 refPoint_;
@@ -44,20 +44,16 @@ public class ProductGround : MonoBehaviour {
 
                 // j is -1 for the padding rowGroups.
                 groundObj.transform.position = new Vector3(refPoint.x + (side * i), refPoint_.y - (side * j - 2), z - height/2);
-
-                Vector3 dir = new Vector3(0, -1, 0);
-                float speed = 200;
-                float speedLimit = 200;
-                groundObj.rigidbody.AddForce(Vector3.ClampMagnitude(dir * speed, speedLimit));
             }
         }
 
         lastRow = rowGroups.Count - 1;
         lastRowRep = rowGroups[lastRow].transform.GetChild(0).gameObject;
-    }
 
-    void Reset() {
-        // TO DO
+        Vector3 dir = new Vector3(0, -1, 0);
+        float speed = 200;
+        float speedLimit = 200;
+        group.rigidbody.AddForce(Vector3.ClampMagnitude(dir * speed, speedLimit));
     }
 
     void Start() {

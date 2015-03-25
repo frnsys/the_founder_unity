@@ -12,7 +12,8 @@ public class ProductGravity : MonoBehaviour {
     void OnTriggerStay(Collider other) {
         if (other.name == "Labor" || other.name == "Hazard") {
             Vector3 diff = player.position - other.transform.position;
-            diff.y *= 20;
+            if (diff.y > 0)
+                diff.y *= 20;
             other.rigidbody.AddForce(diff.normalized * gravity);
             //other.rigidbody.AddForce(Force(other.transform));
         }

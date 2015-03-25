@@ -54,21 +54,20 @@ public class ProductMinigame : MonoBehaviour {
             labors.Add(pl);
         }
 
-        hazardChance = 0.001f + Mathf.Max(-1 * c.opinion.value, 0) / 1000;
+        hazardChance = 0.02f + Mathf.Max(-1 * c.opinion.value, 0) / 1000;
         powerupChance = 0.0005f + aggHap / 1000;
-    }
 
-    void OnDisable() {
-        officeCamera.SetActive(true);
-        officeCameraController.SetActive(true);
-        EventTimer.Resume();
-        Reset();
+        StartCoroutine(Spawn());
     }
 
     void Reset() {
         // Clean up labors.
         for (int i = laborGroup.transform.childCount - 1; i >= 0; i--) {
             GameObject go = laborGroup.transform.GetChild(i).gameObject;
+            Destroy(go);
+        }
+        for (int i = livesGrid.transform.childCount - 1; i >= 0; i--) {
+            GameObject go = livesGrid.transform.GetChild(i).gameObject;
             Destroy(go);
         }
 
@@ -84,12 +83,21 @@ public class ProductMinigame : MonoBehaviour {
     }
 
     private Company company;
-    void Start() {
-        StartCoroutine(Spawn());
+    void OnEnable() {
         ProductPlayer.Scored += Scored;
         ProductPlayer.Died += Died;
         ProductPlayer.Hit += Hit;
         company = GameManager.Instance.playerCompany;
+    }
+    void OnDisable() {
+        ProductPlayer.Scored -= Scored;
+        ProductPlayer.Died -= Died;
+        ProductPlayer.Hit -= Hit;
+
+        officeCamera.SetActive(true);
+        officeCameraController.SetActive(true);
+        EventTimer.Resume();
+        Reset();
     }
 
     private float hazardChance;
@@ -98,6 +106,7 @@ public class ProductMinigame : MonoBehaviour {
     IEnumerator Spawn() {
         while (true) {
             ProductLabor labor = labors.FirstOrDefault(l => l.available);
+            Debug.Log(labor);
             if (labor != null) {
                 labor.available = false;
 
@@ -210,6 +219,8 @@ public class ProductMinigame : MonoBehaviour {
     }
 
     void Died() {
+        Debug.Log(workers);
+        Debug.Log(workers.Count);
         if (workers.Count > 1) {
             workers.RemoveAt(0);
             player.Respawn(workers[0]);
