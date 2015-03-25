@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Shield
+  m_Shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords:
+  - _EMISSIVE_ONOFF_ON
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 131244474c0a5473c92aaaa68ce0d7fa, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BumpMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Illum
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ParallaxMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Diffuse
+        second:
+          m_Texture: {fileID: 2800000, guid: 6dcc0912e94b245a8afe9a109a66f4e6, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Emissive
+        second:
+          m_Texture: {fileID: 2800000, guid: 6dcc0912e94b245a8afe9a109a66f4e6, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Specular
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Normal
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _GlowExtrusion_Texture
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _Shininess
+        second: .699999988
+      data:
+        first:
+          name: _EmissionLM
+        second: 0
+      data:
+        first:
+          name: _Parallax
+        second: .0199999996
+      data:
+        first:
+          name: _Outline
+        second: .0142857144
+      data:
+        first:
+          name: _Emissive_OnOff
+        second: 1
+      data:
+        first:
+          name: _Pulse_Speed
+        second: 3
+      data:
+        first:
+          name: _Fresnel_Width
+        second: 2.875
+      data:
+        first:
+          name: _Outline_Width
+        second: .0199999996
+      data:
+        first:
+          name: _Specular_Power
+        second: 1
+      data:
+        first:
+          name: _Normal_Intensity
+        second: 1
+      data:
+        first:
+          name: _Pan_Speed_Y
+        second: 1
+      data:
+        first:
+          name: _Pan_Speed_X
+        second: 1
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: .87843138, g: 1, b: .984313726, a: .392156869}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 0, g: 1, b: .379310369, a: 1}
+      data:
+        first:
+          name: _Fresnel_Color
+        second: {r: .647058845, g: .456747413, b: .456747413, a: 1}
+      data:
+        first:
+          name: _Outline_Color
+        second: {r: 1, g: .492647052, b: .492647052, a: 1}
+      data:
+        first:
+          name: _Highlight_Color
+        second: {r: 1, g: .492647052, b: .492647052, a: 1}

@@ -13,12 +13,17 @@ public class ProductLabor : MonoBehaviour {
     protected bool isVisible {
         get { return !(seen && !renderer.isVisible); }
     }
+    public bool available = true;
 
     public enum Type {
         Creativity,
         Cleverness,
         Charisma,
-        Breakthrough
+        Outrage,
+        Block,
+        Bug,
+        Coffee,
+        Insight
     }
     public Type type;
     public float points = 1;
@@ -26,18 +31,22 @@ public class ProductLabor : MonoBehaviour {
     public static Type RandomType {
         get {
             Array types = Enum.GetValues(typeof(Type));
-            // types.Length - 1 because w don't want to include Breakthrough.
-            return (Type)types.GetValue(UnityEngine.Random.Range(0, types.Length - 1));
+            return (Type)types.GetValue(UnityEngine.Random.Range(0, 3));
         }
     }
 
-    public void Fire() {
-        rigidbody.isKinematic = false;
-        Vector3 dir = new Vector3(UnityEngine.Random.value - 0.5f, 1, 0);
-        rigidbody.AddForce(Vector3.ClampMagnitude(dir * speed, speedLimit));
+    public static Type RandomHazard {
+        get {
+            Array types = Enum.GetValues(typeof(Type));
+            return (Type)types.GetValue(UnityEngine.Random.Range(3, 6));
+        }
+    }
 
-        // Hacky, but reparent the Labor so that it doesn't move with the worker group.
-        transform.parent = transform.parent.parent.parent.Find("Labor Group");
+    public static Type RandomPowerup {
+        get {
+            Array types = Enum.GetValues(typeof(Type));
+            return (Type)types.GetValue(UnityEngine.Random.Range(6, 8));
+        }
     }
 
     void OnEnable() {
@@ -48,12 +57,15 @@ public class ProductLabor : MonoBehaviour {
         if (renderer.isVisible)
             seen = true;
 
-        // Check if it is no longer visible,
-        // and if it is not kinematic.
-        // If it is kinematic, it means
-        // it's attached to the product.
-        if (!isVisible && !rigidbody.isKinematic) {
-            Destroy(gameObject);
+        // Check if it is no longer visible.
+        if (!isVisible) {
+            Reset();
         }
+    }
+
+    public void Reset() {
+        gameObject.SetActive(false);
+        available = true;
+        seen = false;
     }
 }

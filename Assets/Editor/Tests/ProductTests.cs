@@ -66,28 +66,6 @@ namespace UnityTest
 		}
 
 		[Test]
-		public void Develop() {
-            Assert.AreEqual(p.state, Product.State.DEVELOPMENT);
-            Assert.AreEqual(p.progress, 0);
-
-            p.Develop(100000, c);
-
-            Assert.AreEqual(p.progress, 100000/p.requiredProgress);
-            Assert.AreEqual(p.state, Product.State.LAUNCHED);
-        }
-
-		[Test]
-		public void Develop_Disabled() {
-            Assert.AreEqual(p.state, Product.State.DEVELOPMENT);
-            Assert.AreEqual(p.progress, 0);
-
-            p.disabled = true;
-            p.Develop(100000, c);
-
-            Assert.AreEqual(p.progress, 0);
-        }
-
-		[Test]
 		public void Revenue_NotLaunched() {
             Assert.AreNotEqual(p.state, Product.State.LAUNCHED);
             Assert.AreEqual(p.Revenue(10, c), 0);
@@ -251,13 +229,14 @@ namespace UnityTest
 
             // Complete the project so that the effects are applied.
             c.StartNewProduct(pts, 0, 0, 0);
-            c.products[0].Develop(100000, c);
+            // TO DO
+            //c.products[0].Develop(100000, c);
             Assert.AreEqual(c.products[0].state, Product.State.LAUNCHED);
             Assert.AreEqual(c.research.value, start + e.research.value);
 
             // Complete a duplicate product.
             c.StartNewProduct(pts, 0, 0, 0);
-            c.products[1].Develop(100000, c);
+            //c.products[1].Develop(100000, c);
             Assert.AreEqual(c.products[1].state, Product.State.LAUNCHED);
 
             // Effect should have only been applied once.

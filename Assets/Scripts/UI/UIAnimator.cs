@@ -25,7 +25,7 @@ public class UIAnimator : MonoBehaviour {
         }
     }
 
-    public static IEnumerator Scale(Transform t, float from, float to, float step) {
+    public static IEnumerator Scale(Transform t, float from, float to, float step, Action callback = null) {
         Vector3 fromScale = new Vector3(from, from, from);
         Vector3 toScale = new Vector3(to,to,to);
 
@@ -33,6 +33,9 @@ public class UIAnimator : MonoBehaviour {
             t.localScale = Vector3.Lerp(fromScale, toScale, Mathf.SmoothStep(0f, 1f, f));
             yield return null;
         }
+
+        if (callback != null)
+            callback();
     }
 
     public static IEnumerator Bloop(Transform t, float from, float to, float step) {

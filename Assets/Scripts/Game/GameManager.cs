@@ -172,7 +172,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
 
             // Uncomment this if you want to start the game with onboarding.
-            narrativeManager.InitializeOnboarding();
+            //narrativeManager.InitializeOnboarding();
         }
 #endif
 
@@ -212,7 +212,6 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(Monthly());
         StartCoroutine(Yearly());
 
-        StartCoroutine(ProductDevelopmentCycle());
         StartCoroutine(ProductRevenueCycle());
         StartCoroutine(ResearchCycle());
         StartCoroutine(OpinionCycle());
@@ -420,17 +419,6 @@ public class GameManager : Singleton<GameManager> {
             //GameData.Save(data);
 
             yield return StartCoroutine(GameTimer.Wait(weekTime));
-        }
-    }
-
-    IEnumerator ProductDevelopmentCycle() {
-        yield return StartCoroutine(GameTimer.Wait(cycleTime));
-        while(true) {
-            playerCompany.DevelopProduct();
-
-            // Add a bit of randomness to give things
-            // a more "natural" feel.
-            yield return StartCoroutine(GameTimer.Wait(cycleTime * Random.Range(0.4f, 1.4f)));
         }
     }
 

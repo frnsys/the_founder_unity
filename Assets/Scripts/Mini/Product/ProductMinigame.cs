@@ -5,64 +5,57 @@ using System.Collections.Generic;
 
 public class ProductMinigame : MonoBehaviour {
 
-    public GameObject[] laborPrefabs;
+    public Camera camera;
+    public GameObject laborPrefab;
+    public Mesh[] laborMeshes;
     public GameObject laborGroup;
-    public GameObject workerGroup;
-    public ProductShell shell;
-    public ProductTarget target;
-    public ProductLabor.Type primaryType;
-    public GameObject blackHole;
+    public ProductPlayer player;
 
     public GameObject officeCamera;
     public GameObject officeCameraController;
 
-    private float shellChance;
-    private float blackholeChance;
+    private float aggCre = 0;
+    private float aggCle = 0;
+    private float aggCha = 0;
+    private float aggPro = 0;
+    private float aggHap = 0;
+    private List<Worker> workers;
+    private Product product;
 
-    public void Setup(Product p) {
+    public void Setup(Product p, Company c) {
+        product = p;
+
         officeCamera.SetActive(false);
         officeCameraController.SetActive(false);
-
-        switch (p.Recipe.primaryFeature) {
-            case ProductRecipe.Feature.Design:
-                primaryType = ProductLabor.Type.Creativity;
-                break;
-            case ProductRecipe.Feature.Engineering:
-                primaryType = ProductLabor.Type.Cleverness;
-                break;
-            case ProductRecipe.Feature.Marketing:
-                primaryType = ProductLabor.Type.Charisma;
-                break;
-        }
-
-        float workerWidth = 0.5f;
-        workers = new List<ProductWorker>();
-        List<Worker> ws = GameManager.Instance.playerCompany.productWorkers.ToList();
-        for (int i=0; i < ws.Count; i++) {
-            GameObject worker = Instantiate(workerPrefab) as GameObject;
-            ProductWorker pw = worker.GetComponent<ProductWorker>();
-            pw.Setup(ws[i], workerGroup);
-            worker.transform.parent = workerGroup.transform;
-
-            Vector3 pos = Vector3.zero;
-            pos.x = i * workerWidth - ((workerWidth * ws.Count)/2);
-            pos.y = 0.3f;
-            worker.transform.localPosition = pos;
-
-            workers.Add(pw);
-        }
-
-        // Probability of a shell appearing is based on product difficulty.
-        shellChance = 0.0001f * p.Recipe.featureIdeal;
-        blackholeChance = 0.00001f;
-
-        // But for the company's first product, the chance is zero (shells are introduced later).
-        if (GameManager.Instance.playerCompany.products.Count == 1) {
-            shellChance = 0;
-            blackholeChance = 0;
-        }
-
         EventTimer.Pause();
+
+        labors = new List<ProductLabor>();
+        workers = c.productWorkers.ToList();
+        foreach (Worker w in workers) {
+            aggCre += w.creativity.value;
+            aggCle += w.cleverness.value;
+            aggCha += w.charisma.value;
+            aggPro += w.productivity.value;
+            aggHap += w.happiness.value;
+            GameObject live = NGUITools.AddChild(livesGrid.gameObject, livePrefab);
+            live.transform.Find("Object").renderer.material = w.material;
+        }
+        livesGrid.Reposition();
+        player.Setup(workers[0]);
+
+        // Create the labor pool.
+        int numLabors = (int)(aggPro * 1.5f);
+        for (int i=0; i < numLabors; i++) {
+            GameObject labor = Instantiate(laborPrefab) as GameObject;
+            labor.name = "Labor";
+            labor.transform.parent = laborGroup.transform;
+            ProductLabor pl = labor.GetComponent<ProductLabor>();
+            pl.Reset();
+            labors.Add(pl);
+        }
+
+        hazardChance = 0.001f + Mathf.Max(-1 * c.opinion.value, 0) / 1000;
+        powerupChance = 0.0005f + aggHap / 1000;
     }
 
     void OnDisable() {
@@ -73,12 +66,6 @@ public class ProductMinigame : MonoBehaviour {
     }
 
     void Reset() {
-        // Clean up workers.
-        for (int i = workerGroup.transform.childCount - 1; i >= 0; i--) {
-            GameObject go = workerGroup.transform.GetChild(i).gameObject;
-            Destroy(go);
-        }
-
         // Clean up labors.
         for (int i = laborGroup.transform.childCount - 1; i >= 0; i--) {
             GameObject go = laborGroup.transform.GetChild(i).gameObject;
@@ -89,48 +76,77 @@ public class ProductMinigame : MonoBehaviour {
         charismaPoints = 0;
         clevernessPoints = 0;
 
-        target.Reset();
+        aggCre = 0;
+        aggCle = 0;
+        aggCha = 0;
+        aggPro = 0;
+        aggHap = 0;
     }
 
     private Company company;
     void Start() {
-        // This is for testing.
-        //StartCoroutine(Spawn());
-
-        ProductShell.Bug += Debugging;
-        ProductShell.Broken += Broken;
-        ProductTarget.Scored += Scored;
-        Product.Completed += Completed;
+        StartCoroutine(Spawn());
+        ProductPlayer.Scored += Scored;
+        ProductPlayer.Died += Died;
+        ProductPlayer.Hit += Hit;
         company = GameManager.Instance.playerCompany;
     }
 
-    private List<ProductWorker> workers;
-    public GameObject workerPrefab;
-
-    void Debugging() {
-        List<ProductWorker> freeWorkers = workers.Where(w => w.debugging == 0).ToList();
-
-        if (freeWorkers.Count > 0) {
-            freeWorkers[Random.Range(0, freeWorkers.Count)].StartDebugging();
-        }
-    }
-
+    private float hazardChance;
+    private float powerupChance;
+    private List<ProductLabor> labors;
     IEnumerator Spawn() {
         while (true) {
-            GameObject labor = Instantiate(laborPrefabs[Random.Range(0, laborPrefabs.Length)]) as GameObject;
-            labor.name = "Labor";
-            labor.transform.parent = laborGroup.transform;
-            labor.transform.localPosition = Vector3.zero;
-            labor.SetActive(true);
-            labor.GetComponent<ProductLabor>().Fire();
+            ProductLabor labor = labors.FirstOrDefault(l => l.available);
+            if (labor != null) {
+                labor.available = false;
+
+                if (Random.value < hazardChance) {
+                    labor.type = ProductLabor.RandomHazard;
+                    labor.name = "Hazard";
+                    labor.points = 4f; // so that they are larger scaled
+                } else if (Random.value < powerupChance) {
+                    labor.type = ProductLabor.RandomPowerup;
+                    labor.name = "Powerup";
+                    labor.points = 2f; // so that they are larger scaled
+                } else {
+                    labor.type = ProductLabor.RandomType;
+                    labor.name = "Labor";
+
+                    switch (labor.type) {
+                        case ProductLabor.Type.Creativity:
+                            labor.points = 1 + Random.value * aggCre/2;
+                            break;
+                        case ProductLabor.Type.Cleverness:
+                            labor.points = 1 + Random.value * aggCle/2;
+                            break;
+                        case ProductLabor.Type.Charisma:
+                            labor.points = 1 + Random.value * aggCha/2;
+                            break;
+                    }
+                }
+
+                labor.GetComponent<MeshFilter>().mesh = laborMeshes[(int)labor.type];
+
+                SetupLabor(labor.gameObject);
+            }
             yield return new WaitForSeconds(0.2f);
         }
     }
 
-    void Completed(Product p, Company c) {
-        if (c == company) {
-            // End the game.
-            gameObject.SetActive(false);
+    void SetupLabor(GameObject labor) {
+        float x = Random.value;
+        float z = camera.WorldToViewportPoint(player.transform.position).z;
+        Vector3 start = camera.ViewportToWorldPoint(new Vector3(Random.value, 1, z));
+        start.z = 0;
+        labor.transform.position = start;
+        labor.SetActive(true);
+
+        if (labor.rigidbody.velocity == Vector3.zero) {
+            Vector3 dir = new Vector3(0, -1, 0);
+            float speed = 200;
+            float speedLimit = 200;
+            labor.rigidbody.AddForce(Vector3.ClampMagnitude(dir * speed, speedLimit));
         }
     }
 
@@ -154,56 +170,63 @@ public class ProductMinigame : MonoBehaviour {
         }
     }
 
-    // Breaking shells scores you points for that shell's type.
-    void Broken(ProductLabor.Type t) {
-        Scored(t, 50);
+    void Hit(ProductLabor.Type t, float points) {
+        switch (t) {
+            case ProductLabor.Type.Outrage:
+                charismaPoints -= points;
+                break;
+            case ProductLabor.Type.Block:
+                creativityPoints -= points;
+                break;
+            case ProductLabor.Type.Bug:
+                clevernessPoints -= points;
+                break;
+
+            case ProductLabor.Type.Coffee:
+                StartCoroutine(Coffee());
+                break;
+            case ProductLabor.Type.Insight:
+                StartCoroutine(Insight());
+                break;
+        }
     }
 
+    IEnumerator Coffee() {
+        float oldGravity = player.gravity.gravity;
+        player.gravity.gravity = 0.5f;
+        yield return new WaitForSeconds(6f);
+        player.gravity.gravity = oldGravity;
+    }
 
-    public UIProgressBar shellHealth;
-    public UIProgressBar shellTimer;
-    public UIProgressBar productProgressBar;
+    IEnumerator Insight() {
+        player.shield = true;
+        yield return new WaitForSeconds(4f);
+        player.shield = false;
+    }
+
+    void Died() {
+        if (workers.Count > 1) {
+            workers.RemoveAt(0);
+            player.Respawn(workers[0]);
+            NGUITools.Destroy(livesGrid.transform.GetChild(0));
+            livesGrid.Reposition();
+        } else {
+            // End the game.
+            product.Complete(company);
+            gameObject.SetActive(false);
+        }
+    }
+
+    public UIProgressBar healthBar;
     public UIProgressBar creativityBar;
     public UIProgressBar charismaBar;
     public UIProgressBar clevernessBar;
+    public UIGrid livesGrid;
+    public GameObject livePrefab;
     void Update() {
-        productProgressBar.value = company.developingProduct.progress;
+        healthBar.value = player.health/player.maxHealth;
         creativityBar.value = creativityPoints/200;
         charismaBar.value = charismaPoints/200;
         clevernessBar.value = clevernessPoints/200;
-
-        // Randomly spawn shells.
-        if (!shell.active && Random.value < shellChance) {
-            if (Random.value < 0.5) {
-                shell.type = primaryType;
-            } else {
-                shell.type = ProductLabor.RandomType;
-            }
-            shell.gameObject.SetActive(true);
-            shellHealth.gameObject.SetActive(true);
-            shellTimer.gameObject.SetActive(true);
-
-            if (Shell != null)
-                Shell(shell.type);
-
-        } else if (!blackHole.active && Random.value < blackholeChance) {
-            // Black hole
-            blackHole.SetActive(true);
-            blackHole.transform.localPosition = new Vector3(-1.8f + Random.value * 3.6f, 2.25f + Random.value * 2.25f, 0);
-
-            if (BlackHole != null)
-                BlackHole();
-        }
-
-        if (shell.active) {
-            shellHealth.value = shell.health/shell.maxHealth;
-            shellTimer.value = shell.time/shell.maxTime;
-        } else {
-            shellHealth.gameObject.SetActive(false);
-            shellTimer.gameObject.SetActive(false);
-        }
     }
-    static public event System.Action<ProductLabor.Type> Shell;
-    static public event System.Action BlackHole;
-
 }

@@ -280,29 +280,13 @@ namespace UnityTest
         }
 
 		[Test]
-		public void DevelopProduct() {
-            c.HireWorker(worker);
-
-            worker.productivity.baseValue = 10;
-            worker.charisma.baseValue = 10;
-            worker.creativity.baseValue = 10;
-            worker.cleverness.baseValue = 10;
-
-            Product p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pts, 0, 0, 0, c);
-            c.developingProduct = p;
-            c.DevelopProduct();
-
-            Assert.IsTrue(p.progress > 0);
-        }
-
-		[Test]
 		public void HarvestProduct() {
             c.cash.baseValue = 2000;
 
             c.StartNewProduct(pts, 1, 1, 1);
             Product p = c.products[0];
-            c.DevelopProduct();
+            // TO DO
+            //c.DevelopProduct();
 
             p.Launch(c);
             Assert.AreEqual(c.activeProducts[0], p);
@@ -320,7 +304,8 @@ namespace UnityTest
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             p.requiredProgress = 0;
-            c.DevelopProduct();
+            // TO DO
+            //c.DevelopProduct();
             Assert.AreEqual(c.activeProducts[0], p);
             //Assert.AreEqual(p.design.value, 10);
 
