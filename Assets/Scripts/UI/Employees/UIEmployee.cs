@@ -15,12 +15,9 @@ public class UIEmployee : MonoBehaviour {
     public Worker worker;
 
     [SerializeField, HideInInspector]
-    private Office.Desk desk;
-    [SerializeField, HideInInspector]
     private State state = State.Wandering;
 
     private NavMeshAgent agent;
-    private LineRenderer line;
     private Company company;
 
     [HideInInspector]
@@ -31,53 +28,28 @@ public class UIEmployee : MonoBehaviour {
         StartCoroutine(Working());
 
         agent = GetComponent<NavMeshAgent>();
-        line = GetComponent<LineRenderer>();
-        line.enabled = false;
         target = RandomTarget();
-        desk = UIOfficeManager.Instance.RandomDesk();
-        desk.occupied = true;
-
-        line.material = UIOfficeManager.Instance.RandomColor();
     }
 
     [System.Serializable]
     private enum State {
         Wandering,
-        Idling,
-        GoingToDesk,
-        AtDesk
+        Idling
     }
 
     void Update() {
         if (!GameTimer.paused) {
             agent.Resume();
-            // Move to target if not at desk and not idling.
-            if (state == State.GoingToDesk || state == State.Wandering) {
-                line.SetPosition(0, transform.position);
+            // Move to target if not idling.
+            if (state == State.Wandering) {
                 agent.SetDestination(target);
-
-                // May randomly go to desk.
-                if (state == State.Wandering && company.developing && Random.value < 0.05f * worker.productivity.value) {
-                    GoToDesk();
-                } else if (state == State.GoingToDesk) {
-                    DrawPath(agent.path);
-                    line.enabled = true;
-                }
 
                 // Check if we've reached the destination
                 // For this to work, the stoppingDistance has to be about 1.
                 if (Vector3.Distance(agent.nextPosition, agent.destination) <= agent.stoppingDistance) {
-
-                    // If going to a desk...
-                    if (state == State.GoingToDesk) {
-                        state = State.AtDesk;
-                        line.enabled = false;
-
-                    } else {
-                        // Else, continue wandering around.
-                        StartCoroutine(Pause());
-                        target = RandomTarget();
-                    }
+                    // Else, continue wandering around.
+                    StartCoroutine(Pause());
+                    target = RandomTarget();
                 }
             }
 
@@ -94,16 +66,8 @@ public class UIEmployee : MonoBehaviour {
     }
 
     void OnEnable() {
-        // On enable, reset the target and desk.
+        // On enable, reset the target.
         target = RandomTarget();
-        desk = UIOfficeManager.Instance.RandomDesk();
-        desk.occupied = true;
-    }
-
-    void OnDisable() {
-        // Relinquish the deks.
-        desk.occupied = false;
-        desk = null;
     }
 
     void OnDestroy() {
@@ -117,15 +81,6 @@ public class UIEmployee : MonoBehaviour {
 
     Vector3 RandomTarget() {
         return transform.parent.TransformDirection(UIOfficeManager.Instance.RandomTarget());
-    }
-
-    public void GoToDesk() {
-        state = State.GoingToDesk;
-        target = transform.parent.TransformDirection(desk.transform.position);
-    }
-    public void LeaveDesk() {
-        state = State.Wandering;
-        target = RandomTarget();
     }
 
     IEnumerator Working() {
@@ -154,20 +109,5 @@ public class UIEmployee : MonoBehaviour {
 
     private float Randomize(float value) {
         return Mathf.Max(1, (0.5f + Random.value) * value);
-    }
-
-    // Draw path to employee's target.
-    private void DrawPath(NavMeshPath path) {
-        // If the path has 1 or no corners, there is no need.
-        if (path.corners.Length < 2)
-            return;
-
-        // Set the array of positions to the amount of corners.
-        line.SetVertexCount(path.corners.Length);
-
-        // Go through each corner and set that to the line renderer's position.
-        for(int i=0; i<path.corners.Length; i++){
-            line.SetPosition(i, path.corners[i]);
-        }
     }
 }

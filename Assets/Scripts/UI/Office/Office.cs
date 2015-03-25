@@ -37,15 +37,6 @@ public class Office : MonoBehaviour {
     // Where the office upgrade button should be positioned.
     public Vector3 upgradeButtonPosition;
 
-    // Desks the employees can occupy.
-    [System.Serializable]
-    public class Desk {
-        [HideInInspector]
-        public bool occupied;
-        public Transform transform;
-    }
-    public List<Desk> desks;
-
     // The cost for upgrading to this office.
     public float cost;
 

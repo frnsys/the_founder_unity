@@ -189,16 +189,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         return target.position;
     }
 
-    // Returns a random unoccupied desk.
-    public Office.Desk RandomDesk() {
-        List<Office.Desk> unoccupiedDesks = currentOffice.desks.Where(d => !d.occupied).ToList();
-
-        if (unoccupiedDesks.Count == 0)
-            return null;
-
-        return unoccupiedDesks[Random.Range(0, unoccupiedDesks.Count)];
-    }
-
     public void Load(GameData d) {
         data = d;
         company = d.company;
