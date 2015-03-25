@@ -21,6 +21,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         public bool VERTICALS_UNLOCKED;
         public bool LOCATIONS_UNLOCKED;
         public bool SPECIALPROJECTS_UNLOCKED;
+        public bool RESEARCH_OPENED;
         public bool HYPE_MINIGAME;
         public bool SYNERGY;
     }
@@ -254,7 +255,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 UIManager uim = UIManager.Instance;
                 uim.statusBar.hypeLabel.gameObject.SetActive(true);
                 uim.menu.Activate("Communications");
-            }, 6f));
+            }, 2f));
 
         } else if (ev.name == "RIVALCORP Founded") {
             StartCoroutine(Delay(delegate(GameObject obj) {
@@ -375,6 +376,20 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 }
                 break;
 
+            case "Research":
+                if (!ob.RESEARCH_OPENED) {
+                    MentorMessages(new string[] {
+                        string.Format("Here you can assign your employees as {0}.", ConceptHighlight("researchers")),
+                        "A researcher's skill spends on their cleverness and productivity.",
+                        "Once you assign a researcher, they will start generating research points for you!",
+                        string.Format("You can spend these research points to purchase new {0}.", ConceptHighlight("technologies")),
+                        string.Format("New technologies can unlock new {0}, {1}, and provide other bonuses.", ConceptHighlight("product types"), ConceptHighlight("special projects")),
+                        "Don't neglect research! Stay ahead of the competition!"
+                    });
+                    ob.RESEARCH_OPENED = true;
+                }
+                break;
+
             default:
                 break;
         }
@@ -423,13 +438,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         string.Format("You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge {0}.", ConceptHighlight("research")),
                         string.Format("You can manage your Innovation Labs in the {0} button below.", MenuHighlight("Research")),
-                        string.Format("There you can assign workers to conduct research. They won't be available for product development, but over time they will generate {0}!", ConceptHighlight("research points")),
-                        "A researcher's skill spends on their cleverness and productivity.",
-                        "Once you assign a researcher, leave them be for a bit while they generate research points.",
-                        "Check back often though, because researchers can only work so much before they have to rest!",
-                        string.Format("You can spend these research points to purchase new {0}.", ConceptHighlight("technologies")),
-                        string.Format("New technologies can unlock new {0}, {1}, and provide other bonuses.", ConceptHighlight("product types"), ConceptHighlight("special projects")),
-                        "Don't neglect research! Stay ahead of the competition!"
+                        string.Format("There you can assign workers to conduct research. They won't be available for product development, but over time they will generate {0}!", ConceptHighlight("research points"))
                     });
                     UIManager uim = UIManager.Instance;
                     uim.menu.Activate("Research");
@@ -446,6 +455,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Great, you have an employee now. See if you can build a new, better product."
                     });
+                    UIManager.Instance.menu.Activate("New Product");
                 }, 1f));
             } else if (!ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
                 StartCoroutine(Delay(delegate(GameObject obj) {

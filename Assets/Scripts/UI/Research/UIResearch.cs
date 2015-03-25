@@ -52,6 +52,7 @@ public class UIResearch : MonoBehaviour {
     public GameObject prompt;
     public GameObject workerPrefab;
     public UIScrollView promptScrollView;
+    public GameObject noWorkersNotice;
 
     public void AssignWorker(GameObject obj) {
         Worker w = obj.GetComponent<UIResearcherItem>().worker;
@@ -77,11 +78,19 @@ public class UIResearch : MonoBehaviour {
             GameObject go = promptGrid.transform.GetChild(i).gameObject;
             NGUITools.DestroyImmediate(go);
         }
-        foreach (Worker w in company.workers.Where(w => !company.researchers.Contains(w))) {
-            GameObject reItem = NGUITools.AddChild(promptGrid.gameObject, workerPrefab);
-            reItem.GetComponent<UIResearcherItem>().worker = w;
-            reItem.GetComponent<UIDragScrollView>().scrollView = promptScrollView;
-            UIEventListener.Get(reItem).onClick += AssignWorker;
+
+        IEnumerable<Worker> workers = company.workers.Where(w => !company.researchers.Contains(w));
+
+        if (workers.Count() == 0) {
+            noWorkersNotice.SetActive(true);
+        } else {
+            noWorkersNotice.SetActive(false);
+            foreach (Worker w in workers) {
+                GameObject reItem = NGUITools.AddChild(promptGrid.gameObject, workerPrefab);
+                reItem.GetComponent<UIResearcherItem>().worker = w;
+                reItem.GetComponent<UIDragScrollView>().scrollView = promptScrollView;
+                UIEventListener.Get(reItem).onClick += AssignWorker;
+            }
         }
         promptGrid.Reposition();
     }
