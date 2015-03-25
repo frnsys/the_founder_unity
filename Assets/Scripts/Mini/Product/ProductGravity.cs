@@ -9,7 +9,7 @@ public class ProductGravity : MonoBehaviour {
     }
 
     void OnTriggerStay(Collider other) {
-        if (other.name == "Labor") {
+        if (other.name == "Labor" || other.name == "Hazard") {
             other.rigidbody.AddForce(Force(other.transform));
         }
     }

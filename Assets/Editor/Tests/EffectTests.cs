@@ -135,8 +135,7 @@ namespace UnityTest
             Assert.IsTrue(p.developing);
             Assert.AreEqual(start, p.design.value);
 
-            // TO DO
-            //c.DevelopProduct();
+            p.Complete(c);
 
             // The effect should after the product is launched.
             Assert.IsTrue(p.launched);

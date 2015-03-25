@@ -292,6 +292,8 @@ public class Company : HasStats {
             es.Apply(p);
         }
 
+        developingProduct = null;
+
         // The product's effects are applied by the GameManager.
     }
 

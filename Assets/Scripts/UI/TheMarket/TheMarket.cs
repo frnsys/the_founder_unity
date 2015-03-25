@@ -11,7 +11,7 @@ public class TheMarket : MonoBehaviour {
     public Transform[] pedestalGroups;
     public MeshFilter[] products;
     public UILabel[] companyLabels;
-    public TextMesh[] marketLabels;
+    public UILabel[] marketLabels;
     public GameObject marketHud;
 
     void OnEnable() {
@@ -74,7 +74,6 @@ public class TheMarket : MonoBehaviour {
             products[i].mesh = p.meshes[0];
             marketLabels[i].text = string.Format("{0:P1}", marketShares[i]);
             marketLabels[i].transform.localScale = Vector3.zero;
-            Debug.Log(marketShares[i]);
 
             // Reset then raise the pedestals.
             Vector3 pos = pedestalGroups[i].localPosition;
@@ -125,7 +124,7 @@ public class TheMarket : MonoBehaviour {
 
         // Show the market labels.
         for (int i=0; i < marketLabels.Length; i++) {
-            StartCoroutine(UIAnimator.Scale(marketLabels[i].transform, 0, 0.12f, 4f));
+            StartCoroutine(UIAnimator.Scale(marketLabels[i].transform, 0, 1f, 4f));
         }
 
         yield return new WaitForSeconds(5f);

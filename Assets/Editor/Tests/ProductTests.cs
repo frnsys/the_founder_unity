@@ -116,21 +116,6 @@ namespace UnityTest
         }
 
 		[Test]
-		public void MarketShare_TechPenalty() {
-            p.design.baseValue = 100;
-            p.marketing.baseValue = 100;
-            p.engineering.baseValue = 100;
-            p.Launch(c);
-
-            Product p_ = ScriptableObject.CreateInstance<Product>();
-            pr.requiredTechnologies.Add(ScriptableObject.CreateInstance<Technology>());
-            p_.Init(pts, 100, 100, 100, c);
-            p_.Launch(c);
-
-            Assert.IsTrue(p.marketShare > p_.marketShare);
-        }
-
-		[Test]
 		public void MarketShare_Hype() {
             p.design.baseValue = 100;
             p.marketing.baseValue = 100;
@@ -229,14 +214,13 @@ namespace UnityTest
 
             // Complete the project so that the effects are applied.
             c.StartNewProduct(pts, 0, 0, 0);
-            // TO DO
-            //c.products[0].Develop(100000, c);
+            c.products[0].Complete(c);
             Assert.AreEqual(c.products[0].state, Product.State.LAUNCHED);
             Assert.AreEqual(c.research.value, start + e.research.value);
 
             // Complete a duplicate product.
             c.StartNewProduct(pts, 0, 0, 0);
-            //c.products[1].Develop(100000, c);
+            c.products[1].Complete(c);
             Assert.AreEqual(c.products[1].state, Product.State.LAUNCHED);
 
             // Effect should have only been applied once.

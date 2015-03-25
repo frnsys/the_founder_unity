@@ -285,9 +285,6 @@ namespace UnityTest
 
             c.StartNewProduct(pts, 1, 1, 1);
             Product p = c.products[0];
-            // TO DO
-            //c.DevelopProduct();
-
             p.Launch(c);
             Assert.AreEqual(c.activeProducts[0], p);
 
@@ -299,15 +296,11 @@ namespace UnityTest
         [Test]
         public void ShutdownProduct() {
             c.cash.baseValue = 2000;
-            //c.BuyItem(item);
 
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
-            p.requiredProgress = 0;
-            // TO DO
-            //c.DevelopProduct();
+            p.Launch(c);
             Assert.AreEqual(c.activeProducts[0], p);
-            //Assert.AreEqual(p.design.value, 10);
 
             c.ShutdownProduct(p);
 

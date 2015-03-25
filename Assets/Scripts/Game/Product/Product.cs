@@ -190,6 +190,7 @@ public class Product : HasStats {
     static public event System.Action<Product, Company> Completed;
     public void Complete(Company company) {
         Launch(company);
+        company.CompletedProduct(this);
         // Trigger completed event.
         if (Completed != null) {
             Completed(this, company);

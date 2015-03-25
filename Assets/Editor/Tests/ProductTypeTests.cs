@@ -39,27 +39,11 @@ namespace UnityTest
 
         [Test]
         public void AvailableConditions() {
-            // Create a starting location with some infrastructure capacity.
-            Location startLoc = ScriptableObject.CreateInstance<Location>();
-            startLoc.cost = 0;
-            startLoc.infrastructureCapacity = 3;
-            gd.company.ExpandToLocation(startLoc);
-
             // The company does not yet have the required vertical.
             Assert.IsFalse(pt.isAvailable(gd.company));
 
             gd.company.cash.baseValue = 2000;
             gd.company.ExpandToVertical(vert);
-
-            // Should still be false since the company does not have the required infrastructure.
-            Assert.IsFalse(pt.isAvailable(gd.company));
-
-            Infrastructure i = new Infrastructure();
-            i[Infrastructure.Type.Datacenter] = 2;
-            i[Infrastructure.Type.Factory] = 1;
-
-            gd.company.cash.baseValue = i.cost;
-            gd.company.BuyInfrastructure(i);
 
             Assert.IsTrue(pt.isAvailable(gd.company));
         }

@@ -193,7 +193,7 @@ public class ProductMinigame : MonoBehaviour {
 
     IEnumerator Coffee() {
         float oldGravity = player.gravity.gravity;
-        player.gravity.gravity = 0.5f;
+        player.gravity.gravity *= 2f;
         yield return new WaitForSeconds(6f);
         player.gravity.gravity = oldGravity;
     }
