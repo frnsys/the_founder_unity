@@ -41,13 +41,9 @@ public class UIResearch : MonoBehaviour {
     private void SetupButton(GameObject button) {
         UIEventListener.VoidDelegate onTap = delegate(GameObject obj) {
             UIResearcher item = button.GetComponent<UIResearcher>();
-            if (!item.empty && item.worker.research > 0) {
-                company.CaptureResearch(item.worker);
-            } else {
-                SetupPrompt();
-                prompt.SetActive(true);
-                currentItem = item;
-            }
+            SetupPrompt();
+            prompt.SetActive(true);
+            currentItem = item;
         };
         UIEventListener.Get(button).onClick += onTap;
     }

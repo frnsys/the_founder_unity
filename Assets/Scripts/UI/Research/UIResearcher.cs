@@ -19,18 +19,11 @@ public class UIResearcher : MonoBehaviour {
             empty_ = value;
             displayObject.SetActive(!value);
             addLabel.SetActive(value);
-            pointsLabel.gameObject.SetActive(!value);
         }
     }
 
     public GameObject displayObject;
     public GameObject addLabel;
-    public UILabel pointsLabel;
-
-    void Update() {
-        if (worker_ != null)
-            pointsLabel.text = string.Format("{0}", worker_.research);
-    }
 }
 
 

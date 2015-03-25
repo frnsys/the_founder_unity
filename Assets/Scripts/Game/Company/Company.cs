@@ -638,19 +638,13 @@ public class Company : HasStats {
 
     public void Research() {
         foreach (Worker w in researchers) {
-            w.Research(research.value);
+            researchPoints += w.Research(research.value);
         }
     }
-    public void CaptureResearch(Worker w) {
-        researchPoints +=  w.research;
-        w.research = 0;
-    }
     public void AddResearcher(Worker w) {
-        w.research = 0;
         researchers.Add(w);
     }
     public void RemoveResearcher(Worker w) {
-        w.research = 0;
         researchers.Remove(w);
     }
 

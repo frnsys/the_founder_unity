@@ -50,17 +50,6 @@ namespace UnityTest
         }
 
         [Test]
-        public void Research() {
-            Assert.AreEqual(worker.research, 0);
-            worker.Research(0);
-            Assert.AreEqual(worker.research, 0);
-
-            worker.cleverness.baseValue = 10;
-            worker.Research(0);
-            Assert.IsTrue(worker.research > 0);
-        }
-
-        [Test]
         public void MinimumSalary() {
             worker.baseMinSalary = 1;
 
