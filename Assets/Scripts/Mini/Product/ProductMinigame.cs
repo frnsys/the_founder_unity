@@ -142,6 +142,11 @@ public class ProductMinigame : MonoBehaviour {
         labor.transform.position = start;
         labor.SetActive(true);
 
+        labor.rigidbody.velocity = Vector3.zero;
+        labor.rigidbody.angularVelocity = Vector3.zero;
+        labor.rigidbody.isKinematic = true;
+        labor.rigidbody.isKinematic = false;
+
         if (labor.rigidbody.velocity == Vector3.zero) {
             Vector3 dir = new Vector3(0, -1, 0);
             float speed = 200;

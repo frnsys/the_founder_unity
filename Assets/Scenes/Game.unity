@@ -16121,7 +16121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2e7fdb60af4488e87f24ac452bf9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 1.5
+  gravity: 10
+  player: {fileID: 1941157726}
 --- !u!135 &907389034
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -16132,7 +16133,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: .600000024
   m_Center: {x: 0, y: .150000006, z: 0}
 --- !u!1 &907604092
 GameObject:

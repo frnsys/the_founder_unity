@@ -61,7 +61,7 @@ public class ProductPlayer : MonoBehaviour {
     }
 
     void Update() {
-        health -= 0.02f;
+        health -= 0.4f * Time.deltaTime;
         if (health <= 0 && Died != null)
             Died();
     }
