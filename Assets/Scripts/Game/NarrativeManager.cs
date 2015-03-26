@@ -130,8 +130,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         THE_MARKET_DONE,
         OPENED_RECRUITING,
         OPENED_HIRING,
-        RESEARCH,
         GAME_GOALS,
+        RESEARCH
     }
     private OBS obs = OBS.START;
 
@@ -439,11 +439,12 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         string.Format("You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge {0}.", ConceptHighlight("research")),
                         string.Format("You can manage your Innovation Labs in the {0} button below.", MenuHighlight("Research")),
-                        string.Format("There you can assign workers to conduct research. They won't be available for product development, but over time they will generate {0}!", ConceptHighlight("research points"))
+                        "There you can assign workers to conduct research.",
+                        string.Format("They won't be available for product development, but over time they will generate {0}!", ConceptHighlight("research points"))
                     });
                     UIManager uim = UIManager.Instance;
                     uim.menu.Activate("Research");
-                }, 12f));
+                }, 6f));
                 Product.Completed -= CompletedProduct;
             }
         }

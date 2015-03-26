@@ -241,7 +241,8 @@ public class Product : HasStats {
         marketShare = Mathf.Min(marketShare, 1f);
 
         // Maxmimum lifetime revenue of the product.
-        maxRevenue = recipe.maxRevenue * marketShare;
+        // * 10 to make the game a bit easier.
+        maxRevenue = recipe.maxRevenue * marketShare * 10;
 
         // Effect modifications.
         effects = recipe.effects.Clone();

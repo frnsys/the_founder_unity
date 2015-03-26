@@ -69,7 +69,7 @@ public class UIManager : Singleton<UIManager> {
             while (pendingPings.Count > 0) {
                 Ping p = pendingPings.Dequeue();
                 UIPing ping = NGUITools.AddChild(pingsPanel, pingPrefab).GetComponent<UIPing>();
-                ping.Set(p.note, p.color);
+                ping.Set(p.note);
                 yield return StartCoroutine(GameTimer.Wait(2f));
                 NGUITools.Destroy(ping.gameObject);
             }
