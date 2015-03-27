@@ -10,6 +10,11 @@ public class UIResearch : MonoBehaviour {
     public GameObject subwindow;
     private Company company;
 
+    public GameObject recruitingWindow;
+    public void ShowRecruiting() {
+        UIManager.Instance.CloseAndOpenPopup(recruitingWindow);
+    }
+
     void Awake() {
         company = GameManager.Instance.playerCompany;
         ShowResearchers();

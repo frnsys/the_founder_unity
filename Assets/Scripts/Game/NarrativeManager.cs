@@ -313,6 +313,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 if (Stage(OBS.OPENED_RECRUITING)) {
                     MentorMessages(new string[] {
                         "Here is where you can recruit some new candidates to hire.",
+                        "The more employees you have, the more opportunities you have when developing new products.",
                         "There are a few different recruiting methods which vary in cost and quality of candidate.",
                         "Give it a try!"
                     });
