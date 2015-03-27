@@ -172,7 +172,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
 
             // Uncomment this if you want to start the game with onboarding.
-            narrativeManager.InitializeOnboarding();
+            //narrativeManager.InitializeOnboarding();
         }
 #endif
 

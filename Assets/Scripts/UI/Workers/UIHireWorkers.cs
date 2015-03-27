@@ -95,7 +95,19 @@ public class UIHireWorkers : UIFullScreenPager {
                 ic.Close_();
             };
 
-            UIEventListener.Get(ic.yesButton).onClick += yesAction;
+
+            UIEventListener.VoidDelegate warning = delegate(GameObject obj) {
+                UIManager.Instance.Confirm("This is your final offer. Are you sure?", delegate() {
+                    yesAction(null);
+                }, null);
+            };
+
+            if (worker.recentPlayerOffers == 2) {
+                UIEventListener.Get(ic.yesButton).onClick += warning;
+            } else {
+                UIEventListener.Get(ic.yesButton).onClick += yesAction;
+            }
+
             UIEventListener.Get(ic.noButton).onClick += noAction;
 
         } else {
