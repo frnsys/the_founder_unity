@@ -47,21 +47,6 @@ public class Product : HasStats {
         get { return _state; }
     }
 
-    // A product may be disabled if the company
-    // has less infrastructure than necessary to support it.
-    // A disabled product generates no revenue and does not continue developing.
-    public bool disabled = false;
-
-    public Infrastructure requiredInfrastructure {
-        get {
-            Infrastructure infras = new Infrastructure();
-            foreach (ProductType pt in productTypes) {
-                if (pt.requiredInfrastructure != null)
-                    infras += pt.requiredInfrastructure;
-            }
-            return infras;
-        }
-    }
     public List<Vertical> requiredVerticals {
         get {
             List<Vertical> verts = new List<Vertical>();
@@ -273,7 +258,7 @@ public class Product : HasStats {
         //Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         //Debug.Log(string.Format("Elapsed Time {0}", elapsedTime));
         //Debug.Log(string.Format("Time {0}", t));
-        if (launched && !disabled) {
+        if (launched) {
             revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
             //Debug.Log(string.Format("Raw revenue: {0}", revenue));
 

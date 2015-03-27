@@ -148,18 +148,6 @@ namespace UnityTest
         }
 
 		[Test]
-		public void Revenue_Disabled() {
-            p.design.baseValue = 100;
-            p.marketing.baseValue = 100;
-            p.engineering.baseValue = 100;
-
-            p.Launch(c);
-
-            p.disabled = true;
-            Assert.AreEqual(p.Revenue(4, c), 0);
-        }
-
-		[Test]
 		public void Shutdown() {
             p.Shutdown();
 
@@ -180,27 +168,6 @@ namespace UnityTest
             prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0, c);
 
             Assert.AreEqual(prod.requiredVerticals, new List<Vertical>() { vert_, vert__ });
-        }
-
-        [Test]
-        public void RequiredInfrastructure() {
-            ProductType pt_   = ScriptableObject.CreateInstance<ProductType>();
-            Infrastructure i_ = new Infrastructure();
-            i_[Infrastructure.Type.Datacenter] = 10;
-            pt_.requiredInfrastructure = i_;
-
-            ProductType pt__   = ScriptableObject.CreateInstance<ProductType>();
-            Infrastructure i__ = new Infrastructure();
-            i__[Infrastructure.Type.Studio] = 3;
-            pt__.requiredInfrastructure = i__;
-
-            Product prod = ScriptableObject.CreateInstance<Product>();
-            prod.Init( new List<ProductType> { pt_, pt__ }, 0, 0, 0, c);
-
-            Infrastructure i = new Infrastructure();
-            i[Infrastructure.Type.Datacenter] = 10;
-            i[Infrastructure.Type.Studio] = 3;
-            Assert.IsTrue(prod.requiredInfrastructure.Equals(i));
         }
 
         [Test]

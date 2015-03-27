@@ -38,10 +38,5 @@ public class ProductTypeManager : ManagerWindow<ProductType> {
         if (GUILayout.Button("Add Required Vertical")) {
             target.requiredVerticals.Add(null);
         }
-
-        EditorGUILayout.LabelField("Required Infrastructure");
-        foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
-            target.requiredInfrastructure[t] = EditorGUILayout.IntField(t.ToString(), target.requiredInfrastructure[t]);
-        }
     }
 }

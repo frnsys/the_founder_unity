@@ -15,8 +15,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     [System.Serializable]
     public struct OnboardingState {
         public bool PRODUCTS_OPENED;
-        public bool INFRASTRUCTURE;
-        public bool INFRASTRUCTURE_OPENED;
         public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
         public bool LOCATIONS_UNLOCKED;
@@ -142,7 +140,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         // Listen to some events.
         Company.BeganProduct += BeganProduct;
         Company.WorkerHired += WorkerHired;
-        Company.BoughtInfrastructure += InfrastructureBought;
         Company.Synergy += Synergy;
         Product.Completed += CompletedProduct;
         Product.Launched += LaunchedProduct;
@@ -159,8 +156,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         uim.menu.Deactivate("New Product");
         uim.menu.Deactivate("Accounting");
         uim.menu.Deactivate("Special Projects");
-        uim.menu.Deactivate("Infrastructure");
-        uim.menu.Deactivate("Existing Products");
         uim.menu.Deactivate("Locations");
         uim.menu.Deactivate("Verticals");
         uim.menu.Deactivate("Acquisitions");
@@ -309,22 +304,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         string.Format("Some combinations work well and give {0}. Some don't.", ConceptHighlight("bonuses")),
                         string.Format("You will have to {0} and experiment with different combinations.", SpecialHighlight("innovate")),
                         "Right now you only have a few types available, but that will change over time.",
-                        string.Format("Products require different kinds of {0} to support their growth.", ConceptHighlight("infrastructure")),
-                        "They might require\n:DATACENTER: [c][0078E1]datacenters[-][/c],\n:FACTORY: [c][0078E1]factories[-][/c],\n:LAB: [c][0078E1]labs[-][/c], or\n:STUDIO: [c][0078E1]studios[-][/c].",
-                        "All product types have some minimum necessary infrastructure before you can use them.",
-                        "You have some infrastructure to start, shown at the bottom of the screen, so no need to worry now.",
                         "Pick two product types and hit the button below to start developing the product."
                     });
-
-                } else if (data.company.availableInfrastructure.total < 2 && !ob.INFRASTRUCTURE) {
-                    MentorMessages(new string[] {
-                        "It looks like you don't have enough infrastructure to start a new product!",
-                        string.Format("You can buy more infrastructure in the {0} menu item. There's a cost to setup the infrastructure, and then a rental cost every month after.", MenuHighlight("Infrastructure")),
-                        string.Format("You can also shutdown products in the {0} menu item to reclaim their infrastructure.", MenuHighlight("Existing Products"))
-                    });
-                    UIManager.Instance.menu.Activate("Infrastructure");
-                    UIManager.Instance.menu.Activate("Existing Products");
-                    ob.INFRASTRUCTURE = true;
                 }
                 break;
 
@@ -349,30 +330,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "However, if your employees are exceptionally happy, candidates will be willing to take a lower salary.",
                         "Don't forget - you're fighting to keep a high profit margin - so negotiate with that in mind!"
                     });
-                }
-                break;
-
-            case "Products":
-                if (!ob.PRODUCTS_OPENED) {
-                    MentorMessages(new string[] {
-                        "This is where you manage your products.",
-                        "You can shutdown in-market products to reclaim the infrastructure they use and put it towards new products.",
-                        "Shutdown products stop generating revenue for you. But their bonus effects are permanent!"
-                    });
-                    ob.PRODUCTS_OPENED = true;
-                }
-                break;
-
-            case "Infrastructure":
-                if (!ob.INFRASTRUCTURE_OPENED) {
-                    MentorMessages(new string[] {
-                        "Here's where you can manage your infrastructure.",
-                        "You pay for infrastructure on a per-month basis.",
-                        "You have a limit to how much infrastructure you can have at a given time, but you can swap out infrastructure when you need it.",
-                        "Just note that infrastructure has a purchasing fee in addition to its monthly cost.",
-                        "Infrastructure highlighted in green is currently being used by products, so you can't swap those out until they are no longer being used."
-                    });
-                    ob.INFRASTRUCTURE_OPENED = true;
                 }
                 break;
 
@@ -446,6 +403,16 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     uim.menu.Activate("Research");
                 }, 6f));
                 Product.Completed -= CompletedProduct;
+            } else if (!ob.LOCATIONS_UNLOCKED) {
+                MentorMessages(new string[] {
+                    "It's time to start thinking about expanding to new locations.",
+                    string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
+                    "The more locations you have for a market, the more money you will make!",
+                    "Some locations have special bonuses too.",
+                    string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
+                });
+                UIManager.Instance.menu.Activate("Locations");
+                ob.LOCATIONS_UNLOCKED = true;
             }
         }
     }
@@ -524,22 +491,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             });
             UIManager.Instance.menu.Activate("Special Projects");
             ob.SPECIALPROJECTS_UNLOCKED = true;
-        }
-    }
-
-    void InfrastructureBought(Company c, Infrastructure i) {
-        if (c.availableInfrastructureCapacity == 0 && !ob.LOCATIONS_UNLOCKED) {
-            MentorMessages(new string[] {
-                "It looks like you've run out space for new infrastructure!",
-                "That's ok - if you need more room for infrastructure, you can expand to new locations.",
-                string.Format("{0} also provide capacity for more infrastructure. Some locations have special bonuses too.", ConceptHighlight("Locations")),
-                string.Format("They also allow you to increase your share of existing {0} or establish a foothold in new ones.", ConceptHighlight("markets")),
-                "The more locations you have for a market, the more money you will make!",
-                string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
-            });
-            UIManager.Instance.menu.Activate("Locations");
-            ob.LOCATIONS_UNLOCKED = true;
-            Company.BoughtInfrastructure -= InfrastructureBought;
         }
     }
 

@@ -33,10 +33,8 @@ namespace UnityTest
 
             c = new Company("Foo Inc").Init();
 
-            // Create a starting location with some infrastructure capacity.
             startLoc = ScriptableObject.CreateInstance<Location>();
             startLoc.cost = 0;
-            startLoc.infrastructureCapacity = 2;
             c.ExpandToLocation(startLoc);
 
             pts = new List<ProductType>() {
@@ -153,10 +151,6 @@ namespace UnityTest
             float startCash = 200000;
             c.cash.baseValue = startCash;
 
-            Infrastructure i = new Infrastructure();
-            i[Infrastructure.Type.Datacenter] = 1;
-            c.BuyInfrastructure(i);
-
             Location loc = ScriptableObject.CreateInstance<Location>();
             loc.cost = 100;
             c.ExpandToLocation(loc);
@@ -164,86 +158,12 @@ namespace UnityTest
             worker.salary = 500;
 
             // Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
-            // Same for infrastructure and worker salary.
-            float paid = worker.hiringFee + worker.monthlyPay + i.cost + i.cost + loc.cost + loc.cost;
+            float paid = worker.hiringFee + worker.monthlyPay + loc.cost + loc.cost;
 
             c.HireWorker(worker);
 
             c.PayMonthly();
             Assert.AreEqual(c.cash.baseValue, startCash - paid);
-        }
-
-        [Test]
-        public void ManageInfrastructure() {
-            int baseCapacity = c.availableInfrastructureCapacity;
-            Infrastructure zeroInf = new Infrastructure();
-
-            // All capacity should be available.
-            // No infrastructure is currently being used.
-            Assert.IsTrue(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
-            Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
-
-            Infrastructure i = new Infrastructure();
-            i[Infrastructure.Type.Datacenter] = baseCapacity + 1;
-
-            // Can't buy the infrastructure, not enough cash.
-            c.cash.baseValue = 0;
-            Assert.IsFalse(c.BuyInfrastructure(i));
-
-            // Can't buy the infrastructure, not enough capacity.
-            c.cash.baseValue = i.cost;
-            Assert.IsFalse(c.BuyInfrastructure(i));
-
-            // Can buy the infrastructure: enough cash + capacity.
-            i[Infrastructure.Type.Datacenter] = 1;
-            Assert.IsTrue(c.BuyInfrastructure(i));
-
-            // The available capacity should now be less than the total capacity.
-            Assert.IsFalse(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
-
-            // The entireity of the available infrastructure should only be the one set we added.
-            // All of the company's infrastructure should be available.
-            // None of it is being used.
-            Assert.IsTrue(c.availableInfrastructure.Equals(i));
-            Assert.IsTrue(c.availableInfrastructure.Equals(c.infrastructure));
-            Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
-
-            ProductType pt  = ScriptableObject.CreateInstance<ProductType>();
-            ProductType pt_ = ScriptableObject.CreateInstance<ProductType>();
-            Infrastructure required = new Infrastructure();
-            required[Infrastructure.Type.Datacenter] = baseCapacity;
-            pt.requiredInfrastructure = required;
-            c.StartNewProduct(new List<ProductType> { pt, pt_ }, 0, 0, 0);
-
-            // All infrastructure is being used now,
-            // so none of it is available.
-            // The amount used should equal the amount the product needed.
-            Assert.IsFalse(c.usedInfrastructure.Equals(zeroInf));
-            Assert.IsTrue(c.availableInfrastructure.Equals(zeroInf));
-            Assert.AreEqual(c.usedInfrastructure[Infrastructure.Type.Datacenter], baseCapacity);
-
-            c.ShutdownProduct(c.products[0]);
-
-            // Now that the product is retired, it shouldn't count towards used infrastructure.
-            Assert.IsTrue(c.usedInfrastructure.Equals(zeroInf));
-            Assert.IsTrue(c.availableInfrastructure.Equals(c.infrastructure));
-
-            int oldDatacenterCapacity = c.infrastructureCapacity;
-
-            Location loc = ScriptableObject.CreateInstance<Location>();
-            loc.infrastructureCapacity = 10;
-            loc.cost = 0;
-            c.ExpandToLocation(loc);
-
-            // Adding a location should have increased the capacity by the amount the location gives.
-            Assert.AreEqual(c.infrastructureCapacity, oldDatacenterCapacity + 10);
-
-            c.DestroyInfrastructure(i);
-
-            // Destroying the infrastructure we had should have cleared up all capacity.
-            // No infrastructure should be available now.
-            Assert.IsTrue(c.availableInfrastructureCapacity.Equals(c.infrastructureCapacity));
-            Assert.IsTrue(c.availableInfrastructure.Equals(zeroInf));
         }
 
         [Test]
@@ -261,18 +181,9 @@ namespace UnityTest
 
         [Test]
         public void StartNewProduct() {
-            Infrastructure i = new Infrastructure();
-            i[Infrastructure.Type.Datacenter] = 1;
-            i[Infrastructure.Type.Factory] = 1;
-            c.BuyInfrastructure(i);
-
             c.StartNewProduct(pts, 0, 0, 0);
             Product p = c.products[0];
             Assert.AreEqual(c.developingProduct, p);
-
-            // Assure the infrastructure is properly used up.
-            Assert.AreEqual(c.availableInfrastructure, c.infrastructure - pts[0].requiredInfrastructure);
-
             Assert.AreEqual(c.products.Count, 1);
 
             // Creating a new product should not apply existing effects.
@@ -306,7 +217,6 @@ namespace UnityTest
 
             Assert.AreEqual(p.state, Product.State.RETIRED);
             Assert.AreEqual(p.design.value, 0);
-            Assert.AreEqual(c.availableInfrastructure, c.infrastructure);
         }
 
         // ===============================================

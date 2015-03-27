@@ -18,9 +18,7 @@ public class UIAccounting : MonoBehaviour {
         salaries.text = string.Format("Salaries: [c][EF4542]{0:C0}[-][/c]/month", monthlySalaries);
 
         float monthlyRent = company.locations.Skip(1).Sum(l => l.cost);
-        float monthlyInf = company.infrastructure.cost;
         rent.text = string.Format("Rent: [c][EF4542]{0:C0}[-][/c]/month", monthlyRent);
-        inf.text = string.Format("Infrastructure: [c][EF4542]{0:C0}[-][/c]/month", monthlyInf);
 
         numWorkerLocations.text = string.Format("[c][6A53F7]{0}[-][/c] employees across [c][6A53F7]{1}[-][/c] locations ([c][6A53F7]{2}[-][/c] employees at HQ)", company.employeesAcrossLocations, company.locations.Count, company.workers.Count);
 
@@ -76,7 +74,6 @@ public class UIAccounting : MonoBehaviour {
 
     public UILabel salaries;
     public UILabel rent;
-    public UILabel inf;
     public UILabel numWorkerLocations;
     public UILabel currentRevenue;
     public UILabel currentProfit;

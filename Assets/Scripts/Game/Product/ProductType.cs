@@ -23,7 +23,6 @@ public class ProductType : SharedResource<ProductType> {
     // Note: we don't have required technologies because a technology is necessary
     // for *unlocking* a product. Technologies don't disappear so it never needs to be checked again after the product is unlocked.
     public List<Vertical> requiredVerticals = new List<Vertical>();
-    public Infrastructure requiredInfrastructure;
     public bool isAvailable(Company company) {
         // Check that all required verticals are active on the company.
         return !requiredVerticals.Except(company.verticals).Any();

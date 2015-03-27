@@ -155,7 +155,7 @@ public class UIOnboarding : MonoBehaviour {
         if (!didShowLocations) {
             string[] messages = new string[] {
                 "Next, where do you want to base your company?",
-                "Locations vary in the kind of infrastructure you have access to - some products are easier to build in certain places."
+                "Locations can have different bonuses and access to different markets."
             };
             gm.narrativeManager.MentorMessages(messages);
             didShowLocations = true;
