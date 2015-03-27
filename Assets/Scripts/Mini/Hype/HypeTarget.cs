@@ -79,6 +79,12 @@ public class HypeTarget : MonoBehaviour {
 
         StartCoroutine("Move");
     }
+
+    public void Reset() {
+        // Re-enable for the new puck.
+        enabled = true;
+    }
+
     public void Setup(HypeMinigame hg, Type type) {
         model.renderer.material.mainTexture = hg.blebTextures[UnityEngine.Random.Range(0, hg.blebTextures.Length - 1)];
         function = RandomFunction;
@@ -134,8 +140,8 @@ public class HypeTarget : MonoBehaviour {
                 }
             }
 
-            // should targets be able to be re-triggered? much nicer cascade effect, but there needs to be _some_ limit.
-            //enabled = false;
+            // Can only be hit once per puck.
+            enabled = false;
             Cascade();
         }
     }

@@ -18,7 +18,7 @@ public class MarketAnalysis : UIAlert {
         hype.text = string.Format("x{0:0.#}", 1 + c.publicity.value);
         opinion.text = string.Format("x{0:0.#}", 1 + c.opinion.value/100f);
         reach.text = string.Format("x{0:0.##}", Math.Round(c.marketSharePercent, 2));
-        share.text = string.Format("{0:0.##}%", Math.Round(p.marketShare, 2) * 100);
+        share.text = string.Format("{0:0.#}%", Math.Round(p.marketShare * 100, 2));
 
         // Reset stars
         foreach (Transform t in starsGrid.transform) {

@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Smooth.Slinq;
 
 [System.Serializable]
 public class Company : HasStats {
@@ -127,15 +128,15 @@ public class Company : HasStats {
     public float AggregateWorkerStat(string stat) {
         switch (stat) {
             case "Charisma":
-                return allWorkers.Sum(x => x.charisma.value);
+                return allWorkers.Slinq().Select(x => x.charisma.value).Sum();
             case "Cleverness":
-                return allWorkers.Sum(x => x.cleverness.value);
+                return allWorkers.Slinq().Select(x => x.cleverness.value).Sum();
             case "Creativity":
-                return allWorkers.Sum(x => x.creativity.value);
+                return allWorkers.Slinq().Select(x => x.creativity.value).Sum();
             case "Productivity":
-                return allWorkers.Sum(x => x.productivity.value);
+                return allWorkers.Slinq().Select(x => x.productivity.value).Sum();
             case "Happiness":
-                return allWorkers.Sum(x => x.happiness.value);
+                return allWorkers.Slinq().Select(x => x.happiness.value).Sum();
             default:
                 return 0;
         }
@@ -418,8 +419,8 @@ public class Company : HasStats {
         float toPay = 0;
 
         // Skip the first location's rent since it is our HQ and considered free.
-        float salaries = workers.Sum(w => w.monthlyPay) * GameManager.Instance.wageMultiplier;
-        float rent = locations.Skip(1).Sum(l => l.cost)/100 * GameManager.Instance.costMultiplier;
+        float salaries = workers.Slinq().Select(w => w.monthlyPay).Sum() * GameManager.Instance.wageMultiplier;
+        float rent = locations.Skip(1).Slinq().Select(l => l.cost).Sum()/100 * GameManager.Instance.costMultiplier;
         toPay += salaries + rent;
 
         // Taxes

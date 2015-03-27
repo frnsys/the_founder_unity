@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Smooth.Slinq;
 
 [System.Serializable]
 public class MarketManager {
@@ -99,7 +100,7 @@ public class MarketManager {
     public static float totalMarketSize {
         get {
             if (totalMarketSize_ == 0) {
-                totalMarketSize_ = Markets.Sum(m => SizeForMarket(m));
+                totalMarketSize_ = Markets.Slinq().Select(m => SizeForMarket(m)).Sum();
             }
             return totalMarketSize_;
         }

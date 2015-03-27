@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Smooth.Slinq;
 
 public class UIAccounting : MonoBehaviour {
     private GameManager gm;
@@ -17,7 +18,7 @@ public class UIAccounting : MonoBehaviour {
         }
         salaries.text = string.Format("Salaries: [c][EF4542]{0:C0}[-][/c]/month", monthlySalaries);
 
-        float monthlyRent = company.locations.Skip(1).Sum(l => l.cost);
+        float monthlyRent = company.locations.Skip(1).Slinq().Select(l => l.cost).Sum();
         rent.text = string.Format("Rent: [c][EF4542]{0:C0}[-][/c]/month", monthlyRent);
 
         numWorkerLocations.text = string.Format("[c][6A53F7]{0}[-][/c] employees across [c][6A53F7]{1}[-][/c] locations ([c][6A53F7]{2}[-][/c] employees at HQ)", company.employeesAcrossLocations, company.locations.Count, company.workers.Count);

@@ -42,6 +42,7 @@ public class ProductMinigame : MonoBehaviour {
         }
         livesGrid.Reposition();
         player.Setup(workers[0]);
+        player.transform.localPosition = Vector3.zero;
 
         // Create the labor pool.
         int numLabors = (int)(aggPro * 1.5f);
