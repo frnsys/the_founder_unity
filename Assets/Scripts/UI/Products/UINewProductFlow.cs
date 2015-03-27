@@ -52,51 +52,47 @@ public class UINewProductFlow : MonoBehaviour {
     }
 
     private void ToggleProductType(ProductType pt, GameObject obj) {
-        if (productTypes.Contains(pt)) {
-            obj.transform.Find("Overlay").gameObject.SetActive(true);
-            return;
-        }
+        obj.transform.Find("Overlay").gameObject.SetActive(productTypes.Contains(pt));
     }
 
     // Select a product type for the new product.
     private void SelectProductType(GameObject obj) {
+        ProductType pt = obj.GetComponent<UIProductType>().productType;
+
+        // Deselect
+        if (productTypes.Contains(pt)) {
+            productTypes.Remove(pt);
+            ToggleProductType(pt, obj);
+            foreach (Transform t in selectedGrid.transform) {
+                if (t.name == pt.name) {
+                    NGUITools.Destroy(t.gameObject);
+                    break;
+                }
+            }
+            UpdateConfirmButton();
+            selectedGrid.Reposition();
+
         // Required product types is 2.
-        if (selectedGrid.transform.childCount < 2) {
-            ProductType pt = obj.GetComponent<UIProductType>().productType;
-
-            // Can't have two of the same product type.
-            if (productTypes.Contains(pt))
-                return;
-
+        } else if (selectedGrid.transform.childCount < 2) {
             GameObject productType = NGUITools.AddChild(selectedGrid.gameObject, selectedProductTypePrefab);
-
+            productType.name = pt.name;
             productType.transform.Find("Label").GetComponent<UILabel>().text = pt.name;
             Transform po = productType.transform.Find("Product Object");
             po.GetComponent<MeshFilter>().mesh = pt.mesh;
 
             // Deselect on click.
-            UIEventListener.Get(productType.gameObject).onClick += delegate(GameObject go) {
+            UIEventListener.Get(productType).onClick += delegate(GameObject go) {
                 NGUITools.Destroy(productType);
                 productTypes.Remove(pt);
                 selectedGrid.Reposition();
-
                 UpdateConfirmButton();
-                UpdateProductTypeItems();
             };
 
             productTypes.Add(pt);
+            ToggleProductType(pt, obj);
             selectedGrid.Reposition();
 
             UpdateConfirmButton();
-            UpdateProductTypeItems();
-        }
-    }
-
-    // Update which product types can be selected.
-    private void UpdateProductTypeItems() {
-        foreach (GameObject item in productTypeItems) {
-            ProductType pt = item.GetComponent<UIProductType>().productType;
-            ToggleProductType(pt, item);
         }
     }
 
