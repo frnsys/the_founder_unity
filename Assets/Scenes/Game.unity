@@ -2794,6 +2794,10 @@ MonoBehaviour:
   weekGrid: {fileID: 1005929634}
   activeWeekColor: {r: .889705896, g: .274762124, b: .274762124, a: 1}
   defaultWeekColor: {r: .845588207, g: .845588207, b: .845588207, a: 1}
+  posCashColor: {r: .340506017, g: .985294104, b: .576101661, a: 1}
+  posCashShadow: {r: .0914792418, g: .691176474, b: .316365719, a: 1}
+  negCashColor: {r: 1, g: .338235319, b: .338235319, a: 1}
+  negCashShadow: {r: .889705896, g: .274762124, b: .274762124, a: 1}
 --- !u!1 &130821373
 GameObject:
   m_ObjectHideFlags: 0
@@ -14939,7 +14943,7 @@ MonoBehaviour:
   mClipping: 4
   mClipRange: {x: 0, y: -469.923187, z: 538.913757, w: 819.846375}
   mClipSoftness: {x: 0, y: 0}
-  mDepth: 10
+  mDepth: 3
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!1 &862090770
@@ -25426,7 +25430,7 @@ MonoBehaviour:
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 224
+  mDepth: 10
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!1 &1408049456
@@ -26160,7 +26164,7 @@ MonoBehaviour:
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 2
+  mDepth: 4
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!1 &1454137175

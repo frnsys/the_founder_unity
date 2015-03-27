@@ -50,8 +50,8 @@ public class UIOnboarding : MonoBehaviour {
 
     void Intro() {
         string[] messages = new string[] {
-            "It's the year 2001. The dot-com bubble has just burst, leaving many companies to shutter their operations.",
-            string.Format("A few stronger enterprises - {0}, {1}, {2}, and others - have managed to survive.",
+            "Can you believe it's already 2001? The dot-com bubble just burst, but I'm looking forward to the years ahead.",
+            string.Format("A few stronger enterprises - {0}, {1}, {2}, and others - have managed to survive the bubble.",
                     gm.narrativeManager.ConceptHighlight("Kougle"),
                     gm.narrativeManager.ConceptHighlight("Coralzon"),
                     gm.narrativeManager.ConceptHighlight("Carrot Inc.")),

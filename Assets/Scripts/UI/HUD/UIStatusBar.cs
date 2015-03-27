@@ -23,8 +23,21 @@ public class UIStatusBar : MonoBehaviour {
         SetWeek();
     }
 
+    public Color posCashColor;
+    public Color posCashShadow;
+    public Color negCashColor;
+    public Color negCashShadow;
+    private float cash;
     void Update() {
-        cashLabel.text = string.Format("{0:C0}", gm.playerCompany.cash.value);
+        cash = gm.playerCompany.cash.value;
+        if (cash <= 0) {
+            cashLabel.color = negCashColor;
+            cashLabel.effectColor = negCashShadow;
+        } else {
+            cashLabel.color = posCashColor;
+            cashLabel.effectColor = posCashShadow;
+        }
+        cashLabel.text = string.Format("{0:C0}", cash);
         hypeLabel.text = string.Format("{0:0.#}x hype", gm.playerCompany.publicity.value);
         yearLabel.text = gm.year.ToString();
         monthLabel.text = gm.month;
