@@ -462,7 +462,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 231, y: 0, z: 0}
+  m_LocalPosition: {x: 230.5, y: 0, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -486,7 +486,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -449.999969, z: 0}
+  m_LocalPosition: {x: 0, y: -439.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -858,7 +858,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 27, y: 27, z: 0}
+  m_Size: {x: 80, y: 80, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500020
 BoxCollider:
@@ -915,11 +915,11 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 400006}
     relative: 1
-    absolute: -52
+    absolute: -58
   rightAnchor:
     target: {fileID: 400006}
     relative: 1
-    absolute: -25
+    absolute: -24
   bottomAnchor:
     target: {fileID: 400006}
     relative: 0
@@ -931,10 +931,10 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .0220588446, g: .0220588446, b: .0220588446, a: .345098048}
   mPivot: 4
-  mWidth: 27
-  mHeight: 27
+  mWidth: 34
+  mHeight: 34
   mDepth: 120
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 1
   aspectRatio: 1
@@ -989,8 +989,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .198529422, g: .198529422, b: .198529422, a: 1}
   mPivot: 4
-  mWidth: 514
-  mHeight: 60
+  mWidth: 518
+  mHeight: 80
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -1037,7 +1037,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   salaries: {fileID: 11400040}
   rent: {fileID: 11400048}
-  inf: {fileID: 0}
   numWorkerLocations: {fileID: 11400046}
   currentRevenue: {fileID: 11400032}
   currentProfit: {fileID: 11400030}
@@ -1079,17 +1078,17 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 400010}
     relative: 0
-    absolute: 60
+    absolute: 80
   updateAnchors: 1
   mColor: {r: .658682942, g: .963235319, b: .923938215, a: 1}
   mPivot: 4
-  mWidth: 539
-  mHeight: 60
+  mWidth: 543
+  mHeight: 80
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.98333359
+  aspectRatio: 67.875
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1883,7 +1882,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 17.3928566
+  aspectRatio: 24.3500004
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}

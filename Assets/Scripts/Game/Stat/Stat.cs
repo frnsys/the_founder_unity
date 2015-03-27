@@ -5,6 +5,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using Smooth.Slinq;
 
 [System.Serializable]
 public class Stat {
@@ -14,7 +15,7 @@ public class Stat {
         get { return _name; }
     }
     public float value {
-        get { return baseValue + _buffs.Sum(b => b.value); }
+        get { return baseValue + _buffs.Slinq().Select(b => b.value).Sum(); }
     }
     public float baseValue = 0;
 

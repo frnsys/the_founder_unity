@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class HypeMinigame : MonoBehaviour {
     public int pucks = 3;
@@ -12,6 +13,7 @@ public class HypeMinigame : MonoBehaviour {
     public Transform[] tiers;
 
     private float hypeScore = 0;
+    private List<HypeTarget> targets;
 
     public GameObject level;
     public void Setup(Promo promo) {
@@ -20,6 +22,7 @@ public class HypeMinigame : MonoBehaviour {
         level.SetActive(false);
         Invoke("StartGame", 0.5f);
 
+        targets = new List<HypeTarget>();
         for (int i=0; i < (int)(promo.cost/2000); i++) {
             GameObject hypeTarget = Instantiate(hypeTargetPrefab) as GameObject;
             HypeTarget ht = hypeTarget.GetComponent<HypeTarget>();
@@ -27,6 +30,8 @@ public class HypeMinigame : MonoBehaviour {
             HypeTarget.Type t = HypeTarget.RandomType;
             ht.transform.parent = tiers[(int)t];
             ht.Setup(this, t);
+
+            targets.Add(ht);
         }
     }
 
@@ -62,6 +67,9 @@ public class HypeMinigame : MonoBehaviour {
 
     void Completed() {
         if (pucks >= 0) {
+            foreach (HypeTarget ht in targets) {
+                ht.Reset();
+            }
             puck.Reset();
         } else {
             // Game Over
@@ -73,16 +81,18 @@ public class HypeMinigame : MonoBehaviour {
 
     void UpdateLabels() {
         pitchesLabel.text = string.Format("Pitches: [c][EFD4F1]{0}[-][/c]", pucks + 1);
-        scoreLabel.text = string.Format("Hype: [c][56FB92]{0}[-][/c]", hypeScore);
+        scoreLabel.text = string.Format("Hype: [c][56FB92]{0:0.#}[-][/c]", hypeScore);
     }
 
     void EndGame() {
         int numPeople = (int)(Mathf.Pow(hypeScore, 2) * 100 * (Random.value + 0.75f));
 
         GameEvent ev = GameEvent.LoadNoticeEvent("Promo Failure");
-        if (hypeScore >= 25) {
+        if (hypeScore * 1000 >= promo.cost * 0.7) {
+            ev = GameEvent.LoadNoticeEvent("Promo Meh");
+        } else if (hypeScore * 1000 >= promo.cost) {
             ev = GameEvent.LoadNoticeEvent("Promo Success");
-        } else if (hypeScore >= 60) {
+        } else if (hypeScore * 1000 >= promo.cost * 1.5) {
             ev = GameEvent.LoadNoticeEvent("Promo Major Success");
         }
 
@@ -96,5 +106,10 @@ public class HypeMinigame : MonoBehaviour {
 
         // Cleanup.
         Destroy(gameObject);
+
+        if (Done != null)
+            Done();
     }
+
+    static public event System.Action Done;
 }

@@ -28,8 +28,8 @@ public class ProductPlayer : MonoBehaviour {
         } else if (other.name == "Hazard") {
             ProductLabor pl = other.GetComponent<ProductLabor>();
             if (!shield) {
+                health *= 0.5f;
                 Hit(pl.type, pl.points);
-                Died();
             }
             pl.Reset();
 

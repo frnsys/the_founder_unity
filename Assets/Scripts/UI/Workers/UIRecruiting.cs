@@ -13,7 +13,8 @@ public class UIRecruiting : MonoBehaviour {
 
     private void LoadRecruitments() {
         int i = 0;
-        foreach (Recruitment p in Recruitment.LoadAll().Where(r => !r.robots || GameManager.Instance.automation).OrderBy(r => r.cost)) {
+        // Recruitments are unlocked by lifetime revenue.
+        foreach (Recruitment p in Recruitment.LoadAll().Where(r => !r.robots || GameManager.Instance.automation).OrderBy(r => r.cost).Where(p => GameManager.Instance.playerCompany.lifetimeRevenue > (p.cost - 20000) * 1.5)) {
             GameObject recruitmentItem = NGUITools.AddChild(grid.gameObject, recruitmentPrefab);
             UIRecruitment uir = recruitmentItem.GetComponent<UIRecruitment>();
             recruitmentItem.GetComponent<UIDragScrollView>().scrollView = scrollView;

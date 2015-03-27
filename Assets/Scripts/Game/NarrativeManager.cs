@@ -122,6 +122,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     private enum OBS {
         START,
         GAME_INTRO,
+        OPENED_HYPE,
+        NEW_PRODUCT,
         OPENED_NEW_PRODUCT,
         STARTED_PRODUCT,
         THE_MARKET,
@@ -148,6 +150,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         UnlockSet.Unlocked += OnUnlocked;
         TheMarket.Started += OnMarketStarted;
         TheMarket.Done += OnMarketDone;
+        HypeMinigame.Done += OnHypeDone;
         UIOfficeManager.OfficeUpgraded += OfficeUpgraded;
 
         // Hide some menu and status bar items.
@@ -241,15 +244,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 MentorMessages(new string[] {
                     "Congratulations! This is your first write-up in a major publication.",
                     string.Format("This kind of mention has driven up the {0} for your company.", ConceptHighlight("hype")),
-                    "Hype is central to your company's success. A hyped company's products sell much better.",
-                    string.Format("But hype is always deflating. Keep hyping your company by launching {0} from the {1} below.", ConceptHighlight("promotional campaigns"), MenuHighlight("megaphone")),
-                    string.Format("But note that some press can be negative. {0} hurts your company's image.", ConceptHighlight("Bad publicity")),
+                    string.Format("But note that some press can be negative. Bad publicity causes {0} against your company.", ConceptHighlight("outrage")),
                     "Consumers aren't going to buy your products if they disagree with your decisions.",
-                    "Fortunately, consumers forget things over time, and hype can counteract bad publicity."
+                    "Fortunately, consumers forget things over time, and hype can overwhelm outrage."
                 });
-                UIManager uim = UIManager.Instance;
-                uim.statusBar.hypeLabel.gameObject.SetActive(true);
-                uim.menu.Activate("Communications");
             }, 2f));
 
         } else if (ev.name == "RIVALCORP Founded") {
@@ -277,10 +275,28 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         MentorMessages(new string[] {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
-            string.Format("You're not much of a business if haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
-            string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
+            string.Format("Before we dig into building a product, we have to {0} up your company!", ConceptHighlight("hype")),
+            "That way, when you release a product, consumers will be clamoring to buy it.",
+            string.Format("You can hype up company by launching {0} from the {1} below.", ConceptHighlight("promotional campaigns"), MenuHighlight("megaphone")),
+            "Go a head and give it a try!"
         });
-        UIManager.Instance.menu.Activate("New Product");
+        UIManager uim = UIManager.Instance;
+        uim.statusBar.hypeLabel.gameObject.SetActive(true);
+        uim.menu.Activate("Communications");
+    }
+
+    void OnHypeDone() {
+        if (Stage(OBS.NEW_PRODUCT)) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                MentorMessages(new string[] {
+                    "Great! Your company has some hype now.",
+                    "Hype is critical to your products' success, and it fades out over time. So keep it up.",
+                    string.Format("You're not much of a business if haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
+                    string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
+                });
+                UIManager.Instance.menu.Activate("New Product");
+            }, 1f));
+        }
     }
 
     // Checks if it is appropriate to execute the specified stage,
@@ -296,6 +312,15 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     public void OnScreenOpened(string name) {
         Debug.Log(name + " opened");
         switch(name) {
+
+            case "Manage Communications":
+                if (Stage(OBS.OPENED_HYPE)) {
+                    MentorMessages(new string[] {
+                        "Here you can choose from a few different kinds of promos to run.",
+                        "For now you only have a couple to choose from, but more will become available over time."
+                    });
+                }
+                break;
 
             case "New Product":
                 if (Stage(OBS.OPENED_NEW_PRODUCT)) {
@@ -386,7 +411,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         string.Format("[c][FC5656]The Board[-][/c] sets {0} for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c].", ConceptHighlight("annual profit targets")),
                         "You [i]must[/i] hit these targets.",
                         "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will [c][1A9EF2]dismiss you from the company[-][/c].",
-                        "Making money is simple -  just make better and better products!",
+                        "Making money is simple -  hype up your company and make more and better products!",
                         string.Format("Your {0} and {1} are shown in the bar below.", ConceptHighlight("current profit"), ConceptHighlight("target profit")),
                         string.Format("You can keep more detailed track of your profit and other accounting in the {0} menu item.", MenuHighlight("Accounting"))
                     });
@@ -404,7 +429,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     uim.menu.Activate("Research");
                 }, 6f));
                 Product.Completed -= CompletedProduct;
-            } else if (!ob.LOCATIONS_UNLOCKED) {
+            } else if (c.products.Count > 2 && !ob.LOCATIONS_UNLOCKED) {
                 MentorMessages(new string[] {
                     "It's time to start thinking about expanding to new locations.",
                     string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
@@ -447,7 +472,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         if (!ob.HYPE_MINIGAME) {
             MentorMessages(new string[] {
                 "Completing promotional campaigns gives you the opportunity to garner some allies in the media and hype up your company.",
-                string.Format("{0} the puck and hit some {1} to get them on your side. More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!", InteractHighlight("Flick"), ConceptHighlight("influencers"))
+                string.Format("{0} the puck and hit some {1} to get them on your side.", InteractHighlight("Flick"), ConceptHighlight("influencers")),
+                "More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
             });
             ob.HYPE_MINIGAME = true;
         }

@@ -22,9 +22,6 @@ public class UINewProductFlow : MonoBehaviour {
     public UIGrid grid;
     public UIButton confirmSelectionButton;
 
-    public GameObject blackout;
-    public UIProgressBar progressBar;
-
     // Keep track of the selected product aspects.
     private List<ProductType> productTypes;
     private Product product;
@@ -39,22 +36,6 @@ public class UINewProductFlow : MonoBehaviour {
 
         UpdateConfirmButton();
         LoadProductTypes();
-    }
-
-    void Update() {
-        // Prevent access if something is already developing.
-        if (gm.playerCompany.developing) {
-            blackout.SetActive(true);
-
-            if (gm.playerCompany.developingProduct != null) {
-                progressBar.value = gm.playerCompany.developingProduct.progress;
-            } else {
-                progressBar.gameObject.SetActive(false);
-            }
-
-        } else {
-            blackout.SetActive(false);
-        }
     }
 
     // Load product types into the grid.
