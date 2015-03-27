@@ -48,7 +48,7 @@ public class GameData : ScriptableObject {
     public float economicStability;
     public float taxRate;
     public float expansionCostMultiplier;
-    public Infrastructure infrastructureCostMultiplier;
+    public float costMultiplier;
 
     // Onboarding progress.
     public NarrativeManager.OnboardingState onboardingState;
@@ -114,13 +114,7 @@ public class GameData : ScriptableObject {
         data.economicStability = 1f;
         data.expansionCostMultiplier = 1f;
         data.taxRate = 0.3f;
-
-        // This is only in ints so we operate at 1 = 1/100.
-        // i.e. 1 = 1%.
-        data.infrastructureCostMultiplier = new Infrastructure();
-        foreach (Infrastructure.Type t in Infrastructure.Types) {
-            data.infrastructureCostMultiplier[t] = 100;
-        }
+        data.costMultiplier = 1f;
 
         data.specialEventsPool = GameEvent.LoadSpecialEvents();
         data.eventsPool = new List<GameEvent>();

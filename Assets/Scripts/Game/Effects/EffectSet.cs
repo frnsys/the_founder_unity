@@ -44,10 +44,7 @@ public class EffectSet {
     public float taxRate = 0;
     public float economicStability = 0;
     public float expansionCostMultiplier = 0;
-
-    // Infrastructure only uses ints, so we assume it is all divided by 100.
-    // This by default starts at 1 for each Infrastructure type, so we count 1 as our 0.
-    public Infrastructure infrastructureCostMultiplier = new Infrastructure();
+    public float costMultiplier = 0;
 
     public List<ProductEffect> productEffects = new List<ProductEffect>();
     public List<StatBuff> workerEffects = new List<StatBuff>();
@@ -94,7 +91,7 @@ public class EffectSet {
         es.aiCompany = aiCompany;
         es.specialEffect = specialEffect;
         es.expansionCostMultiplier = expansionCostMultiplier;
-        es.infrastructureCostMultiplier = infrastructureCostMultiplier;
+        es.costMultiplier = costMultiplier;
 
         return es;
     }
@@ -106,6 +103,7 @@ public class EffectSet {
         wageMultiplier *= mult;
         taxRate *= mult;
         economicStability *= mult;
+        costMultiplier *= mult;
         cash *= mult;
 
         foreach (ProductEffect pe in productEffects) {
@@ -158,15 +156,10 @@ public class EffectSet {
         gm.economicStability += economicStability;
         gm.taxRate += taxRate;
         gm.expansionCostMultiplier += expansionCostMultiplier;
+        gm.costMultiplier += costMultiplier;
 
         if (specialEffect != Special.None)
             gm.ApplySpecialEffect(specialEffect);
-
-        foreach (KeyValuePair<Infrastructure.Type, int> item in infrastructureCostMultiplier) {
-            if (item.Value != 0) {
-                gm.infrastructureCostMultiplier[item.Key] += item.Value;
-            }
-        }
     }
     public void Remove(Company company) {
         company.activeEffects.Remove(this);

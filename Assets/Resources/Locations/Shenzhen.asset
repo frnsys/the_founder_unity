@@ -11,21 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: Shenzhen
   m_EditorClassIdentifier: 
-  description: All the big hitters go here for low-cost manufacturing.
   rotation: {x: -104.900002, y: 22.6200008, z: 0}
   cost: 1e+06
+  description: All the big hitters go here for low-cost manufacturing.
   market: 2
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 000000000a0000000000000000000000
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -49,9 +44,7 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000fcffffff0000000000000000
+    costMultiplier: -.0500000007
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

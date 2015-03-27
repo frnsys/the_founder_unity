@@ -21,7 +21,6 @@ public class UINewProductFlow : MonoBehaviour {
     public UIGrid selectedGrid;
     public UIGrid grid;
     public UIButton confirmSelectionButton;
-    public UILabel availableInfrastructureLabel;
 
     public GameObject blackout;
     public UIProgressBar progressBar;
@@ -56,9 +55,6 @@ public class UINewProductFlow : MonoBehaviour {
         } else {
             blackout.SetActive(false);
         }
-
-        // Update how much infrastructure is available.
-        availableInfrastructureLabel.text = (gm.playerCompany.availableInfrastructure - SelectedInfrastructure()).ToStringWithEmpty();
     }
 
     // Load product types into the grid.
@@ -77,15 +73,7 @@ public class UINewProductFlow : MonoBehaviour {
     private void ToggleProductType(ProductType pt, GameObject obj) {
         if (productTypes.Contains(pt)) {
             obj.transform.Find("Overlay").gameObject.SetActive(true);
-            obj.transform.Find("Overlay/Missing").GetComponent<UILabel>().text = "";
             return;
-        }
-
-        bool capacity = HasCapacityFor(pt);
-        obj.GetComponent<UIButton>().isEnabled = capacity;
-        obj.transform.Find("Overlay").gameObject.SetActive(!capacity);
-        if (!capacity) {
-            obj.transform.Find("Overlay/Missing").GetComponent<UILabel>().text = string.Format("Needs an additional\n{0}", MissingInfrastructureFor(pt));
         }
     }
 
@@ -129,23 +117,6 @@ public class UINewProductFlow : MonoBehaviour {
             ProductType pt = item.GetComponent<UIProductType>().productType;
             ToggleProductType(pt, item);
         }
-    }
-
-    // Check if the company has enough capacity for a particular product type.
-    private bool HasCapacityFor(ProductType pt) {
-        return (gm.playerCompany.availableInfrastructure - SelectedInfrastructure()) >= pt.requiredInfrastructure;
-    }
-    private Infrastructure MissingInfrastructureFor(ProductType pt) {
-        return pt.requiredInfrastructure - (gm.playerCompany.availableInfrastructure - SelectedInfrastructure());
-    }
-    private Infrastructure SelectedInfrastructure() {
-        Infrastructure selectionInf = new Infrastructure();
-        if (productTypes.Count > 0) {
-            IEnumerable<Infrastructure> selectionInfs = productTypes.Select(x => x.requiredInfrastructure);
-            if (selectionInfs.Count() > 0)
-                selectionInf += selectionInfs.Aggregate((x, y) => x + y);
-        }
-        return selectionInf;
     }
 
     public void BeginProductDevelopment() {

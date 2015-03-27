@@ -15,12 +15,6 @@ public class UILocationItem : UIEffectItem {
     private void DisplayLocation() {
         label.text = location_.name;
         description.text = location_.description;
-
-        if (location_.infrastructureCapacity > 0) {
-            infrastructure.text = string.Format("Adds capacity for {0} :DATACENTER:, :FACTORY:, :LAB:, or :STUDIO:", location_.infrastructureCapacity);
-        } else {
-            infrastructure.gameObject.SetActive(false);
-        }
         market.text = string.Format("Increases {0} market share.", MarketManager.NameForMarket(location_.market));
 
         if (playerCompany.HasLocation(location_)) {
@@ -56,7 +50,6 @@ public class UILocationItem : UIEffectItem {
     public UILabel label;
     public UILabel description;
     public UILabel market;
-    public UILabel infrastructure;
     public GameObject expandButton;
 
     private Company playerCompany;

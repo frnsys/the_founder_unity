@@ -32,9 +32,6 @@ internal class LocationInspector : Editor {
         i.rotation = (Vector3)EditorGUILayout.Vector3Field("Coordinates RotXYZ", i.rotation);
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("Infrastructure Capacity");
-        i.infrastructureCapacity = EditorGUILayout.IntField("Infrastructure Capacity", i.infrastructureCapacity);
-
         EditorGUILayout.Space();
         if (i.effects == null)
             i.effects = new EffectSet();

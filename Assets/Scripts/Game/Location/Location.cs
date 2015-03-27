@@ -8,7 +8,6 @@ public class Location : SharedResource<Location> {
     public float cost = 1000000;
     public string description;
     public MarketManager.Market market = MarketManager.Market.NorthAmerica;
-    public int infrastructureCapacity;
     public EffectSet effects = new EffectSet();
 
     public static new Location Load(string name) {

@@ -108,7 +108,6 @@ public class UIEffectAlert : UIAlert {
         }
 
         if (es.expansionCostMultiplier != 0) {
-            RenderBuffEffect(new StatBuff("Expansion Costs", es.expansionCostMultiplier), null);
             RenderEffect(string.Format("New locations are {0:P1} {1}",
                             Mathf.Abs(es.expansionCostMultiplier),
                             es.expansionCostMultiplier > 0 ? "more expensive" : "cheaper"));
@@ -122,13 +121,10 @@ public class UIEffectAlert : UIAlert {
             RenderBuffEffect(es.opinionEvent.publicity, null);
         }
 
-        foreach (Infrastructure.Type t in Infrastructure.Types) {
-            if (es.infrastructureCostMultiplier[t] != 0) {
-                RenderEffect(string.Format("{0:P1} {1} {2} costs",
-                                Mathf.Abs(es.infrastructureCostMultiplier[t]/100f),
-                                es.infrastructureCostMultiplier[t] > 0 ? "more expensive" : "cheaper",
-                                t));
-            }
+        if (es.costMultiplier != 0) {
+            RenderEffect(string.Format("{0} costs by {0:P1}",
+                            es.costMultiplier > 0 ? "Reduces" : "Increases",
+                            Mathf.Abs(es.costMultiplier)));
         }
     }
 

@@ -35,7 +35,6 @@ public class Company : HasStats {
         baseSizeLimit = 5;
         perks = new List<Perk>();
         office = Office.Type.Apartment;
-        infrastructure = new Infrastructure();
 
         products = new List<Product>();
         founders = new List<Founder>();
@@ -419,8 +418,8 @@ public class Company : HasStats {
         float toPay = 0;
 
         // Skip the first location's rent since it is our HQ and considered free.
-        float salaries = workers.Sum(w => w.monthlyPay);
-        float rent = locations.Skip(1).Sum(l => l.cost) + infrastructure.cost;
+        float salaries = workers.Sum(w => w.monthlyPay) * GameManager.Instance.wageMultiplier;
+        float rent = locations.Skip(1).Sum(l => l.cost)/100 * GameManager.Instance.costMultiplier;
         toPay += salaries + rent;
 
         // Taxes
@@ -526,89 +525,6 @@ public class Company : HasStats {
         perk = Perk.Find(perk, perks);
         perks.Remove(perk);
         perk.effects.Remove(this);
-    }
-
-
-    // ===============================================
-    // Infrastructure Management =====================
-    // ===============================================
-
-    public Infrastructure infrastructure;
-
-    // Infrastructure which is available for new products.
-    public Infrastructure availableInfrastructure {
-        get { return infrastructure - usedInfrastructure; }
-    }
-
-    // Infrastructure which is tied up in existing products.
-    public Infrastructure usedInfrastructure {
-        get {
-            Infrastructure usedInfras = new Infrastructure();
-            foreach (Product p in products.Where(p => !p.retired)) {
-                usedInfras += p.requiredInfrastructure;
-            }
-            return usedInfras;
-        }
-    }
-
-    // Total infrastructure capacity.
-    public int infrastructureCapacity {
-        get { return 8 + locations.Sum(i => i.infrastructureCapacity); }
-    }
-
-    // Infrastructure capacity which is unused.
-    public int availableInfrastructureCapacity {
-        get { return infrastructureCapacity - infrastructure.total; }
-    }
-
-    static public event System.Action<Company, Infrastructure> BoughtInfrastructure;
-    public bool BuyInfrastructure(Infrastructure i) {
-        if (HasCapacityFor(i) && Pay(i.cost)) {
-            infrastructure += i;
-            UpdateProductStatuses();
-            if (BoughtInfrastructure != null)
-                BoughtInfrastructure(this, i);
-            return true;
-        }
-        return false;
-    }
-
-    public void DestroyInfrastructure(Infrastructure i) {
-        infrastructure -= i;
-        UpdateProductStatuses();
-    }
-
-    // If you don't have enough infrastructure for your
-    // current products (in-market & developing), they are put on hold.
-    private void UpdateProductStatuses() {
-        Infrastructure inf = infrastructure;
-
-        IEnumerable<Product> supportedProducts = products.Where(p => !p.retired);
-
-        // Tally up the total infrastructure required to support all products.
-        // Get all products which are currently using infrastructure.
-        Infrastructure allInf = new Infrastructure();
-        foreach (Product p in supportedProducts) {
-            allInf += p.requiredInfrastructure;
-        }
-
-        // Figure out which infrastructure types are overloaded.
-        List<Infrastructure.Type> overloadedTypes = new List<Infrastructure.Type>();
-        foreach (Infrastructure.Type t in Infrastructure.Types) {
-            if (allInf[t] > inf[t]) {
-                overloadedTypes.Add(t);
-            }
-        }
-
-        // Disable products which rely on infrastructure which is overloaded.
-        // Re-enable products which rely on infrastructure which is no longer overloaded.
-        foreach (Product p in supportedProducts) {
-            p.disabled = overloadedTypes.Any(t => p.requiredInfrastructure[t] > 0);
-        }
-    }
-
-    public bool HasCapacityFor(Infrastructure i) {
-        return availableInfrastructureCapacity >= i.total;
     }
 
 

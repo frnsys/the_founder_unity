@@ -171,7 +171,6 @@ namespace UnityTest
             Assert.AreEqual(gd.company.office,             data.company.office);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
             Assert.AreEqual(gd.company.baseSizeLimit,      data.company.baseSizeLimit);
-            Assert.AreEqual(gd.company.infrastructure,     data.company.infrastructure);
             Assert.AreEqual(gd.company.lastMonthRevenue,   data.company.lastMonthRevenue);
             Assert.AreEqual(gd.company.annualRevenue,      data.company.annualRevenue);
             Assert.AreEqual(gd.company.annualCosts,        data.company.annualCosts);
@@ -219,7 +218,6 @@ namespace UnityTest
 
                 Assert.AreEqual(p.name,               p_.name);
                 Assert.AreEqual(p.progress,           p_.progress);
-                Assert.AreEqual(p.disabled,           p_.disabled);
                 Assert.AreEqual(p.state,              p_.state);
                 Assert.AreEqual(p.timeSinceLaunch,    p_.timeSinceLaunch);
                 Assert.AreEqual(p.revenueEarned,      p_.revenueEarned);
@@ -232,7 +230,6 @@ namespace UnityTest
 
                 for (int j=0; j<p.productTypes.Count; j++) {
                     Assert.AreEqual(p.productTypes[j].name, p_.productTypes[j].name);
-                    Assert.IsTrue(p.productTypes[j].requiredInfrastructure.Equals(p_.productTypes[j].requiredInfrastructure));
                 }
             }
 
@@ -338,17 +335,10 @@ namespace UnityTest
             product.Init(pts, 0, 0, 0, data.company);
             product.requiredProgress = 100000;
 
-            // TO DO
-            //product.Develop(RandFloat(), data.company);
-
             float r = Random.Range(0,1);
             if (r > 0.33) {
                 product.Launch(data.company);
                 product.Revenue(5, data.company);
-
-                if (Random.Range(0,1) > 0.5) {
-                    product.disabled = true;
-                }
             } else if (r > 0.66) {
                 product.Shutdown();
             }

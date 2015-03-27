@@ -33,11 +33,6 @@ internal class ProductTypeInspector : Editor {
             p.requiredVerticals.Add(null);
         }
 
-        EditorGUILayout.LabelField("Required Infrastructure");
-        foreach (Infrastructure.Type t in Enum.GetValues(typeof(Infrastructure.Type))) {
-            p.requiredInfrastructure[t] = EditorGUILayout.IntField(t.ToString(), p.requiredInfrastructure[t]);
-        }
-
         // Let Unity know to save on changes.
         if (GUI.changed) {
             EditorUtility.SetDirty(target);

@@ -63,9 +63,9 @@ public class GameManager : Singleton<GameManager> {
         get { return data.expansionCostMultiplier; }
         set { data.expansionCostMultiplier = value; }
     }
-    public Infrastructure infrastructureCostMultiplier {
-        get { return data.infrastructureCostMultiplier; }
-        set { data.infrastructureCostMultiplier = value; }
+    public float costMultiplier {
+        get { return data.costMultiplier; }
+        set { data.costMultiplier = value; }
     }
 
     public float profitTarget {
@@ -187,13 +187,6 @@ public class GameManager : Singleton<GameManager> {
 
     public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
         data.company.verticals = new List<Vertical> { vertical };
-
-        if (vertical.name == "Information") {
-            data.company.infrastructure[Infrastructure.Type.Datacenter] = 4;
-        } else {
-            data.company.infrastructure[Infrastructure.Type.Factory] = 4;
-        }
-
         data.company.SetHQ(location);
         data.company.founders.Add(cofounder);
         ApplyEffectSet(cofounder.bonuses);
