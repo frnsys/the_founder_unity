@@ -43,10 +43,26 @@ public class UIOnboarding : MonoBehaviour {
         cofounders = new List<Founder>(Resources.LoadAll<Founder>("Founders/Cofounders"));
 
         Intro();
+
+        continueButton.SetActive(false);
+        backButton.SetActive(false);
     }
 
     void Intro() {
-        VerticalSelection(null);
+        string[] messages = new string[] {
+            "It's the year 2001. The dot-com bubble has just burst, leaving many companies to shutter their operations.",
+            string.Format("A few stronger enterprises - {0}, {1}, {2}, and others - have managed to survive.",
+                    gm.narrativeManager.ConceptHighlight("Kougle"),
+                    gm.narrativeManager.ConceptHighlight("Coralzon"),
+                    gm.narrativeManager.ConceptHighlight("Carrot Inc.")),
+            string.Format("But their weakened state and the void left by mass bankruptcy means the business world is ripe for {0}.", gm.narrativeManager.SpecialHighlight("disruption")),
+            "I have a good feeling about you - so I've given you some starting funds to take advantage of this time and build a powerful company yourself."
+        };
+        gm.narrativeManager.MentorMessages(messages, delegate(GameObject obj) {
+            continueButton.SetActive(true);
+            backButton.SetActive(true);
+            VerticalSelection(null);
+        });
     }
 
     void BackToMainMenu(GameObject obj) {
@@ -60,8 +76,9 @@ public class UIOnboarding : MonoBehaviour {
      * ==========================
      */
     void VerticalSelection(GameObject obj) {
-        title.text = "Select starting vertical";
+        title.text = "What kind of products\nwill you make?";
         back = BackToMainMenu;
+        continueButton.GetComponent<UIButton>().isEnabled = false;
 
         ClearGrid();
         foreach (Vertical v in startingVerticals) {
@@ -70,8 +87,10 @@ public class UIOnboarding : MonoBehaviour {
             ov.vertical = v;
             UIEventListener.Get(go).onClick += SelectVertical;
 
-            if (selectedVertical == v)
+            if (selectedVertical == v) {
                 ov.background.color = activeColor;
+                continueButton.GetComponent<UIButton>().isEnabled = true;
+            }
         }
         grid.Reposition();
 
@@ -81,14 +100,7 @@ public class UIOnboarding : MonoBehaviour {
         // Otherwise, it is a "back" event.
         if (!didShowVerticals) {
             string[] messages = new string[] {
-                "It's the year 2001. The dot-com bubble has just burst, leaving many companies to shutter their operations.",
-                string.Format("A few stronger enterprises - {0}, {1}, {2}, and others - have managed to survive.",
-                        gm.narrativeManager.ConceptHighlight("Kougle"),
-                        gm.narrativeManager.ConceptHighlight("Coralzon"),
-                        gm.narrativeManager.ConceptHighlight("Carrot Inc.")),
-                string.Format("But their weakened state and the void left by mass bankruptcy means the business world is ripe for {0}.", gm.narrativeManager.SpecialHighlight("disruption")),
-                "I have a good feeling about you - so I've given you some starting funds to take advantage of this time and build a powerful company yourself.",
-                "First, what kind of business do you want to create?",
+                "First you have to choose the kind of business you want to create.",
                 "Remember that a lot of companies start doing one thing and grow to do many."
             };
             gm.narrativeManager.MentorMessages(messages);
@@ -104,6 +116,7 @@ public class UIOnboarding : MonoBehaviour {
         UIOnboardingVertical ov = obj.GetComponent<UIOnboardingVertical>();
         selectedVertical = ov.vertical;
         ov.background.color = activeColor;
+        continueButton.GetComponent<UIButton>().isEnabled = true;
     }
 
     void ConfirmVertical(GameObject obj) {
@@ -119,8 +132,9 @@ public class UIOnboarding : MonoBehaviour {
      * ==========================
      */
     void LocationSelection(GameObject obj) {
-        title.text = "Select starting location";
+        title.text = "Where will your HQ\nbe located?";
         back = VerticalSelection;
+        continueButton.GetComponent<UIButton>().isEnabled = false;
 
         ClearGrid();
         foreach (Location l in startingLocations) {
@@ -129,8 +143,10 @@ public class UIOnboarding : MonoBehaviour {
             ov.location = l;
             UIEventListener.Get(go).onClick += SelectLocation;
 
-            if (selectedLocation == l)
+            if (selectedLocation == l) {
                 ov.background.color = activeColor;
+                continueButton.GetComponent<UIButton>().isEnabled = true;
+            }
         }
         grid.Reposition();
 
@@ -154,6 +170,7 @@ public class UIOnboarding : MonoBehaviour {
         UIOnboardingLocation ov = obj.GetComponent<UIOnboardingLocation>();
         selectedLocation = ov.location;
         ov.background.color = activeColor;
+        continueButton.GetComponent<UIButton>().isEnabled = true;
     }
 
     void ConfirmLocation(GameObject obj) {
@@ -169,8 +186,9 @@ public class UIOnboarding : MonoBehaviour {
      * ==========================
      */
     void CofounderSelection(GameObject obj) {
-        title.text = "Select cofounder";
-        continueButton.transform.Find("Label").GetComponent<UILabel>().text = "OK";
+        title.text = "Who will be your cofounder?";
+        continueButton.transform.Find("Label").GetComponent<UILabel>().text = "Next";
+        continueButton.GetComponent<UIButton>().isEnabled = false;
         back = LocationSelection;
 
         ClearGrid();
@@ -180,8 +198,10 @@ public class UIOnboarding : MonoBehaviour {
             ov.cofounder = f;
             UIEventListener.Get(go).onClick += SelectCofounder;
 
-            if (selectedCofounder == f)
+            if (selectedCofounder == f) {
                 ov.background.color = activeColor;
+                continueButton.GetComponent<UIButton>().isEnabled = true;
+            }
         }
         grid.Reposition();
 
@@ -207,6 +227,7 @@ public class UIOnboarding : MonoBehaviour {
         UIOnboardingCofounder ov = obj.GetComponent<UIOnboardingCofounder>();
         selectedCofounder = ov.cofounder;
         ov.background.color = activeColor;
+        continueButton.GetComponent<UIButton>().isEnabled = true;
     }
 
     void ConfirmCofounder(GameObject obj) {

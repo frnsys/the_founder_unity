@@ -8,7 +8,7 @@ public class UIMentor : UIPopup {
     public GameObject model;
     public UITexture overlay;
 
-    private float overlayAlpha = 0.004f;
+    private float overlayAlpha = 0.2f;
 
     void OnEnable() {
         Show(box);
