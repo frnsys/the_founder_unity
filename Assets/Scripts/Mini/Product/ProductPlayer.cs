@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ProductPlayer : MonoBehaviour {
     static public event System.Action<ProductLabor.Type, float> Scored;
@@ -20,6 +21,7 @@ public class ProductPlayer : MonoBehaviour {
         // "Capture" the labor value.
         if (other.name == "Labor") {
             ProductLabor pl = other.GetComponent<ProductLabor>();
+            StartCoroutine(Pickup());
             AudioManager.Instance.PlayLaborHitFX();
             if (Scored != null)
                 Scored(pl.type, pl.points);
@@ -28,6 +30,7 @@ public class ProductPlayer : MonoBehaviour {
         } else if (other.name == "Hazard") {
             ProductLabor pl = other.GetComponent<ProductLabor>();
             if (!shield) {
+                StartCoroutine(Flash());
                 health *= 0.5f;
                 Hit(pl.type, pl.points);
             }
@@ -38,6 +41,21 @@ public class ProductPlayer : MonoBehaviour {
             Hit(pl.type, pl.points);
             pl.Reset();
         }
+    }
+
+    public Material hitMat;
+    IEnumerator Flash() {
+        Material oldMat = renderer.material;
+        renderer.material = hitMat;
+        StartCoroutine(UIAnimator.Scale(transform, 1f, 1.4f, 20f));
+        yield return new WaitForSeconds(0.1f);
+        renderer.material = oldMat;
+        StartCoroutine(UIAnimator.Scale(transform, 1.4f, 1f, 20f));
+    }
+    IEnumerator Pickup() {
+        StartCoroutine(UIAnimator.Scale(transform, 1f, 1.2f, 20f));
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(UIAnimator.Scale(transform, 1.2f, 1f, 20f));
     }
 
     public float health;

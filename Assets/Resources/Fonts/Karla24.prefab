@@ -1032,6 +1032,16 @@ MonoBehaviour:
     spriteName: creativity
   - sequence: ':PRODUCTIVITY:'
     spriteName: productivity
+  - sequence: ':OUTRAGE:'
+    spriteName: outrage
+  - sequence: ':BUG:'
+    spriteName: bug
+  - sequence: ':BLOCK:'
+    spriteName: block
+  - sequence: ':COFFEE:'
+    spriteName: coffee
+  - sequence: ':INSIGHT:'
+    spriteName: insight
   mDynamicFont: {fileID: 0}
   mDynamicFontSize: 16
   mDynamicFontStyle: 0

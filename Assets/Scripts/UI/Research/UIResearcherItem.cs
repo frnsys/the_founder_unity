@@ -11,7 +11,7 @@ public class UIResearcherItem : MonoBehaviour {
             displayObject.GetComponent<MeshRenderer>().material = worker_.material;
 
             nameLabel.text = worker_.name;
-            skillsLabel.text = string.Format(":CREATIVITY: {0}     :CLEVERNESS: {1}     :CHARISMA: {2}     :PRODUCTIVITY: {3}", worker_.creativity.value, worker_.cleverness.value, worker_.charisma.value, worker_.productivity.value);
+            skillsLabel.text = string.Format(":DESIGN: {0}     :ENGINEERING: {1}     :MARKETING: {2}     :PRODUCTIVITY: {3}", worker_.creativity.value, worker_.cleverness.value, worker_.charisma.value, worker_.productivity.value);
         }
     }
 

@@ -55,7 +55,7 @@ public class ProductMinigame : MonoBehaviour {
             labors.Add(pl);
         }
 
-        hazardChance = 0.3f + Mathf.Max(-1 * c.opinion.value, 0) / 1000;
+        hazardChance = 0.2f + Mathf.Max(-1 * c.opinion.value, 0) / 1000;
         powerupChance = 0.0005f + aggHap / 1000;
 
         StartCoroutine(Spawn());
@@ -189,12 +189,18 @@ public class ProductMinigame : MonoBehaviour {
         switch (t) {
             case ProductLabor.Type.Outrage:
                 charismaPoints -= points;
+                if (charismaPoints < 0)
+                    charismaPoints = 0;
                 break;
             case ProductLabor.Type.Block:
                 creativityPoints -= points;
+                if (creativityPoints < 0)
+                    creativityPoints = 0;
                 break;
             case ProductLabor.Type.Bug:
                 clevernessPoints -= points;
+                if (clevernessPoints < 0)
+                    clevernessPoints = 0;
                 break;
 
             case ProductLabor.Type.Coffee:

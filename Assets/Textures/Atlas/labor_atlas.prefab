@@ -41,9 +41,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 3fcb9a339ecad449f9c27f654e40f160, type: 2}
   mSprites:
+  - name: block
+    x: 171
+    y: 475
+    width: 24
+    height: 12
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 6
+    paddingBottom: 6
   - name: breakthrough
-    x: 213
-    y: 473
+    x: 203
+    y: 450
     width: 16
     height: 16
     borderLeft: 0
@@ -54,9 +67,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: bug
+    x: 203
+    y: 489
+    width: 24
+    height: 23
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 1
+    paddingBottom: 0
   - name: charisma
-    x: 196
-    y: 473
+    x: 230
+    y: 471
     width: 16
     height: 16
     borderLeft: 0
@@ -81,8 +107,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cleverness
-    x: 179
-    y: 473
+    x: 196
+    y: 471
     width: 16
     height: 16
     borderLeft: 0
@@ -93,9 +119,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: coffee
+    x: 153
+    y: 488
+    width: 24
+    height: 24
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: creativity
-    x: 162
-    y: 473
+    x: 213
+    y: 471
     width: 16
     height: 16
     borderLeft: 0
@@ -107,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: datacenter
-    x: 240
-    y: 492
+    x: 128
+    y: 421
     width: 12
     height: 20
     borderLeft: 0
@@ -120,33 +159,33 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 2
   - name: design
-    x: 145
-    y: 473
-    width: 16
-    height: 16
+    x: 147
+    y: 442
+    width: 18
+    height: 24
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
+    paddingLeft: 3
+    paddingRight: 3
     paddingTop: 0
     paddingBottom: 0
   - name: engineering
-    x: 223
-    y: 496
-    width: 16
-    height: 16
+    x: 128
+    y: 467
+    width: 24
+    height: 20
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
     paddingLeft: 0
     paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
+    paddingTop: 2
+    paddingBottom: 2
   - name: factory
-    x: 128
+    x: 228
     y: 490
     width: 22
     height: 22
@@ -158,9 +197,22 @@ MonoBehaviour:
     paddingRight: 1
     paddingTop: 1
     paddingBottom: 1
+  - name: insight
+    x: 128
+    y: 442
+    width: 18
+    height: 24
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 3
+    paddingRight: 3
+    paddingTop: 0
+    paddingBottom: 0
   - name: interact
-    x: 171
-    y: 492
+    x: 153
+    y: 467
     width: 17
     height: 20
     borderLeft: 0
@@ -185,8 +237,8 @@ MonoBehaviour:
     paddingTop: 34
     paddingBottom: 0
   - name: lab
-    x: 128
-    y: 465
+    x: 186
+    y: 442
     width: 16
     height: 24
     borderLeft: 0
@@ -198,10 +250,23 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: marketing
-    x: 206
-    y: 496
-    width: 16
-    height: 16
+    x: 128
+    y: 488
+    width: 24
+    height: 24
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: outrage
+    x: 178
+    y: 488
+    width: 24
+    height: 24
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -211,8 +276,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: productivity
-    x: 189
-    y: 496
+    x: 220
+    y: 450
     width: 16
     height: 16
     borderLeft: 0
@@ -224,8 +289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: star
-    x: 230
-    y: 473
+    x: 237
+    y: 450
     width: 16
     height: 16
     borderLeft: 0
@@ -238,7 +303,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: star_half
     x: 247
-    y: 473
+    y: 471
     width: 8
     height: 16
     borderLeft: 0
@@ -250,8 +315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: studio
-    x: 151
-    y: 490
+    x: 166
+    y: 444
     width: 19
     height: 22
     borderLeft: 0

@@ -386,13 +386,15 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "Great! You've started developing your first product.",
                         "Now you are in the zone to build something great.",
                         "Collect as many product points as you can.",
-                        "There are \n:CREATIVITY: [c][0078E1]design[-][/c],\n:CLEVERNESS: [c][0078E1]engineering[-][/c], or\n:CHARISMA: [c][0078E1]marketing[-][/c]\nproduct points available.",
+                        "There are \n:DESIGN: [c][0078E1]design[-][/c],\n:ENGINEERING: [c][0078E1]engineering[-][/c], or\n:MARKETING: [c][0078E1]marketing[-][/c]\nproduct points available.",
                         "Larger globs are worth more points.",
                         "Your employees will take turns collecting points.",
                         string.Format("They will last a limited amount of time depending on their {0}.", ConceptHighlight("productivity")),
                         string.Format("Sometimes you will see {0} to help your employees out.", ConceptHighlight("powerups")),
+                        "You may encounter \n:COFFEE: [c][0078E1]coffee[-][/c] or\n:INSIGHT: [c][0078E1]insight[-][/c]\npowerups.",
                         string.Format("The {0} your employees are, the more powerups you'll see.", ConceptHighlight("happier")),
                         string.Format("Finally, you may encounter {0} which will tire your employees out and cost you hard-earned points.", ConceptHighlight("hazards")),
+                        "You may encounter \n:BLOCK: [c][0078E1]creative blocks[-][/c],\n:BUG: [c][0078E1]bugs[-][/c], or\n:OUTRAGE: [c][0078E1]outrage[-][/c]\nhazards.",
                         string.Format("The more {0} there is towards your company, the more likely you are to encounter hazards.", ConceptHighlight("outrage")),
                         string.Format("When all your employees have gone, your product will be released to {0}!", SpecialHighlight("The Market"))
                     });
