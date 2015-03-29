@@ -40,7 +40,7 @@ public class UIRecruitment : MonoBehaviour {
 
     private bool locked;
     public void Lock() {
-        GetComponent<UIWidget>().alpha = 0.5f;
+        GetComponent<UIWidget>().alpha = 0.3f;
         transform.Find("Lock").gameObject.SetActive(true);
         locked = true;
     }

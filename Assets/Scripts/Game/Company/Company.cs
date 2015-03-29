@@ -420,7 +420,7 @@ public class Company : HasStats {
 
         // Skip the first location's rent since it is our HQ and considered free.
         float salaries = workers.Slinq().Select(w => w.monthlyPay).Sum() * GameManager.Instance.wageMultiplier;
-        float rent = locations.Skip(1).Slinq().Select(l => l.cost).Sum()/100 * GameManager.Instance.costMultiplier;
+        float rent = locations.Skip(1).Slinq().Select(l => l.cost).Sum()/1000 * GameManager.Instance.costMultiplier;
         toPay += salaries + rent;
 
         // Taxes

@@ -17,78 +17,70 @@ MonoBehaviour:
   activeEffects:
   - unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
+      specialProjects: []
     cash: 0
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
     spendingMultiplier: 0
     wageMultiplier: 0
+    taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+    specialEffect: 0
   - unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
+      specialProjects: []
     cash: 0
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
     spendingMultiplier: 0
     wageMultiplier: 0
+    taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+    specialEffect: 0
   slogan: 
   office: 0
   _workers: []
@@ -97,18 +89,24 @@ MonoBehaviour:
   baseSizeLimit: 5
   _locations: []
   markets: 
+  marketShare: 0
+  marketSharePercent: 0
   _verticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
   products: []
-  developingPromo: {fileID: 0}
-  developingRecruitment: {fileID: 0}
+  developingProduct: {fileID: 0}
+  specialProjects: []
+  lobbies: []
   lastMonthRevenue: 0
-  quarterRevenue: 0
-  quarterCosts: 0
+  annualRevenue: 0
+  annualCosts: 0
   lifetimeRevenue: 0
+  taxesAvoided: 0
+  deathToll: 0
+  debtOwned: 0
+  pollution: 0
   companies: []
   perks: []
-  opinionCzar: {fileID: 0}
   opinion:
     baseValue: 1
     _buffs: []
@@ -116,13 +114,13 @@ MonoBehaviour:
     baseValue: 0
     _buffs: []
   opinionEvents: []
-  researchCzar: {fileID: 0}
   research:
     baseValue: 1
     _buffs: []
-  researchInvestment: 0
+  researchPoints: 0
   technologies: []
-  QuarterlyPerfHistory:
+  researchers: []
+  AnnualPerfHistory:
     Size: 0
     values: []
   disabled: 0
@@ -139,7 +137,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
     - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
     - {fileID: 11400000, guid: 36896ff72616c4e739fd3a93ab1d96a3, type: 2}
-    workers: []
     perks: []
     locations: []
     verticals:
@@ -150,50 +147,44 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
     - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    promos: []
-    recruitments: []
     companies: []
+    specialProjects: []
   bonuses:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
+      specialProjects: []
     cash: 0
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
     spendingMultiplier: 0
     wageMultiplier: 0
+    taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+    specialEffect: 0
   specialtyVerticals: []
   specialtyProductTypes: []
-  startLocations:
-  - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
-  - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
-  - {fileID: 11400000, guid: d3210efca70014e1fb03a93ffc12038d, type: 2}
+  designSkill: 0
+  engineeringSkill: 0
+  marketingSkill: 0

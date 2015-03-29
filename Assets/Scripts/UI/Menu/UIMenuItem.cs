@@ -35,7 +35,8 @@ public class UIMenuItem : MonoBehaviour {
     }
 
     void Awake() {
-        mat = display.renderer.material;
+        if (display != null)
+            mat = display.renderer.material;
     }
 
     void Update() {
