@@ -31,9 +31,9 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         StartCoroutine(DayNightCycle());
 
         if (officeUpgradeTriggered)
-            UIManager.Instance.menu.Activate("Upgrade Office");
+            UIManager.Instance.menu.Show("Upgrade Office");
         else
-            UIManager.Instance.menu.Deactivate("Upgrade Office");
+            UIManager.Instance.menu.Hide("Upgrade Office");
     }
 
     void OnEnable() {

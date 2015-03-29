@@ -34,16 +34,18 @@ public class UILocationItem : UIEffectItem {
     }
 
     public void ExpandToLocation() {
-        UIManager.Instance.Confirm("Are you sure want to expand to " + location_.name + "?", delegate() {
-            bool success = playerCompany.ExpandToLocation(location_);
+        if (!locked) {
+            UIManager.Instance.Confirm("Are you sure want to expand to " + location_.name + "?", delegate() {
+                bool success = playerCompany.ExpandToLocation(location_);
 
-            if (!success) {
-                UIManager.Instance.Alert("You don't have enough capital to expand here. Get out.");
-            } else {
-                // Re-display the location as an owned one.
-                DisplayLocation();
-            }
-        }, null);
+                if (!success) {
+                    UIManager.Instance.Alert("You don't have enough capital to expand here. Get out.");
+                } else {
+                    // Re-display the location as an owned one.
+                    DisplayLocation();
+                }
+            }, null);
+        }
     }
 
     public UILabel cost;
@@ -56,6 +58,13 @@ public class UILocationItem : UIEffectItem {
 
     void Update() {
         UpdateEffectWidths();
+    }
+
+    private bool locked;
+    public void Lock() {
+        GetComponent<UIWidget>().alpha = 0.3f;
+        transform.Find("Lock").gameObject.SetActive(true);
+        locked = true;
     }
 }
 

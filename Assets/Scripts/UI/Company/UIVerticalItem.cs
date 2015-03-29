@@ -22,13 +22,15 @@ public class UIVerticalItem : MonoBehaviour {
     }
 
     public void ExpandToVertical() {
-        UIManager.Instance.Confirm("Are you sure want to expand into " + vertical_.name + "?", delegate() {
-            bool success = GameManager.Instance.playerCompany.ExpandToVertical(vertical_);
+        if (!locked) {
+            UIManager.Instance.Confirm("Are you sure want to expand into " + vertical_.name + "?", delegate() {
+                bool success = GameManager.Instance.playerCompany.ExpandToVertical(vertical_);
 
-            if (!success) {
-                UIManager.Instance.Alert("You don't have enough capital to break into this industry. Get out of my office.");
-            }
-        }, null);
+                if (!success) {
+                    UIManager.Instance.Alert("You don't have enough capital to break into this industry. Get out of my office.");
+                }
+            }, null);
+        }
     }
 
     public UILabel label;
@@ -39,6 +41,15 @@ public class UIVerticalItem : MonoBehaviour {
 
     void Update() {
         UIAnimator.Rotate(displayObject);
+    }
+
+    private bool locked;
+    public Material lockedMat;
+    public void Lock() {
+        GetComponent<UIWidget>().alpha = 0.3f;
+        transform.Find("Lock").gameObject.SetActive(true);
+        displayObject.renderer.material = lockedMat;
+        locked = true;
     }
 }
 

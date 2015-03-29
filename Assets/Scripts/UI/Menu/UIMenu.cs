@@ -5,6 +5,7 @@ public class UIMenu : MonoBehaviour {
     public UISimpleGrid grid;
     public UIMenuButton menuButton;
     public UIMenuItem[] hudButtons;
+    public Material lockedMat;
 
     void OnEnable() {
         grid.Reposition();
@@ -13,15 +14,36 @@ public class UIMenu : MonoBehaviour {
     public void Activate(string item) {
         UIMenuItem menuItem = GetItem(item);
         menuItem.wiggle = true;
-        menuItem.gameObject.SetActive(true);
-        grid.Reposition();
-
-        if (item != "New Product" && item != "Research" && item != "Communications")
+        menuItem.locked = false;
+        if (item == "New Product" || item == "Research" || item == "Communications") {
+            Show(item);
+        } else {
+            menuItem.display.renderer.material = menuItem.mat;
+            menuItem.transform.Find("Locked").gameObject.SetActive(false);
+            grid.Reposition();
             menuButton.Wiggle();
+        }
     }
 
     public void Deactivate(string item) {
+        if (item == "New Product" || item == "Research" || item == "Communications") {
+            Hide(item);
+        } else {
+            UIMenuItem menuItem = GetItem(item);
+            menuItem.locked = true;
+            menuItem.display.renderer.material = lockedMat;
+            menuItem.transform.Find("Locked").gameObject.SetActive(true);
+            grid.Reposition();
+        }
+    }
+
+    public void Hide(string item) {
         GetItem(item).gameObject.SetActive(false);
+        grid.Reposition();
+    }
+
+    public void Show(string item) {
+        GetItem(item).gameObject.SetActive(true);
         grid.Reposition();
     }
 

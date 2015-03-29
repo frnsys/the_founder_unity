@@ -19,11 +19,13 @@ public class UIPromo : MonoBehaviour {
     public UIGrid starsGrid;
 
     void OnClick() {
-        UIManager.Instance.Confirm(string.Format("Are you sure want to run this campaign? It will cost you {0:C0}.", promo_.cost), delegate() {
-            if (!GameManager.Instance.playerCompany.StartPromo(promo_)) {
-                UIManager.Instance.Alert("You don't have the cash for this campaign.");
-            }
-        }, null);
+        if (!locked) {
+            UIManager.Instance.Confirm(string.Format("Are you sure want to run this campaign? It will cost you {0:C0}.", promo_.cost), delegate() {
+                if (!GameManager.Instance.playerCompany.StartPromo(promo_)) {
+                    UIManager.Instance.Alert("You don't have the cash for this campaign.");
+                }
+            }, null);
+        }
     }
 
     public int stars {
@@ -39,6 +41,13 @@ public class UIPromo : MonoBehaviour {
             }
             starsGrid.Reposition();
         }
+    }
+
+    private bool locked;
+    public void Lock() {
+        GetComponent<UIWidget>().alpha = 0.5f;
+        transform.Find("Lock").gameObject.SetActive(true);
+        locked = true;
     }
 }
 

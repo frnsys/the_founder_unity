@@ -37,11 +37,14 @@ public class UIEarth : MonoBehaviour {
     }
 
     public void SetLocationMarker(Location loc) {
-        GameObject marker = transform.Find(loc.name).gameObject;
-        if (GameManager.Instance.playerCompany.HasLocation(loc)) {
-            marker.renderer.material = ownedMaterial;
-        } else {
-            marker.renderer.material = unownedMaterial;
+        Transform mt = transform.Find(loc.name);
+        if (mt) {
+            GameObject marker = mt.gameObject;
+            if (GameManager.Instance.playerCompany.HasLocation(loc)) {
+                marker.renderer.material = ownedMaterial;
+            } else {
+                marker.renderer.material = unownedMaterial;
+            }
         }
     }
 

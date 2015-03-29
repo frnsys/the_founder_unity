@@ -14,13 +14,17 @@ public class UIManageCommunications : MonoBehaviour {
     private void LoadPromos() {
         int i = 0;
         // Promos are unlocked by lifetime revenue.
-        foreach (Promo p in Promo.LoadAll().OrderBy(p => p.cost).Where(p => GameManager.Instance.playerCompany.lifetimeRevenue > (p.cost - 30000) * 1.5)) {
+        foreach (Promo p in Promo.LoadAll().OrderBy(p => p.cost)) {
             GameObject promoItem = NGUITools.AddChild(grid.gameObject, promoPrefab);
             UIPromo uip = promoItem.GetComponent<UIPromo>();
             promoItem.GetComponent<UIDragScrollView>().scrollView = scrollView;
             uip.promo = p;
             uip.stars = i;
             i++;
+
+            if (GameManager.Instance.playerCompany.lifetimeRevenue < (p.cost - 30000) * 4) {
+                uip.Lock();
+            }
         }
         grid.Reposition();
     }

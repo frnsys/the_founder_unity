@@ -19,11 +19,13 @@ public class UIRecruitment : MonoBehaviour {
     public UIGrid starsGrid;
 
     void OnClick() {
-        UIManager.Instance.Confirm(string.Format("Are you sure want to recruit this way? It will cost you {0:C0}.", recruitment_.cost), delegate() {
-            if (!GameManager.Instance.playerCompany.StartRecruitment(recruitment_)) {
-                UIManager.Instance.Alert("You don't have the cash to recruit this way.");
-            }
-        }, null);
+        if (!locked) {
+            UIManager.Instance.Confirm(string.Format("Are you sure want to recruit this way? It will cost you {0:C0}.", recruitment_.cost), delegate() {
+                if (!GameManager.Instance.playerCompany.StartRecruitment(recruitment_)) {
+                    UIManager.Instance.Alert("You don't have the cash to recruit this way.");
+                }
+            }, null);
+        }
     }
 
     public int stars {
@@ -34,6 +36,13 @@ public class UIRecruitment : MonoBehaviour {
             }
             starsGrid.Reposition();
         }
+    }
+
+    private bool locked;
+    public void Lock() {
+        GetComponent<UIWidget>().alpha = 0.5f;
+        transform.Find("Lock").gameObject.SetActive(true);
+        locked = true;
     }
 }
 

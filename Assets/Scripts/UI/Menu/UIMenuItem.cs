@@ -6,19 +6,25 @@ public class UIMenuItem : MonoBehaviour {
     public bool wiggle;
     private IEnumerator wiggler;
     public GameObject display;
+    public bool locked;
+
+    [HideInInspector]
+    public Material mat;
 
     void OnClick() {
-        if (wiggler != null) {
-            StopCoroutine(wiggler);
-            wiggler = null;
-            wiggle = false;
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        if (!locked) {
+            if (wiggler != null) {
+                StopCoroutine(wiggler);
+                wiggler = null;
+                wiggle = false;
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+
+            UIManager.Instance.CloseMenu();
+
+            if (window != null)
+                UIManager.Instance.OpenPopup(window);
         }
-
-        UIManager.Instance.CloseMenu();
-
-        if (window != null)
-            UIManager.Instance.OpenPopup(window);
     }
 
     void OnEnable() {
@@ -26,6 +32,10 @@ public class UIMenuItem : MonoBehaviour {
             wiggler = UIAnimator.PulseUI(transform, 1f, 1.25f, 4f);
             StartCoroutine(wiggler);
         }
+    }
+
+    void Awake() {
+        mat = display.renderer.material;
     }
 
     void Update() {

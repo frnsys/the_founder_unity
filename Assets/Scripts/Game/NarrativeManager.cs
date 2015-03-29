@@ -291,7 +291,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 MentorMessages(new string[] {
                     "Great! Your company has some hype now.",
                     "Hype is critical to your products' success, and it fades out over time. So keep it up.",
-                    string.Format("You're not much of a business if haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
+                    string.Format("You're not much of a business if you haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
                     string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
                 });
                 UIManager.Instance.menu.Activate("New Product");
