@@ -12,12 +12,9 @@ MonoBehaviour:
   m_Name: New York
   m_EditorClassIdentifier: 
   rotation: {x: -53.5999985, y: -166.699997, z: 0}
-  cost: 100
+  cost: 200000
   description: Entertainment, information and more - New York has everything.
   market: 0
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 04000000000000000400000000000000
   effects:
     unlocks:
       productTypes: []
@@ -47,10 +44,10 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 0000000000000000feffffff00000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
+  altMesh: {fileID: 0}
+  altMat: {fileID: 0}

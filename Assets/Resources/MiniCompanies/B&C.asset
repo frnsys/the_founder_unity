@@ -8,24 +8,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
-  m_Name: Shanghai
+  m_Script: {fileID: 11500000, guid: 5b4bc42b501ad4dcd8f5f0552975166c, type: 3}
+  m_Name: B&C
   m_EditorClassIdentifier: 
-  description: 
-  rotation: {x: 0, y: 0, z: 0}
-  cost: 1e+06
-  market: 2
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
+  baseCost: 100000
+  description: You've got nothing to worry about.
+  logo: {fileID: 0}
+  revenue: 1e+06
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
-      verticals: []
-      promos: []
-      recruitments: []
+      verticals:
+      - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
       companies: []
       specialProjects: []
     cash: 0
@@ -49,10 +45,17 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
-    productEffects: []
-    workerEffects: []
+    costMultiplier: 0
+    productEffects:
+    - productTypes: []
+      verticals:
+      - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
+      buff:
+        name: Design
+        value: 20
+    workerEffects:
+    - name: Happiness
+      value: 200
     aiCompany: {fileID: 0}
     specialEffect: 0
+  aiCompany: {fileID: 11400000, guid: 046e532f60d3a46bba060609cd69eec4, type: 2}

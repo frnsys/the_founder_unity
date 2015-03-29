@@ -12,12 +12,9 @@ MonoBehaviour:
   m_Name: San Francisco
   m_EditorClassIdentifier: 
   rotation: {x: -42.9000015, y: 157.600006, z: 0}
-  cost: 1e+06
+  cost: 200000
   description: The hub of the new information revolution.
   market: 0
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 04000000010000000100000001000000
   effects:
     unlocks:
       productTypes: []
@@ -47,10 +44,10 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: feffffff000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
+  altMesh: {fileID: 0}
+  altMat: {fileID: 0}

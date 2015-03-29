@@ -11,29 +11,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: Seasteading State
   m_EditorClassIdentifier: 
+  rotation: {x: -28.2999992, y: 147.800003, z: 0}
+  cost: 1500000
   description: A customized state, where you are its sovereign leader. No need to
     worry about mucky government regulations or ethical committees from slowing down
     research here!
-  rotation: {x: 0, y: 0, z: 0}
-  cost: 1e+06
   market: 6
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
     research:
-      name: Research
-      value: 1000
+      name: DEFAULTNAME
+      value: 100
     opinionEvent:
       name: 
       opinion:
@@ -47,14 +42,14 @@ MonoBehaviour:
     eventProbability: 0
     forgettingRate: 0
     spendingMultiplier: 0
-    wageMultiplier: 0
-    taxRate: 0
+    wageMultiplier: -.100000001
+    taxRate: -.100000001
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
+  altMesh: {fileID: 0}
+  altMat: {fileID: 0}

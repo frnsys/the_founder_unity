@@ -60,10 +60,14 @@ public class UILocationItem : UIEffectItem {
         UpdateEffectWidths();
     }
 
-    private bool locked;
+    public bool locked;
     public void Lock() {
         GetComponent<UIWidget>().alpha = 0.3f;
         transform.Find("Lock").gameObject.SetActive(true);
+        label.text = "Locked";
+        description.gameObject.SetActive(false);
+        market.gameObject.SetActive(false);
+        effectGrid.gameObject.SetActive(false);
         locked = true;
     }
 }

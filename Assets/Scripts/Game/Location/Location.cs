@@ -10,6 +10,9 @@ public class Location : SharedResource<Location> {
     public MarketManager.Market market = MarketManager.Market.NorthAmerica;
     public EffectSet effects = new EffectSet();
 
+    public Mesh altMesh;
+    public Material altMat;
+
     public static new Location Load(string name) {
         return Resources.Load<Location>("Locations/" + name);
     }

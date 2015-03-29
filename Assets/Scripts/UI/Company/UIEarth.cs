@@ -8,21 +8,55 @@ public class UIEarth : MonoBehaviour {
     public Location location {
         set {
             if (location_ != null) {
-                // Set the marker representing the old location.
+                // Update the old location's marker.
                 SetLocationMarker(location_);
             }
 
             location_ = value;
-            GameObject newMarker = transform.Find(location_.name).gameObject;
-            newMarker.renderer.material = activeMaterial;
 
-            Quaternion from = transform.rotation;
-            Quaternion to = Quaternion.Euler(location_.rotation);
+            // Only go to the new marker if the location is unlocked.
+            if (GameManager.Instance.unlocked.locations.Contains(location_)) {
+                // Locations without an alt mesh are on earth.
+                if (location_.altMesh == null) {
+                    GetComponent<MeshFilter>().mesh = defaultMesh;
+                    renderer.material = defaultMat;
+                    ShowMarkers();
 
-            StartCoroutine(RotateToLocation(from, to));
+                    // Highlight the new marker, if there is one.
+                    Transform mt = markers.transform.Find(location_.name);
+                    if (mt != null) {
+                        GameObject newMarker = mt.gameObject;
+                        newMarker.renderer.material = activeMaterial;
+                    }
+
+
+                } else {
+                    GetComponent<MeshFilter>().mesh = location_.altMesh;
+                    renderer.material = location_.altMat;
+                    HideMarkers();
+                }
+
+                // Rotate.
+                Quaternion from = transform.rotation;
+                Quaternion to = Quaternion.Euler(location_.rotation);
+                StartCoroutine(RotateToLocation(from, to));
+            }
+
         }
         get {
             return location_;
+        }
+    }
+
+    void HideMarkers() {
+        foreach (Transform t in transform) {
+            t.gameObject.SetActive(false);
+        }
+    }
+
+    void ShowMarkers() {
+        foreach (Transform t in transform) {
+            t.gameObject.SetActive(true);
         }
     }
 
@@ -37,7 +71,7 @@ public class UIEarth : MonoBehaviour {
     }
 
     public void SetLocationMarker(Location loc) {
-        Transform mt = transform.Find(loc.name);
+        Transform mt = markers.transform.Find(loc.name);
         if (mt) {
             GameObject marker = mt.gameObject;
             if (GameManager.Instance.playerCompany.HasLocation(loc)) {
@@ -48,10 +82,21 @@ public class UIEarth : MonoBehaviour {
         }
     }
 
+    public void LockLocation(Location loc) {
+        Transform mt = markers.transform.Find(loc.name);
+        if (mt)
+            mt.gameObject.SetActive(false);
+    }
+
     public Material ownedMaterial;
     public Material activeMaterial;
     public Material unownedMaterial;
     public float rotationSpeed = 0.1f;
+
+    public GameObject markers;
+
+    public Mesh defaultMesh;
+    public Material defaultMat;
 
     private IEnumerator RotateToLocation(Quaternion from, Quaternion to) {
         float step = rotationSpeed;

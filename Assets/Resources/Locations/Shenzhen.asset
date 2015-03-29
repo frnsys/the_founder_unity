@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Shenzhen
   m_EditorClassIdentifier: 
   rotation: {x: -104.900002, y: 22.6200008, z: 0}
-  cost: 1e+06
+  cost: 250000
   description: All the big hitters go here for low-cost manufacturing.
   market: 2
   effects:
@@ -49,3 +49,5 @@ MonoBehaviour:
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
+  altMesh: {fileID: 0}
+  altMat: {fileID: 0}

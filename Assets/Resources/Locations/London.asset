@@ -11,21 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: London
   m_EditorClassIdentifier: 
+  rotation: {x: 172.699997, y: -32.7999992, z: 0}
+  cost: 250000
   description: 
-  rotation: {x: 0, y: 0, z: 0}
-  cost: 1e+06
   market: 3
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -49,10 +44,10 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
+  altMesh: {fileID: 0}
+  altMat: {fileID: 0}

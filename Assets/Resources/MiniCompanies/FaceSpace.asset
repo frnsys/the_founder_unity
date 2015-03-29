@@ -8,24 +8,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
-  m_Name: Sao Paolo
+  m_Script: {fileID: 11500000, guid: 5b4bc42b501ad4dcd8f5f0552975166c, type: 3}
+  m_Name: FaceSpace
   m_EditorClassIdentifier: 
-  description: 
-  rotation: {x: 0, y: 0, z: 0}
-  cost: 1e+06
-  market: 1
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
+  baseCost: 100000
+  description: The space for your digital face.
+  logo: {fileID: 0}
+  revenue: 1e+06
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
-      verticals: []
-      promos: []
-      recruitments: []
+      verticals:
+      - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
       companies: []
       specialProjects: []
     cash: 0
@@ -33,10 +29,10 @@ MonoBehaviour:
       name: Research
       value: 0
     opinionEvent:
-      name: 
+      name: Own The Times
       opinion:
         name: Opinion
-        value: 0
+        value: 1000
       publicity:
         name: Hype
         value: 0
@@ -49,10 +45,9 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
+  aiCompany: {fileID: 11400000, guid: ef65701a4df2d4484a123610fe6c9931, type: 2}

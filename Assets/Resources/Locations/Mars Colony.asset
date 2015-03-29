@@ -11,21 +11,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b573eefa569c4f7483eca0cd5afd00a, type: 3}
   m_Name: Mars Colony
   m_EditorClassIdentifier: 
-  description: 
-  rotation: {x: 0, y: 0, z: 0}
+  rotation: {x: -60, y: 20.5, z: -180}
   cost: 1e+06
+  description: Establish the first Mars colony and develop an entirely new market
+    to expand to.
   market: 7
-  capacity:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -49,10 +45,10 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
+  altMesh: {fileID: 4300058, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  altMat: {fileID: 2100000, guid: d2536123db18b453e9d2989fdbb47884, type: 2}

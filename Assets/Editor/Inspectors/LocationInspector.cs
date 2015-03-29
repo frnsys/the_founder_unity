@@ -32,6 +32,9 @@ internal class LocationInspector : Editor {
         i.rotation = (Vector3)EditorGUILayout.Vector3Field("Coordinates RotXYZ", i.rotation);
         EditorGUILayout.Space();
 
+        i.altMesh = (Mesh)EditorGUILayout.ObjectField("Alt Mesh", i.altMesh, typeof(Mesh), false);
+        i.altMat = (Material)EditorGUILayout.ObjectField("Alt Material", i.altMat, typeof(Material), false);
+
         EditorGUILayout.Space();
         if (i.effects == null)
             i.effects = new EffectSet();

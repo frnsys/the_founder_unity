@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -19,7 +20,7 @@ public class UIManageLocations : UIFullScreenPager {
         gridCenter.onFinished = OnCenter;
         ClearGrid();
 
-        foreach (Location l in Location.LoadAll()) {
+        foreach (Location l in Location.LoadAll().OrderBy(i => i.cost)) {
             GameObject locationItem = NGUITools.AddChild(grid.gameObject, locationPrefab);
             UILocationItem uli = locationItem.GetComponent<UILocationItem>();
             uli.location = l;
@@ -28,6 +29,7 @@ public class UIManageLocations : UIFullScreenPager {
 
             if (!gm.unlocked.locations.Contains(l)) {
                 uli.Lock();
+                earth.LockLocation(l);
             }
         }
         earth.location = grid.transform.GetChild(0).GetComponent<UILocationItem>().location;
@@ -37,7 +39,7 @@ public class UIManageLocations : UIFullScreenPager {
 
     private void OnCenter() {
         UILocationItem item = gridCenter.centeredObject.GetComponent<UILocationItem>();
-        if (item != null) {
+        if (item != null && !item.locked) {
             earth.location = item.location;
         }
     }

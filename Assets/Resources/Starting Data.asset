@@ -52,6 +52,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
     - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
     - {fileID: 11400000, guid: f86eeac89cb544f81a5f9c6a0392d39f, type: 2}
+    - {fileID: 11400000, guid: e7c7dea82df4e45858edb7bcd07a0b10, type: 2}
+    - {fileID: 11400000, guid: e30291e4b78394118a831439660cf994, type: 2}
     verticals:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
@@ -73,16 +75,17 @@ MonoBehaviour:
   economicStability: 0
   taxRate: 0
   expansionCostMultiplier: 0
-  infrastructureCostMultiplier:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000000000000
+  costMultiplier: 0
   onboardingState:
     PRODUCTS_OPENED: 0
     PERKS_UNLOCKED: 0
     VERTICALS_UNLOCKED: 0
     LOCATIONS_UNLOCKED: 0
     SPECIALPROJECTS_UNLOCKED: 0
+    RESEARCH_OPENED: 0
     HYPE_MINIGAME: 0
+    HIRED_EMPLOYEE: 0
+    SYNERGY: 0
   otherCompanies: []
   month: 0
   week: 0

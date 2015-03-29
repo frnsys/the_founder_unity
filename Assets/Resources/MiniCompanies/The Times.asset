@@ -19,40 +19,36 @@ MonoBehaviour:
   effects:
     unlocks:
       productTypes: []
-      workers: []
       perks: []
       locations: []
       verticals:
       - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
-      promos: []
-      recruitments: []
       companies: []
+      specialProjects: []
     cash: 0
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: Own The Times
       opinion:
         name: Opinion
         value: 1000
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
     forgettingRate: 0
     spendingMultiplier: 0
     wageMultiplier: 0
+    taxRate: 0
     economicStability: 0
+    expansionCostMultiplier: 0
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
+    specialEffect: 0
   aiCompany: {fileID: 0}
