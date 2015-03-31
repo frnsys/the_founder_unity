@@ -15,7 +15,6 @@ public class AudioManager : Singleton<AudioManager> {
 
         laborAudioClips = Resources.LoadAll<AudioClip>("Sounds/Labor/Make");
         laborHitAudioClips = Resources.LoadAll<AudioClip>("Sounds/Labor/Hit");
-        employeeTouchClips = Resources.LoadAll<AudioClip>("Sounds/Employee/");
 
         menuClip = Resources.Load<AudioClip>("Sounds/Music/Menu");
 
@@ -29,7 +28,6 @@ public class AudioManager : Singleton<AudioManager> {
 
     public AudioClip[] laborAudioClips;
     public AudioClip[] laborHitAudioClips;
-    public AudioClip[] employeeTouchClips;
     public AudioClip menuClip;
 
     public void PlayLaborFX() {
@@ -39,25 +37,16 @@ public class AudioManager : Singleton<AudioManager> {
         fx.PlayOneShot(laborHitAudioClips[Random.Range(0, laborHitAudioClips.Length)]);
     }
 
-    public void PlayEmployeeTouchedFX() {
-        fx.PlayOneShot(employeeTouchClips[Random.Range(0, employeeTouchClips.Length)]);
+    public void PlayPowerupHitFX() {
+        fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_hit"));
     }
 
-    public void PlayProductShellFX(string clip) {
-        switch (clip) {
-            case "Reveal":
-                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_reveal"));
-                break;
-            case "Destroy":
-                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_destroy"));
-                break;
-            case "Hit":
-                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_hit"));
-                break;
-            case "Fizzle":
-                fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_fizzle"));
-                break;
-        }
+    public void PlayPlayerDeadFX() {
+        fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Product/shell_destroy"));
+    }
+
+    public void PlayPlayerHitFX() {
+        fx.PlayOneShot(Resources.Load<AudioClip>("Sounds/Employee/hit"));
     }
 
     public void PlayMenuMusic() {

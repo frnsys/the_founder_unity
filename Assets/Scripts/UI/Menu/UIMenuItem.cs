@@ -34,11 +34,6 @@ public class UIMenuItem : MonoBehaviour {
         }
     }
 
-    void Awake() {
-        if (display != null)
-            mat = display.renderer.material;
-    }
-
     void Update() {
         if (display != null)
             UIAnimator.Rotate(display);

@@ -31,6 +31,7 @@ public class UIMenu : MonoBehaviour {
         } else {
             UIMenuItem menuItem = GetItem(item);
             menuItem.locked = true;
+            menuItem.mat = menuItem.display.renderer.material;
             menuItem.display.renderer.material = lockedMat;
             menuItem.transform.Find("Locked").gameObject.SetActive(true);
             grid.Reposition();

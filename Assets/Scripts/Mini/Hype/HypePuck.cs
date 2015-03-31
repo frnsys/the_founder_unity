@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class HypePuck : MonoBehaviour {
     public static event System.Action Completed;
@@ -34,16 +35,25 @@ public class HypePuck : MonoBehaviour {
     }
 
     public void Fire(Vector2 dir) {
-        // TO DO tweak this
+        if (dir.y < 0)
+            dir.y *= -1;
         rigidbody2D.AddForce(Vector2.ClampMagnitude(dir * speed, speedLimit));
         fired = true;
 
         if (Fired != null)
             Fired();
+
+        StartCoroutine("Timeout");
     }
 
     protected void DoCompleted() {
+        StopCoroutine("Timeout");
         if (Completed != null)
             Completed();
+    }
+
+    IEnumerator Timeout() {
+        yield return new WaitForSeconds(3f);
+        DoCompleted();
     }
 }

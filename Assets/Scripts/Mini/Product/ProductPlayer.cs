@@ -32,12 +32,14 @@ public class ProductPlayer : MonoBehaviour {
             if (!shield) {
                 StartCoroutine(Flash());
                 health *= 0.5f;
+                AudioManager.Instance.PlayPlayerHitFX();
                 Hit(pl.type, pl.points);
             }
             pl.Reset();
 
         } else if (other.name == "Powerup") {
             ProductLabor pl = other.GetComponent<ProductLabor>();
+            AudioManager.Instance.PlayPowerupHitFX();
             Hit(pl.type, pl.points);
             pl.Reset();
         }
@@ -80,6 +82,7 @@ public class ProductPlayer : MonoBehaviour {
     void Update() {
         health -= 0.4f * Time.deltaTime;
         if (health <= 0 && !dead && Died != null) {
+            AudioManager.Instance.PlayPlayerDeadFX();
             dead = true;
             Died();
         }
