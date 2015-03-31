@@ -85,6 +85,7 @@ public class UINewProductFlow : MonoBehaviour {
                 NGUITools.Destroy(productType);
                 productTypes.Remove(pt);
                 selectedGrid.Reposition();
+                ToggleProductType(pt, obj);
                 UpdateConfirmButton();
             };
 

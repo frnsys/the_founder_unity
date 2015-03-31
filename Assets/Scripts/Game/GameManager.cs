@@ -172,7 +172,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
 
             // Uncomment this if you want to start the game with onboarding.
-            narrativeManager.InitializeOnboarding();
+            //narrativeManager.InitializeOnboarding();
         }
 #endif
 
@@ -464,7 +464,7 @@ public class GameManager : Singleton<GameManager> {
             // Pull back opinion effects towards 0.
             // Deflate hype.
             playerCompany.ForgetOpinionEvents();
-            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - 0.01f);
+            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - 0.024f);
 
             yield return StartCoroutine(GameTimer.Wait(elapsedTime));
         }

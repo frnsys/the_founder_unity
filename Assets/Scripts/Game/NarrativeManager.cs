@@ -156,6 +156,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         // Hide some menu and status bar items.
         UIManager uim = UIManager.Instance;
         uim.statusBar.hypeLabel.gameObject.SetActive(false);
+        uim.statusBar.researchLabel.gameObject.SetActive(false);
         uim.menu.Deactivate("New Product");
         uim.menu.Deactivate("Accounting");
         uim.menu.Deactivate("Special Projects");
@@ -429,6 +430,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                     UIManager uim = UIManager.Instance;
                     uim.menu.Activate("Research");
+                    uim.statusBar.researchLabel.gameObject.SetActive(true);
                 }, 6f));
                 Product.Completed -= CompletedProduct;
             } else if (c.products.Count > 2 && !ob.LOCATIONS_UNLOCKED) {

@@ -210,7 +210,7 @@ public class Product : HasStats {
         score = (A_ + U_ + P_)/(a_w + u_w + p_w);
 
         // Revenue model modifications:
-        longevity = recipe.maxLongevity;
+        longevity = (recipe.maxLongevity/100) * score;
 
         marketShare = company.marketSharePercent * score;
 
