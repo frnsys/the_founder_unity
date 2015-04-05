@@ -1552,8 +1552,8 @@ Transform:
   - {fileID: 400036}
   - {fileID: 400070}
   - {fileID: 400098}
-  - {fileID: 400178}
   - {fileID: 400176}
+  - {fileID: 400178}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400002
@@ -2654,7 +2654,7 @@ Transform:
   - {fileID: 400180}
   - {fileID: 400158}
   m_Father: {fileID: 400000}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!4 &400178
 Transform:
   m_ObjectHideFlags: 1
@@ -2674,7 +2674,7 @@ Transform:
   - {fileID: 400160}
   - {fileID: 400194}
   m_Father: {fileID: 400000}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &400180
 Transform:
   m_ObjectHideFlags: 1
@@ -3284,7 +3284,6 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4bfbd179b77554b70a154d19202adf54, type: 2}
   - {fileID: 2100000, guid: 4bfbd179b77554b70a154d19202adf54, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -4312,39 +4311,6 @@ MonoBehaviour:
   cameraBounds: {x: -9, y: 6, z: -.5, w: 8.30000019}
   cameraSizeLimits: {x: 6, y: 12}
   upgradeButtonPosition: {x: -1.13999999, y: -2.33999991, z: .569999993}
-  uiObjects:
-  - {fileID: 100002, guid: bbd652ab741ad447f8b95e92d923199e, type: 2}
-  - {fileID: 100000, guid: 985f2c75204ce48c785a87e14146be5d, type: 2}
-  - {fileID: 100000, guid: 7a9080f7b0b63443186755b83c6d6831, type: 2}
-  - {fileID: 100000, guid: 99ae1c0b7187f4ea897b659fc268fd1d, type: 2}
-  - {fileID: 100002, guid: b3bbbe46385844b9092645a04864096a, type: 2}
-  - {fileID: 100000, guid: ddea970286c71470383385c6bda5efd7, type: 2}
-  - {fileID: 100002, guid: e88cc8caa3d3c40c6ba40e923c343249, type: 2}
-  uiTargets:
-  - {fileID: 400030}
-  - {fileID: 400102}
-  - {fileID: 400002}
-  - {fileID: 400114}
-  - {fileID: 400014}
-  - {fileID: 400172}
-  - {fileID: 400084}
-  desks:
-  - occupied: 0
-    transform: {fileID: 400174}
-  - occupied: 0
-    transform: {fileID: 400170}
-  - occupied: 0
-    transform: {fileID: 400168}
-  - occupied: 0
-    transform: {fileID: 400166}
-  - occupied: 0
-    transform: {fileID: 400164}
-  - occupied: 0
-    transform: {fileID: 400162}
-  - occupied: 0
-    transform: {fileID: 400160}
-  - occupied: 0
-    transform: {fileID: 400194}
   cost: 0
   employeesRequired: 0
   nextOffice: {fileID: 0}

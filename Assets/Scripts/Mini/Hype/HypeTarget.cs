@@ -134,9 +134,9 @@ public class HypeTarget : MonoBehaviour {
                 } else {
                     activePucks--;
                     Destroy(other.gameObject);
-                    if (activePucks == 0 && Completed != null) {
-                        Completed();
-                    }
+                    //if (activePucks == 0 && Completed != null) {
+                        //Completed();
+                    //}
                 }
             }
 
