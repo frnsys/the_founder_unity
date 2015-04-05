@@ -47,7 +47,7 @@ public class UIHireWorkers : UIFullScreenPager {
             UIEventListener.Get(ic.noButton).onClick += noAction;
 
         } else {
-            UIManager.Instance.Alert("You don't have any space for new workers. Consider laying some people off or expanding to a new location.");
+            UIManager.Instance.Alert("You don't have any space for new workers. Consider laying some people off or upgrading your office.");
         }
     }
 

@@ -580,7 +580,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 540, y: 960, z: 0}
+  m_Size: {x: 607, y: 1079, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500006
 BoxCollider:
@@ -592,7 +592,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 50, z: 0}
+  m_Size: {x: 60, y: 70, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500008
 BoxCollider:
@@ -604,8 +604,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 50, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 80, y: 70, z: 0}
+  m_Center: {x: 10, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1187,8 +1187,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 0}
   mPivot: 4
-  mWidth: 540
-  mHeight: 960
+  mWidth: 607
+  mHeight: 1079
   mDepth: -1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   mWidth: 40
   mHeight: 50
   mDepth: 12
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .800000012
