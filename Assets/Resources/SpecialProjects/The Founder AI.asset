@@ -13,15 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   cost: 7e+09
-  requiredProgress: 80000
   effects:
     unlocks:
       productTypes: []
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -45,14 +42,10 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 5
   requiredProducts: []
   mesh: {fileID: 4300048, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
-  texture: {fileID: 0}
-  _progress: 0

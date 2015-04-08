@@ -75,6 +75,8 @@ public class UIMainMenu : Singleton<UIMainMenu> {
 
     public void Continue() {
         // Load the game and everything.
+        UIManager.Reset();
+        UIOfficeManager.Reset();
         GameManager.Reset();
         GameManager.Instance.Load(GameData.Load());
 
