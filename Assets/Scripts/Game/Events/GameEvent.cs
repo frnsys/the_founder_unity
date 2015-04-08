@@ -57,8 +57,8 @@ public class GameEvent : ScriptableObject {
     public bool repeatable;
 
     public EffectSet effects = new EffectSet();
-    public Action[] actions;
-    public Condition[] conditions;
+    public List<Action> actions;
+    public List<Condition> conditions;
 
     // An event which is broadcast for each event.
     static public event System.Action<GameEvent> EventTriggered;
@@ -71,7 +71,7 @@ public class GameEvent : ScriptableObject {
     }
 
     public bool ConditionsSatisfied(Company company) {
-        for (int i=0; i < conditions.Length; i++) {
+        for (int i=0; i < conditions.Count; i++) {
             if (!EvaluateCondition(company, conditions[i]))
                 return false;
         }

@@ -70,7 +70,7 @@ public class Product : HasStats {
         get { return recipe; }
     }
 
-    public ProductRecipe[] synergies {
+    public List<ProductRecipe> synergies {
         get { return recipe.synergies; }
     }
 

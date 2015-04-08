@@ -300,10 +300,10 @@ public class Company : HasStats {
         List<ProductRecipe> activeRecipes = activeProducts.Select(p => p.Recipe).ToList();
         foreach (Product p in activeProducts) {
             p.synergy = true;
-            if (p.synergies.Length == 0) {
+            if (p.synergies.Count == 0) {
                 p.synergy = false;
             } else {
-                for (int i=0; i<p.synergies.Length; i++) {
+                for (int i=0; i<p.synergies.Count; i++) {
                     if (!activeRecipes.Contains(p.synergies[i])) {
                         p.synergy = false;
                         break;

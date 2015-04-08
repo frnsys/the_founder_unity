@@ -142,7 +142,7 @@ namespace UnityTest
             pc_.greater = true;
             pc_.type = GameEvent.Condition.Type.Publicity;
 
-            gE.conditions = new GameEvent.Condition[] { pc, pc_ };
+            gE.conditions = new List<GameEvent.Condition>() { pc, pc_ };
 
             Company c = new Company("Foo Inc").Init();
             c.publicity.baseValue = 0;
@@ -162,7 +162,7 @@ namespace UnityTest
             pc.value = 20;
             pc.greater = true;
             pc.type = GameEvent.Condition.Type.Publicity;
-            gE.conditions = new GameEvent.Condition[] { pc };
+            gE.conditions = new List<GameEvent.Condition>() { pc };
 
             gd.specialEventsPool.Add(gE);
             gd.company = new Company("Foo Inc").Init();

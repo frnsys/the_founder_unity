@@ -77,7 +77,7 @@ public class UIGameEventNotification: UIEffectAlert {
         }
 
         // Render the available actions for this event.
-        if (gameEvent_.actions.Length > 0) {
+        if (gameEvent_.actions.Count > 0) {
             foreach (GameEvent.Action action in gameEvent_.actions) {
                 GameObject actionObj = NGUITools.AddChild(actionGrid.gameObject, actionPrefab);
                 actionObj.GetComponent<UIEventActionButton>().action = action;

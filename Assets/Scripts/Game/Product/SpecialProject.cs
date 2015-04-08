@@ -8,7 +8,7 @@ public class SpecialProject : TemplateResource<SpecialProject> {
     public string description;
     public float cost;
     public EffectSet effects = new EffectSet();
-    public ProductRecipe[] requiredProducts;
+    public List<ProductRecipe> requiredProducts;
     public Mesh mesh;
 
     public override string ToString() {
@@ -25,7 +25,7 @@ public class SpecialProject : TemplateResource<SpecialProject> {
         if (!(company.cash.value >= cost))
             return false;
 
-        return requiredProducts.Length == company.products.Where(p => requiredProducts.Contains(p.Recipe)).Distinct().Count();
+        return requiredProducts.Count == company.products.Where(p => requiredProducts.Contains(p.Recipe)).Distinct().Count();
     }
 }
 

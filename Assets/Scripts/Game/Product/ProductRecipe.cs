@@ -21,7 +21,7 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     public string description;
 
     // "Synergistic" product recipes.
-    public ProductRecipe[] synergies;
+    public List<ProductRecipe> synergies;
 
     // Weights: how important a given feature is to the product's performance.
     public Feature primaryFeature;

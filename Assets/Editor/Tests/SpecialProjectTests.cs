@@ -42,7 +42,7 @@ namespace UnityTest
             pr = ProductRecipe.LoadFromTypes(pts);
 
             sp = ScriptableObject.CreateInstance<SpecialProject>();
-            sp.requiredProducts = new ProductRecipe[] { pr };
+            sp.requiredProducts = new List<ProductRecipe> { pr };
         }
 
         [TearDown]

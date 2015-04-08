@@ -7,6 +7,7 @@ public class UIExit : MonoBehaviour {
     void OnClick() {
         UIManager.Instance.Confirm("Are you sure you want to exit? Your progress will be saved.", delegate() {
             GameManager.Instance.SaveGame();
+            Destroy(GameManager.Instance.gameObject);
             Application.LoadLevel("MainMenu");
         }, null);
     }

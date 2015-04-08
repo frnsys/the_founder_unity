@@ -64,4 +64,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
     public void OnDestroy() {
         applicationIsQuitting = true;
     }
+
+    public static void Reset() {
+        applicationIsQuitting = false;
+    }
 }
