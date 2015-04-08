@@ -8,13 +8,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2caad3cadff8c41b9bbabba4ad7e0d5b, type: 3}
-  m_Name: Praeta Industries
+  m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
+  m_Name: Rival
   m_EditorClassIdentifier: 
-  disabled: 0
-  productLimit: 0
-  slogan: Desire is infinite.
-  description: A global leader in manufacturing.
+  avatar: {fileID: 0}
+  material: {fileID: 0}
+  robot: 0
+  salary: 0
+  bio: 
+  description: 
+  title: Founder & CEO
+  baseMinSalary: 0
+  offMarketTime: 0
+  recentPlayerOffers: 0
+  happiness:
+    baseValue: 20
+    _buffs: []
+  productivity:
+    baseValue: 20
+    _buffs: []
+  charisma:
+    baseValue: 20
+    _buffs: []
+  creativity:
+    baseValue: 20
+    _buffs: []
+  cleverness:
+    baseValue: 20
+    _buffs: []
   bonuses:
     unlocks:
       productTypes: []
@@ -30,7 +51,7 @@ MonoBehaviour:
     opinionEvent:
       name: 
       opinion:
-        name: Opinion
+        name: Outrage
         value: 0
       publicity:
         name: Hype
@@ -49,12 +70,3 @@ MonoBehaviour:
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
-  specialtyVerticals: []
-  specialtyProductTypes: []
-  workers: []
-  founders:
-  - {fileID: 11400000, guid: 21bd9dca23cd94c68acee7e20a2c217e, type: 2}
-  sizeLimit: 5
-  designSkill: 0
-  engineeringSkill: 0
-  marketingSkill: 0

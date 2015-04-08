@@ -211,6 +211,10 @@ public class GameManager : Singleton<GameManager> {
         UIOfficeManager.Instance.Load(data);
     }
 
+    public void SaveGame() {
+        GameData.Save(data);
+    }
+
     void OnEvent(GameEvent e) {
         if (e.effects != null)
             ApplyEffectSet(e.effects);
@@ -345,11 +349,9 @@ public class GameManager : Singleton<GameManager> {
                     //narrativeManager.GameLost();
             }
 
-            // Save the game every month.
-            foreach (Vertical v in playerCompany.verticals) {
-                Debug.Log(v);
-            }
-            GameData.Save(data);
+            // Save the game every other month.
+            if ((int)data.month % 2 == 0)
+                GameData.Save(data);
 
             yield return StartCoroutine(GameTimer.Wait(monthTime));
         }

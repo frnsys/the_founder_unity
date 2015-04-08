@@ -11,151 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2caad3cadff8c41b9bbabba4ad7e0d5b, type: 3}
   m_Name: Rival Corp
   m_EditorClassIdentifier: 
-  cash:
-    baseValue: 2e+07
-    _buffs: []
-  activeEffects:
-  - unlocks:
-      productTypes: []
-      perks: []
-      locations: []
-      verticals: []
-      companies: []
-      specialProjects: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-      publicity:
-        name: Hype
-        value: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    forgettingRate: 0
-    spendingMultiplier: 0
-    wageMultiplier: 0
-    taxRate: 0
-    economicStability: 0
-    expansionCostMultiplier: 0
-    costMultiplier: 0
-    productEffects: []
-    workerEffects: []
-    aiCompany: {fileID: 0}
-    specialEffect: 0
-  - unlocks:
-      productTypes: []
-      perks: []
-      locations: []
-      verticals: []
-      companies: []
-      specialProjects: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-      publicity:
-        name: Hype
-        value: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    forgettingRate: 0
-    spendingMultiplier: 0
-    wageMultiplier: 0
-    taxRate: 0
-    economicStability: 0
-    expansionCostMultiplier: 0
-    costMultiplier: 0
-    productEffects: []
-    workerEffects: []
-    aiCompany: {fileID: 0}
-    specialEffect: 0
-  slogan: A better you.
-  office: 0
-  _workers: []
-  founders:
-  - {fileID: 0}
-  baseSizeLimit: 5
-  _locations: []
-  markets: 
-  marketShare: 0
-  marketSharePercent: 0
-  _verticals:
-  - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-  products: []
-  developingProduct: {fileID: 0}
-  specialProjects: []
-  lobbies: []
-  lastMonthRevenue: 0
-  annualRevenue: 0
-  annualCosts: 0
-  lifetimeRevenue: 0
-  taxesAvoided: 0
-  deathToll: 0
-  debtOwned: 0
-  pollution: 0
-  companies: []
-  perks: []
-  opinion:
-    baseValue: 1
-    _buffs: []
-  publicity:
-    baseValue: 0
-    _buffs: []
-  opinionEvents: []
-  research:
-    baseValue: 1
-    _buffs: []
-  researchPoints: 0
-  technologies: []
-  researchers: []
-  AnnualPerfHistory:
-    Size: 0
-    values: []
   disabled: 1
   productLimit: 0
+  slogan: A better you.
   description: You have scorned us and we will destroy you.
-  unlocked:
-    productTypes:
-    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-    - {fileID: 11400000, guid: dc3e30ba9b6e84b8285c5ee918dd0cc7, type: 2}
-    - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
-    perks: []
-    locations: []
-    verticals:
-    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-    - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-    - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-    - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-    companies: []
-    specialProjects: []
   bonuses:
     unlocks:
       productTypes: []
@@ -192,6 +51,10 @@ MonoBehaviour:
     specialEffect: 0
   specialtyVerticals: []
   specialtyProductTypes: []
+  workers: []
+  founders:
+  - {fileID: 11400000, guid: 0003da67628f841d9b449f650c160397, type: 2}
+  sizeLimit: 5
   designSkill: 0
   engineeringSkill: 0
   marketingSkill: 0
