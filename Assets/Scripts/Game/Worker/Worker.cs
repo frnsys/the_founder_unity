@@ -106,6 +106,15 @@ public class Worker : HasStats {
         }
         return minSalary * GameManager.Instance.wageMultiplier;
     }
+    public float MinSalaryForCompany() {
+        float minSalary = baseMinSalary;
+        if (salary > 0) {
+            float diff = 0;
+            diff = happiness.value - happiness.baseValue;
+            minSalary = Mathf.Max(0, salary + (diff/10 * 1000));
+        }
+        return minSalary * GameManager.Instance.wageMultiplier;
+    }
 
     // How many weeks the worker is off the job market for.
     // Recent offers the player has made.

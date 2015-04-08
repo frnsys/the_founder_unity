@@ -139,10 +139,10 @@ namespace UnityTest
             p.Launch(c);
 
             gm.spendingMultiplier = 1;
-            float r = p.Revenue(4, c);
+            float r = p.Revenue(0.1f, c);
 
             gm.spendingMultiplier = 10;
-            float r_ = p.Revenue(4, c);
+            float r_ = p.Revenue(0, c);
 
             Assert.IsTrue(r_ > r);
         }

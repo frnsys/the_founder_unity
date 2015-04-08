@@ -12,8 +12,6 @@ using Smooth.Slinq;
 public class Company : HasStats {
     public Stat cash;
     public List<EffectSet> activeEffects;
-    public string slogan;
-
     public Office.Type office;
 
     public Company(string name_) {

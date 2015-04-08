@@ -155,11 +155,6 @@ public class UIManager : Singleton<UIManager> {
             StartCoroutine(Delay(delegate {
                 theMarket.Setup(p);
             }, 0.6f));
-
-        // If it is a competitor's product, show it as an "ad".
-        } else {
-            GameObject popup = NGUITools.AddChild(alertsPanel, competitorProductCompletedAlertPrefab);
-            popup.GetComponent<UIProductAdAlert>().SetProductAndCompany(p, c);
         }
     }
 

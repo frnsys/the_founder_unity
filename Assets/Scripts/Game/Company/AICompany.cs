@@ -12,15 +12,18 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AICompany : Company {
+public class AICompany : ScriptableObject {
     public bool disabled = false;
     public int productLimit = 5;
 
+    public string slogan;
     public string description;
-    public UnlockSet unlocked;
     public EffectSet bonuses;
     public List<Vertical> specialtyVerticals;
     public List<ProductType> specialtyProductTypes;
+    public List<Worker> workers;
+    public List<Founder> founders;
+    public int sizeLimit = 5;
 
     public int designSkill;
     public int engineeringSkill;
@@ -48,16 +51,11 @@ public class AICompany : Company {
         return all.Where(a => a.name == name).First();
     }
 
-    public AICompany(string name_) : base(name_) {
-        name = name_;
-    }
-
     // Call `Init()` if creating a new AICompany from scratch.
     public new AICompany Init() {
-        base.Init();
-
         // Initialize stuff.
-        unlocked = new UnlockSet();
+        founders = new List<Founder>();
+        workers = new List<Worker>();
         bonuses = new EffectSet();
 
         return this;
@@ -95,7 +93,7 @@ public class AICompany : Company {
         int engineering = Random.Range(0, engineeringSkill) + engineeringSkill/2;
         int marketing = Random.Range(0, marketingSkill) + marketingSkill/2;
         Product product = ScriptableObject.CreateInstance<Product>();
-        product.Init(pts, design, marketing, engineering, this);
+        product.Init(pts, design, marketing, engineering);
         return product;
     }
 
@@ -134,7 +132,7 @@ public class AICompany : Company {
                     // Fake an offer.
                     // It may be too low, (in which case, no hiring happens).
                     // Or it may be too high, in which case wages get driven up.
-                    float minSalary = w.MinSalaryForCompany(this);
+                    float minSalary = w.MinSalaryForCompany();
                     float offer = minSalary * (Random.value + 0.5f);
                     if (offer >= minSalary & Random.value < 0.2f) {
                         Debug.Log(string.Format("{0} is hiring {1} for {2:C0} (min was {3:C0})...", name, w.name, offer, minSalary));
@@ -151,5 +149,18 @@ public class AICompany : Company {
     // Calculate the "value" of a worker.
     private float WorkerROI(Worker w) {
         return (w.productivity.value + ((w.charisma.value + w.creativity.value + w.cleverness.value)/3))/(w.salary+w.happiness.value);
+    }
+
+    public void FireWorker(Worker worker) {
+        worker.salary = 0;
+        workers.Remove(worker);
+    }
+
+    public bool HireWorker(Worker worker) {
+        if (workers.Count < sizeLimit) {
+            workers.Add(worker);
+            return true;
+        }
+        return false;
     }
 }

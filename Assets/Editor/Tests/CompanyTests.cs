@@ -158,7 +158,7 @@ namespace UnityTest
             worker.salary = 500;
 
             // Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
-            float paid = worker.hiringFee + worker.monthlyPay + loc.cost + loc.cost;
+            float paid = worker.hiringFee + (worker.monthlyPay * GameManager.Instance.wageMultiplier) + loc.cost + (loc.cost/1000 * GameManager.Instance.costMultiplier);
 
             c.HireWorker(worker);
 
@@ -194,12 +194,12 @@ namespace UnityTest
 		public void HarvestProduct() {
             c.cash.baseValue = 2000;
 
-            c.StartNewProduct(pts, 1, 1, 1);
+            c.StartNewProduct(pts, 10, 10, 10);
             Product p = c.products[0];
             p.Launch(c);
             Assert.AreEqual(c.activeProducts[0], p);
 
-            c.HarvestProducts(2);
+            c.HarvestProducts(0.1f);
 
             Assert.IsTrue(c.cash.baseValue > 2000);
         }

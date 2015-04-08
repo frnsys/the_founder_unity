@@ -127,21 +127,14 @@ namespace UnityTest
             ProductType pt__ = data.unlocked.productTypes[0];
             Assert.AreEqual(pt.GetInstanceID(), pt__.GetInstanceID());
 
-            // Create an AI company who also has this product type.
-            AICompany oc = ScriptableObject.CreateInstance<AICompany>().Init();
-            oc.unlocked.productTypes.Add(pt);
-            data.otherCompanies.Add(oc);
-
             // Save and re-load.
             string filepath = "/tmp/the_founder_test_saving.dat";
             GameData.Save(data, filepath);
             GameData gd = GameData.Load(filepath);
 
             // The two product types should be the same instance.
-            ProductType pt_ai = gd.otherCompanies[0].unlocked.productTypes[0];
             ProductType pt_hu = gd.unlocked.productTypes[0];
-            Assert.AreEqual(pt_ai.GetInstanceID(), pt_hu.GetInstanceID());
-            Assert.AreEqual(pt_ai.GetInstanceID(), data.unlocked.productTypes[0].GetInstanceID());
+            Assert.AreEqual(pt_hu.GetInstanceID(), data.unlocked.productTypes[0].GetInstanceID());
         }
 
 		[Test]

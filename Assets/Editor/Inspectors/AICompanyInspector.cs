@@ -22,9 +22,7 @@ internal class AICompanyInspector : Editor {
         c.description = EditorGUILayout.TextArea(c.description, GUILayout.Height(50));
         c.slogan = EditorGUILayout.TextField("Slogan", c.slogan);
         c.disabled = EditorGUILayout.Toggle("Starts Disabled", c.disabled);
-        c.baseSizeLimit = EditorGUILayout.IntField("Worker Size Limit", c.baseSizeLimit);
         c.productLimit = EditorGUILayout.IntField("In-Market Product Limit", c.productLimit);
-        c.cash.baseValue  = EditorGUILayout.FloatField("Starting Cash", c.cash.baseValue);
 
         c.designSkill = EditorGUILayout.IntField("Design Skill", c.designSkill);
         c.engineeringSkill = EditorGUILayout.IntField("Engineering Skill", c.engineeringSkill);

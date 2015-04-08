@@ -101,17 +101,16 @@ namespace UnityTest
 
             int startingCount = wm.AvailableWorkers.Count();
 
-            wm.HireWorker(w, c);
+            wm.HireWorker(w);
             Assert.IsTrue(c.workers.Contains(w));
 
             // Should be -1 now that the other worker is hired.
             Assert.AreEqual(wm.AvailableWorkers.Count(), startingCount - 1);
             Assert.IsFalse(gd.unemployed.Contains(w));
 
-            Company c_ = ScriptableObject.CreateInstance<Company>();
+            AICompany c_ = ScriptableObject.CreateInstance<AICompany>();
             c_.Init();
             w.salary = 333333;
-            c_.cash.baseValue = 333333;
             wm.HireWorker(w, c_);
 
             // These should not have changed.

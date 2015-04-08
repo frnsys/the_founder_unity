@@ -21,7 +21,13 @@ public class WorkerManager : MonoBehaviour {
     }
 
     public Company EmployerForWorker(Worker w) {
-        return GameManager.Instance.allCompanies.Where(c => c.workers.Contains(w)).SingleOrDefault();
+        if (GameManager.Instance.playerCompany.workers.Contains(w)) {
+            return GameManager.Instance.playerCompany;
+        }
+        return null;
+    }
+    public AICompany AIEmployerForWorker(Worker w) {
+        return GameManager.Instance.otherCompanies.Where(c => c.workers.Contains(w)).SingleOrDefault();
     }
 
     // The canonical pool of workers in the game.
@@ -39,15 +45,38 @@ public class WorkerManager : MonoBehaviour {
     // If a worker is at a company,
     // that instance is considered the canonical one.
     public IEnumerable<Worker> Employed {
-        get { return GameManager.Instance.allCompanies.SelectMany(c => c.workers); }
+        get { return GameManager.Instance.otherCompanies.SelectMany(c => c.workers).Concat(GameManager.Instance.playerCompany.workers); }
     }
 
     public bool HireWorker(Worker w) {
-        return HireWorker(w, GameManager.Instance.playerCompany);
+        Company employer = EmployerForWorker(w);
+        AICompany aiEmployer = AIEmployerForWorker(w);
+
+        if (GameManager.Instance.playerCompany.HireWorker(w)) {
+            if (data.unemployed.Contains(w)) {
+                data.unemployed.Remove(w);
+
+            // Poached employee.
+            } else if (employer != null) {
+                // Need to juggle the salary, b/c
+                // firing a worker resets it to 0.
+                float salary = w.salary;
+                employer.FireWorker(w);
+                w.salary = salary;
+            } else if (aiEmployer != null) {
+                float salary = w.salary;
+                aiEmployer.FireWorker(w);
+                w.salary = salary;
+            }
+            return true;
+        }
+        return false;
     }
 
-    public bool HireWorker(Worker w, Company c) {
+    public bool HireWorker(Worker w, AICompany c) {
         Company employer = EmployerForWorker(w);
+        AICompany aiEmployer = AIEmployerForWorker(w);
+
         if (c.HireWorker(w)) {
             if (data.unemployed.Contains(w)) {
                 data.unemployed.Remove(w);
@@ -59,6 +88,10 @@ public class WorkerManager : MonoBehaviour {
                 float salary = w.salary;
                 employer.FireWorker(w);
                 w.salary = salary;
+            } else if (aiEmployer != null) {
+                float salary = w.salary;
+                aiEmployer.FireWorker(w);
+                w.salary = salary;
             }
             return true;
         }
@@ -66,9 +99,10 @@ public class WorkerManager : MonoBehaviour {
     }
 
     public void FireWorker(Worker w) {
-        FireWorker(w, GameManager.Instance.playerCompany);
+        data.unemployed.Add(w);
+        GameManager.Instance.playerCompany.FireWorker(w);
     }
-    public void FireWorker(Worker w, Company c) {
+    public void FireWorker(Worker w, AICompany c) {
         data.unemployed.Add(w);
         c.FireWorker(w);
     }

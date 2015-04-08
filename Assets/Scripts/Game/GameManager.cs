@@ -21,12 +21,8 @@ public class GameManager : Singleton<GameManager> {
     public Company playerCompany {
         get { return data.company; }
     }
-    public List<Company> allCompanies {
-        get {
-            List<Company> allCos = new List<Company>(data.otherCompanies.Cast<Company>());
-            allCos.Add(playerCompany);
-            return allCos;
-        }
+    public List<AICompany> otherCompanies {
+        get { return data.otherCompanies; }
     }
     public UnlockSet unlocked {
         get { return data.unlocked; }
@@ -349,6 +345,12 @@ public class GameManager : Singleton<GameManager> {
                     //narrativeManager.GameLost();
             }
 
+            // Save the game every month.
+            foreach (Vertical v in playerCompany.verticals) {
+                Debug.Log(v);
+            }
+            GameData.Save(data);
+
             yield return StartCoroutine(GameTimer.Wait(monthTime));
         }
     }
@@ -407,9 +409,6 @@ public class GameManager : Singleton<GameManager> {
                     w.recentPlayerOffers = 0;
                 }
             }
-
-            // Save the game every week.
-            //GameData.Save(data);
 
             yield return StartCoroutine(GameTimer.Wait(weekTime));
         }

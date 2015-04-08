@@ -105,6 +105,20 @@ public class Product : HasStats {
     public Stat engineering;
 
     public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_, Company c) {
+        Init(pts, design_, marketing_, engineering_);
+
+        // A product recipe can be built without the required techs,
+        // but it will operate at a penalty.
+        techPenalty = false;
+        foreach (Technology t in recipe.requiredTechnologies) {
+            if (!c.technologies.Contains(t))
+                techPenalty = true;
+        }
+
+        name = GenerateName(c);
+    }
+
+    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_) {
         productTypes = pts;
         comboID = string.Join(".", productTypes.OrderBy(pt => pt.name).Select(pt => pt.name).ToArray());
 
@@ -139,16 +153,6 @@ public class Product : HasStats {
                 pollutes = true;
             }
         }
-
-        // A product recipe can be built without the required techs,
-        // but it will operate at a penalty.
-        techPenalty = false;
-        foreach (Technology t in recipe.requiredTechnologies) {
-            if (!c.technologies.Contains(t))
-                techPenalty = true;
-        }
-
-        name = GenerateName(c);
     }
 
     // Generate a product name.

@@ -80,6 +80,8 @@ public class Serializer {
                 string name = fi.Name;
                 object val = fi.GetValue(obj);
 
+               Debug.Log("Serializing " + name + "...");
+
                 // If this field references a resource,
                 // we don't want to serialize the entire resource.
                 // Just enough data (name and type) so that we can reload it on deserialization.
