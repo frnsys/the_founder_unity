@@ -241,11 +241,11 @@ namespace UnityTest
 
 		[Test]
 		public void UpgradePerk_CanAfford() {
+            float startResearch = c.research.value;
             c.cash.baseValue = perk.cost;
             Assert.IsTrue(c.BuyPerk(perk));
 
             c.cash.baseValue = perk.next.cost;
-            float startResearch = c.research.value;
             Assert.IsTrue(c.UpgradePerk(perk));
             Assert.AreEqual(c.perks.Count, 1);
             Assert.AreEqual(c.perks[0].upgradeLevel, 1);

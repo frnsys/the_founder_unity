@@ -51,8 +51,6 @@ namespace UnityTest
 
         [Test]
         public void MinimumSalary() {
-            worker.baseMinSalary = 1;
-
             Assert.AreEqual(worker.MinSalaryForCompany(gd.company), worker.baseMinSalary);
 
             // Emulate the worker being hired
@@ -77,7 +75,6 @@ namespace UnityTest
 
             // Emulate the worker being hired
             // Happy at current job.
-            worker.baseMinSalary = 1;
             worker.salary = 1;
             worker.happiness = 10;
 

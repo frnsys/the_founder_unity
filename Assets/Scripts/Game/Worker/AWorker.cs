@@ -52,7 +52,6 @@ public class AWorker {
         }
     }
 
-    public float baseMinSalary;
     public float MinSalaryForCompany(Company c) {
         float minSalary = worker.baseMinSalary;
         // If the employee is currently hired, i.e. has a salary > 0,
@@ -61,7 +60,7 @@ public class AWorker {
             float adjustedDiff = 0;
             if (c.workers.Count > 0) {
                 // First calculate the effect the current company has on their happiness.
-                float current = worker.happiness - happiness;
+                float current = happiness - worker.happiness;
 
                 // Get the average happiness at the hiring company.
                 float avgHappiness = c.AggregateWorkerStat("Happiness")/c.workers.Count;
@@ -70,7 +69,7 @@ public class AWorker {
                 float diff = (avgHappiness - worker.happiness) - current;
 
                 // It's difficult changing jobs, so slightly lower the expected happiness.
-                adjustedDiff = diff - 10;
+                adjustedDiff = diff - 5;
             }
 
             // TO DO tweak this.
@@ -130,6 +129,9 @@ public class AWorker {
     }
     public string bio {
         get { return worker.bio; }
+    }
+    public float baseMinSalary {
+        get { return worker.baseMinSalary; }
     }
 
     public float StatByName(string name) {
