@@ -85,7 +85,7 @@ public class GameEvent : SharedResource<GameEvent> {
                 comparison = GameManager.Instance.date;
                 break;
             case Condition.Type.ProductsLaunched:
-                comparison = c.launchedProducts.Count;
+                comparison = c.launchedProducts;
                 break;
             case Condition.Type.Locations:
                 comparison = c.locations.Count;

@@ -232,14 +232,9 @@ public class Company : HasStats {
 
     public List<Product> products;
     public Product developingProduct;
+    public int launchedProducts;
     public List<Product> activeProducts {
         get { return products.FindAll(p => p.launched); }
-    }
-    public List<Product> retiredProducts {
-        get { return products.FindAll(p => p.retired); }
-    }
-    public List<Product> launchedProducts {
-        get { return products.FindAll(p => !p.developing); }
     }
     public bool developing {
         get { return developingProduct != null; }
@@ -291,6 +286,7 @@ public class Company : HasStats {
         }
 
         developingProduct = null;
+        launchedProducts++;
 
         // The product's effects are applied by the GameManager.
     }
@@ -322,6 +318,10 @@ public class Company : HasStats {
         }
 
         product.Shutdown();
+
+        // Remove product from the company.
+        // Otherwise we will be serializing way too much stuff.
+        products.Remove(product);
     }
 
     // Given an item, find the list of currently active products that
