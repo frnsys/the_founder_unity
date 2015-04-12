@@ -1,6 +1,11 @@
 # The Founder
 -------------
 
+![Think happy.](http://www.thefounder.biz/assets/art/ad.png)
+
+<http://thefounder.biz/>
+<http://www.thefounder.biz/art/>
+
 ## Development Setup
 In the Unity Asset Store, download and then import Unity Test Tools into
 the `Assets/Imports/` folder. Make sure you don't import the `Examples`
