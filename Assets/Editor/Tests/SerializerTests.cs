@@ -85,14 +85,16 @@ namespace UnityTest
             data.economicStability = 10;
 
             GameEvent ev = ScriptableObject.CreateInstance<GameEvent>();
+            AGameEvent aGe = new AGameEvent(ev);
             ev.name = "TESTEVENT";
-            ev.probability = 1f;
-            data.eventsPool.Add(ev);
+            aGe.probability = 1f;
+            data.eventsPool.Add(aGe);
 
             GameEvent sev = ScriptableObject.CreateInstance<GameEvent>();
+            AGameEvent saGe = new AGameEvent(sev);
             sev.name = "TESTSPECIALEVENT";
-            sev.probability = 1f;
-            data.specialEventsPool.Add(sev);
+            saGe.probability = 1f;
+            data.specialEventsPool.Add(saGe);
 
             // TO DO AI companies
             data.unlocked = new UnlockSet();

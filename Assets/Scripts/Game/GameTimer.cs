@@ -33,6 +33,9 @@ static class GameTimer {
             pauses = 0;
         Debug.Log(string.Format("Resumed: {0}", pauses));
     }
+    public static void Reset() {
+        pauses = 0;
+    }
 
     public static IEnumerator Wait(float seconds) {
         float releaseTime = gameTimeElapsed + seconds;

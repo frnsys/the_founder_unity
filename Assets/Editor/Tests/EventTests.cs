@@ -35,7 +35,6 @@ namespace UnityTest
         public void SetUp() {
             gE = ScriptableObject.CreateInstance<GameEvent>();
             gE.name = "Some event";
-            gE.probability = 1f;
 
             gameObj = new GameObject("Game Manager");
             gm = gameObj.AddComponent<GameManager>();
@@ -77,19 +76,21 @@ namespace UnityTest
 
         [Test]
         public void Tick() {
-            gE.delay = 10;
-            em.Add(gE);
+            AGameEvent aGe = new AGameEvent(gE);
+            aGe.delay = 10;
+            em.Add(aGe);
 
             em.Tick();
 
-            Assert.AreEqual(gE.countdown, 9);
+            Assert.AreEqual(aGe.countdown, 9);
         }
 
         [Test]
         public void TickResolve() {
-            gE.delay = 1;
-            gE.probability = 1;
-            em.Add(gE);
+            AGameEvent aGe = new AGameEvent(gE);
+            aGe.delay = 1;
+            aGe.probability = 1;
+            em.Add(aGe);
 
             // Our test listener to listen for and capture the event.
             TestEventListener eL = new TestEventListener();
@@ -97,20 +98,22 @@ namespace UnityTest
             em.Tick();
 
             Assert.AreEqual(eL.triggeredEvent, gE);
-            Assert.IsFalse(gd.eventsPool.Contains(gE));
+            Assert.IsFalse(gd.eventsPool.Contains(aGe));
         }
 
         [Test]
         public void TickResolveMultiple() {
-            gE.delay = 1;
-            gE.probability = 1;
-            em.Add(gE);
+            AGameEvent aGe = new AGameEvent(gE);
+            aGe.delay = 1;
+            aGe.probability = 1;
+            em.Add(aGe);
 
             GameEvent gE_ = ScriptableObject.CreateInstance<GameEvent>();
             gE_.name = "Some event";
-            gE_.probability = 1f;
-            gE_.delay = 1;
-            em.Add(gE_);
+            AGameEvent aGe_ = new AGameEvent(gE_);
+            aGe_.probability = 1f;
+            aGe_.delay = 1;
+            em.Add(aGe_);
 
             Assert.AreEqual(gd.eventsPool.Count, 2);
 
@@ -164,11 +167,12 @@ namespace UnityTest
             pc.type = GameEvent.Condition.Type.Publicity;
             gE.conditions = new List<GameEvent.Condition>() { pc };
 
-            gd.specialEventsPool.Add(gE);
+            AGameEvent aGe = new AGameEvent(gE);
+            gd.specialEventsPool.Add(aGe);
             gd.company = new Company("Foo Inc").Init();
 
             em.EvaluateSpecialEvents();
-            Assert.IsTrue(gd.specialEventsPool.Contains(gE));
+            Assert.IsTrue(gd.specialEventsPool.Contains(aGe));
 
             // Note we don't test that the event has triggered
             // because there is a 45s delay.
@@ -176,7 +180,7 @@ namespace UnityTest
             // so that it doesn't trigger multiple times.
             gd.company.publicity.baseValue = 40;
             em.EvaluateSpecialEvents();
-            Assert.IsFalse(gd.specialEventsPool.Contains(gE));
+            Assert.IsFalse(gd.specialEventsPool.Contains(aGe));
 
         }
     }

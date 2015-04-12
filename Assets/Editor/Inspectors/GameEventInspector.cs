@@ -24,8 +24,6 @@ internal class GameEventInspector : Editor {
         ge.from = EditorGUILayout.TextField("From (Email or Publication)", ge.from, options);
         ge.type = (GameEvent.Type)EditorGUILayout.EnumPopup("Type", ge.type, options);
         ge.image = (Texture)EditorGUILayout.ObjectField("Image", ge.image, typeof(Texture), false, options);
-        ge.probability = EditorGUILayout.FloatField("Probability", ge.probability, options);
-        ge.probability = Mathf.Clamp(ge.probability, 0, 1);
 
         if (ge.effects == null)
             ge.effects = new EffectSet();

@@ -151,7 +151,10 @@ public class GameManager : Singleton<GameManager> {
         // See Build Settings to get the number for levels/scenes.
         if (Application.loadedLevelName == "Game") {
             StartGame();
-            narrativeManager.InitializeOnboarding();
+            Debug.Log(data.obs);
+            if (data.obs == NarrativeManager.OBS.START) {
+                //narrativeManager.InitializeOnboarding();
+            }
         }
     }
 
@@ -359,7 +362,7 @@ public class GameManager : Singleton<GameManager> {
 
     IEnumerator PerformanceNews(float growth) {
         yield return StartCoroutine(GameTimer.Wait(weekTime));
-        GameEvent ev = null;
+        AGameEvent ev = null;
         float target = data.board.desiredGrowth;
         if (growth >= target * 2) {
             ev = GameEvent.LoadSpecialEvent("Faster Growth");
@@ -370,7 +373,7 @@ public class GameManager : Singleton<GameManager> {
         } else if (growth <= target * 0.6) {
             ev = GameEvent.LoadSpecialEvent("Slower Growth");
         }
-        GameEvent.Trigger(ev);
+        GameEvent.Trigger(ev.gameEvent);
     }
 
     IEnumerator Weekly() {
@@ -387,16 +390,16 @@ public class GameManager : Singleton<GameManager> {
                 data.week > data.lifetimeWeek) {
 
                 if (!data.immortal) {
-                    GameEvent ev = GameEvent.LoadNoticeEvent("Death");
-                    GameEvent.Trigger(ev);
+                    AGameEvent ev = GameEvent.LoadNoticeEvent("Death");
+                    GameEvent.Trigger(ev.gameEvent);
 
                     // Pay inheritance tax.
                     float tax = playerCompany.cash.value * 0.75f;
                     playerCompany.Pay(tax);
                     UIManager.Instance.SendPing(string.Format("Paid {0:C0} in inheritance taxes.", tax), Color.red);
                 } else {
-                    GameEvent ev = GameEvent.LoadNoticeEvent("Immortal");
-                    GameEvent.Trigger(ev);
+                    AGameEvent ev = GameEvent.LoadNoticeEvent("Immortal");
+                    GameEvent.Trigger(ev.gameEvent);
                 }
             }
 

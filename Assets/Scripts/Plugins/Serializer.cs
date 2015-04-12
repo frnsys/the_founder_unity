@@ -125,8 +125,8 @@ public class Serializer {
                     replica.Add(name, Serialize(val), ft);
 
                 } else {
-                    Debug.Log("This serializable field was not serialized. Maybe you forgot to mark it as [Serializable]?");
-                    Debug.Log("\t" + fi.Name + " :: " + fi.FieldType.ToString());
+                    //Debug.Log("This serializable field was not serialized. Maybe you forgot to mark it as [Serializable]?");
+                    //Debug.Log("\t" + fi.Name + " :: " + fi.FieldType.ToString());
                 }
             }
         }

@@ -77,7 +77,7 @@ namespace UnityTest
             e.eventProbability = 0.5f;
 
             e.Apply(c);
-            GameEvent ev_ = gd.eventsPool.Where(evn => evn.name == ev.name).First();
+            AGameEvent ev_ = gd.eventsPool.Where(evn => evn.name == ev.name).First();
             Assert.AreEqual(ev_.name, ev.name);
             Assert.AreEqual(ev_.delay, e.eventDelay);
             Assert.AreEqual(ev_.probability, e.eventProbability);

@@ -104,6 +104,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         UIEmployee uie = obj.GetComponent<UIEmployee>();
         uie.worker = w;
         w.avatar = obj;
+        Debug.Log(w.material);
         if (w.material != null)
             uie.GetComponent<MeshRenderer>().material = w.material;
 
@@ -193,7 +194,9 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         data = d;
         company = d.company;
 
-        // Spawn the cofounder as a worker.
-        SpawnWorker(d.company.founders[0]);
+        foreach (Worker worker in d.company.allWorkers) {
+            // Spawn the cofounder as a worker.
+            SpawnWorker(worker);
+        }
     }
 }

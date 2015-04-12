@@ -61,8 +61,8 @@ public class EconomyManager : Singleton<EconomyManager> {
 
             // Make a prediction if available.
             if (data.prescient && newEconomy != Economy.Neutral) {
-                GameEvent ev = GameEvent.LoadNoticeEvent(eventName + " Forecast");
-                GameEvent.Trigger(ev);
+                AGameEvent ev = GameEvent.LoadNoticeEvent(eventName + " Forecast");
+                GameEvent.Trigger(ev.gameEvent);
             }
         }
     }
@@ -92,8 +92,8 @@ public class EconomyManager : Singleton<EconomyManager> {
         data.economy = newEconomy;
 
         if (eventName != null) {
-            GameEvent ev = GameEvent.LoadNoticeEvent(eventName);
-            GameEvent.Trigger(ev);
+            AGameEvent ev = GameEvent.LoadNoticeEvent(eventName);
+            GameEvent.Trigger(ev.gameEvent);
         }
         UpdateEconomyChangeProbability();
         changing = false;

@@ -16,8 +16,14 @@ public class EventManager : MonoBehaviour {
         data = d;
     }
 
-    public void Add(GameEvent ev) {
+    public void Add(AGameEvent ev) {
         data.eventsPool.Add(ev);
+    }
+
+    public void Remove(AGameEvent ev) {
+        // Remove a given event by name.
+        int idx = data.eventsPool.FindIndex(e => e.name == ev.name);
+        data.eventsPool.RemoveAt(idx);
     }
 
     public void Remove(GameEvent ev) {
@@ -27,9 +33,9 @@ public class EventManager : MonoBehaviour {
     }
 
     public void Tick() {
-        List<GameEvent> toResolve = new List<GameEvent>();
+        List<AGameEvent> toResolve = new List<AGameEvent>();
 
-        foreach (GameEvent ev_ in data.eventsPool) {
+        foreach (AGameEvent ev_ in data.eventsPool) {
             ev_.countdown -= 1;
 
             if (ev_.countdown <= 0)
@@ -37,11 +43,11 @@ public class EventManager : MonoBehaviour {
         }
 
         // If there is one event to resolve, resolve it.
-        GameEvent ev;
+        AGameEvent ev;
         if (toResolve.Count == 1) {
             ev = toResolve[0];
             if (Random.value <= ev.probability)
-                GameEvent.Trigger(ev);
+                GameEvent.Trigger(ev.gameEvent);
             data.eventsPool.Remove(ev);
 
         // If there are more, randomly pick events until one is triggered
@@ -53,7 +59,7 @@ public class EventManager : MonoBehaviour {
                 toResolve.Remove(ev);
 
                 // Repeatable events remain in the pool.
-                if (!ev.repeatable) {
+                if (!ev.gameEvent.repeatable) {
                     data.eventsPool.Remove(ev);
                 } else {
                     // Reset the delay/countdown.
@@ -61,7 +67,7 @@ public class EventManager : MonoBehaviour {
                 }
 
                 if (Random.value <= ev.probability) {
-                    GameEvent.Trigger(ev);
+                    GameEvent.Trigger(ev.gameEvent);
                     break;
                 }
             }
@@ -76,10 +82,10 @@ public class EventManager : MonoBehaviour {
 
     // Evaluate special events to see if conditions have been met.
     public void EvaluateSpecialEvents() {
-        foreach (GameEvent ev in data.specialEventsPool) {
+        foreach (AGameEvent ev in data.specialEventsPool) {
             // Only show one event, the next one will
             // resolve in the following iteration.
-            if (ev.ConditionsSatisfied(data.company)) {
+            if (ev.gameEvent.ConditionsSatisfied(data.company)) {
                 // We trigger the event by adding it to the regular event pool.
                 ev.probability = 1f;
 
@@ -87,7 +93,7 @@ public class EventManager : MonoBehaviour {
                 DelayTrigger(ev, 5f);
 
                 // Remove it now though so that it doesn't re-trigger.
-                if (!ev.repeatable)
+                if (!ev.gameEvent.repeatable)
                     data.specialEventsPool.Remove(ev);
                 break;
             }
@@ -95,7 +101,7 @@ public class EventManager : MonoBehaviour {
     }
 
     // It's expected that the event passed in is a clone.
-    public void DelayTrigger(GameEvent ge, float ticks) {
+    public void DelayTrigger(AGameEvent ge, float ticks) {
         ge.countdown = ticks;
         Add(ge);
     }

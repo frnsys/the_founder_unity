@@ -126,8 +126,7 @@ public class EffectSet {
             company.ApplyOpinionEvent(opinionEvent);
 
         if (gameEvent != null) {
-            GameEvent ge = ScriptableObject.Instantiate(gameEvent) as GameEvent;
-            ge.name = gameEvent.name;
+            AGameEvent ge = new AGameEvent(gameEvent);
             ge.delay = eventDelay;
             ge.probability = eventProbability;
             GameManager.Instance.eventManager.Add(ge);

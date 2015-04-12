@@ -8,52 +8,33 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class GameEvent : ScriptableObject {
+public class GameEvent : SharedResource<GameEvent> {
     public enum Type {
         Email,
         News,
         Personal
     }
 
-    public static List<GameEvent> LoadSpecialEvents() {
+    public static List<AGameEvent> LoadSpecialEvents() {
         return Resources.LoadAll<GameEvent>("SpecialEvents").ToList().Select(ev => {
-            GameEvent gameEvent = Instantiate(ev) as GameEvent;
-            gameEvent.name = ev.name;
-            return gameEvent;
+            return new AGameEvent(ev);
         }).ToList();
     }
 
-    public static GameEvent LoadSpecialEvent(string name) {
+    public static AGameEvent LoadSpecialEvent(string name) {
         GameEvent ev = Resources.Load<GameEvent>("SpecialEvents/" + name);
-        GameEvent clone = Instantiate(ev) as GameEvent;
-        clone.name = ev.name;
-        return clone;
+        return new AGameEvent(ev);
     }
 
-    public static GameEvent LoadNoticeEvent(string name) {
+    public static AGameEvent LoadNoticeEvent(string name) {
         GameEvent ev = Resources.Load<GameEvent>("NoticeEvents/" + name);
-        GameEvent clone = Instantiate(ev) as GameEvent;
-        clone.name = ev.name;
-        return clone;
+        return new AGameEvent(ev);
     }
 
     public Type type;
     public string description;
     public string from;
     public Texture image;
-
-    public float delay {
-        get { return _delay; }
-        set {
-            _delay = value;
-            countdown = value;
-        }
-    }
-
-    [SerializeField]
-    private float _delay;
-    public float countdown;
-    public float probability;
     public bool repeatable;
 
     public EffectSet effects = new EffectSet();

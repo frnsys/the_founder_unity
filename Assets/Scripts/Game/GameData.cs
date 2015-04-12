@@ -52,6 +52,7 @@ public class GameData : ScriptableObject {
 
     // Onboarding progress.
     public NarrativeManager.OnboardingState onboardingState;
+    public NarrativeManager.OBS obs;
 
     // Other companies in the world.
     public List<AICompany> otherCompanies;
@@ -70,8 +71,8 @@ public class GameData : ScriptableObject {
     public List<Worker> unemployed;
 
     // Events which are waiting to resolve.
-    public List<GameEvent> specialEventsPool;
-    public List<GameEvent> eventsPool;
+    public List<AGameEvent> specialEventsPool;
+    public List<AGameEvent> eventsPool;
 
     // Special effects.
     public bool immortal;
@@ -117,7 +118,7 @@ public class GameData : ScriptableObject {
         data.costMultiplier = 1f;
 
         data.specialEventsPool = GameEvent.LoadSpecialEvents();
-        data.eventsPool = new List<GameEvent>();
+        data.eventsPool = new List<AGameEvent>();
 
         data.month = Month.January;
         data.year  = 1;
@@ -128,6 +129,8 @@ public class GameData : ScriptableObject {
         data.prescient = false;
         data.automation = false;
         data.workerInsight = false;
+
+        data.obs = NarrativeManager.OBS.START;
 
         // You start your business at 25,
         // so the amount of time you have really ranges from 40-60.

@@ -78,6 +78,7 @@ public class UIMainMenu : Singleton<UIMainMenu> {
         UIManager.Reset();
         UIOfficeManager.Reset();
         GameManager.Reset();
+        GameTimer.Reset();
         GameManager.Instance.Load(GameData.Load());
 
         // Switch to the game scene.

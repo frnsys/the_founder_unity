@@ -87,7 +87,7 @@ public class HypeMinigame : MonoBehaviour {
     void EndGame() {
         int numPeople = (int)(Mathf.Pow(hypeScore, 2) * 100 * (Random.value + 0.75f));
 
-        GameEvent ev = GameEvent.LoadNoticeEvent("Promo Failure");
+        AGameEvent ev = GameEvent.LoadNoticeEvent("Promo Failure");
         if (hypeScore * 1000 >= promo.cost * 0.7) {
             ev = GameEvent.LoadNoticeEvent("Promo Meh");
         } else if (hypeScore * 1000 >= promo.cost) {
@@ -96,8 +96,10 @@ public class HypeMinigame : MonoBehaviour {
             ev = GameEvent.LoadNoticeEvent("Promo Major Success");
         }
 
-        ev.description = ev.description.Replace("<NUM_PEOPLE>", string.Format("{0:n0}", numPeople));
-        GameEvent.Trigger(ev);
+        string desc = ev.gameEvent.description;
+        ev.gameEvent.description = ev.gameEvent.description.Replace("<NUM_PEOPLE>", string.Format("{0:n0}", numPeople));
+        GameEvent.Trigger(ev.gameEvent);
+        ev.gameEvent.description = desc;
 
         // Apply the results to the company.
         OpinionEvent oe = new OpinionEvent(0, hypeScore);

@@ -44,6 +44,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     public void Load(GameData d) {
         data = d;
+        ob = data.onboardingState;
+        obs = data.obs;
     }
 
     // A message from your mentor.
@@ -119,7 +121,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
      * ==========================================
      */
 
-    private enum OBS {
+    public enum OBS {
         START,
         GAME_INTRO,
         OPENED_HYPE,
@@ -133,12 +135,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         GAME_GOALS,
         RESEARCH
     }
-    private OBS obs = OBS.START;
+    private OBS obs;
 
     // Setup the starting game state for onboarding.
     public void InitializeOnboarding() {
-        obs = OBS.START;
-
         // Listen to some events.
         Company.BeganProduct += BeganProduct;
         Company.WorkerHired += WorkerHired;
