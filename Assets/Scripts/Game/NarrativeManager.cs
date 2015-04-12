@@ -17,6 +17,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
         public bool LOCATIONS_UNLOCKED;
+        public bool LOBBYING_UNLOCKED;
+        public bool ACQUISITIONS_UNLOCKED;
         public bool SPECIALPROJECTS_UNLOCKED;
         public bool RESEARCH_OPENED;
         public bool HYPE_MINIGAME;
@@ -135,45 +137,92 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     // Setup the starting game state for onboarding.
     public void InitializeOnboarding() {
-        // Listen to some events.
-        Company.BeganProduct += BeganProduct;
-        Company.WorkerHired += WorkerHired;
-        Company.Synergy += Synergy;
-        Product.Completed += CompletedProduct;
-        Product.Launched += LaunchedProduct;
-        Promo.Completed += PromoCompleted;
-        GameEvent.EventTriggered += OnEvent;
-        UnlockSet.Unlocked += OnUnlocked;
-        TheMarket.Started += OnMarketStarted;
-        TheMarket.Done += OnMarketDone;
-        HypeMinigame.Done += OnHypeDone;
-        UIOfficeManager.OfficeUpgraded += OfficeUpgraded;
-
         // Hide some menu and status bar items.
         UIManager uim = UIManager.Instance;
-        uim.statusBar.hypeLabel.gameObject.SetActive(false);
-        uim.statusBar.researchLabel.gameObject.SetActive(false);
-        uim.menu.Deactivate("New Product");
-        uim.menu.Deactivate("Accounting");
-        uim.menu.Deactivate("Special Projects");
-        uim.menu.Deactivate("Locations");
-        uim.menu.Deactivate("Verticals");
-        uim.menu.Deactivate("Acquisitions");
-        uim.menu.Deactivate("Lobbying");
-        uim.menu.Deactivate("Recruiting");
-        uim.menu.Deactivate("Employees");
-        uim.menu.Deactivate("Perks");
-        uim.menu.Deactivate("Research");
-        uim.menu.Deactivate("Communications");
 
-        // Show the game intro.
-        Intro();
+        if (!data.ob.SPECIALPROJECTS_UNLOCKED) {
+            uim.menu.Deactivate("Special Projects");
+        }
+
+        if (!data.ob.LOCATIONS_UNLOCKED) {
+            uim.menu.Deactivate("Locations");
+        }
+
+        if (!data.ob.PERKS_UNLOCKED) {
+            Company.WorkerHired += WorkerHired;
+            uim.menu.Deactivate("Perks");
+        }
+
+        if (!data.ob.VERTICALS_UNLOCKED) {
+            uim.menu.Deactivate("Verticals");
+        }
+
+        if (!data.ob.HIRED_EMPLOYEE) {
+            uim.menu.Deactivate("Employees");
+        }
+
+        if (!data.ob.LOBBYING_UNLOCKED) {
+            uim.menu.Deactivate("Lobbying");
+        }
+
+        if (!data.ob.ACQUISITIONS_UNLOCKED) {
+            UIOfficeManager.OfficeUpgraded += OfficeUpgraded;
+            uim.menu.Deactivate("Acquisitions");
+        }
+
+        if (!data.ob.SYNERGY) {
+            Company.Synergy += Synergy;
+        }
+
+        if (!data.ob.HYPE_MINIGAME) {
+            Promo.Completed += PromoCompleted;
+        }
+
+        if (data.obs < OBS.RESEARCH) {
+            uim.menu.Deactivate("Research");
+            uim.statusBar.researchLabel.gameObject.SetActive(false);
+        }
+
+        if (data.obs < OBS.GAME_GOALS) {
+            uim.menu.Deactivate("Accounting");
+        }
+
+        if (data.obs < OBS.THE_MARKET_DONE) {
+            uim.menu.Deactivate("Recruiting");
+            TheMarket.Done += OnMarketDone;
+        }
+
+        if (data.obs < OBS.THE_MARKET) {
+            TheMarket.Started += OnMarketStarted;
+        }
+
+        if (data.obs < OBS.STARTED_PRODUCT) {
+            Company.BeganProduct += BeganProduct;
+        }
+
+        if (data.obs < OBS.NEW_PRODUCT) {
+            HypeMinigame.Done += OnHypeDone;
+            uim.menu.Deactivate("New Product");
+        }
+
+        if (data.obs < OBS.GAME_INTRO) {
+            uim.statusBar.hypeLabel.gameObject.SetActive(false);
+            uim.menu.Deactivate("Communications");
+
+            // Show the game intro.
+            Intro();
+        }
+
+        Product.Completed += CompletedProduct;
+        Product.Launched += LaunchedProduct;
+        GameEvent.EventTriggered += OnEvent;
+        UnlockSet.Unlocked += OnUnlocked;
     }
 
     void LaunchedProduct(Product p, Company c, float score) {
         ProductRecipe r = p.Recipe;
         // Product hints appear sporadically, and only after onboarding is finished.
-        if (c == data.company && Random.value < 0.4f && data.obs == OBS.GAME_GOALS) {
+        if (c == data.company && Random.value < 0.4f && data.obs > OBS.GAME_GOALS) {
             if (score < 0.6f) {
                 switch(r.primaryFeature) {
                     case ProductRecipe.Feature.Design:
@@ -263,6 +312,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     string.Format("You can access this through the {0} menu item.", MenuHighlight("Lobbying"))
                 });
                 UIManager.Instance.menu.Activate("Lobbying");
+                data.ob.LOBBYING_UNLOCKED = true;
             }));
         }
     }
@@ -292,6 +342,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
                 });
                 UIManager.Instance.menu.Activate("New Product");
+                HypeMinigame.Done -= OnHypeDone;
             }, 1f));
         }
     }
@@ -307,7 +358,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     // Triggered whenever a window or tab is opened.
     public void OnScreenOpened(string name) {
-        Debug.Log(name + " opened");
         switch(name) {
 
             case "Manage Communications":
@@ -428,7 +478,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     uim.menu.Activate("Research");
                     uim.statusBar.researchLabel.gameObject.SetActive(true);
                 }, 6f));
-                Product.Completed -= CompletedProduct;
             } else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
                 MentorMessages(new string[] {
                     "It's time to start thinking about expanding to new locations.",
@@ -450,8 +499,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     MentorMessages(new string[] {
                         "Great, you have an employee now. See if you can build a new, better product."
                     });
-                    UIManager.Instance.menu.Deactivate("New Product");
-                    UIManager.Instance.menu.Activate("New Product");
+                    UIManager uim = UIManager.Instance;
+                    uim.menu.Deactivate("New Product");
+                    uim.menu.Activate("New Product");
+                    uim.menu.Activate("Employees");
                     data.ob.HIRED_EMPLOYEE = true;
                 }, 1f));
             } else if (!data.ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
@@ -463,6 +514,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                     UIManager.Instance.menu.Activate("Perks");
                     data.ob.PERKS_UNLOCKED = true;
+                    Company.WorkerHired -= WorkerHired;
                 }, 6f));
             }
         }
@@ -528,6 +580,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 string.Format("It's harder to {0} on your own, but with all of your capital you can {1} other companies now. Manage these purchases through the {2}", SpecialHighlight("innovate"), ConceptHighlight("aquire"), MenuHighlight("Acquisitions"))
             });
             UIManager.Instance.menu.Activate("Acquisitions");
+            data.ob.ACQUISITIONS_UNLOCKED = true;
+            UIOfficeManager.OfficeUpgraded -= OfficeUpgraded;
         }
     }
 
