@@ -153,7 +153,7 @@ public class GameManager : Singleton<GameManager> {
             StartGame();
             Debug.Log(data.obs);
             if (data.obs == NarrativeManager.OBS.START) {
-                //narrativeManager.InitializeOnboarding();
+                narrativeManager.InitializeOnboarding();
             }
         }
     }

@@ -27,6 +27,10 @@ public class SpecialProject : SharedResource<SpecialProject> {
 
         return requiredProducts.Count == company.products.Where(p => requiredProducts.Contains(p.Recipe)).Distinct().Count();
     }
+
+    public static new SpecialProject Load(string name) {
+        return Resources.Load("SpecialProjects/" + name) as SpecialProject;
+    }
 }
 
 

@@ -12,10 +12,11 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AAICompany {
+public class AAICompany : ScriptableObject {
+    [SerializeField]
+    private AICompany aic;
     public bool disabled = false;
     public List<AWorker> workers;
-    private AICompany aic;
     public List<Vertical> specialtyVerticals;
     public List<ProductType> specialtyProductTypes;
 
@@ -48,6 +49,7 @@ public class AAICompany {
 
     public string name {
         get { return aic.name; }
+        set {} // for serialization
     }
     public Worker founder {
         get { return aic.founder; }

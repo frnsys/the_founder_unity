@@ -9,7 +9,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AWorker {
+public class AWorker : ScriptableObject {
     [SerializeField]
     private Worker worker;
 
