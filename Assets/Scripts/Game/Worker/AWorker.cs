@@ -14,7 +14,7 @@ public class AWorker {
     private Worker worker;
 
     // The worker's avatar in the game world.
-    [HideInInspector]
+    [HideInInspector, System.NonSerialized]
     public GameObject avatar;
 
     public int Research(float bonus) {

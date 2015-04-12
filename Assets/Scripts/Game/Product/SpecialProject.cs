@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class SpecialProject : TemplateResource<SpecialProject> {
+public class SpecialProject : SharedResource<SpecialProject> {
     public string description;
     public float cost;
     public EffectSet effects = new EffectSet();

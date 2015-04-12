@@ -346,9 +346,8 @@ public class Company : HasStats {
     public List<SpecialProject> specialProjects;
     public bool BuySpecialProject(SpecialProject p) {
         if (Pay(p.cost)) {
-            SpecialProject sp = p.Clone();
-            specialProjects.Add(sp);
-            sp.Develop();
+            specialProjects.Add(p);
+            p.Develop();
 
             // The product's effects are applied by the GameManager.
             return true;

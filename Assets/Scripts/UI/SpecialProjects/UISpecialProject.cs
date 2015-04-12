@@ -7,11 +7,10 @@ public class UISpecialProject : UIEffectItem {
     public SpecialProject specialProject {
         get { return _specialProject; }
         set {
-            _specialProject = value.Clone();
+            _specialProject = value;
 
             // Check if the project has already been completed.
-            SpecialProject completedProject = SpecialProject.Find(_specialProject, company.specialProjects);
-            if (completedProject == null) {
+            if (company.specialProjects.Contains(_specialProject)) {
                 SetupNewProject();
             } else {
                 SetupCompletedProject();
