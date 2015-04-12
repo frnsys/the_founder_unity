@@ -31,6 +31,14 @@ public class GameEvent : SharedResource<GameEvent> {
         return new AGameEvent(ev);
     }
 
+    public static new GameEvent Load(string name) {
+        GameEvent ev = Resources.Load("NoticeEvents/" + name) as GameEvent;
+        if (ev == null) {
+            ev = Resources.Load("SpecialEvents/" + name) as GameEvent;
+        }
+        return ev;
+    }
+
     public Type type;
     public string description;
     public string from;

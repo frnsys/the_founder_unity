@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Angeline Everly
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: cc45eb035bd7847f890ce21262745efe, type: 2}
+  robot: 0
+  bio: Angeline Everly reminds me of Eeyore and is not very imaginative. Angeline
+    Everly isn't the sharpest tool in the shed and is hard to be around. Angeline
+    Everly needs a lot of motivation.
+  description: 
+  title: MBA
+  happiness: 1
+  productivity: 1
+  charisma: 1
+  creativity: 1
+  cleverness: 1
+  baseMinSalary: 45000

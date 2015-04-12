@@ -164,7 +164,7 @@ public class GameManager : Singleton<GameManager> {
 #if UNITY_EDITOR
         // TESTING start a test game.
         if (Application.loadedLevelName == "Game") {
-            Founder cofounder = Resources.LoadAll<Founder>("Founders/Cofounders").First();
+            Worker cofounder = Resources.LoadAll<Worker>("Founders/Cofounders").First();
             Location location = Location.Load("San Francisco");
             Vertical vertical = Vertical.Load("Hardware");
             InitializeGame(cofounder, location, vertical);
@@ -184,16 +184,19 @@ public class GameManager : Singleton<GameManager> {
         Application.targetFrameRate = 30;
     }
 
-    public void InitializeGame(Founder cofounder, Location location, Vertical vertical) {
+    public void InitializeGame(Worker cofounder, Location location, Vertical vertical) {
         data.company.verticals = new List<Vertical> { vertical };
         data.company.SetHQ(location);
-        data.company.founders.Add(cofounder);
-        ApplyEffectSet(cofounder.bonuses);
+        data.company.founders.Add(new AWorker(cofounder));
+
+        if (cofounder.name == "Mark Stanley") {
+            data.company.cash.baseValue += 50000;
+        }
 
         // The cofounders you didn't pick start their own rival company.
         AICompany aic = AICompany.Find("Rival Corp");
-        List<Founder> cofounders = Resources.LoadAll<Founder>("Founders/Cofounders").Where(c => c != cofounder).ToList();
-        aic.founders = cofounders;
+        List<Worker> cofounders = Resources.LoadAll<Worker>("Founders/Cofounders").Where(c => c != cofounder).ToList();
+        aic.founder = cofounders[0];
     }
 
     void StartGame() {
@@ -408,7 +411,7 @@ public class GameManager : Singleton<GameManager> {
                 activeAICompanies[Random.Range(0, activeAICompanies.Count)].Decide();
 
             // Update workers' off market times.
-            foreach (Worker w in workerManager.AllWorkers.Where(w => w.offMarketTime > 0)) {
+            foreach (AWorker w in workerManager.AllWorkers.Where(w => w.offMarketTime > 0)) {
                 // Reset player offers if appropriate.
                 if (--w.offMarketTime == 0) {
                     w.recentPlayerOffers = 0;

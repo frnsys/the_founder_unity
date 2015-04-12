@@ -10,8 +10,8 @@ using UnityEngine;
 using System.Collections;
 
 public class UIWorker : MonoBehaviour {
-    private Worker worker_;
-    public Worker worker {
+    private AWorker worker_;
+    public AWorker worker {
         get { return worker_; }
         set {
             worker_ = value;
@@ -45,12 +45,12 @@ public class UIWorker : MonoBehaviour {
         }
     }
 
-    public void SetBasicWorker(Worker w) {
+    public void SetBasicWorker(AWorker w) {
         worker = w;
         quantObj.SetActive(false);
     }
 
-    public void SetQuantWorker(Worker w) {
+    public void SetQuantWorker(AWorker w) {
         worker = w;
         quantObj.SetActive(true);
     }

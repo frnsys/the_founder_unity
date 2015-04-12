@@ -20,14 +20,13 @@ internal class WorkerInspector : Editor {
         EditorGUILayout.LabelField("Description");
         w.description = EditorGUILayout.TextArea(w.description, GUILayout.Height(60));
         w.material = (Material)EditorGUILayout.ObjectField("Material", w.material, typeof(Material), false);
-        w.productivity.baseValue = EditorGUILayout.FloatField("Productivity", w.productivity.baseValue);
-        w.happiness.baseValue = EditorGUILayout.FloatField("Happiness", w.happiness.baseValue);
-        w.charisma.baseValue = EditorGUILayout.FloatField("Charisma", w.charisma.baseValue);
-        w.creativity.baseValue = EditorGUILayout.FloatField("Creativity", w.creativity.baseValue);
-        w.cleverness.baseValue = EditorGUILayout.FloatField("Cleverness", w.cleverness.baseValue);
+        w.productivity = EditorGUILayout.FloatField("Productivity", w.productivity);
+        w.happiness = EditorGUILayout.FloatField("Happiness", w.happiness);
+        w.charisma = EditorGUILayout.FloatField("Charisma", w.charisma);
+        w.creativity = EditorGUILayout.FloatField("Creativity", w.creativity);
+        w.cleverness = EditorGUILayout.FloatField("Cleverness", w.cleverness);
         w.robot = EditorGUILayout.Toggle("Is a Robot", w.robot);
 
-        w.salary = EditorGUILayout.FloatField("Salary", w.salary);
         w.baseMinSalary = EditorGUILayout.FloatField("Base Minimum Salary", w.baseMinSalary);
         EditorGUILayout.Space();
 

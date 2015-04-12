@@ -8,62 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Sergey Paj
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
-  salary: 0
-  bio: 
+  avatar: {fileID: 0}
+  material: {fileID: 0}
+  robot: 0
+  bio: Aaron Koi needs a lot of motivation and reminds me of Eeyore. Aaron Koi is
+    not very imaginative and is hard to be around. Aaron Koi is quite dim.
   description: 
   title: Founder & CEO
+  happiness: 0
+  productivity: 0
+  charisma: 0
+  creativity: 0
+  cleverness: 0
   baseMinSalary: 0
-  offMarketTime: 0
-  recentPlayerOffers: 0
-  happiness:
-    baseValue: 10
-    _buffs: []
-  productivity:
-    baseValue: 10
-    _buffs: []
-  charisma:
-    baseValue: 10
-    _buffs: []
-  creativity:
-    baseValue: 10
-    _buffs: []
-  cleverness:
-    baseValue: 4
-    _buffs: []
-  bonuses:
-    unlocks:
-      productTypes: []
-      workers: []
-      items: []
-      perks: []
-      stores: 
-      locations: []
-      verticals: []
-      promos: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-      duration: 0
-      type: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-        duration: 0
-        type: 0
-      publicity:
-        name: Hype
-        value: 0
-        duration: 0
-        type: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    productEffects: []
-    workerEffects: []

@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIResearcher : MonoBehaviour {
-    private Worker worker_;
-    public Worker worker {
+    private AWorker worker_;
+    public AWorker worker {
         get { return worker_; }
         set {
             worker_ = value;

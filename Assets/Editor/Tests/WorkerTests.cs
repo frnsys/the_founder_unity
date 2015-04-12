@@ -17,7 +17,7 @@ namespace UnityTest
         private GameData gd;
         private WorkerManager wm;
 
-        private Worker worker;
+        private AWorker worker;
 
         [SetUp]
         public void SetUp() {
@@ -29,8 +29,8 @@ namespace UnityTest
 
             wm = gm.workerManager;
 
-            worker = ScriptableObject.CreateInstance<Worker>();
-            worker.Init("Franklin");
+            Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            worker = new AWorker(w);
 
             gd.unemployed.Add(worker);
         }
@@ -66,8 +66,9 @@ namespace UnityTest
         [Test]
         public void MinimumSalaryAgainstCompanyHappiness() {
             // Create a worker for the company.
-            Worker w = ScriptableObject.CreateInstance<Worker>();
-            w.Init("Dava");
+
+            Worker w_ = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            AWorker w = new AWorker(w_);
             gm.playerCompany.HireWorker(w);
             Assert.AreEqual(gm.playerCompany.workers.Count, 1);
 
@@ -95,8 +96,8 @@ namespace UnityTest
         [Test]
         public void HireWorkers() {
             Company c = gm.playerCompany;
-            Worker w = ScriptableObject.CreateInstance<Worker>();
-            w.Init("Sammy");
+            Worker w_ = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            AWorker w = new AWorker(w_);
             gd.unemployed.Add(w);
 
             int startingCount = wm.AvailableWorkers.Count();

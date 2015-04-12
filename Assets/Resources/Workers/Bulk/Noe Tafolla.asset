@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Noe Tafolla
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
+  robot: 0
+  bio: Noe Tafolla works hard but is quite dim. Noe Tafolla is easy to talk to but
+    is not very imaginative and reminds me of Eeyore.
+  description: 
+  title: Public Relations Associate
+  happiness: 1
+  productivity: 5
+  charisma: 6
+  creativity: 2
+  cleverness: 1
+  baseMinSalary: 195000

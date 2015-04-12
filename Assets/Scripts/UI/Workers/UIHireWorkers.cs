@@ -10,7 +10,7 @@ public class UIHireWorkers : UIFullScreenPager {
     public GameObject offerPrefab;
     public GameObject noWorkersNotice;
 
-    private List<Worker> availableWorkers = new List<Worker>();
+    private List<AWorker> availableWorkers = new List<AWorker>();
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -27,7 +27,7 @@ public class UIHireWorkers : UIFullScreenPager {
             GameManager.Instance.Resume();
     }
 
-    public void HireRobotWorker(Worker worker) {
+    public void HireRobotWorker(AWorker worker) {
         if (company.remainingSpace > 0) {
             UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
             ic.SetRobotWorker(string.Format("The {0} model costs", worker.name), worker.baseMinSalary);
@@ -51,7 +51,7 @@ public class UIHireWorkers : UIFullScreenPager {
         }
     }
 
-    public void HireWorker(Worker worker) {
+    public void HireWorker(AWorker worker) {
         if (company.remainingSpace > 0) {
             UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
 
@@ -114,7 +114,7 @@ public class UIHireWorkers : UIFullScreenPager {
             UIManager.Instance.Alert("You don't have any space for new workers. Consider laying some people off or expanding to a new location.");
         }
     }
-    private void HireWorker_(Worker worker) {
+    private void HireWorker_(AWorker worker) {
         GameManager.Instance.workerManager.HireWorker(worker);
         RemoveWorker(worker);
 
@@ -122,7 +122,7 @@ public class UIHireWorkers : UIFullScreenPager {
         UIManager.Instance.Alert("It's been my lifelong dream to work for " + company.name + "!!");
     }
 
-    private void RemoveWorker(Worker worker) {
+    private void RemoveWorker(AWorker worker) {
         int i = availableWorkers.IndexOf(worker);
         availableWorkers.Remove(worker);
 
@@ -138,16 +138,16 @@ public class UIHireWorkers : UIFullScreenPager {
         }
     }
 
-    public void LoadWorkers(List<Worker> workers) {
+    public void LoadWorkers(List<AWorker> workers) {
         ClearGrid();
         availableWorkers.Clear();
         bool wi = GameManager.Instance.workerInsight;
-        foreach (Worker w in workers) {
+        foreach (AWorker w in workers) {
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
 
             UIWorker uiw = workerItem.GetComponent<UIWorker>();
-            Worker worker = w;
+            AWorker worker = w;
             UIEventListener.Get(uiw.button.gameObject).onClick += delegate(GameObject obj) {
                 if (worker.robot) {
                     HireRobotWorker(worker);

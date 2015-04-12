@@ -66,7 +66,7 @@ namespace UnityTest
                 es.Apply(data.company);
 
                 for (int i=0;i<5;i++) {
-                    Worker worker = CreateWorker("WORKER"+i, i*10);
+                    AWorker worker = CreateWorker("WORKER"+i, i*10);
                     worker.offMarketTime = i;
                     worker.recentPlayerOffers = i;
                     wm.HireWorker(worker);
@@ -200,8 +200,8 @@ namespace UnityTest
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);
             for (int i=0;i<gd.company.workers.Count;i++) {
-                Worker w  = data.company.workers[i];
-                Worker w_ = gd.company.workers[i];
+                AWorker w  = data.company.workers[i];
+                AWorker w_ = gd.company.workers[i];
 
                 CompareWorkers(w, w_);
             }
@@ -230,8 +230,8 @@ namespace UnityTest
 
             Assert.AreEqual(gd.company.founders.Count, data.company.founders.Count);
             for (int i=0;i<gd.company.founders.Count;i++) {
-                Founder f  = data.company.founders[i];
-                Founder f_ = gd.company.founders[i];
+                AWorker f  = data.company.founders[i];
+                AWorker f_ = gd.company.founders[i];
 
                 Assert.AreEqual(f.name,                     f_.name);
                 Assert.AreEqual(f.salary,                   f_.salary);
@@ -240,8 +240,6 @@ namespace UnityTest
                 Assert.AreEqual(f.charisma.baseValue,       f_.charisma.baseValue);
                 Assert.AreEqual(f.creativity.baseValue,     f_.creativity.baseValue);
                 Assert.AreEqual(f.creativity.baseValue,     f_.creativity.baseValue);
-
-                CompareEffectSets(f.bonuses, f_.bonuses);
             }
 
             CompareUnlockSets(gd.unlocked,               data.unlocked);
@@ -294,9 +292,9 @@ namespace UnityTest
             Assert.AreEqual(us.verticals[0].name, us_.verticals[0].name);
         }
 
-        private Worker CreateWorker(string name, int stat) {
-            Worker worker = ScriptableObject.CreateInstance<Worker>();
-            worker.Init(name);
+        private AWorker CreateWorker(string name, int stat) {
+            Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            AWorker worker = new AWorker(w);
             worker.salary                 = stat;
             worker.happiness.baseValue    = stat;
             worker.productivity.baseValue = stat;
@@ -306,16 +304,15 @@ namespace UnityTest
             return worker;
         }
 
-        private Founder CreateFounder(string name, int stat) {
-            Founder founder = ScriptableObject.CreateInstance<Founder>();
-            founder.Init(name);
+        private AWorker CreateFounder(string name, int stat) {
+            Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            AWorker founder = new AWorker(w);
             founder.salary                 = stat;
             founder.happiness.baseValue    = stat;
             founder.productivity.baseValue = stat;
             founder.charisma.baseValue     = stat;
             founder.creativity.baseValue   = stat;
             founder.cleverness.baseValue   = stat;
-            founder.bonuses                = CreateEffectSet();
             return founder;
         }
 
@@ -386,7 +383,7 @@ namespace UnityTest
             return Random.Range(10, 50);
         }
 
-        private void CompareWorkers(Worker w, Worker w_) {
+        private void CompareWorkers(AWorker w, AWorker w_) {
             Assert.AreEqual(w.name,                     w_.name);
             Assert.AreEqual(w.salary,                   w_.salary);
             Assert.AreEqual(w.offMarketTime,            w_.offMarketTime);

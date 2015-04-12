@@ -9,15 +9,24 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class Worker : HasStats {
-    public static List<Worker> LoadAll() {
+public class Worker : SharedResource<Worker> {
+    public static List<AWorker> LoadAll() {
         // Load workers as _copies_ so any changes don't get saved to the actual resources.
         // This does not load special workers, since they are only added to available workers through effects.
         return Resources.LoadAll<Worker>("Workers/Bulk").ToList().Select(w => {
-                Worker worker = Instantiate(w) as Worker;
-                worker.name = w.name;
-                return worker;
+                return new AWorker(w);
         }).ToList();
+    }
+
+    public static new Worker Load(string name) {
+        Worker w = Resources.Load("Workers/Bulk/" + name) as Worker;
+        if (w == null) {
+            w = Resources.Load("Founders/" + name) as Worker;
+        }
+        if (w == null) {
+            w = Resources.Load("Founders/Cofounders/" + name) as Worker;
+        }
+        return w;
     }
 
     // The worker's avatar in the game world.
@@ -30,158 +39,16 @@ public class Worker : HasStats {
     // Later on, there are robotic workers.
     public bool robot = false;
 
-    public int Research(float bonus) {
-        return 1 + (int)((cleverness.value * productivity.value) + bonus)/10;
-    }
-
-    public float salary;
-    public float hiringFee {
-        get {
-            // For robots, the baseMinSalary is the one-time cost.
-            return robot ? baseMinSalary : salary * 0.1f;
-        }
-    }
-    public float monthlyPay {
-        get { return salary/12; }
-    }
-    public float score {
-        get {
-            return cleverness.value +
-                   creativity.value +
-                   charisma.value +
-                   productivity.value +
-                   happiness.value;
-        }
-    }
-
     public string bio;
     public string description;
     public string title;
 
-    // Returns a "clone" of this worker.
-    public Worker Clone() {
-        if (!robot) {
-            Worker w = ScriptableObject.CreateInstance<Worker>();
-            w.Init(name,
-                   title,
-                   baseMinSalary,
-                   happiness.baseValue,
-                   productivity.baseValue,
-                   charisma.baseValue,
-                   creativity.baseValue,
-                   cleverness.baseValue);
-            w.material = material;
-            w.salary = salary;
-            w.bio = bio;
-            w.description = description;
-            return w;
-        } else {
-            return null;
-        }
-    }
-
+    public float happiness;
+    public float productivity;
+    public float charisma;
+    public float creativity;
+    public float cleverness;
     public float baseMinSalary;
-    public float MinSalaryForCompany(Company c) {
-        float minSalary = baseMinSalary;
-        // If the employee is currently hired, i.e. has a salary > 0,
-        // their minimum acceptable salary depends on their happiness at their current company.
-        if (salary > 0) {
-            float adjustedDiff = 0;
-            if (c.workers.Count > 0) {
-                // First calculate the effect the current company has on their happiness.
-                float current = happiness.baseValue - happiness.value;
-
-                // Get the average happiness at the hiring company.
-                float avgHappiness = c.AggregateWorkerStat("Happiness")/c.workers.Count;
-
-                // Estimate how much happier this employee would be at the hiring company.
-                float diff = (avgHappiness - happiness.baseValue) - current;
-
-                // It's difficult changing jobs, so slightly lower the expected happiness.
-                adjustedDiff = diff - 10;
-            }
-
-            // TO DO tweak this.
-            minSalary = Mathf.Max(0, salary + (-adjustedDiff/10 * 1000));
-        }
-        return minSalary * GameManager.Instance.wageMultiplier;
-    }
-    public float MinSalaryForCompany() {
-        float minSalary = baseMinSalary;
-        if (salary > 0) {
-            float diff = 0;
-            diff = happiness.value - happiness.baseValue;
-            minSalary = Mathf.Max(0, salary + (diff/10 * 1000));
-        }
-        return minSalary * GameManager.Instance.wageMultiplier;
-    }
-
-    // How many weeks the worker is off the job market for.
-    // Recent offers the player has made.
-    public int offMarketTime;
-    public int recentPlayerOffers;
-
-    public Stat happiness;
-    public Stat productivity;
-    public Stat charisma;
-    public Stat creativity;
-    public Stat cleverness;
-
-    void Start() {
-        Init("Default Worker");
-    }
-    public Worker Init(string name_) {
-        return Init(name_, "Associate", 30000, 0, 0, 0, 0, 0);
-    }
-
-    public Worker Init(
-            string name_,
-            string title_,
-            float baseMinSalary_,
-            float happiness_,
-            float productivity_,
-            float charisma_,
-            float creativity_,
-            float cleverness_ ) {
-        name          = name_;
-        title         = title_;
-        salary        = 0;
-        baseMinSalary = baseMinSalary_;
-        happiness     = new Stat("Happiness",    happiness_);
-        productivity  = new Stat("Productivity", productivity_);
-        charisma      = new Stat("Charisma",     charisma_);
-        creativity    = new Stat("Creativity",   creativity_);
-        cleverness    = new Stat("Cleverness",   cleverness_);
-
-        offMarketTime = 0;
-        recentPlayerOffers = 0;
-
-        bio = Worker.BuildBio(this);
-        return this;
-    }
-
-    public override Stat StatByName(string name) {
-        switch (name) {
-            case "Happiness":
-                return happiness;
-            case "Productivity":
-                return productivity;
-            case "Charisma":
-                return charisma;
-            case "Creativity":
-                return creativity;
-            case "Cleverness":
-                return cleverness;
-            default:
-                return null;
-        }
-    }
-
-
-
-
-
-
 
     // WORKER BIO GENERATION ---------------------------
 
@@ -234,7 +101,7 @@ public class Worker : HasStats {
         List<string> bio = new List<string> { w.name };
 
         foreach (string stat in stats) {
-            float val = w.StatByName(stat).baseValue;
+            float val = w.StatByName(stat);
             string level = SkillLevel(val);
 
             if (prevVal >= 0) {
@@ -272,7 +139,22 @@ public class Worker : HasStats {
             return "high";
     }
 
-
+    public float StatByName(string name) {
+        switch (name) {
+            case "Happiness":
+                return happiness;
+            case "Productivity":
+                return productivity;
+            case "Charisma":
+                return charisma;
+            case "Creativity":
+                return creativity;
+            case "Cleverness":
+                return cleverness;
+            default:
+                return 0f;
+        }
+    }
 }
 
 

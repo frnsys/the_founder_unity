@@ -12,6 +12,10 @@ public class Lobby : SharedResource<Lobby> {
         return Resources.LoadAll<Lobby>("Lobbies");
     }
 
+    public static new Lobby Load(string name) {
+        return Resources.Load("Lobbies/" + name) as Lobby;
+    }
+
     public override string ToString() {
         return name;
     }

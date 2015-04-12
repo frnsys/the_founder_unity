@@ -166,7 +166,7 @@ public class UIManager : Singleton<UIManager> {
 
 
     void OnRecruitmentCompleted(Recruitment r) {
-        List<Worker> workers = GameManager.Instance.workerManager.WorkersForRecruitment(r);
+        List<AWorker> workers = GameManager.Instance.workerManager.WorkersForRecruitment(r);
         Alert(string.Format("Our recruiting has finished. We had {0} applicants. Here is the info we have on them.", workers.Count));
         GameObject window = NGUITools.AddChild(windowsPanel, hiringPrefab);
         window.GetComponent<UIWidget>().SetAnchor(windowsPanel.gameObject, 0, 0, 0, 0);

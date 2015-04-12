@@ -12,7 +12,7 @@ public class UIOnboarding : MonoBehaviour {
     public UILabel title;
 
     private GameManager gm;
-    private List<Founder> cofounders;
+    private List<Worker> cofounders;
 
     public GameObject verticalPrefab;
     public GameObject locationPrefab;
@@ -24,7 +24,7 @@ public class UIOnboarding : MonoBehaviour {
     public GameObject continueButton;
     public GameObject backButton;
 
-    private Founder selectedCofounder;
+    private Worker selectedCofounder;
     private Vertical selectedVertical;
     private Location selectedLocation;
 
@@ -40,7 +40,7 @@ public class UIOnboarding : MonoBehaviour {
 
     void OnEnable() {
         gm = GameManager.Instance;
-        cofounders = new List<Founder>(Resources.LoadAll<Founder>("Founders/Cofounders"));
+        cofounders = new List<Worker>(Resources.LoadAll<Worker>("Founders/Cofounders"));
 
         Intro();
 
@@ -192,7 +192,7 @@ public class UIOnboarding : MonoBehaviour {
         back = LocationSelection;
 
         ClearGrid();
-        foreach (Founder f in cofounders) {
+        foreach (Worker f in cofounders) {
             GameObject go = NGUITools.AddChild(grid.gameObject, cofounderPrefab);
             UIOnboardingCofounder ov = go.GetComponent<UIOnboardingCofounder>();
             ov.cofounder = f;

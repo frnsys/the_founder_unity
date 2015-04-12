@@ -139,7 +139,7 @@ public class EffectSet {
         }
 
         if (workerEffects != null) {
-            foreach (Worker worker in company.workers) {
+            foreach (AWorker worker in company.workers) {
                 worker.ApplyBuffs(workerEffects);
             }
         }
@@ -173,7 +173,7 @@ public class EffectSet {
         }
 
         if (workerEffects != null) {
-            foreach (Worker worker in company.workers) {
+            foreach (AWorker worker in company.workers) {
                 worker.RemoveBuffs(workerEffects);
             }
         }
@@ -188,12 +188,12 @@ public class EffectSet {
         // they degrade naturally via "forgetting".
     }
 
-    public void Apply(Worker worker) {
+    public void Apply(AWorker worker) {
         if (workerEffects != null)
             worker.ApplyBuffs(workerEffects);
     }
 
-    public void Remove(Worker worker) {
+    public void Remove(AWorker worker) {
         if (workerEffects != null)
             worker.RemoveBuffs(workerEffects);
     }

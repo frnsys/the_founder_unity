@@ -21,8 +21,8 @@ public class AICompany : ScriptableObject {
     public EffectSet bonuses;
     public List<Vertical> specialtyVerticals;
     public List<ProductType> specialtyProductTypes;
-    public List<Worker> workers;
-    public List<Founder> founders;
+    public List<AWorker> workers;
+    public Worker founder;
     public int sizeLimit = 5;
 
     public int designSkill;
@@ -54,8 +54,7 @@ public class AICompany : ScriptableObject {
     // Call `Init()` if creating a new AICompany from scratch.
     public new AICompany Init() {
         // Initialize stuff.
-        founders = new List<Founder>();
-        workers = new List<Worker>();
+        workers = new List<AWorker>();
         bonuses = new EffectSet();
 
         return this;
@@ -108,7 +107,7 @@ public class AICompany : ScriptableObject {
             avgROI = workers.Average(w => WorkerROI(w));
 
             // Review all hired workers (this should not include the founder(s)).
-            List<Worker> toFire = workers.Where(w => WorkerROI(w) < avgROI * 0.8f).ToList();
+            List<AWorker> toFire = workers.Where(w => WorkerROI(w) < avgROI * 0.8f).ToList();
             for (int i = toFire.Count - 1; i >= 0; i--) {
                 Debug.Log(string.Format("{0} is firing {1}...", name, workers[i].name));
                 FireWorker(toFire[i]);
@@ -118,7 +117,7 @@ public class AICompany : ScriptableObject {
         // AI companies will try to poach from other AI companies,
         // to drive up salaries.
         if (workers.Count < sizeLimit) {
-            List<Worker> candidates = new List<Worker>();
+            List<AWorker> candidates = new List<AWorker>();
             foreach (AICompany c in all.Where(x => x != this)) {
                 candidates.AddRange(c.workers.Where(w => WorkerROI(w) > avgROI));
             }
@@ -127,7 +126,7 @@ public class AICompany : ScriptableObject {
             );
 
             // Rank the candidates and hire one.
-            foreach (Worker w in candidates.OrderBy(w => WorkerROI(w))) {
+            foreach (AWorker w in candidates.OrderBy(w => WorkerROI(w))) {
                 if (workers.Count < sizeLimit) {
                     // Fake an offer.
                     // It may be too low, (in which case, no hiring happens).
@@ -147,16 +146,16 @@ public class AICompany : ScriptableObject {
     }
 
     // Calculate the "value" of a worker.
-    private float WorkerROI(Worker w) {
+    private float WorkerROI(AWorker w) {
         return (w.productivity.value + ((w.charisma.value + w.creativity.value + w.cleverness.value)/3))/(w.salary+w.happiness.value);
     }
 
-    public void FireWorker(Worker worker) {
+    public void FireWorker(AWorker worker) {
         worker.salary = 0;
         workers.Remove(worker);
     }
 
-    public bool HireWorker(Worker worker) {
+    public bool HireWorker(AWorker worker) {
         if (workers.Count < sizeLimit) {
             workers.Add(worker);
             return true;

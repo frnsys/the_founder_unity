@@ -27,7 +27,7 @@ public class UIResearch : MonoBehaviour {
     }
 
     private void ShowResearchers() {
-        foreach (Worker w in company.researchers) {
+        foreach (AWorker w in company.researchers) {
             GameObject reItem = NGUITools.AddChild(grid.gameObject, researcherPrefab);
             reItem.GetComponent<UIResearcher>().worker = w;
             SetupButton(reItem);
@@ -60,7 +60,7 @@ public class UIResearch : MonoBehaviour {
     public GameObject noWorkersNotice;
 
     public void AssignWorker(GameObject obj) {
-        Worker w = obj.GetComponent<UIResearcherItem>().worker;
+        AWorker w = obj.GetComponent<UIResearcherItem>().worker;
         // If the this slot is currently occupied
         // remove the existing worker.
         if (!currentItem.empty) {
@@ -84,13 +84,13 @@ public class UIResearch : MonoBehaviour {
             NGUITools.DestroyImmediate(go);
         }
 
-        IEnumerable<Worker> workers = company.workers.Where(w => !company.researchers.Contains(w));
+        IEnumerable<AWorker> workers = company.workers.Where(w => !company.researchers.Contains(w));
 
         if (workers.Count() == 0) {
             noWorkersNotice.SetActive(true);
         } else {
             noWorkersNotice.SetActive(false);
-            foreach (Worker w in workers) {
+            foreach (AWorker w in workers) {
                 GameObject reItem = NGUITools.AddChild(promptGrid.gameObject, workerPrefab);
                 reItem.GetComponent<UIResearcherItem>().worker = w;
                 reItem.GetComponent<UIDragScrollView>().scrollView = promptScrollView;

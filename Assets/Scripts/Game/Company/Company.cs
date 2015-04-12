@@ -23,7 +23,7 @@ public class Company : HasStats {
         cash = new Stat("Cash", 100000);
         research = new Stat("Research", 0);
         researchPoints = 0;
-        researchers = new List<Worker>();
+        researchers = new List<AWorker>();
         deathToll = 0;
         debtOwned = 0;
         taxesAvoided = 0;
@@ -36,8 +36,8 @@ public class Company : HasStats {
         office = Office.Type.Apartment;
 
         products = new List<Product>();
-        founders = new List<Founder>();
-        _workers = new List<Worker>();
+        founders = new List<AWorker>();
+        _workers = new List<AWorker>();
         _locations = new List<Location>();
         _verticals = new List<Vertical>();
         technologies = new List<Technology>();
@@ -67,17 +67,17 @@ public class Company : HasStats {
     // ===============================================
 
     [SerializeField]
-    private List<Worker> _workers;
-    public ReadOnlyCollection<Worker> workers {
+    private List<AWorker> _workers;
+    public ReadOnlyCollection<AWorker> workers {
         get { return _workers.AsReadOnly(); }
     }
-    public IEnumerable<Worker> allWorkers {
-        get { return _workers.Concat(founders.Cast<Worker>()); }
+    public IEnumerable<AWorker> allWorkers {
+        get { return _workers.Concat(founders.Cast<AWorker>()); }
     }
-    public IEnumerable<Worker> productWorkers {
-        get { return _workers.Where(w => !researchers.Contains(w)).Concat(founders.Cast<Worker>()); }
+    public IEnumerable<AWorker> productWorkers {
+        get { return _workers.Where(w => !researchers.Contains(w)).Concat(founders); }
     }
-    public List<Founder> founders;
+    public List<AWorker> founders;
 
     public int baseSizeLimit;
     public int sizeLimit {
@@ -89,8 +89,8 @@ public class Company : HasStats {
         get { return sizeLimit - _workers.Count; }
     }
 
-    static public event System.Action<Worker, Company> WorkerHired;
-    public bool HireWorker(Worker worker) {
+    static public event System.Action<AWorker, Company> WorkerHired;
+    public bool HireWorker(AWorker worker) {
         if (_workers.Count < sizeLimit && Pay(worker.hiringFee)) {
             // Apply existing worker effects.
             foreach (EffectSet es in activeEffects) {
@@ -108,8 +108,8 @@ public class Company : HasStats {
         return false;
     }
 
-    static public event System.Action<Worker, Company> WorkerFired;
-    public void FireWorker(Worker worker) {
+    static public event System.Action<AWorker, Company> WorkerFired;
+    public void FireWorker(AWorker worker) {
         // Remove existing worker effects.
         foreach (EffectSet es in activeEffects) {
             es.Remove(worker);
@@ -551,17 +551,17 @@ public class Company : HasStats {
     public Stat research;
     public int researchPoints;
     public List<Technology> technologies;
-    public List<Worker> researchers;
+    public List<AWorker> researchers;
 
     public void Research() {
-        foreach (Worker w in researchers) {
+        foreach (AWorker w in researchers) {
             researchPoints += w.Research(research.value);
         }
     }
-    public void AddResearcher(Worker w) {
+    public void AddResearcher(AWorker w) {
         researchers.Add(w);
     }
-    public void RemoveResearcher(Worker w) {
+    public void RemoveResearcher(AWorker w) {
         researchers.Remove(w);
     }
 

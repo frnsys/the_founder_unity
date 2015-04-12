@@ -62,7 +62,7 @@ public class ProductPlayer : MonoBehaviour {
 
     public float health;
     public float maxHealth;
-    public void Respawn(Worker w) {
+    public void Respawn(AWorker w) {
         StartCoroutine(UIAnimator.Scale(transform, 1f, 0, 4f,
             delegate() {
                 Setup(w);
@@ -70,7 +70,7 @@ public class ProductPlayer : MonoBehaviour {
         ));
     }
 
-    public void Setup(Worker w) {
+    public void Setup(AWorker w) {
         shield = false;
         renderer.material = w.material;
         maxHealth = w.productivity.value;

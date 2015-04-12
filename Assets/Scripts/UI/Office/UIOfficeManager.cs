@@ -70,7 +70,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         }
     }
 
-    void OnHired(Worker w, Company c) {
+    void OnHired(AWorker w, Company c) {
         if (c == company) {
             SpawnWorker(w);
 
@@ -89,7 +89,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         }
     }
 
-    public void SpawnWorker(Worker w) {
+    public void SpawnWorker(AWorker w) {
         // A lot of manual set up, there may be a better way.
         GameObject obj = Instantiate(employeePrefab) as GameObject;
         obj.transform.parent = employeeGroup.transform;
@@ -104,7 +104,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         UIEmployee uie = obj.GetComponent<UIEmployee>();
         uie.worker = w;
         w.avatar = obj;
-        Debug.Log(w.material);
         if (w.material != null)
             uie.GetComponent<MeshRenderer>().material = w.material;
 
@@ -118,7 +117,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         uie.HUDgroup = hud;
     }
 
-    void OnFired(Worker w, Company c) {
+    void OnFired(AWorker w, Company c) {
         if (c == company) {
             Destroy(w.avatar);
         }
@@ -152,7 +151,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         officeCameraController.ResetPosition();
 
         // Reposition workers in the new office.
-        foreach (Worker w in company.allWorkers) {
+        foreach (AWorker w in company.allWorkers) {
             if (w.avatar != null) {
                 w.avatar.SetActive(false);
                 RandomlyPlaceEmployee(w.avatar);
@@ -194,7 +193,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         data = d;
         company = d.company;
 
-        foreach (Worker worker in d.company.allWorkers) {
+        foreach (AWorker worker in d.company.allWorkers) {
             // Spawn the cofounder as a worker.
             SpawnWorker(worker);
         }

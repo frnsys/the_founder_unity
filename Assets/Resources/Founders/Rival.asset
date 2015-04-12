@@ -8,65 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Rival
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
   material: {fileID: 0}
   robot: 0
-  salary: 0
-  bio: 
+  bio: Aaron Koi needs a lot of motivation and reminds me of Eeyore. Aaron Koi is
+    not very imaginative and is hard to be around. Aaron Koi is quite dim.
   description: 
   title: Founder & CEO
+  happiness: 0
+  productivity: 0
+  charisma: 0
+  creativity: 0
+  cleverness: 0
   baseMinSalary: 0
-  offMarketTime: 0
-  recentPlayerOffers: 0
-  happiness:
-    baseValue: 20
-    _buffs: []
-  productivity:
-    baseValue: 20
-    _buffs: []
-  charisma:
-    baseValue: 20
-    _buffs: []
-  creativity:
-    baseValue: 20
-    _buffs: []
-  cleverness:
-    baseValue: 20
-    _buffs: []
-  bonuses:
-    unlocks:
-      productTypes: []
-      perks: []
-      locations: []
-      verticals: []
-      companies: []
-      specialProjects: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Outrage
-        value: 0
-      publicity:
-        name: Hype
-        value: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    forgettingRate: 0
-    spendingMultiplier: 0
-    wageMultiplier: 0
-    taxRate: 0
-    economicStability: 0
-    expansionCostMultiplier: 0
-    costMultiplier: 0
-    productEffects: []
-    workerEffects: []
-    aiCompany: {fileID: 0}
-    specialEffect: 0

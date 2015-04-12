@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Abbey Wuertz
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: 563cd5eee7f544e7b972d59b08ea04b6, type: 2}
+  robot: 0
+  bio: Abbey Wuertz isn't the sharpest tool in the shed and is a real bummer. Abbey
+    Wuertz is kind of lazy and has a weird smell. Abbey Wuertz is not very imaginative.
+  description: 
+  title: Programmer
+  happiness: 1
+  productivity: 1
+  charisma: 1
+  creativity: 1
+  cleverness: 1
+  baseMinSalary: 45000

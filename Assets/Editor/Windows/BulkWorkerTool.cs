@@ -34,7 +34,15 @@ public class BulkWorkerTool : EditorWindow {
                 float cleverness = float.Parse(worker_attrs[7]);
 
                 Worker worker = ScriptableObject.CreateInstance<Worker>();
-                worker.Init(name, title, baseMinSalary, happiness, productivity, charisma, creativity, cleverness);
+                worker.name = name;
+                worker.title = title;
+                worker.baseMinSalary = baseMinSalary;
+                worker.happiness = happiness;
+                worker.productivity = productivity;
+                worker.charisma = charisma;
+                worker.creativity = creativity;
+                worker.cleverness = cleverness;
+                worker.bio = Worker.BuildBio(worker);
 
                 worker.material = materials[UnityEngine.Random.Range(0, materials.Count - 1)];
                 AssetDatabase.CreateAsset(worker, "Assets/Resources/Workers/Bulk/" + name + ".asset");

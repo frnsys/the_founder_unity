@@ -13,7 +13,7 @@ public class UIAccounting : MonoBehaviour {
         company = gm.playerCompany;
 
         float monthlySalaries = 0;
-        foreach (Worker worker in company.workers) {
+        foreach (AWorker worker in company.workers) {
             monthlySalaries += worker.monthlyPay;
         }
         salaries.text = string.Format("Salaries: [c][EF4542]{0:C0}[-][/c]/month", monthlySalaries);

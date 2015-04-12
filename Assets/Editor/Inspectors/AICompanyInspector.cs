@@ -29,12 +29,7 @@ internal class AICompanyInspector : Editor {
         c.marketingSkill = EditorGUILayout.IntField("Marketing Skill", c.marketingSkill);
 
         EditorGUILayout.LabelField("Founder/CEO");
-        if (c.founders.Count == 0) {
-            Founder founder = (Founder)EditorGUILayout.ObjectField(null, typeof(Founder), false);
-            c.founders.Add(founder);
-        } else {
-            c.founders[0] = (Founder)EditorGUILayout.ObjectField(c.founders[0], typeof(Founder), false);
-        }
+        c.founder = (Worker)EditorGUILayout.ObjectField(c.founder, typeof(Worker), false);
 
         EditorGUILayout.Space();
 

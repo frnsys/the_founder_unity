@@ -447,7 +447,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    void WorkerHired(Worker w, Company c) {
+    void WorkerHired(AWorker w, Company c) {
         if (c == data.company) {
             if (!ob.HIRED_EMPLOYEE) {
                 StartCoroutine(Delay(delegate(GameObject obj) {

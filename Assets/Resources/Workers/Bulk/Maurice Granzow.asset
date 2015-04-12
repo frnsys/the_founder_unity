@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Maurice Granzow
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: a8032affc94154eb883a3431cf780b7a, type: 2}
+  robot: 0
+  bio: Maurice Granzow is hard to be around but is a diligent worker and is quite
+    dim. Maurice Granzow is a real bummer but has an eye for trends.
+  description: 
+  title: Designer
+  happiness: 4
+  productivity: 7
+  charisma: 2
+  creativity: 8
+  cleverness: 4
+  baseMinSalary: 345000

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using System;
 using System.Linq;
 using System.Threading;
@@ -99,7 +100,8 @@ namespace UnityTest
             e.workerEffects = new List<StatBuff>();
             e.workerEffects.Add(new StatBuff("Happiness", 100));
 
-            Worker w = ScriptableObject.CreateInstance<Worker>().Init("TESTWORKER");
+            Worker worker = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            AWorker w = new AWorker(worker);
             c.HireWorker(w);
             Assert.IsTrue(c.workers.Contains(w));
 

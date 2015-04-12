@@ -8,52 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Michael Manehl
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
-  salary: 0
-  bio: 
+  avatar: {fileID: 0}
+  material: {fileID: 0}
+  robot: 0
+  bio: Aaron Koi needs a lot of motivation and reminds me of Eeyore. Aaron Koi is
+    not very imaginative and is hard to be around. Aaron Koi is quite dim.
   description: 
   title: Founder & CEO
+  happiness: 0
+  productivity: 0
+  charisma: 0
+  creativity: 0
+  cleverness: 0
   baseMinSalary: 0
-  offMarketTime: 0
-  recentPlayerOffers: 0
-  happiness:
-    baseValue: 20
-    _buffs: []
-  productivity:
-    baseValue: 20
-    _buffs: []
-  charisma:
-    baseValue: 20
-    _buffs: []
-  creativity:
-    baseValue: 20
-    _buffs: []
-  cleverness:
-    baseValue: 20
-    _buffs: []
-  bonuses:
-    products: []
-    workers: []
-    company: []
-    unlocks:
-      prereqs:
-        productTypes: []
-        verticals: []
-        workers: []
-        events: []
-        items: []
-        stores: 
-        researchPoints: 0
-      productTypes: []
-      workers: []
-      events: []
-      items: []
-      stores: 
-      locations: []
-      verticals: []
-      characters: []
-      promos: []
-    opinionEvents: []

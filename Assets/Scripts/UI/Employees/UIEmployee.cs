@@ -12,7 +12,7 @@ public class UIEmployee : MonoBehaviour {
     public UILabel happinessLabel;
 
     [HideInInspector]
-    public Worker worker;
+    public AWorker worker;
 
     [SerializeField, HideInInspector]
     private State state = State.Wandering;

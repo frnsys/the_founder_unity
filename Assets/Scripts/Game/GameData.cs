@@ -68,7 +68,7 @@ public class GameData : ScriptableObject {
     public int lifetimeWeek;
 
     // The canonical pool of workers not at companies.
-    public List<Worker> unemployed;
+    public List<AWorker> unemployed;
 
     // Events which are waiting to resolve.
     public List<AGameEvent> specialEventsPool;

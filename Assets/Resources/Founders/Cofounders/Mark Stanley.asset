@@ -8,72 +8,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Mark Stanley
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
   material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
   robot: 0
-  salary: 0
-  bio: 
+  bio: Mark Stanley would be a great cultural fit but is very awkward. Mark Stanley
+    is a diligent worker but is not very imaginative and is quite dim.
   description: Comes from money, but can't do much. Will throw in some cash.
   title: 
+  happiness: 10
+  productivity: 5
+  charisma: 1
+  creativity: 1
+  cleverness: 1
   baseMinSalary: 0
-  offMarketTime: 0
-  recentPlayerOffers: 0
-  happiness:
-    baseValue: 10
-    acc: 0
-    _buffs: []
-  productivity:
-    baseValue: 5
-    acc: 0
-    _buffs: []
-  charisma:
-    baseValue: 1
-    acc: 0
-    _buffs: []
-  creativity:
-    baseValue: 1
-    acc: 0
-    _buffs: []
-  cleverness:
-    baseValue: 1
-    acc: 0
-    _buffs: []
-  bonuses:
-    unlocks:
-      productTypes: []
-      perks: []
-      locations: []
-      verticals: []
-      companies: []
-      specialProjects: []
-    cash: 50000
-    research:
-      name: Research
-      value: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-      publicity:
-        name: Hype
-        value: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    forgettingRate: 0
-    spendingMultiplier: 0
-    wageMultiplier: 0
-    taxRate: 0
-    economicStability: 0
-    expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
-    productEffects: []
-    workerEffects: []
-    aiCompany: {fileID: 0}
-    specialEffect: 0

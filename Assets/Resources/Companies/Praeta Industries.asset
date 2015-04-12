@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disabled: 0
   productLimit: 0
-  slogan: Desire is infinite.
+  slogan: Desire is infinite. So are we.
   description: A global leader in manufacturing.
   bonuses:
     unlocks:
@@ -52,8 +52,7 @@ MonoBehaviour:
   specialtyVerticals: []
   specialtyProductTypes: []
   workers: []
-  founders:
-  - {fileID: 11400000, guid: 21bd9dca23cd94c68acee7e20a2c217e, type: 2}
+  founder: {fileID: 11400000, guid: ce44d9fb91707425eb2cfb9167ae6558, type: 2}
   sizeLimit: 5
   designSkill: 0
   engineeringSkill: 0

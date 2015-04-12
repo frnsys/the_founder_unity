@@ -14,41 +14,41 @@ public class WorkerManager : MonoBehaviour {
         data = d;
     }
 
-    public IEnumerable<Worker> AvailableWorkers {
+    public IEnumerable<AWorker> AvailableWorkers {
         get {
             return AllWorkers.Where(w => w.offMarketTime == 0 && !GameManager.Instance.playerCompany.workers.Contains(w));
         }
     }
 
-    public Company EmployerForWorker(Worker w) {
+    public Company EmployerForWorker(AWorker w) {
         if (GameManager.Instance.playerCompany.workers.Contains(w)) {
             return GameManager.Instance.playerCompany;
         }
         return null;
     }
-    public AICompany AIEmployerForWorker(Worker w) {
+    public AICompany AIEmployerForWorker(AWorker w) {
         return GameManager.Instance.otherCompanies.Where(c => c.workers.Contains(w)).SingleOrDefault();
     }
 
     // The canonical pool of workers in the game.
-    public IEnumerable<Worker> AllWorkers {
+    public IEnumerable<AWorker> AllWorkers {
         get {
-            return new List<Worker>(data.unemployed).Concat(Employed);
+            return new List<AWorker>(data.unemployed).Concat(Employed);
         }
     }
 
-    public List<Worker> WorkersForRecruitment(Recruitment r) {
-        IEnumerable<Worker> ws = AvailableWorkers.Where(w => w.robot == r.robots && Random.value < 1 - Mathf.Abs(w.score - r.targetScore)/r.targetScore).OrderBy(i => Random.value);
+    public List<AWorker> WorkersForRecruitment(Recruitment r) {
+        IEnumerable<AWorker> ws = AvailableWorkers.Where(w => w.robot == r.robots && Random.value < 1 - Mathf.Abs(w.score - r.targetScore)/r.targetScore).OrderBy(i => Random.value);
         return ws.Take(Random.Range(1, ws.Count())).ToList();
     }
 
     // If a worker is at a company,
     // that instance is considered the canonical one.
-    public IEnumerable<Worker> Employed {
+    public IEnumerable<AWorker> Employed {
         get { return GameManager.Instance.otherCompanies.SelectMany(c => c.workers).Concat(GameManager.Instance.playerCompany.workers); }
     }
 
-    public bool HireWorker(Worker w) {
+    public bool HireWorker(AWorker w) {
         Company employer = EmployerForWorker(w);
         AICompany aiEmployer = AIEmployerForWorker(w);
 
@@ -73,7 +73,7 @@ public class WorkerManager : MonoBehaviour {
         return false;
     }
 
-    public bool HireWorker(Worker w, AICompany c) {
+    public bool HireWorker(AWorker w, AICompany c) {
         Company employer = EmployerForWorker(w);
         AICompany aiEmployer = AIEmployerForWorker(w);
 
@@ -98,11 +98,11 @@ public class WorkerManager : MonoBehaviour {
         return false;
     }
 
-    public void FireWorker(Worker w) {
+    public void FireWorker(AWorker w) {
         data.unemployed.Add(w);
         GameManager.Instance.playerCompany.FireWorker(w);
     }
-    public void FireWorker(Worker w, AICompany c) {
+    public void FireWorker(AWorker w, AICompany c) {
         data.unemployed.Add(w);
         c.FireWorker(w);
     }

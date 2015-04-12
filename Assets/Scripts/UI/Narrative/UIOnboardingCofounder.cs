@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class UIOnboardingCofounder : MonoBehaviour {
-    private Founder cofounder_;
-    public Founder cofounder {
+    private Worker cofounder_;
+    public Worker cofounder {
         get { return cofounder_; }
         set {
             cofounder_ = value;

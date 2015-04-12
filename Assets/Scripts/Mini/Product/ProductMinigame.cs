@@ -19,7 +19,7 @@ public class ProductMinigame : MonoBehaviour {
     private float aggCha = 0;
     private float aggPro = 0;
     private float aggHap = 0;
-    private List<Worker> workers;
+    private List<AWorker> workers;
     private Product product;
 
     public void Setup(Product p, Company c) {
@@ -31,7 +31,7 @@ public class ProductMinigame : MonoBehaviour {
 
         labors = new List<ProductLabor>();
         workers = c.productWorkers.ToList();
-        foreach (Worker w in workers) {
+        foreach (AWorker w in workers) {
             aggCre += w.creativity.value;
             aggCle += w.cleverness.value;
             aggCha += w.charisma.value;

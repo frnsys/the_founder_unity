@@ -8,7 +8,7 @@ public class UIManageWorkers : UIFullScreenPager {
 
     public GameObject workerItemPrefab;
 
-    private List<Worker> workers = new List<Worker>();
+    private List<AWorker> workers = new List<AWorker>();
     private Color buttonColor = new Color(1f, 0f, 0f);
     private Color otherButtonColor = new Color(0.42f, 0.33f, 0.97f);
 
@@ -20,7 +20,7 @@ public class UIManageWorkers : UIFullScreenPager {
 
     private void LoadWorkers() {
         ClearGrid();
-        foreach (Worker w in company.workers) {
+        foreach (AWorker w in company.workers) {
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
             UIWorker uiw = workerItem.GetComponent<UIWorker>();
             uiw.worker = w;
@@ -28,7 +28,7 @@ public class UIManageWorkers : UIFullScreenPager {
             workers.Add(w);
 
             // Setup the fire button.
-            Worker worker = w;
+            AWorker worker = w;
             UIEventListener.Get(uiw.button.gameObject).onClick += delegate(GameObject obj) {
                 FireWorker(worker);
             };
@@ -53,12 +53,12 @@ public class UIManageWorkers : UIFullScreenPager {
         Adjust();
     }
 
-    public void FireWorker(Worker worker) {
+    public void FireWorker(AWorker worker) {
         UIManager.Instance.Confirm("Are you sure want to fire " + worker.name + "?", delegate {
                 FireWorker_(worker);
         } , null);
     }
-    private void FireWorker_(Worker worker) {
+    private void FireWorker_(AWorker worker) {
         GameManager.Instance.playerCompany.FireWorker(worker);
 
         int i = workers.IndexOf(worker);
@@ -75,12 +75,12 @@ public class UIManageWorkers : UIFullScreenPager {
         UIManager.Instance.Alert("Your company is shit!!!1!");
     }
 
-    public void CloneWorker(Worker worker) {
+    public void CloneWorker(AWorker worker) {
         UIManager.Instance.Confirm("Are you sure want to clone " + worker.name + "?", delegate {
                 CloneWorker_(worker);
         } , null);
     }
-    private void CloneWorker_(Worker worker) {
+    private void CloneWorker_(AWorker worker) {
         if (worker.robot) {
             UIManager.Instance.Alert("You can't clone robots. It would violate digital copyright laws.");
             return;
@@ -88,7 +88,7 @@ public class UIManageWorkers : UIFullScreenPager {
             UIManager.Instance.Alert("You don't have room for anymore employees. Fire some.");
             return;
         } else {
-            Worker clone = worker.Clone();
+            AWorker clone = worker.Clone();
             gm.workerManager.HireWorker(clone);
         }
     }

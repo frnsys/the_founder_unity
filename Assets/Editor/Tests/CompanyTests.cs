@@ -18,7 +18,7 @@ namespace UnityTest
         private GameManager gm;
 
         private Company c;
-        private Worker worker;
+        private AWorker worker;
         private Perk perk;
         private Location startLoc;
 
@@ -42,8 +42,8 @@ namespace UnityTest
                 ProductType.Load("Virtual Reality")
             };
 
-            worker = ScriptableObject.CreateInstance<Worker>();
-            worker.Init("Franklin");
+            Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            worker = new AWorker(w);
 
             perk = (Perk)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestPerk.asset", typeof(Perk)));
         }
@@ -88,8 +88,8 @@ namespace UnityTest
 
 		[Test]
 		public void AggregateWorkerStats() {
-            Founder founder = ScriptableObject.CreateInstance<Founder>();
-            founder.Init("Jobs");
+            Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
+            AWorker founder = new AWorker(w);
             founder.charisma.baseValue = 10;
             founder.creativity.baseValue = 20;
             founder.cleverness.baseValue = 30;

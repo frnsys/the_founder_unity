@@ -8,72 +8,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f2366cce9a24b7e927a359588a5c18, type: 3}
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Beth Poush
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
   material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
   robot: 0
-  salary: 0
-  bio: 
+  bio: Beth Poush is not very imaginative and is hard to be around but would be a
+    great cultural fit and multitasks very effectively. Beth Poush isn't the sharpest
+    tool in the shed.
   description: Exceedingly charismatic. Could sell you anything.
   title: 
+  happiness: 10
+  productivity: 10
+  charisma: 4
+  creativity: 2
+  cleverness: 1
   baseMinSalary: 0
-  offMarketTime: 0
-  recentPlayerOffers: 0
-  happiness:
-    baseValue: 10
-    acc: 0
-    _buffs: []
-  productivity:
-    baseValue: 10
-    acc: 0
-    _buffs: []
-  charisma:
-    baseValue: 4
-    acc: 0
-    _buffs: []
-  creativity:
-    baseValue: 2
-    acc: 0
-    _buffs: []
-  cleverness:
-    baseValue: 1
-    acc: 0
-    _buffs: []
-  bonuses:
-    unlocks:
-      productTypes: []
-      perks: []
-      locations: []
-      verticals: []
-      companies: []
-      specialProjects: []
-    cash: 0
-    research:
-      name: Research
-      value: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-      publicity:
-        name: Hype
-        value: 0
-    gameEvent: {fileID: 0}
-    eventDelay: 0
-    eventProbability: 0
-    forgettingRate: 0
-    spendingMultiplier: 0
-    wageMultiplier: 0
-    taxRate: 0
-    economicStability: 0
-    expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
-    productEffects: []
-    workerEffects: []
-    aiCompany: {fileID: 0}
-    specialEffect: 0
