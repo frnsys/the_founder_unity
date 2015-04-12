@@ -51,7 +51,7 @@ public class GameData : ScriptableObject {
     public float costMultiplier;
 
     // Onboarding progress.
-    public NarrativeManager.OnboardingState onboardingState;
+    public NarrativeManager.OnboardingState ob;
     public NarrativeManager.OBS obs;
 
     // Other companies in the world.

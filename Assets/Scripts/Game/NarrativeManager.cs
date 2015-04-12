@@ -10,7 +10,6 @@ using System.Collections.Generic;
 
 public class NarrativeManager : Singleton<NarrativeManager> {
     private GameData data;
-    private OnboardingState ob;
 
     [System.Serializable]
     public struct OnboardingState {
@@ -44,8 +43,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     public void Load(GameData d) {
         data = d;
-        ob = data.onboardingState;
-        obs = data.obs;
     }
 
     // A message from your mentor.
@@ -135,7 +132,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         GAME_GOALS,
         RESEARCH
     }
-    private OBS obs;
 
     // Setup the starting game state for onboarding.
     public void InitializeOnboarding() {
@@ -177,7 +173,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     void LaunchedProduct(Product p, Company c, float score) {
         ProductRecipe r = p.Recipe;
         // Product hints appear sporadically, and only after onboarding is finished.
-        if (c == data.company && Random.value < 0.4f && obs == OBS.GAME_GOALS) {
+        if (c == data.company && Random.value < 0.4f && data.obs == OBS.GAME_GOALS) {
             if (score < 0.6f) {
                 switch(r.primaryFeature) {
                     case ProductRecipe.Feature.Design:
@@ -272,7 +268,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     public void Intro() {
-        obs = OBS.GAME_INTRO;
+        data.obs = OBS.GAME_INTRO;
         MentorMessages(new string[] {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
@@ -302,8 +298,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     // Checks if it is appropriate to execute the specified stage,
     private bool Stage(OBS stage) {
-        if (obs == stage - 1) {
-            obs = stage;
+        if (data.obs == stage - 1) {
+            data.obs = stage;
             return true;
         }
         return false;
@@ -361,7 +357,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 break;
 
             case "Research":
-                if (!ob.RESEARCH_OPENED) {
+                if (!data.ob.RESEARCH_OPENED) {
                     MentorMessages(new string[] {
                         string.Format("Here you can assign your employees as {0}.", ConceptHighlight("researchers")),
                         "A researcher's skill spends on their cleverness and productivity.",
@@ -370,7 +366,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         string.Format("New technologies can unlock new {0}, {1}, and provide other bonuses.", ConceptHighlight("product types"), ConceptHighlight("special projects")),
                         "Don't neglect research! Stay ahead of the competition!"
                     });
-                    ob.RESEARCH_OPENED = true;
+                    data.ob.RESEARCH_OPENED = true;
                 }
                 break;
 
@@ -433,7 +429,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     uim.statusBar.researchLabel.gameObject.SetActive(true);
                 }, 6f));
                 Product.Completed -= CompletedProduct;
-            } else if (c.products.Count > 2 && !ob.LOCATIONS_UNLOCKED) {
+            } else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
                 MentorMessages(new string[] {
                     "It's time to start thinking about expanding to new locations.",
                     string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
@@ -442,23 +438,23 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
                 });
                 UIManager.Instance.menu.Activate("Locations");
-                ob.LOCATIONS_UNLOCKED = true;
+                data.ob.LOCATIONS_UNLOCKED = true;
             }
         }
     }
 
     void WorkerHired(AWorker w, Company c) {
         if (c == data.company) {
-            if (!ob.HIRED_EMPLOYEE) {
+            if (!data.ob.HIRED_EMPLOYEE) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Great, you have an employee now. See if you can build a new, better product."
                     });
                     UIManager.Instance.menu.Deactivate("New Product");
                     UIManager.Instance.menu.Activate("New Product");
-                    ob.HIRED_EMPLOYEE = true;
+                    data.ob.HIRED_EMPLOYEE = true;
                 }, 1f));
-            } else if (!ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
+            } else if (!data.ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         string.Format("Now that you have a few employees, you want to maximize their {0} and {1}.", ConceptHighlight("productivity"), ConceptHighlight("happiness")),
@@ -466,20 +462,20 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         string.Format("A great way to accomplish this is through {0}. You can purchase and upgrade perks for your company through the {0} menu item.", ConceptHighlight("perks"), MenuHighlight("Perks"))
                     });
                     UIManager.Instance.menu.Activate("Perks");
-                    ob.PERKS_UNLOCKED = true;
+                    data.ob.PERKS_UNLOCKED = true;
                 }, 6f));
             }
         }
     }
 
     void PromoCompleted(Promo p) {
-        if (!ob.HYPE_MINIGAME) {
+        if (!data.ob.HYPE_MINIGAME) {
             MentorMessages(new string[] {
                 "Completing promotional campaigns gives you the opportunity to garner some allies in the media and hype up your company.",
                 string.Format("{0} the puck and hit some {1} to get them on your side.", InteractHighlight("Flick"), ConceptHighlight("influencers")),
                 "More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
             });
-            ob.HYPE_MINIGAME = true;
+            data.ob.HYPE_MINIGAME = true;
         }
     }
 
@@ -504,24 +500,24 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                     break;
                 default:
-                    if (!ob.VERTICALS_UNLOCKED) {
+                    if (!data.ob.VERTICALS_UNLOCKED) {
                         MentorMessages(new string[] {
                             "Now that you've unlocked another vertical, you should consider saving up some capital to expand into it.",
                             string.Format("{0} provide access to new product types and technologies so you can {1} even further. Manage your verticals in the {2} menu item.", ConceptHighlight("Verticals"), SpecialHighlight("innovate"), MenuHighlight("Verticals"))
                         });
                         UIManager.Instance.menu.Activate("Verticals");
-                        ob.VERTICALS_UNLOCKED = true;
+                        data.ob.VERTICALS_UNLOCKED = true;
                     }
                     break;
             }
 
-        } else if (us.specialProjects.Count > 0 && !ob.SPECIALPROJECTS_UNLOCKED) {
+        } else if (us.specialProjects.Count > 0 && !data.ob.SPECIALPROJECTS_UNLOCKED) {
             MentorMessages(new string[] {
                 string.Format("Your first special project is available. {0} are one-off products which can have world-changing effects. In order to build one, you need to have built some prerequisite products beforehand.", ConceptHighlight("Special projects")),
                 string.Format("Manage special projects in the {0} menu item.", MenuHighlight("Special Projects"))
             });
             UIManager.Instance.menu.Activate("Special Projects");
-            ob.SPECIALPROJECTS_UNLOCKED = true;
+            data.ob.SPECIALPROJECTS_UNLOCKED = true;
         }
     }
 
@@ -536,7 +532,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     void Synergy() {
-        if (!ob.SYNERGY) {
+        if (!data.ob.SYNERGY) {
             StartCoroutine(Delay(delegate(GameObject obj) {
                 MentorMessages(new string[] {
                     string.Format("Wow! That product you just released is {0} with another one in The Market.", SpecialHighlight("synergetic")),
@@ -544,7 +540,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     "Use your Entrepeneurial Sense and try to figure out what combinations work best!"
                 });
             }, 6f));
-            ob.SYNERGY = true;
+            data.ob.SYNERGY = true;
             Company.Synergy -= Synergy;
         }
     }
