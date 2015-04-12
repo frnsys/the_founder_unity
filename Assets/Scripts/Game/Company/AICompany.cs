@@ -14,7 +14,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public class AICompany : ScriptableObject {
     public bool disabled = false;
-    public int productLimit = 5;
 
     public string slogan;
     public string description;
@@ -147,7 +146,7 @@ public class AICompany : ScriptableObject {
 
     // Calculate the "value" of a worker.
     private float WorkerROI(AWorker w) {
-        return (w.productivity.value + ((w.charisma.value + w.creativity.value + w.cleverness.value)/3))/(w.salary+w.happiness.value);
+        return (w.productivity + ((w.charisma + w.creativity + w.cleverness)/3))/(w.salary+w.happiness);
     }
 
     public void FireWorker(AWorker worker) {

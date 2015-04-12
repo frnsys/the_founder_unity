@@ -126,15 +126,15 @@ public class Company : HasStats {
     public float AggregateWorkerStat(string stat) {
         switch (stat) {
             case "Charisma":
-                return allWorkers.Slinq().Select(x => x.charisma.value).Sum();
+                return allWorkers.Slinq().Select(x => x.charisma).Sum();
             case "Cleverness":
-                return allWorkers.Slinq().Select(x => x.cleverness.value).Sum();
+                return allWorkers.Slinq().Select(x => x.cleverness).Sum();
             case "Creativity":
-                return allWorkers.Slinq().Select(x => x.creativity.value).Sum();
+                return allWorkers.Slinq().Select(x => x.creativity).Sum();
             case "Productivity":
-                return allWorkers.Slinq().Select(x => x.productivity.value).Sum();
+                return allWorkers.Slinq().Select(x => x.productivity).Sum();
             case "Happiness":
-                return allWorkers.Slinq().Select(x => x.happiness.value).Sum();
+                return allWorkers.Slinq().Select(x => x.happiness).Sum();
             default:
                 return 0;
         }

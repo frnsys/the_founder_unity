@@ -73,7 +73,7 @@ public class ProductPlayer : MonoBehaviour {
     public void Setup(AWorker w) {
         shield = false;
         renderer.material = w.material;
-        maxHealth = w.productivity.value;
+        maxHealth = w.productivity;
         health = maxHealth;
         StartCoroutine(UIAnimator.Bloop(transform, 0, 1f, 4f));
         dead = false;

@@ -235,11 +235,11 @@ namespace UnityTest
 
                 Assert.AreEqual(f.name,                     f_.name);
                 Assert.AreEqual(f.salary,                   f_.salary);
-                Assert.AreEqual(f.happiness.baseValue,      f_.happiness.baseValue);
-                Assert.AreEqual(f.productivity.baseValue,   f_.productivity.baseValue);
-                Assert.AreEqual(f.charisma.baseValue,       f_.charisma.baseValue);
-                Assert.AreEqual(f.creativity.baseValue,     f_.creativity.baseValue);
-                Assert.AreEqual(f.creativity.baseValue,     f_.creativity.baseValue);
+                Assert.AreEqual(f.happiness,                f_.happiness);
+                Assert.AreEqual(f.productivity,             f_.productivity);
+                Assert.AreEqual(f.charisma,                 f_.charisma);
+                Assert.AreEqual(f.creativity,               f_.creativity);
+                Assert.AreEqual(f.creativity,               f_.creativity);
             }
 
             CompareUnlockSets(gd.unlocked,               data.unlocked);
@@ -296,23 +296,23 @@ namespace UnityTest
             Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
             AWorker worker = new AWorker(w);
             worker.salary                 = stat;
-            worker.happiness.baseValue    = stat;
-            worker.productivity.baseValue = stat;
-            worker.charisma.baseValue     = stat;
-            worker.creativity.baseValue   = stat;
-            worker.cleverness.baseValue   = stat;
+            worker.happiness              = stat;
+            worker.productivity           = stat;
+            worker.charisma               = stat;
+            worker.creativity             = stat;
+            worker.cleverness             = stat;
             return worker;
         }
 
         private AWorker CreateFounder(string name, int stat) {
             Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
             AWorker founder = new AWorker(w);
-            founder.salary                 = stat;
-            founder.happiness.baseValue    = stat;
-            founder.productivity.baseValue = stat;
-            founder.charisma.baseValue     = stat;
-            founder.creativity.baseValue   = stat;
-            founder.cleverness.baseValue   = stat;
+            founder.salary                = stat;
+            founder.happiness             = stat;
+            founder.productivity          = stat;
+            founder.charisma              = stat;
+            founder.creativity            = stat;
+            founder.cleverness            = stat;
             return founder;
         }
 
@@ -389,11 +389,11 @@ namespace UnityTest
             Assert.AreEqual(w.salary,                   w_.salary);
             Assert.AreEqual(w.offMarketTime,            w_.offMarketTime);
             Assert.AreEqual(w.recentPlayerOffers,       w_.recentPlayerOffers);
-            Assert.AreEqual(w.happiness.baseValue,      w_.happiness.baseValue);
-            Assert.AreEqual(w.productivity.baseValue,   w_.productivity.baseValue);
-            Assert.AreEqual(w.charisma.baseValue,       w_.charisma.baseValue);
-            Assert.AreEqual(w.creativity.baseValue,     w_.creativity.baseValue);
-            Assert.AreEqual(w.creativity.baseValue,     w_.creativity.baseValue);
+            Assert.AreEqual(w.happiness,                w_.happiness);
+            Assert.AreEqual(w.productivity,             w_.productivity);
+            Assert.AreEqual(w.charisma,                 w_.charisma);
+            Assert.AreEqual(w.creativity,               w_.creativity);
+            Assert.AreEqual(w.creativity,               w_.creativity);
         }
     }
 }

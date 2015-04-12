@@ -32,11 +32,11 @@ public class ProductMinigame : MonoBehaviour {
         labors = new List<ProductLabor>();
         workers = c.productWorkers.ToList();
         foreach (AWorker w in workers) {
-            aggCre += w.creativity.value;
-            aggCle += w.cleverness.value;
-            aggCha += w.charisma.value;
-            aggPro += w.productivity.value;
-            aggHap += w.happiness.value;
+            aggCre += w.creativity;
+            aggCle += w.cleverness;
+            aggCha += w.charisma;
+            aggPro += w.productivity;
+            aggHap += w.happiness;
             GameObject live = NGUITools.AddChild(livesGrid.gameObject, livePrefab);
             live.transform.Find("Object").renderer.material = w.material;
         }

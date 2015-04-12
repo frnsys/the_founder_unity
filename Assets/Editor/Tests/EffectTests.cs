@@ -105,10 +105,10 @@ namespace UnityTest
             c.HireWorker(w);
             Assert.IsTrue(c.workers.Contains(w));
 
-            float start = w.happiness.value;
+            float start = w.happiness;
 
             e.Apply(c);
-            Assert.AreEqual(w.happiness.value, start + e.workerEffects[0].value);
+            Assert.AreEqual(w.happiness, start + e.workerEffects[0].value);
         }
 
         [Test]

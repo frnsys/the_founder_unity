@@ -9,7 +9,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class AWorker : HasStats {
+public class AWorker {
     [SerializeField]
     private Worker worker;
 
@@ -18,7 +18,7 @@ public class AWorker : HasStats {
     public GameObject avatar;
 
     public int Research(float bonus) {
-        return 1 + (int)((cleverness.value * productivity.value) + bonus)/10;
+        return 1 + (int)((cleverness * productivity) + bonus)/10;
     }
 
     public float salary;
@@ -33,11 +33,11 @@ public class AWorker : HasStats {
     }
     public float score {
         get {
-            return cleverness.value +
-                   creativity.value +
-                   charisma.value +
-                   productivity.value +
-                   happiness.value;
+            return cleverness +
+                   creativity +
+                   charisma +
+                   productivity +
+                   happiness;
         }
     }
 
@@ -61,13 +61,13 @@ public class AWorker : HasStats {
             float adjustedDiff = 0;
             if (c.workers.Count > 0) {
                 // First calculate the effect the current company has on their happiness.
-                float current = happiness.baseValue - happiness.value;
+                float current = worker.happiness - happiness;
 
                 // Get the average happiness at the hiring company.
                 float avgHappiness = c.AggregateWorkerStat("Happiness")/c.workers.Count;
 
                 // Estimate how much happier this employee would be at the hiring company.
-                float diff = (avgHappiness - happiness.baseValue) - current;
+                float diff = (avgHappiness - worker.happiness) - current;
 
                 // It's difficult changing jobs, so slightly lower the expected happiness.
                 adjustedDiff = diff - 10;
@@ -82,7 +82,7 @@ public class AWorker : HasStats {
         float minSalary = worker.baseMinSalary;
         if (salary > 0) {
             float diff = 0;
-            diff = happiness.value - happiness.baseValue;
+            diff = happiness - worker.happiness;
             minSalary = Mathf.Max(0, salary + (diff/10 * 1000));
         }
         return minSalary * GameManager.Instance.wageMultiplier;
@@ -93,20 +93,20 @@ public class AWorker : HasStats {
     public int offMarketTime;
     public int recentPlayerOffers;
 
-    public Stat happiness;
-    public Stat productivity;
-    public Stat charisma;
-    public Stat creativity;
-    public Stat cleverness;
+    public float happiness;
+    public float productivity;
+    public float charisma;
+    public float creativity;
+    public float cleverness;
 
     public AWorker(Worker w) {
         worker = w;
 
-        happiness     = new Stat("Happiness",    w.happiness);
-        productivity  = new Stat("Productivity", w.productivity);
-        charisma      = new Stat("Charisma",     w.charisma);
-        creativity    = new Stat("Creativity",   w.creativity);
-        cleverness    = new Stat("Cleverness",   w.cleverness);
+        happiness     = w.happiness;
+        productivity  = w.productivity;
+        charisma      = w.charisma;
+        creativity    = w.creativity;
+        cleverness    = w.cleverness;
 
         offMarketTime = 0;
         recentPlayerOffers = 0;
@@ -132,7 +132,7 @@ public class AWorker : HasStats {
         get { return worker.bio; }
     }
 
-    public override Stat StatByName(string name) {
+    public float StatByName(string name) {
         switch (name) {
             case "Happiness":
                 return happiness;
@@ -145,10 +145,43 @@ public class AWorker : HasStats {
             case "Cleverness":
                 return cleverness;
             default:
-                return null;
+                return 0;
         }
     }
 
+    public void ApplyBuffs(List<StatBuff> buffs) {
+        foreach (StatBuff buff in buffs) {
+            ModifyStat(buff.name, buff.value);
+        }
+    }
+
+    public void RemoveBuffs(List<StatBuff> buffs) {
+        foreach (StatBuff buff in buffs) {
+            ModifyStat(buff.name, buff.value);
+        }
+    }
+
+    public void ModifyStat(string name, float val) {
+        switch (name) {
+            case "Happiness":
+                happiness += val;
+                break;
+            case "Productivity":
+                productivity += val;
+                break;
+            case "Charisma":
+                charisma += val;
+                break;
+            case "Creativity":
+                creativity += val;
+                break;
+            case "Cleverness":
+                cleverness += val;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 

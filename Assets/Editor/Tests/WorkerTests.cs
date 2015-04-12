@@ -45,8 +45,8 @@ namespace UnityTest
         [Test]
         public void WorkerConstructor() {
             Assert.IsNotNull(worker);
-            Assert.AreEqual(worker.happiness.value, 0);
-            Assert.AreEqual(worker.productivity.value, 0);
+            Assert.AreEqual(worker.happiness, 0);
+            Assert.AreEqual(worker.productivity, 0);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace UnityTest
 
             // Emulate the worker being hired
             worker.salary = 10000;
-            worker.happiness.baseValue = 10;
+            worker.happiness = 10;
 
             // The min salary should be higher now.
             Assert.IsTrue(worker.MinSalaryForCompany(gd.company) > worker.baseMinSalary);
@@ -73,20 +73,20 @@ namespace UnityTest
             Assert.AreEqual(gm.playerCompany.workers.Count, 1);
 
             // Current employee is unhappy.
-            w.happiness.baseValue = 0;
+            w.happiness = 0;
 
             // Emulate the worker being hired
             // Happy at current job.
             worker.baseMinSalary = 1;
             worker.salary = 1;
-            worker.happiness.baseValue = 10;
+            worker.happiness = 10;
 
             // The min salary should be higher since the worker expects to be
             // less happy at the new company.
             Assert.IsTrue(worker.MinSalaryForCompany(gd.company) > worker.baseMinSalary);
 
             // Current employee is happy.
-            w.happiness.baseValue = 40;
+            w.happiness = 40;
 
             // The min salary should be lower since the worker expects to be happier
             // at the new company.

@@ -85,7 +85,7 @@ public class UIEmployee : MonoBehaviour {
 
     IEnumerator Working() {
         while(true) {
-            float happy = worker.happiness.value;
+            float happy = worker.happiness;
             if (happy >= 20) {
                 happinessLabel.text = ":D";
                 happinessLabel.color = happyColor;

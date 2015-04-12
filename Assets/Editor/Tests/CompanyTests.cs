@@ -69,7 +69,7 @@ namespace UnityTest
 		public void ManageWorkers() {
           Assert.AreEqual(c.workers.Count, 0);
 
-          worker.creativity.baseValue = 20;
+          worker.creativity = 20;
 
           c.baseSizeLimit = 0;
           c.HireWorker(worker);
@@ -91,18 +91,18 @@ namespace UnityTest
 		public void AggregateWorkerStats() {
             Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
             AWorker founder = new AWorker(w);
-            founder.charisma.baseValue = 10;
-            founder.creativity.baseValue = 20;
-            founder.cleverness.baseValue = 30;
-            founder.happiness.baseValue = 40;
-            founder.productivity.baseValue = 50;
+            founder.charisma = 10;
+            founder.creativity = 20;
+            founder.cleverness = 30;
+            founder.happiness = 40;
+            founder.productivity = 50;
             c.founders.Add(founder);
 
-            worker.charisma.baseValue = 1;
-            worker.creativity.baseValue = 2;
-            worker.cleverness.baseValue = 3;
-            worker.happiness.baseValue = 4;
-            worker.productivity.baseValue = 5;
+            worker.charisma = 1;
+            worker.creativity = 2;
+            worker.cleverness = 3;
+            worker.happiness = 4;
+            worker.productivity = 5;
             c.HireWorker(worker);
 
             Assert.AreEqual(c.AggregateWorkerStat("Charisma"), 11);
