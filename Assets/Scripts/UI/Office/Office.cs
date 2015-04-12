@@ -54,7 +54,7 @@ public class Office : MonoBehaviour {
         Company.PerkBought -= ShowPerk;
     }
 
-    public void ShowPerk(Perk perk) {
+    public void ShowPerk(APerk perk) {
         PerkDisplay pd = perkDisplays.FirstOrDefault(p => p.perk.name == perk.name);
         if (pd.perk != null) {
             // Get the current perk upgrade level.

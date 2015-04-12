@@ -4,15 +4,16 @@ using System.Collections;
 public class UIPerk : UIEffectItem {
     private static Color upgradeColor = new Color(1f, 0.9f, 0.53f);
 
-    private Perk _perk;
-    public Perk perk {
+    private APerk _perk;
+    public APerk perk {
         get { return _perk; }
         set {
-            _perk = value.Clone();
+            _perk = value;
 
             // Check if the perk is already owned.
-            Perk ownedPerk = Perk.Find(_perk, company.perks);
+            APerk ownedPerk = company.OwnedPerk(_perk);
             if (ownedPerk == null) {
+                _perk = ownedPerk;
                 SetupUnownedPerk();
             } else {
                 SetupOwnedPerk();
@@ -92,7 +93,7 @@ public class UIPerk : UIEffectItem {
     }
 
     void UpgradedPerk() {
-        _perk = Perk.Find(_perk, company.perks);
+        _perk = company.OwnedPerk(_perk);
         SetupOwnedPerk();
         DisplayPerk();
     }

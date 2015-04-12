@@ -19,7 +19,7 @@ namespace UnityTest
 
         private Company c;
         private AWorker worker;
-        private Perk perk;
+        private APerk perk;
         private Location startLoc;
 
         private List<ProductType> pts;
@@ -45,7 +45,8 @@ namespace UnityTest
             Worker w = (Worker)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestWorker.asset", typeof(Worker)));
             worker = new AWorker(w);
 
-            perk = (Perk)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestPerk.asset", typeof(Perk)));
+            Perk p = (Perk)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestPerk.asset", typeof(Perk)));
+            perk = new APerk(p);
         }
 
         [TearDown]

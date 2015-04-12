@@ -46,7 +46,7 @@ namespace UnityTest
                 data.company.publicity.baseValue = 300;
                 data.company.office              = Office.Type.Office;
 
-                data.company.perks               = new List<Perk>() {
+                data.company.perks               = new List<APerk>() {
                     CreatePerk(0),
                     CreatePerk(1)
                 };
@@ -175,8 +175,8 @@ namespace UnityTest
             Assert.AreEqual(gd.company.markets,            data.company.markets);
 
             for (int i=0; i<gd.company.perks.Count; i++) {
-                Perk p = gd.company.perks[i];
-                Perk p_ = data.company.perks[i];
+                APerk p = gd.company.perks[i];
+                APerk p_ = data.company.perks[i];
 
                 Assert.AreEqual(p.name, p_.name);
                 Assert.AreEqual(p.upgradeLevel, p_.upgradeLevel);
@@ -338,9 +338,10 @@ namespace UnityTest
             return product;
         }
 
-        private Perk CreatePerk(int i) {
-            Perk p = ScriptableObject.CreateInstance<Perk>();
-            p.name = string.Format("PERK{0}", i);
+        private APerk CreatePerk(int i) {
+            Perk perk = (Perk)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestPerk.asset", typeof(Perk)));
+            perk.name = string.Format("PERK{0}", i);
+            APerk p = new APerk(perk);
             p.upgradeLevel = i;
             return p;
         }

@@ -3,8 +3,8 @@ using System;
 using System.Collections;
 
 public class UIUpgradePerk : UIEffectAlert {
-    private Perk _perk;
-    public Perk perk {
+    private APerk _perk;
+    public APerk perk {
         get { return _perk; }
         set {
             _perk = value;
@@ -31,7 +31,7 @@ public class UIUpgradePerk : UIEffectAlert {
 
     public Action callback;
     public void Upgrade() {
-        bool upgraded =GameManager.Instance.playerCompany.UpgradePerk(perk);
+        bool upgraded = GameManager.Instance.playerCompany.UpgradePerk(perk);
 
         if (!upgraded)
             UIManager.Instance.Alert("Not enough cash.");

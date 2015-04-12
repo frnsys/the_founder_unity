@@ -32,7 +32,7 @@ public class Company : HasStats {
         annualRevenue = 0;
         annualCosts = 0;
         baseSizeLimit = 5;
-        perks = new List<Perk>();
+        perks = new List<APerk>();
         office = Office.Type.Apartment;
 
         products = new List<Product>();
@@ -486,11 +486,10 @@ public class Company : HasStats {
     // ===============================================
     // Perk Management ===============================
     // ===============================================
-    public List<Perk> perks;
+    public List<APerk> perks;
 
-    static public event System.Action<Perk> PerkBought;
-    public bool BuyPerk(Perk perk) {
-        perk = perk.Clone();
+    static public event System.Action<APerk> PerkBought;
+    public bool BuyPerk(APerk perk) {
         if (Pay(perk.cost)) {
             perks.Add(perk);
             perk.upgradeLevel = 0;
@@ -503,8 +502,7 @@ public class Company : HasStats {
         return false;
     }
 
-    public bool UpgradePerk(Perk perk) {
-        perk = Perk.Find(perk, perks);
+    public bool UpgradePerk(APerk perk) {
         if (Pay(perk.next.cost)) {
             // First unapply the previous upgrade's effects.
             perk.effects.Remove(this);
@@ -520,8 +518,11 @@ public class Company : HasStats {
         return false;
     }
 
-    public void RemovePerk(Perk perk) {
-        perk = Perk.Find(perk, perks);
+    public APerk OwnedPerk(APerk perk) {
+        return perks.Where(p => p.name == perk.name).SingleOrDefault();
+    }
+
+    public void RemovePerk(APerk perk) {
         perks.Remove(perk);
         perk.effects.Remove(this);
     }

@@ -160,7 +160,7 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         }
 
         // Load existing perks for the new office.
-        foreach (Perk p in company.perks) {
+        foreach (APerk p in company.perks) {
             currentOffice.ShowPerk(p);
         }
 

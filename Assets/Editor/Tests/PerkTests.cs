@@ -16,7 +16,7 @@ namespace UnityTest
         private GameData gd;
         private GameManager gm;
 
-        private Perk p = null;
+        private APerk p = null;
         private Technology t = null;
         private Perk.Upgrade u1;
         private Perk.Upgrade u2;
@@ -32,7 +32,8 @@ namespace UnityTest
             c = gd.company;
             c.office = Office.Type.Apartment;
 
-            p = ScriptableObject.CreateInstance<Perk>();
+            Perk perk = (Perk)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestPerk.asset", typeof(Perk)));
+            p = new APerk(perk);
 
             t = ScriptableObject.CreateInstance<Technology>();
 
