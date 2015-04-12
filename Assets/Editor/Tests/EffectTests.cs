@@ -86,13 +86,15 @@ namespace UnityTest
 
         [Test]
         public void EnablingAICompanies() {
-            AICompany aic = ScriptableObject.CreateInstance<AICompany>();
+            AICompany a = (AICompany)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestAICompanyDisabled.asset", typeof(AICompany)));
+            AAICompany aic = new AAICompany(a);
             aic.disabled = true;
-            AICompany.all = new List<AICompany>() { aic };
+            AICompany.all = new List<AAICompany>() { aic };
 
-            e.aiCompany = aic;
+            e.aiCompany = aic.aiCompany;
             e.Apply(c);
             Assert.IsFalse(aic.disabled);
+            Assert.IsTrue(a.disabled);
         }
 
         [Test]

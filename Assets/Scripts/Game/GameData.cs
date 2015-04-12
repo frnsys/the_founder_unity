@@ -55,7 +55,7 @@ public class GameData : ScriptableObject {
     public NarrativeManager.OBS obs;
 
     // Other companies in the world.
-    public List<AICompany> otherCompanies;
+    public List<AAICompany> otherCompanies;
 
     // Time
     public Month month;
@@ -88,7 +88,7 @@ public class GameData : ScriptableObject {
     void Start() {
         // Initialize editable stuff for the inspector.
         unlocked       = new UnlockSet();
-        otherCompanies = new List<AICompany>();
+        otherCompanies = new List<AAICompany>();
     }
     public static GameData New(string companyName) {
         Debug.Log("Creating new game data!");

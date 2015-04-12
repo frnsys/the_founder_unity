@@ -273,14 +273,15 @@ namespace UnityTest
 
         [Test]
         public void MiniCompanyAcquisition() {
-            AICompany aic = ScriptableObject.CreateInstance<AICompany>();
-            AICompany.all = new List<AICompany>() { aic };
+            AICompany a = (AICompany)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestAICompany.asset", typeof(AICompany)));
+            AAICompany aic = new AAICompany(a);
+            AICompany.all = new List<AAICompany>() { aic };
 
             Assert.IsFalse(aic.disabled);
 
             MiniCompany mc = ScriptableObject.CreateInstance<MiniCompany>();
             mc.baseCost = 10000;
-            mc.aiCompany = aic;
+            mc.aiCompany = aic.aiCompany;
             mc.revenue = 1;
 
             EffectSet es = new EffectSet();

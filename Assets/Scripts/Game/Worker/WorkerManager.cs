@@ -26,7 +26,7 @@ public class WorkerManager : MonoBehaviour {
         }
         return null;
     }
-    public AICompany AIEmployerForWorker(AWorker w) {
+    public AAICompany AIEmployerForWorker(AWorker w) {
         return GameManager.Instance.otherCompanies.Where(c => c.workers.Contains(w)).SingleOrDefault();
     }
 
@@ -50,7 +50,7 @@ public class WorkerManager : MonoBehaviour {
 
     public bool HireWorker(AWorker w) {
         Company employer = EmployerForWorker(w);
-        AICompany aiEmployer = AIEmployerForWorker(w);
+        AAICompany aiEmployer = AIEmployerForWorker(w);
 
         if (GameManager.Instance.playerCompany.HireWorker(w)) {
             if (data.unemployed.Contains(w)) {
@@ -73,9 +73,9 @@ public class WorkerManager : MonoBehaviour {
         return false;
     }
 
-    public bool HireWorker(AWorker w, AICompany c) {
+    public bool HireWorker(AWorker w, AAICompany c) {
         Company employer = EmployerForWorker(w);
-        AICompany aiEmployer = AIEmployerForWorker(w);
+        AAICompany aiEmployer = AIEmployerForWorker(w);
 
         if (c.HireWorker(w)) {
             if (data.unemployed.Contains(w)) {
@@ -102,7 +102,7 @@ public class WorkerManager : MonoBehaviour {
         data.unemployed.Add(w);
         GameManager.Instance.playerCompany.FireWorker(w);
     }
-    public void FireWorker(AWorker w, AICompany c) {
+    public void FireWorker(AWorker w, AAICompany c) {
         data.unemployed.Add(w);
         c.FireWorker(w);
     }

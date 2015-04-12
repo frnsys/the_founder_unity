@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2caad3cadff8c41b9bbabba4ad7e0d5b, type: 3}
+  m_Name: TestAICompany
+  m_EditorClassIdentifier: 
+  slogan: 
+  description: 
+  bonuses:
+    unlocks:
+      productTypes: []
+      perks: []
+      locations: []
+      verticals: []
+      companies: []
+      specialProjects: []
+    cash: 0
+    research:
+      name: Research
+      value: 0
+    opinionEvent:
+      name: 
+      opinion:
+        name: Outrage
+        value: 0
+      publicity:
+        name: Hype
+        value: 0
+    gameEvent: {fileID: 0}
+    eventDelay: 0
+    eventProbability: 0
+    forgettingRate: 0
+    spendingMultiplier: 0
+    wageMultiplier: 0
+    taxRate: 0
+    economicStability: 0
+    expansionCostMultiplier: 0
+    costMultiplier: 0
+    productEffects: []
+    workerEffects: []
+    aiCompany: {fileID: 0}
+    specialEffect: 0
+  founder: {fileID: 0}
+  sizeLimit: 5
+  disabled: 0
+  designSkill: 0
+  engineeringSkill: 0
+  marketingSkill: 0

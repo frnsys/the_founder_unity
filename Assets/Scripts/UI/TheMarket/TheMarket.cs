@@ -33,9 +33,9 @@ public class TheMarket : MonoBehaviour {
         product = p;
 
         // Try to find two AI companies which are suitable competitors for this product.
-        List<AICompany> competitors = new List<AICompany>();
-        List<AICompany> active = AICompany.all.Where(c => !c.disabled).ToList();
-        List<AICompany> candidates = active.Where(c => c.specialtyVerticals.Intersect(p.requiredVerticals).Count() > 0).ToList();
+        List<AAICompany> competitors = new List<AAICompany>();
+        List<AAICompany> active = AICompany.all.Where(c => !c.disabled).ToList();
+        List<AAICompany> candidates = active.Where(c => c.specialtyVerticals.Intersect(p.requiredVerticals).Count() > 0).ToList();
 
         switch (candidates.Count) {
             case 0:

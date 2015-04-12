@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager> {
     public Company playerCompany {
         get { return data.company; }
     }
-    public List<AICompany> otherCompanies {
+    public List<AAICompany> otherCompanies {
         get { return data.otherCompanies; }
     }
     public UnlockSet unlocked {
@@ -78,7 +78,7 @@ public class GameManager : Singleton<GameManager> {
         get { return data.automation; }
     }
 
-    public List<AICompany> activeAICompanies {
+    public List<AAICompany> activeAICompanies {
         get { return data.otherCompanies.FindAll(a => !a.disabled); }
     }
 
@@ -120,7 +120,7 @@ public class GameManager : Singleton<GameManager> {
 
         // Setup all the AI companies.
         AICompany.all = data.otherCompanies;
-        foreach (AICompany aic in AICompany.all) {
+        foreach (AAICompany aic in AICompany.all) {
             aic.Setup();
         }
     }
@@ -194,7 +194,7 @@ public class GameManager : Singleton<GameManager> {
         }
 
         // The cofounders you didn't pick start their own rival company.
-        AICompany aic = AICompany.Find("Rival Corp");
+        AAICompany aic = AICompany.Find("Rival Corp");
         List<Worker> cofounders = Resources.LoadAll<Worker>("Founders/Cofounders").Where(c => c != cofounder).ToList();
         aic.founder = cofounders[0];
     }

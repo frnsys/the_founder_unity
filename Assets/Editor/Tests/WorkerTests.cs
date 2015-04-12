@@ -109,8 +109,8 @@ namespace UnityTest
             Assert.AreEqual(wm.AvailableWorkers.Count(), startingCount - 1);
             Assert.IsFalse(gd.unemployed.Contains(w));
 
-            AICompany c_ = ScriptableObject.CreateInstance<AICompany>();
-            c_.Init();
+            AICompany a = (AICompany)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestAICompany.asset", typeof(AICompany)));
+            AAICompany c_ = new AAICompany(a);
             w.salary = 333333;
             wm.HireWorker(w, c_);
 
