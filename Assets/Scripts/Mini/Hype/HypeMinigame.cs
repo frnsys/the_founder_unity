@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class HypeMinigame : MonoBehaviour {
@@ -63,9 +64,18 @@ public class HypeMinigame : MonoBehaviour {
     void Fired() {
         pucks--;
         UpdateLabels();
+
+        // Reset after timeout.
+        StartCoroutine("Timeout");
+    }
+
+    IEnumerator Timeout() {
+        yield return new WaitForSeconds(3f);
+        Completed();
     }
 
     void Completed() {
+        StopCoroutine("Timeout");
         if (pucks >= 0) {
             foreach (HypeTarget ht in targets) {
                 ht.Reset();

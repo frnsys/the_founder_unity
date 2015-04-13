@@ -42,18 +42,11 @@ public class HypePuck : MonoBehaviour {
 
         if (Fired != null)
             Fired();
-
-        StartCoroutine("Timeout");
     }
 
-    protected void DoCompleted() {
-        StopCoroutine("Timeout");
+    public void DoCompleted() {
         if (Completed != null)
             Completed();
     }
 
-    IEnumerator Timeout() {
-        yield return new WaitForSeconds(3f);
-        DoCompleted();
-    }
 }
