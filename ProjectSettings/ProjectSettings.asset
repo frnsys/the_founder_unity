@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 3
   AndroidProfiler: 0
   defaultScreenOrientation: 0
-  targetDevice: 2
+  targetDevice: 0
   targetGlesGraphics: 1
   targetIOSGraphics: -1
   targetResolution: 0
@@ -72,9 +72,9 @@ PlayerSettings:
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: e096713562e5a1249a7c2470ec7ac03d
-  iPhoneBundleVersion: 1.0
-  iPhoneShortBundleVersion: 1.0
-  AndroidBundleVersionCode: 1
+  iPhoneBundleVersion: 1.1
+  iPhoneShortBundleVersion: 1.1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 15
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -274,7 +274,7 @@ PlayerSettings:
   intPropertyNames:
   - iOS::Architecture
   - iOS::ScriptingBackend
-  iOS::Architecture: 2
+  iOS::Architecture: 0
   iOS::ScriptingBackend: 0
   firstStreamedLevelWithResources: 0
   unityRebuildLibraryVersion: 9

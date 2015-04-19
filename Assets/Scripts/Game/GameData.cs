@@ -151,11 +151,14 @@ public class GameData : ScriptableObject {
     }
     public static void Save(GameData gd, string savePath) {
         Debug.Log("Saving game...");
-        Serializer.Replica data = Serializer.Serialize(gd);
-        BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(savePath);
-        bf.Serialize(file, data);
-        file.Close();
+        try {
+            Serializer.Replica data = Serializer.Serialize(gd);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(file, data);
+        } finally {
+            file.Close();
+        }
     }
 
     public static GameData Load() {
@@ -164,12 +167,22 @@ public class GameData : ScriptableObject {
     public static GameData Load(string savePath) {
         GameData gd = null;
         if(SaveExists) {
-            BinaryFormatter bf = new BinaryFormatter();
+            Debug.Log("Creating file stream");
             FileStream file = File.Open(savePath, FileMode.Open);
+            try {
+                Debug.Log("Trying to load game");
+                BinaryFormatter bf = new BinaryFormatter();
 
-            Serializer.Replica data = (Serializer.Replica)bf.Deserialize(file);
-            gd = Serializer.Deserialize<GameData>(data);
-            file.Close();
+                Debug.Log("Deserializing replica");
+                Serializer.Replica data = (Serializer.Replica)bf.Deserialize(file);
+
+                Debug.Log("Deserializing game data");
+                gd = Serializer.Deserialize<GameData>(data);
+
+                Debug.Log("Closing file");
+            } finally {
+                file.Close();
+            }
         }
         return gd;
     }
