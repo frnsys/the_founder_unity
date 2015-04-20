@@ -12,11 +12,14 @@ public class UIMainMenu : Singleton<UIMainMenu> {
     public GameObject continueButton;
     public GameObject confirmPrefab;
     public GameObject inputConfirmPrefab;
+    public GameObject infoOverlay;
+    public UILabel infoLabel;
 
     void OnEnable() {
         if (!GameData.SaveExists) {
             continueButton.SetActive(false);
         }
+        infoOverlay.SetActive(false);
         menu.Reposition();
         AudioManager.Instance.PlayMenuMusic();
     }
@@ -49,6 +52,7 @@ public class UIMainMenu : Singleton<UIMainMenu> {
             confirm.bodyText = "Are you sure you want to start a new game? This will overwrite your existing one.";
 
             UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
+                confirm.Close_();
                 BeginNewGame(companyName);
             };
 
@@ -65,6 +69,9 @@ public class UIMainMenu : Singleton<UIMainMenu> {
     }
 
     private void BeginNewGame(string companyName) {
+        infoLabel.text = "Creating the universe...";
+        infoOverlay.SetActive(true);
+
         // Setup the game data.
         GameData data = GameData.New(companyName);
         GameManager.Instance.Load(data);
@@ -74,6 +81,9 @@ public class UIMainMenu : Singleton<UIMainMenu> {
     }
 
     public void Continue() {
+        infoLabel.text = "Repeating history...";
+        infoOverlay.SetActive(true);
+
         // Load the game and everything.
         UIManager.Reset();
         UIOfficeManager.Reset();
