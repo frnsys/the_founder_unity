@@ -124,5 +124,11 @@ public class HypeMinigame : MonoBehaviour {
             Done();
     }
 
+    public void Quit() {
+        UIManager.Instance.Confirm("Are you sure you want to prematurely end your promotion?", delegate() {
+            EndGame();
+        }, null);
+    }
+
     static public event System.Action Done;
 }
