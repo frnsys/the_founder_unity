@@ -125,13 +125,13 @@ public class ProductMinigame : MonoBehaviour {
 
                     switch (labor.type) {
                         case ProductLabor.Type.Creativity:
-                            labor.points = 1 + Random.value * aggCre/2;
+                            labor.points = Mathf.Sqrt(1 + Random.value * aggCre);
                             break;
                         case ProductLabor.Type.Cleverness:
-                            labor.points = 1 + Random.value * aggCle/2;
+                            labor.points = Mathf.Sqrt(1 + Random.value * aggCle);
                             break;
                         case ProductLabor.Type.Charisma:
-                            labor.points = 1 + Random.value * aggCha/2;
+                            labor.points = Mathf.Sqrt(1 + Random.value * aggCha);
                             break;
                     }
                 }
@@ -248,8 +248,8 @@ public class ProductMinigame : MonoBehaviour {
     public GameObject livePrefab;
     void Update() {
         healthBar.value = player.health/player.maxHealth;
-        creativityBar.value = creativityPoints/200;
-        charismaBar.value = charismaPoints/200;
-        clevernessBar.value = clevernessPoints/200;
+        creativityBar.value = creativityPoints/100;
+        charismaBar.value = charismaPoints/100;
+        clevernessBar.value = clevernessPoints/100;
     }
 }
