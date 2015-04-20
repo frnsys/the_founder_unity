@@ -13,9 +13,9 @@ public class UIPerk : UIEffectItem {
             // Check if the perk is already owned.
             APerk ownedPerk = company.OwnedPerk(_perk);
             if (ownedPerk == null) {
-                _perk = ownedPerk;
                 SetupUnownedPerk();
             } else {
+                _perk = ownedPerk;
                 SetupOwnedPerk();
             }
 
@@ -48,7 +48,7 @@ public class UIPerk : UIEffectItem {
 
     void SetupUnownedPerk() {
         costLabel.gameObject.SetActive(true);
-        costLabel.text = string.Format("{0:C0}", perk.cost);
+        costLabel.text = string.Format("{0:C0}", _perk.cost);
         buttonLabel.text = "Buy";
         action = DecideBuy;
     }
