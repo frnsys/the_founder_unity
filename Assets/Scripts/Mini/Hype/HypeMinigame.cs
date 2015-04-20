@@ -53,6 +53,7 @@ public class HypeMinigame : MonoBehaviour {
         HypeTarget.Scored -= Scored;
         HypeTarget.Completed -= Completed;
         HypePuck.Completed -= Completed;
+        HypePuck.Fired -= Fired;
         EventTimer.Resume();
     }
 
