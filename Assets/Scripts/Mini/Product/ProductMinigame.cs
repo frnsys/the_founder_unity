@@ -55,7 +55,7 @@ public class ProductMinigame : MonoBehaviour {
             labors.Add(pl);
         }
 
-        hazardChance = 0.2f + Mathf.Max(-1 * c.opinion.value, 0) / 1000;
+        hazardChance = 0.2f + Mathf.Max(-1 * c.opinion.value, 0) / (1000/Mathf.Sqrt(workers.Count));
         powerupChance = 0.0005f + Mathf.Sqrt(aggHap / 1000);
 
         StartCoroutine(Spawn());
