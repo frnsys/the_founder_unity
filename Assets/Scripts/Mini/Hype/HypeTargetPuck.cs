@@ -14,8 +14,6 @@ public class HypeTargetPuck : HypePuck {
         if (!isVisible) {
             HypeTarget.activePucks--;
             Destroy(gameObject);
-            if (HypeTarget.activePucks == 0)
-                DoCompleted();
         }
     }
 

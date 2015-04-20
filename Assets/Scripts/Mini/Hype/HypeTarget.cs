@@ -51,7 +51,6 @@ public class HypeTarget : MonoBehaviour {
     new private bool enabled = true;
 
     public static event System.Action<float> Scored;
-    public static event System.Action Completed;
     public static int activePucks = 0;
     private static int[] notes = new int[] { 0, 5, 7, -3, -5, -7, -12, -24, -19, -17, -15 };
     private bool hit;
@@ -134,9 +133,6 @@ public class HypeTarget : MonoBehaviour {
                 } else {
                     activePucks--;
                     Destroy(other.gameObject);
-                    //if (activePucks == 0 && Completed != null) {
-                        //Completed();
-                    //}
                 }
             }
 

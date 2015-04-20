@@ -43,16 +43,14 @@ public class HypeMinigame : MonoBehaviour {
     void OnEnable() {
         EventTimer.Pause();
         HypeTarget.Scored += Scored;
-        HypeTarget.Completed += Completed;
-        HypePuck.Completed += Completed;
         HypePuck.Fired += Fired;
         UpdateLabels();
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Puck"), LayerMask.NameToLayer("TargetPucks"), true);
     }
 
     void OnDisable() {
         HypeTarget.Scored -= Scored;
-        HypeTarget.Completed -= Completed;
-        HypePuck.Completed -= Completed;
         HypePuck.Fired -= Fired;
         EventTimer.Resume();
     }
@@ -71,7 +69,13 @@ public class HypeMinigame : MonoBehaviour {
     }
 
     IEnumerator Timeout() {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.2f);
+
+        // If puck is still visible, wait...
+        while (puck.isVisible) {
+            yield return null;
+        }
+
         Completed();
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 58: {fileID: 5800000}
   - 114: {fileID: 11400000}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Hype Target Puck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,6 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2000
+  speedLimit: 4000
+  fired: 0
   owner: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:

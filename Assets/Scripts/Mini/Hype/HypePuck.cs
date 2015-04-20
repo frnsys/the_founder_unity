@@ -2,28 +2,19 @@ using UnityEngine;
 using System.Collections;
 
 public class HypePuck : MonoBehaviour {
-    public static event System.Action Completed;
     public static event System.Action Fired;
 
     public float speed = 4000f;
     public float speedLimit = 4000f;
     public bool fired;
     protected bool seen;
-    protected bool isVisible {
+    public bool isVisible {
         get { return !(seen && fired && !renderer.isVisible); }
     }
 
     void Update() {
         if (renderer.isVisible)
             seen = true;
-
-        // If the puck has gone off screen and nothing was hit,
-        // the round is over.
-        if (!isVisible && HypeTarget.activePucks == 0)
-            DoCompleted();
-
-        if (rigidbody2D.IsSleeping() && fired && HypeTarget.activePucks == 0)
-            DoCompleted();
     }
 
     public void Reset() {
@@ -42,11 +33,6 @@ public class HypePuck : MonoBehaviour {
 
         if (Fired != null)
             Fired();
-    }
-
-    public void DoCompleted() {
-        if (Completed != null)
-            Completed();
     }
 
 }
