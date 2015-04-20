@@ -214,47 +214,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
 
         Product.Completed += CompletedProduct;
-        Product.Launched += LaunchedProduct;
         GameEvent.EventTriggered += OnEvent;
         UnlockSet.Unlocked += OnUnlocked;
-    }
-
-    void LaunchedProduct(Product p, Company c, float score) {
-        ProductRecipe r = p.Recipe;
-        // Product hints appear sporadically, and only after onboarding is finished.
-        if (c == data.company && Random.value < 0.4f && data.obs > OBS.GAME_GOALS) {
-            if (score < 0.6f) {
-                switch(r.primaryFeature) {
-                    case ProductRecipe.Feature.Design:
-                        StartCoroutine(Delay(delegate(GameObject obj) {
-                            MentorMessages(new string[] {
-                                "Hmm...that last product probably could have been designed better."
-                            });
-                        }, 20f));
-                        return;
-                    case ProductRecipe.Feature.Engineering:
-                        StartCoroutine(Delay(delegate(GameObject obj) {
-                            MentorMessages(new string[] {
-                                "Hmm...that last product probably could have been engineered better."
-                            });
-                        }, 20f));
-                        return;
-                    case ProductRecipe.Feature.Marketing:
-                        StartCoroutine(Delay(delegate(GameObject obj) {
-                            MentorMessages(new string[] {
-                                "Hmm...that last product probably could have been marketed better."
-                            });
-                        }, 20f));
-                        return;
-                }
-            } else if (p.marketShare < 0.6f) {
-                StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
-                        "Hmm...that last product could have had more reach. Consider expanding to new locations, or build more hype for the company!"
-                    });
-                }, 20f));
-            }
-        }
     }
 
     void OnMarketStarted() {

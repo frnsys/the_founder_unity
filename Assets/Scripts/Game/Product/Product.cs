@@ -187,7 +187,6 @@ public class Product : HasStats {
     }
 
 
-    static public event System.Action<Product, Company, float> Launched;
     public float score;
     public void Launch(Company company) {
         // Calculate the revenue model's parameters
@@ -245,9 +244,6 @@ public class Product : HasStats {
         Debug.Log(string.Format("Longevity {0}", longevity));
 
         _state = State.LAUNCHED;
-
-        if (Launched != null)
-            Launched(this, company, score);
     }
 
     public float Revenue(float elapsedTime, Company company) {
