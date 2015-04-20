@@ -18,7 +18,7 @@ public class AWorker : ScriptableObject {
     public GameObject avatar;
 
     public int Research(float bonus) {
-        return 1 + (int)((cleverness * productivity) + bonus)/10;
+        return 1 + (int)((cleverness * productivity) + bonus)/4;
     }
 
     public float salary;
