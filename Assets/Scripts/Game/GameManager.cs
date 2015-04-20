@@ -469,7 +469,7 @@ public class GameManager : Singleton<GameManager> {
             // Pull back opinion effects towards 0.
             // Deflate hype.
             playerCompany.ForgetOpinionEvents();
-            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - 0.024f);
+            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - (0.024f + Mathf.Sqrt(playerCompany.publicity.baseValue/50f)));
 
             yield return StartCoroutine(GameTimer.Wait(elapsedTime));
         }
