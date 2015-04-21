@@ -6,8 +6,17 @@ public class SetRenderQueue : MonoBehaviour
 
     Material mMat;
 
-    void Start ()
-    {
+    void Start() {
+        Setup();
+    }
+
+    void OnDestroy() { if (mMat != null) Destroy(mMat); }
+
+    public void Reset() {
+        Setup();
+    }
+
+    private void Setup() {
         Renderer ren = renderer;
 
         if (ren == null)
@@ -23,6 +32,4 @@ public class SetRenderQueue : MonoBehaviour
             ren.material = mMat;
         }
     }
-
-    void OnDestroy () { if (mMat != null) Destroy(mMat); }
 }

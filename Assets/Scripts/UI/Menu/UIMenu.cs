@@ -21,6 +21,7 @@ public class UIMenu : MonoBehaviour {
             Transform lockItem = menuItem.transform.Find("Locked");
             if (lockItem != null) {
                 menuItem.display.renderer.material = menuItem.mat;
+                menuItem.display.GetComponent<SetRenderQueue>().Reset();
                 lockItem.gameObject.SetActive(false);
             } else {
                 menuItem.gameObject.SetActive(true);
@@ -41,6 +42,7 @@ public class UIMenu : MonoBehaviour {
             if (lockItem != null) {
                 menuItem.mat = menuItem.display.renderer.material;
                 menuItem.display.renderer.material = lockedMat;
+                menuItem.display.GetComponent<SetRenderQueue>().Reset();
                 lockItem.gameObject.SetActive(true);
             } else {
                 menuItem.gameObject.SetActive(false);
