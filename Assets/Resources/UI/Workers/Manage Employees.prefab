@@ -492,7 +492,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.4749999
+  aspectRatio: 5.9625001
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -557,7 +557,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.7874999
+  aspectRatio: 6.2750001
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -715,14 +715,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 970
-  mHeight: 681
+  mWidth: 1280
+  mHeight: 680
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.42437589
-  childSize: {x: 970, y: 681}
+  aspectRatio: 1.88235295
+  childSize: {x: 1280, y: 680}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 280}
 --- !u!114 &11400022
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 970
+  itemSize: 1280
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -808,7 +808,7 @@ MonoBehaviour:
   smoothDragStart: 1
   iOSDragEmulation: 1
   scrollWheelFactor: .25
-  momentumAmount: 0
+  momentumAmount: 120
   horizontalScrollBar: {fileID: 0}
   verticalScrollBar: {fileID: 0}
   showScrollBars: 1
