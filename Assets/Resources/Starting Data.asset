@@ -52,8 +52,20 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a672b2c57248b40d69f83561c4b7967a, type: 2}
     - {fileID: 11400000, guid: 6a2774be3b8c249c7b9b8a873771d0ab, type: 2}
     - {fileID: 11400000, guid: f86eeac89cb544f81a5f9c6a0392d39f, type: 2}
-    - {fileID: 11400000, guid: e7c7dea82df4e45858edb7bcd07a0b10, type: 2}
-    - {fileID: 11400000, guid: e30291e4b78394118a831439660cf994, type: 2}
+    - {fileID: 11400000, guid: 6ec9a5cdbe96249fb896804a631fc074, type: 2}
+    - {fileID: 11400000, guid: 780814d50fa2f4086972acf1d936a8db, type: 2}
+    - {fileID: 11400000, guid: e635ae6d95a8b49d3bbfbdea21449098, type: 2}
+    - {fileID: 11400000, guid: 717bee83c00a044bba254e9fd1d956d5, type: 2}
+    - {fileID: 11400000, guid: 76d37443bf6a94ae5827a7580271f485, type: 2}
+    - {fileID: 11400000, guid: d3210efca70014e1fb03a93ffc12038d, type: 2}
+    - {fileID: 11400000, guid: c97f93cc04dfb483dbae108282958344, type: 2}
+    - {fileID: 11400000, guid: 618facebb04bf4649b117534eb594e46, type: 2}
+    - {fileID: 11400000, guid: 0a66020239568409faf039bee96a0101, type: 2}
+    - {fileID: 11400000, guid: c16e999571204484590841646d947b6b, type: 2}
+    - {fileID: 11400000, guid: 8b28b26e920994a6fbb1dbae04d51505, type: 2}
+    - {fileID: 11400000, guid: ca0453b02fb8745fd84d1f84fe559ff9, type: 2}
+    - {fileID: 11400000, guid: 62307217fe2024f6e88b9347ae57a3bc, type: 2}
+    - {fileID: 11400000, guid: e6e117d8aff38494ebe3a0f7d3237d43, type: 2}
     verticals:
     - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
     - {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
@@ -76,16 +88,19 @@ MonoBehaviour:
   taxRate: 0
   expansionCostMultiplier: 0
   costMultiplier: 0
-  onboardingState:
+  ob:
     PRODUCTS_OPENED: 0
     PERKS_UNLOCKED: 0
     VERTICALS_UNLOCKED: 0
     LOCATIONS_UNLOCKED: 0
+    LOBBYING_UNLOCKED: 0
+    ACQUISITIONS_UNLOCKED: 0
     SPECIALPROJECTS_UNLOCKED: 0
     RESEARCH_OPENED: 0
     HYPE_MINIGAME: 0
     HIRED_EMPLOYEE: 0
     SYNERGY: 0
+  obs: 0
   otherCompanies: []
   month: 0
   week: 0
