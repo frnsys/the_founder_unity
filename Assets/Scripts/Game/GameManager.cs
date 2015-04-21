@@ -203,7 +203,6 @@ public class GameManager : Singleton<GameManager> {
 
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
-        StartCoroutine(Yearly());
 
         StartCoroutine(ProductRevenueCycle());
         StartCoroutine(ResearchCycle());
@@ -306,19 +305,6 @@ public class GameManager : Singleton<GameManager> {
     }
 
     static public event System.Action<int> YearEnded;
-    IEnumerator Yearly() {
-        int yearTime = weekTime*4*12;
-        yield return StartCoroutine(GameTimer.Wait(yearTime));
-        while(true) {
-            data.year++;
-
-            if (YearEnded != null)
-                YearEnded(data.year);
-
-            yield return StartCoroutine(GameTimer.Wait(yearTime));
-        }
-    }
-
     static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> PerformanceReport;
     IEnumerator Monthly() {
         int monthTime = weekTime*4;
@@ -333,7 +319,7 @@ public class GameManager : Singleton<GameManager> {
             playerCompany.PayMonthly();
 
             // You only need to start making profit after the first year.
-            if ((int)data.month % 3 == 0 && (int)data.year > 2) {
+            if ((int)data.month % 3 == 0 && (int)data.year > 1) {
                 // Get the annual performance data and generate the report.
                 List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
                 PerformanceDict results = annualData[0];
@@ -356,6 +342,14 @@ public class GameManager : Singleton<GameManager> {
             // Save the game every other month.
             if ((int)data.month % 2 == 0)
                 GameData.Save(data);
+
+            // Year
+            if ((int)data.month % 12 == 0) {
+                data.year++;
+
+                if (YearEnded != null)
+                    YearEnded(data.year);
+            }
 
             yield return StartCoroutine(GameTimer.Wait(monthTime));
         }

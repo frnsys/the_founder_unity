@@ -13,14 +13,14 @@ public class UIPerformanceReport : UIAlert {
     public UILabel boardLabel;
 
     public void BuildReport(PerformanceDict results, PerformanceDict deltas, TheBoard board){
-        revenueLabel.text = string.Format("{0:C0}", results["Quarterly Revenue"]);
-        revenueDeltaLabel.text = string.Format("{0}%", deltas["Quarterly Revenue"] * 100);
+        revenueLabel.text = string.Format("{0:C0}", results["Annual Revenue"]);
+        revenueDeltaLabel.text = string.Format("{0}%", deltas["Annual Revenue"] * 100);
 
-        costsLabel.text = string.Format("{0:C0}", results["Quarterly Costs"]);
-        costsDeltaLabel.text = string.Format("{0}%", deltas["Quarterly Costs"] * 100);
+        costsLabel.text = string.Format("{0:C0}", results["Annual Costs"]);
+        costsDeltaLabel.text = string.Format("{0}%", deltas["Annual Costs"] * 100);
 
-        profitLabel.text = string.Format("{0:C0}", results["Quarterly Profit"]);
-        profitDeltaLabel.text = string.Format("{0}%", deltas["Quarterly Profit"] * 100);
+        profitLabel.text = string.Format("{0:C0}", results["Annual Profit"]);
+        profitDeltaLabel.text = string.Format("{0}%", deltas["Annual Profit"] * 100);
 
         boardLabel.text = board.BoardStatus();
     }
