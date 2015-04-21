@@ -37,7 +37,14 @@ public class Product : HasStats {
     public bool synergy;
     public float marketShare;
 
-    public Mesh[] meshes;
+    public Mesh[] meshes {
+        get {
+            return new Mesh[] {
+                productTypes[0].mesh,
+                productTypes[1].mesh
+            };
+        }
+    }
 
     public float requiredProgress;
 
@@ -132,11 +139,6 @@ public class Product : HasStats {
         if (recipe == null) {
             recipe = ProductRecipe.LoadDefault();
         }
-
-        meshes = new Mesh[] {
-            pts[0].mesh,
-            pts[1].mesh
-        };
 
         // This is 8 weeks at 12cycles/week.
         // Each progress is one cycle.
