@@ -14,14 +14,16 @@ MonoBehaviour:
   description: 
   icon: {fileID: 2800000, guid: e6c06bf1e9d4041729c9b24b8043e5ea, type: 3}
   cost: 1000
+  requiredVertical: {fileID: 0}
+  requiredTechnologies:
+  - {fileID: 11400000, guid: 005bb9100ac8144edb14353b5b9b234b, type: 2}
   effects:
     unlocks:
-      productTypes: []
+      productTypes:
+      - {fileID: 11400000, guid: 57bae7d73b1f44fd2bddee31854a40ca, type: 2}
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects: []
     cash: 0
@@ -45,13 +47,8 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
-  requiredVertical: {fileID: 0}
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 005bb9100ac8144edb14353b5b9b234b, type: 2}

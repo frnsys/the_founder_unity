@@ -13,15 +13,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   icon: {fileID: 2800000, guid: e518ef92ff1444e1795122f6e98d589a, type: 3}
-  requiredResearch: 1000
+  cost: 1000
+  requiredVertical: {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
+  requiredTechnologies:
+  - {fileID: 11400000, guid: 1b687c184e7e54eba90e2485ab84a341, type: 2}
+  - {fileID: 11400000, guid: 24eec6675b43446729146ff38105d4f8, type: 2}
   effects:
     unlocks:
-      productTypes: []
+      productTypes:
+      - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
       perks: []
       locations: []
       verticals: []
-      promos: []
-      recruitments: []
       companies: []
       specialProjects:
       - {fileID: 11400000, guid: ba77defe408ed4bd2ba336f7a222f977, type: 2}
@@ -29,20 +32,14 @@ MonoBehaviour:
     research:
       name: Research
       value: 0
-      duration: 0
-      type: 0
     opinionEvent:
       name: 
       opinion:
         name: Opinion
         value: 0
-        duration: 0
-        type: 0
       publicity:
         name: Hype
         value: 0
-        duration: 0
-        type: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0
@@ -52,17 +49,8 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
-      baseCosts:
-        keys: 00000000010000000200000003000000
-        values: e8030000e8030000e8030000e8030000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
     specialEffect: 0
-  requiredVertical: {fileID: 11400000, guid: 86d6df5c2cf68423e9da25f82bfe1f7a, type: 2}
-  requiredTechnologies:
-  - {fileID: 11400000, guid: 1b687c184e7e54eba90e2485ab84a341, type: 2}
-  - {fileID: 11400000, guid: 24eec6675b43446729146ff38105d4f8, type: 2}

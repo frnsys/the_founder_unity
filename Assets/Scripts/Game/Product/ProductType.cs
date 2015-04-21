@@ -20,10 +20,11 @@ public class ProductType : SharedResource<ProductType> {
         return new List<ProductType>(Resources.LoadAll<ProductType>("Products/Types"));
     }
 
-    // Note: we don't have required technologies because a technology is necessary
-    // for *unlocking* a product. Technologies don't disappear so it never needs to be checked again after the product is unlocked.
     public List<Vertical> requiredVerticals = new List<Vertical>();
     public bool isAvailable(Company company) {
+        if (!GameManager.Instance.unlocked.productTypes.Contains(this))
+            return false;
+
         // Check that all required verticals are active on the company.
         return !requiredVerticals.Except(company.verticals).Any();
     }

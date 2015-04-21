@@ -17,7 +17,6 @@ public class UINewProductFlow : MonoBehaviour {
     public GameObject productTypePrefab;
     public GameObject selectedProductTypePrefab;
     public GameObject productTypeSelectionView;
-    public List<GameObject> productTypeItems;
     public UIGrid selectedGrid;
     public UIGrid grid;
     public UIButton confirmSelectionButton;
@@ -31,7 +30,6 @@ public class UINewProductFlow : MonoBehaviour {
 
         if (productTypes == null) {
             productTypes = new List<ProductType>();
-            productTypeItems = new List<GameObject>();
         }
 
         UpdateConfirmButton();
@@ -40,13 +38,17 @@ public class UINewProductFlow : MonoBehaviour {
 
     // Load product types into the grid.
     private void LoadProductTypes() {
-        productTypeItems.Clear();
-        foreach (ProductType pt in gm.unlocked.productTypes.Where(p => p.isAvailable(gm.playerCompany))) {
+        foreach (ProductType pt in ProductType.LoadAll().Where(p => p.isAvailable(gm.playerCompany))) {
             GameObject productType = NGUITools.AddChild(grid.gameObject, productTypePrefab);
             UIEventListener.Get(productType).onClick += SelectProductType;
             productType.GetComponent<UIProductType>().productType = pt;
-            productTypeItems.Add(productType);
             ToggleProductType(pt, productType);
+        }
+        foreach (ProductType pt in ProductType.LoadAll().Where(p => !p.isAvailable(gm.playerCompany))) {
+            GameObject productType = NGUITools.AddChild(grid.gameObject, productTypePrefab);
+            productType.GetComponent<UIProductType>().productType = pt;
+            productType.transform.Find("Overlay").gameObject.SetActive(true);
+            productType.transform.Find("Lock").gameObject.SetActive(true);
         }
         grid.Reposition();
     }

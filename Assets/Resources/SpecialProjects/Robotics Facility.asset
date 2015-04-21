@@ -16,8 +16,7 @@ MonoBehaviour:
   cost: 5e+07
   effects:
     unlocks:
-      productTypes:
-      - {fileID: 11400000, guid: 78208c6a62cad468d879ec27a1222301, type: 2}
+      productTypes: []
       perks: []
       locations: []
       verticals: []
