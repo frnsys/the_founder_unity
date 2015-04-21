@@ -6,7 +6,10 @@ public class UIProductEffect : UIBuffEffect {
     public void Set(ProductEffect pe) {
         List<string> targets = new List<string>();
         foreach (ProductType x in pe.productTypes) {
-            targets.Add(x.name);
+            // some leftover product types get caught here
+            if (x != null) {
+                targets.Add(x.name);
+            }
         }
         foreach (Vertical x in pe.verticals) {
             targets.Add(x.name);

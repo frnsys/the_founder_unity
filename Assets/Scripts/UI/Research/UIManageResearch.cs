@@ -24,6 +24,10 @@ public class UIManageResearch : UIFullScreenPager {
             GameObject techItem = NGUITools.AddChild(grid.gameObject, techPrefab);
             techItem.GetComponent<UITechnology>().technology = t;
         }
+        foreach (Technology t in Technology.LoadAll().Where(t => !company.technologies.Contains(t) && !t.isAvailable(company))) {
+            GameObject techItem = NGUITools.AddChild(grid.gameObject, techPrefab);
+            techItem.GetComponent<UITechnology>().technology = t;
+        }
         foreach (Technology t in company.technologies) {
             GameObject techItem = NGUITools.AddChild(grid.gameObject, techPrefab);
             UITechnology uit = techItem.GetComponent<UITechnology>();
