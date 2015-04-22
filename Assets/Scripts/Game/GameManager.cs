@@ -219,7 +219,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     void OnEvent(GameEvent e) {
-        if (e.effects != null)
+        if (e != null && e.effects != null)
             ApplyEffectSet(e.effects);
     }
 
@@ -318,27 +318,6 @@ public class GameManager : Singleton<GameManager> {
 
             playerCompany.PayMonthly();
 
-            // You only need to start making profit after the first year.
-            if ((int)data.month % 3 == 0 && (int)data.year > 1) {
-                // Get the annual performance data and generate the report.
-                List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
-                PerformanceDict results = annualData[0];
-                PerformanceDict deltas = annualData[1];
-                float growth = data.board.EvaluatePerformance(results["Annual Profit"]);
-
-                if (PerformanceReport != null) {
-                    PerformanceReport(data.year, results, deltas, data.board);
-                }
-
-                // Schedule a news story about the growth (if it warrants one).
-                StartCoroutine(PerformanceNews(growth));
-
-                // Lose condition:
-                // TEMP disabled
-                //if (data.board.happiness < -20)
-                    //narrativeManager.GameLost();
-            }
-
             // Save the game every other month.
             if ((int)data.month % 2 == 0)
                 GameData.Save(data);
@@ -346,6 +325,27 @@ public class GameManager : Singleton<GameManager> {
             // Year
             if ((int)data.month % 12 == 0) {
                 data.year++;
+
+                // You only need to start making profit after the first year.
+                if ((int)data.year > 1) {
+                    // Get the annual performance data and generate the report.
+                    List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
+                    PerformanceDict results = annualData[0];
+                    PerformanceDict deltas = annualData[1];
+                    float growth = data.board.EvaluatePerformance(results["Annual Profit"]);
+
+                    if (PerformanceReport != null) {
+                        PerformanceReport(data.year, results, deltas, data.board);
+                    }
+
+                    // Schedule a news story about the growth (if it warrants one).
+                    StartCoroutine(PerformanceNews(growth));
+
+                    // Lose condition:
+                    // TEMP disabled
+                    //if (data.board.happiness < -20)
+                        //narrativeManager.GameLost();
+                }
 
                 if (YearEnded != null)
                     YearEnded(data.year);
@@ -360,15 +360,16 @@ public class GameManager : Singleton<GameManager> {
         AGameEvent ev = null;
         float target = data.board.desiredGrowth;
         if (growth >= target * 2) {
-            ev = GameEvent.LoadSpecialEvent("Faster Growth");
+            ev = GameEvent.LoadNoticeEvent("Faster Growth");
         } else if (growth >= target * 1.2) {
-            ev = GameEvent.LoadSpecialEvent("Fast Growth");
+            ev = GameEvent.LoadNoticeEvent("Fast Growth");
         } else if (growth <= target * 0.8) {
-            ev = GameEvent.LoadSpecialEvent("Slow Growth");
+            ev = GameEvent.LoadNoticeEvent("Slow Growth");
         } else if (growth <= target * 0.6) {
-            ev = GameEvent.LoadSpecialEvent("Slower Growth");
+            ev = GameEvent.LoadNoticeEvent("Slower Growth");
         }
-        GameEvent.Trigger(ev.gameEvent);
+        if (ev != null)
+            GameEvent.Trigger(ev.gameEvent);
     }
 
     IEnumerator Weekly() {
@@ -463,7 +464,7 @@ public class GameManager : Singleton<GameManager> {
             // Pull back opinion effects towards 0.
             // Deflate hype.
             playerCompany.ForgetOpinionEvents();
-            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - (0.024f + Mathf.Sqrt(playerCompany.publicity.baseValue/50f)));
+            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - (0.024f + Mathf.Sqrt(playerCompany.publicity.baseValue/5000f)));
 
             yield return StartCoroutine(GameTimer.Wait(elapsedTime));
         }

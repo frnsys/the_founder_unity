@@ -604,10 +604,14 @@ public class Company : HasStats {
         PerformanceDict deltas = new PerformanceDict();
         if (AnnualPerfHistory.Count > 1) {
             // Last annual is the second to last element.
-            PerformanceDict lastAnnual = (PerformanceDict)AnnualPerfHistory.Skip(AnnualPerfHistory.Count - 2).Take(1);
+            PerformanceDict lastAnnual = AnnualPerfHistory.Skip(AnnualPerfHistory.Count - 2).Take(1).First();
 
             foreach (string key in results.Keys) {
-                deltas[key] = results[key]/lastAnnual[key] - 1f;
+                if (lastAnnual[key] == 0) {
+                    deltas[key] = 0f;
+                } else {
+                    deltas[key] = results[key]/lastAnnual[key] - 1f;
+                }
             }
 
         // Otherwise, everything improved by 100%!!!
