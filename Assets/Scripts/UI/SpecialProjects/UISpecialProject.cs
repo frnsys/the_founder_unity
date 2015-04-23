@@ -11,9 +11,9 @@ public class UISpecialProject : UIEffectItem {
 
             // Check if the project has already been completed.
             if (company.specialProjects.Contains(_specialProject)) {
-                SetupNewProject();
-            } else {
                 SetupCompletedProject();
+            } else {
+                SetupNewProject();
             }
 
             DisplayProject();
