@@ -107,7 +107,6 @@ public class ProductMinigame : MonoBehaviour {
     IEnumerator Spawn() {
         while (true) {
             ProductLabor labor = labors.FirstOrDefault(l => l.available);
-            Debug.Log(labor);
             if (labor != null) {
                 labor.available = false;
 
@@ -226,8 +225,6 @@ public class ProductMinigame : MonoBehaviour {
     }
 
     void Died() {
-        Debug.Log(workers);
-        Debug.Log(workers.Count);
         if (workers.Count > 1) {
             workers.RemoveAt(0);
             player.Respawn(workers[0]);
