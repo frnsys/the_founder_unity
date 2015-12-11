@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd9f5075c488941f58e20aa062837db0, type: 3}
-  m_Name: Appliance.Mobile
+  m_Name: Gadget.Mobile
   m_EditorClassIdentifier: 
   names: yPhone
   description: Smartphones
@@ -70,9 +70,7 @@ MonoBehaviour:
     taxRate: 0
     economicStability: 0
     expansionCostMultiplier: 0
-    infrastructureCostMultiplier:
-      keys: 00000000010000000200000003000000
-      values: 00000000000000000000000000000000
+    costMultiplier: 0
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}

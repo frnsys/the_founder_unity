@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class HypeMinigame : MonoBehaviour {
-    public int pucks = 3;
+    private int pucks = 0;
     public HypePuck puck;
     public UILabel pitchesLabel;
     public UILabel scoreLabel;
@@ -18,6 +18,9 @@ public class HypeMinigame : MonoBehaviour {
 
     public GameObject level;
     public void Setup(Promo promo) {
+        pucks = promo.pucks;
+        UpdateLabels();
+
         // This is a hack so that the mentor message
         // doesn't have to deal with layering issues with the blebs.
         level.SetActive(false);

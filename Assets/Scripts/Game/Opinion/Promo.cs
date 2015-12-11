@@ -7,6 +7,7 @@ public class Promo : SharedResource<Promo> {
     public Texture icon;
     public string description;
     public float cost;
+    public int pucks;
 
     static public event System.Action<Promo> Completed;
     public void Develop() {
