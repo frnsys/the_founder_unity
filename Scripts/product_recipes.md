@@ -4,7 +4,7 @@ names: Servo, Alfred, Handy
 description: Automated labor and service
     - wage multiplier - 0.2
 
-m_Name: AI.Appliance
+m_Name: AI.Gadget
 names: DriveIt, Chaffeur
 description: Driverless cars
 
@@ -56,7 +56,7 @@ description: VR ad network
     - marketing + to all products
     - synergies: ad.analytics
 
-m_Name: Analytics.Appliance
+m_Name: Analytics.Gadget
 names: SmartHome
 description: Home automation devices
 
@@ -115,7 +115,7 @@ names: RoboWarrior
 description: Robotic soldiers and law enforcement
     - cash bonus $100000 x product quality
 
-m_Name: Appliance.Space
+m_Name: Gadget.Space
 names: Sats
 description: Satellites
     - synergies: defense.space

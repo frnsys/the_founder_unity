@@ -76,7 +76,7 @@ PlayerSettings:
   iPhoneShortBundleVersion: 1.3
   AndroidBundleVersionCode: 4
   AndroidMinSdkVersion: 15
-  AndroidPreferredInstallLocation: 1
+  AndroidPreferredInstallLocation: 0
   aotOptions: 
   apiCompatibilityLevel: 2
   iPhoneStrippingLevel: 0
@@ -273,8 +273,10 @@ PlayerSettings:
   wp8UnprocessedPlugins: []
   intPropertyNames:
   - iOS::Architecture
+  - iOS::EnableIncrementalBuildSupportForIl2cpp
   - iOS::ScriptingBackend
   iOS::Architecture: 0
+  iOS::EnableIncrementalBuildSupportForIl2cpp: 0
   iOS::ScriptingBackend: 0
   firstStreamedLevelWithResources: 0
   unityRebuildLibraryVersion: 9
