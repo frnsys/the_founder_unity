@@ -228,7 +228,6 @@ namespace UnityTest
 		public void BuyPerk_CanAfford() {
             c.cash.baseValue = perk.cost;
             float startCash = c.cash.value;
-            float startResearch = c.research.value;
 
 
             Assert.IsTrue(c.BuyPerk(perk));
@@ -236,12 +235,10 @@ namespace UnityTest
             Assert.AreEqual(c.cash.baseValue, startCash - perk.cost);
             Assert.AreEqual(c.perks.Count, 1);
             Assert.AreEqual(c.perks[0].upgradeLevel, 0);
-            Assert.AreEqual(c.research.value, startResearch + perk.effects.research.value);
         }
 
 		[Test]
 		public void UpgradePerk_CanAfford() {
-            float startResearch = c.research.value;
             c.cash.baseValue = perk.cost;
             Assert.IsTrue(c.BuyPerk(perk));
 
@@ -249,7 +246,6 @@ namespace UnityTest
             Assert.IsTrue(c.UpgradePerk(perk));
             Assert.AreEqual(c.perks.Count, 1);
             Assert.AreEqual(c.perks[0].upgradeLevel, 1);
-            Assert.AreEqual(c.research.value, startResearch + perk.effects.research.value);
         }
 
         [Test]

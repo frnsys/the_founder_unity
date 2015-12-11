@@ -10,12 +10,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdffd9aed3bdb4b6c87f71d624c66640, type: 3}
   m_Name: TestPerk
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   upgradeLevel: 0
   upgrades:
   - name: Test Upgrade 1
     cost: 1000
-    description: 
+    description:
     mesh: {fileID: 0}
     texture: {fileID: 0}
     effects:
@@ -24,18 +24,13 @@ MonoBehaviour:
         workers: []
         items: []
         perks: []
-        stores: 
+        stores:
         locations: []
         verticals: []
         promos: []
       cash: 0
-      research:
-        name: Research
-        value: 200
-        duration: 0
-        type: 0
       opinionEvent:
-        name: 
+        name:
         opinion:
           name: Opinion
           value: 0
@@ -53,7 +48,7 @@ MonoBehaviour:
       workerEffects: []
   - name: Test Upgrade 2
     cost: 4000
-    description: 
+    description:
     mesh: {fileID: 0}
     texture: {fileID: 0}
     effects:
@@ -62,18 +57,13 @@ MonoBehaviour:
         workers: []
         items: []
         perks: []
-        stores: 
+        stores:
         locations: []
         verticals: []
         promos: []
       cash: 0
-      research:
-        name: Research
-        value: 400
-        duration: 0
-        type: 0
       opinionEvent:
-        name: 
+        name:
         opinion:
           name: Opinion
           value: 0

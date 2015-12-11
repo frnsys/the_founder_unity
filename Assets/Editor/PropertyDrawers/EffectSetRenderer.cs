@@ -25,22 +25,6 @@ public class EffectSetRenderer {
     public static EffectSet RenderEffectSet(UnityEngine.Object target, EffectSet es) {
         es.cash =  EditorGUILayout.FloatField("Cash Effect", es.cash);
 
-        EditorGUILayout.LabelField("Research Effect");
-        if (es.research == null) {
-            if (GUILayout.Button("Add Research Effect")) {
-                es.research = new StatBuff("Research", 0);
-                EditorUtility.SetDirty(target);
-            }
-        } else {
-            EditorGUILayout.BeginHorizontal();
-            es.research.value = EditorGUILayout.FloatField(es.research.value);
-            if (GUILayout.Button("Clear")) {
-                es.research = null;
-                EditorUtility.SetDirty(target);
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-
         EditorGUILayout.LabelField("Opinion Effect");
         if (es.opinionEvent == null) {
             if (GUILayout.Button("Add Opinion Effect")) {

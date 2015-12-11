@@ -169,7 +169,6 @@ namespace UnityTest
             Assert.AreEqual(gd.company.lastMonthRevenue,   data.company.lastMonthRevenue);
             Assert.AreEqual(gd.company.annualRevenue,      data.company.annualRevenue);
             Assert.AreEqual(gd.company.annualCosts,        data.company.annualCosts);
-            Assert.AreEqual(gd.company.research.value,     data.company.research.value);
             Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
             Assert.AreEqual(gd.company.publicity.value,    data.company.publicity.value);
             Assert.AreEqual(gd.company.markets,            data.company.markets);
@@ -265,7 +264,6 @@ namespace UnityTest
             }
 
             Assert.AreEqual(es.cash, es_.cash);
-            Assert.AreEqual(es.research.value, es_.research.value);
             Assert.AreEqual(es.aiCompany, es_.aiCompany);
             Assert.AreEqual(es.gameEvent, es_.gameEvent);
 

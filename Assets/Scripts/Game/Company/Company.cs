@@ -21,9 +21,6 @@ public class Company : HasStats {
     public Company Init() {
         // Default values.
         cash = new Stat("Cash", 100000);
-        research = new Stat("Research", 0);
-        researchPoints = 0;
-        researchers = new List<AWorker>();
         deathToll = 0;
         debtOwned = 0;
         taxesAvoided = 0;
@@ -73,9 +70,6 @@ public class Company : HasStats {
     }
     public IEnumerable<AWorker> allWorkers {
         get { return _workers.Concat(founders.Cast<AWorker>()); }
-    }
-    public IEnumerable<AWorker> productWorkers {
-        get { return _workers.Where(w => !researchers.Contains(w)).Concat(founders); }
     }
     public List<AWorker> founders;
 
@@ -544,34 +538,17 @@ public class Company : HasStats {
         }
     }
 
+
     // ===============================================
     // Research ======================================
     // ===============================================
-    [SerializeField]
-    public Stat research;
-    public int researchPoints;
     public List<Technology> technologies;
-    public List<AWorker> researchers;
-
-    public void Research() {
-        foreach (AWorker w in researchers) {
-            researchPoints += w.Research(research.value);
-        }
-    }
-    public void AddResearcher(AWorker w) {
-        researchers.Add(w);
-    }
-    public void RemoveResearcher(AWorker w) {
-        researchers.Remove(w);
-    }
-
     static public event System.Action<Technology> ResearchCompleted;
-    public bool BuyTechnology(Technology technology) {
-        if (researchPoints >= technology.cost) {
-            researchPoints -= technology.cost;
-            technologies.Add(technology);
+    public bool BuyTechnology(Technology t) {
+        if (Pay(t.cost)) {
+            technologies.Add(t);
             if (ResearchCompleted != null)
-                ResearchCompleted(technology);
+                ResearchCompleted(t);
             return true;
         }
         return false;

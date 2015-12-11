@@ -70,10 +70,6 @@ public class UIEffectAlert : UIAlert {
                 RenderBuffEffect(buff, "workers");
         }
 
-        if (es.research.value != 0) {
-            RenderBuffEffect(es.research, null);
-        }
-
         if (es.cash != 0) {
             RenderBuffEffect(new StatBuff("Cash", es.cash), null);
         }

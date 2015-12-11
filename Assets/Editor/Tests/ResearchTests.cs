@@ -27,7 +27,6 @@ namespace UnityTest
 
             tech = GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestTechnology.asset", typeof(Technology))) as Technology;
             vert = AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestVertical.asset", typeof(Vertical)) as Vertical;
-            gd.company.research.baseValue = 50;
         }
 
         [TearDown]

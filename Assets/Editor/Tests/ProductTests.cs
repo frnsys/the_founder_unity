@@ -173,9 +173,9 @@ namespace UnityTest
         [Test]
         public void ProductEffectsApplyOnlyOnce() {
             EffectSet e = new EffectSet();
-            e.research = new StatBuff("Research", 2000);
+            e.forgettingRate = 0.1f;
             pr.effects = e;
-            float start = c.research.value;
+            float start = gm.forgettingRate;
 
             Product.Completed += gm.OnProductCompleted;
 
@@ -183,7 +183,7 @@ namespace UnityTest
             c.StartNewProduct(pts, 0, 0, 0);
             c.products[0].Complete(c);
             Assert.AreEqual(c.products[0].state, Product.State.LAUNCHED);
-            Assert.AreEqual(c.research.value, start + e.research.value);
+            Assert.AreEqual(gm.forgettingRate, start + e.forgettingRate);
 
             // Complete a duplicate product.
             c.StartNewProduct(pts, 0, 0, 0);
@@ -191,7 +191,7 @@ namespace UnityTest
             Assert.AreEqual(c.products[1].state, Product.State.LAUNCHED);
 
             // Effect should have only been applied once.
-            Assert.AreEqual(c.research.value, start + e.research.value);
+            Assert.AreEqual(gm.forgettingRate, start + e.forgettingRate);
         }
     }
 }

@@ -180,7 +180,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
         if (data.obs < OBS.RESEARCH) {
             uim.menu.Deactivate("Research");
-            uim.statusBar.researchLabel.gameObject.SetActive(false);
         }
 
         if (data.obs < OBS.GAME_GOALS) {
@@ -370,11 +369,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             case "Research":
                 if (!data.ob.RESEARCH_OPENED) {
                     MentorMessages(new string[] {
-                        string.Format("Here you can assign your employees as {0}.", ConceptHighlight("researchers")),
-                        "A researcher's skill spends on their cleverness and productivity.",
-                        "Once you assign a researcher, they will start generating research points for you!",
-                        string.Format("You can spend these research points to purchase new {0}.", ConceptHighlight("technologies")),
+                        string.Format("Welcome to your {0}!", SpecialHighlight("Innovation Lab")),
+                        string.Format("Here you can purchase new {0}.", ConceptHighlight("technologies")),
                         string.Format("New technologies can unlock new {0}, {1}, and provide other bonuses.", ConceptHighlight("product types"), ConceptHighlight("special projects")),
+                        string.Format("Some technologies have prerequisite technologies that you must purchase first."),
                         "Don't neglect research! Stay ahead of the competition!"
                     });
                     data.ob.RESEARCH_OPENED = true;
@@ -431,13 +429,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         string.Format("You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge {0}.", ConceptHighlight("research")),
-                        string.Format("You can manage your Innovation Labs in the {0} button below.", MenuHighlight("Research")),
+                        string.Format("You can manage your Innovation Labs in the {0} menu item.", MenuHighlight("Research")),
                         "There you can assign workers to conduct research.",
                         string.Format("They won't be available for product development, but over time they will generate {0}!", ConceptHighlight("research points"))
                     });
-                    UIManager uim = UIManager.Instance;
-                    uim.menu.Activate("Research");
-                    uim.statusBar.researchLabel.gameObject.SetActive(true);
+                    UIManager.Instance.menu.Activate("Research");
                 }, 6f));
             } else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
                 MentorMessages(new string[] {

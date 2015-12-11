@@ -17,10 +17,6 @@ public class AWorker : ScriptableObject {
     [HideInInspector, System.NonSerialized]
     public GameObject avatar;
 
-    public int Research(float bonus) {
-        return 1 + (int)((cleverness * productivity) + bonus)/4;
-    }
-
     public float salary;
     public float hiringFee {
         get {

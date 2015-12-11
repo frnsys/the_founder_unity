@@ -31,7 +31,6 @@ public class EffectSet {
 
     // To keep things consistent with Unity's serialization,
     // these values are initialized as non-null.
-    public StatBuff research = new StatBuff("Research", 0);
     public OpinionEvent opinionEvent = new OpinionEvent(0, 0);
 
     public GameEvent gameEvent;
@@ -66,7 +65,6 @@ public class EffectSet {
         EffectSet es = new EffectSet();
         es.cash = cash;
         es.unlocks = unlocks;
-        es.research = research;
         es.opinionEvent = opinionEvent;
         es.gameEvent = gameEvent;
         es.eventDelay = eventDelay;
@@ -97,7 +95,6 @@ public class EffectSet {
     }
 
     public void ApplyMultiplier(float mult) {
-        research.value *= mult;
         forgettingRate *= mult;
         spendingMultiplier *= mult;
         wageMultiplier *= mult;
@@ -118,9 +115,6 @@ public class EffectSet {
         company.activeEffects.Add(this);
 
         company.cash.baseValue += cash;
-
-        if (research.value != 0)
-            company.research.ApplyBuff(research);
 
         if (opinionEvent.opinion.value != 0 && opinionEvent.publicity.value != 0)
             company.ApplyOpinionEvent(opinionEvent);
@@ -162,9 +156,6 @@ public class EffectSet {
     }
     public void Remove(Company company) {
         company.activeEffects.Remove(this);
-
-        if (research.value != 0)
-            company.research.RemoveBuff(research);
 
         if (productEffects != null) {
             foreach (ProductEffect fx in productEffects) {
@@ -219,9 +210,6 @@ public class EffectSet {
             return false;
 
         if (cash != es.cash)
-            return false;
-
-        if (!research.Equals(es.research))
             return false;
 
         if (!opinionEvent.Equals(es.opinionEvent))

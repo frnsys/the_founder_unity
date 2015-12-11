@@ -205,7 +205,6 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(Monthly());
 
         StartCoroutine(ProductRevenueCycle());
-        StartCoroutine(ResearchCycle());
         StartCoroutine(OpinionCycle());
         StartCoroutine(EventCycle());
 
@@ -437,18 +436,6 @@ public class GameManager : Singleton<GameManager> {
 
             playerCompany.HarvestProducts(elapsedTime);
             playerCompany.HarvestCompanies();
-
-            yield return StartCoroutine(GameTimer.Wait(elapsedTime));
-        }
-    }
-
-    IEnumerator ResearchCycle() {
-        yield return StartCoroutine(GameTimer.Wait(cycleTime));
-        while(true) {
-            // Add a bit of randomness to give things
-            // a more "natural" feel.
-            float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
-            playerCompany.Research();
 
             yield return StartCoroutine(GameTimer.Wait(elapsedTime));
         }

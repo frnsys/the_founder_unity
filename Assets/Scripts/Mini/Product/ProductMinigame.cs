@@ -30,7 +30,7 @@ public class ProductMinigame : MonoBehaviour {
         EventTimer.Pause();
 
         labors = new List<ProductLabor>();
-        workers = c.productWorkers.ToList();
+        workers = c.allWorkers.ToList();
         foreach (AWorker w in workers) {
             aggCre += w.creativity;
             aggCle += w.cleverness;

@@ -28,7 +28,7 @@ public class UIResearchCompletedAlert: UIEffectAlert {
         // This is a hacky way of checking if the current popup
         // is already the research manager popup.
         if (uim.currentPopup != null) {
-            // If it is already the research manager, just close this aler.
+            // If it is already the research manager, just close this alert.
             if (string.Format("{0}(Clone)", uim.currentPopup.name) == manageResearchPrefab.name) {
                 Close_();
                 return;

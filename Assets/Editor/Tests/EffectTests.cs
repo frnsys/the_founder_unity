@@ -48,15 +48,6 @@ namespace UnityTest
         }
 
         [Test]
-        public void Research() {
-            e.research = new StatBuff("Research", 2000);
-
-            float start = c.research.value;
-            e.Apply(c);
-            Assert.AreEqual(c.research.value, start + e.research.value);
-        }
-
-        [Test]
         public void Opinion() {
             e.opinionEvent = new OpinionEvent();
             e.opinionEvent.opinion.value   = 2000;

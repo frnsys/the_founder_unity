@@ -10,7 +10,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9abc88014853c4f2986e5738a56bcec0, type: 3}
   m_Name: TestTechnology
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   description: This is a test technology
   icon: {fileID: 0}
   requiredResearch: 100
@@ -19,18 +19,13 @@ MonoBehaviour:
       productTypes: []
       workers: []
       items: []
-      stores: 
+      stores:
       locations: []
       verticals: []
       promos: []
     cash: 0
-    research:
-      name: DEFAULTNAME
-      value: 0
-      duration: 0
-      type: 0
     opinionEvent:
-      name: 
+      name:
       opinion:
         name: Opinion
         value: 0

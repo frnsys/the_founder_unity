@@ -13,7 +13,7 @@ public class UITechnology : UIEffectItem {
             label.text = technology_.name;
             description.text = technology_.description;
             image.mainTexture = technology_.icon;
-            cost.text = string.Format("Costs {0} research", technology_.cost);
+            cost.text = string.Format("Costs {0:C0}", technology_.cost);
 
             UpdateLock();
 
@@ -46,7 +46,7 @@ public class UITechnology : UIEffectItem {
     public void SelectTech() {
         UIManager.Instance.Confirm("Are you sure you want to research this technology?", delegate() {
             if (!GameManager.Instance.playerCompany.BuyTechnology(technology_)) {
-                UIManager.Instance.Alert("You don't have enough research for this technology.");
+                UIManager.Instance.Alert("You don't have enough capital for this technology.");
             } else {
                 researched = true;
             }

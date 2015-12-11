@@ -10,7 +10,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a17a9e0542e3945c49777a77a5cb367e, type: 3}
   m_Name: TestingGameData
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   company: {fileID: 0}
   board:
     happiness: 10
@@ -42,7 +42,6 @@ MonoBehaviour:
   workerInsight: 0
   maxProductTypes: 0
   technology: {fileID: 0}
-  research: 0
   otherCompanies: []
   LabsAccessible: 0
   CommsAccessible: 0
