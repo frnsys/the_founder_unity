@@ -11,11 +11,15 @@ public class UIHUD : MonoBehaviour {
     public UIGrid grid;
     public GameObject activeProductPrefab;
     public Color highlightColor;
+    public UIProgressBar productDevelopment;
 
     void OnEnable() {
         gm = GameManager.Instance;
         company = gm.playerCompany;
         StartCoroutine(UpdateHUD());
+
+        Company.BeganProduct += BeganProduct;
+        Product.Completed += CompletedProduct;
     }
 
     // Keep track of which products are already displayed so we don't create redundant ones.
@@ -58,9 +62,23 @@ public class UIHUD : MonoBehaviour {
                 }
             }
 
+            if (company.developing) {
+                productDevelopment.value = company.developingProduct.progress;
+            }
+
             grid.Reposition();
             yield return StartCoroutine(GameTimer.Wait(0.2f));
         }
+    }
+
+
+    void BeganProduct(Product p, Company c) {
+        productDevelopment.value = 0;
+        productDevelopment.gameObject.SetActive(true);
+    }
+
+    void CompletedProduct(Product p, Company c) {
+        productDevelopment.gameObject.SetActive(false);
     }
 }
 
