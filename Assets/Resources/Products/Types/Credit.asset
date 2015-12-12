@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Credit
   m_EditorClassIdentifier: 
   mesh: {fileID: 4300024, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  difficulty: 1
   requiredVerticals:
   - {fileID: 11400000, guid: e8f2df9dc9bf64840a47e408dd67a48b, type: 2}
-  requiredInfrastructure:
-    keys: 00000000010000000200000003000000
-    values: 02000000000000000000000000000000

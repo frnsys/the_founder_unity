@@ -130,11 +130,12 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnBeganProduct(Product p, Company c) {
-        if (c == gm.playerCompany) {
-            productHud.SetActive(true);
-            hud.SetActive(false);
-            LaunchProductMinigame(p, c);
-        }
+        // TODO: SWITCHING OVER TO NEW PRODUCT SYSTEM
+        //if (c == gm.playerCompany) {
+            //productHud.SetActive(true);
+            //hud.SetActive(false);
+            //LaunchProductMinigame(p, c);
+        //}
     }
 
     // Show a "product completed" alert.

@@ -142,8 +142,7 @@ public class Product : HasStats {
 
         // This is 8 weeks at 12cycles/week.
         // Each progress is one cycle.
-        requiredProgress = 96f;
-        //requiredProgress = 12f;
+        requiredProgress = 96f * pts[0].difficulty * pts[1].difficulty;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
