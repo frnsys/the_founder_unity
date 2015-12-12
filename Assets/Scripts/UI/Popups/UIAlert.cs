@@ -43,7 +43,7 @@ public class UIAlert : UIPopup {
     }
 
     protected virtual void Extend(int amount) {
-        amount = (amount/2) + 50;
+        amount = (amount/2) + 75;
         body.bottomAnchor.Set(window.transform, 0, -amount);
         body.topAnchor.Set(window.transform, 0, amount);
     }
