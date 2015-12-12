@@ -250,6 +250,12 @@ public class Company : HasStats {
         return product;
     }
 
+    public void DevelopProduct() {
+        if (developing) {
+            developingProduct.Develop(this);
+        }
+    }
+
     public void HarvestProducts(float elapsedTime) {
         float newRevenue = 0;
         foreach (Product product in products.Where(p => p.launched)) {

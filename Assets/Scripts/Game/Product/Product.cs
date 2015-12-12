@@ -140,9 +140,9 @@ public class Product : HasStats {
             recipe = ProductRecipe.LoadDefault();
         }
 
-        // This is 8 weeks at 12cycles/week.
+        // This is 12 weeks at 12cycles/week.
         // Each progress is one cycle.
-        requiredProgress = 96f * pts[0].difficulty * pts[1].difficulty;
+        requiredProgress = 1440f * pts[0].difficulty * pts[1].difficulty;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
@@ -185,6 +185,14 @@ public class Product : HasStats {
         if (Completed != null) {
             Completed(this, company);
         }
+    }
+
+    public void Develop(Company company) {
+        Debug.Log("agg worker productivity is:");
+        Debug.Log(company.AggregateWorkerStat("Productivity"));
+        _progress += company.AggregateWorkerStat("Productivity");
+        if (progress >= 1f)
+            Complete(company);
     }
 
 

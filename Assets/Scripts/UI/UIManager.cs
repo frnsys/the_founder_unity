@@ -154,6 +154,7 @@ public class UIManager : Singleton<UIManager> {
 
             // Hack to show The Market after the player has hit OK on the product completed alert.
             StartCoroutine(Delay(delegate {
+                hud.SetActive(false);
                 theMarket.Setup(p);
             }, 0.6f));
         }

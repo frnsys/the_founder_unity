@@ -204,7 +204,7 @@ public class GameManager : Singleton<GameManager> {
         StartCoroutine(Weekly());
         StartCoroutine(Monthly());
 
-        StartCoroutine(ProductRevenueCycle());
+        StartCoroutine(ProductCycle());
         StartCoroutine(OpinionCycle());
         StartCoroutine(EventCycle());
 
@@ -427,13 +427,14 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    IEnumerator ProductRevenueCycle() {
+    IEnumerator ProductCycle() {
         yield return StartCoroutine(GameTimer.Wait(cycleTime));
         while(true) {
             // Add a bit of randomness to give things
             // a more "natural" feel.
             float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
 
+            playerCompany.DevelopProduct();
             playerCompany.HarvestProducts(elapsedTime);
             playerCompany.HarvestCompanies();
 
