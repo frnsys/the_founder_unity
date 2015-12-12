@@ -155,10 +155,6 @@ public class Company : HasStats {
     public ReadOnlyCollection<Location> locations {
         get { return _locations.AsReadOnly(); }
     }
-    public int employeesAcrossLocations {
-        // TO DO this number is fudged right now. How should it work?
-        get { return (locations.Count - 1) * workers.Count + companies.Count * 1000; }
-    }
     public List<MarketManager.Market> markets;
     public float marketShare;
     public float marketSharePercent;

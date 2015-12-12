@@ -91,7 +91,7 @@ public class GameEvent : SharedResource<GameEvent> {
                 comparison = c.locations.Count;
                 break;
             case Condition.Type.Employees:
-                comparison = c.employeesAcrossLocations;
+                comparison = c.workers.Count;
                 break;
             case Condition.Type.OfficeLevel:
                 comparison = (int)c.office;

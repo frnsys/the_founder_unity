@@ -1,93 +1,99 @@
 using UnityEngine;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using Smooth.Slinq;
 
 public class UIAccounting : MonoBehaviour {
     private GameManager gm;
     private Company company;
+    public UISimpleGrid grid;
+    public UIScrollView scrollView;
+    public UILabel salariesLabel;
+    public UILabel rentLabel;
+    public UILabel employeesLabel;
+    public UILabel locationsLabel;
+    public UILabel economyLabel;
+    public UILabel revenueLabel;
+    public UILabel profitLabel;
+    public UILabel revenueChangeLabel;
+    public UILabel profitChangeLabel;
+    public UILabel lifetimeRevenueLabel;
+    public UILabel globalCoverageLabel;
+    public UILabel deathTollLabel;
+    public UILabel debtOwnedLabel;
+    public UILabel pollutionLabel;
+    public UILabel taxesAvoidedLabel;
+    public UILabel spendingRateLabel;
+    public UILabel forgettingRateLabel;
+    public UILabel averageWageLabel;
+    public UILabel engineeringLabel;
+    public UILabel designLabel;
+    public UILabel marketingLabel;
+    public UILabel productivityLabel;
+    public UILabel employeeSatisfactionLabel;
 
     void OnEnable() {
         gm = GameManager.Instance;
         company = gm.playerCompany;
+        grid.Reposition();
+        Update();
+    }
 
+    void Update() {
         float monthlySalaries = 0;
         foreach (AWorker worker in company.workers) {
             monthlySalaries += worker.monthlyPay;
         }
-        salaries.text = string.Format("Salaries: [c][EF4542]{0:C0}[-][/c]/month", monthlySalaries);
+        salariesLabel.text = string.Format("{0:C0}/mo", monthlySalaries);
 
         float monthlyRent = company.locations.Skip(1).Slinq().Select(l => l.cost).Sum();
-        rent.text = string.Format("Rent: [c][EF4542]{0:C0}[-][/c]/month", monthlyRent);
+        rentLabel.text = string.Format("{0:C0}/mo", monthlyRent);
 
-        numWorkerLocations.text = string.Format("[c][6A53F7]{0}[-][/c] employees across [c][6A53F7]{1}[-][/c] locations ([c][6A53F7]{2}[-][/c] employees at HQ)", company.employeesAcrossLocations, company.locations.Count, company.workers.Count);
+        employeesLabel.text = string.Format("{0}", company.workers.Count);
+        locationsLabel.text = string.Format("{0}", company.locations.Count);
 
-        PerformanceDict lastAnnual = company.lastAnnualPerformance;
-        float revs = 0;
-        float cost = 0;
-        if (lastAnnual != null) {
-            revs = lastAnnual["Annual Revenue"];
-            cost = lastAnnual["Annual Costs"];
-        }
-        pastRevenue.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
-        pastProfit.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
-
-        string economy = "[c][20D060]healthy[-][/c]";
+        string economy = "healthy";
         switch (gm.economy) {
             case Economy.Depression:
-                economy = "[c][EF4542]in a depression[-][/c]";
+                economy = "in a depression";
                 break;
             case Economy.Recession:
-                economy = "[c][EF4542]in a recession[-][/c]";
+                economy = "in a recession";
                 break;
             case Economy.Expansion:
-                economy = "[c][20D060]booming[-][/c]";
+                economy = "booming!";
                 break;
         }
-        economicHealth.text = string.Format("The economy is {0}.", economy);
-        lifetimeRevenue.text = string.Format("Lifetime Revenue: [c][6A53F7]{0:C0}[-][/c]", company.lifetimeRevenue);
-        totalMarketShare.text = string.Format("Global Coverage: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
-        deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
-        debtOwned.text = string.Format("World Debt Owned by Company: [c][EF4542]{0}[-][/c]", company.debtOwned);
-        pollution.text = string.Format("Pollution Emitted: [c][EF4542]{0:0}[-][/c] metric tons", company.pollution);
-        spendingRate.text = string.Format("Consumer Spending Rate: [c][20D060]{0:F2}x[-][/c]", gm.spendingMultiplier);
-        taxesAvoided.text = string.Format("Taxes Avoided: [c][20D060]{0:C0}[-][/c]", company.taxesAvoided);
-        averageIncome.text = string.Format("Global Average Income: [c][6A53F7]{0:C0}/yr[-][/c]", gm.wageMultiplier * 60000);
-        forgettingRate.text = string.Format("Public Forgetting Rate: [c][20D060]{0:F2}x[-][/c]", gm.forgettingRate);
-    }
+        economyLabel.text = economy;
 
-    void Update() {
         float revs = company.annualRevenue;
         float cost = company.annualCosts;
-        currentRevenue.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
-        currentProfit.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
-        lifetimeRevenue.text = string.Format("Lifetime Revenue: [c][6A53F7]{0:C0}[-][/c]", company.lifetimeRevenue);
-        totalMarketShare.text = string.Format("Global Coverage: [c][6A53F7]{0:F2}%[-][/c]", company.marketSharePercent * 100);
-        deathToll.text = string.Format("Deaths Caused by Products: [c][EF4542]{0}[-][/c]", company.deathToll);
-        debtOwned.text = string.Format("World Debt Owned by Company: [c][EF4542]{0}[-][/c]", company.debtOwned);
-        pollution.text = string.Format("Pollution Emitted: [c][EF4542]{0:0}[-][/c] metric tons", company.pollution);
-        taxesAvoided.text = string.Format("Taxes Avoided: [c][20D060]{0:C0}[-][/c]", company.taxesAvoided);
-        averageIncome.text = string.Format("Global Average Income: [c][6A53F7]{0:C0}/yr[-][/c]", gm.wageMultiplier * 60000);
-        forgettingRate.text = string.Format("Public Forgetting Rate: [c][20D060]{0:F2}x[-][/c]", gm.forgettingRate);
+        revenueLabel.text = string.Format("{0:C0}", revs);
+        profitLabel.text = string.Format("{0:C0}", revs-cost);
+
+        //TODO
+        //PerformanceDict lastAnnual = company.lastAnnualPerformance;
+        //if (lastAnnual != null) {
+            //revs = lastAnnual["Annual Revenue"];
+            //cost = lastAnnual["Annual Costs"];
+        //}
+        //revenueChangeLabel.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
+        //revenueChangeLabel.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
+
+        lifetimeRevenueLabel.text = string.Format("{0:C0}", company.lifetimeRevenue);
+        globalCoverageLabel.text = string.Format("{0:F2}%", company.marketSharePercent * 100);
+        deathTollLabel.text = string.Format("{0}", company.deathToll);
+        debtOwnedLabel.text = string.Format("{0}", company.debtOwned);
+        pollutionLabel.text = string.Format("{0:0} metric tons", company.pollution);
+        spendingRateLabel.text = string.Format("{0:F2}x", gm.spendingMultiplier);
+        taxesAvoidedLabel.text = string.Format("{0:C0}", company.taxesAvoided);
+        averageWageLabel.text = string.Format("{0:C0}/hr", gm.wageMultiplier * 15);
+        forgettingRateLabel.text = string.Format("{0:F2}x", gm.forgettingRate);
+
+        productivityLabel.text = string.Format("{0}", company.AggregateWorkerStat("Productivity"));
+        designLabel.text = string.Format("{0}", company.AggregateWorkerStat("Design"));
+        engineeringLabel.text = string.Format("{0}", company.AggregateWorkerStat("Engineering"));
+        marketingLabel.text = string.Format("{0}", company.AggregateWorkerStat("Marketing"));
+        employeeSatisfactionLabel.text = string.Format("{0}", company.AggregateWorkerStat("Happiness")/company.allWorkers.Count());
     }
-
-
-    public UILabel salaries;
-    public UILabel rent;
-    public UILabel numWorkerLocations;
-    public UILabel currentRevenue;
-    public UILabel currentProfit;
-    public UILabel pastRevenue;
-    public UILabel pastProfit;
-    public UILabel lifetimeRevenue;
-    public UILabel totalMarketShare;
-    public UILabel deathToll;
-    public UILabel debtOwned;
-    public UILabel pollution;
-    public UILabel economicHealth;
-    public UILabel spendingRate;
-    public UILabel taxesAvoided;
-    public UILabel averageIncome;
-    public UILabel forgettingRate;
 }
