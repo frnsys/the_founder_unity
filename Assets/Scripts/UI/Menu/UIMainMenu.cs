@@ -14,6 +14,7 @@ public class UIMainMenu : Singleton<UIMainMenu> {
     public GameObject inputConfirmPrefab;
     public GameObject infoOverlay;
     public UILabel infoLabel;
+    public UILabel loadingLabel;
 
     void OnEnable() {
         if (!GameData.SaveExists) {
@@ -53,7 +54,7 @@ public class UIMainMenu : Singleton<UIMainMenu> {
 
             UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
                 confirm.Close_();
-                BeginNewGame(companyName);
+                StartCoroutine(BeginNewGame(companyName));
             };
 
             UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
@@ -64,13 +65,15 @@ public class UIMainMenu : Singleton<UIMainMenu> {
             UIEventListener.Get(confirm.noButton).onClick += noAction;
 
         } else {
-            BeginNewGame(companyName);
+            StartCoroutine(BeginNewGame(companyName));
         }
     }
 
-    private void BeginNewGame(string companyName) {
-        infoLabel.text = "Creating the universe...";
+    // this has to be a coroutine so the loading message actually shows up...why??
+    private IEnumerator BeginNewGame(string companyName) {
         infoOverlay.SetActive(true);
+        infoLabel.text = "Creating the universe...";
+        yield return new WaitForSeconds(1);
 
         // Setup the game data.
         GameData data = GameData.New(companyName);
@@ -80,9 +83,10 @@ public class UIMainMenu : Singleton<UIMainMenu> {
         Application.LoadLevel("Onboarding");
     }
 
-    public void Continue() {
+    public IEnumerator Continue() {
         infoLabel.text = "Repeating history...";
         infoOverlay.SetActive(true);
+        yield return new WaitForSeconds(1);
 
         // Load the game and everything.
         UIManager.Reset();
