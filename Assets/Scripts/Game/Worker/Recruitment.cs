@@ -9,6 +9,7 @@ public class Recruitment : SharedResource<Recruitment> {
     public float targetScore;
     public string description;
     public bool robots;
+    public int id;
 
     static public event System.Action<Recruitment> Completed;
     public void Develop() {

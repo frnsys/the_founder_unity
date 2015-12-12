@@ -61,6 +61,10 @@ namespace UnityTest
                     MiniCompany.Load("Carrot, Inc")
                 };
 
+
+                data.company.recruitments        = new List<int>() { 0,3,4 };
+                data.company.promos              = new List<int>() { 0,2,5 };
+
                 EffectSet es = new EffectSet();
                 es.opinionEvent = new OpinionEvent(100, 400);
                 es.Apply(data.company);
@@ -244,6 +248,9 @@ namespace UnityTest
             CompareUnlockSets(gd.unlocked,               data.unlocked);
 
             Assert.AreEqual(gd.board.happiness,          data.board.happiness);
+
+            Assert.AreEqual(gd.company.recruitments, data.company.recruitments);
+            Assert.AreEqual(gd.company.promos, data.company.promos);
 		}
 
         private void CompareOpinionEvent(OpinionEvent oe, OpinionEvent oe_) {

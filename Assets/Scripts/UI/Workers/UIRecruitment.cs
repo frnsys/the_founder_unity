@@ -20,9 +20,13 @@ public class UIRecruitment : MonoBehaviour {
 
     void OnClick() {
         if (!locked) {
-            UIManager.Instance.Confirm(string.Format("Are you sure want to recruit this way? It will cost you {0:C0}.", recruitment_.cost), delegate() {
-                if (!GameManager.Instance.playerCompany.StartRecruitment(recruitment_)) {
-                    UIManager.Instance.Alert("You don't have the cash to recruit this way.");
+            UIManager.Instance.Confirm(string.Format("Are you sure want to recruit this way?"), delegate() {
+                GameManager.Instance.playerCompany.StartRecruitment(recruitment_);
+            }, null);
+        } else {
+            UIManager.Instance.Confirm(string.Format("Are you sure buy this recruitment strategy? It will cost you {0:C0}", recruitment_.cost), delegate() {
+                if (!GameManager.Instance.playerCompany.BuyRecruitment(recruitment_)) {
+                    UIManager.Instance.Alert("You don't have the cash to buy this recruitment strategy.");
                 }
             }, null);
         }
@@ -40,9 +44,14 @@ public class UIRecruitment : MonoBehaviour {
 
     private bool locked;
     public void Lock() {
-        GetComponent<UIWidget>().alpha = 0.3f;
+        GetComponent<UIWidget>().alpha = 0.75f;
         transform.Find("Lock").gameObject.SetActive(true);
         locked = true;
+    }
+    public void Unlock() {
+        GetComponent<UIWidget>().alpha = 1f;
+        transform.Find("Lock").gameObject.SetActive(false);
+        locked = false;
     }
 }
 

@@ -31,6 +31,9 @@ public class Company : HasStats {
         baseSizeLimit = 5;
         perks = new List<APerk>();
         office = Office.Type.Apartment;
+        recruitments = new List<int> {0};
+        promos = new List<int> {0};
+
 
         products = new List<Product>();
         founders = new List<AWorker>();
@@ -346,9 +349,13 @@ public class Company : HasStats {
     }
 
 
-    public bool StartRecruitment(Recruitment recruitment) {
-        if (Pay(recruitment.cost)) {
-            recruitment.Develop();
+    public List<int> recruitments;
+    public void StartRecruitment(Recruitment recruitment) {
+        recruitment.Develop();
+    }
+    public bool BuyRecruitment(Recruitment r) {
+        if (Pay(r.cost)) {
+            recruitments.Add(r.id);
             return true;
         }
         return false;
@@ -374,10 +381,15 @@ public class Company : HasStats {
         opinionEvents.Add(oe);
     }
 
-    public bool StartPromo(Promo promo) {
-        if (Pay(promo.cost)) {
-            promo.Develop();
-            UIManager.Instance.LaunchHypeMinigame(promo);
+    public void StartPromo(Promo promo) {
+        promo.Develop();
+        UIManager.Instance.LaunchHypeMinigame(promo);
+    }
+
+    public List<int> promos;
+    public bool BuyPromo(Promo p) {
+        if (Pay(p.cost)) {
+            promos.Add(p.id);
             return true;
         }
         return false;

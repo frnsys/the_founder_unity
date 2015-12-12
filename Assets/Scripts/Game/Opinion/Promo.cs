@@ -8,6 +8,7 @@ public class Promo : SharedResource<Promo> {
     public string description;
     public float cost;
     public int pucks;
+    public int id;
 
     static public event System.Action<Promo> Completed;
     public void Develop() {

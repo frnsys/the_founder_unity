@@ -6,6 +6,7 @@ public class UIManageCommunications : MonoBehaviour {
     public GameObject promoPrefab;
     public UISimpleGrid grid;
     public UIScrollView scrollView;
+    public List<UIPromo> promos;
 
     void OnEnable() {
         LoadPromos();
@@ -13,7 +14,6 @@ public class UIManageCommunications : MonoBehaviour {
 
     private void LoadPromos() {
         int i = 0;
-        // Promos are unlocked by lifetime revenue.
         foreach (Promo p in Promo.LoadAll().OrderBy(p => p.cost)) {
             GameObject promoItem = NGUITools.AddChild(grid.gameObject, promoPrefab);
             UIPromo uip = promoItem.GetComponent<UIPromo>();
@@ -22,11 +22,22 @@ public class UIManageCommunications : MonoBehaviour {
             uip.stars = i;
             i++;
 
-            if (GameManager.Instance.playerCompany.lifetimeRevenue < (p.cost - 30000) * 4) {
+            if (!GameManager.Instance.playerCompany.promos.Contains(p.id)) {
                 uip.Lock();
             }
+            promos.Add(uip);
         }
         grid.Reposition();
+    }
+
+    void Update() {
+        foreach (UIPromo uip in promos) {
+            if (!GameManager.Instance.playerCompany.promos.Contains(uip.promo.id)) {
+                uip.Lock();
+            } else {
+                uip.Unlock();
+            }
+        }
     }
 
     public GameObject historyPrefab;

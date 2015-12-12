@@ -20,9 +20,13 @@ public class UIPromo : MonoBehaviour {
 
     void OnClick() {
         if (!locked) {
-            UIManager.Instance.Confirm(string.Format("Are you sure want to run this campaign? It will cost you {0:C0}.", promo_.cost), delegate() {
-                if (!GameManager.Instance.playerCompany.StartPromo(promo_)) {
-                    UIManager.Instance.Alert("You don't have the cash for this campaign.");
+            UIManager.Instance.Confirm(string.Format("Are you sure want to run this campaign?"), delegate() {
+                GameManager.Instance.playerCompany.StartPromo(promo_);
+            }, null);
+        } else {
+            UIManager.Instance.Confirm(string.Format("Are you sure buy this promotional strategy? It will cost you {0:C0}", promo_.cost), delegate() {
+                if (!GameManager.Instance.playerCompany.BuyPromo(promo_)) {
+                    UIManager.Instance.Alert("You don't have the cash to buy this promotional strategy.");
                 }
             }, null);
         }
@@ -45,9 +49,14 @@ public class UIPromo : MonoBehaviour {
 
     private bool locked;
     public void Lock() {
-        GetComponent<UIWidget>().alpha = 0.3f;
+        GetComponent<UIWidget>().alpha = 0.75f;
         transform.Find("Lock").gameObject.SetActive(true);
         locked = true;
+    }
+    public void Unlock() {
+        GetComponent<UIWidget>().alpha = 1f;
+        transform.Find("Lock").gameObject.SetActive(false);
+        locked = false;
     }
 }
 
