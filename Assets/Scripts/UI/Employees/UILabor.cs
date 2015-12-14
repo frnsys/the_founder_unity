@@ -11,6 +11,9 @@ public class UILabor : MonoBehaviour {
     public Mesh creativityMesh;
     public Mesh clevernessMesh;
     public Mesh charismaMesh;
+    public Mesh blockMesh;
+    public Mesh bugMesh;
+    public Mesh outrageMesh;
     public Mesh breakthroughMesh;
 
     private Stat stat_;
@@ -22,19 +25,31 @@ public class UILabor : MonoBehaviour {
             stat_ = value;
             switch (stat.name) {
                 case "Charisma":
-                    displayMesh.mesh = charismaMesh;
+                    if (stat_.value > 0)
+                        displayMesh.mesh = charismaMesh;
+                    else
+                        displayMesh.mesh = outrageMesh;
                     break;
                 case "Creativity":
-                    displayMesh.mesh = creativityMesh;
+                    if (stat_.value > 0)
+                        displayMesh.mesh = creativityMesh;
+                    else
+                        displayMesh.mesh = blockMesh;
                     break;
                 case "Cleverness":
-                    displayMesh.mesh = clevernessMesh;
+                    if (stat_.value > 0)
+                        displayMesh.mesh = clevernessMesh;
+                    else
+                        displayMesh.mesh = bugMesh;
                     break;
                 case "Breakthrough":
                     displayMesh.mesh = breakthroughMesh;
                     break;
             }
-            amount.text = string.Format("+{0:F0}", stat_.value);
+            if (stat_.value > 0)
+                amount.text = string.Format("+{0:F0}", stat_.value);
+            else
+                amount.text = string.Format("{0:F0}", stat_.value);
         }
     }
 

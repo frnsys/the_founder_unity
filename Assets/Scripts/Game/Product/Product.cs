@@ -30,6 +30,8 @@ public class Product : HasStats {
         get { return _progress/requiredProgress; }
     }
 
+    public float difficulty;
+
     public bool killsPeople;
     public bool debtsPeople;
     public bool pollutes;
@@ -142,7 +144,8 @@ public class Product : HasStats {
 
         // This is 12 weeks at 12cycles/week.
         // Each progress is one cycle.
-        requiredProgress = 1440f * pts[0].difficulty * pts[1].difficulty;
+        difficulty = pts[0].difficulty * pts[1].difficulty;
+        requiredProgress = 1440f * difficulty;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
@@ -197,12 +200,15 @@ public class Product : HasStats {
         switch (stat.name) {
             case "Charisma":
                 marketing.baseValue += stat.value;
+                marketing.baseValue = Mathf.Max(0f, marketing.baseValue);
                 break;
             case "Creativity":
                 design.baseValue += stat.value;
+                design.baseValue = Mathf.Max(0f, design.baseValue);
                 break;
             case "Cleverness":
                 engineering.baseValue += stat.value;
+                engineering.baseValue = Mathf.Max(0f, engineering.baseValue);
                 break;
             case "Breakthrough":
                 design.baseValue += stat.value;
