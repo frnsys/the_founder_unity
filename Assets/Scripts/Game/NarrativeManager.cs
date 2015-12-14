@@ -294,7 +294,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         //uim.menu.Activate("Communications");
     }
 
-    void OnHypeDone() {
+    void OnHypeDone(float hypeScore) {
         if (Stage(OBS.NEW_PRODUCT)) {
             StartCoroutine(Delay(delegate(GameObject obj) {
                 MentorMessages(new string[] {

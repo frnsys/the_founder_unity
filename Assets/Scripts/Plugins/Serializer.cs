@@ -80,7 +80,7 @@ public class Serializer {
                 string name = fi.Name;
                 object val = fi.GetValue(obj);
 
-               Debug.Log("Serializing " + name + "...");
+               //Debug.Log("Serializing " + name + "...");
 
                 // If this field references a resource,
                 // we don't want to serialize the entire resource.
@@ -176,7 +176,7 @@ public class Serializer {
 
         // If this object is a resource, we just reload it.
         if (IsSharedResource(type)) {
-            Debug.Log(string.Format("Deserializing SharedResource of type {0}", type));
+            //Debug.Log(string.Format("Deserializing SharedResource of type {0}", type));
             string resourceName = (string)replica.map["name"];
             return type.GetMethod("Load").Invoke(null, new object[] { resourceName });
         }
@@ -187,7 +187,7 @@ public class Serializer {
                 string name = fi.Name;
                 object val = replica.map[name];
 
-                Debug.Log(string.Format("Deserializing object named {0}", name));
+                //Debug.Log(string.Format("Deserializing object named {0}", name));
 
                 // If this field references a resource,
                 // reload it based on the name and type.

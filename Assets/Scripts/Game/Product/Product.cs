@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class Product : HasStats {
     public enum State {
         DEVELOPMENT,
+        COMPLETED,
         LAUNCHED,
         RETIRED
     }
@@ -182,18 +183,26 @@ public class Product : HasStats {
 
     static public event System.Action<Product, Company> Completed;
     public void Complete(Company company) {
-        Launch(company);
-        company.CompletedProduct(this);
-        // Trigger completed event.
-        if (Completed != null) {
-            Completed(this, company);
+        if (GameManager.Instance.playerCompany == company) {
+            HypeMinigame.Done += OnHypeDone;
+
+            // Start the hype/promo flow
+            UIManager.Instance.ShowPromos();
         }
+    }
+
+    void OnHypeDone(float hypeScore) {
+        if (GameManager.Instance.playerCompany.developingProduct == this)
+            Launch(GameManager.Instance.playerCompany, hypeScore);
+        HypeMinigame.Done -= OnHypeDone;
     }
 
     public void Develop(Company company) {
         _progress += company.AggregateWorkerStat("Productivity");
-        if (progress >= 1f)
+        if (progress >= 1f && developing) {
+            _state = State.COMPLETED;
             Complete(company);
+        }
     }
 
     public void Develop(Stat stat) {
@@ -222,7 +231,7 @@ public class Product : HasStats {
     public float score;
     public float hype;
     public float quality;
-    public void Launch(Company company) {
+    public void Launch(Company company, float hypeBonus=0) {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
 
@@ -248,7 +257,7 @@ public class Product : HasStats {
 
         // Marketing is considered separately to be the "hype" around the product
         float U_ = Mathf.Min((U/i) * u_w, 1f);
-        hype = U_/u_w;
+        hype = U_/u_w * hypeBonus;
 
         // Revenue model modifications:
         longevity = (recipe.maxLongevity/100) * quality;
@@ -287,6 +296,13 @@ public class Product : HasStats {
         Debug.Log(string.Format("Longevity {0}", longevity));
 
         _state = State.LAUNCHED;
+
+        company.CompletedProduct(this);
+
+        // Trigger completed event.
+        if (Completed != null) {
+            Completed(this, company);
+        }
     }
 
     public float Revenue(float elapsedTime, Company company) {

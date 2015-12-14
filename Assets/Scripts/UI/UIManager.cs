@@ -263,8 +263,14 @@ public class UIManager : Singleton<UIManager> {
         return report;
     }
 
+    public GameObject promoWindow;
+    public void ShowPromos() {
+        OpenPopup(promoWindow);
+    }
+
     public GameObject hypeMinigame;
     public void LaunchHypeMinigame(Promo promo) {
+        ClosePopup(); // Close promo window
         GameObject hmg = NGUITools.AddChild(gameObject, hypeMinigame);
         hmg.GetComponent<HypeMinigame>().Setup(promo);
 

@@ -230,7 +230,7 @@ public class Company : HasStats {
         get { return products.FindAll(p => p.launched); }
     }
     public bool developing {
-        get { return developingProduct != null; }
+        get { return developingProduct != null && developingProduct.developing; }
     }
 
     public bool HasProduct(ProductRecipe r ) {
