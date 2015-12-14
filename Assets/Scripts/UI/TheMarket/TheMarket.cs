@@ -31,9 +31,9 @@ public class TheMarket : MonoBehaviour {
         UIAlert alert;
         Debug.Log(p.hype);
         // TWEAK THIS!! The idea is that higher difficulty products should have higher standards for a successful promo
-        if (p.hype >= p.difficulty * 0.7) {
+        if (p.hype >= p.difficulty * 0.7 && p.hype <= p.difficulty) {
             alert = UIManager.Instance.Alert(string.Format("Our promo went ok - we only reached {0:n0} people. Hopefully the product still catches on...", numPeople));
-        } else if (p.hype <= p.difficulty * 1.5) {
+        } else if (p.hype > p.difficulty && p.hype <= p.difficulty * 1.5) {
             alert = UIManager.Instance.Alert(string.Format("Our promo went great! We reached {0:n0} people - there's a lot of buzz around the launch.", numPeople));
         } else if (p.hype > p.difficulty * 1.5) {
             alert = UIManager.Instance.Alert(string.Format("Everyone is super amped about our product release! Over {0:n0} people have been talking about it.", numPeople));
