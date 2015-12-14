@@ -12,6 +12,7 @@ public class UIAccounting : MonoBehaviour {
     public UILabel rentLabel;
     public UILabel employeesLabel;
     public UILabel locationsLabel;
+    public UILabel technologiesLabel;
     public UILabel economyLabel;
     public UILabel revenueLabel;
     public UILabel profitLabel;
@@ -51,6 +52,7 @@ public class UIAccounting : MonoBehaviour {
 
         employeesLabel.text = string.Format("{0}", company.workers.Count);
         locationsLabel.text = string.Format("{0}", company.locations.Count);
+        technologiesLabel.text = string.Format("{0}", company.technologies.Count);
 
         string economy = "healthy";
         switch (gm.economy) {
