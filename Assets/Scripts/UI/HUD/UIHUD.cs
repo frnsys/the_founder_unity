@@ -12,6 +12,7 @@ public class UIHUD : MonoBehaviour {
     public GameObject activeProductPrefab;
     public Color highlightColor;
     public UIProgressBar productDevelopment;
+    public GameObject newProductButton;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -75,10 +76,12 @@ public class UIHUD : MonoBehaviour {
     void BeganProduct(Product p, Company c) {
         productDevelopment.value = 0;
         productDevelopment.gameObject.SetActive(true);
+        newProductButton.SetActive(false);
     }
 
     void CompletedProduct(Product p, Company c) {
         productDevelopment.gameObject.SetActive(false);
+        newProductButton.SetActive(true);
     }
 }
 
