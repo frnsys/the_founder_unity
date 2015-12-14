@@ -230,7 +230,7 @@ public class Company : HasStats {
         get { return products.FindAll(p => p.launched); }
     }
     public bool developing {
-        get { return developingProduct != null; }
+        get { return developingProduct != null && developingProduct.developing; }
     }
 
     public bool HasProduct(ProductRecipe r ) {
@@ -248,6 +248,12 @@ public class Company : HasStats {
             BeganProduct(product, this);
 
         return product;
+    }
+
+    public void DevelopProduct() {
+        if (developing) {
+            developingProduct.Develop(this);
+        }
     }
 
     public void HarvestProducts(float elapsedTime) {

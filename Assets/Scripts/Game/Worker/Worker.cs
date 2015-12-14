@@ -2,6 +2,7 @@
  * A worker which contributes to the development of products.
  * "Worker" here is used abstractly - it can mean an employee, or a location, or a planet.
  * i.e. a worker is some _productive_ entity.
+ * This is the immutable template of a Worker, which is instantiated as AWorker
  */
 
 using UnityEngine;

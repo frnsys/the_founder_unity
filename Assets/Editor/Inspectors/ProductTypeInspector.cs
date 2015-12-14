@@ -19,6 +19,7 @@ internal class ProductTypeInspector : Editor {
         p.name = EditorGUILayout.TextField("Name", p.name);
 
         p.mesh = (Mesh)EditorGUILayout.ObjectField("Mesh", p.mesh, typeof(Mesh), false);
+        p.difficulty = EditorGUILayout.FloatField("Difficulty", p.difficulty);
 
         EditorGUILayout.LabelField("Required Verticals");
         for (int i=0; i < p.requiredVerticals.Count; i++) {

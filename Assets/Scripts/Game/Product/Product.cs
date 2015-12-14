@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class Product : HasStats {
     public enum State {
         DEVELOPMENT,
+        COMPLETED,
         LAUNCHED,
         RETIRED
     }
@@ -29,6 +30,8 @@ public class Product : HasStats {
     public float progress {
         get { return _progress/requiredProgress; }
     }
+
+    public float difficulty;
 
     public bool killsPeople;
     public bool debtsPeople;
@@ -140,10 +143,10 @@ public class Product : HasStats {
             recipe = ProductRecipe.LoadDefault();
         }
 
-        // This is 8 weeks at 12cycles/week.
+        // This is 12 weeks at 12cycles/week.
         // Each progress is one cycle.
-        requiredProgress = 96f;
-        //requiredProgress = 12f;
+        difficulty = pts[0].difficulty * pts[1].difficulty;
+        requiredProgress = 1440f * difficulty;
         revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
@@ -180,17 +183,55 @@ public class Product : HasStats {
 
     static public event System.Action<Product, Company> Completed;
     public void Complete(Company company) {
-        Launch(company);
-        company.CompletedProduct(this);
-        // Trigger completed event.
-        if (Completed != null) {
-            Completed(this, company);
+        if (GameManager.Instance.playerCompany == company) {
+            HypeMinigame.Done += OnHypeDone;
+
+            // Start the hype/promo flow
+            UIManager.Instance.ShowPromos();
+        }
+    }
+
+    void OnHypeDone(float hypeScore) {
+        if (GameManager.Instance.playerCompany.developingProduct == this)
+            Launch(GameManager.Instance.playerCompany, hypeScore);
+        HypeMinigame.Done -= OnHypeDone;
+    }
+
+    public void Develop(Company company) {
+        _progress += company.AggregateWorkerStat("Productivity");
+        if (progress >= 1f && developing) {
+            _state = State.COMPLETED;
+            Complete(company);
+        }
+    }
+
+    public void Develop(Stat stat) {
+        switch (stat.name) {
+            case "Charisma":
+                marketing.baseValue += stat.value;
+                marketing.baseValue = Mathf.Max(0f, marketing.baseValue);
+                break;
+            case "Creativity":
+                design.baseValue += stat.value;
+                design.baseValue = Mathf.Max(0f, design.baseValue);
+                break;
+            case "Cleverness":
+                engineering.baseValue += stat.value;
+                engineering.baseValue = Mathf.Max(0f, engineering.baseValue);
+                break;
+            case "Breakthrough":
+                design.baseValue += stat.value;
+                marketing.baseValue += stat.value;
+                engineering.baseValue += stat.value;
+                break;
         }
     }
 
 
     public float score;
-    public void Launch(Company company) {
+    public float hype;
+    public float quality;
+    public void Launch(Company company, float hypeBonus=0) {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
 
@@ -209,21 +250,25 @@ public class Product : HasStats {
         // Calculate the score, i.e. the percent achieve of the ideal product values.
         // The maximum score is 1.0. We cap each value individually so that
         // they don't "bleed over" into others.
+        // We consider engineering and design together to be the "quality" of the product
         float A_ = Mathf.Min((A/i) * a_w, 1f);
-        float U_ = Mathf.Min((U/i) * u_w, 1f);
         float P_ = Mathf.Min((P/i) * p_w, 1f);
-        score = (A_ + U_ + P_)/(a_w + u_w + p_w);
+        quality = (A_ + P_)/(a_w + p_w);
+
+        // Marketing is considered separately to be the "hype" around the product
+        float U_ = Mathf.Min((U/i) * u_w, 1f);
+        hype = U_/u_w * hypeBonus;
 
         // Revenue model modifications:
-        longevity = (recipe.maxLongevity/100) * score;
+        longevity = (recipe.maxLongevity/100) * quality;
 
-        marketShare = company.marketSharePercent * score;
+        marketShare = company.marketSharePercent * quality;
 
         if (techPenalty)
             marketShare *= 0.1f;
 
-        // Hype buffs against public opinion.
-        marketShare *= 1 + company.publicity.value;
+        // Hype matters a lot
+        marketShare *= 1 + hype;
 
         // Public opinion's impact.
         marketShare *= 1 + company.opinion.value/100f;
@@ -236,8 +281,13 @@ public class Product : HasStats {
 
         // Effect modifications.
         effects = recipe.effects.Clone();
-        effects.ApplyMultiplier(score);
+        effects.ApplyMultiplier(quality);
 
+        // Score is weighted towards hype
+        score = (quality + (2*hype))/3;
+
+        Debug.Log(string.Format("Quality {0}", quality));
+        Debug.Log(string.Format("Hype {0}", hype));
         Debug.Log(string.Format("Score {0}", score));
         Debug.Log(string.Format("Design Value {0}", A));
         Debug.Log(string.Format("Marketing Value {0}", U));
@@ -246,6 +296,13 @@ public class Product : HasStats {
         Debug.Log(string.Format("Longevity {0}", longevity));
 
         _state = State.LAUNCHED;
+
+        company.CompletedProduct(this);
+
+        // Trigger completed event.
+        if (Completed != null) {
+            Completed(this, company);
+        }
     }
 
     public float Revenue(float elapsedTime, Company company) {

@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Social Network
   m_EditorClassIdentifier: 
   mesh: {fileID: 4300030, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  difficulty: 1
   requiredVerticals:
   - {fileID: 11400000, guid: aabf18a6ad41e4f93b268341f8f9e38f, type: 2}
-  requiredInfrastructure:
-    keys: 00000000010000000200000003000000
-    values: 01000000000000000000000000000000

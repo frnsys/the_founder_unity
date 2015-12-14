@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Celebrity
   m_EditorClassIdentifier: 
   mesh: {fileID: 4300050, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  difficulty: 1
   requiredVerticals:
   - {fileID: 11400000, guid: fd7b80ed9b7dd4107aa503678b8bde60, type: 2}
-  requiredInfrastructure:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000200000000000000
