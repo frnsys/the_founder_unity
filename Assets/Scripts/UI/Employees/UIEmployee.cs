@@ -3,16 +3,15 @@ using System.Collections;
 
 public class UIEmployee : MonoBehaviour {
     public Transform HUDtarget;
-    public Color unhappyColor;
-    public Color happyColor;
 
     [HideInInspector]
     public GameObject HUDgroup;
-    [HideInInspector]
-    public UILabel happinessLabel;
 
     [HideInInspector]
     public AWorker worker;
+
+    [HideInInspector]
+    public UILabor laborObj;
 
     [SerializeField, HideInInspector]
     private State state = State.Wandering;
@@ -85,29 +84,15 @@ public class UIEmployee : MonoBehaviour {
 
     IEnumerator Working() {
         while(true) {
-            float happy = worker.happiness;
-            if (happy >= 20) {
-                happinessLabel.text = ":D";
-                happinessLabel.color = happyColor;
-            } else if (happy >= 14) {
-                happinessLabel.text = ":)";
-                happinessLabel.color = happyColor;
-            } else if (happy >= 8) {
-                happinessLabel.text = ":\\";
-                happinessLabel.color = happyColor;
-            } else if (happy >= 4) {
-                happinessLabel.text = ":(";
-                happinessLabel.color = unhappyColor;
-            } else {
-                happinessLabel.text = ">:(";
-                happinessLabel.color = unhappyColor;
+            if (company.developing && laborObj.stat == null) {
+                // Robots have no productivity issues.
+                if (worker.robot || Random.value < worker.productivity) {
+                    laborObj.stat = worker.Work(company.developingProduct);
+                    laborObj.gameObject.SetActive(true);
+                }
             }
-
             yield return StartCoroutine(GameTimer.Wait(1.4f * Random.value));
         }
     }
 
-    private float Randomize(float value) {
-        return Mathf.Max(1, (0.5f + Random.value) * value);
-    }
 }

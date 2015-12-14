@@ -1,7 +1,5 @@
 /*
- * A worker which contributes to the development of products.
- * "Worker" here is used abstractly - it can mean an employee, or a location, or a planet.
- * i.e. a worker is some _productive_ entity.
+ * An mutable instance of a Worker
  */
 
 using UnityEngine;
@@ -147,6 +145,49 @@ public class AWorker : ScriptableObject {
         }
     }
 
+    private string RollStat() {
+        // Selects one stat at random, weighted by value
+        float total = charisma + creativity + cleverness;
+        float rand = Random.Range(0f, total);
+        string[] stats = new string[] {"Charisma", "Creativity", "Cleverness"};
+
+        float acc = 0;
+        string selected = null;
+        foreach (string stat in stats) {
+            acc += StatByName(stat);
+            if (acc >= rand) {
+                selected = stat;
+                break;
+            }
+        }
+        return selected;
+    }
+
+    private bool RollBreakthrough() {
+        // Rolls to see if employee has a breakthrough or not
+        // Need to ensure that happiness can't go over 100
+        float breakthrough_prob = happiness / 200;
+        return Random.value < breakthrough_prob;
+    }
+
+    public Stat Work(Product p) {
+        Stat stat;
+        if (RollBreakthrough()) {
+            stat = new Stat("Breakthrough", Randomize(
+                Mathf.Max(creativity, cleverness, charisma)
+            ));
+        } else {
+            string statName = RollStat();
+            stat = new Stat(statName, Randomize(StatByName(statName)));
+        }
+        p.Develop(stat);
+        return stat;
+    }
+
+    private float Randomize(float value) {
+        return Mathf.Max(1, (0.5f + Random.value) * value);
+    }
+
     public void ApplyBuffs(List<StatBuff> buffs) {
         foreach (StatBuff buff in buffs) {
             ModifyStat(buff.name, buff.value);
@@ -155,7 +196,7 @@ public class AWorker : ScriptableObject {
 
     public void RemoveBuffs(List<StatBuff> buffs) {
         foreach (StatBuff buff in buffs) {
-            ModifyStat(buff.name, buff.value);
+            ModifyStat(buff.name, -buff.value);
         }
     }
 

@@ -188,15 +188,34 @@ public class Product : HasStats {
     }
 
     public void Develop(Company company) {
-        Debug.Log("agg worker productivity is:");
-        Debug.Log(company.AggregateWorkerStat("Productivity"));
         _progress += company.AggregateWorkerStat("Productivity");
         if (progress >= 1f)
             Complete(company);
     }
 
+    public void Develop(Stat stat) {
+        switch (stat.name) {
+            case "Charisma":
+                marketing.baseValue += stat.value;
+                break;
+            case "Creativity":
+                design.baseValue += stat.value;
+                break;
+            case "Cleverness":
+                engineering.baseValue += stat.value;
+                break;
+            case "Breakthrough":
+                design.baseValue += stat.value;
+                marketing.baseValue += stat.value;
+                engineering.baseValue += stat.value;
+                break;
+        }
+    }
+
 
     public float score;
+    public float hype;
+    public float quality;
     public void Launch(Company company) {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
@@ -216,21 +235,25 @@ public class Product : HasStats {
         // Calculate the score, i.e. the percent achieve of the ideal product values.
         // The maximum score is 1.0. We cap each value individually so that
         // they don't "bleed over" into others.
+        // We consider engineering and design together to be the "quality" of the product
         float A_ = Mathf.Min((A/i) * a_w, 1f);
-        float U_ = Mathf.Min((U/i) * u_w, 1f);
         float P_ = Mathf.Min((P/i) * p_w, 1f);
-        score = (A_ + U_ + P_)/(a_w + u_w + p_w);
+        quality = (A_ + P_)/(a_w + p_w);
+
+        // Marketing is considered separately to be the "hype" around the product
+        float U_ = Mathf.Min((U/i) * u_w, 1f);
+        hype = U_/u_w;
 
         // Revenue model modifications:
-        longevity = (recipe.maxLongevity/100) * score;
+        longevity = (recipe.maxLongevity/100) * quality;
 
-        marketShare = company.marketSharePercent * score;
+        marketShare = company.marketSharePercent * quality;
 
         if (techPenalty)
             marketShare *= 0.1f;
 
-        // Hype buffs against public opinion.
-        marketShare *= 1 + company.publicity.value;
+        // Hype matters a lot
+        marketShare *= 1 + hype;
 
         // Public opinion's impact.
         marketShare *= 1 + company.opinion.value/100f;
@@ -243,8 +266,13 @@ public class Product : HasStats {
 
         // Effect modifications.
         effects = recipe.effects.Clone();
-        effects.ApplyMultiplier(score);
+        effects.ApplyMultiplier(quality);
 
+        // Score is weighted towards hype
+        score = (quality + (2*hype))/3;
+
+        Debug.Log(string.Format("Quality {0}", quality));
+        Debug.Log(string.Format("Hype {0}", hype));
         Debug.Log(string.Format("Score {0}", score));
         Debug.Log(string.Format("Design Value {0}", A));
         Debug.Log(string.Format("Marketing Value {0}", U));

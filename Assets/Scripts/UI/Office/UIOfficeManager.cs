@@ -109,10 +109,10 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
 
         GameObject hud = NGUITools.AddChild(employeeHUDs, employeeHUDPrefab);
 
-        Transform happiness = hud.transform.Find("Happiness");
-        UIFollowTarget uift = happiness.GetComponent<UIFollowTarget>();
+        Transform labor = hud.transform.Find("Labor");
+        UIFollowTarget uift = labor.GetComponent<UIFollowTarget>();
         SetupFollowTarget(uie, uift);
-        uie.happinessLabel = happiness.GetComponent<UILabel>();
+        uie.laborObj = labor.GetComponent<UILabor>();
 
         uie.HUDgroup = hud;
     }
