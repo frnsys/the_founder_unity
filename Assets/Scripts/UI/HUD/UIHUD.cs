@@ -11,8 +11,12 @@ public class UIHUD : MonoBehaviour {
     public UIGrid grid;
     public GameObject activeProductPrefab;
     public Color highlightColor;
+
     public UIProgressBar productDevelopment;
     public GameObject newProductButton;
+    public UILabel devEngineering;
+    public UILabel devDesign;
+    public UILabel devMarketing;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -65,6 +69,9 @@ public class UIHUD : MonoBehaviour {
 
             if (company.developing) {
                 productDevelopment.value = company.developingProduct.progress;
+                devEngineering.text = string.Format("{0:F0}", company.developingProduct.engineering.baseValue);
+                devDesign.text = string.Format("{0:F0}", company.developingProduct.design.baseValue);
+                devMarketing.text = string.Format("{0:F0}", company.developingProduct.marketing.baseValue);
             }
 
             grid.Reposition();
