@@ -27,6 +27,28 @@ public class TheMarket : MonoBehaviour {
     // Setup the market for a product.
     private Product product;
     public void Setup(Product p) {
+        int numPeople = (int)(Mathf.Pow(p.hype, 2) * 100 * (Random.value + 0.75f));
+        UIAlert alert;
+        Debug.Log(p.hype);
+        // TWEAK THIS!! The idea is that higher difficulty products should have higher standards for a successful promo
+        if (p.hype >= p.difficulty * 0.7) {
+            alert = UIManager.Instance.Alert(string.Format("Our promo went ok - we only reached {0:n0} people. Hopefully the product still catches on...", numPeople));
+        } else if (p.hype <= p.difficulty * 1.5) {
+            alert = UIManager.Instance.Alert(string.Format("Our promo went great! We reached {0:n0} people - there's a lot of buzz around the launch.", numPeople));
+        } else if (p.hype > p.difficulty * 1.5) {
+            alert = UIManager.Instance.Alert(string.Format("Everyone is super amped about our product release! Over {0:n0} people have been talking about it.", numPeople));
+        } else {
+            alert = UIManager.Instance.Alert("No one cares about our product...let's hope some enthusiasts pick it up...");
+        }
+
+        UIEventListener.VoidDelegate action = delegate(GameObject obj) {
+            StartMarket(p);
+            alert.Close_();
+        };
+        UIEventListener.Get(alert.okButton).onClick += action;
+    }
+
+    void StartMarket(Product p) {
         Reset();
         gameObject.SetActive(true);
         marketHud.SetActive(true);

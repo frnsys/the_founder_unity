@@ -205,8 +205,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
 
         if (data.obs < OBS.GAME_INTRO) {
-            uim.statusBar.hypeLabel.gameObject.SetActive(false);
-            uim.menu.Deactivate("Communications");
+            // TODO update this
+            //uim.statusBar.hypeLabel.gameObject.SetActive(false);
+            //uim.menu.Deactivate("Communications");
 
             // Show the game intro.
             Intro();
@@ -282,17 +283,18 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         MentorMessages(new string[] {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
-            string.Format("Before we dig into building a product, we have to {0} up your company!", ConceptHighlight("hype")),
-            "That way, when you release a product, consumers will be clamoring to buy it.",
-            string.Format("You can hype up company by launching {0} from the {1} below.", ConceptHighlight("promotional campaigns"), MenuHighlight("megaphone")),
-            "Go a head and give it a try!"
+            // TODO clean this up/update this now that hype is gone
+            //string.Format("Before we dig into building a product, we have to {0} up your company!", ConceptHighlight("hype")),
+            //"That way, when you release a product, consumers will be clamoring to buy it.",
+            //string.Format("You can hype up company by launching {0} from the {1} below.", ConceptHighlight("promotional campaigns"), MenuHighlight("megaphone")),
+            //"Go a head and give it a try!"
         });
-        UIManager uim = UIManager.Instance;
-        uim.statusBar.hypeLabel.gameObject.SetActive(true);
-        uim.menu.Activate("Communications");
+        //UIManager uim = UIManager.Instance;
+        //uim.statusBar.hypeLabel.gameObject.SetActive(true);
+        //uim.menu.Activate("Communications");
     }
 
-    void OnHypeDone() {
+    void OnHypeDone(float hypeScore) {
         if (Stage(OBS.NEW_PRODUCT)) {
             StartCoroutine(Delay(delegate(GameObject obj) {
                 MentorMessages(new string[] {

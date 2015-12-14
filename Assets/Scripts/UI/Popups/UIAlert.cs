@@ -13,6 +13,7 @@ public class UIAlert : UIPopup {
             Extend(bodyLabel.height);
         }
     }
+    public GameObject okButton;
 
     private float overlayAlpha = 0.3f;
 

@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Name: Drug
   m_EditorClassIdentifier: 
   mesh: {fileID: 4300036, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}
+  difficulty: 1
   requiredVerticals:
   - {fileID: 11400000, guid: f33f8406f83ae494884eb18eea4d864d, type: 2}
-  requiredInfrastructure:
-    keys: 00000000010000000200000003000000
-    values: 00000000000000000000000004000000

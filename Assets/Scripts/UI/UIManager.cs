@@ -130,11 +130,12 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnBeganProduct(Product p, Company c) {
-        if (c == gm.playerCompany) {
-            productHud.SetActive(true);
-            hud.SetActive(false);
-            LaunchProductMinigame(p, c);
-        }
+        // TODO: SWITCHING OVER TO NEW PRODUCT SYSTEM
+        //if (c == gm.playerCompany) {
+            //productHud.SetActive(true);
+            //hud.SetActive(false);
+            //LaunchProductMinigame(p, c);
+        //}
     }
 
     // Show a "product completed" alert.
@@ -153,6 +154,7 @@ public class UIManager : Singleton<UIManager> {
 
             // Hack to show The Market after the player has hit OK on the product completed alert.
             StartCoroutine(Delay(delegate {
+                hud.SetActive(false);
                 theMarket.Setup(p);
             }, 0.6f));
         }
@@ -261,8 +263,14 @@ public class UIManager : Singleton<UIManager> {
         return report;
     }
 
+    public GameObject promoWindow;
+    public void ShowPromos() {
+        OpenPopup(promoWindow);
+    }
+
     public GameObject hypeMinigame;
     public void LaunchHypeMinigame(Promo promo) {
+        ClosePopup(); // Close promo window
         GameObject hmg = NGUITools.AddChild(gameObject, hypeMinigame);
         hmg.GetComponent<HypeMinigame>().Setup(promo);
 
