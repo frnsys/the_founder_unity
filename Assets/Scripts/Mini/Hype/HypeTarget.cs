@@ -9,6 +9,10 @@ public class HypeTarget : MonoBehaviour {
     public static Color firstColor = new Color(0.74f, 1.0f, 0.95f, 0.4f);
     public static Color hypeColor = new Color(0.34f, 0.98f, 0.57f);
 
+    public Mesh outrageMesh;
+    public Mesh happyMesh;
+    public Texture moodTexture;
+
     public enum Function {
         Linear,
         Sin,
@@ -39,6 +43,7 @@ public class HypeTarget : MonoBehaviour {
     public float distance = 5f;
     public float cascadeRadius = 10f;
     public int numPucks;
+    public float bonus = 1f;
     public Function function;
     public GameObject rangeDisplay;
     public GameObject model;
@@ -112,7 +117,6 @@ public class HypeTarget : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-
         if (enabled) {
             // Check if we are working with the player puck.
             HypePuck puck = other.GetComponent<HypePuck>();
@@ -126,11 +130,21 @@ public class HypeTarget : MonoBehaviour {
             // Otherwise, it is a target puck.
             } else {
                 // Ignore the puck if it belongs to this target.
-                if (other.GetComponent<HypeTargetPuck>().owner == this) {
+                HypeTarget hto = other.GetComponent<HypeTargetPuck>().owner;
+                if (hto == this) {
                     return;
 
                 // Otherwise, this puck is used up and becomes inactive.
                 } else {
+                    // If this is an outrage puck,
+                    // there's a chance this turns into an outrage target
+                    if (hto.bonus < 0 && UnityEngine.Random.value < 0.4f) {
+                        Outrage();
+                    // Same for happy pucks
+                    } else if (hto.bonus > 1 && UnityEngine.Random.value < 0.25f) {
+                        Happy();
+                    }
+
                     activePucks--;
                     Destroy(other.gameObject);
                 }
@@ -146,6 +160,7 @@ public class HypeTarget : MonoBehaviour {
         StartCoroutine(Highlight());
 
         float points = hit ? hypePoints/10 : hypePoints;
+        points *= bonus;
 
         hit = true;
         hudtext.Add(string.Format("+{0:0.#}", points), hypeColor, 0f);
@@ -159,12 +174,36 @@ public class HypeTarget : MonoBehaviour {
             puckObj.transform.position = transform.position;
             HypeTargetPuck htp = puckObj.GetComponent<HypeTargetPuck>();
             htp.owner = this;
+
+            // Change color for outrage/happy pucks
+            if (bonus < 0) {
+                puckObj.GetComponent<SpriteRenderer>().color = Color.red;
+            } else if (bonus > 1) {
+                puckObj.GetComponent<SpriteRenderer>().color = Color.yellow;
+            }
+
             htp.Fire();
 
             // Keep track of active pucks so we know when
             // everything is finished.
             activePucks++;
         }
+    }
+
+    public void Outrage() {
+        model.GetComponent<MeshFilter>().mesh = outrageMesh;
+        model.renderer.material.mainTexture = moodTexture;
+        model.transform.localScale = new Vector3(2f, 2f, 2f);
+        model.transform.localEulerAngles = new Vector3(-90f, -144f, 0);
+        bonus = -1f;
+    }
+
+    public void Happy() {
+        model.GetComponent<MeshFilter>().mesh = happyMesh;
+        model.renderer.material.mainTexture = moodTexture;
+        model.transform.localScale = new Vector3(2f, 2f, 2f);
+        model.transform.localEulerAngles = new Vector3(-82f, -180f, 0);
+        bonus = 1.5f;
     }
 
     // Highlight the target.

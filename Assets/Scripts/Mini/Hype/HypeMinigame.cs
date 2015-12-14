@@ -35,6 +35,14 @@ public class HypeMinigame : MonoBehaviour {
             ht.transform.parent = tiers[(int)t];
             ht.Setup(this, t);
 
+            // TODO make these based on public opinion or something
+            if (Random.value <= 0.1) {
+                ht.Outrage();
+            } else if (Random.value <= 0.2) {
+                ht.Happy();
+            }
+
+
             targets.Add(ht);
         }
     }

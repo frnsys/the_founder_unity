@@ -337,11 +337,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f7dfaa96c0a4d1ca012d10d717366e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outrageMesh: {fileID: 4300346, guid: e9796bf3602d74003b68d472c9f1a480, type: 3}
+  happyMesh: {fileID: 4300310, guid: e9796bf3602d74003b68d472c9f1a480, type: 3}
+  moodTexture: {fileID: 2800000, guid: 131244474c0a5473c92aaaa68ce0d7fa, type: 3}
   hypePoints: 4
   speed: 1.79999995
   distance: 1.5
   cascadeRadius: 60
   numPucks: 6
+  bonus: 1
   function: 1
   rangeDisplay: {fileID: 100006}
   model: {fileID: 100004}

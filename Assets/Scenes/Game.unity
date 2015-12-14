@@ -5705,7 +5705,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 273724435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 154.10939, y: 367.005798, z: 0}
+  m_LocalPosition: {x: 154.10939, y: 419.005798, z: 0}
   m_LocalScale: {x: .999987006, y: .999987006, z: .999987006}
   m_Children: []
   m_Father: {fileID: 127671519}
@@ -5736,7 +5736,7 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 127671519}
     relative: 1
-    absolute: -166
+    absolute: -62
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 5
@@ -25807,7 +25807,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.63559341
+  aspectRatio: 9.11666679
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
