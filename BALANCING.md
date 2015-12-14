@@ -1,0 +1,43 @@
+values to balance:
+
+- hype minigame
+    - outrage probability
+    - happy probability
+    - outrage/happy bonus values
+    - number of targets for each promo
+    - number of pucks for each promo
+- employees
+    - expected salaries
+    - skill numbers
+- products
+    - revenues
+    - effects
+    - success calculation (in particular, hype)
+    - product types
+        - difficulties
+        - how "ideals" are calculated
+    - product development
+        - base rate of progress
+- growth target scaling
+- event effects
+- AI companies
+- technologies
+    - costs
+    - effects
+- perks
+    - costs
+    - effects
+- minicompanies
+    - costs
+    - effects
+- lobbying
+    - costs
+    - effects
+- locations
+    - costs
+    - effects
+- economy
+    - transition probabilities
+    - effects
+- industries/verticals
+    - costs
