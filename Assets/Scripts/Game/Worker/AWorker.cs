@@ -35,6 +35,12 @@ public class AWorker : ScriptableObject {
         }
     }
 
+    public List<Worker.Preference> personalInfo {
+        get { return worker.personalInfo; }
+    }
+    public List<string> personalInfos;
+    public List<string> knownPersonalInfos;
+
     // Returns a "clone" of this worker.
     public AWorker Clone() {
         if (!worker.robot) {
@@ -82,9 +88,9 @@ public class AWorker : ScriptableObject {
     }
 
     // How many weeks the worker is off the job market for.
-    // Recent offers the player has made.
+    // Turns the player has used so far.
     public int offMarketTime;
-    public int recentPlayerOffers;
+    public float leaveProb;
 
     public float happiness;
     public float productivity;
@@ -102,7 +108,14 @@ public class AWorker : ScriptableObject {
         cleverness    = w.cleverness;
 
         offMarketTime = 0;
-        recentPlayerOffers = 0;
+        leaveProb = Worker.baseLeaveProb;
+
+        knownPersonalInfos = new List<string>();
+        personalInfos = new List<string>();
+        foreach (Worker.Preference p in worker.personalInfo) {
+            string[] descs = Worker.prefToDescMap[p];
+            personalInfos.Add(descs[Random.Range(0, descs.Length)]);
+        }
     }
 
     public string name {
@@ -121,7 +134,7 @@ public class AWorker : ScriptableObject {
     public string description {
         get { return worker.description; }
     }
-    public string bio {
+    public List<string> bio {
         get { return worker.bio; }
     }
     public float baseMinSalary {

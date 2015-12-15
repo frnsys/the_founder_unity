@@ -80,6 +80,7 @@ public class GameData : ScriptableObject {
     public bool prescient;
     public bool automation;
     public bool workerInsight;
+    public bool workerQuant;
 
     // ===============================================
     // Management ====================================
@@ -129,6 +130,7 @@ public class GameData : ScriptableObject {
         data.prescient = false;
         data.automation = false;
         data.workerInsight = false;
+        data.workerQuant = false;
 
         data.obs = NarrativeManager.OBS.START;
 

@@ -22,9 +22,6 @@ MonoBehaviour:
       companies: []
       specialProjects: []
     cash: 0
-    research:
-      name: Research
-      value: 0
     opinionEvent:
       name: 
       opinion:
@@ -46,6 +43,6 @@ MonoBehaviour:
     productEffects: []
     workerEffects: []
     aiCompany: {fileID: 0}
-    specialEffect: 5
+    specialEffect: 6
   requiredProducts: []
   mesh: {fileID: 4300048, guid: 81d5dea76fef9443ca29d821043cfbae, type: 3}

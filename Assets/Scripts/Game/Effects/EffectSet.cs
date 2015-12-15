@@ -57,6 +57,7 @@ public class EffectSet {
         Cloneable,
         Prescient,
         WorkerInsight,
+        WorkerQuant,
         FounderAI,
         Automation
     }
