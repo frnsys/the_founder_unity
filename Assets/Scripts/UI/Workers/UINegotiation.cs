@@ -61,9 +61,11 @@ public class UINegotiation : UIWindow {
 
         if (GameManager.Instance.workerInsight) {
             personalInfoLabel.text = string.Format("- {0}", string.Join("\n- ", w.personalInfos.ToArray()));
+            suspectedAssertions = new List<Worker.Preference>(w.personalInfo);
         } else {
             personalInfoLabel.gameObject.SetActive(false);
             personalInfoTitle.gameObject.SetActive(false);
+            suspectedAssertions = new List<Worker.Preference>();
         }
 
         worker = w;
@@ -75,7 +77,6 @@ public class UINegotiation : UIWindow {
         assertions = new List<Worker.Preference>(Worker.prefToDialogueMap.Keys);
         assertions.Remove(Worker.Preference.NONE);
         knownAssertions = new List<Worker.Preference>();
-        suspectedAssertions = new List<Worker.Preference>();
         dialogueOptions = new List<DialogueOption>();
         GenerateDialogueOptions();
     }
