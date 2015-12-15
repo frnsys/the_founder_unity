@@ -78,7 +78,6 @@ GameObject:
   - 54: {fileID: 5400004}
   - 114: {fileID: 11400024}
   - 65: {fileID: 6500020}
-  - 114: {fileID: 11400014}
   - 114: {fileID: 11487964}
   m_Layer: 8
   m_Name: Negotiation
@@ -470,6 +469,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 487996}
   - 114: {fileID: 11488004}
+  - 54: {fileID: 5485276}
+  - 65: {fileID: 6585276}
   m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
@@ -939,6 +940,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5485276
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187996}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -957,6 +973,18 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100020}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 535, y: 960, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6585276
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187996}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
@@ -988,7 +1016,7 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick:
-  - mTarget: {fileID: 11400014}
+  - mTarget: {fileID: 11487964}
     mMethodName: Close
     mParameters: []
     oneShot: 0
@@ -1218,17 +1246,6 @@ MonoBehaviour:
   mDepth: 321
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 764eef58d1b374af99dfa1aec0254ca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2716,7 +2733,7 @@ MonoBehaviour:
   mWidth: 535
   mHeight: 960
   mDepth: 0
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: .557291687

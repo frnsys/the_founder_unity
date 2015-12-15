@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
-public class UINegotiation : MonoBehaviour {
+public class UINegotiation : UIWindow {
     public UILabel offerLabel;
     public UILabel hiringFeeLabel;
     public UILabel probabilitySuccessLabel;
@@ -12,6 +12,7 @@ public class UINegotiation : MonoBehaviour {
     public MeshRenderer employee;
 
     private Worker worker;
+    private int turns = 0;
 
     private int offer_;
     public int offer {
@@ -49,5 +50,15 @@ public class UINegotiation : MonoBehaviour {
 
     public void MakeOffer() {
         //TODO roll to see if offer is accepted
+    }
+
+    public void Close() {
+        if (turns > 0) {
+            UIManager.Instance.Confirm("Are you sure want to leave negotiations? Your turns will take some time to reset.", delegate {
+                base.Close();
+            } , null);
+        } else {
+            base.Close();
+        }
     }
 }
