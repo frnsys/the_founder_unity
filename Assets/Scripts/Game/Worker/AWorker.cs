@@ -181,8 +181,9 @@ public class AWorker : ScriptableObject {
             float val = StatByName(statName);
 
             // worst this can be is 0.5
+            // only applys to human workers
             float messUpProb = (1 - Mathf.Min(1f, val/p.difficulty)) * 0.5f;
-            if (Random.value < messUpProb) {
+            if (!worker.robot && Random.value < messUpProb) {
                 // at minimum, this is 1
                 stat = new Stat(statName, -Mathf.Max(1f, Randomize(val) * 0.75f));
             } else {

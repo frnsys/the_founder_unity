@@ -123,10 +123,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     public enum OBS {
         START,
         GAME_INTRO,
-        OPENED_HYPE,
-        NEW_PRODUCT,
         OPENED_NEW_PRODUCT,
         STARTED_PRODUCT,
+        OPENED_HYPE,
         THE_MARKET,
         THE_MARKET_DONE,
         OPENED_RECRUITING,
@@ -199,17 +198,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             Company.BeganProduct += BeganProduct;
         }
 
-        if (data.obs < OBS.NEW_PRODUCT) {
-            HypeMinigame.Done += OnHypeDone;
-            uim.menu.Deactivate("New Product");
-        }
-
         if (data.obs < OBS.GAME_INTRO) {
-            // TODO update this
-            //uim.statusBar.hypeLabel.gameObject.SetActive(false);
-            //uim.menu.Deactivate("Communications");
-
             // Show the game intro.
+            uim.menu.Deactivate("New Product");
             Intro();
         }
 
@@ -224,7 +215,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 string.Format("Now that your product is completed, it is released into {0}.", ConceptHighlight("The Market")),
                 string.Format("{0} will release products like the ones you create to edge out your profits.", ConceptHighlight("Competitors")),
                 "Consumers will flock to the products they think are the best.",
-                "Naturally, if your products are better, you'll have the upper hand.",
+                "Naturally, if your products are better (or better hyped), you'll have the upper hand.",
                 "Let's see how they respond."
             });
             TheMarket.Started -= OnMarketStarted;
@@ -283,30 +274,10 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         MentorMessages(new string[] {
             "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
             "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
-            // TODO clean this up/update this now that hype is gone
-            //string.Format("Before we dig into building a product, we have to {0} up your company!", ConceptHighlight("hype")),
-            //"That way, when you release a product, consumers will be clamoring to buy it.",
-            //string.Format("You can hype up company by launching {0} from the {1} below.", ConceptHighlight("promotional campaigns"), MenuHighlight("megaphone")),
-            //"Go a head and give it a try!"
+            string.Format("You're not much of a business if you haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
+            string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
         });
-        //UIManager uim = UIManager.Instance;
-        //uim.statusBar.hypeLabel.gameObject.SetActive(true);
-        //uim.menu.Activate("Communications");
-    }
-
-    void OnHypeDone(float hypeScore) {
-        if (Stage(OBS.NEW_PRODUCT)) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                MentorMessages(new string[] {
-                    "Great! Your company has some hype now.",
-                    "Hype is critical to your products' success, and it fades out over time. So keep it up.",
-                    string.Format("You're not much of a business if you haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
-                    string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
-                });
-                UIManager.Instance.menu.Activate("New Product");
-                HypeMinigame.Done -= OnHypeDone;
-            }, 1f));
-        }
+        UIManager.Instance.menu.Activate("New Product");
     }
 
     // Checks if it is appropriate to execute the specified stage,
@@ -321,12 +292,11 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     // Triggered whenever a window or tab is opened.
     public void OnScreenOpened(string name) {
         switch(name) {
-
             case "Manage Communications":
                 if (Stage(OBS.OPENED_HYPE)) {
                     MentorMessages(new string[] {
+                        "Now that your product has finished developing, we need to launch and promote it.",
                         "Here you can choose from a few different kinds of promos to run.",
-                        "For now you only have a couple to choose from, but more will become available over time."
                     });
                 }
                 break;
@@ -392,19 +362,13 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Great! You've started developing your first product.",
-                        "Now you are in the zone to build something great.",
-                        "Collect as many product points as you can.",
+                        "Employees contribute quality points to the developing product.",
                         "There are \n:DESIGN: [c][0078E1]design[-][/c],\n:ENGINEERING: [c][0078E1]engineering[-][/c], or\n:MARKETING: [c][0078E1]marketing[-][/c]\nproduct points available.",
-                        "Larger globs are worth more points.",
-                        "Your employees will take turns collecting points.",
-                        string.Format("They will last a limited amount of time depending on their {0}.", ConceptHighlight("productivity")),
-                        string.Format("Sometimes you will see {0} to help your employees out.", ConceptHighlight("powerups")),
-                        "You may encounter \n:COFFEE: [c][0078E1]coffee[-][/c] or\n:INSIGHT: [c][0078E1]insight[-][/c]\npowerups.",
-                        string.Format("The {0} your employees are, the more powerups you'll see.", ConceptHighlight("happier")),
-                        string.Format("Finally, you may encounter {0} which will tire your employees out and cost you hard-earned points.", ConceptHighlight("hazards")),
-                        "You may encounter \n:BLOCK: [c][0078E1]creative blocks[-][/c],\n:BUG: [c][0078E1]bugs[-][/c], or\n:OUTRAGE: [c][0078E1]outrage[-][/c]\nhazards.",
-                        string.Format("The more {0} there is towards your company, the more likely you are to encounter hazards.", ConceptHighlight("outrage")),
-                        string.Format("When all your employees have gone, your product will be released to {0}!", SpecialHighlight("The Market"))
+                        "Some products are harder to develop than others.",
+                        string.Format("They take longer to develop, but you can hire employees to increase {0} and develop them faster.", ConceptHighlight("productivity")),
+                        "Less skilled employees may mess up on hard products,",
+                        "causing \n:BLOCK: [c][0078E1]creative blocks[-][/c],\n:BUG: [c][0078E1]bugs[-][/c], or\n:OUTRAGE: [c][0078E1]outrage[-][/c].",
+                        string.Format("When the product is finished, your product will be released to {0}!", SpecialHighlight("The Market"))
                     });
                 }, 1f));
             }
@@ -482,7 +446,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     void PromoCompleted(Promo p) {
         if (!data.ob.HYPE_MINIGAME) {
             MentorMessages(new string[] {
-                "Completing promotional campaigns gives you the opportunity to garner some allies in the media and hype up your company.",
+                "Completing promotional campaigns gives you the opportunity to garner some allies in the media and hype up your product.",
                 string.Format("{0} the puck and hit some {1} to get them on your side.", InteractHighlight("Flick"), ConceptHighlight("influencers")),
                 "More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
             });
