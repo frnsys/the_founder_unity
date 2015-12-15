@@ -34,6 +34,9 @@ public class AWorker : ScriptableObject {
                    happiness;
         }
     }
+    public List<string> personalInfos {
+        get { return worker.personalInfos; }
+    }
 
     // Returns a "clone" of this worker.
     public AWorker Clone() {
@@ -82,9 +85,9 @@ public class AWorker : ScriptableObject {
     }
 
     // How many weeks the worker is off the job market for.
-    // Recent offers the player has made.
+    // Turns the player has used so far.
     public int offMarketTime;
-    public int recentPlayerOffers;
+    public int turnsTaken;
 
     public float happiness;
     public float productivity;
@@ -102,7 +105,7 @@ public class AWorker : ScriptableObject {
         cleverness    = w.cleverness;
 
         offMarketTime = 0;
-        recentPlayerOffers = 0;
+        turnsTaken = 0;
     }
 
     public string name {

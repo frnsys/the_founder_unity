@@ -128,7 +128,7 @@ GameObject:
   - 4: {fileID: 442244}
   - 114: {fileID: 11442244}
   m_Layer: 8
-  m_Name: Known
+  m_Name: Known Personal Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,6 +276,7 @@ GameObject:
   - 4: {fileID: 487972}
   - 114: {fileID: 11487980}
   - 65: {fileID: 6549810}
+  - 114: {fileID: 11466008}
   m_Layer: 8
   m_Name: Dialog Option
   m_TagString: Untagged
@@ -293,6 +294,7 @@ GameObject:
   - 4: {fileID: 487974}
   - 114: {fileID: 11487982}
   - 65: {fileID: 6549812}
+  - 114: {fileID: 11466006}
   m_Layer: 8
   m_Name: Dialog Option
   m_TagString: Untagged
@@ -342,6 +344,7 @@ GameObject:
   - 4: {fileID: 487980}
   - 114: {fileID: 11487988}
   - 65: {fileID: 6549814}
+  - 114: {fileID: 11466004}
   m_Layer: 8
   m_Name: Dialog Option
   m_TagString: Untagged
@@ -1019,7 +1022,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 471, y: 72, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6549812
 BoxCollider:
@@ -1031,7 +1034,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 471, y: 72, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6549814
 BoxCollider:
@@ -1043,7 +1046,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 471, y: 72, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6549816
 BoxCollider:
@@ -1315,7 +1318,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 4206
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1454,8 +1457,8 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   softBorderPadding: 1
-  renderQueue: 0
-  startingRenderQueue: 3005
+  renderQueue: 1
+  startingRenderQueue: 4200
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1690,6 +1693,93 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &11466004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 187980}
+  hover: {r: .443137258, g: .509803951, b: .627451003, a: 1}
+  pressed: {r: .31833908, g: .371160239, b: .470588207, a: 1}
+  disabledColor: {r: .5, g: .5, b: .5, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 11487964}
+    mMethodName: ChooseDialogue
+    mParameters: []
+    oneShot: 0
+--- !u!114 &11466006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 187980}
+  hover: {r: .443137258, g: .509803951, b: .627451003, a: 1}
+  pressed: {r: .31833908, g: .371160239, b: .470588207, a: 1}
+  disabledColor: {r: .5, g: .5, b: .5, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 11487964}
+    mMethodName: ChooseDialogue
+    mParameters: []
+    oneShot: 0
+--- !u!114 &11466008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 187980}
+  hover: {r: .443137258, g: .509803951, b: .627451003, a: 1}
+  pressed: {r: .31833908, g: .371160239, b: .470588207, a: 1}
+  disabledColor: {r: .5, g: .5, b: .5, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 11487964}
+    mMethodName: ChooseDialogue
+    mParameters: []
+    oneShot: 0
 --- !u!114 &11487960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1760,11 +1850,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offerLabel: {fileID: 11487998}
-  hiringFeeLabel: {fileID: 0}
   probabilitySuccessLabel: {fileID: 11400006}
   nameLabel: {fileID: 11442248}
-  personalInfoLabel: {fileID: 0}
-  turnsLabel: {fileID: 0}
+  personalInfoLabel: {fileID: 11442244}
+  turnsLabel: {fileID: 11488000}
   employee: {fileID: 2387960}
 --- !u!114 &11487966
 MonoBehaviour:
@@ -2184,7 +2273,7 @@ MonoBehaviour:
   mWidth: 471
   mHeight: 72
   mDepth: 1
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 6.54166651
@@ -2242,7 +2331,7 @@ MonoBehaviour:
   mWidth: 471
   mHeight: 72
   mDepth: 1
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 6.54166651
@@ -2430,7 +2519,7 @@ MonoBehaviour:
   mWidth: 471
   mHeight: 72
   mDepth: 1
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 6.54166651
@@ -2777,7 +2866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9998be0d09d42918716e850d450779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderQueue: 4000
+  renderQueue: 5000
 --- !u!114 &11488004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2872,7 +2961,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 15.6875
+  aspectRatio: 6.42500019
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}

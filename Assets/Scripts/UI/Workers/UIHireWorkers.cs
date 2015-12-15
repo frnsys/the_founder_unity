@@ -57,6 +57,7 @@ public class UIHireWorkers : UIFullScreenPager {
             // hacky, b/c UIManager doesn't allow multiple simultaneous popups
             GameObject negotiationPopup = NGUITools.AddChild(UIManager.Instance.windowsPanel, negotiationPrefab);
             negotiationPopup.GetComponent<UIWidget>().SetAnchor(UIManager.Instance.windowsPanel.gameObject, 0, 0, 0, 0);
+            negotiationPopup.GetComponent<UINegotiation>().Setup(worker, this);
 
             //UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
 
@@ -127,7 +128,7 @@ public class UIHireWorkers : UIFullScreenPager {
         UIManager.Instance.Alert("It's been my lifelong dream to work for " + company.name + "!!");
     }
 
-    private void RemoveWorker(AWorker worker) {
+    public void RemoveWorker(AWorker worker) {
         int i = availableWorkers.IndexOf(worker);
         availableWorkers.Remove(worker);
 
@@ -148,6 +149,9 @@ public class UIHireWorkers : UIFullScreenPager {
         availableWorkers.Clear();
         bool wq = GameManager.Instance.workerQuant;
         foreach (AWorker w in workers) {
+            // Reset turns taken for each worker
+            w.turnsTaken = 0;
+
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);
 
