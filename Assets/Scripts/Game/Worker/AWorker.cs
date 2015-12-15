@@ -34,9 +34,12 @@ public class AWorker : ScriptableObject {
                    happiness;
         }
     }
-    public List<string> personalInfos {
-        get { return worker.personalInfos; }
+
+    public List<Worker.Preference> personalInfo {
+        get { return worker.personalInfo; }
     }
+    public List<string> personalInfos;
+    public List<string> knownPersonalInfos;
 
     // Returns a "clone" of this worker.
     public AWorker Clone() {
@@ -106,6 +109,13 @@ public class AWorker : ScriptableObject {
 
         offMarketTime = 0;
         turnsTaken = 0;
+
+        knownPersonalInfos = new List<string>();
+        personalInfos = new List<string>();
+        foreach (Worker.Preference p in worker.personalInfo) {
+            string[] descs = Worker.prefToDescMap[p];
+            personalInfos.Add(descs[Random.Range(0, descs.Length)]);
+        }
     }
 
     public string name {

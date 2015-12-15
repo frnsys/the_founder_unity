@@ -128,7 +128,7 @@ GameObject:
   - 4: {fileID: 442244}
   - 114: {fileID: 11442244}
   m_Layer: 8
-  m_Name: Known Personal Info
+  m_Name: Personal Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ GameObject:
   - 4: {fileID: 442246}
   - 114: {fileID: 11442246}
   m_Layer: 8
-  m_Name: Title
+  m_Name: Personal Info Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,7 +608,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 119.75, y: 31.9999924, z: 0}
+  m_LocalPosition: {x: 119.75, y: 63.9999924, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400034}
@@ -632,7 +632,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -119.75, y: -120, z: 0}
+  m_LocalPosition: {x: -119.75, y: -139, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400034}
@@ -851,7 +851,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 119.75, y: -120, z: 0}
+  m_LocalPosition: {x: 119.75, y: -139, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400034}
@@ -1518,27 +1518,35 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 442246}
     relative: 0
-    absolute: -64
+    absolute: -160
   topAnchor:
     target: {fileID: 442246}
     relative: 0
     absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
+  mPivot: 1
   mWidth: 240
-  mHeight: 64
+  mHeight: 160
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.75
+  aspectRatio: 1.5
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
   mText: '- one
 
-    - two'
+    - two
+
+    - three
+
+    - four
+
+    - five
+
+    - six'
   mFontSize: 26
   mFontStyle: 0
   mAlignment: 1
@@ -1603,7 +1611,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: What we know...
+  mText: Personal Info
   mFontSize: 24
   mFontStyle: 1
   mAlignment: 1
@@ -1654,17 +1662,17 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 400034}
     relative: 0
-    absolute: 120
+    absolute: 82
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 240
-  mHeight: 120
+  mHeight: 82
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2
+  aspectRatio: 2.92682934
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -1720,7 +1728,9 @@ MonoBehaviour:
   onClick:
   - mTarget: {fileID: 11487964}
     mMethodName: ChooseDialogue
-    mParameters: []
+    mParameters:
+    - obj: {fileID: 187980}
+      field: 
     oneShot: 0
 --- !u!114 &11466006
 MonoBehaviour:
@@ -1749,7 +1759,9 @@ MonoBehaviour:
   onClick:
   - mTarget: {fileID: 11487964}
     mMethodName: ChooseDialogue
-    mParameters: []
+    mParameters:
+    - obj: {fileID: 187974}
+      field: 
     oneShot: 0
 --- !u!114 &11466008
 MonoBehaviour:
@@ -1778,7 +1790,9 @@ MonoBehaviour:
   onClick:
   - mTarget: {fileID: 11487964}
     mMethodName: ChooseDialogue
-    mParameters: []
+    mParameters:
+    - obj: {fileID: 187972}
+      field: 
     oneShot: 0
 --- !u!114 &11487960
 MonoBehaviour:
@@ -1852,9 +1866,14 @@ MonoBehaviour:
   offerLabel: {fileID: 11487998}
   probabilitySuccessLabel: {fileID: 11400006}
   nameLabel: {fileID: 11442248}
-  personalInfoLabel: {fileID: 11442244}
   turnsLabel: {fileID: 11488000}
+  personalInfoLabel: {fileID: 11442244}
+  personalInfoTitle: {fileID: 11442246}
   employee: {fileID: 2387960}
+  dialogueOptionButtons:
+  - {fileID: 11466004}
+  - {fileID: 11466006}
+  - {fileID: 11466008}
 --- !u!114 &11487966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2816,17 +2835,17 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 400034}
     relative: 0
-    absolute: 120
+    absolute: 82
   updateAnchors: 1
   mColor: {r: .172549024, g: .721568644, b: .647058845, a: 1}
   mPivot: 4
   mWidth: 240
-  mHeight: 120
+  mHeight: 82
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2
+  aspectRatio: 2.92682934
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}

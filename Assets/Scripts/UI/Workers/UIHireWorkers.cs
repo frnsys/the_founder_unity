@@ -52,75 +52,17 @@ public class UIHireWorkers : UIFullScreenPager {
         }
     }
 
-    public void HireWorker(AWorker worker) {
+    public void NegotiateWorker(AWorker worker) {
         if (company.remainingSpace > 0) {
             // hacky, b/c UIManager doesn't allow multiple simultaneous popups
             GameObject negotiationPopup = NGUITools.AddChild(UIManager.Instance.windowsPanel, negotiationPrefab);
             negotiationPopup.GetComponent<UIWidget>().SetAnchor(UIManager.Instance.windowsPanel.gameObject, 0, 0, 0, 0);
             negotiationPopup.GetComponent<UINegotiation>().Setup(worker, this);
-
-            //UIOffer ic = NGUITools.AddChild(gameObject, offerPrefab).GetComponent<UIOffer>();
-
-            //ic.bodyText = "Make an offer for " + worker.name + ".";
-            //ic.offer = 40000;
-
-            //UIEventListener.VoidDelegate yesAction = delegate(GameObject obj) {
-                //ic.Close_();
-                //float minSal = worker.MinSalaryForCompany(company);
-                //if (ic.offer >= minSal) {
-                    //// Set the worker's salary to the offer.
-                    //// Reset the player offer counter.
-                    //// Hire the worker!
-                    //worker.salary = ic.offer;
-                    //worker.recentPlayerOffers = 0;
-                    //HireWorker_(worker);
-                //} else {
-                    //if (++worker.recentPlayerOffers >= 3) {
-                        //// If you make too many failed offers,
-                        //// the worker goes off the market for a bit.
-                        //worker.offMarketTime = 4;
-
-                        //UIManager.Instance.Alert("Your offers were too low. I've decided to take a position somewhere else.");
-
-                        //RemoveWorker(worker);
-                    //} else {
-                        //if (minSal - ic.offer >= 50000) {
-                            //UIManager.Instance.Alert("That is insultingly low. I'm worth way more than that.");
-                        //} else if (minSal - ic.offer >= 30000) {
-                            //UIManager.Instance.Alert("I made more than that at my last job. How about more?");
-                        //} else if (minSal - ic.offer >= 10000) {
-                            //UIManager.Instance.Alert("That's a little low. I think I deserve more.");
-                        //} else {
-                            //UIManager.Instance.Alert("This is starting to look acceptable, but I need to see a bit more.");
-                        //}
-                    //}
-                //}
-            //};
-
-            //UIEventListener.VoidDelegate noAction = delegate(GameObject obj) {
-                //ic.Close_();
-            //};
-
-
-            //UIEventListener.VoidDelegate warning = delegate(GameObject obj) {
-                //UIManager.Instance.Confirm("This is your final offer. Are you sure?", delegate() {
-                    //yesAction(null);
-                //}, null);
-            //};
-
-            //if (worker.recentPlayerOffers == 2) {
-                //UIEventListener.Get(ic.yesButton).onClick += warning;
-            //} else {
-                //UIEventListener.Get(ic.yesButton).onClick += yesAction;
-            //}
-
-            //UIEventListener.Get(ic.noButton).onClick += noAction;
-
         } else {
             UIManager.Instance.Alert("You don't have any space for new workers. Consider laying some people off or expanding to a new location.");
         }
     }
-    private void HireWorker_(AWorker worker) {
+    public void HireWorker(AWorker worker) {
         GameManager.Instance.workerManager.HireWorker(worker);
         RemoveWorker(worker);
 
@@ -161,7 +103,7 @@ public class UIHireWorkers : UIFullScreenPager {
                 if (worker.robot) {
                     HireRobotWorker(worker);
                 } else {
-                    HireWorker(worker);
+                    NegotiateWorker(worker);
                 }
             };
 

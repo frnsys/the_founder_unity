@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Helen Barkhimer
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: 058f4772bbd2f4a49b7cd3cd9061d9e7, type: 2}
+  robot: 0
+  description: 
+  title: Visual Designer
+  bio:
+  - is kind of lazy
+  - is quite dim
+  - reminds me of Eeyore
+  - has a weird smell
+  - has an eye for trends
+  personalInfo: 06000000
+  happiness: 3
+  productivity: 3
+  charisma: 2
+  creativity: 5
+  cleverness: 1
+  baseMinSalary: 168000

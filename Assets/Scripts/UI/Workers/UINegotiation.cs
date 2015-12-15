@@ -2,17 +2,39 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
+// TODO refactor this, ugh
 public class UINegotiation : UIWindow {
     public UILabel offerLabel;
     public UILabel probabilitySuccessLabel;
     public UILabel nameLabel;
-    public UILabel personalInfoLabel;
     public UILabel turnsLabel;
+    public UILabel personalInfoLabel;
+    public UILabel personalInfoTitle;
     public MeshRenderer employee;
 
     private AWorker worker;
     private UIHireWorkers hireWorkersWindow;
     private float probAccept;
+    private float minSalary;
+
+    private struct DialogueOption {
+        public string question;
+        public Worker.Preference preference;
+        public DialogueOption(string q) {
+            question = q;
+            preference = Worker.Preference.NONE;
+        }
+        public DialogueOption(Worker.Preference p) {
+            question = null;
+            preference = p;
+        }
+    }
+    public List<UIButton> dialogueOptionButtons;
+    private List<DialogueOption> dialogueOptions;
+    private List<string> questions;
+    private List<Worker.Preference> assertions;
+    private List<Worker.Preference> knownAssertions;
+    private List<Worker.Preference> suspectedAssertions;
 
     private int offer_;
     public int offer {
@@ -40,12 +62,22 @@ public class UINegotiation : UIWindow {
         if (GameManager.Instance.workerInsight) {
             personalInfoLabel.text = string.Format("- {0}", string.Join("\n- ", w.personalInfos.ToArray()));
         } else {
-            personalInfoLabel.text = "";
+            personalInfoLabel.gameObject.SetActive(false);
+            personalInfoTitle.gameObject.SetActive(false);
         }
 
         worker = w;
         hireWorkersWindow = hww;
         offer = 40000;
+        minSalary = worker.MinSalaryForCompany(GameManager.Instance.playerCompany);
+
+        questions = new List<string>(Worker.dialogueToDialogueMap.Keys);
+        assertions = new List<Worker.Preference>(Worker.prefToDialogueMap.Keys);
+        assertions.Remove(Worker.Preference.NONE);
+        knownAssertions = new List<Worker.Preference>();
+        suspectedAssertions = new List<Worker.Preference>();
+        dialogueOptions = new List<DialogueOption>();
+        GenerateDialogueOptions();
     }
 
     public void Increment() {
@@ -61,27 +93,112 @@ public class UINegotiation : UIWindow {
     public void MakeOffer() {
         UIManager.Instance.Confirm(string.Format("There will be a {0:C0} hiring fee (0.1%). Is that ok?", offer_ * 0.1f), delegate {
             if (Random.value <= probAccept) {
-                Debug.Log("offer successful!");
+                hireWorkersWindow.HireWorker(worker);
+                base.Close();
             } else {
+                // TODO make this better
+                UIManager.Instance.Alert("You can do better");
                 TakeTurn();
             }
         } , null);
     }
 
     private float AcceptanceProb(int off) {
-        float minSal = worker.MinSalaryForCompany(GameManager.Instance.playerCompany);
-        float diff = off - minSal;
+        float diff = off - minSalary;
         if (diff >= 0) {
             return 0.99f;
         } else {
-            float x = -diff/minSal;
+            // the further below the min salary,
+            // the less likely they are to accept
+            float x = -diff/minSalary;
             return Mathf.Max(0, 0.99f - (((1/(-x-1)) + 1)*2));
         }
     }
 
-    public void ChooseDialogue() {
-        Debug.Log("chose dialogue");
+    private void GenerateDialogueOptions() {
+        dialogueOptions.Clear();
+
+        // On first turn, generate all questions
+        if (worker.turnsTaken == 0) {
+            List<string> qs = new List<string>(Worker.dialogueToDialogueMap.Keys);
+            for (int i=0; i<3; i++) {
+                int idx = Random.Range(0, qs.Count);
+                string question = qs[idx];
+
+                dialogueOptionButtons[i].transform.Find("Label").GetComponent<UILabel>().text = question;
+                dialogueOptions.Add(new DialogueOption(question));
+                qs.RemoveAt(idx);
+            }
+
+        // Otherwise, choose one question, two assertions
+        } else {
+            string q = questions[Random.Range(0, questions.Count)];
+            dialogueOptionButtons[0].transform.Find("Label").GetComponent<UILabel>().text = q;
+            dialogueOptions.Add(new DialogueOption(q));
+
+            // Select assertions based on suspected assertions
+            List<Worker.Preference> asrts = new List<Worker.Preference>(suspectedAssertions);
+            for (int i=1; i<3; i++) {
+                // Select from available assertions if no suspected ones are available
+                if (asrts.Count == 0)
+                    asrts = new List<Worker.Preference>(assertions);
+                int idx = Random.Range(0, asrts.Count);
+                Worker.Preference key = asrts[idx];
+
+                dialogueOptionButtons[i].transform.Find("Label").GetComponent<UILabel>().text = Worker.prefToDialogueMap[key];
+                dialogueOptions.Add(new DialogueOption(key));
+                asrts.RemoveAt(idx);
+            }
+        }
+    }
+
+    public void ChooseDialogue(GameObject clicked) {
+        int idx = dialogueOptionButtons.IndexOf(clicked.GetComponent<UIButton>());
+        DialogueOption selected = dialogueOptions[idx];
+
+        // Question
+        if (selected.question != null) {
+            Dictionary<Worker.Preference, string[]> responseOptions = Worker.dialogueToDialogueMap[selected.question];
+            List<Worker.Preference> validKeys = new List<Worker.Preference>();
+            foreach (Worker.Preference p in responseOptions.Keys) {
+                if (worker.personalInfo.Contains(p) && !knownAssertions.Contains(p)) {
+                    validKeys.Add(p);
+                }
+            }
+            if (validKeys.Count == 0) {
+                validKeys.Add(Worker.Preference.NONE);
+            }
+            Worker.Preference key = validKeys[Random.Range(0, validKeys.Count)];
+            string[] responses = responseOptions[key];
+            string response = responses[Random.Range(0, responses.Length)];
+
+            UIManager.Instance.Alert(response);
+            questions.Remove(selected.question);
+
+            if (key != Worker.Preference.NONE)
+                suspectedAssertions.Add(key);
+
+        // Assertion
+        } else {
+            // Success
+            if (worker.personalInfo.Contains(selected.preference)) {
+                // TODO better dialogue here
+                UIManager.Instance.Alert("Amazing!");
+                minSalary *= Worker.prefToDiscountMap[selected.preference];
+                knownAssertions.Add(selected.preference);
+                if (suspectedAssertions.Contains(selected.preference))
+                    suspectedAssertions.Remove(selected.preference);
+
+                // Recalculate everything
+                offer = offer_;
+            } else {
+                UIManager.Instance.Alert("That's not that important to me");
+            }
+            assertions.Remove(selected.preference);
+        }
+
         TakeTurn();
+        GenerateDialogueOptions();
     }
 
     private void TakeTurn() {
