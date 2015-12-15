@@ -121,7 +121,7 @@ public class AWorker : ScriptableObject {
     public string description {
         get { return worker.description; }
     }
-    public string bio {
+    public List<string> bio {
         get { return worker.bio; }
     }
     public float baseMinSalary {

@@ -15,8 +15,6 @@ internal class WorkerInspector : Editor {
         EditorStyles.textField.wordWrap = true;
         w.name = EditorGUILayout.TextField("Name", w.name);
         w.title = EditorGUILayout.TextField("Title", w.title);
-        EditorGUILayout.LabelField("Bio (auto-generated, changes not saved)");
-        EditorGUILayout.TextArea(w.bio, GUILayout.Height(60));
         EditorGUILayout.LabelField("Description");
         w.description = EditorGUILayout.TextArea(w.description, GUILayout.Height(60));
         w.material = (Material)EditorGUILayout.ObjectField("Material", w.material, typeof(Material), false);
@@ -33,6 +31,7 @@ internal class WorkerInspector : Editor {
         if (GUI.changed) {
             EditorUtility.SetDirty(target);
             w.bio = Worker.BuildBio(w);
+            w.personalInfo = Worker.BuildPreferences(w);
 
             // Update asset filename.
             string path = AssetDatabase.GetAssetPath(target);

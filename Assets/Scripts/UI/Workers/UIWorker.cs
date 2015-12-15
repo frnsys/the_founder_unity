@@ -21,9 +21,9 @@ public class UIWorker : MonoBehaviour {
                 employee.material = worker_.material;
 
             if (worker_.description != "")
-                bio.text = string.Format("{0} {1}", worker_.description, worker_.bio);
+                bio.text = string.Format("{0}\n- {1}", worker_.description, string.Join("\n- ", worker_.bio.ToArray()));
             else
-                bio.text = worker_.bio;
+                bio.text = string.Format("- {0}", string.Join("\n- ", worker_.bio.ToArray()));
 
             Company employer = GameManager.Instance.workerManager.EmployerForWorker(worker_);
             if (employer != null)
@@ -34,7 +34,6 @@ public class UIWorker : MonoBehaviour {
             if (worker_.robot) {
                 bioLabel.text = "Description";
                 statLabel.text = "Specifications";
-                credit.gameObject.SetActive(false);
             }
 
             creativity.text = string.Format("Creativity: {0}", worker_.creativity);
@@ -63,7 +62,7 @@ public class UIWorker : MonoBehaviour {
     public UILabel cleverness;
     public UILabel productivity;
     public UILabel happiness;
-    public UILabel credit;
+    public UILabel personalInfo;
     public UIButton button;
     public UIButton otherButton;
     public MeshRenderer employee;

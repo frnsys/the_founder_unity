@@ -10,14 +10,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Jeffrey Zhou
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   avatar: {fileID: 0}
   material: {fileID: 2100000, guid: a87dbb592c37e44f79ec0e3c2ab11d2b, type: 2}
   robot: 0
-  bio: Jeffrey Zhou is a real pleasure to work with but is quite dim and is very awkward.
-    Jeffrey Zhou is not very imaginative but multitasks very effectively.
+  bio:
   description: A brilliant product engineer.
-  title: 
+  title:
   happiness: 10
   productivity: 10
   charisma: 1

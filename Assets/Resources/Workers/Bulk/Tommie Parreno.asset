@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Tommie Parreno
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
+  robot: 0
+  description: 
+  title: MBA
+  bio:
+  - can be charming
+  - brightens up the office
+  - multitasks very effectively
+  - is artistic
+  - isn't the sharpest tool in the shed
+  personalInfo: 000000000a0000000b000000
+  happiness: 6
+  productivity: 11
+  charisma: 5
+  creativity: 5
+  cleverness: 1
+  baseMinSalary: 468000

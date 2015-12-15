@@ -180,7 +180,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 230.5, y: 0, z: 0}
+  m_LocalPosition: {x: 228.5, y: 0, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -369,7 +369,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 543, y: 960, z: 0}
+  m_Size: {x: 539, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6500020
 BoxCollider:
@@ -565,13 +565,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 518
+  mWidth: 514
   mHeight: 80
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.63333321
+  aspectRatio: 6.42500019
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
@@ -615,8 +615,9 @@ MonoBehaviour:
   gridCenter: {fileID: 11400026}
   scrollView: {fileID: 11400028}
   workerItemPrefab: {fileID: 100010, guid: 0e4cb85a0e41544f592f49b906eb7b56, type: 2}
-  offerPrefab: {fileID: 100020, guid: 97c84dc3691364888a63c9468abe7359, type: 2}
   noWorkersNotice: {fileID: 100004}
+  negotiationPrefab: {fileID: 100020, guid: 23d671794c8a94adca040b7106fac947, type: 2}
+  offerPrefab: {fileID: 100020, guid: 97c84dc3691364888a63c9468abe7359, type: 2}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -647,13 +648,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .41911763, b: .41911763, a: 1}
   mPivot: 4
-  mWidth: 543
+  mWidth: 539
   mHeight: 80
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 67.875
+  aspectRatio: 6.625
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -711,7 +712,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3006
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -761,14 +762,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 1524
+  mWidth: 540
   mHeight: 680
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.24117637
-  childSize: {x: 1524, y: 680}
+  aspectRatio: .79411763
+  childSize: {x: 540, y: 680}
   OnReposition: []
   padding: {x: 0, y: 0, z: 0, w: 280}
 --- !u!114 &11400022
@@ -782,7 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7151fd3c05c1b4c499d4d972a6b88b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSize: 1524
+  itemSize: 540
   cullContent: 0
   minIndex: 0
   maxIndex: 0
@@ -899,7 +900,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -944,7 +945,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3003
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -996,13 +997,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .955392122, b: .79411763, a: 1}
   mPivot: 4
-  mWidth: 543
+  mWidth: 539
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .565625012
+  aspectRatio: .561458349
   mType: 0
   mFillDirection: 4
   mFillAmount: 1

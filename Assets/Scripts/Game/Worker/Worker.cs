@@ -6,6 +6,7 @@
  */
 
 using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -40,9 +41,10 @@ public class Worker : SharedResource<Worker> {
     // Later on, there are robotic workers.
     public bool robot = false;
 
-    public string bio;
     public string description;
     public string title;
+    public List<string> bio;
+    public List<Preference> personalInfo;
 
     public float happiness;
     public float productivity;
@@ -50,6 +52,16 @@ public class Worker : SharedResource<Worker> {
     public float creativity;
     public float cleverness;
     public float baseMinSalary;
+
+    public List<string> personalInfos {
+        get {
+            List<string> pis = new List<string>();
+            foreach (Preference p in personalInfo) {
+                pis.Add(p.ToString());
+            }
+            return pis;
+        }
+    }
 
     // WORKER BIO GENERATION ---------------------------
 
@@ -91,44 +103,50 @@ public class Worker : SharedResource<Worker> {
         }
     };
 
-    public static string BuildBio(Worker w) {
+    // There are certain preferences for which
+    // employees are willing to take less salary
+    // if mentioned in conversation
+    public enum Preference {
+        HEALTHCARE,
+        VACATION,
+        CULTURE,
+        LOANS, // student loans
+        DEBT, // credit card debt
+        DENTAL,
+        VISION,
+        RETIREMENT,
+        TUITION,
+        PARENTAL,
+        FITNESS,
+        DISCOUNTS,
+    }
+
+    public static List<Preference> BuildPreferences(Worker w) {
+        List<Preference> prefs = new List<Preference>();
+        foreach (Preference p in Enum.GetValues(typeof(Preference)).Cast<Preference>()) {
+            if (UnityEngine.Random.value < 0.25) {
+                prefs.Add(p);
+            }
+        }
+        return prefs;
+    }
+
+    public static List<string> BuildBio(Worker w) {
         // Randomize order of stats.
         string[] stats = new string[] {"Creativity", "Cleverness", "Charisma", "Productivity", "Happiness"};
-        stats = stats.OrderBy(x => Random.value).ToArray();
+        stats = stats.OrderBy(x => UnityEngine.Random.value).ToArray();
 
-        float prevVal = -1;
-        int maxConj = 3;
-        List<string> conjs = new List<string>() {};
-        List<string> bio = new List<string> { w.name };
+        List<string> bio = new List<string>();
 
         foreach (string stat in stats) {
             float val = w.StatByName(stat);
             string level = SkillLevel(val);
 
-            if (prevVal >= 0) {
-                string conj;
-                if (System.Math.Abs(val - prevVal) >= 4) {
-                    conj = "but";
-                } else {
-                    conj = "and";
-                }
-
-                if (conjs.Count >= maxConj || (conjs.Count > 0 && conjs[conjs.Count - 1] == conj)) {
-                    bio[bio.Count - 1] += ".";
-                    bio.Add(w.name);
-                    conjs.Clear();
-                } else {
-                    bio.Add(conj);
-                    conjs.Add(conj);
-                }
-            }
-
             string[] descs = bioMap[stat][level];
-            int idx = Random.Range(0,(descs.Length - 1));
+            int idx = UnityEngine.Random.Range(0,(descs.Length - 1));
             bio.Add(descs[idx]);
-            prevVal = val;
         }
-        return string.Join(" ", bio.ToArray()) + ".";
+        return bio;
     }
 
     private static string SkillLevel(float val) {

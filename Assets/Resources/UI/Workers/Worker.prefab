@@ -193,22 +193,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100024
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400024}
-  - 114: {fileID: 11400026}
-  m_Layer: 8
-  m_Name: Credit
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100026
 GameObject:
   m_ObjectHideFlags: 1
@@ -568,7 +552,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 227.999969, z: 0}
+  m_LocalPosition: {x: 0, y: 239.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
@@ -595,7 +579,6 @@ Transform:
   - {fileID: 400000}
   - {fileID: 400026}
   - {fileID: 400028}
-  - {fileID: 400024}
   m_Father: {fileID: 400010}
   m_RootOrder: 2
 --- !u!4 &400020
@@ -622,18 +605,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400018}
   m_RootOrder: 3
---- !u!4 &400024
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400018}
-  m_RootOrder: 8
 --- !u!4 &400026
 Transform:
   m_ObjectHideFlags: 1
@@ -725,7 +696,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 31.9999847, z: 0}
+  m_LocalPosition: {x: 0, y: 44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
@@ -737,7 +708,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 56, z: 0}
+  m_LocalPosition: {x: 0, y: 76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
@@ -1149,7 +1120,7 @@ MonoBehaviour:
   cleverness: {fileID: 11400024}
   productivity: {fileID: 11400022}
   happiness: {fileID: 11400000}
-  credit: {fileID: 11400026}
+  personalInfo: {fileID: 0}
   button: {fileID: 11400056}
   otherButton: {fileID: 11400046}
   employee: {fileID: 2300000}
@@ -1333,17 +1304,17 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 400012}
     relative: 0
-    absolute: -24
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 587
-  mHeight: 160
+  mHeight: 184
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.66875005
+  aspectRatio: 3.19021749
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1490,71 +1461,6 @@ MonoBehaviour:
   mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
-  mEncoding: 1
-  mMaxLineCount: 0
-  mEffectStyle: 0
-  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  mSymbols: 1
-  mEffectDistance: {x: 1, y: 1}
-  mOverflow: 0
-  mMaterial: {fileID: 0}
-  mApplyGradient: 0
-  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
-  mSpacingX: 0
-  mSpacingY: 0
-  mUseFloatSpacing: 0
-  mFloatSpacingX: 0
-  mFloatSpacingY: 0
-  mShrinkToFit: 0
-  mMaxLineWidth: 0
-  mMaxLineHeight: 0
-  mLineWidth: 0
-  mMultiline: 1
---- !u!114 &11400026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftAnchor:
-    target: {fileID: 400018}
-    relative: 0
-    absolute: 24
-  rightAnchor:
-    target: {fileID: 400018}
-    relative: 1
-    absolute: -24
-  bottomAnchor:
-    target: {fileID: 400018}
-    relative: 0
-    absolute: 24
-  topAnchor:
-    target: {fileID: 400018}
-    relative: 0
-    absolute: 36
-  updateAnchors: 1
-  mColor: {r: .705882311, g: .705882311, b: .705882311, a: 1}
-  mPivot: 4
-  mWidth: 539
-  mHeight: 12
-  mDepth: 6
-  autoResizeBoxCollider: 0
-  hideIfOffScreen: 0
-  keepAspectRatio: 0
-  aspectRatio: 44.9166679
-  keepCrispWhenShrunk: 1
-  mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
-  mFont: {fileID: 0}
-  mText: "Powered by QuantCo\u2122"
-  mFontSize: 16
-  mFontStyle: 0
-  mAlignment: 3
   mEncoding: 1
   mMaxLineCount: 0
   mEffectStyle: 0
@@ -2011,7 +1917,7 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 400016}
     relative: 0
-    absolute: 24
+    absolute: 0
   topAnchor:
     target: {fileID: 400016}
     relative: 1
@@ -2020,17 +1926,17 @@ MonoBehaviour:
   mColor: {r: .375, g: .375, b: .375, a: 1}
   mPivot: 1
   mWidth: 539
-  mHeight: 88
+  mHeight: 136
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.125
+  aspectRatio: 3.96323538
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
   mText: Yoyoyoyoyoyoy
-  mFontSize: 24
+  mFontSize: 28
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1
@@ -2080,22 +1986,22 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 400016}
     relative: 1
-    absolute: -24
+    absolute: -16
   updateAnchors: 1
   mColor: {r: .669117689, g: .669117689, b: .669117689, a: 1}
   mPivot: 1
   mWidth: 539
-  mHeight: 112
+  mHeight: 144
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.8125
+  aspectRatio: 3.74305558
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d2e543d11566547b6b52e2ae4975b066, type: 3}
   mFont: {fileID: 0}
-  mText: Referral
-  mFontSize: 20
+  mText: Word on the street
+  mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
   mEncoding: 1

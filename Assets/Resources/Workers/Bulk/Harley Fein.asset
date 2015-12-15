@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Harley Fein
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
+  robot: 0
+  description: 
+  title: Marketing Associate
+  bio:
+  - has a magnetic personality
+  - isn't the sharpest tool in the shed
+  - reminds me of Eeyore
+  - has an eye for trends
+  - is kind of lazy
+  personalInfo: 00000000020000000300000007000000080000000a000000
+  happiness: 4
+  productivity: 1
+  charisma: 9
+  creativity: 8
+  cleverness: 2
+  baseMinSalary: 308000
