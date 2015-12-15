@@ -36,6 +36,7 @@ public class UINegotiation : UIWindow {
     private List<Worker.Preference> knownAssertions;
     private List<Worker.Preference> suspectedAssertions;
 
+    private int turns;
     private int offer_;
     public int offer {
         get { return offer_; }
@@ -68,6 +69,7 @@ public class UINegotiation : UIWindow {
             suspectedAssertions = new List<Worker.Preference>();
         }
 
+        turns = 0;
         worker = w;
         hireWorkersWindow = hww;
         offer = 40000;
@@ -99,6 +101,8 @@ public class UINegotiation : UIWindow {
             } else {
                 // TODO make this better
                 UIManager.Instance.Alert("You can do better");
+                worker.leaveProb += 0.15f;
+                UpdateLeaveProb();
                 TakeTurn();
             }
         } , null);
@@ -120,7 +124,7 @@ public class UINegotiation : UIWindow {
         dialogueOptions.Clear();
 
         // On first turn, generate all questions
-        if (worker.turnsTaken == 0) {
+        if (turns == 0) {
             List<string> qs = new List<string>(Worker.dialogueToDialogueMap.Keys);
             for (int i=0; i<3; i++) {
                 int idx = Random.Range(0, qs.Count);
@@ -192,8 +196,14 @@ public class UINegotiation : UIWindow {
 
                 // Recalculate everything
                 offer = offer_;
+                worker.leaveProb -= 0.1f;
+                if (worker.leaveProb < 0.05f)
+                    worker.leaveProb = 0.05f;
+                UpdateLeaveProb();
             } else {
                 UIManager.Instance.Alert("That's not that important to me");
+                worker.leaveProb += 0.15f;
+                UpdateLeaveProb();
             }
             assertions.Remove(selected.preference);
         }
@@ -203,20 +213,24 @@ public class UINegotiation : UIWindow {
     }
 
     private void TakeTurn() {
-        worker.turnsTaken +=1;
-        turnsLabel.text = string.Format("{0}/5 turns", worker.turnsTaken + 1);
-        if (worker.turnsTaken >= 5) {
-            // After all turns,
-            // the worker goes off the market for a bit.
+        if (Random.value <= worker.leaveProb) {
+            // The worker goes off the market for a bit.
             worker.offMarketTime = 4;
             UIManager.Instance.Alert("Your offers were too low. I've decided to take a position somewhere else.");
             hireWorkersWindow.RemoveWorker(worker);
             base.Close();
         }
+        worker.leaveProb += 0.05f;
+        UpdateLeaveProb();
+        turns++;
+    }
+
+    private void UpdateLeaveProb() {
+        turnsLabel.text = string.Format("{0:F0}% chance to leave", worker.leaveProb * 100);
     }
 
     public void Close() {
-        if (worker.turnsTaken > 0) {
+        if (turns > 0) {
             UIManager.Instance.Confirm("Are you sure want to leave negotiations? Your turns will take some time to reset.", delegate {
                 base.Close();
             } , null);

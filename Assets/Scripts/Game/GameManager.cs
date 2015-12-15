@@ -412,7 +412,7 @@ public class GameManager : Singleton<GameManager> {
             foreach (AWorker w in workerManager.AllWorkers.Where(w => w.offMarketTime > 0)) {
                 // Reset player offers if appropriate.
                 if (--w.offMarketTime == 0) {
-                    w.turnsTaken = 0;
+                    w.leaveProb = Worker.baseLeaveProb;
                 }
             }
 

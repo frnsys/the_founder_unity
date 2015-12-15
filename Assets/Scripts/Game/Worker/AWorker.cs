@@ -90,7 +90,7 @@ public class AWorker : ScriptableObject {
     // How many weeks the worker is off the job market for.
     // Turns the player has used so far.
     public int offMarketTime;
-    public int turnsTaken;
+    public float leaveProb;
 
     public float happiness;
     public float productivity;
@@ -108,7 +108,7 @@ public class AWorker : ScriptableObject {
         cleverness    = w.cleverness;
 
         offMarketTime = 0;
-        turnsTaken = 0;
+        leaveProb = Worker.baseLeaveProb;
 
         knownPersonalInfos = new List<string>();
         personalInfos = new List<string>();

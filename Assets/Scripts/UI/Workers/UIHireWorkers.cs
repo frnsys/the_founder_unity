@@ -91,8 +91,8 @@ public class UIHireWorkers : UIFullScreenPager {
         availableWorkers.Clear();
         bool wq = GameManager.Instance.workerQuant;
         foreach (AWorker w in workers) {
-            // Reset turns taken for each worker
-            w.turnsTaken = 0;
+            // Reset leave probability for each worker
+            w.leaveProb = Worker.baseLeaveProb;
 
             availableWorkers.Add(w);
             GameObject workerItem = NGUITools.AddChild(grid.gameObject, workerItemPrefab);

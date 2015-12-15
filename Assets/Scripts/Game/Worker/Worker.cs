@@ -45,6 +45,7 @@ public class Worker : SharedResource<Worker> {
     public string title;
     public List<string> bio;
     public List<Preference> personalInfo;
+    public static float baseLeaveProb = 0.05f;
 
     public float happiness;
     public float productivity;
