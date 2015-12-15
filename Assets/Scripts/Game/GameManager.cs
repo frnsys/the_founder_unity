@@ -71,6 +71,9 @@ public class GameManager : Singleton<GameManager> {
     public bool workerInsight {
         get { return data.workerInsight; }
     }
+    public bool workerQuant {
+        get { return data.workerQuant; }
+    }
     public bool cloneable {
         get { return data.cloneable; }
     }
@@ -258,6 +261,9 @@ public class GameManager : Singleton<GameManager> {
             case EffectSet.Special.WorkerInsight:
                 data.workerInsight = true;
                 break;
+            case EffectSet.Special.WorkerQuant:
+                data.workerQuant = true;
+                break;
             case EffectSet.Special.Automation:
                 data.automation = true;
                 break;
@@ -406,7 +412,7 @@ public class GameManager : Singleton<GameManager> {
             foreach (AWorker w in workerManager.AllWorkers.Where(w => w.offMarketTime > 0)) {
                 // Reset player offers if appropriate.
                 if (--w.offMarketTime == 0) {
-                    w.recentPlayerOffers = 0;
+                    w.leaveProb = Worker.baseLeaveProb;
                 }
             }
 

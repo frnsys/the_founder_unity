@@ -72,7 +72,7 @@ namespace UnityTest
                 for (int i=0;i<5;i++) {
                     AWorker worker = CreateWorker("WORKER"+i, i*10);
                     worker.offMarketTime = i;
-                    worker.recentPlayerOffers = i;
+                    worker.leaveProb = i/10;
                     wm.HireWorker(worker);
                 }
 
@@ -393,7 +393,7 @@ namespace UnityTest
             Assert.AreEqual(w.name,                     w_.name);
             Assert.AreEqual(w.salary,                   w_.salary);
             Assert.AreEqual(w.offMarketTime,            w_.offMarketTime);
-            Assert.AreEqual(w.recentPlayerOffers,       w_.recentPlayerOffers);
+            Assert.AreEqual(w.leaveProb,                w_.leaveProb);
             Assert.AreEqual(w.happiness,                w_.happiness);
             Assert.AreEqual(w.productivity,             w_.productivity);
             Assert.AreEqual(w.charisma,                 w_.charisma);

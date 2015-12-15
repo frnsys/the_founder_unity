@@ -43,6 +43,7 @@ public class BulkWorkerTool : EditorWindow {
                 worker.creativity = creativity;
                 worker.cleverness = cleverness;
                 worker.bio = Worker.BuildBio(worker);
+                worker.personalInfo = Worker.BuildPreferences(worker);
 
                 worker.material = materials[UnityEngine.Random.Range(0, materials.Count - 1)];
                 AssetDatabase.CreateAsset(worker, "Assets/Resources/Workers/Bulk/" + name + ".asset");

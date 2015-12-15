@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Marquetta Bocchi
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: a87dbb592c37e44f79ec0e3c2ab11d2b, type: 2}
+  robot: 0
+  description: 
+  title: MBA
+  bio:
+  - is not very imaginative
+  - is quite dim
+  - is a diligent worker
+  - brightens up the office
+  - is very awkward
+  personalInfo: 04000000
+  happiness: 5
+  productivity: 6
+  charisma: 1
+  creativity: 3
+  cleverness: 1
+  baseMinSalary: 224000

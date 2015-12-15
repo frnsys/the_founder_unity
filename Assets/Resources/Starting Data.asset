@@ -10,7 +10,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a17a9e0542e3945c49777a77a5cb367e, type: 3}
   m_Name: Starting Data
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   company: {fileID: 0}
   board:
     happiness: 10
@@ -109,3 +109,4 @@ MonoBehaviour:
   prescient: 0
   automation: 0
   workerInsight: 0
+  workerQuant: 0

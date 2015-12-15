@@ -258,16 +258,11 @@ public class Product : HasStats {
         // Marketing is considered separately to be the "hype" around the product
         float U_ = Mathf.Min((U/i) * u_w, 1f);
 
-        // Negative hype bonus means a fractional effect to hype
+        // Negative hype bonus causes a fractional effect to hype
         if (hypeBonus < 0) {
-            Debug.Log("NEG HYPE");
-            Debug.Log(hypeBonus);
             hypeBonus = 1/(-1 * hypeBonus + 1);
-            Debug.Log(hypeBonus);
         }
         hype = U_/u_w * hypeBonus;
-        Debug.Log(hype);
-        Debug.Log("----");
 
         // Revenue model modifications:
         longevity = (recipe.maxLongevity/100) * quality;

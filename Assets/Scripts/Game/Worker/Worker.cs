@@ -6,6 +6,7 @@
  */
 
 using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -40,9 +41,11 @@ public class Worker : SharedResource<Worker> {
     // Later on, there are robotic workers.
     public bool robot = false;
 
-    public string bio;
     public string description;
     public string title;
+    public List<string> bio;
+    public List<Preference> personalInfo;
+    public static float baseLeaveProb = 0.05f;
 
     public float happiness;
     public float productivity;
@@ -91,44 +94,22 @@ public class Worker : SharedResource<Worker> {
         }
     };
 
-    public static string BuildBio(Worker w) {
+    public static List<string> BuildBio(Worker w) {
         // Randomize order of stats.
         string[] stats = new string[] {"Creativity", "Cleverness", "Charisma", "Productivity", "Happiness"};
-        stats = stats.OrderBy(x => Random.value).ToArray();
+        stats = stats.OrderBy(x => UnityEngine.Random.value).ToArray();
 
-        float prevVal = -1;
-        int maxConj = 3;
-        List<string> conjs = new List<string>() {};
-        List<string> bio = new List<string> { w.name };
+        List<string> bio = new List<string>();
 
         foreach (string stat in stats) {
             float val = w.StatByName(stat);
             string level = SkillLevel(val);
 
-            if (prevVal >= 0) {
-                string conj;
-                if (System.Math.Abs(val - prevVal) >= 4) {
-                    conj = "but";
-                } else {
-                    conj = "and";
-                }
-
-                if (conjs.Count >= maxConj || (conjs.Count > 0 && conjs[conjs.Count - 1] == conj)) {
-                    bio[bio.Count - 1] += ".";
-                    bio.Add(w.name);
-                    conjs.Clear();
-                } else {
-                    bio.Add(conj);
-                    conjs.Add(conj);
-                }
-            }
-
             string[] descs = bioMap[stat][level];
-            int idx = Random.Range(0,(descs.Length - 1));
+            int idx = UnityEngine.Random.Range(0,(descs.Length - 1));
             bio.Add(descs[idx]);
-            prevVal = val;
         }
-        return string.Join(" ", bio.ToArray()) + ".";
+        return bio;
     }
 
     private static string SkillLevel(float val) {
@@ -139,6 +120,95 @@ public class Worker : SharedResource<Worker> {
         else
             return "high";
     }
+
+    // There are certain preferences for which
+    // employees are willing to take less salary
+    // if mentioned in conversation
+    public enum Preference {
+        HEALTHCARE,
+        VACATION,
+        CULTURE,
+        LOANS, // student loans
+        DEBT, // credit card debt
+        RETIREMENT,
+        PARENTAL,
+        FITNESS,
+        NONE
+    }
+
+    public static List<Preference> BuildPreferences(Worker w) {
+        List<Preference> prefs = new List<Preference>();
+        foreach (Preference p in Enum.GetValues(typeof(Preference)).Cast<Preference>()) {
+            if (UnityEngine.Random.value < 0.25) {
+                prefs.Add(p);
+            }
+        }
+        return prefs;
+    }
+
+    public static Dictionary<Preference, string[]> prefToDescMap = new Dictionary<Preference, string[]> {
+        {Preference.HEALTHCARE, new string[] {"has a sick relative", "is a hypochondriac", "has a chronic illness"}},
+        {Preference.VACATION, new string[] {"values time off", "likes to travel", "enjoys rest and relaxation"}},
+        {Preference.CULTURE, new string[] {"prefers a fun environment", "enjoys joking with coworkers", "likes an social workplace"}},
+        {Preference.LOANS, new string[] {"has student loans", "went to an expensive school", "had a job through college"}},
+        {Preference.DEBT, new string[] {"shops online a lot", "has expensive tastes", "spends a lot of money"}},
+        {Preference.RETIREMENT, new string[] {"worried about financial security", "concerned about growing old", "anxious about social security"}},
+        {Preference.PARENTAL, new string[] {"wants to have kids", "has children", "planning a family"}},
+        {Preference.FITNESS, new string[] {"values exercise", "anxious about body image", "wants to stay fit"}}
+    };
+
+    public static Dictionary<string, Dictionary<Preference, string[]>> dialogueToDialogueMap = new Dictionary<string, Dictionary<Preference, string[]>> {
+        {"Been anywhere fun lately?", new Dictionary<Preference, string[]> {
+            {Preference.DEBT, new string[] {"Haven't been able to afford it"}},
+            {Preference.LOANS, new string[] {"Haven't been able to afford it"}},
+            {Preference.VACATION, new string[] {"Yes, I love to travel!", "We just got back from a great trip!"}},
+            {Preference.FITNESS, new string[] {"I went on a long bike ride out of town"}},
+            {Preference.NONE, new string[] {"Not really"}}
+        }},
+        {"What are you up to this weekend?", new Dictionary<Preference, string[]> {
+            {Preference.PARENTAL, new string[] {"Taking our kids out to a show.", "Watching my kid's soccer game.", "Preparing our baby shower!"}},
+            {Preference.VACATION, new string[] {"Taking a trip to see some sights.", "Heading out to the beach!"}},
+            {Preference.CULTURE, new string[] {"Grabbing drinks with some former coworkers", "Catching up with some old colleagues"}},
+            {Preference.FITNESS, new string[] {"Running a 5k", "Going for a long bike ride"}},
+            {Preference.NONE, new string[] {"Not much"}}
+        }},
+        {"What do you like to do outside of work?", new Dictionary<Preference, string[]> {
+            {Preference.PARENTAL, new string[] {"Don't have much free time, the kids are a handful"}},
+            {Preference.VACATION, new string[] {"I love to travel", "I love visiting new places"}},
+            {Preference.FITNESS, new string[] {"I enjoy running", "I like to bike a lot"}},
+            {Preference.NONE, new string[] {"Not much"}}
+        }},
+        {"Where do you see yourself in 5 years?", new Dictionary<Preference, string[]> {
+            {Preference.RETIREMENT, new string[] {"Hoping I can retire by then!"}},
+            {Preference.VACATION, new string[] {"I'd love to visit Europe at some point", "I'm planning on taking a trip through Asia before long"}},
+            {Preference.FITNESS, new string[] {"Hoping that I'll have run a full marathon!"}},
+            {Preference.PARENTAL, new string[] {"Seeing my kid graduate from a prestigious university"}},
+            {Preference.CULTURE, new string[] {"Taking part in a vibrant and exciting workplace", "Participating in a thriving company"}},
+            {Preference.NONE, new string[] {"I dunno"}}
+        }},
+    };
+
+    public static Dictionary<Preference, string> prefToDialogueMap = new Dictionary<Preference, string> {
+        {Preference.HEALTHCARE, "We have some great healthcare benefits included"},
+        {Preference.VACATION, "We have a great vacation policy"},
+        {Preference.CULTURE, "We really value our workplace culture"},
+        {Preference.LOANS, "We provide student loan forgiveness programs"},
+        {Preference.DEBT, "We often help employees with debt management"},
+        {Preference.RETIREMENT, "We provide a generous 401k plan"},
+        {Preference.PARENTAL, "We have great programs and services to help with childcare"},
+        {Preference.FITNESS, "We have a lot of great fitness benefits"}
+    };
+
+    public static Dictionary<Preference, float> prefToDiscountMap = new Dictionary<Preference, float> {
+        {Preference.HEALTHCARE, 0.8f},
+        {Preference.VACATION, 0.85f},
+        {Preference.CULTURE, 0.9f},
+        {Preference.LOANS, 0.75f},
+        {Preference.DEBT, 0.75f},
+        {Preference.RETIREMENT, 0.9f},
+        {Preference.PARENTAL, 0.85f},
+        {Preference.FITNESS, 0.9f}
+    };
 
     public float StatByName(string name) {
         switch (name) {
