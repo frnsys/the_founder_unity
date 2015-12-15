@@ -12,6 +12,7 @@ public class UINegotiation : UIWindow {
 
     private AWorker worker;
     private UIHireWorkers hireWorkersWindow;
+    private float probAccept;
 
     private int offer_;
     public int offer {
@@ -20,8 +21,14 @@ public class UINegotiation : UIWindow {
             offer_ = value;
             offerLabel.text = string.Format("{0:C0}/mo", offer_);
 
-            float successProb = 50f; // TODO
-            probabilitySuccessLabel.text = string.Format("{0}% success", successProb);
+            probAccept = AcceptanceProb(offer_);
+            string color = "7BD6A4";
+            if (probAccept <= 0.55) {
+                color = "FF1E1E";
+            } else if (probAccept <= 0.75) {
+                color = "F1B71A";
+            }
+            probabilitySuccessLabel.text = string.Format("[c][{0}]{1:F0}% success[-][/c]", color, probAccept * 100);
         }
     }
 
@@ -38,24 +45,38 @@ public class UINegotiation : UIWindow {
 
         worker = w;
         hireWorkersWindow = hww;
+        offer = 40000;
     }
 
     public void Increment() {
-        offer += 5000;
+        offer += 2000;
     }
 
     public void Decrement() {
-        offer -= 5000;
+        offer -= 2000;
         if (offer < 0)
             offer = 0;
     }
 
     public void MakeOffer() {
-        //TODO roll to see if offer is accepted
-        UIManager.Instance.Confirm(string.Format("There will be a {0:C0} hiring fee (0.1%).", 1000), delegate {
-            Debug.Log("Offer made");
-            TakeTurn();
+        UIManager.Instance.Confirm(string.Format("There will be a {0:C0} hiring fee (0.1%). Is that ok?", offer_ * 0.1f), delegate {
+            if (Random.value <= probAccept) {
+                Debug.Log("offer successful!");
+            } else {
+                TakeTurn();
+            }
         } , null);
+    }
+
+    private float AcceptanceProb(int off) {
+        float minSal = worker.MinSalaryForCompany(GameManager.Instance.playerCompany);
+        float diff = off - minSal;
+        if (diff >= 0) {
+            return 0.99f;
+        } else {
+            float x = -diff/minSal;
+            return Mathf.Max(0, 0.99f - (((1/(-x-1)) + 1)*2));
+        }
     }
 
     public void ChooseDialogue() {
