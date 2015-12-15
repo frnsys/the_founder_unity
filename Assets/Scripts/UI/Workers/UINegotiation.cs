@@ -50,6 +50,9 @@ public class UINegotiation : UIWindow {
 
     public void MakeOffer() {
         //TODO roll to see if offer is accepted
+        UIManager.Instance.Confirm(string.Format("There will be a {0:C0} hiring fee (0.1%).", 1000), delegate {
+            Debug.Log("Offer made");
+        } , null);
     }
 
     public void Close() {
