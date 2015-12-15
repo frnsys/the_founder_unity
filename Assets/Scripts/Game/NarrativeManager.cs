@@ -328,12 +328,12 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 if (Stage(OBS.OPENED_HIRING)) {
                     MentorMessages(new string[] {
                         "Here are the candidates from your recruiting effort.",
-                        "To hire an candidate, you must give them an offer they find acceptable. You have three tries before they take an offer elsewhere.",
-                        string.Format("The {0} an candidate is willing to accept is affected by a few things.", ConceptHighlight("minimum salary")),
-                        "Generally, more skilled employees will expect more money.",
-                        "Hiring competition amongst companies can drive salary expectations up.",
-                        "However, if your employees are exceptionally happy, candidates will be willing to take a lower salary.",
-                        "Don't forget - you're fighting to keep a high profit margin - so negotiate with that in mind!"
+                        "To hire an candidate, you must give them an offer they find acceptable.",
+                        string.Format("You can {0} with candidates to get a good deal.", ConceptHighlight("negotiate")),
+                        "Ask them questions to learn their concerns,",
+                        "then persuade them with your company's benefits.",
+                        "They'll take a lower salary if you can convince them.",
+                        "If negotiations drag on or don't look good for them, they may leave the table."
                     });
                 }
                 break;
@@ -368,7 +368,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         string.Format("They take longer to develop, but you can hire employees to increase {0} and develop them faster.", ConceptHighlight("productivity")),
                         "Less skilled employees may mess up on hard products,",
                         "causing \n:BLOCK: [c][0078E1]creative blocks[-][/c],\n:BUG: [c][0078E1]bugs[-][/c], or\n:OUTRAGE: [c][0078E1]outrage[-][/c].",
-                        string.Format("When the product is finished, your product will be released to {0}!", SpecialHighlight("The Market"))
+                        string.Format("When the product is finished, your product will be released to\n{0}!", SpecialHighlight("The Market"))
                     });
                 }, 1f));
             }

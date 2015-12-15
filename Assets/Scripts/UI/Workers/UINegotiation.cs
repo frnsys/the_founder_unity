@@ -81,6 +81,7 @@ public class UINegotiation : UIWindow {
         knownAssertions = new List<Worker.Preference>();
         dialogueOptions = new List<DialogueOption>();
         GenerateDialogueOptions();
+        UpdateLeaveProb();
     }
 
     public void Increment() {
