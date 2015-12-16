@@ -4295,7 +4295,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189669549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -136.415771, y: 450.005798, z: 0}
+  m_LocalPosition: {x: -136.434814, y: 450.005798, z: 0}
   m_LocalScale: {x: .999986887, y: .999986887, z: .999986887}
   m_Children:
   - {fileID: 893560091}
@@ -4339,7 +4339,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 9.9333334
+  aspectRatio: 3.76666665
 --- !u!1 &191160447
 GameObject:
   m_ObjectHideFlags: 0
@@ -24300,7 +24300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 1435893506}
   menuButton: {fileID: 291774585}
-  newProductButton: {fileID: 0}
+  newProductButton: {fileID: 2124557375}
   lockedMat: {fileID: 2100000, guid: 7ff6de4b2b0464922849210c026c39d6, type: 2}
 --- !u!1 &1277323834
 GameObject:
