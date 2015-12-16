@@ -139,7 +139,7 @@ public class Worker : SharedResource<Worker> {
     public static List<Preference> BuildPreferences(Worker w) {
         List<Preference> prefs = new List<Preference>();
         foreach (Preference p in Enum.GetValues(typeof(Preference)).Cast<Preference>()) {
-            if (UnityEngine.Random.value < 0.25) {
+            if (p != Preference.NONE && UnityEngine.Random.value < 0.25) {
                 prefs.Add(p);
             }
         }

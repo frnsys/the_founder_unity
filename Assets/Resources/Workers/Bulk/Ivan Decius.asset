@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
+  m_Name: Ivan Decius
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
+  material: {fileID: 2100000, guid: cc45eb035bd7847f890ce21262745efe, type: 2}
+  robot: 0
+  description: 
+  title: Designer
+  bio:
+  - brightens up the office
+  - is not very imaginative
+  - has a weird smell
+  - is kind of lazy
+  - is quite dim
+  personalInfo: 0100000002000000030000000400000007000000
+  happiness: 6
+  productivity: 3
+  charisma: 3
+  creativity: 1
+  cleverness: 1
+  baseMinSalary: 168000
