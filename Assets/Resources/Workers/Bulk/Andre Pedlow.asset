@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Name: Andre Pedlow
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
+  material: {fileID: 2100000, guid: a8032affc94154eb883a3431cf780b7a, type: 2}
   robot: 0
   description: 
   title: Public Relations Associate
-  bio: is not very imaginative is easy to talk to is a real pleasure to work with
-    is technically gifted is kind of lazy|
-  personalInfo: 06000000
+  bio: is not very imaginative|can be charming|is kind of lazy|is a real pleasure
+    to work with|solves problems well
+  personalInfo: 0400000006000000
   happiness: 13
   productivity: 3
   charisma: 7

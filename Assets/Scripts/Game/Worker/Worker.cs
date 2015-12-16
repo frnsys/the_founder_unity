@@ -111,7 +111,7 @@ public class Worker : SharedResource<Worker> {
         }
         // Unity has trouble serializing lists of strings,
         // so store as a single string with a delimeter
-        return string.Join(" ", bio.ToArray()) + "|";
+        return string.Join("|", bio.ToArray());
     }
 
     private static string SkillLevel(float val) {
