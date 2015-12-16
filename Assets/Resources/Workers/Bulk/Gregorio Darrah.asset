@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Gregorio Darrah
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
+  material: {fileID: 2100000, guid: 563cd5eee7f544e7b972d59b08ea04b6, type: 2}
   robot: 0
   description: 
   title: Sales Associate
-  bio:
-  - is alienating
-  - is quite dim
-  - needs a lot of motivation
-  - reminds me of Eeyore
-  - is not very imaginative
-  personalInfo: 04000000
+  bio: is not very imaginative is quite dim brings everyone down needs a lot of motivation
+    is very awkward|
+  personalInfo: 
   happiness: 1
   productivity: 4
   charisma: 3

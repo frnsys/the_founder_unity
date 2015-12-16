@@ -134,8 +134,8 @@ public class AWorker : ScriptableObject {
     public string description {
         get { return worker.description; }
     }
-    public List<string> bio {
-        get { return worker.bio; }
+    public string[] bio {
+        get { return worker.bio.Split('|'); }
     }
     public float baseMinSalary {
         get { return worker.baseMinSalary; }

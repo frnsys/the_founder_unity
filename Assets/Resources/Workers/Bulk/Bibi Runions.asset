@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Bibi Runions
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
+  material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
   robot: 0
   description: 
   title: Public Relations Associate
-  bio:
-  - is not very imaginative
-  - is quite dim
-  - is fun to be around
-  - reminds me of Eeyore
-  - needs a lot of motivation
-  personalInfo: 010000000200000006000000
+  bio: isn't the sharpest tool in the shed needs a lot of motivation can be charming
+    reminds me of Eeyore is not very imaginative|
+  personalInfo: 06000000
   happiness: 1
   productivity: 1
   charisma: 8

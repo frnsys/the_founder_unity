@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Venita Poldrack
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: 563cd5eee7f544e7b972d59b08ea04b6, type: 2}
+  material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
   robot: 0
   description: 
   title: Programmer
-  bio:
-  - isn't the sharpest tool in the shed
-  - is not very imaginative
-  - needs a lot of motivation
-  - reminds me of Eeyore
-  - is very awkward
-  personalInfo: 
+  bio: is not very imaginative is very awkward is kind of lazy brings everyone down
+    is quite dim|
+  personalInfo: 010000000400000005000000
   happiness: 1
   productivity: 1
   charisma: 1

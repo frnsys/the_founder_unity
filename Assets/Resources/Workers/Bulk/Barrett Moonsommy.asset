@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Barrett Moonsommy
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
+  material: {fileID: 2100000, guid: 058f4772bbd2f4a49b7cd3cd9061d9e7, type: 2}
   robot: 0
   description: 
   title: Public Relations Associate
-  bio:
-  - is not very imaginative
-  - isn't the sharpest tool in the shed
-  - needs a lot of motivation
-  - reminds me of Eeyore
-  - is hypnotic
-  personalInfo: 
+  bio: is kind of lazy is not very imaginative is quite dim has a magnetic personality
+    brings everyone down|
+  personalInfo: 0200000006000000
   happiness: 3
   productivity: 2
   charisma: 10

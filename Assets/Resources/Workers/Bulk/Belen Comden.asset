@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Belen Comden
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: 058f4772bbd2f4a49b7cd3cd9061d9e7, type: 2}
+  material: {fileID: 2100000, guid: a87dbb592c37e44f79ec0e3c2ab11d2b, type: 2}
   robot: 0
   description: 
   title: Business Developer
-  bio:
-  - brightens up the office
-  - needs a lot of motivation
-  - is an adept problem solver
-  - is not very imaginative
-  - has a magnetic personality
-  personalInfo: 010000000600000007000000
+  bio: is technically gifted has a magnetic personality is kind of lazy is not very
+    imaginative brightens up the office|
+  personalInfo: 06000000
   happiness: 5
   productivity: 1
   charisma: 12

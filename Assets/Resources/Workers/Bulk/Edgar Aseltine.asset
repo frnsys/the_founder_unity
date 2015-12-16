@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Edgar Aseltine
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
+  material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
   robot: 0
   description: 
   title: Programmer
-  bio:
-  - has a weird smell
-  - isn't the sharpest tool in the shed
-  - reminds me of Eeyore
-  - is not very imaginative
-  - needs a lot of motivation
-  personalInfo: 0000000006000000
+  bio: has a weird smell isn't the sharpest tool in the shed is kind of lazy is a
+    real bummer is not very imaginative|
+  personalInfo: 030000000600000007000000
   happiness: 1
   productivity: 1
   charisma: 1

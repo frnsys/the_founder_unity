@@ -21,9 +21,9 @@ public class UIWorker : MonoBehaviour {
                 employee.material = worker_.material;
 
             if (worker_.description != "")
-                bio.text = string.Format("{0}\n- {1}", worker_.description, string.Join("\n- ", worker_.bio.ToArray()));
+                bio.text = string.Format("{0}\n- {1}", worker_.description, string.Join("\n- ", worker_.bio));
             else
-                bio.text = string.Format("- {0}", string.Join("\n- ", worker_.bio.ToArray()));
+                bio.text = string.Format("- {0}", string.Join("\n- ", worker_.bio));
 
             Company employer = GameManager.Instance.workerManager.EmployerForWorker(worker_);
             if (employer != null)

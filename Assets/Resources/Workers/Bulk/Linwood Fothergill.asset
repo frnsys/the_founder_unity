@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Linwood Fothergill
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
+  material: {fileID: 2100000, guid: cc45eb035bd7847f890ce21262745efe, type: 2}
   robot: 0
   description: 
   title: Product Manager
-  bio:
-  - needs a lot of motivation
-  - is not very imaginative
-  - is a real bummer
-  - can be charming
-  - solves problems well
-  personalInfo: 06000000
+  bio: brings everyone down needs a lot of motivation is an adept problem solver is
+    fun to be around is not very imaginative|
+  personalInfo: 0100000003000000
   happiness: 2
   productivity: 1
   charisma: 5

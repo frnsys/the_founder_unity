@@ -43,7 +43,7 @@ public class Worker : SharedResource<Worker> {
 
     public string description;
     public string title;
-    public List<string> bio;
+    public string bio;
     public List<Preference> personalInfo;
     public static float baseLeaveProb = 0.05f;
 
@@ -94,7 +94,7 @@ public class Worker : SharedResource<Worker> {
         }
     };
 
-    public static List<string> BuildBio(Worker w) {
+    public static string BuildBio(Worker w) {
         // Randomize order of stats.
         string[] stats = new string[] {"Creativity", "Cleverness", "Charisma", "Productivity", "Happiness"};
         stats = stats.OrderBy(x => UnityEngine.Random.value).ToArray();
@@ -109,7 +109,9 @@ public class Worker : SharedResource<Worker> {
             int idx = UnityEngine.Random.Range(0,(descs.Length - 1));
             bio.Add(descs[idx]);
         }
-        return bio;
+        // Unity has trouble serializing lists of strings,
+        // so store as a single string with a delimeter
+        return string.Join(" ", bio.ToArray()) + "|";
     }
 
     private static string SkillLevel(float val) {

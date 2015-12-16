@@ -113,6 +113,12 @@ The serializer will recognize this inheritance and attempt to load the resource 
 
 To make serialization/deserialization (game saving/loading) less insane, we try to take advantage of the `SharedResource` system wherever possible. However, some classes, such as `Worker`s, are modified throughout the game. We do not want to permanently affect its underlying asset. For these classes, we have the `SharedResource` version of the class, e.g. `Worker`, which contains static (as in unchanging) data. That way, we do not need to serialize or deserialize each individual field; rather we just re-load the asset as needed. But we do not directly interact with this `SharedResource` class. Rather, we have an associated class, in the case of `Worker`, it is `AWorker`, which wraps around the `SharedResource` and manages the data which does change throughout the course of the game. This is so that we save only the absolute minimum.
 
+## Bleh, Unity
+
+(some notes to make dealing with Unity a bit easier)
+
+- Unity cannot serialize lists of strings well (it runs fine in the Editor but when building to iOS, causes a `unhandled NULL exception`). Instead, save as a single string with a delimiter and then split as needed.
+
 ## License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">The Founder</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://frnsys.com" property="cc:attributionName" rel="cc:attributionURL">Francis Tseng</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Winfred Couse
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: a87dbb592c37e44f79ec0e3c2ab11d2b, type: 2}
+  material: {fileID: 2100000, guid: 563cd5eee7f544e7b972d59b08ea04b6, type: 2}
   robot: 0
   description: 
   title: MBA
-  bio:
-  - reminds me of Eeyore
-  - has a weird smell
-  - is not very imaginative
-  - needs a lot of motivation
-  - is quite dim
-  personalInfo: 03000000
+  bio: is very awkward is a real bummer is kind of lazy isn't the sharpest tool in
+    the shed is not very imaginative|
+  personalInfo: 
   happiness: 1
   productivity: 1
   charisma: 1

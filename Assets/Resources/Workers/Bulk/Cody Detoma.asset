@@ -12,17 +12,13 @@ MonoBehaviour:
   m_Name: Cody Detoma
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  material: {fileID: 2100000, guid: 563cd5eee7f544e7b972d59b08ea04b6, type: 2}
+  material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
   robot: 0
   description: 
   title: Designer
-  bio:
-  - is a real bummer
-  - isn't the sharpest tool in the shed
-  - is not very imaginative
-  - needs a lot of motivation
-  - is alienating
-  personalInfo: 0000000001000000
+  bio: reminds me of Eeyore is quite dim is hard to be around is not very imaginative
+    needs a lot of motivation|
+  personalInfo: 0100000003000000
   happiness: 1
   productivity: 1
   charisma: 1
