@@ -185,18 +185,6 @@ public class UIManager : Singleton<UIManager> {
         OpenPopup(promoWindow);
     }
 
-    public GameObject hypeMinigame;
-    public void LaunchHypeMinigame(Promo promo) {
-        ClosePopup(); // Close promo window
-        GameObject hmg = NGUITools.AddChild(gameObject, hypeMinigame);
-        hmg.GetComponent<HypeMinigame>().Setup(promo);
-
-        foreach (UIFollowTarget uift in hmg.GetComponentsInChildren<UIFollowTarget>()) {
-            uift.gameCamera = uiCamera;
-            uift.uiCamera = uiCamera;
-        }
-    }
-
     private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
         yield return StartCoroutine(GameTimer.Wait(delay));
         callback(null);

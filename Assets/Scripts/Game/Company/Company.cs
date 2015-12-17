@@ -341,7 +341,6 @@ public class Company : HasStats {
 
     public void StartPromo(Promo promo) {
         promo.Develop();
-        UIManager.Instance.LaunchHypeMinigame(promo);
     }
 
     public List<int> promos;
