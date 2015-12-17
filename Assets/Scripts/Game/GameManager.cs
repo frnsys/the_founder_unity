@@ -298,6 +298,7 @@ public class GameManager : Singleton<GameManager> {
         playerCompany.HarvestCompanies();
 
         // Check performance and update profit target
+        Dictionary<string, float> results = playerCompany.CollectAnnualPerformanceData();
         float growth = data.board.EvaluatePerformance(results["Annual Profit"]);
 
         // Show performance report

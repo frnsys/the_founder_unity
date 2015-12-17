@@ -96,8 +96,8 @@ public class UIManager : Singleton<UIManager> {
         window.GetComponent<UIHireWorkers>().LoadWorkers(workers);
     }
 
-    void OnPerformanceReport(int year, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
-        PerformanceReport(results, deltas, board);
+    void OnPerformanceReport(int year, Dictionary<string, float> results, TheBoard board) {
+        PerformanceReport(results, board);
     }
 
     void OnYearEnded(int year) {

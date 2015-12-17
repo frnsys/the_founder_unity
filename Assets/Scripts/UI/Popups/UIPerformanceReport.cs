@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UIPerformanceReport : UIAlert {
     public GameObject first;
@@ -14,13 +15,13 @@ public class UIPerformanceReport : UIAlert {
 
     public void BuildReport(Dictionary<string, float> results, TheBoard board){
         revenueLabel.text = string.Format("{0:C0}", results["Annual Revenue"]);
-        revenueDeltaLabel.text = string.Format("{0}%", deltas["Annual Revenue Delta"] * 100);
+        revenueDeltaLabel.text = string.Format("{0}%", results["Annual Revenue Delta"] * 100);
 
         costsLabel.text = string.Format("{0:C0}", results["Annual Costs"]);
-        costsDeltaLabel.text = string.Format("{0}%", deltas["Annual Costs Delta"] * 100);
+        costsDeltaLabel.text = string.Format("{0}%", results["Annual Costs Delta"] * 100);
 
         profitLabel.text = string.Format("{0:C0}", results["Annual Profit"]);
-        profitDeltaLabel.text = string.Format("{0}%", deltas["Annual Profit Delta"] * 100);
+        profitDeltaLabel.text = string.Format("{0}%", results["Annual Profit Delta"] * 100);
 
         boardLabel.text = board.BoardStatus();
     }
