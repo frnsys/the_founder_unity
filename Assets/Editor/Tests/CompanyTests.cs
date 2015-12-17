@@ -145,27 +145,28 @@ namespace UnityTest
             Assert.AreEqual(c.cash.value, 5000);
         }
 
-		[Test]
-		public void PayMonthly() {
-            // For this test to work, startCash has to be enough for all these purchases.
-            // Otherwise the purchases don't go through.
-            float startCash = 200000;
-            c.cash.baseValue = startCash;
+        // TODO change to payannual
+		//[Test]
+		//public void PayMonthly() {
+            //// For this test to work, startCash has to be enough for all these purchases.
+            //// Otherwise the purchases don't go through.
+            //float startCash = 200000;
+            //c.cash.baseValue = startCash;
 
-            Location loc = ScriptableObject.CreateInstance<Location>();
-            loc.cost = 100;
-            c.ExpandToLocation(loc);
+            //Location loc = ScriptableObject.CreateInstance<Location>();
+            //loc.cost = 100;
+            //c.ExpandToLocation(loc);
 
-            worker.salary = 500;
+            //worker.salary = 500;
 
-            // Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
-            float paid = worker.hiringFee + (worker.monthlyPay * GameManager.Instance.wageMultiplier) + loc.cost + (loc.cost/1000 * GameManager.Instance.costMultiplier);
+            //// Location rent is calculated twice because it's paid on purchase, and then again as monthly rent.
+            //float paid = worker.hiringFee + (worker.salary * GameManager.Instance.wageMultiplier) + loc.cost + (loc.cost/1000 * GameManager.Instance.costMultiplier);
 
-            c.HireWorker(worker);
+            //c.HireWorker(worker);
 
-            c.PayMonthly();
-            Assert.AreEqual(c.cash.baseValue, startCash - paid);
-        }
+            //c.PayMonthly();
+            //Assert.AreEqual(c.cash.baseValue, startCash - paid);
+        //}
 
         [Test]
         public void ActiveEffects() {
@@ -173,51 +174,6 @@ namespace UnityTest
 
             //int last = c.activeEffects.Count - 1;
             //Assert.IsTrue(c.activeEffects[last].Equals(item.effects));
-        }
-
-
-        // ===============================================
-        // Product Management ============================
-        // ===============================================
-
-        [Test]
-        public void StartNewProduct() {
-            c.StartNewProduct(pts, 0, 0, 0);
-            Product p = c.products[0];
-            Assert.AreEqual(c.developingProduct, p);
-            Assert.AreEqual(c.products.Count, 1);
-
-            // Creating a new product should not apply existing effects.
-            //Assert.AreEqual(p.design.value, 0);
-        }
-
-		[Test]
-		public void HarvestProduct() {
-            c.cash.baseValue = 2000;
-
-            c.StartNewProduct(pts, 10, 10, 10);
-            Product p = c.products[0];
-            p.Launch(c);
-            Assert.AreEqual(c.activeProducts[0], p);
-
-            c.HarvestProducts(0.1f);
-
-            Assert.IsTrue(c.cash.baseValue > 2000);
-        }
-
-        [Test]
-        public void ShutdownProduct() {
-            c.cash.baseValue = 2000;
-
-            c.StartNewProduct(pts, 0, 0, 0);
-            Product p = c.products[0];
-            p.Launch(c);
-            Assert.AreEqual(c.activeProducts[0], p);
-
-            c.ShutdownProduct(p);
-
-            Assert.AreEqual(p.state, Product.State.RETIRED);
-            Assert.AreEqual(p.design.value, 0);
         }
 
         // ===============================================

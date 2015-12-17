@@ -11,6 +11,7 @@ using System.Collections.Generic;
 public class AGameEvent {
     public GameEvent gameEvent;
     public float probability;
+    public int delay; // delay in years that the event happens
 
     public AGameEvent() {}
     public AGameEvent(GameEvent ev) {

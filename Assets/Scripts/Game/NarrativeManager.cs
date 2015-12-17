@@ -401,16 +401,17 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                     UIManager.Instance.menu.Activate("Research");
                 }, 6f));
-            } else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
-                MentorMessages(new string[] {
-                    "It's time to start thinking about expanding to new locations.",
-                    string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
-                    "The more locations you have for a market, the more money you will make!",
-                    "Some locations have special bonuses too.",
-                    string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
-                });
-                UIManager.Instance.menu.Activate("Locations");
-                data.ob.LOCATIONS_UNLOCKED = true;
+            // TODO update
+            //} else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
+                //MentorMessages(new string[] {
+                    //"It's time to start thinking about expanding to new locations.",
+                    //string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
+                    //"The more locations you have for a market, the more money you will make!",
+                    //"Some locations have special bonuses too.",
+                    //string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
+                //});
+                //UIManager.Instance.menu.Activate("Locations");
+                //data.ob.LOCATIONS_UNLOCKED = true;
             }
         }
     }

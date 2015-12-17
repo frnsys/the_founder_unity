@@ -41,14 +41,14 @@ public class UIAccounting : MonoBehaviour {
     }
 
     void Update() {
-        float monthlySalaries = 0;
+        float salaries = 0;
         foreach (AWorker worker in company.workers) {
-            monthlySalaries += worker.monthlyPay;
+            salaries += worker.salary;
         }
-        salariesLabel.text = string.Format("{0:C0}/mo", monthlySalaries);
+        salariesLabel.text = string.Format("{0:C0}/yr", salaries);
 
         float monthlyRent = company.locations.Skip(1).Slinq().Select(l => l.cost).Sum();
-        rentLabel.text = string.Format("{0:C0}/mo", monthlyRent);
+        rentLabel.text = string.Format("{0:C0}/yr", monthlyRent * 12);
 
         employeesLabel.text = string.Format("{0}", company.workers.Count);
         locationsLabel.text = string.Format("{0}", company.locations.Count);

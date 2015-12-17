@@ -24,8 +24,6 @@ public class UIEmployee : MonoBehaviour {
 
     void Start() {
         company = GameManager.Instance.playerCompany;
-        StartCoroutine(Working());
-
         agent = GetComponent<NavMeshAgent>();
         target = RandomTarget();
     }
@@ -81,18 +79,4 @@ public class UIEmployee : MonoBehaviour {
     Vector3 RandomTarget() {
         return transform.parent.TransformDirection(UIOfficeManager.Instance.RandomTarget());
     }
-
-    IEnumerator Working() {
-        while(true) {
-            if (company.developing && laborObj.stat == null) {
-                // Robots have no productivity issues.
-                if (worker.robot || Random.value < worker.productivity) {
-                    laborObj.stat = worker.Work(company.developingProduct);
-                    laborObj.gameObject.SetActive(true);
-                }
-            }
-            yield return StartCoroutine(GameTimer.Wait(1.4f * Random.value));
-        }
-    }
-
 }

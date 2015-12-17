@@ -5,13 +5,6 @@ using System.Collections.Generic;
 
 [System.Serializable]
 public class Product : HasStats {
-    public enum State {
-        DEVELOPMENT,
-        COMPLETED,
-        LAUNCHED,
-        RETIRED
-    }
-
     public string description {
         get {
             return recipe.description != null ? recipe.description : "This combination didn't make any sense. This product is incoherent!";
@@ -51,12 +44,6 @@ public class Product : HasStats {
 
     public float requiredProgress;
 
-    [SerializeField]
-    private State _state = State.DEVELOPMENT;
-    public State state {
-        get { return _state; }
-    }
-
     public List<Vertical> requiredVerticals {
         get {
             List<Vertical> verts = new List<Vertical>();
@@ -67,10 +54,6 @@ public class Product : HasStats {
         }
     }
     public EffectSet effects;
-
-    public bool launched { get { return _state == State.LAUNCHED; } }
-    public bool developing { get { return _state == State.DEVELOPMENT; } }
-    public bool retired { get { return _state == State.RETIRED; } }
 
     // All the data about how well
     // this ProductType combination does.
@@ -88,22 +71,6 @@ public class Product : HasStats {
     // the product is. This is meant for quicker comparisons
     // between products to see if they are of the same combo.
     public string comboID;
-
-    public float timeSinceLaunch = 0;
-
-    // Revenue earned over the product's lifetime.
-    public float revenueEarned = 0;
-
-    // Revenue earned during the last cycle.
-    public float lastRevenue = 0;
-
-    // The revenue model for the product.
-    [SerializeField]
-    private AnimationCurve revenueModel;
-
-    // How long the product lasts at its peak plateau.
-    [SerializeField]
-    private float longevity;
 
     [SerializeField]
     private float maxRevenue;
@@ -147,7 +114,6 @@ public class Product : HasStats {
         // Each progress is one cycle.
         difficulty = pts[0].difficulty * pts[1].difficulty;
         requiredProgress = 1440f * difficulty;
-        revenueModel = recipe.revenueModel;
 
         foreach (Vertical v in requiredVerticals) {
             if (v.name == "Defense") {
@@ -162,76 +128,31 @@ public class Product : HasStats {
 
     // Generate a product name.
     private string GenerateName(Company c) {
+        // TODO
         // If the company already has products of this combo,
         // use "versioning" for the product name.
-        IEnumerable<Product> existing = c.products.Where(p => p.comboID == comboID);
-        int version = existing.Count();
-        if (version > 0)
-            return string.Format("{0} {1}.0", existing.First().name, version + 1);
+        //IEnumerable<Product> existing = c.products.Where(p => p.comboID == comboID);
+        //int version = existing.Count();
+        //if (version > 0)
+            //return string.Format("{0} {1}.0", existing.First().name, version + 1);
 
-        if (recipe.names != null) {
-            // TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
-            string[] names = recipe.names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
-            if (names.Length > 0)
-                return names[Random.Range(0, names.Length-1)];
-        }
+        //if (recipe.names != null) {
+            //// TO DO this can potentially lead to products with duplicate names. Should keep track of which names are used,
+            //string[] names = recipe.names.Split(new string[] { ", ", "," }, System.StringSplitOptions.None);
+            //if (names.Length > 0)
+                //return names[Random.Range(0, names.Length-1)];
+        //}
 
         // Fallback to a rather generic name.
         return genericName;
     }
 
-
     static public event System.Action<Product, Company> Completed;
-    public void Complete(Company company) {
-        if (GameManager.Instance.playerCompany == company) {
-            HypeMinigame.Done += OnHypeDone;
-
-            // Start the hype/promo flow
-            UIManager.Instance.ShowPromos();
-        }
-    }
-
-    void OnHypeDone(float hypeScore) {
-        if (GameManager.Instance.playerCompany.developingProduct == this)
-            Launch(GameManager.Instance.playerCompany, hypeScore);
-        HypeMinigame.Done -= OnHypeDone;
-    }
-
-    public void Develop(Company company) {
-        _progress += company.AggregateWorkerStat("Productivity");
-        if (progress >= 1f && developing) {
-            _state = State.COMPLETED;
-            Complete(company);
-        }
-    }
-
-    public void Develop(Stat stat) {
-        switch (stat.name) {
-            case "Charisma":
-                marketing.baseValue += stat.value;
-                marketing.baseValue = Mathf.Max(0f, marketing.baseValue);
-                break;
-            case "Creativity":
-                design.baseValue += stat.value;
-                design.baseValue = Mathf.Max(0f, design.baseValue);
-                break;
-            case "Cleverness":
-                engineering.baseValue += stat.value;
-                engineering.baseValue = Mathf.Max(0f, engineering.baseValue);
-                break;
-            case "Breakthrough":
-                design.baseValue += stat.value;
-                marketing.baseValue += stat.value;
-                engineering.baseValue += stat.value;
-                break;
-        }
-    }
-
 
     public float score;
     public float hype;
     public float quality;
-    public void Launch(Company company, float hypeBonus=0) {
+    public float Launch(Company company, float hypeBonus=0) {
         // Calculate the revenue model's parameters
         // based on the properties of the product.
 
@@ -264,9 +185,6 @@ public class Product : HasStats {
         }
         hype = U_/u_w * hypeBonus;
 
-        // Revenue model modifications:
-        longevity = (recipe.maxLongevity/100) * quality;
-
         marketShare = company.marketSharePercent * quality;
 
         if (techPenalty)
@@ -298,49 +216,30 @@ public class Product : HasStats {
         Debug.Log(string.Format("Marketing Value {0}", U));
         Debug.Log(string.Format("Engineering Value {0}", P));
         Debug.Log(string.Format("Max Revenue {0}", maxRevenue));
-        Debug.Log(string.Format("Longevity {0}", longevity));
 
-        _state = State.LAUNCHED;
-
+        // Apply effects and what not
         company.CompletedProduct(this);
 
         // Trigger completed event.
         if (Completed != null) {
             Completed(this, company);
         }
+        return Revenue(score);
     }
 
-    public float Revenue(float elapsedTime, Company company) {
-        timeSinceLaunch += elapsedTime;
-
-        float t = timeSinceLaunch/longevity;
-        if (t > 1f)
-            // Auto-shutdown.
-            Shutdown();
-
+    public float Revenue(float score) {
         float revenue = 0;
-        //Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        //Debug.Log(string.Format("Elapsed Time {0}", elapsedTime));
-        //Debug.Log(string.Format("Time {0}", t));
-        if (launched) {
-            revenue = revenueModel.Evaluate(t) * maxRevenue * Random.Range(0.95f, 1.05f);
-            //Debug.Log(string.Format("Raw revenue: {0}", revenue));
+        revenue = score * maxRevenue * Random.Range(0.95f, 1.05f);
 
-            // Economy's impact.
-            revenue *= GameManager.Instance.economyMultiplier;
-            //Debug.Log(string.Format("After economy: {0}", revenue));
+        // Economy's impact.
+        revenue *= GameManager.Instance.economyMultiplier;
 
-            // Consumer spending impact.
-            revenue *= GameManager.Instance.spendingMultiplier;
-            //Debug.Log(string.Format("After consumer spending: {0}", revenue));
+        // Consumer spending impact.
+        revenue *= GameManager.Instance.spendingMultiplier;
 
-            if (synergy)
-                revenue *= 1.5f;
-        }
+        if (synergy)
+            revenue *= 1.5f;
 
-
-        revenueEarned += revenue;
-        lastRevenue = revenue;
         return Mathf.Max(revenue, 0);
     }
 
@@ -355,16 +254,6 @@ public class Product : HasStats {
             default:
                 return null;
         }
-    }
-
-    // Product death
-    public void Shutdown() {
-        if (_state == State.DEVELOPMENT) {
-            // Give it a basic name; incomplete products aren't christened!
-            name = genericName;
-        }
-
-        _state = State.RETIRED;
     }
 }
 

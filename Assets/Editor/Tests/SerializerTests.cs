@@ -38,7 +38,7 @@ namespace UnityTest
             data.company  = new Company("TESTINGCORP").Init();
                 data.company.founders.Add(CreateFounder("STEVE", 100));
                 data.company.baseSizeLimit       = 17;
-                data.company.lastMonthRevenue    = 28517;
+                data.company.lastAnnualRevenue    = 28517;
                 data.company.annualRevenue      = 12489;
                 data.company.annualCosts        = 184787;
                 data.company.cash.baseValue      = 100000000;
@@ -76,12 +76,8 @@ namespace UnityTest
                     wm.HireWorker(worker);
                 }
 
-                for (int i=0;i<5;i++) {
-                    data.company.products.Add(CreateProduct());
-                }
-
             data.board    = new TheBoard();
-                data.board.happiness = 20;
+            data.board.happiness = 20;
 
             data.forgettingRate = 10;
             data.wageMultiplier = 10;
@@ -170,7 +166,7 @@ namespace UnityTest
             Assert.AreEqual(gd.company.office,             data.company.office);
             Assert.AreEqual(gd.company.cash.value,         data.company.cash.value);
             Assert.AreEqual(gd.company.baseSizeLimit,      data.company.baseSizeLimit);
-            Assert.AreEqual(gd.company.lastMonthRevenue,   data.company.lastMonthRevenue);
+            Assert.AreEqual(gd.company.lastAnnualRevenue,  data.company.lastAnnualRevenue);
             Assert.AreEqual(gd.company.annualRevenue,      data.company.annualRevenue);
             Assert.AreEqual(gd.company.annualCosts,        data.company.annualCosts);
             Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
@@ -207,28 +203,6 @@ namespace UnityTest
                 AWorker w_ = gd.company.workers[i];
 
                 CompareWorkers(w, w_);
-            }
-
-            Assert.AreEqual(gd.company.products.Count, data.company.products.Count);
-            for (int i=0;i<gd.company.products.Count;i++) {
-                Product p  = data.company.products[i];
-                Product p_ = gd.company.products[i];
-
-                Assert.AreEqual(p.name,               p_.name);
-                Assert.AreEqual(p.progress,           p_.progress);
-                Assert.AreEqual(p.state,              p_.state);
-                Assert.AreEqual(p.timeSinceLaunch,    p_.timeSinceLaunch);
-                Assert.AreEqual(p.revenueEarned,      p_.revenueEarned);
-                Assert.AreEqual(p.requiredProgress,   p_.requiredProgress);
-                Assert.AreEqual(p.lastRevenue,        p_.lastRevenue);
-
-                Assert.AreEqual(p.design.value,       p_.design.value);
-                Assert.AreEqual(p.marketing.value,    p_.marketing.value);
-                Assert.AreEqual(p.engineering.value,  p_.engineering.value);
-
-                for (int j=0; j<p.productTypes.Count; j++) {
-                    Assert.AreEqual(p.productTypes[j].name, p_.productTypes[j].name);
-                }
             }
 
             Assert.AreEqual(gd.company.founders.Count, data.company.founders.Count);
@@ -319,28 +293,6 @@ namespace UnityTest
             founder.creativity            = stat;
             founder.cleverness            = stat;
             return founder;
-        }
-
-        private Product CreateProduct() {
-            ProductType pt  = ProductType.Load("Social Network");
-            ProductType pt_ = ProductType.Load("Virtual Reality");
-            Vertical v     = Vertical.Load("Information");
-            pt.requiredVerticals = new List<Vertical>() { v };
-            List<ProductType> pts = new List<ProductType>() { pt, pt_ };
-
-            Product product = ScriptableObject.CreateInstance<Product>();
-            product.Init(pts, 0, 0, 0, data.company);
-            product.requiredProgress = 100000;
-
-            float r = Random.Range(0,1);
-            if (r > 0.33) {
-                product.Launch(data.company);
-                product.Revenue(5, data.company);
-            } else if (r > 0.66) {
-                product.Shutdown();
-            }
-
-            return product;
         }
 
         private APerk CreatePerk(int i) {

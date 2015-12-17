@@ -139,15 +139,15 @@ public class GameManager : Singleton<GameManager> {
     void OnEnable() {
         GameEvent.EventTriggered += OnEvent;
         Company.ResearchCompleted += OnResearchCompleted;
-        Product.Completed += OnProductCompleted;
         SpecialProject.Completed += OnSpecialProjectCompleted;
+        //MainGame.YearEnded += OnYearEnded;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
         Company.ResearchCompleted -= OnResearchCompleted;
-        Product.Completed -= OnProductCompleted;
         SpecialProject.Completed -= OnSpecialProjectCompleted;
+        //MainGame.YearEnded -= OnYearEnded;
     }
 
     void OnLevelWasLoaded(int level) {
@@ -219,15 +219,6 @@ public class GameManager : Singleton<GameManager> {
         ApplyEffectSet(t.effects);
     }
 
-    public void OnProductCompleted(Product p, Company c) {
-        if (c == data.company) {
-            // If a product of this type combo already exists,
-            // do not re-apply the effects.
-            if(c.products.Count(p_ => p_.comboID == p.comboID) == 1)
-                ApplyEffectSet(p.effects);
-        }
-    }
-
     public void OnSpecialProjectCompleted(SpecialProject p) {
         ApplyEffectSet(p.effects);
     }
@@ -292,5 +283,12 @@ public class GameManager : Singleton<GameManager> {
         //if (ev != null)
             //GameEvent.Trigger(ev.gameEvent);
     //}
+
+
+    public void EndYear() {
+        data.year++;
+        if (YearEnded != null)
+            YearEnded(data.year);
+    }
 
 }
