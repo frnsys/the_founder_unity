@@ -65,13 +65,11 @@ namespace UnityTest
             GameEvent ev  = ScriptableObject.CreateInstance<GameEvent>();
             ev.name       = "TESTEVENT";
             e.gameEvent   = ev;
-            e.eventDelay  = 2000;
             e.eventProbability = 0.5f;
 
             e.Apply(c);
             AGameEvent ev_ = gd.eventsPool.Where(evn => evn.name == ev.name).First();
             Assert.AreEqual(ev_.name, ev.name);
-            Assert.AreEqual(ev_.delay, e.eventDelay);
             Assert.AreEqual(ev_.probability, e.eventProbability);
         }
 

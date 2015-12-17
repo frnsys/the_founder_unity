@@ -75,65 +75,6 @@ namespace UnityTest
         }
 
         [Test]
-        public void Tick() {
-            AGameEvent aGe = new AGameEvent(gE);
-            aGe.delay = 10;
-            em.Add(aGe);
-
-            em.Tick();
-
-            Assert.AreEqual(aGe.countdown, 9);
-        }
-
-        [Test]
-        public void TickResolve() {
-            AGameEvent aGe = new AGameEvent(gE);
-            aGe.delay = 1;
-            aGe.probability = 1;
-            em.Add(aGe);
-
-            // Our test listener to listen for and capture the event.
-            TestEventListener eL = new TestEventListener();
-
-            em.Tick();
-
-            Assert.AreEqual(eL.triggeredEvent, gE);
-            Assert.IsFalse(gd.eventsPool.Contains(aGe));
-        }
-
-        [Test]
-        public void TickResolveMultiple() {
-            AGameEvent aGe = new AGameEvent(gE);
-            aGe.delay = 1;
-            aGe.probability = 1;
-            em.Add(aGe);
-
-            GameEvent gE_ = ScriptableObject.CreateInstance<GameEvent>();
-            gE_.name = "Some event";
-            AGameEvent aGe_ = new AGameEvent(gE_);
-            aGe_.probability = 1f;
-            aGe_.delay = 1;
-            em.Add(aGe_);
-
-            Assert.AreEqual(gd.eventsPool.Count, 2);
-
-            // Our test listener to listen for and capture the event.
-            TestEventListener eL = new TestEventListener();
-
-            em.Tick();
-
-            // One of the events should have been triggered.
-            List<GameEvent> ges = new List<GameEvent>() { gE, gE_ };
-            Assert.IsTrue(ges.Contains(eL.triggeredEvent));
-
-            // There should only be one event left.
-            Assert.AreEqual(gd.eventsPool.Count, 1);
-
-            // That event should have an increased delay.
-            Assert.IsTrue(gd.eventsPool[0].delay > 0);
-        }
-
-        [Test]
         public void Conditions() {
             GameEvent.Condition pc = new GameEvent.Condition();
             pc.value = 20;
@@ -159,29 +100,29 @@ namespace UnityTest
             Assert.IsTrue(gE.ConditionsSatisfied(c));
         }
 
-        [Test]
-        public void SpecialEvents() {
-            GameEvent.Condition pc = new GameEvent.Condition();
-            pc.value = 20;
-            pc.greater = true;
-            pc.type = GameEvent.Condition.Type.Publicity;
-            gE.conditions = new List<GameEvent.Condition>() { pc };
+        //[Test]
+        //public void SpecialEvents() {
+            //GameEvent.Condition pc = new GameEvent.Condition();
+            //pc.value = 20;
+            //pc.greater = true;
+            //pc.type = GameEvent.Condition.Type.Publicity;
+            //gE.conditions = new List<GameEvent.Condition>() { pc };
 
-            AGameEvent aGe = new AGameEvent(gE);
-            gd.specialEventsPool.Add(aGe);
-            gd.company = new Company("Foo Inc").Init();
+            //AGameEvent aGe = new AGameEvent(gE);
+            //gd.specialEventsPool.Add(aGe);
+            //gd.company = new Company("Foo Inc").Init();
 
-            em.EvaluateSpecialEvents();
-            Assert.IsTrue(gd.specialEventsPool.Contains(aGe));
+            //em.EvaluateSpecialEvents();
+            //Assert.IsTrue(gd.specialEventsPool.Contains(aGe));
 
-            // Note we don't test that the event has triggered
-            // because there is a 45s delay.
-            // But the event is removed before it is triggered
-            // so that it doesn't trigger multiple times.
-            gd.company.publicity.baseValue = 40;
-            em.EvaluateSpecialEvents();
-            Assert.IsFalse(gd.specialEventsPool.Contains(aGe));
+            //// Note we don't test that the event has triggered
+            //// because there is a 45s delay.
+            //// But the event is removed before it is triggered
+            //// so that it doesn't trigger multiple times.
+            //gd.company.publicity.baseValue = 40;
+            //em.EvaluateSpecialEvents();
+            //Assert.IsFalse(gd.specialEventsPool.Contains(aGe));
 
-        }
+        //}
     }
 }

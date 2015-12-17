@@ -202,14 +202,6 @@ public class GameManager : Singleton<GameManager> {
 
     void StartGame() {
         StartCoroutine(GameTimer.Start());
-        StartCoroutine(EventTimer.Start());
-
-        StartCoroutine(Weekly());
-        StartCoroutine(Monthly());
-
-        StartCoroutine(ProductCycle());
-        StartCoroutine(OpinionCycle());
-        StartCoroutine(EventCycle());
 
         // We only load this here because the UIOfficeManager
         // doesn't exist until the game starts.
@@ -273,195 +265,34 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    // ===============================================
-    // Time ==========================================
-    // ===============================================
-
-    // In seconds
-    private static int weekTime = 3;
-    private static float cycleTime = weekTime/12f;
-    public static float CycleTime {
-        get { return cycleTime; }
-    }
-    public string month {
-        get { return Month.GetName(typeof(Month), data.month); }
-    }
-    public int numMonth {
-        get { return (int)data.month + 1; }
-    }
     public int year {
         get { return 2000 + data.year; }
-    }
-    [HideInInspector]
-    public int week {
-        get { return data.week; }
-    }
-    public int date {
-        get { return int.Parse(string.Format("{0}{1:00}{2}", year, numMonth, week)); }
     }
 
     public void Pause() {
         GameTimer.Pause();
-        EventTimer.Pause();
     }
     public void Resume() {
         GameTimer.Resume();
-        EventTimer.Resume();
     }
 
     static public event System.Action<int> YearEnded;
     static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> PerformanceReport;
-    IEnumerator Monthly() {
-        int monthTime = weekTime*4;
-        yield return StartCoroutine(GameTimer.Wait(monthTime));
-        while(true) {
-            if (data.month == Month.December) {
-                data.month = Month.January;
-            } else {
-                data.month++;
-            }
-
-            playerCompany.PayMonthly();
-
-            // Save the game every other month.
-            if ((int)data.month % 2 == 0)
-                GameData.Save(data);
-
-            // Year
-            if ((int)data.month % 12 == 0) {
-                data.year++;
-
-                // You only need to start making profit after the first year.
-                if ((int)data.year > 1) {
-                    // Get the annual performance data and generate the report.
-                    List<PerformanceDict> annualData = playerCompany.CollectAnnualPerformanceData();
-                    PerformanceDict results = annualData[0];
-                    PerformanceDict deltas = annualData[1];
-                    float growth = data.board.EvaluatePerformance(results["Annual Profit"]);
-
-                    if (PerformanceReport != null) {
-                        PerformanceReport(data.year, results, deltas, data.board);
-                    }
-
-                    // Schedule a news story about the growth (if it warrants one).
-                    StartCoroutine(PerformanceNews(growth));
-
-                    // Lose condition:
-                    // TEMP disabled
-                    //if (data.board.happiness < -20)
-                        //narrativeManager.GameLost();
-                }
-
-                if (YearEnded != null)
-                    YearEnded(data.year);
-            }
-
-            yield return StartCoroutine(GameTimer.Wait(monthTime));
-        }
-    }
-
-    IEnumerator PerformanceNews(float growth) {
-        yield return StartCoroutine(GameTimer.Wait(weekTime));
-        AGameEvent ev = null;
-        float target = data.board.desiredGrowth;
-        if (growth >= target * 2) {
-            ev = GameEvent.LoadNoticeEvent("Faster Growth");
-        } else if (growth >= target * 1.2) {
-            ev = GameEvent.LoadNoticeEvent("Fast Growth");
-        } else if (growth <= target * 0.8) {
-            ev = GameEvent.LoadNoticeEvent("Slow Growth");
-        } else if (growth <= target * 0.6) {
-            ev = GameEvent.LoadNoticeEvent("Slower Growth");
-        }
-        if (ev != null)
-            GameEvent.Trigger(ev.gameEvent);
-    }
-
-    IEnumerator Weekly() {
-        yield return StartCoroutine(GameTimer.Wait(weekTime));
-        while(true) {
-            if (data.week == 3) {
-                data.week = 0;
-            } else {
-                data.week++;
-            }
-
-            if (data.year > data.lifetimeYear &&
-                (int)data.month > data.lifetimeMonth &&
-                data.week > data.lifetimeWeek) {
-
-                if (!data.immortal) {
-                    AGameEvent ev = GameEvent.LoadNoticeEvent("Death");
-                    GameEvent.Trigger(ev.gameEvent);
-
-                    // Pay inheritance tax.
-                    float tax = playerCompany.cash.value * 0.75f;
-                    playerCompany.Pay(tax);
-                    UIManager.Instance.SendPing(string.Format("Paid {0:C0} in inheritance taxes.", tax), Color.red);
-                } else {
-                    AGameEvent ev = GameEvent.LoadNoticeEvent("Immortal");
-                    GameEvent.Trigger(ev.gameEvent);
-                }
-            }
-
-            // A random AI company makes a move.
-            if (Random.value < 0.02)
-                activeAICompanies[Random.Range(0, activeAICompanies.Count)].Decide();
-
-            // Update workers' off market times.
-            foreach (AWorker w in workerManager.AllWorkers.Where(w => w.offMarketTime > 0)) {
-                // Reset player offers if appropriate.
-                if (--w.offMarketTime == 0) {
-                    w.leaveProb = Worker.baseLeaveProb;
-                }
-            }
-
-            yield return StartCoroutine(GameTimer.Wait(weekTime));
-        }
-    }
-
-    IEnumerator EventCycle() {
-        // Events are on a separate timer so they can be paused independently.
-        yield return StartCoroutine(EventTimer.Wait(weekTime));
-        while(true) {
-            eventManager.Tick();
-            eventManager.EvaluateSpecialEvents();
-
-            // Add a bit of randomness to give things
-            // a more "natural" feel.
-            yield return StartCoroutine(EventTimer.Wait(weekTime * Random.Range(0.9f, 1.6f)));
-        }
-    }
-
-    IEnumerator ProductCycle() {
-        yield return StartCoroutine(GameTimer.Wait(cycleTime));
-        while(true) {
-            // Add a bit of randomness to give things
-            // a more "natural" feel.
-            float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
-
-            playerCompany.DevelopProduct();
-            playerCompany.HarvestProducts(elapsedTime);
-            playerCompany.HarvestCompanies();
-
-            yield return StartCoroutine(GameTimer.Wait(elapsedTime));
-        }
-    }
-
-    IEnumerator OpinionCycle() {
-        yield return StartCoroutine(GameTimer.Wait(cycleTime));
-        while(true) {
-            // Add a bit of randomness to give things
-            // a more "natural" feel.
-            float elapsedTime = cycleTime * Random.Range(0.4f, 1.4f);
-
-            // Pull back opinion effects towards 0.
-            // Deflate hype.
-            playerCompany.ForgetOpinionEvents();
-            playerCompany.publicity.baseValue = Mathf.Max(0, playerCompany.publicity.baseValue - (0.024f + Mathf.Sqrt(playerCompany.publicity.baseValue/5000f)));
-
-            yield return StartCoroutine(GameTimer.Wait(elapsedTime));
-        }
-    }
+    //IEnumerator PerformanceNews(float growth) {
+        //yield return StartCoroutine(GameTimer.Wait(weekTime));
+        //AGameEvent ev = null;
+        //float target = data.board.desiredGrowth;
+        //if (growth >= target * 2) {
+            //ev = GameEvent.LoadNoticeEvent("Faster Growth");
+        //} else if (growth >= target * 1.2) {
+            //ev = GameEvent.LoadNoticeEvent("Fast Growth");
+        //} else if (growth <= target * 0.8) {
+            //ev = GameEvent.LoadNoticeEvent("Slow Growth");
+        //} else if (growth <= target * 0.6) {
+            //ev = GameEvent.LoadNoticeEvent("Slower Growth");
+        //}
+        //if (ev != null)
+            //GameEvent.Trigger(ev.gameEvent);
+    //}
 
 }

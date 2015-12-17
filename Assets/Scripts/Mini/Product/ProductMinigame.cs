@@ -27,7 +27,7 @@ public class ProductMinigame : MonoBehaviour {
 
         officeCamera.SetActive(false);
         officeCameraController.SetActive(false);
-        EventTimer.Pause();
+        //EventTimer.Pause();
 
         labors = new List<ProductLabor>();
         workers = c.allWorkers.ToList();
@@ -97,7 +97,7 @@ public class ProductMinigame : MonoBehaviour {
 
         officeCamera.SetActive(true);
         officeCameraController.SetActive(true);
-        EventTimer.Resume();
+        //Eventimer.Resume();
         Reset();
     }
 

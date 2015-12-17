@@ -34,7 +34,6 @@ public class EffectSet {
     public OpinionEvent opinionEvent = new OpinionEvent(0, 0);
 
     public GameEvent gameEvent;
-    public float eventDelay = 0;
     public float eventProbability = 0;
 
     public float forgettingRate = 0;
@@ -68,7 +67,6 @@ public class EffectSet {
         es.unlocks = unlocks;
         es.opinionEvent = opinionEvent;
         es.gameEvent = gameEvent;
-        es.eventDelay = eventDelay;
         es.eventProbability = eventProbability;
 
         es.forgettingRate = forgettingRate;
@@ -122,7 +120,6 @@ public class EffectSet {
 
         if (gameEvent != null) {
             AGameEvent ge = new AGameEvent(gameEvent);
-            ge.delay = eventDelay;
             ge.probability = eventProbability;
             GameManager.Instance.eventManager.Add(ge);
         }
@@ -217,8 +214,6 @@ public class EffectSet {
             return false;
 
         if (gameEvent != es.gameEvent)
-            return false;
-        if (eventDelay != es.eventDelay)
             return false;
         if (eventProbability != es.eventProbability)
             return false;

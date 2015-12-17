@@ -52,7 +52,7 @@ public class HypeMinigame : MonoBehaviour {
     }
 
     void OnEnable() {
-        EventTimer.Pause();
+        //EventTimer.Pause();
         HypeTarget.Scored += Scored;
         HypePuck.Fired += Fired;
         UpdateLabels();
@@ -63,7 +63,7 @@ public class HypeMinigame : MonoBehaviour {
     void OnDisable() {
         HypeTarget.Scored -= Scored;
         HypePuck.Fired -= Fired;
-        EventTimer.Resume();
+        //EventTimer.Resume();
     }
 
     void Scored(float hypePoints) {

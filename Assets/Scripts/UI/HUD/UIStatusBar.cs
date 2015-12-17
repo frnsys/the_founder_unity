@@ -8,18 +8,9 @@ public class UIStatusBar : MonoBehaviour {
 
     public UILabel cashLabel;
     public UILabel yearLabel;
-    public UILabel monthLabel;
-    public UIGrid weekGrid;
-
-    public Color activeWeekColor;
-    public Color defaultWeekColor;
-
-    private int week;
 
     void OnEnable() {
         gm = GameManager.Instance;
-        week = gm.week;
-        SetWeek();
     }
 
     public Color posCashColor;
@@ -38,24 +29,5 @@ public class UIStatusBar : MonoBehaviour {
         }
         cashLabel.text = string.Format("{0:C0}", cash);
         yearLabel.text = gm.year.ToString();
-        monthLabel.text = gm.month;
-
-        // If the week has changed,
-        // update the UI.
-        if (week != gm.week) {
-            week = gm.week;
-            SetWeek();
-        }
-    }
-
-    private void SetWeek() {
-        List<Transform> gridChildren = weekGrid.GetChildList();
-        for (int i=0; i<gridChildren.Count; i++) {
-            if (i == gm.week) {
-                gridChildren[i].GetComponent<UITexture>().color = activeWeekColor;
-            } else {
-                gridChildren[i].GetComponent<UITexture>().color = defaultWeekColor;
-            }
-        }
     }
 }
