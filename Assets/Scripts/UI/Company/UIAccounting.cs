@@ -69,18 +69,14 @@ public class UIAccounting : MonoBehaviour {
         economyLabel.text = economy;
 
         float revs = company.annualRevenue;
-        float cost = company.annualCosts;
+        float costs = company.annualCosts;
         revenueLabel.text = string.Format("{0:C0}", revs);
-        profitLabel.text = string.Format("{0:C0}", revs-cost);
+        profitLabel.text = string.Format("{0:C0}", revs-costs);
 
-        //TODO
-        //PerformanceDict lastAnnual = company.lastAnnualPerformance;
-        //if (lastAnnual != null) {
-            //revs = lastAnnual["Annual Revenue"];
-            //cost = lastAnnual["Annual Costs"];
-        //}
-        //revenueChangeLabel.text = string.Format("Revenue: [c][6A53F7]{0:C0}[-][/c]", revs);
-        //revenueChangeLabel.text = string.Format("Profit: [c][6A53F7]{0:C0}[-][/c]", revs-cost);
+        float lastRevs = company.annualRevenue;
+        float lastCosts = company.annualCosts;
+        revenueChangeLabel.text = string.Format("{0:C0}", lastRevs);
+        profitChangeLabel.text = string.Format("{0:C0}", lastRevs-lastCosts);
 
         lifetimeRevenueLabel.text = string.Format("{0:C0}", company.lifetimeRevenue);
         globalCoverageLabel.text = string.Format("{0:F2}%", company.marketSharePercent * 100);
