@@ -12,12 +12,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager> {
-    public ProductMinigame pm;
-    public void LaunchProductMinigame(Product p, Company c) {
-        pm.gameObject.SetActive(true);
-        pm.Setup(p, c);
-    }
-
     private GameManager gm;
 
     public Camera uiCamera;
