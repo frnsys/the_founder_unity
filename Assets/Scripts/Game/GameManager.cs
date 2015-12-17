@@ -140,14 +140,14 @@ public class GameManager : Singleton<GameManager> {
         GameEvent.EventTriggered += OnEvent;
         Company.ResearchCompleted += OnResearchCompleted;
         SpecialProject.Completed += OnSpecialProjectCompleted;
-        //MainGame.YearEnded += OnYearEnded;
+        MainGame.Done += OnGameDone;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
         Company.ResearchCompleted -= OnResearchCompleted;
         SpecialProject.Completed -= OnSpecialProjectCompleted;
-        //MainGame.YearEnded -= OnYearEnded;
+        MainGame.Done -= OnGameDone;
     }
 
     void OnLevelWasLoaded(int level) {
@@ -266,7 +266,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     static public event System.Action<int> YearEnded;
-    static public event System.Action<int, PerformanceDict, PerformanceDict, TheBoard> PerformanceReport;
+    static public event System.Action<int, Dictionary<string, float>, TheBoard> PerformanceReport;
     //IEnumerator PerformanceNews(float growth) {
         //yield return StartCoroutine(GameTimer.Wait(weekTime));
         //AGameEvent ev = null;
@@ -284,11 +284,30 @@ public class GameManager : Singleton<GameManager> {
             //GameEvent.Trigger(ev.gameEvent);
     //}
 
-
-    public void EndYear() {
+    public void OnGameDone() {
         data.year++;
+
+        // Resolve events
+        eventManager.Tick();
+        eventManager.EvaluateSpecialEvents();
+
+        // Public forgetting
+        playerCompany.ForgetOpinionEvents();
+
+        // Harvest minicompanies (acquisitions)
+        playerCompany.HarvestCompanies();
+
+        // Check performance and update profit target
+        float growth = data.board.EvaluatePerformance(results["Annual Profit"]);
+
+        // Show performance report
+        if (PerformanceReport != null)
+            PerformanceReport(data.year, results, data.board);
+
         if (YearEnded != null)
             YearEnded(data.year);
+
+        SaveGame();
     }
 
 }

@@ -524,34 +524,38 @@ public class Company : HasStats {
     // ===============================================
 
     public Dictionary<string, float> CollectAnnualPerformanceData() {
-        Dictionary<string, float> deltas = new Dictionary<string, float>();
+        Dictionary<string, float> results = new Dictionary<string, float>();
         // Compare this annual's performance to last annual's (if available).
         if (lastAnnualRevenue != 0 && lastAnnualCosts != 0) {
             if (lastAnnualRevenue == 0) {
-                deltas["Annual Revenue"] = 0f;
+                results["Annual Revenue Delta"] = 0f;
             } else {
-                deltas["Annual Revenue"] = annualRevenue/lastAnnualRevenue;
+                results["Annual Revenue Delta"] = annualRevenue/lastAnnualRevenue;
             }
 
             if (lastAnnualCosts == 0) {
-                deltas["Annual Costs"] = 0f;
+                results["Annual Costs Delta"] = 0f;
             } else {
-                deltas["Annual Costs"] = annualCosts/lastAnnualCosts;
+                results["Annual Costs Delta"] = annualCosts/lastAnnualCosts;
             }
 
             float lastAnnualProfit = lastAnnualRevenue - lastAnnualCosts;
             if (lastAnnualProfit == 0) {
-                deltas["Annual Profit"] = 0f;
+                results["Annual Profit Delta"] = 0f;
             } else {
-                deltas["Annual Profit"] = annualProfit/lastAnnualProfit;
+                results["Annual Profit Delta"] = annualProfit/lastAnnualProfit;
             }
 
         // Otherwise, everything improved by 100%!!!
         } else {
-            deltas["Annual Revenue"] = 1f;
-            deltas["Annual Costs"] = 1f;
-            deltas["Annual Profit"] = 1f;
+            results["Annual Revenue Delta"] = 1f;
+            results["Annual Costs Delta"] = 1f;
+            results["Annual Profit Delta"] = 1f;
         }
+
+        results["Annual Revenue"] = annualRevenue;
+        results["Annual Costs"] = annualCosts;
+        results["Annual Profit"] = annualProfit;
 
         // Reset values.
         lastAnnualRevenue = annualRevenue;
@@ -559,7 +563,7 @@ public class Company : HasStats {
         annualRevenue = 0;
         annualCosts = 0;
 
-        return deltas;
+        return results;
     }
 
     // ===============================================

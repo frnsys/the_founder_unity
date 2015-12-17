@@ -11,7 +11,17 @@ using System.Collections.Generic;
 public class AGameEvent {
     public GameEvent gameEvent;
     public float probability;
-    public int delay; // delay in years that the event happens
+    public int countdown;
+
+    [SerializeField]
+    public int _delay;
+    public int delay {
+        get { return _delay; }
+        set {
+            _delay = value;
+            countdown = value;
+        }
+    }
 
     public AGameEvent() {}
     public AGameEvent(GameEvent ev) {

@@ -174,9 +174,9 @@ public class UIManager : Singleton<UIManager> {
     }
 
     // Create an annual report.
-    public UIPerformanceReport PerformanceReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+    public UIPerformanceReport PerformanceReport(Dictionary<string, float> results, TheBoard board) {
         UIPerformanceReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIPerformanceReport>();
-        report.BuildReport(results, deltas, board);
+        report.BuildReport(results, board);
         return report;
     }
 
