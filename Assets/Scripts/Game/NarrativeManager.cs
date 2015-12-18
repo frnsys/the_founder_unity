@@ -124,7 +124,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         START,
         GAME_INTRO,
         OPENED_NEW_PRODUCT,
-        STARTED_PRODUCT,
+        LAUNCHED_PRODUCT,
         OPENED_HYPE,
         THE_MARKET,
         THE_MARKET_DONE,
@@ -194,8 +194,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             TheMarket.Started += OnMarketStarted;
         }
 
-        if (data.obs < OBS.STARTED_PRODUCT) {
-            Company.BeganProduct += BeganProduct;
+        if (data.obs < OBS.LAUNCHED_PRODUCT) {
+            Company.LaunchedProduct += LaunchedProduct;
         }
 
         if (data.obs < OBS.GAME_INTRO) {
@@ -356,9 +356,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    void BeganProduct(Product p, Company c) {
+    void LaunchedProduct(Company c) {
         if (c == data.company) {
-            if (Stage(OBS.STARTED_PRODUCT)) {
+            if (Stage(OBS.LAUNCHED_PRODUCT)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Great! You've started developing your first product.",
@@ -372,7 +372,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                 }, 1f));
             }
-            Company.BeganProduct -= BeganProduct;
+            Company.LaunchedProduct -= LaunchedProduct;
         }
     }
 

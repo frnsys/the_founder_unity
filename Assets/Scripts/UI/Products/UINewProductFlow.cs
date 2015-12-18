@@ -104,7 +104,7 @@ public class UINewProductFlow : MonoBehaviour {
     }
 
     private void BeginProductDevelopment_() {
-        gm.playerCompany.StartNewProduct(productTypes, 0, 0, 0);
+        //gm.playerCompany.StartNewProduct(productTypes, 0, 0, 0);
         SendMessageUpwards("Close");
     }
 

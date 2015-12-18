@@ -169,7 +169,7 @@ public class MainGame : MonoBehaviour {
                 return influencerPrefabs[2];
         } else {
             //return productTypePrefabs[UnityEngine.Random.Range(0, productTypePrefabs.Length)];
-            return productTypePrefabs[UnityEngine.Random.Range(0, 5)];
+            return productTypePrefabs[UnityEngine.Random.Range(0, 3)];
         }
     }
 
@@ -220,7 +220,7 @@ public class MainGame : MonoBehaviour {
                         state = GameState.None;
                     } else {
                         state = GameState.Animating;
-                        StartCoroutine(FindMatchesAndCollapse(hit));
+                        StartCoroutine(MergePieces(hit.collider.gameObject, hitGo));
                     }
                 }
             }
@@ -228,36 +228,19 @@ public class MainGame : MonoBehaviour {
     }
 
     private IEnumerator FindMatchesAndCollapse(RaycastHit2D hit2) {
-        GameObject hitGo2 = hit2.collider.gameObject;
-
-        Piece p1 = hitGo.GetComponent<Piece>();
-        Piece p2 = hitGo2.GetComponent<Piece>();
-
-        // If the two are product types and the same product type
-        if (p1.type == Piece.Type.ProductType && p2.type == Piece.Type.ProductType) {
-            if (hitGo.name == hitGo2.name) { // TODO more rigorous comparison
-                // TODO Merge the two
-            //} else if (p1.stacked && p2.stacked) {
-                //// TODO create a new product
-            }
-        }
-
-        Swap(hitGo, hitGo2);
-        yield return new WaitForSeconds(animationDuration);
-
         // Check matches
-        var matches1 = GetMatches(hitGo);
-        var matches2 = GetMatches(hitGo2);
-        IEnumerable<GameObject> totalMatches = matches1.matches.Union(matches2.matches).Distinct();
+        //var matches1 = GetMatches(hitGo);
+        //var matches2 = GetMatches(hitGo2);
+        //IEnumerable<GameObject> totalMatches = matches1.matches.Union(matches2.matches).Distinct();
 
-        if (totalMatches.Count() < minMatches)  {
-            // Undo
-            Swap(hitGo2, hitGo);
-            yield return new WaitForSeconds(animationDuration);
-        } else {
-            // Only successful moves cost a turn
-            TakeTurn();
-        }
+        //if (totalMatches.Count() < minMatches)  {
+            //// Undo
+            //Swap(hitGo2, hitGo);
+            //yield return new WaitForSeconds(animationDuration);
+        //} else {
+            //// Only successful moves cost a turn
+            //TakeTurn();
+        //}
 
         //while (totalMatches.Count() >= minMatches) {
             ////ShowResultAt(hitGo.transform.localPosition, "$24,000");
@@ -285,8 +268,9 @@ public class MainGame : MonoBehaviour {
             //totalMatches = GetMatches(newPieces).Union(GetMatches(collapses.pieces)).Distinct();
         //}
 
-        UpdateUI();
-        state = GameState.None;
+        //UpdateUI();
+        //state = GameState.None;
+        yield return new WaitForSeconds(animationDuration);
     }
 
     private Collapses Collapse(IEnumerable<int> columns) {
@@ -317,23 +301,6 @@ public class MainGame : MonoBehaviour {
         return collapses;
     }
 
-    private void Swap(GameObject g1, GameObject g2) {
-        Piece p1 = g1.GetComponent<Piece>();
-        Piece p2 = g2.GetComponent<Piece>();
-
-        // Swap in the grid
-        GameObject tmp = grid[p1.row, p1.col];
-        grid[p1.row, p1.col] = grid[p2.row, p2.col];
-        grid[p2.row, p2.col] = tmp;
-
-        // Update piece positions
-        p1.SwapWith(p2);
-
-        // Swap the rendered pieces
-        g1.transform.positionTo(animationDuration, g2.transform.position);
-        g2.transform.positionTo(animationDuration, g1.transform.position);
-    }
-
     private void UpdateUI() {
         turnsBar.value = (float)turnsLeft/totalTurns;
     }
@@ -354,6 +321,7 @@ public class MainGame : MonoBehaviour {
             // so keep the first horizontal match (assuming sorted)
             GameObject merged = hMatches[0];
             merged.transform.Find("Tile").GetComponent<SpriteRenderer>().color = activeColor;
+            merged.GetComponent<Piece>().stacked = true;
             hMatches.RemoveAt(0);
             foreach (GameObject p in hMatches) {
                 GameObject empty = CreatePiece(emptyPrefab);
@@ -366,6 +334,7 @@ public class MainGame : MonoBehaviour {
             // so keep the first vertical match (assuming sorted)
             GameObject merged = vMatches[0];
             merged.transform.Find("Tile").GetComponent<SpriteRenderer>().color = activeColor;
+            merged.GetComponent<Piece>().stacked = true;
             vMatches.RemoveAt(0);
             foreach (GameObject p in vMatches) {
                 GameObject empty = CreatePiece(emptyPrefab);
@@ -375,21 +344,37 @@ public class MainGame : MonoBehaviour {
     }
 
 
-    private Matches GetMatches(GameObject go) {
-        Matches matches = new Matches();
-        var hMatches = HorizontalMatches(go);
-        var vMatches = VerticalMatches(go);
-        matches.AddObjects(hMatches);
-        matches.AddObjects(vMatches);
-        return matches;
-    }
+    private IEnumerator MergePieces(GameObject g1, GameObject g2) {
+        Piece p1 = g1.GetComponent<Piece>();
+        Piece p2 = g2.GetComponent<Piece>();
 
-    private IEnumerable<GameObject> GetMatches(IEnumerable<GameObject> gos) {
-        List<GameObject> matches = new List<GameObject>();
-        foreach (GameObject go in gos) {
-            matches.AddRange(GetMatches(go).matches);
+        // Animate
+        Vector2 oldPos = g2.transform.position;
+        g2.transform.positionTo(animationDuration, g1.transform.position);
+        yield return new WaitForSeconds(animationDuration);
+
+        if (!p1.stacked || !p2.stacked) {
+            // Undo
+            g2.transform.positionTo(animationDuration, oldPos);
+        } else {
+            // TODO a nice little flash of light or something
+            Debug.Log("MAKING PRODUCT!");
+            ProductType pt1 = ProductType.Load(p1.name);
+            ProductType pt2 = ProductType.Load(p2.name);
+            float revenue = company.LaunchProduct(new List<ProductType> {pt1, pt2});
+
+            ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
+                    string.Format("{0:C0}", revenue));
+
+            GameObject e1 = CreatePiece(emptyPrefab);
+            GameObject e2 = CreatePiece(emptyPrefab);
+            PlacePiece(e1, p1.row, p1.col);
+            PlacePiece(e2, p2.row, p2.col);
+
+            TakeTurn();
         }
-        return matches.Distinct();
+
+        state = GameState.None;
     }
 
     private IEnumerable<GameObject> HorizontalMatches(GameObject go) {
@@ -457,10 +442,11 @@ public class MainGame : MonoBehaviour {
     }
 
 
-
     // Check if two pieces are valid neighbors,
-    // i.e. not diagonal neighbors
+    // i.e. not diagonal neighbors and neither is empty
     private bool ValidNeighbors(Piece p1, Piece p2) {
-        return (p1.row == p2.row || p1.col == p2.col) && Math.Abs(p1.row - p2.row) <= 1 && Math.Abs(p1.col - p2.col) <= 1;
+        return p1.type != Piece.Type.Empty && p2.type != Piece.Type.Empty
+            && (p1.row == p2.row || p1.col == p2.col)
+            && Math.Abs(p1.row - p2.row) <= 1 && Math.Abs(p1.col - p2.col) <= 1;
     }
 }

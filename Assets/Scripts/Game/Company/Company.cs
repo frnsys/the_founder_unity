@@ -119,6 +119,12 @@ public class Company : HasStats {
     public float productivity {
         get { return AggregateWorkerStat("Productivity"); }
     }
+    public float creativity {
+        get { return AggregateWorkerStat("Creativity"); }
+    }
+    public float cleverness {
+        get { return AggregateWorkerStat("Cleverness"); }
+    }
     public float charisma {
         get { return AggregateWorkerStat("Charisma"); }
     }
@@ -226,54 +232,32 @@ public class Company : HasStats {
     // Product Management ============================
     // ===============================================
 
-    public Product developingProduct;
     public int launchedProducts;
-
-    static public event System.Action<Product, Company> BeganProduct;
-    public Product StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
+    static public event System.Action<Company> LaunchedProduct;
+    public float LaunchProduct(List<ProductType> pts) {
         Product product = ScriptableObject.CreateInstance<Product>();
-        product.Init(pts, design, marketing, engineering, this);
-        developingProduct = product;
+        float revenue = product.Create(pts, creativity, charisma, cleverness, this);
 
-        if (BeganProduct != null)
-            BeganProduct(product, this);
+        if (product.killsPeople)
+            deathToll += Random.Range(0, 10);
 
-        return product;
-    }
+        if (product.debtsPeople)
+            debtOwned += Random.Range(0, 10);
 
-    public void HarvestProducts(float elapsedTime) {
-        // TODO update this
-        //float newRevenue = 0;
-        //foreach (Product product in products.Where(p => p.launched)) {
-            //newRevenue += product.Revenue(elapsedTime, this);
+        if (product.pollutes)
+            pollution += Random.Range(0, 10);
 
-            //if (product.killsPeople)
-                //deathToll += Random.Range(0, 10);
+        cash.baseValue += revenue;
+        annualRevenue += revenue;
+        lifetimeRevenue += revenue;
 
-            //if (product.debtsPeople)
-                //debtOwned += Random.Range(0, 10);
-
-            //if (product.pollutes)
-                //pollution += Random.Range(0, 10);
-        //}
-        //cash.baseValue += newRevenue;
-        //annualRevenue += newRevenue;
-        //lifetimeRevenue += newRevenue;
-    }
-
-    // TODO remove this
-    public void CompletedProduct(Product p) {
         UpdateProductSynergies();
 
-        // Apply relevant effects to the product
-        foreach (EffectSet es in activeEffects) {
-            es.Apply(p);
-        }
+        if (LaunchedProduct != null)
+            LaunchedProduct(this);
 
-        developingProduct = null;
         launchedProducts++;
-
-        // The product's effects are applied by the GameManager.
+        return revenue;
     }
 
     static public event System.Action Synergy;

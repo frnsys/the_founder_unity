@@ -18,20 +18,13 @@ public class Product : HasStats {
         }
     }
 
-    [SerializeField]
-    private float _progress = 0;
-    public float progress {
-        get { return _progress/requiredProgress; }
-    }
-
-    public float difficulty;
-
     public bool killsPeople;
     public bool debtsPeople;
     public bool pollutes;
     public bool techPenalty;
     public bool synergy;
     public float marketShare;
+    public float difficulty;
 
     public Mesh[] meshes {
         get {
@@ -41,8 +34,6 @@ public class Product : HasStats {
             };
         }
     }
-
-    public float requiredProgress;
 
     public List<Vertical> requiredVerticals {
         get {
@@ -81,8 +72,13 @@ public class Product : HasStats {
     public Stat marketing;
     public Stat engineering;
 
-    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_, Company c) {
+    public float Create(List<ProductType> pts, float design_, float marketing_, float engineering_, Company c) {
         Init(pts, design_, marketing_, engineering_);
+
+        // Apply relevant effects to the product
+        foreach (EffectSet es in c.activeEffects) {
+            es.Apply(this);
+        }
 
         // A product recipe can be built without the required techs,
         // but it will operate at a penalty.
@@ -93,15 +89,17 @@ public class Product : HasStats {
         }
 
         name = GenerateName(c);
+
+        return Launch(c);
     }
 
-    public void Init(List<ProductType> pts, int design_, int marketing_, int engineering_) {
+    public void Init(List<ProductType> pts, float design_, float marketing_, float engineering_) {
         productTypes = pts;
         comboID = string.Join(".", productTypes.OrderBy(pt => pt.name).Select(pt => pt.name).ToArray());
 
-        design =      new Stat("Design",      (float)design_);
-        marketing =   new Stat("Marketing",   (float)marketing_);
-        engineering = new Stat("Engineering", (float)engineering_);
+        design =      new Stat("Design",      design_);
+        marketing =   new Stat("Marketing",   marketing_);
+        engineering = new Stat("Engineering", engineering_);
 
         recipe = ProductRecipe.LoadFromTypes(pts);
 
@@ -110,10 +108,7 @@ public class Product : HasStats {
             recipe = ProductRecipe.LoadDefault();
         }
 
-        // This is 12 weeks at 12cycles/week.
-        // Each progress is one cycle.
         difficulty = pts[0].difficulty * pts[1].difficulty;
-        requiredProgress = 1440f * difficulty;
 
         foreach (Vertical v in requiredVerticals) {
             if (v.name == "Defense") {
@@ -216,9 +211,6 @@ public class Product : HasStats {
         Debug.Log(string.Format("Marketing Value {0}", U));
         Debug.Log(string.Format("Engineering Value {0}", P));
         Debug.Log(string.Format("Max Revenue {0}", maxRevenue));
-
-        // Apply effects and what not
-        company.CompletedProduct(this);
 
         // Trigger completed event.
         if (Completed != null) {

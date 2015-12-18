@@ -12,48 +12,49 @@ namespace UnityTest
 	[TestFixture]
 	internal class SpecialProjectTests
 	{
-        private GameObject gameObj;
-        private GameData gd;
-        private GameManager gm;
+        // TODO fix all this
+        //private GameObject gameObj;
+        //private GameData gd;
+        //private GameManager gm;
 
-        private Product p = null;
-        private ProductRecipe pr = null;
-        private ProductType pt;
-        private SpecialProject sp;
-        private List<ProductType> pts;
-        private Company c;
+        //private Product p = null;
+        //private ProductRecipe pr = null;
+        //private ProductType pt;
+        //private SpecialProject sp;
+        //private List<ProductType> pts;
+        //private Company c;
 
-        [SetUp]
-        public void SetUp() {
-            pts = new List<ProductType>() {
-                ScriptableObject.Instantiate(ProductType.Load("Social Network")) as ProductType,
-                ScriptableObject.Instantiate(ProductType.Load("Virtual Reality")) as ProductType
-            };
+        //[SetUp]
+        //public void SetUp() {
+            //pts = new List<ProductType>() {
+                //ScriptableObject.Instantiate(ProductType.Load("Social Network")) as ProductType,
+                //ScriptableObject.Instantiate(ProductType.Load("Virtual Reality")) as ProductType
+            //};
 
-            gameObj = new GameObject("Game Manager");
-            gm = gameObj.AddComponent<GameManager>();
-            gd = GameData.New("DEFAULTCORP");
-            gm.Load(gd);
+            //gameObj = new GameObject("Game Manager");
+            //gm = gameObj.AddComponent<GameManager>();
+            //gd = GameData.New("DEFAULTCORP");
+            //gm.Load(gd);
 
-            c = gd.company;
+            //c = gd.company;
 
-            p = ScriptableObject.CreateInstance<Product>();
-            p.Init(pts, 0, 0, 0, c);
-            pr = ProductRecipe.LoadFromTypes(pts);
+            //p = ScriptableObject.CreateInstance<Product>();
+            //p.Init(pts, 0, 0, 0, c);
+            //pr = ProductRecipe.LoadFromTypes(pts);
 
-            sp = ScriptableObject.CreateInstance<SpecialProject>();
-            sp.requiredProducts = new List<ProductRecipe> { pr };
-        }
+            //sp = ScriptableObject.CreateInstance<SpecialProject>();
+            //sp.requiredProducts = new List<ProductRecipe> { pr };
+        //}
 
-        [TearDown]
-        public void TearDown() {
-            UnityEngine.Object.DestroyImmediate(gameObj);
-            gm = null;
-            p = null;
-            pr = null;
-            pts = null;
-            sp = null;
-        }
+        //[TearDown]
+        //public void TearDown() {
+            //UnityEngine.Object.DestroyImmediate(gameObj);
+            //gm = null;
+            //p = null;
+            //pr = null;
+            //pts = null;
+            //sp = null;
+        //}
 
         // TODO update
 		//[Test]
