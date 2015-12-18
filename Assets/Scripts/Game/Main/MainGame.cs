@@ -27,6 +27,11 @@ public class MainGame : MonoBehaviour {
     public GameObject blockPrefab;
     public GameObject[,] grid;
 
+    public Color productTypeColor;
+    public Color influencerColor;
+    public Color hazardColor;
+    public GameObject tilePrefab;
+
     public GameObject ui;
     public UIProgressBar turnsBar;
     public GameObject resultPrefab;
@@ -100,6 +105,20 @@ public class MainGame : MonoBehaviour {
                 }
 
                 GameObject piece = Instantiate(p, startPos + new Vector2(c * gridItemSize, r * gridItemSize), p.transform.rotation) as GameObject;
+                GameObject tile = Instantiate(tilePrefab) as GameObject;
+                switch (piece.GetComponent<Piece>().type) {
+                    case Piece.Type.ProductType:
+                        tile.GetComponent<SpriteRenderer>().color = productTypeColor;
+                        break;
+                    case Piece.Type.Bug:
+                        tile.GetComponent<SpriteRenderer>().color = hazardColor;
+                        break;
+                    case Piece.Type.Influencer:
+                        tile.GetComponent<SpriteRenderer>().color = influencerColor;
+                        break;
+                }
+                tile.transform.parent = piece.transform;
+                tile.transform.localPosition = new Vector3(0,0,2);
                 piece.GetComponent<Piece>().Setup(p.GetComponent<Piece>().type, r, c);
                 piece.transform.parent = board.transform;
                 grid[r, c] = piece;
@@ -122,7 +141,8 @@ public class MainGame : MonoBehaviour {
             else
                 return influencerPrefabs[2];
         } else {
-            return productTypePrefabs[UnityEngine.Random.Range(0, productTypePrefabs.Length)];
+            //return productTypePrefabs[UnityEngine.Random.Range(0, productTypePrefabs.Length)];
+            return productTypePrefabs[UnityEngine.Random.Range(0, 5)];
         }
     }
 
@@ -149,44 +169,56 @@ public class MainGame : MonoBehaviour {
                 var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null && hitGo != hit.collider.gameObject) {
                     if (!ValidNeighbors(hit.collider.gameObject.GetComponent<Piece>(),
-                        hitGo.GetComponent<Piece>())) {
+                            hitGo.GetComponent<Piece>())) {
                         state = GameState.None;
                     } else {
                         state = GameState.Animating;
-                        StartCoroutine(FindMatchesAndCollapse(hit));
+                        FindMatchesAndCollapse(hit);
                     }
                 }
             }
         }
     }
 
-    private IEnumerator FindMatchesAndCollapse(RaycastHit2D hit2) {
-        var hitGo2 = hit2.collider.gameObject;
+    private void FindMatchesAndCollapse(RaycastHit2D hit2) {
+        GameObject hitGo2 = hit2.collider.gameObject;
+
+        Piece p1 = hitGo.GetComponent<Piece>();
+        Piece p2 = hitGo2.GetComponent<Piece>();
+
+        // If the two are product types and the same product type
+        if (p1.type == Piece.Type.ProductType && p2.type == Piece.Type.ProductType) {
+            if (hitGo.name == hitGo2.name) { // TODO more rigorous comparison
+                // TODO Merge the two
+
+            } else if (p1.stacked && p2.stacked) {
+                // TODO create a new product
+            }
+        }
+
         Swap(hitGo, hitGo2);
 
-        // Swap in the rendered grid
-        hitGo.transform.positionTo(animationDuration, hitGo2.transform.position);
-        hitGo2.transform.positionTo(animationDuration, hitGo.transform.position);
-        yield return new WaitForSeconds(animationDuration);
-
-        // For now, assume a successful turn
         turnsLeft--;
         state = GameState.None;
-
-        ShowResultAt(hitGo.transform.localPosition, "$24,000");
         UpdateUI();
+        ShowResultAt(hitGo.transform.localPosition, "$24,000");
     }
 
-    // Swap in the grid
     private void Swap(GameObject g1, GameObject g2) {
         Piece p1 = g1.GetComponent<Piece>();
         Piece p2 = g2.GetComponent<Piece>();
 
+        // Swap in the grid
         GameObject tmp = grid[p1.x, p1.y];
         grid[p1.x, p1.y] = grid[p2.x, p2.y];
         grid[p2.x, p2.y] = tmp;
 
+        // Update piece positions
         p1.SwapWith(p2);
+
+        // Swap the rendered pieces
+        g1.transform.positionTo(animationDuration, g2.transform.position);
+        g1.transform.positionTo(animationDuration, g2.transform.position);
     }
 
     private void UpdateUI() {
