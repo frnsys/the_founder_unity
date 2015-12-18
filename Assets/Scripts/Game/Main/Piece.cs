@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class Piece : MonoBehaviour {
-    public int x;
-    public int y;
+    public int col;
+    public int row;
     public bool stacked;
     public GameObject obj;
 
@@ -17,16 +17,16 @@ public class Piece : MonoBehaviour {
     }
     public Type type;
 
-    public void Setup(Type t, int x_, int y_) {
-        x = x_;
-        y = y_;
+    public void Setup(Type t, int row_, int col_) {
+        col = col_;
+        row = row_;
         type = t;
         stacked = false;
     }
 
-    public bool Equals(Piece p) {
-        // TODO this needs to also compare that the producttype or product are equivalent
-        if (p != null && type == p.type) {
+    public bool Equal(Piece p) {
+        if (p != null && type == p.type && name == p.name) {
+            return true;
         }
         return false;
     }
@@ -37,12 +37,12 @@ public class Piece : MonoBehaviour {
     }
 
     public void SwapWith(Piece p) {
-        int tmp = p.x;
-        p.x = x;
-        x = tmp;
+        int tmp = p.col;
+        p.col = col;
+        col = tmp;
 
-        tmp = p.y;
-        p.y = y;
-        y = tmp;
+        tmp = p.row;
+        p.row = row;
+        row = tmp;
     }
 }

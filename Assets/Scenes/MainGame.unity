@@ -439,7 +439,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 13.46875
+  aspectRatio: 31.96875
 --- !u!4 &1340821633
 Transform:
   m_ObjectHideFlags: 0
@@ -711,7 +711,6 @@ MonoBehaviour:
   - {fileID: 179326, guid: 46aff48c109d14a62a4c7ca1c03ded03, type: 2}
   - {fileID: 179326, guid: df09de94de2344bd29205f7b783821a9, type: 2}
   outragePrefab: {fileID: 179326, guid: 94d5b30d567f24055b7a58f5be5276b6, type: 2}
-  happyPrefab: {fileID: 179326, guid: 21ab3ffde3cbc48a9a89085a438d6de1, type: 2}
   bugPrefab: {fileID: 179326, guid: 6fe7ceb2a350841a992a059be52efd09, type: 2}
   blockPrefab: {fileID: 179326, guid: 10353c7d5e3284638aeda3729c51b6d8, type: 2}
   productTypeColor: {r: .417874128, g: .78270185, b: .963235319, a: 1}
