@@ -15,7 +15,8 @@ public class MainGame : MonoBehaviour {
     private int workUnit = 10; // TODO balance this
     private int outrageCost = 50;
     private int minMatches = 3;
-    private float outragePenalty = -0.5f;
+    private float outragePenalty = -0.25f;
+    private float happyBonus = 0.1f;
 
     private int rows;
     private int cols;
@@ -171,21 +172,27 @@ public class MainGame : MonoBehaviour {
         grid[r, c] = piece;
         piece.SetActive(true);
 
-        // Outrage irradiates nearby tiles
+        // Outrage/happy irradiates nearby tiles
         if (piece.GetComponent<Piece>().type == Piece.Type.Outrage) {
-            for (int col=c-1; col<=c+1; col++) {
-                if (col < 0 || col > cols-1)
-                    continue;
-
-                for (int row=r-1; row<=r+1; row++) {
-                    if (row < 0 || row > rows-1)
-                        continue;
-                    SetBonusAt(row, col, outragePenalty);
-                }
-            }
+            SetBonusAround(r, c, outragePenalty);
+        } else if (piece.GetComponent<Piece>().type == Piece.Type.Happy) {
+            SetBonusAround(r, c, happyBonus);
         }
 
         return piece;
+    }
+
+    private void SetBonusAround(int r, int c, float bonus) {
+        for (int col=c-1; col<=c+1; col++) {
+            if (col < 0 || col > cols-1)
+                continue;
+
+            for (int row=r-1; row<=r+1; row++) {
+                if (row < 0 || row > rows-1)
+                    continue;
+                SetBonusAt(row, col, bonus);
+            }
+        }
     }
 
     private void RemovePieceAt(int r, int c) {
@@ -214,8 +221,6 @@ public class MainGame : MonoBehaviour {
     }
 
     private GameObject RandomPiecePrefab() {
-        return outragePrefab;
-
         // TODO balance this
         if (UnityEngine.Random.value <= Mathf.Max(0.02f, -company.opinion.value/100)) {
             return outragePrefab;
