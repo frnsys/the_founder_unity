@@ -49,6 +49,7 @@ public class UIManager : Singleton<UIManager> {
         Recruitment.Completed += OnRecruitmentCompleted;
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
+        MainGame.Done += OnGridGameDone;
         //Company.Paid += OnPaid;
     }
 
@@ -58,6 +59,7 @@ public class UIManager : Singleton<UIManager> {
         Recruitment.Completed -= OnRecruitmentCompleted;
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
+        MainGame.Done -= OnGridGameDone;
         //Company.Paid -= OnPaid;
     }
 
@@ -188,6 +190,21 @@ public class UIManager : Singleton<UIManager> {
     private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
         yield return StartCoroutine(GameTimer.Wait(delay));
         callback(null);
+    }
+
+    public MainGame gridGame;
+    public Camera officeCamera;
+    public Camera mainCamera;
+    public void StartGridGame(GameObject obj) {
+        officeCamera.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(false);
+        gridGame.gameObject.SetActive(true);
+    }
+
+    void OnGridGameDone() {
+        officeCamera.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(true);
+        gridGame.gameObject.SetActive(false);
     }
 }
 

@@ -8,8 +8,8 @@ public class MainGame : MonoBehaviour {
     // Much credit due to github.com/dgkanatsios/matchthreegame for guidance
     static public event System.Action Done;
 
-    public int totalTurns;
-    public int turnsLeft;
+    private int totalTurns;
+    private int turnsLeft;
 
     private Company company;
     private int workUnit = 10; // TODO balance this
@@ -21,7 +21,6 @@ public class MainGame : MonoBehaviour {
     private float gridItemSize = 1f;
     private float animationDuration = 0.2f;
     private float moveAnimationDuration = 0.05f;
-
 
     public GameObject board;
     public GameObject[] productTypePrefabs;
@@ -41,6 +40,7 @@ public class MainGame : MonoBehaviour {
     public GameObject tilePrefab;
 
     public GameObject ui;
+    public Camera camera;
     public GameObject resultPrefab;
     public UIProgressBar turnsBar;
     public UILabel goodwillLabel;
@@ -49,14 +49,19 @@ public class MainGame : MonoBehaviour {
     private Vector2 startPos;
     private GameObject nextPiece;
 
-    // for testing
-    void Start() {
-        StartGame();
+    private enum GameState {
+        None,
+        Selecting,
+        Animating
     }
+    private GameState state;
 
-    public void StartGame() {
+    void OnEnable() {
         company = GameManager.Instance.playerCompany;
         state = GameState.None;
+
+        ui.SetActive(true);
+        camera.gameObject.SetActive(true);
 
         // At minimum, 10 turns
         //totalTurns = Math.Max(10, (int)Math.Floor(company.productivity/workUnit));
@@ -68,6 +73,11 @@ public class MainGame : MonoBehaviour {
 
         InitGrid();
         UpdateUI();
+    }
+
+    void OnDisable() {
+        ui.SetActive(false);
+        camera.gameObject.SetActive(false);
     }
 
     // Show a float-up text bit at the specified position
@@ -176,13 +186,6 @@ public class MainGame : MonoBehaviour {
         }
     }
 
-    private enum GameState {
-        None,
-        Selecting,
-        Animating
-    }
-    private GameState state;
-
     private void CreateNextPiece() {
         nextPiece = CreatePiece(RandomPiecePrefab());
         Debug.Log(nextPiece.name);
@@ -240,52 +243,6 @@ public class MainGame : MonoBehaviour {
         }
     }
 
-    private IEnumerator FindMatchesAndCollapse(RaycastHit2D hit2) {
-        // Check matches
-        //var matches1 = GetMatches(hitGo);
-        //var matches2 = GetMatches(hitGo2);
-        //IEnumerable<GameObject> totalMatches = matches1.matches.Union(matches2.matches).Distinct();
-
-        //if (totalMatches.Count() < minMatches)  {
-            //// Undo
-            //Swap(hitGo2, hitGo);
-            //yield return new WaitForSeconds(animationDuration);
-        //} else {
-            //// Only successful moves cost a turn
-            //TakeTurn();
-        //}
-
-        //while (totalMatches.Count() >= minMatches) {
-            ////ShowResultAt(hitGo.transform.localPosition, "$24,000");
-            //foreach (GameObject go in totalMatches) {
-                //// Remove from grid
-                //grid[go.GetComponent<Piece>().row, go.GetComponent<Piece>().col] = null;
-                //Destroy(go);
-            //}
-
-            //// Get columns which will collapse and collapse them
-            //IEnumerable<int> columns = totalMatches.Select(go => go.GetComponent<Piece>().col).Distinct();
-            //Collapses collapses = Collapse(columns);
-
-            //int maxDistance = collapses.maxDistance;
-            //List<GameObject> newPieces = new List<GameObject>();
-
-            //foreach (GameObject go in newPieces.Union(collapses.pieces)) {
-                //go.transform.positionTo(moveAnimationDuration * maxDistance,
-                        //startPos + new Vector2(go.GetComponent<Piece>().col * gridItemSize, go.GetComponent<Piece>().row * gridItemSize));
-            //}
-
-            //yield return new WaitForSeconds(moveAnimationDuration * maxDistance);
-
-            //// Check for cascading effects
-            //totalMatches = GetMatches(newPieces).Union(GetMatches(collapses.pieces)).Distinct();
-        //}
-
-        //UpdateUI();
-        //state = GameState.None;
-        yield return new WaitForSeconds(animationDuration);
-    }
-
     private void UpdateUI() {
         turnsBar.value = (float)turnsLeft/totalTurns;
         goodwillLabel.text = string.Format("{0} goodwill", company.goodwill);
@@ -293,6 +250,11 @@ public class MainGame : MonoBehaviour {
 
     private void TakeTurn() {
         turnsLeft--;
+
+        if (turnsLeft <= 0 && Done != null) {
+            Done();
+        }
+
         UpdateUI();
     }
 
@@ -344,7 +306,6 @@ public class MainGame : MonoBehaviour {
             g2.transform.positionTo(animationDuration, oldPos);
         } else {
             // TODO a nice little flash of light or something
-            Debug.Log("MAKING PRODUCT!");
             ProductType pt1 = ProductType.Load(p1.name);
             ProductType pt2 = ProductType.Load(p2.name);
             float revenue = company.LaunchProduct(new List<ProductType> {pt1, pt2});
