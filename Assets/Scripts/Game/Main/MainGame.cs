@@ -50,6 +50,7 @@ public class MainGame : MonoBehaviour {
     public GameObject resultPrefab;
     public UIProgressBar turnsBar;
     public UILabel goodwillLabel;
+    public GameObject nextObj;
 
     private GameObject hitGo;
     private Vector2 startPos;
@@ -242,7 +243,12 @@ public class MainGame : MonoBehaviour {
 
     private void CreateNextPiece() {
         nextPiece = CreatePiece(RandomPiecePrefab());
-        Debug.Log(nextPiece.name);
+        nextPiece.SetActive(true);
+
+        // Get top-left coordinate of the next piece anchor
+        Vector3 pos = UICamera.mainCamera.WorldToViewportPoint(nextObj.GetComponent<UIWidget>().worldCorners[1]);
+        pos = camera.ViewportToWorldPoint(pos);
+        nextPiece.transform.position = pos + new Vector3(gridItemSize/2,-gridItemSize/2,1);
     }
 
     void Update() {
