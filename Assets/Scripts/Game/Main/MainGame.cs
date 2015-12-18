@@ -82,8 +82,6 @@ public class MainGame : MonoBehaviour {
 
     // Show a float-up text bit at the specified position
     private void ShowResultAt(Vector2 pos, string text) {
-        pos.x += gridItemSize/2;
-
         // Get correct positioning for NGUI
         Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
         screenPos.x -= Screen.width/2f;
@@ -120,7 +118,7 @@ public class MainGame : MonoBehaviour {
         }
     }
 
-    private void PlacePiece(GameObject piece, int r, int c) {
+    private GameObject PlacePiece(GameObject piece, int r, int c) {
         Vector2 pos = new Vector2(c * gridItemSize, r * gridItemSize);
 
         // Remove existing piece if necessary
@@ -132,6 +130,7 @@ public class MainGame : MonoBehaviour {
         piece.transform.parent = board.transform;
         grid[r, c] = piece;
         piece.SetActive(true);
+        return piece;
     }
 
     private void RemovePieceAt(int r, int c) {
@@ -167,6 +166,9 @@ public class MainGame : MonoBehaviour {
     }
 
     private GameObject RandomPiecePrefab() {
+        // testing
+        return influencerPrefabs[0];
+
         // TODO balance this
         if (UnityEngine.Random.value <= Mathf.Max(0.02f, -company.opinion.value/100)) {
             return outragePrefab;
@@ -225,6 +227,11 @@ public class MainGame : MonoBehaviour {
                             PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
                             TakeTurn();
                             break;
+                        case Piece.Type.Influencer:
+                            PopInfluencer(p.name, p.gameObject.transform.position);
+                            PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
+                            TakeTurn();
+                            break;
                     }
                     state = GameState.None;
                     return;
@@ -239,7 +246,7 @@ public class MainGame : MonoBehaviour {
                         state = GameState.None;
                     } else {
                         state = GameState.Animating;
-                        StartCoroutine(MergePieces(hit.collider.gameObject, hitGo));
+                        StartCoroutine(MergeProductTypes(hit.collider.gameObject, hitGo));
                     }
                 }
             }
@@ -261,6 +268,23 @@ public class MainGame : MonoBehaviour {
         UpdateUI();
     }
 
+    private void PopInfluencer(string name, Vector2 pos) {
+        int amount = 0;
+        switch (name) {
+            case "Friend":
+                amount = 15;
+                break;
+            case "Journalist":
+                amount = 35;
+                break;
+            case "Thought Leader":
+                amount = 70;
+                break;
+        }
+        company.goodwill += amount;
+        ShowResultAt(pos, string.Format("+{0}", amount));
+    }
+
     private void ProcessMatchesAround(GameObject piece) {
         List<GameObject> hMatches = HorizontalMatches(piece).ToList();
         List<GameObject> vMatches = VerticalMatches(piece).ToList();
@@ -268,34 +292,47 @@ public class MainGame : MonoBehaviour {
         // TODO animate the merging
 
         if (hMatches.Count > 0) {
-            // Collapse horizontal matches leftwards,
-            // so keep the first horizontal match (assuming sorted)
-            GameObject merged = hMatches[0];
-            merged.transform.Find("Tile").GetComponent<SpriteRenderer>().color = activeColor;
-            merged.GetComponent<Piece>().stacked = true;
-            hMatches.RemoveAt(0);
-            foreach (GameObject p in hMatches) {
-                GameObject empty = CreatePiece(emptyPrefab);
-                PlacePiece(empty, p.GetComponent<Piece>().row, p.GetComponent<Piece>().col);
-            }
+            // Collapse horizontal matches leftwards
+            ProcessMatchesAround(MergePieces(hMatches));
         }
 
         if (vMatches.Count > 0) {
-            // Collapse vertical matches downwards,
-            // so keep the first vertical match (assuming sorted)
-            GameObject merged = vMatches[0];
-            merged.transform.Find("Tile").GetComponent<SpriteRenderer>().color = activeColor;
-            merged.GetComponent<Piece>().stacked = true;
-            vMatches.RemoveAt(0);
-            foreach (GameObject p in vMatches) {
-                GameObject empty = CreatePiece(emptyPrefab);
-                PlacePiece(empty, p.GetComponent<Piece>().row, p.GetComponent<Piece>().col);
-            }
+            // Collapse vertical matches downwards
+            ProcessMatchesAround(MergePieces(vMatches));
         }
     }
 
+    private GameObject MergePieces(List<GameObject> pieces) {
+        // Assumes pieces are sorted
+        GameObject merged = pieces[0];
+        pieces.RemoveAt(0);
+        foreach (GameObject p in pieces) {
+            GameObject empty = CreatePiece(emptyPrefab);
+            PlacePiece(empty, p.GetComponent<Piece>().row, p.GetComponent<Piece>().col);
+        }
+        Piece mPiece = merged.GetComponent<Piece>();
+        switch (mPiece.type) {
+            case Piece.Type.ProductType:
+                merged.transform.Find("Tile").GetComponent<SpriteRenderer>().color = activeColor;
+                mPiece.stacked = true;
+                break;
 
-    private IEnumerator MergePieces(GameObject g1, GameObject g2) {
+            case Piece.Type.Influencer:
+                switch (merged.name) {
+                    case "Friend":
+                        merged = PlacePiece(CreatePiece(influencerPrefabs[1]), mPiece.row, mPiece.col);
+                        break;
+                    case "Journalist":
+                        merged = PlacePiece(CreatePiece(influencerPrefabs[2]), mPiece.row, mPiece.col);
+                        break;
+                }
+                break;
+        }
+        return merged;
+    }
+
+
+    private IEnumerator MergeProductTypes(GameObject g1, GameObject g2) {
         Piece p1 = g1.GetComponent<Piece>();
         Piece p2 = g2.GetComponent<Piece>();
 
