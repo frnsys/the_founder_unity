@@ -43,6 +43,7 @@ public class MainGame : MonoBehaviour {
 
     private GameObject hitGo;
     private Vector2 startPos;
+    private GameObject nextPiece;
 
     // for testing
     void Start() {
@@ -53,11 +54,13 @@ public class MainGame : MonoBehaviour {
         company = GameManager.Instance.playerCompany;
         state = GameState.None;
 
-        // At minimum, 2 turns
-        //totalTurns = Math.Max(2, (int)Math.Floor(company.productivity/workUnit));
+        // At minimum, 10 turns
+        //totalTurns = Math.Max(10, (int)Math.Floor(company.productivity/workUnit));
         // testing
         totalTurns = 10;
         turnsLeft = totalTurns;
+
+        CreateNextPiece();
 
         InitGrid();
         UpdateUI();
@@ -97,54 +100,35 @@ public class MainGame : MonoBehaviour {
 
         for (int r=0; r<rows; r++) {
             for (int c=0; c<cols; c++) {
-                PlaceEmptyPiece(r, c);
+                GameObject piece = CreatePiece(emptyPrefab);
+                PlacePiece(piece, r, c);
             }
         }
     }
 
-    private GameObject PlaceEmptyPiece(int r, int c) {
+    private void PlacePiece(GameObject piece, int r, int c) {
         Vector2 pos = new Vector2(c * gridItemSize, r * gridItemSize);
-        GameObject piece = Instantiate(emptyPrefab, startPos + pos, Quaternion.identity) as GameObject;
-        GameObject tile = Instantiate(tilePrefab) as GameObject;
-        tile.GetComponent<SpriteRenderer>().color = emptyColor;
-        piece.name = piece.name.Replace("(Clone)", "");
-        tile.transform.parent = piece.transform;
-        tile.transform.localPosition = new Vector3(0,0,2);
-        piece.GetComponent<Piece>().Setup(emptyPrefab.GetComponent<Piece>().type, r, c);
+
+        // Remove existing piece if necessary
+        if (grid[r,c] != null)
+            RemovePieceAt(r, c);
+
+        piece.transform.position = startPos + pos;
+        piece.GetComponent<Piece>().PlaceAt(r, c);
         piece.transform.parent = board.transform;
         grid[r, c] = piece;
-        return piece;
+        piece.SetActive(true);
     }
 
-    private GameObject PlaceRandomPiece(int r, int c) {
-        return CreateRandomPiece(r, c, new Vector2(c * gridItemSize, r * gridItemSize));
+    private void RemovePieceAt(int r, int c) {
+        Destroy(grid[r, c]);
+        grid[r, c] = null;
     }
 
-    private GameObject SpawnRandomPiece(int r, int c) {
-        return CreateRandomPiece(r, c, new Vector2(c * gridItemSize, rows * gridItemSize));
-    }
-
-    private GameObject CreateRandomPiece(int r, int c, Vector2 pos) {
-        GameObject p = RandomPiece();
-        Piece p_ = p.GetComponent<Piece>();
-
-        // Reselect piece as necessary, so we don't start with
-        // three in a row/col of the same type
-        while (c >= 2
-                && grid[r, c-1] != null && grid[r, c-1].GetComponent<Piece>().Equal(p_)
-                && grid[r, c-2] != null && grid[r, c-2].GetComponent<Piece>().Equal(p_)) {
-            p = RandomPiece();
-            p_ = p.GetComponent<Piece>();
-        }
-        while (r >= 2
-                && grid[r-1, c] != null && grid[r-1, c].GetComponent<Piece>().Equal(p_)
-                && grid[r-2, c] != null && grid[r-2, c].GetComponent<Piece>().Equal(p_)) {
-            p = RandomPiece();
-            p_ = p.GetComponent<Piece>();
-        }
-
-        GameObject piece = Instantiate(p, startPos + pos, p.transform.rotation) as GameObject;
+    private GameObject CreatePiece(GameObject piecePrefab) {
+        GameObject piece = Instantiate(piecePrefab, Vector2.zero, piecePrefab.transform.rotation) as GameObject;
         GameObject tile = Instantiate(tilePrefab) as GameObject;
+
         switch (piece.GetComponent<Piece>().type) {
             case Piece.Type.ProductType:
                 tile.GetComponent<SpriteRenderer>().color = productTypeColor;
@@ -155,17 +139,19 @@ public class MainGame : MonoBehaviour {
             case Piece.Type.Influencer:
                 tile.GetComponent<SpriteRenderer>().color = influencerColor;
                 break;
+            case Piece.Type.Empty:
+                tile.GetComponent<SpriteRenderer>().color = emptyColor;
+                break;
         }
         piece.name = piece.name.Replace("(Clone)", "");
         tile.transform.parent = piece.transform;
         tile.transform.localPosition = new Vector3(0,0,2);
-        piece.GetComponent<Piece>().Setup(p.GetComponent<Piece>().type, r, c);
-        piece.transform.parent = board.transform;
-        grid[r, c] = piece;
+
+        piece.SetActive(false);
         return piece;
     }
 
-    private GameObject RandomPiece() {
+    private GameObject RandomPiecePrefab() {
         // TODO balance this
         if (UnityEngine.Random.value <= Mathf.Max(0.02f, -company.opinion.value/100)) {
             return outragePrefab;
@@ -192,6 +178,11 @@ public class MainGame : MonoBehaviour {
     }
     private GameState state;
 
+    private void CreateNextPiece() {
+        nextPiece = CreatePiece(RandomPiecePrefab());
+        Debug.Log(nextPiece.name);
+    }
+
     void Update() {
         if (state == GameState.None) {
             // Click/tap
@@ -203,7 +194,20 @@ public class MainGame : MonoBehaviour {
                 }
             }
         } else if (state == GameState.Selecting) {
-            // Drag
+            // Double-click/tap
+            if (Input.GetMouseButtonDown(0)) {
+                var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                if (hit.collider != null && hitGo == hit.collider.gameObject) {
+                    Piece p = hitGo.GetComponent<Piece>();
+                    if (p.type == Piece.Type.Empty) {
+                        PlacePiece(nextPiece, p.row, p.col);
+                        CreateNextPiece();
+                    }
+                    state = GameState.None;
+                    return;
+                }
+            }
+            // Swipe
             if (Input.GetMouseButton(0)) {
                 var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null && hitGo != hit.collider.gameObject) {
@@ -229,9 +233,8 @@ public class MainGame : MonoBehaviour {
         if (p1.type == Piece.Type.ProductType && p2.type == Piece.Type.ProductType) {
             if (hitGo.name == hitGo2.name) { // TODO more rigorous comparison
                 // TODO Merge the two
-
-            } else if (p1.stacked && p2.stacked) {
-                // TODO create a new product
+            //} else if (p1.stacked && p2.stacked) {
+                //// TODO create a new product
             }
         }
 
@@ -252,44 +255,31 @@ public class MainGame : MonoBehaviour {
             turnsLeft--;
         }
 
-        while (totalMatches.Count() >= minMatches) {
-            //ShowResultAt(hitGo.transform.localPosition, "$24,000");
-            foreach (GameObject go in totalMatches) {
-                // Remove from grid
-                grid[go.GetComponent<Piece>().row, go.GetComponent<Piece>().col] = null;
-                Destroy(go);
-            }
+        //while (totalMatches.Count() >= minMatches) {
+            ////ShowResultAt(hitGo.transform.localPosition, "$24,000");
+            //foreach (GameObject go in totalMatches) {
+                //// Remove from grid
+                //grid[go.GetComponent<Piece>().row, go.GetComponent<Piece>().col] = null;
+                //Destroy(go);
+            //}
 
-            // Get columns which will collapse and collapse them
-            IEnumerable<int> columns = totalMatches.Select(go => go.GetComponent<Piece>().col).Distinct();
-            Collapses collapses = Collapse(columns);
+            //// Get columns which will collapse and collapse them
+            //IEnumerable<int> columns = totalMatches.Select(go => go.GetComponent<Piece>().col).Distinct();
+            //Collapses collapses = Collapse(columns);
 
-            int maxDistance = collapses.maxDistance;
-            List<GameObject> newPieces = new List<GameObject>();
+            //int maxDistance = collapses.maxDistance;
+            //List<GameObject> newPieces = new List<GameObject>();
 
-            // Create new pieces in empty spots
-            foreach (int col in columns) {
-                for (int row=0; row<rows; row++) {
-                    if (grid[row, col] == null) {
-                        GameObject piece = SpawnRandomPiece(row, col);
-                        newPieces.Add(piece);
+            //foreach (GameObject go in newPieces.Union(collapses.pieces)) {
+                //go.transform.positionTo(moveAnimationDuration * maxDistance,
+                        //startPos + new Vector2(go.GetComponent<Piece>().col * gridItemSize, go.GetComponent<Piece>().row * gridItemSize));
+            //}
 
-                        if (rows - row > maxDistance)
-                            maxDistance = rows - row;
-                    }
-                }
-            }
+            //yield return new WaitForSeconds(moveAnimationDuration * maxDistance);
 
-            foreach (GameObject go in newPieces.Union(collapses.pieces)) {
-                go.transform.positionTo(moveAnimationDuration * maxDistance,
-                        startPos + new Vector2(go.GetComponent<Piece>().col * gridItemSize, go.GetComponent<Piece>().row * gridItemSize));
-            }
-
-            yield return new WaitForSeconds(moveAnimationDuration * maxDistance);
-
-            // Check for cascading effects
-            totalMatches = GetMatches(newPieces).Union(GetMatches(collapses.pieces)).Distinct();
-        }
+            //// Check for cascading effects
+            //totalMatches = GetMatches(newPieces).Union(GetMatches(collapses.pieces)).Distinct();
+        //}
 
         UpdateUI();
         state = GameState.None;

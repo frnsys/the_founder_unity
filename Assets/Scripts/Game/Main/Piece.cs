@@ -4,7 +4,6 @@ using System.Collections;
 public class Piece : MonoBehaviour {
     public int col;
     public int row;
-    public bool stacked;
     public GameObject obj;
 
     public enum Type {
@@ -18,11 +17,9 @@ public class Piece : MonoBehaviour {
     }
     public Type type;
 
-    public void Setup(Type t, int row_, int col_) {
+    public void PlaceAt(int row_, int col_) {
         col = col_;
         row = row_;
-        type = t;
-        stacked = false;
     }
 
     public bool Equal(Piece p) {
