@@ -49,6 +49,7 @@ public class Company : HasStats {
         opinion = new Stat("Outrage", 1);
         opinionEvents = new List<OpinionEvent>();
         publicity = new Stat("Hype", 0);
+        goodwill = 100;
 
         activeEffects = new List<EffectSet>();
 
@@ -480,6 +481,7 @@ public class Company : HasStats {
     // ===============================================
     public Stat opinion;
     public Stat publicity;
+    public int goodwill;
 
     [SerializeField]
     private List<OpinionEvent> opinionEvents;

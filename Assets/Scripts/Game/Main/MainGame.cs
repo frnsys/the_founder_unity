@@ -13,13 +13,15 @@ public class MainGame : MonoBehaviour {
 
     private Company company;
     private int workUnit = 10; // TODO balance this
+    private int outrageCost = 50;
+    private int minMatches = 3;
 
     private int rows;
     private int cols;
     private float gridItemSize = 1f;
     private float animationDuration = 0.2f;
     private float moveAnimationDuration = 0.05f;
-    private int minMatches = 3;
+
 
     public GameObject board;
     public GameObject[] productTypePrefabs;
@@ -39,8 +41,9 @@ public class MainGame : MonoBehaviour {
     public GameObject tilePrefab;
 
     public GameObject ui;
-    public UIProgressBar turnsBar;
     public GameObject resultPrefab;
+    public UIProgressBar turnsBar;
+    public UILabel goodwillLabel;
 
     private GameObject hitGo;
     private Vector2 startPos;
@@ -201,11 +204,21 @@ public class MainGame : MonoBehaviour {
                 var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null && hitGo == hit.collider.gameObject) {
                     Piece p = hitGo.GetComponent<Piece>();
-                    if (p.type == Piece.Type.Empty) {
-                        PlacePiece(nextPiece, p.row, p.col);
-                        ProcessMatchesAround(nextPiece);
-                        CreateNextPiece();
-                        TakeTurn();
+                    switch (p.type) {
+                        case Piece.Type.Empty:
+                            PlacePiece(nextPiece, p.row, p.col);
+                            ProcessMatchesAround(nextPiece);
+                            CreateNextPiece();
+                            TakeTurn();
+                            break;
+                        case Piece.Type.Outrage:
+                            if (company.goodwill - outrageCost >= 0) {
+                                company.goodwill -= outrageCost;
+                                GameObject empty = CreatePiece(emptyPrefab);
+                                PlacePiece(empty, p.row, p.col);
+                                TakeTurn();
+                            }
+                            break;
                     }
                     state = GameState.None;
                     return;
@@ -273,36 +286,9 @@ public class MainGame : MonoBehaviour {
         yield return new WaitForSeconds(animationDuration);
     }
 
-    private Collapses Collapse(IEnumerable<int> columns) {
-        Collapses collapses = new Collapses();
-        foreach (int col in columns) {
-            for (int row=0; row<rows-1; row++) {
-                // Find removed pieces
-                if (grid[row, col] == null) {
-                    // Find next non-removed piece, move it down
-                    for (int row2 = row+1; row2 < rows; row2++) {
-                        if (grid[row2, col] != null) {
-                            grid[row, col] = grid[row2, col];
-                            grid[row2, col] = null;
-
-                            grid[row, col].GetComponent<Piece>().row = row;
-                            grid[row, col].GetComponent<Piece>().col = col;
-
-                            if (row2 - row > collapses.maxDistance)
-                                collapses.maxDistance = row2 - row;
-                            collapses.AddObject(grid[row, col]);
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return collapses;
-    }
-
     private void UpdateUI() {
         turnsBar.value = (float)turnsLeft/totalTurns;
+        goodwillLabel.text = string.Format("{0} goodwill", company.goodwill);
     }
 
     private void TakeTurn() {
