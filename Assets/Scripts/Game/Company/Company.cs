@@ -235,9 +235,10 @@ public class Company : HasStats {
 
     public int launchedProducts;
     static public event System.Action<Company> LaunchedProduct;
-    public float LaunchProduct(List<ProductType> pts) {
+    public float LaunchProduct(List<ProductType> pts, float multiplier) {
         Product product = ScriptableObject.CreateInstance<Product>();
         float revenue = product.Create(pts, creativity, charisma, cleverness, this);
+        revenue *= multiplier;
 
         if (product.killsPeople)
             deathToll += Random.Range(0, 10);

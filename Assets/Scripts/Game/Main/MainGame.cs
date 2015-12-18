@@ -15,6 +15,7 @@ public class MainGame : MonoBehaviour {
     private int workUnit = 10; // TODO balance this
     private int outrageCost = 50;
     private int minMatches = 3;
+    private float outragePenalty = -0.5f;
 
     private int rows;
     private int cols;
@@ -31,6 +32,7 @@ public class MainGame : MonoBehaviour {
     public GameObject blockPrefab;
     public GameObject emptyPrefab;
     public GameObject[,] grid;
+    public float[,] bonusGrid;
 
     public Color productTypeColor;
     public Color influencerColor;
@@ -99,6 +101,7 @@ public class MainGame : MonoBehaviour {
         rows = 5;
         cols = 5;
         grid = new GameObject[rows, cols];
+        bonusGrid = new float[rows, cols];
 
         Vector2 bottomRight = Camera.main.ViewportToWorldPoint(new Vector2(1,0));
         Vector2 topLeft = Camera.main.ViewportToWorldPoint(new Vector2(0,1));
@@ -114,8 +117,41 @@ public class MainGame : MonoBehaviour {
             for (int c=0; c<cols; c++) {
                 GameObject piece = CreatePiece(emptyPrefab);
                 PlacePiece(piece, r, c);
+                bonusGrid[r,c] = 0f;
             }
         }
+    }
+
+    private void SetBonusAt(int r, int c, float bonus) {
+        bonusGrid[r,c] += bonus;
+        Color color;
+
+        if (bonusGrid[r,c] < 0) {
+            color = new Color(1f, 1f * 1+bonusGrid[r,c], 1f * 1+bonusGrid[r,c]);
+        } else if (bonusGrid[r,c] > 0) {
+            color = new Color(1f * 1-bonusGrid[r,c], 1f, 1f * 1-bonusGrid[r,c]);
+        } else {
+            color = ColorForPiece(grid[r,c].GetComponent<Piece>());
+        }
+        grid[r,c].transform.Find("Tile").GetComponent<SpriteRenderer>().color = color;
+    }
+
+    private Color ColorForPiece(Piece p) {
+        switch (p.type) {
+            case Piece.Type.ProductType:
+                return productTypeColor;
+                break;
+            case Piece.Type.Bug:
+                return hazardColor;
+                break;
+            case Piece.Type.Influencer:
+                return influencerColor;
+                break;
+            case Piece.Type.Empty:
+                return emptyColor;
+                break;
+        }
+        return emptyColor;
     }
 
     private GameObject PlacePiece(GameObject piece, int r, int c) {
@@ -130,6 +166,21 @@ public class MainGame : MonoBehaviour {
         piece.transform.parent = board.transform;
         grid[r, c] = piece;
         piece.SetActive(true);
+
+        // Outrage irradiates nearby tiles
+        if (piece.GetComponent<Piece>().type == Piece.Type.Outrage) {
+            for (int col=c-1; col<=c+1; col++) {
+                if (col < 0 || col > cols-1)
+                    continue;
+
+                for (int row=r-1; row<=r+1; row++) {
+                    if (row < 0 || row > rows-1)
+                        continue;
+                    SetBonusAt(row, col, outragePenalty);
+                }
+            }
+        }
+
         return piece;
     }
 
@@ -141,21 +192,7 @@ public class MainGame : MonoBehaviour {
     private GameObject CreatePiece(GameObject piecePrefab) {
         GameObject piece = Instantiate(piecePrefab, Vector2.zero, piecePrefab.transform.rotation) as GameObject;
         GameObject tile = Instantiate(tilePrefab) as GameObject;
-
-        switch (piece.GetComponent<Piece>().type) {
-            case Piece.Type.ProductType:
-                tile.GetComponent<SpriteRenderer>().color = productTypeColor;
-                break;
-            case Piece.Type.Bug:
-                tile.GetComponent<SpriteRenderer>().color = hazardColor;
-                break;
-            case Piece.Type.Influencer:
-                tile.GetComponent<SpriteRenderer>().color = influencerColor;
-                break;
-            case Piece.Type.Empty:
-                tile.GetComponent<SpriteRenderer>().color = emptyColor;
-                break;
-        }
+        tile.GetComponent<SpriteRenderer>().color = ColorForPiece(piece.GetComponent<Piece>());
         piece.name = piece.name.Replace("(Clone)", "");
         tile.name = tile.name.Replace("(Clone)", "");
         tile.transform.parent = piece.transform;
@@ -166,9 +203,6 @@ public class MainGame : MonoBehaviour {
     }
 
     private GameObject RandomPiecePrefab() {
-        // testing
-        return influencerPrefabs[0];
-
         // TODO balance this
         if (UnityEngine.Random.value <= Mathf.Max(0.02f, -company.opinion.value/100)) {
             return outragePrefab;
@@ -348,7 +382,7 @@ public class MainGame : MonoBehaviour {
             // TODO a nice little flash of light or something
             ProductType pt1 = ProductType.Load(p1.name);
             ProductType pt2 = ProductType.Load(p2.name);
-            float revenue = company.LaunchProduct(new List<ProductType> {pt1, pt2});
+            float revenue = company.LaunchProduct(new List<ProductType> {pt1, pt2}, 1+bonusGrid[p1.row, p1.col]);
 
             ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
                     string.Format("{0:C0}", revenue));
