@@ -25,10 +25,6 @@ public class Piece : MonoBehaviour {
 
     public bool Equal(Piece p) {
         if (p != null && type == p.type && name == p.name && !stacked) {
-            // Thought leaders can't be merged, this should probably be refactored
-            if (name == "Thought Leader") {
-                return false;
-            }
             return true;
         }
         return false;

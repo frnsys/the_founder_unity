@@ -377,6 +377,9 @@ public class MainGame : MonoBehaviour {
                     case "Journalist":
                         merged = PlacePiece(CreatePiece(influencerPrefabs[2]), mPiece.row, mPiece.col);
                         break;
+                    case "Thought Leader":
+                        merged = PlacePiece(CreatePiece(happyPrefab), mPiece.row, mPiece.col);
+                        break;
                 }
                 break;
         }
