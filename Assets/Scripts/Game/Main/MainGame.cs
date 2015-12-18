@@ -40,6 +40,9 @@ public class MainGame : MonoBehaviour {
     public Color emptyColor;
     public Color activeColor;
     public GameObject tilePrefab;
+    public GameObject iconPrefab;
+    public Sprite plusIcon;
+    public Sprite minusIcon;
 
     public GameObject ui;
     public Camera camera;
@@ -124,16 +127,17 @@ public class MainGame : MonoBehaviour {
 
     private void SetBonusAt(int r, int c, float bonus) {
         bonusGrid[r,c] += bonus;
-        Color color;
+        GameObject icon = grid[r,c].transform.Find("Icon").gameObject;
 
         if (bonusGrid[r,c] < 0) {
-            color = new Color(1f, 1f * 1+bonusGrid[r,c], 1f * 1+bonusGrid[r,c]);
+            icon.GetComponent<SpriteRenderer>().sprite = minusIcon;
+            icon.SetActive(true);
         } else if (bonusGrid[r,c] > 0) {
-            color = new Color(1f * 1-bonusGrid[r,c], 1f, 1f * 1-bonusGrid[r,c]);
+            icon.GetComponent<SpriteRenderer>().sprite = plusIcon;
+            icon.SetActive(true);
         } else {
-            color = ColorForPiece(grid[r,c].GetComponent<Piece>());
+            icon.SetActive(false);
         }
-        grid[r,c].transform.Find("Tile").GetComponent<SpriteRenderer>().color = color;
     }
 
     private Color ColorForPiece(Piece p) {
@@ -191,18 +195,27 @@ public class MainGame : MonoBehaviour {
 
     private GameObject CreatePiece(GameObject piecePrefab) {
         GameObject piece = Instantiate(piecePrefab, Vector2.zero, piecePrefab.transform.rotation) as GameObject;
+        piece.name = piece.name.Replace("(Clone)", "");
+        piece.SetActive(false);
+
         GameObject tile = Instantiate(tilePrefab) as GameObject;
         tile.GetComponent<SpriteRenderer>().color = ColorForPiece(piece.GetComponent<Piece>());
-        piece.name = piece.name.Replace("(Clone)", "");
-        tile.name = tile.name.Replace("(Clone)", "");
+        tile.name = "Tile";
         tile.transform.parent = piece.transform;
         tile.transform.localPosition = new Vector3(0,0,2);
 
-        piece.SetActive(false);
+        GameObject icon = Instantiate(iconPrefab) as GameObject;
+        icon.name = "Icon";
+        icon.transform.parent = piece.transform;
+        icon.transform.localPosition = new Vector3(0.2f,-0.25f,-1);
+        icon.SetActive(false);
+
         return piece;
     }
 
     private GameObject RandomPiecePrefab() {
+        return outragePrefab;
+
         // TODO balance this
         if (UnityEngine.Random.value <= Mathf.Max(0.02f, -company.opinion.value/100)) {
             return outragePrefab;

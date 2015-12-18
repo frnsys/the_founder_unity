@@ -4287,9 +4287,10 @@ MonoBehaviour:
   hazardColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
   emptyColor: {r: 1, g: .960784316, b: .854901969, a: 1}
   activeColor: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
-  irradiatedColor: {r: 1, g: .338235319, b: .338235319, a: 1}
-  bonusColor: {r: .772058845, g: 1, b: .792494953, a: 1}
   tilePrefab: {fileID: 162278, guid: b1f16316d2b2c4f68883676a2709bab8, type: 2}
+  iconPrefab: {fileID: 137256, guid: 41d750d76c7d74a0d82b31f988125002, type: 2}
+  plusIcon: {fileID: 21300000, guid: 89ac6d1e3f6c7414db33ca31ed78600d, type: 3}
+  minusIcon: {fileID: 21300000, guid: aedbcaafde3c94774a82a3fc808afa45, type: 3}
   ui: {fileID: 1974290794}
   camera: {fileID: 1727583654}
   resultPrefab: {fileID: 168506, guid: 0b6d03b72394842568a5f6c16d12db33, type: 2}
