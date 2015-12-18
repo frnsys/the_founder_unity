@@ -711,11 +711,14 @@ MonoBehaviour:
   - {fileID: 179326, guid: 46aff48c109d14a62a4c7ca1c03ded03, type: 2}
   - {fileID: 179326, guid: df09de94de2344bd29205f7b783821a9, type: 2}
   outragePrefab: {fileID: 179326, guid: 94d5b30d567f24055b7a58f5be5276b6, type: 2}
+  happyPrefab: {fileID: 179326, guid: 21ab3ffde3cbc48a9a89085a438d6de1, type: 2}
   bugPrefab: {fileID: 179326, guid: 6fe7ceb2a350841a992a059be52efd09, type: 2}
   blockPrefab: {fileID: 179326, guid: 10353c7d5e3284638aeda3729c51b6d8, type: 2}
+  emptyPrefab: {fileID: 179326, guid: cb187147a6b3f4bdab8253c7ec65df1b, type: 2}
   productTypeColor: {r: .417874128, g: .78270185, b: .963235319, a: 1}
   influencerColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   hazardColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
+  emptyColor: {r: 1, g: .960784316, b: .854901969, a: 1}
   tilePrefab: {fileID: 162278, guid: b1f16316d2b2c4f68883676a2709bab8, type: 2}
   ui: {fileID: 566843849}
   turnsBar: {fileID: 1340821634}

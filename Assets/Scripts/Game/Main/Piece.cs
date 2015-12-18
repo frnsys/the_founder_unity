@@ -13,7 +13,8 @@ public class Piece : MonoBehaviour {
         Influencer,
         Bug,
         Outrage,
-        Happy
+        Happy,
+        Empty
     }
     public Type type;
 

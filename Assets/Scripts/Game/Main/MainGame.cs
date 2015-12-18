@@ -25,14 +25,16 @@ public class MainGame : MonoBehaviour {
     public GameObject[] productTypePrefabs;
     public GameObject[] influencerPrefabs;
     public GameObject outragePrefab;
-    public GameObject hap.rowPrefab;
+    public GameObject happyPrefab;
     public GameObject bugPrefab;
     public GameObject blockPrefab;
+    public GameObject emptyPrefab;
     public GameObject[,] grid;
 
     public Color productTypeColor;
     public Color influencerColor;
     public Color hazardColor;
+    public Color emptyColor;
     public GameObject tilePrefab;
 
     public GameObject ui;
@@ -95,9 +97,23 @@ public class MainGame : MonoBehaviour {
 
         for (int r=0; r<rows; r++) {
             for (int c=0; c<cols; c++) {
-                PlaceRandomPiece(r, c);
+                PlaceEmptyPiece(r, c);
             }
         }
+    }
+
+    private GameObject PlaceEmptyPiece(int r, int c) {
+        Vector2 pos = new Vector2(c * gridItemSize, r * gridItemSize);
+        GameObject piece = Instantiate(emptyPrefab, startPos + pos, Quaternion.identity) as GameObject;
+        GameObject tile = Instantiate(tilePrefab) as GameObject;
+        tile.GetComponent<SpriteRenderer>().color = emptyColor;
+        piece.name = piece.name.Replace("(Clone)", "");
+        tile.transform.parent = piece.transform;
+        tile.transform.localPosition = new Vector3(0,0,2);
+        piece.GetComponent<Piece>().Setup(emptyPrefab.GetComponent<Piece>().type, r, c);
+        piece.transform.parent = board.transform;
+        grid[r, c] = piece;
+        return piece;
     }
 
     private GameObject PlaceRandomPiece(int r, int c) {
