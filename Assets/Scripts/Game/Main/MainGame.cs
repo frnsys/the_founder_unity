@@ -217,10 +217,13 @@ public class MainGame : MonoBehaviour {
                         case Piece.Type.Outrage:
                             if (company.goodwill - outrageCost >= 0) {
                                 company.goodwill -= outrageCost;
-                                GameObject empty = CreatePiece(emptyPrefab);
-                                PlacePiece(empty, p.row, p.col);
+                                PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
                                 TakeTurn();
                             }
+                            break;
+                        case Piece.Type.Bug:
+                            PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
+                            TakeTurn();
                             break;
                     }
                     state = GameState.None;
