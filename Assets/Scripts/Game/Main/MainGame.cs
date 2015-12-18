@@ -8,14 +8,14 @@ public class MainGame : MonoBehaviour {
     static public event System.Action Done;
 
     public int totalTurns;
-    public int turns;
+    public int turnsLeft;
 
     private Company company;
     private int workUnit = 10; // TODO balance this
 
     private int rows;
     private int cols;
-    private float gridItemSize = 0.8f;
+    private float gridItemSize = 1f;
     private float animationDuration = 0.2f;
 
     public GameObject board;
@@ -27,6 +27,8 @@ public class MainGame : MonoBehaviour {
     public GameObject blockPrefab;
     public GameObject[,] grid;
 
+    public UIProgressBar turnsBar;
+
     private GameObject hitGo;
 
     // for testing
@@ -36,19 +38,22 @@ public class MainGame : MonoBehaviour {
 
     public void StartGame() {
         company = GameManager.Instance.playerCompany;
-        turns = 0;
         state = GameState.None;
 
         // At minimum, 2 turns
-        totalTurns = Math.Max(2, (int)Math.Floor(company.productivity/workUnit));
+        //totalTurns = Math.Max(2, (int)Math.Floor(company.productivity/workUnit));
+        // testing
+        totalTurns = 10;
+        turnsLeft = totalTurns;
 
         InitGrid();
+        UpdateUI();
     }
 
     private void InitGrid() {
         // TODO these depend on number of locations owned or something
-        rows = 4;
-        cols = 4;
+        rows = 5;
+        cols = 5;
         grid = new GameObject[rows, cols];
 
         Vector2 bottomRight = Camera.main.ViewportToWorldPoint(new Vector2(1,0));
@@ -116,7 +121,6 @@ public class MainGame : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) {
                 var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null) {
-                    Debug.Log("SELECTED!");
                     hitGo = hit.collider.gameObject;
                     state = GameState.Selecting;
                 }
@@ -124,7 +128,6 @@ public class MainGame : MonoBehaviour {
         } else if (state == GameState.Selecting) {
             // Drag
             if (Input.GetMouseButton(0)) {
-                Debug.Log("DRAGGING!");
                 var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null && hitGo != hit.collider.gameObject) {
                     if (!ValidNeighbors(hit.collider.gameObject.GetComponent<Piece>(),
@@ -148,7 +151,10 @@ public class MainGame : MonoBehaviour {
         hitGo2.transform.positionTo(animationDuration, hitGo.transform.position);
         yield return new WaitForSeconds(animationDuration);
 
+        // For now, assume a successful turn
+        turnsLeft--;
         state = GameState.None;
+        UpdateUI();
     }
 
     // Swap in the grid
@@ -161,6 +167,10 @@ public class MainGame : MonoBehaviour {
         grid[p2.x, p2.y] = tmp;
 
         p1.SwapWith(p2);
+    }
+
+    private void UpdateUI() {
+        turnsBar.value = (float)turnsLeft/totalTurns;
     }
 
 
