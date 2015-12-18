@@ -4,6 +4,7 @@ using System.Collections;
 public class Piece : MonoBehaviour {
     public int x;
     public int y;
+    public GameObject obj;
 
     public enum Type {
         ProductType,
@@ -29,7 +30,8 @@ public class Piece : MonoBehaviour {
     }
 
     void Update() {
-        UIAnimator.Rotate(gameObject);
+        if (obj != null)
+            UIAnimator.Rotate(obj);
     }
 
     public void SwapWith(Piece p) {

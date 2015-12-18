@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MainGame : MonoBehaviour {
+    // Much credit due to github.com/dgkanatsios/matchthreegame for guidance
     static public event System.Action Done;
 
     public int totalTurns;
@@ -15,6 +16,7 @@ public class MainGame : MonoBehaviour {
     private int rows;
     private int cols;
     private float gridItemSize = 0.8f;
+    private float animationDuration = 0.2f;
 
     public GameObject board;
     public GameObject[] productTypePrefabs;
@@ -25,6 +27,8 @@ public class MainGame : MonoBehaviour {
     public GameObject blockPrefab;
     public GameObject[,] grid;
 
+    private GameObject hitGo;
+
     // for testing
     void Start() {
         StartGame();
@@ -33,6 +37,7 @@ public class MainGame : MonoBehaviour {
     public void StartGame() {
         company = GameManager.Instance.playerCompany;
         turns = 0;
+        state = GameState.None;
 
         // At minimum, 2 turns
         totalTurns = Math.Max(2, (int)Math.Floor(company.productivity/workUnit));
@@ -96,5 +101,72 @@ public class MainGame : MonoBehaviour {
         } else {
             return productTypePrefabs[UnityEngine.Random.Range(0, productTypePrefabs.Length)];
         }
+    }
+
+    private enum GameState {
+        None,
+        Selecting,
+        Animating
+    }
+    private GameState state;
+
+    void Update() {
+        if (state == GameState.None) {
+            // Click/tap
+            if (Input.GetMouseButtonDown(0)) {
+                var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                if (hit.collider != null) {
+                    Debug.Log("SELECTED!");
+                    hitGo = hit.collider.gameObject;
+                    state = GameState.Selecting;
+                }
+            }
+        } else if (state == GameState.Selecting) {
+            // Drag
+            if (Input.GetMouseButton(0)) {
+                Debug.Log("DRAGGING!");
+                var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                if (hit.collider != null && hitGo != hit.collider.gameObject) {
+                    if (!ValidNeighbors(hit.collider.gameObject.GetComponent<Piece>(),
+                        hitGo.GetComponent<Piece>())) {
+                        state = GameState.None;
+                    } else {
+                        state = GameState.Animating;
+                        StartCoroutine(FindMatchesAndCollapse(hit));
+                    }
+                }
+            }
+        }
+    }
+
+    private IEnumerator FindMatchesAndCollapse(RaycastHit2D hit2) {
+        var hitGo2 = hit2.collider.gameObject;
+        Swap(hitGo, hitGo2);
+
+        // Swap in the rendered grid
+        hitGo.transform.positionTo(animationDuration, hitGo2.transform.position);
+        hitGo2.transform.positionTo(animationDuration, hitGo.transform.position);
+        yield return new WaitForSeconds(animationDuration);
+
+        state = GameState.None;
+    }
+
+    // Swap in the grid
+    private void Swap(GameObject g1, GameObject g2) {
+        Piece p1 = g1.GetComponent<Piece>();
+        Piece p2 = g2.GetComponent<Piece>();
+
+        GameObject tmp = grid[p1.x, p1.y];
+        grid[p1.x, p1.y] = grid[p2.x, p2.y];
+        grid[p2.x, p2.y] = tmp;
+
+        p1.SwapWith(p2);
+    }
+
+
+    // Check if two pieces are valid neighbors,
+    // i.e. not diagonal neighbors
+    private bool ValidNeighbors(Piece p1, Piece p2) {
+        return (p1.x == p2.x || p1.y == p2.y) && Math.Abs(p1.x - p2.x) <= 1 && Math.Abs(p1.y - p2.y) <= 1;
     }
 }
