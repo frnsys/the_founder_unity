@@ -27,7 +27,9 @@ public class MainGame : MonoBehaviour {
     public GameObject blockPrefab;
     public GameObject[,] grid;
 
+    public GameObject ui;
     public UIProgressBar turnsBar;
+    public GameObject resultPrefab;
 
     private GameObject hitGo;
 
@@ -48,6 +50,22 @@ public class MainGame : MonoBehaviour {
 
         InitGrid();
         UpdateUI();
+    }
+
+    // Show a float-up text bit at the specified position
+    private void ShowResultAt(Vector2 pos, string text) {
+        pos.x += gridItemSize/2;
+
+        // Get correct positioning for NGUI
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
+        screenPos.x -= Screen.width/2f;
+        screenPos.y -= Screen.height/2f;
+
+        GameObject go = NGUITools.AddChild(ui, resultPrefab);
+        go.GetComponent<UILabel>().text = text;
+        go.transform.localPosition = screenPos;
+        go.transform.localPositionTo(animationDuration, screenPos + new Vector3(0, 32f, 0));
+        TweenAlpha.Begin(go, 1f, 0f);
     }
 
     private void InitGrid() {
@@ -154,6 +172,8 @@ public class MainGame : MonoBehaviour {
         // For now, assume a successful turn
         turnsLeft--;
         state = GameState.None;
+
+        ShowResultAt(hitGo.transform.localPosition, "$24,000");
         UpdateUI();
     }
 

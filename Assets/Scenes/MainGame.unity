@@ -714,7 +714,9 @@ MonoBehaviour:
   happyPrefab: {fileID: 179326, guid: 21ab3ffde3cbc48a9a89085a438d6de1, type: 2}
   bugPrefab: {fileID: 179326, guid: 6fe7ceb2a350841a992a059be52efd09, type: 2}
   blockPrefab: {fileID: 179326, guid: 10353c7d5e3284638aeda3729c51b6d8, type: 2}
+  ui: {fileID: 566843849}
   turnsBar: {fileID: 1340821634}
+  resultPrefab: {fileID: 168506, guid: 0b6d03b72394842568a5f6c16d12db33, type: 2}
 --- !u!4 &1829518309
 Transform:
   m_ObjectHideFlags: 0
