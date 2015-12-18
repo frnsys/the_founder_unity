@@ -439,7 +439,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 31.96875
+  aspectRatio: 13.46875
 --- !u!4 &1340821633
 Transform:
   m_ObjectHideFlags: 0
@@ -719,6 +719,7 @@ MonoBehaviour:
   influencerColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   hazardColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
   emptyColor: {r: 1, g: .960784316, b: .854901969, a: 1}
+  activeColor: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
   tilePrefab: {fileID: 162278, guid: b1f16316d2b2c4f68883676a2709bab8, type: 2}
   ui: {fileID: 566843849}
   turnsBar: {fileID: 1340821634}

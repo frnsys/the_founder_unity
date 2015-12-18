@@ -35,6 +35,7 @@ public class MainGame : MonoBehaviour {
     public Color influencerColor;
     public Color hazardColor;
     public Color emptyColor;
+    public Color activeColor;
     public GameObject tilePrefab;
 
     public GameObject ui;
@@ -144,6 +145,7 @@ public class MainGame : MonoBehaviour {
                 break;
         }
         piece.name = piece.name.Replace("(Clone)", "");
+        tile.name = tile.name.Replace("(Clone)", "");
         tile.transform.parent = piece.transform;
         tile.transform.localPosition = new Vector3(0,0,2);
 
@@ -201,7 +203,9 @@ public class MainGame : MonoBehaviour {
                     Piece p = hitGo.GetComponent<Piece>();
                     if (p.type == Piece.Type.Empty) {
                         PlacePiece(nextPiece, p.row, p.col);
+                        ProcessMatchesAround(nextPiece);
                         CreateNextPiece();
+                        TakeTurn();
                     }
                     state = GameState.None;
                     return;
@@ -252,7 +256,7 @@ public class MainGame : MonoBehaviour {
             yield return new WaitForSeconds(animationDuration);
         } else {
             // Only successful moves cost a turn
-            turnsLeft--;
+            TakeTurn();
         }
 
         //while (totalMatches.Count() >= minMatches) {
@@ -334,6 +338,42 @@ public class MainGame : MonoBehaviour {
         turnsBar.value = (float)turnsLeft/totalTurns;
     }
 
+    private void TakeTurn() {
+        turnsLeft--;
+        UpdateUI();
+    }
+
+    private void ProcessMatchesAround(GameObject piece) {
+        List<GameObject> hMatches = HorizontalMatches(piece).ToList();
+        List<GameObject> vMatches = VerticalMatches(piece).ToList();
+
+        // TODO animate the merging
+
+        if (hMatches.Count > 0) {
+            // Collapse horizontal matches leftwards,
+            // so keep the first horizontal match (assuming sorted)
+            GameObject merged = hMatches[0];
+            merged.transform.Find("Tile").GetComponent<SpriteRenderer>().color = activeColor;
+            hMatches.RemoveAt(0);
+            foreach (GameObject p in hMatches) {
+                GameObject empty = CreatePiece(emptyPrefab);
+                PlacePiece(empty, p.GetComponent<Piece>().row, p.GetComponent<Piece>().col);
+            }
+        }
+
+        if (vMatches.Count > 0) {
+            // Collapse vertical matches downwards,
+            // so keep the first vertical match (assuming sorted)
+            GameObject merged = vMatches[0];
+            merged.transform.Find("Tile").GetComponent<SpriteRenderer>().color = activeColor;
+            vMatches.RemoveAt(0);
+            foreach (GameObject p in vMatches) {
+                GameObject empty = CreatePiece(emptyPrefab);
+                PlacePiece(empty, p.GetComponent<Piece>().row, p.GetComponent<Piece>().col);
+            }
+        }
+    }
+
 
     private Matches GetMatches(GameObject go) {
         Matches matches = new Matches();
@@ -381,7 +421,7 @@ public class MainGame : MonoBehaviour {
         if (matches.Count < minMatches) {
             matches.Clear();
         }
-        return matches.Distinct();
+        return matches.Distinct().OrderBy(m => m.GetComponent<Piece>().col);
     }
 
     private IEnumerable<GameObject> VerticalMatches(GameObject go) {
@@ -413,7 +453,7 @@ public class MainGame : MonoBehaviour {
         if (matches.Count < minMatches) {
             matches.Clear();
         }
-        return matches.Distinct();
+        return matches.Distinct().OrderBy(m => m.GetComponent<Piece>().row);
     }
 
 

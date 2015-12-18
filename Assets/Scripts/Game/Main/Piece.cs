@@ -5,6 +5,7 @@ public class Piece : MonoBehaviour {
     public int col;
     public int row;
     public GameObject obj;
+    public bool stacked = false;
 
     public enum Type {
         ProductType,
@@ -23,7 +24,7 @@ public class Piece : MonoBehaviour {
     }
 
     public bool Equal(Piece p) {
-        if (p != null && type == p.type && name == p.name) {
+        if (p != null && type == p.type && name == p.name && !stacked) {
             return true;
         }
         return false;
