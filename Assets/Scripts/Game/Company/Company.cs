@@ -119,6 +119,9 @@ public class Company : HasStats {
     public float productivity {
         get { return AggregateWorkerStat("Productivity"); }
     }
+    public float charisma {
+        get { return AggregateWorkerStat("Charisma"); }
+    }
 
     public float AggregateWorkerStat(string stat) {
         switch (stat) {

@@ -2640,7 +2640,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
-  mClipRange: {x: .625, y: 449.999969, z: 500.163452, w: 60}
+  mClipRange: {x: .625, y: 449.999969, z: 1792.33838, w: 60}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 2000
   mSortingOrder: 0
@@ -5089,7 +5089,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 291774580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 234.081726, y: -331.999969, z: 0}
+  m_LocalPosition: {x: 880.169189, y: -331.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1485549296}
@@ -18382,7 +18382,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 540, y: 960, z: 0}
+  m_Size: {x: 1832, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1105655471
 MonoBehaviour:
@@ -18414,13 +18414,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 540
+  mWidth: 1832
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .5625
+  aspectRatio: 1.9083333
 --- !u!1 &1105678051
 GameObject:
   m_ObjectHideFlags: 0
@@ -21775,7 +21775,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b41a3208b254527b6eb4aa2301bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pm: {fileID: 1180649766}
   uiCamera: {fileID: 1313245585}
   theMarket: {fileID: 1008160843}
   windowsPanel: {fileID: 1453662938}
@@ -21791,15 +21790,13 @@ MonoBehaviour:
     type: 2}
   specialProjectCompletedAlertPrefab: {fileID: 100024, guid: f2b23ea7a772949e38e00d27e3b78bfe,
     type: 2}
-  competitorProductCompletedAlertPrefab: {fileID: 100024, guid: 4b61f11665f7e44e8a32d5f966f685a3,
-    type: 2}
+  competitorProductCompletedAlertPrefab: {fileID: 0}
   hiringPrefab: {fileID: 100020, guid: 130742e47ccde4724b6f96656fe5c13a, type: 2}
   menu: {fileID: 1275237010}
   menuButton: {fileID: 291774580}
   statusBar: {fileID: 127671522}
   currentPopup: {fileID: 0}
   promoWindow: {fileID: 100020, guid: d08422f1fe108461693ee63f7c714cc0, type: 2}
-  hypeMinigame: {fileID: 100028, guid: c933916914578461c9bc394c5a8a88aa, type: 2}
 --- !u!81 &1278708171
 AudioListener:
   m_ObjectHideFlags: 0
@@ -26112,13 +26109,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .27930361, g: .926470578, b: .460675299, a: 1}
   mPivot: 4
-  mWidth: 500
+  mWidth: 1792
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.33333302
+  aspectRatio: 29.8666668
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 983db26cffafb47b1a272fb887a9aa38, type: 3}
   mFont: {fileID: 0}
@@ -29716,13 +29713,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .898039222, b: .529411793, a: 1}
   mPivot: 4
-  mWidth: 500
+  mWidth: 1792
   mHeight: 60
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 8.33333302
+  aspectRatio: 29.8666668
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 983db26cffafb47b1a272fb887a9aa38, type: 3}
   mFont: {fileID: 0}
@@ -34165,7 +34162,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2013164176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -258.081726, y: 415.999969, z: 0}
+  m_LocalPosition: {x: -904.169189, y: 415.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265441295}
@@ -34200,13 +34197,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 0
-  mWidth: 234
+  mWidth: 880
   mHeight: 896
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .261160702
+  aspectRatio: .982142866
 --- !u!114 &2013164179
 MonoBehaviour:
   m_ObjectHideFlags: 0
