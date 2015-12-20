@@ -51,7 +51,10 @@ public class MainGame : MonoBehaviour {
     public UIProgressBar turnsBar;
     public UILabel goodwillLabel;
     public GameObject nextAnchor;
+    public UIWidget productInfo;
     public UILabel productNameLabel;
+    public UILabel productDescLabel;
+    public GameObject[] productObjects;
 
     private GameObject hitGo;
     private Vector2 startPos;
@@ -99,7 +102,7 @@ public class MainGame : MonoBehaviour {
         go.GetComponent<UILabel>().text = text;
         go.transform.localPosition = screenPos;
         go.transform.localPositionTo(animationDuration, screenPos + new Vector3(0, 32f, 0));
-        TweenAlpha.Begin(go, 1f, 0f);
+        TweenAlpha.Begin(go, animationDuration, 0f);
     }
 
     private void InitGrid() {
@@ -415,8 +418,7 @@ public class MainGame : MonoBehaviour {
 
             ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
                     string.Format("{0:C0}", revenue));
-            productNameLabel.text = product.name;
-            productNameLabel.gameObject.SetActive(true);
+            StartCoroutine(ShowProductInfo(product));
 
             GameObject e1 = CreatePiece(emptyPrefab);
             GameObject e2 = CreatePiece(emptyPrefab);
@@ -427,6 +429,23 @@ public class MainGame : MonoBehaviour {
         }
 
         state = GameState.None;
+    }
+
+    // Show product info, fade out after 5s
+    private IEnumerator ShowProductInfo(Product product) {
+        productInfo.alpha = 1f;
+        productInfo.gameObject.SetActive(true);
+
+        productDescLabel.text = product.description;
+        productNameLabel.text = product.name;
+        for (int i=0; i<product.meshes.Length; i++) {
+            productObjects[i].GetComponent<MeshFilter>().mesh = product.meshes[i];
+        }
+
+        yield return new WaitForSeconds(5f);
+        TweenAlpha.Begin(productInfo.gameObject, animationDuration, 0f);
+        yield return new WaitForSeconds(animationDuration);
+        productInfo.gameObject.SetActive(false);
     }
 
     private IEnumerable<GameObject> HorizontalMatches(GameObject go) {
