@@ -1814,45 +1814,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 742852285}
   m_GameObject: {fileID: 84964790}
   m_Mesh: {fileID: 4300056, guid: e9796bf3602d74003b68d472c9f1a480, type: 3}
---- !u!1 &86153027
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 86153029}
-  - 114: {fileID: 86153028}
-  m_Layer: 0
-  m_Name: Benchy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &86153028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 86153027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 2133502448, guid: ac3087c708d1a4f598ccfe6b8475f4bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &86153029
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 86153027}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!1001 &86446320
 Prefab:
   m_ObjectHideFlags: 0
@@ -4286,7 +4247,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
 --- !u!1 &234041205
 GameObject:
   m_ObjectHideFlags: 0
@@ -11287,7 +11248,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3008
+  startingRenderQueue: 3002
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -16272,7 +16233,7 @@ Transform:
   - {fileID: 280372017}
   - {fileID: 949186306}
   m_Father: {fileID: 1485549296}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!114 &965194602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17369,7 +17330,7 @@ Transform:
   - {fileID: 1283540063}
   - {fileID: 1501473909}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!114 &1008160843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25853,7 +25814,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1858312109}
   - {fileID: 2034827759}
   - {fileID: 965194601}
   m_Father: {fileID: 1278708169}
@@ -30071,7 +30031,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
 --- !u!1 &1730542960
 GameObject:
   m_ObjectHideFlags: 0
@@ -31948,33 +31908,6 @@ Transform:
   - {fileID: 387211926}
   m_Father: {fileID: 612812506}
   m_RootOrder: 1
---- !u!1 &1849737834
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1849737835}
-  m_Layer: 0
-  m_Name: for border measurement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1849737835
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1849737834}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.19000006, y: 14, z: 22.1200008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
 --- !u!1 &1855051545
 GameObject:
   m_ObjectHideFlags: 0
@@ -32033,79 +31966,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 742852285}
   m_GameObject: {fileID: 1855051545}
   m_Mesh: {fileID: 4300140, guid: e9796bf3602d74003b68d472c9f1a480, type: 3}
---- !u!1 &1858312108
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1858312109}
-  - 114: {fileID: 1858312110}
-  m_Layer: 8
-  m_Name: Employee HUDs
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1858312109
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858312108}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1485549296}
-  m_RootOrder: 0
---- !u!114 &1858312110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858312108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae942c9068183dc40a9d01f648273726, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
-  rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
-  bottomAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 0
-  topAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 0
-  updateAnchors: 1
-  showInPanelTool: 1
-  generateNormals: 0
-  widgetsAreStatic: 0
-  cullWhileDragging: 1
-  alwaysOnScreen: 0
-  anchorOffset: 0
-  softBorderPadding: 1
-  renderQueue: 0
-  startingRenderQueue: 3002
-  mClipTexture: {fileID: 0}
-  mAlpha: 1
-  mClipping: 0
-  mClipRange: {x: 0, y: 0, z: 300, w: 200}
-  mClipSoftness: {x: 4, y: 4}
-  mDepth: 0
-  mSortingOrder: 0
-  mClipOffset: {x: 0, y: 0}
 --- !u!1 &1862344902
 GameObject:
   m_ObjectHideFlags: 0
@@ -35349,7 +35209,7 @@ Transform:
   - {fileID: 1883992431}
   - {fileID: 122276693}
   m_Father: {fileID: 1485549296}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &2034827760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36090,10 +35950,8 @@ MonoBehaviour:
   officeCameraController: {fileID: 1105655469}
   officeUpgradeTriggered: 0
   officeArea: {fileID: 701778264}
-  employeeHUDs: {fileID: 1858312108}
   employeeGroup: {fileID: 264071009}
   employeePrefab: {fileID: 100002, guid: 398c90e07e0974daaad4aa4dc8657648, type: 2}
-  employeeHUDPrefab: {fileID: 100000, guid: 6a78d8fca06504127bf3a9cee42278f1, type: 2}
   employeePathColors:
   - {fileID: 2100000, guid: cc9846b9784c943fb83c0ae52a4c2cd9, type: 2}
   - {fileID: 2100000, guid: d30367aba96814985ab31628e464be97, type: 2}

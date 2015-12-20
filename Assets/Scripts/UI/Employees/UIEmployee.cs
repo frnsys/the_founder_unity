@@ -2,16 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class UIEmployee : MonoBehaviour {
-    public Transform HUDtarget;
-
-    [HideInInspector]
-    public GameObject HUDgroup;
-
     [HideInInspector]
     public AWorker worker;
-
-    [HideInInspector]
-    public UILabor laborObj;
 
     [SerializeField, HideInInspector]
     private State state = State.Wandering;
@@ -65,10 +57,6 @@ public class UIEmployee : MonoBehaviour {
     void OnEnable() {
         // On enable, reset the target.
         target = RandomTarget();
-    }
-
-    void OnDestroy() {
-        Destroy(HUDgroup);
     }
 
     // Temporary, to get employees moving about the office.
