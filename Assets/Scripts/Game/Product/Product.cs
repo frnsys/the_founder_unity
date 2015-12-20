@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Product : HasStats {
     public string description {
         get {
-            return recipe.description != null ? recipe.description : "This combination didn't make any sense. This product is incoherent!";
+            return recipe.description != "" ? recipe.description : "This combination didn't make any sense. This product is incoherent!";
         }
     }
 

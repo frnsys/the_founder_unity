@@ -27,9 +27,8 @@ public class UIManager : Singleton<UIManager> {
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
     public GameObject annualReportPrefab;
-    public GameObject productCompletedAlertPrefab;
+    public GameObject productDiscoveredAlertPrefab;
     public GameObject specialProjectCompletedAlertPrefab;
-    public GameObject competitorProductCompletedAlertPrefab;
     public GameObject hiringPrefab;
 
     public UIMenu menu;
@@ -50,6 +49,7 @@ public class UIManager : Singleton<UIManager> {
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
         MainGame.Done += OnGridGameDone;
+        Company.DiscoveredProduct += OnDiscoveredProduct;
         //Company.Paid += OnPaid;
     }
 
@@ -60,7 +60,15 @@ public class UIManager : Singleton<UIManager> {
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
         MainGame.Done -= OnGridGameDone;
+        Company.DiscoveredProduct -= OnDiscoveredProduct;
         //Company.Paid -= OnPaid;
+    }
+
+    void OnDiscoveredProduct(Company c, Product p) {
+        if (c == GameManager.Instance.playerCompany) {
+            GameObject popup = NGUITools.AddChild(alertsPanel, productDiscoveredAlertPrefab);
+            popup.GetComponent<UIProductDiscoveredAlert>().product = p;
+        }
     }
 
     // Show an event notification.

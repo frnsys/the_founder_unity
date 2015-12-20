@@ -52,8 +52,8 @@ public class Company : HasStats {
         goodwill = 100;
 
         activeEffects = new List<EffectSet>();
-
         companies = new List<MiniCompany>();
+        discoveredProducts = new List<ProductRecipe>();
 
         return this;
     }
@@ -234,7 +234,9 @@ public class Company : HasStats {
     // ===============================================
 
     public int launchedProducts;
+    public List<ProductRecipe> discoveredProducts;
     static public event System.Action<Company> LaunchedProduct;
+    static public event System.Action<Company, Product> DiscoveredProduct;
     public Product LaunchProduct(List<ProductType> pts, float multiplier) {
         Product product = ScriptableObject.CreateInstance<Product>();
         float revenue = product.Create(pts, creativity, charisma, cleverness, this);
@@ -255,6 +257,11 @@ public class Company : HasStats {
         product.revenue = revenue;
 
         UpdateProductSynergies();
+
+        if (!discoveredProducts.Contains(product.Recipe)) {
+            discoveredProducts.Add(product.Recipe);
+            DiscoveredProduct(this, product);
+        }
 
         if (LaunchedProduct != null)
             LaunchedProduct(this);

@@ -3,12 +3,10 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UIProductCompletedAlert : UIEffectAlert {
+public class UIProductDiscoveredAlert : UIEffectAlert {
     public UILabel nameLabel;
     public UILabel aspectsLabel;
     public GameObject[] productObjects;
-
-    public List<UILabel> featureLabels;
 
     public Product product {
         set {
@@ -18,10 +16,6 @@ public class UIProductCompletedAlert : UIEffectAlert {
             for (int i=0; i<value.meshes.Length; i++) {
                 productObjects[i].GetComponent<MeshFilter>().mesh = value.meshes[i];
             }
-
-            featureLabels[0].text = string.Format("{0:0}", value.design.value);
-            featureLabels[1].text = string.Format("{0:0}", value.engineering.value);
-            featureLabels[2].text = string.Format("{0:0}", value.marketing.value);
 
             aspectsLabel.text = string.Join(" + ", value.productTypes.Select(pt => pt.name).ToArray());
             Extend(bodyLabel.height);
