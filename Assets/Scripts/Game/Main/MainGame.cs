@@ -50,7 +50,8 @@ public class MainGame : MonoBehaviour {
     public GameObject resultPrefab;
     public UIProgressBar turnsBar;
     public UILabel goodwillLabel;
-    public GameObject nextObj;
+    public GameObject nextAnchor;
+    public UILabel productNameLabel;
 
     private GameObject hitGo;
     private Vector2 startPos;
@@ -73,7 +74,7 @@ public class MainGame : MonoBehaviour {
         // At minimum, 10 turns
         //totalTurns = Math.Max(10, (int)Math.Floor(company.productivity/workUnit));
         // testing
-        totalTurns = 10;
+        totalTurns = 30;
         turnsLeft = totalTurns;
 
         CreateNextPiece();
@@ -246,7 +247,7 @@ public class MainGame : MonoBehaviour {
         nextPiece.SetActive(true);
 
         // Get top-left coordinate of the next piece anchor
-        Vector3 pos = UICamera.mainCamera.WorldToViewportPoint(nextObj.GetComponent<UIWidget>().worldCorners[1]);
+        Vector3 pos = UICamera.mainCamera.WorldToViewportPoint(nextAnchor.GetComponent<UIWidget>().worldCorners[1]);
         pos = camera.ViewportToWorldPoint(pos);
         nextPiece.transform.position = pos + new Vector3(gridItemSize/2,-gridItemSize/2,1);
     }
@@ -361,7 +362,7 @@ public class MainGame : MonoBehaviour {
     }
 
     private GameObject MergePieces(List<GameObject> pieces) {
-        // Assumes pieces are sorted
+        // Assumes newest piece is first
         GameObject merged = pieces[0];
         pieces.RemoveAt(0);
         foreach (GameObject p in pieces) {
@@ -409,10 +410,13 @@ public class MainGame : MonoBehaviour {
             // TODO a nice little flash of light or something
             ProductType pt1 = ProductType.Load(p1.name);
             ProductType pt2 = ProductType.Load(p2.name);
-            float revenue = company.LaunchProduct(new List<ProductType> {pt1, pt2}, 1+bonusGrid[p1.row, p1.col]);
+            Product product = company.LaunchProduct(new List<ProductType> {pt1, pt2}, 1+bonusGrid[p1.row, p1.col]);
+            float revenue = product.revenue;
 
             ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
                     string.Format("{0:C0}", revenue));
+            productNameLabel.text = product.name;
+            productNameLabel.gameObject.SetActive(true);
 
             GameObject e1 = CreatePiece(emptyPrefab);
             GameObject e2 = CreatePiece(emptyPrefab);
@@ -428,7 +432,6 @@ public class MainGame : MonoBehaviour {
     private IEnumerable<GameObject> HorizontalMatches(GameObject go) {
         List<GameObject> matches = new List<GameObject>();
         Piece p = go.GetComponent<Piece>();
-        matches.Add(go);
 
         if (p.col > 0) {
             for (int col=p.col-1; col>=0; col--) {
@@ -451,16 +454,19 @@ public class MainGame : MonoBehaviour {
             }
         }
 
+        // Add last-placed item to beginning of list, so it's easily accessible
+        matches.Insert(0, go);
+
         if (matches.Count < minMatches) {
             matches.Clear();
         }
-        return matches.Distinct().OrderBy(m => m.GetComponent<Piece>().col);
+
+        return matches.Distinct();
     }
 
     private IEnumerable<GameObject> VerticalMatches(GameObject go) {
         List<GameObject> matches = new List<GameObject>();
         Piece p = go.GetComponent<Piece>();
-        matches.Add(go);
 
         if (p.row > 0) {
             for (int row=p.row-1; row>=0; row--) {
@@ -483,10 +489,14 @@ public class MainGame : MonoBehaviour {
             }
         }
 
+        // Add last-placed item to beginning of list, so it's easily accessible
+        matches.Insert(0, go);
+
         if (matches.Count < minMatches) {
             matches.Clear();
         }
-        return matches.Distinct().OrderBy(m => m.GetComponent<Piece>().row);
+
+        return matches.Distinct();
     }
 
 

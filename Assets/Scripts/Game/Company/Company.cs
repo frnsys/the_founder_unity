@@ -235,7 +235,7 @@ public class Company : HasStats {
 
     public int launchedProducts;
     static public event System.Action<Company> LaunchedProduct;
-    public float LaunchProduct(List<ProductType> pts, float multiplier) {
+    public Product LaunchProduct(List<ProductType> pts, float multiplier) {
         Product product = ScriptableObject.CreateInstance<Product>();
         float revenue = product.Create(pts, creativity, charisma, cleverness, this);
         revenue *= multiplier;
@@ -252,6 +252,7 @@ public class Company : HasStats {
         cash.baseValue += revenue;
         annualRevenue += revenue;
         lifetimeRevenue += revenue;
+        product.revenue = revenue;
 
         UpdateProductSynergies();
 
@@ -259,7 +260,7 @@ public class Company : HasStats {
             LaunchedProduct(this);
 
         launchedProducts++;
-        return revenue;
+        return product;
     }
 
     static public event System.Action Synergy;

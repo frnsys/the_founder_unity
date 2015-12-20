@@ -25,6 +25,7 @@ public class Product : HasStats {
     public bool synergy;
     public float marketShare;
     public float difficulty;
+    public float revenue;
 
     public Mesh[] meshes {
         get {
