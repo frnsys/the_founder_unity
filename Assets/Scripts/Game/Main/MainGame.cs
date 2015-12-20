@@ -20,9 +20,9 @@ public class MainGame : MonoBehaviour {
 
     private int rows;
     private int cols;
-    private float gridItemSize = 1f;
-    private float animationDuration = 0.2f;
-    private float moveAnimationDuration = 0.05f;
+    public static float gridItemSize = 1f;
+    public static float animationDuration = 0.2f;
+    public static float moveAnimationDuration = 0.05f;
 
     public GameObject board;
     public GameObject[] productTypePrefabs;
@@ -45,16 +45,8 @@ public class MainGame : MonoBehaviour {
     public Sprite plusIcon;
     public Sprite minusIcon;
 
-    public GameObject ui;
     public Camera camera;
-    public GameObject resultPrefab;
-    public UIProgressBar turnsBar;
-    public UILabel goodwillLabel;
-    public GameObject nextAnchor;
-    public UIWidget productInfo;
-    public UILabel productNameLabel;
-    public UILabel productDescLabel;
-    public GameObject[] productObjects;
+    public MainGameUI ui;
 
     private GameObject hitGo;
     private Vector2 startPos;
@@ -71,39 +63,26 @@ public class MainGame : MonoBehaviour {
         company = GameManager.Instance.playerCompany;
         state = GameState.None;
 
-        ui.SetActive(true);
-        camera.gameObject.SetActive(true);
-
         // At minimum, 10 turns
         //totalTurns = Math.Max(10, (int)Math.Floor(company.productivity/workUnit));
         // testing
         totalTurns = 30;
         turnsLeft = totalTurns;
 
-        CreateNextPiece();
+        ui.gameObject.SetActive(true);
+        camera.gameObject.SetActive(true);
+        ui.Setup(company, camera, totalTurns);
 
+        CreateNextPiece();
         InitGrid();
         UpdateUI();
     }
 
     void OnDisable() {
-        ui.SetActive(false);
+        ui.gameObject.SetActive(false);
         camera.gameObject.SetActive(false);
     }
 
-    // Show a float-up text bit at the specified position
-    private void ShowResultAt(Vector2 pos, string text) {
-        // Get correct positioning for NGUI
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(pos);
-        screenPos.x -= Screen.width/2f;
-        screenPos.y -= Screen.height/2f;
-
-        GameObject go = NGUITools.AddChild(ui, resultPrefab);
-        go.GetComponent<UILabel>().text = text;
-        go.transform.localPosition = screenPos;
-        go.transform.localPositionTo(animationDuration, screenPos + new Vector3(0, 32f, 0));
-        TweenAlpha.Begin(go, animationDuration, 0f);
-    }
 
     private void InitGrid() {
         // TODO these depend on number of locations owned or something
@@ -249,10 +228,7 @@ public class MainGame : MonoBehaviour {
         nextPiece = CreatePiece(RandomPiecePrefab());
         nextPiece.SetActive(true);
 
-        // Get top-left coordinate of the next piece anchor
-        Vector3 pos = UICamera.mainCamera.WorldToViewportPoint(nextAnchor.GetComponent<UIWidget>().worldCorners[1]);
-        pos = camera.ViewportToWorldPoint(pos);
-        nextPiece.transform.position = pos + new Vector3(gridItemSize/2,-gridItemSize/2,1);
+        ui.ShowNextPiece(nextPiece);
     }
 
     void Update() {
@@ -316,8 +292,7 @@ public class MainGame : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        turnsBar.value = (float)turnsLeft/totalTurns;
-        goodwillLabel.text = string.Format("{0} goodwill", company.goodwill);
+        ui.UpdateUI(turnsLeft, totalTurns);
     }
 
     private void TakeTurn() {
@@ -344,7 +319,7 @@ public class MainGame : MonoBehaviour {
                 break;
         }
         company.goodwill += amount;
-        ShowResultAt(pos, string.Format("+{0}", amount));
+        ui.ShowResultAt(pos, string.Format("+{0}", amount));
     }
 
     private void ProcessMatchesAround(GameObject piece) {
@@ -416,9 +391,9 @@ public class MainGame : MonoBehaviour {
             Product product = company.LaunchProduct(new List<ProductType> {pt1, pt2}, 1+bonusGrid[p1.row, p1.col]);
             float revenue = product.revenue;
 
-            ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
+            ui.ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
                     string.Format("{0:C0}", revenue));
-            StartCoroutine(ShowProductInfo(product));
+            ui.ShowProductInfo(product);
 
             GameObject e1 = CreatePiece(emptyPrefab);
             GameObject e2 = CreatePiece(emptyPrefab);
@@ -431,22 +406,6 @@ public class MainGame : MonoBehaviour {
         state = GameState.None;
     }
 
-    // Show product info, fade out after 5s
-    private IEnumerator ShowProductInfo(Product product) {
-        productInfo.alpha = 1f;
-        productInfo.gameObject.SetActive(true);
-
-        productDescLabel.text = product.description;
-        productNameLabel.text = product.name;
-        for (int i=0; i<product.meshes.Length; i++) {
-            productObjects[i].GetComponent<MeshFilter>().mesh = product.meshes[i];
-        }
-
-        yield return new WaitForSeconds(5f);
-        TweenAlpha.Begin(productInfo.gameObject, animationDuration, 0f);
-        yield return new WaitForSeconds(animationDuration);
-        productInfo.gameObject.SetActive(false);
-    }
 
     private IEnumerable<GameObject> HorizontalMatches(GameObject go) {
         List<GameObject> matches = new List<GameObject>();
