@@ -55,7 +55,7 @@ MonoBehaviour:
     paddingTop: 6
     paddingBottom: 6
   - name: breakthrough
-    x: 238
+    x: 186
     y: 431
     width: 16
     height: 16
@@ -81,7 +81,7 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 0
   - name: charisma
-    x: 221
+    x: 169
     y: 431
     width: 16
     height: 16
@@ -146,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: datacenter
-    x: 128
-    y: 385
+    x: 237
+    y: 427
     width: 12
     height: 20
     borderLeft: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
     paddingBottom: 2
   - name: design
     x: 128
-    y: 423
+    y: 402
     width: 18
     height: 24
     borderLeft: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     paddingBottom: 1
   - name: insight
     x: 147
-    y: 423
+    y: 402
     width: 18
     height: 24
     borderLeft: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: interact
-    x: 203
+    x: 151
     y: 427
     width: 17
     height: 20
@@ -238,7 +238,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: lab
     x: 186
-    y: 423
+    y: 402
     width: 16
     height: 24
     borderLeft: 0
@@ -275,6 +275,19 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: megaphone
+    x: 128
+    y: 427
+    width: 22
+    height: 20
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 2
+    paddingBottom: 2
   - name: outrage
     x: 180
     y: 488
@@ -289,8 +302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: productivity
-    x: 128
-    y: 406
+    x: 203
+    y: 431
     width: 16
     height: 16
     borderLeft: 0
@@ -302,8 +315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: star
-    x: 145
-    y: 406
+    x: 220
+    y: 431
     width: 16
     height: 16
     borderLeft: 0
@@ -329,7 +342,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: studio
     x: 166
-    y: 425
+    y: 404
     width: 19
     height: 22
     borderLeft: 0

@@ -7,6 +7,8 @@ public class MainGameUI : MonoBehaviour {
     public GameObject resultPrefab;
     public UIProgressBar turnsBar;
     public UILabel goodwillLabel;
+    public UILabel statsLabel;
+
     public GameObject nextAnchor;
     public UIWidget productInfo;
     public UILabel productNameLabel;
@@ -19,6 +21,8 @@ public class MainGameUI : MonoBehaviour {
     public void Setup(Company c, Camera cam, int turns) {
         company = c;
         camera = cam;
+        statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}", c.charisma, c.cleverness, c.creativity);
+
         UpdateUI(turns, turns);
     }
 
@@ -45,7 +49,7 @@ public class MainGameUI : MonoBehaviour {
 
     public void UpdateUI(int turnsLeft, int totalTurns) {
         turnsBar.value = (float)turnsLeft/totalTurns;
-        goodwillLabel.text = string.Format("{0} goodwill", company.goodwill);
+        goodwillLabel.text = string.Format(":GOODWILL: {0} goodwill", company.goodwill);
     }
 
     public void ShowNextPiece(GameObject nextPiece) {

@@ -9513,6 +9513,7 @@ Transform:
   - {fileID: 1044460740}
   - {fileID: 1946347164}
   - {fileID: 889235516}
+  - {fileID: 916032053}
   m_Father: {fileID: 1974290795}
   m_RootOrder: 0
 --- !u!114 &557697478
@@ -15148,6 +15149,99 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2072226665}
   m_RootOrder: 1
+--- !u!1 &916032052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 916032053}
+  - 114: {fileID: 916032054}
+  m_Layer: 8
+  m_Name: Stats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &916032053
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 916032052}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 122.749908, y: .000152587891, z: 0}
+  m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
+  m_Children: []
+  m_Father: {fileID: 557697477}
+  m_RootOrder: 3
+--- !u!114 &916032054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 916032052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 557697477}
+    relative: .5
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 557697477}
+    relative: 1
+    absolute: -24
+  bottomAnchor:
+    target: {fileID: 557697477}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 557697477}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 246
+  mHeight: 64
+  mDepth: 4
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 3.84375
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 12800000, guid: c3cad337dd5644a85acc0a919212ddb0, type: 3}
+  mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
+  mText: stats
+  mFontSize: 24
+  mFontStyle: 1
+  mAlignment: 3
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mUseFloatSpacing: 0
+  mFloatSpacingX: 0
+  mFloatSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
 --- !u!1 &917033868
 GameObject:
   m_ObjectHideFlags: 0
@@ -17739,20 +17833,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 557697477}
-    relative: .5
-    absolute: 0
-  rightAnchor:
-    target: {fileID: 557697477}
-    relative: 1
-    absolute: -24
-  bottomAnchor:
-    target: {fileID: 557697477}
+    target: {fileID: 916032053}
     relative: 0
     absolute: 0
-  topAnchor:
-    target: {fileID: 557697477}
+  rightAnchor:
+    target: {fileID: 916032053}
     relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 916032053}
+    relative: 0
+    absolute: -32
+  topAnchor:
+    target: {fileID: 916032053}
+    relative: 0
     absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
@@ -17766,7 +17860,7 @@ MonoBehaviour:
   aspectRatio: 3.84375
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
-  mFont: {fileID: 0}
+  mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
   mText: 0 goodwill
   mFontSize: 24
   mFontStyle: 1
@@ -34849,6 +34943,7 @@ MonoBehaviour:
   resultPrefab: {fileID: 168506, guid: 0b6d03b72394842568a5f6c16d12db33, type: 2}
   turnsBar: {fileID: 1174799607}
   goodwillLabel: {fileID: 1044460741}
+  statsLabel: {fileID: 916032054}
   nextAnchor: {fileID: 889235515}
   productInfo: {fileID: 1675768667}
   productNameLabel: {fileID: 1724465103}

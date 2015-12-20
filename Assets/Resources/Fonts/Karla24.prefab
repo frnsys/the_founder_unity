@@ -1021,7 +1021,7 @@ MonoBehaviour:
   - sequence: ':ENGINEERING:'
     spriteName: engineering
   - sequence: ':MARKETING:'
-    spriteName: marketing
+    spriteName: megaphone
   - sequence: ':INTERACT:'
     spriteName: interact
   - sequence: ':CHARISMA:'
@@ -1042,6 +1042,8 @@ MonoBehaviour:
     spriteName: coffee
   - sequence: ':INSIGHT:'
     spriteName: insight
+  - sequence: ':GOODWILL:'
+    spriteName: marketing
   mDynamicFont: {fileID: 0}
   mDynamicFontSize: 16
   mDynamicFontStyle: 0
