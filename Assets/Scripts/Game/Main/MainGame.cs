@@ -255,6 +255,7 @@ public class MainGame : MonoBehaviour {
                         case Piece.Type.Outrage:
                             if (company.goodwill - outrageCost >= 0) {
                                 company.goodwill -= outrageCost;
+                                SetBonusAround(p.row, p.col, -outragePenalty);
                                 PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
                                 TakeTurn();
                             }
