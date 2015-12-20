@@ -1,17 +1,9 @@
-/*
- * New Product Flow
- * ================
- *
- * Select one or more Product Types
- * to start development of a new product.
- */
-
 using UnityEngine;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-public class UINewProductFlow : MonoBehaviour {
+public class UIProductTypes : MonoBehaviour {
     private GameManager gm;
 
     public GameObject productTypePrefab;
