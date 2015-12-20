@@ -17,6 +17,7 @@ public class MainGame : MonoBehaviour {
     private int minMatches = 3;
     private float outragePenalty = -0.25f;
     private float happyBonus = 0.1f;
+    private int locationsPerRow = 5;
 
     private int rows;
     private int cols;
@@ -63,10 +64,8 @@ public class MainGame : MonoBehaviour {
         company = GameManager.Instance.playerCompany;
         state = GameState.None;
 
-        // At minimum, 10 turns
-        //totalTurns = Math.Max(10, (int)Math.Floor(company.productivity/workUnit));
-        // testing
-        totalTurns = 30;
+        // At minimum, 20 turns
+        totalTurns = Math.Max(20, (int)Math.Floor(company.productivity/workUnit));
         turnsLeft = totalTurns;
 
         ui.gameObject.SetActive(true);
@@ -85,8 +84,7 @@ public class MainGame : MonoBehaviour {
 
 
     private void InitGrid() {
-        // TODO these depend on number of locations owned or something
-        rows = 5;
+        rows = 5 + (int)Math.Floor((float)company.locations.Count/locationsPerRow);
         cols = 5;
         grid = new GameObject[rows, cols];
         bonusGrid = new float[rows, cols];
