@@ -18,6 +18,7 @@ public class UIManager : Singleton<UIManager> {
     public TheMarket theMarket;
     public GameObject windowsPanel;
     public GameObject alertsPanel;
+    public GameObject interlude;
 
     public GameObject eventPersonalPrefab;
     public GameObject eventEmailPrefab;
@@ -32,14 +33,12 @@ public class UIManager : Singleton<UIManager> {
     public GameObject hiringPrefab;
 
     public UIMenu menu;
-    public GameObject menuButton;
     public void OpenMenu() {
         menu.gameObject.SetActive(true);
     }
     public void CloseMenu() {
         menu.gameObject.SetActive(false);
     }
-    public UIStatusBar statusBar;
 
     void OnEnable() {
         gm = GameManager.Instance;
@@ -207,12 +206,14 @@ public class UIManager : Singleton<UIManager> {
         officeCamera.gameObject.SetActive(false);
         mainCamera.gameObject.SetActive(false);
         gridGame.gameObject.SetActive(true);
+        interlude.SetActive(false);
     }
 
     void OnGridGameDone() {
         officeCamera.gameObject.SetActive(true);
         mainCamera.gameObject.SetActive(true);
         gridGame.gameObject.SetActive(false);
+        interlude.SetActive(true);
     }
 }
 

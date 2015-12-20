@@ -72,6 +72,9 @@ public class MainGame : MonoBehaviour {
         camera.gameObject.SetActive(true);
         ui.Setup(company, camera, totalTurns);
 
+        if (nextPiece != null)
+            Destroy(nextPiece.gameObject);
+
         CreateNextPiece();
         InitGrid();
         UpdateUI();
@@ -84,6 +87,11 @@ public class MainGame : MonoBehaviour {
 
 
     private void InitGrid() {
+        // Clear the grid
+        foreach (Transform child in transform) {
+             Destroy(child.gameObject);
+        }
+
         rows = 5 + (int)Math.Floor((float)company.locations.Count/locationsPerRow);
         cols = 5;
         grid = new GameObject[rows, cols];
@@ -225,7 +233,6 @@ public class MainGame : MonoBehaviour {
     private void CreateNextPiece() {
         nextPiece = CreatePiece(RandomPiecePrefab());
         nextPiece.SetActive(true);
-
         ui.ShowNextPiece(nextPiece);
     }
 

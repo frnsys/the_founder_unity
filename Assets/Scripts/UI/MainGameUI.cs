@@ -8,6 +8,13 @@ public class MainGameUI : MonoBehaviour {
     public UIProgressBar turnsBar;
     public UILabel goodwillLabel;
     public UILabel statsLabel;
+    public UILabel cashLabel;
+    public UILabel yearLabel;
+
+    public Color posCashColor;
+    public Color posCashShadow;
+    public Color negCashColor;
+    public Color negCashShadow;
 
     public GameObject nextAnchor;
     public UIWidget productInfo;
@@ -22,7 +29,7 @@ public class MainGameUI : MonoBehaviour {
         company = c;
         camera = cam;
         statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}", c.charisma, c.cleverness, c.creativity);
-
+        yearLabel.text = GameManager.Instance.year.ToString();
         UpdateUI(turns, turns);
     }
 
@@ -50,6 +57,16 @@ public class MainGameUI : MonoBehaviour {
     public void UpdateUI(int turnsLeft, int totalTurns) {
         turnsBar.value = (float)turnsLeft/totalTurns;
         goodwillLabel.text = string.Format(":GOODWILL: {0} goodwill", company.goodwill);
+
+        float cash = company.cash.value;
+        if (cash <= 0) {
+            cashLabel.color = negCashColor;
+            cashLabel.effectColor = negCashShadow;
+        } else {
+            cashLabel.color = posCashColor;
+            cashLabel.effectColor = posCashShadow;
+        }
+        cashLabel.text = string.Format("{0:C0}", cash);
     }
 
     public void ShowNextPiece(GameObject nextPiece) {
