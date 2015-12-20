@@ -54,6 +54,7 @@ public class Company : HasStats {
         activeEffects = new List<EffectSet>();
         companies = new List<MiniCompany>();
         discoveredProducts = new List<ProductRecipe>();
+        productTypes = new List<ProductType>();
 
         return this;
     }
@@ -235,6 +236,7 @@ public class Company : HasStats {
 
     public int launchedProducts;
     public List<ProductRecipe> discoveredProducts;
+    public List<ProductType> productTypes;
     static public event System.Action<Company> LaunchedProduct;
     static public event System.Action<Company, Product> DiscoveredProduct;
     public Product LaunchProduct(List<ProductType> pts, float multiplier) {
@@ -268,6 +270,14 @@ public class Company : HasStats {
 
         launchedProducts++;
         return product;
+    }
+
+    public bool BuyProductType(ProductType pt) {
+        if (Pay(pt.cost)) {
+            productTypes.Add(pt);
+            return true;
+        }
+        return false;
     }
 
     static public event System.Action Synergy;

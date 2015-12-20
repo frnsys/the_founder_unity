@@ -185,6 +185,11 @@ public class GameManager : Singleton<GameManager> {
 
     public void InitializeGame(Worker cofounder, Location location, Vertical vertical) {
         data.company.verticals = new List<Vertical> { vertical };
+
+        foreach (ProductType pt in ProductType.LoadAll().Where(p => p.isAvailable(data.company))) {
+            data.company.productTypes.Add(pt);
+        }
+
         data.company.SetHQ(location);
         data.company.founders.Add(new AWorker(cofounder));
 

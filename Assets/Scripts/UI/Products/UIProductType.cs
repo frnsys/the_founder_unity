@@ -27,6 +27,7 @@ public class UIProductType : MonoBehaviour {
     void OnClick() {
         if (!productType_.isAvailable(GameManager.Instance.playerCompany)) {
             string requirements = "";
+            bool requirementsMet = true;
 
             // Find required technology, if there is one.
             Technology requiredTech = Technology.LoadAll().FirstOrDefault(t => t.effects.unlocks.productTypes.Contains(productType_));
@@ -44,7 +45,25 @@ public class UIProductType : MonoBehaviour {
             }
 
             UIManager.Instance.Alert(requirements);
+        } else if (!GameManager.Instance.playerCompany.productTypes.Contains(productType_)) {
+            UIManager.Instance.Confirm(string.Format("Are you sure buy this product type? It will cost you {0:C0}", productType_.cost), delegate() {
+                if (!GameManager.Instance.playerCompany.BuyProductType(productType_)) {
+                    UIManager.Instance.Alert("You don't have the cash to buy this product type.");
+                } else {
+                    Unlock();
+                }
+            }, null);
         }
+    }
+
+    public void Lock() {
+        transform.Find("Overlay").gameObject.SetActive(true);
+        transform.Find("Lock").gameObject.SetActive(true);
+    }
+
+    public void Unlock() {
+        transform.Find("Overlay").gameObject.SetActive(false);
+        transform.Find("Lock").gameObject.SetActive(false);
     }
 }
 
