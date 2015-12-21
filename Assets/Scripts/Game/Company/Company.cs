@@ -18,6 +18,57 @@ public class Company : HasStats {
         name = name_;
     }
 
+    public struct StatusReport {
+        public float rent;
+        public float salaries;
+        public float taxes;
+        public float costs;
+        public float costsDelta;
+        public float otherCosts;
+        public float profit;
+        public float profitDelta;
+        public float revenue;
+        public float revenueDelta;
+
+        public StatusReport(float annualRevenue, float lastAnnualRevenue, float annualCosts, float lastAnnualCosts, float rentCost, float salaryCost, float taxesCost) {
+            revenue = annualRevenue;
+            profit = annualRevenue - annualCosts;
+            costs = annualCosts;
+            taxes = taxesCost;
+            salaries = salaryCost;
+            rent = rentCost;
+            otherCosts = annualCosts - taxes - salaries - rent;
+
+            // Compare this annual's performance to last annual's (if available).
+            if (lastAnnualRevenue != 0 && lastAnnualCosts != 0) {
+                if (lastAnnualRevenue == 0) {
+                    revenueDelta = 0f;
+                } else {
+                    revenueDelta = revenue/lastAnnualRevenue;
+                }
+
+                if (lastAnnualCosts == 0) {
+                    costsDelta = 0f;
+                } else {
+                    costsDelta = costs/lastAnnualCosts;
+                }
+
+                float lastAnnualProfit = lastAnnualRevenue - lastAnnualCosts;
+                if (lastAnnualProfit == 0) {
+                    profitDelta = 0f;
+                } else {
+                    profitDelta = profit/lastAnnualProfit;
+                }
+
+            // Otherwise, everything improved by 100%!!!
+            } else {
+                revenueDelta = 1f;
+                costsDelta = 1f;
+                profitDelta = 1f;
+            }
+        }
+    }
+
     public Company Init() {
         // Default values.
         cash = new Stat("Cash", 100000);
@@ -25,17 +76,16 @@ public class Company : HasStats {
         debtOwned = 0;
         taxesAvoided = 0;
         lifetimeRevenue = 0;
-        lastMonthRevenue = 0;
         annualRevenue = 0;
         annualCosts = 0;
+        lastAnnualRevenue = 0;
+        lastAnnualCosts = 0;
         baseSizeLimit = 5;
         perks = new List<APerk>();
         office = Office.Type.Apartment;
         recruitments = new List<int> {0};
         promos = new List<int> {0};
 
-
-        products = new List<Product>();
         founders = new List<AWorker>();
         _workers = new List<AWorker>();
         _locations = new List<Location>();
@@ -50,13 +100,12 @@ public class Company : HasStats {
         opinion = new Stat("Outrage", 1);
         opinionEvents = new List<OpinionEvent>();
         publicity = new Stat("Hype", 0);
+        goodwill = 100;
 
         activeEffects = new List<EffectSet>();
-
         companies = new List<MiniCompany>();
-
-        // Keep track for 10 years.
-        AnnualPerfHistory = new PerformanceHistory(10);
+        discoveredProducts = new List<ProductRecipe>();
+        productTypes = new List<ProductType>();
 
         return this;
     }
@@ -118,6 +167,22 @@ public class Company : HasStats {
         if (WorkerFired != null) {
             WorkerFired(worker, this);
         }
+    }
+
+    public float productivity {
+        get { return AggregateWorkerStat("Productivity"); }
+    }
+    public float happiness {
+        get { return AggregateWorkerStat("Happiness"); }
+    }
+    public float creativity {
+        get { return AggregateWorkerStat("Creativity"); }
+    }
+    public float cleverness {
+        get { return AggregateWorkerStat("Cleverness"); }
+    }
+    public float charisma {
+        get { return AggregateWorkerStat("Charisma"); }
     }
 
     public float AggregateWorkerStat(string stat) {
@@ -223,120 +288,77 @@ public class Company : HasStats {
     // Product Management ============================
     // ===============================================
 
-    public List<Product> products;
-    public Product developingProduct;
     public int launchedProducts;
-    public List<Product> activeProducts {
-        get { return products.FindAll(p => p.launched); }
-    }
-    public bool developing {
-        get { return developingProduct != null && developingProduct.developing; }
-    }
-
-    public bool HasProduct(ProductRecipe r ) {
-        return products.FirstOrDefault(p => p.Recipe == r) != null;
-    }
-
-    static public event System.Action<Product, Company> BeganProduct;
-    public Product StartNewProduct(List<ProductType> pts, int design, int marketing, int engineering) {
+    public List<ProductRecipe> discoveredProducts;
+    public List<ProductType> productTypes;
+    static public event System.Action<Company> LaunchedProduct;
+    static public event System.Action<Company, Product> DiscoveredProduct;
+    public Product LaunchProduct(List<ProductType> pts, float multiplier) {
         Product product = ScriptableObject.CreateInstance<Product>();
-        product.Init(pts, design, marketing, engineering, this);
-        products.Add(product);
-        developingProduct = product;
+        float revenue = product.Create(pts, creativity, charisma, cleverness, this);
+        if (revenue == 0) {
+            // Failure
+            return null;
+        }
 
-        if (BeganProduct != null)
-            BeganProduct(product, this);
+        revenue *= multiplier;
 
+        if (product.killsPeople)
+            deathToll += Random.Range(0, 10);
+
+        if (product.debtsPeople)
+            debtOwned += Random.Range(0, 10);
+
+        if (product.pollutes)
+            pollution += Random.Range(0, 10);
+
+        cash.baseValue += revenue;
+        annualRevenue += revenue;
+        lifetimeRevenue += revenue;
+        product.revenue = revenue;
+
+        UpdateProductSynergies();
+
+        if (!discoveredProducts.Contains(product.Recipe)) {
+            discoveredProducts.Add(product.Recipe);
+            DiscoveredProduct(this, product);
+        }
+
+        if (LaunchedProduct != null)
+            LaunchedProduct(this);
+
+        launchedProducts++;
         return product;
     }
 
-    public void DevelopProduct() {
-        if (developing) {
-            developingProduct.Develop(this);
+    public bool BuyProductType(ProductType pt) {
+        if (Pay(pt.cost)) {
+            productTypes.Add(pt);
+            return true;
         }
-    }
-
-    public void HarvestProducts(float elapsedTime) {
-        float newRevenue = 0;
-        foreach (Product product in products.Where(p => p.launched)) {
-            newRevenue += product.Revenue(elapsedTime, this);
-
-            if (product.killsPeople)
-                deathToll += Random.Range(0, 10);
-
-            if (product.debtsPeople)
-                debtOwned += Random.Range(0, 10);
-
-            if (product.pollutes)
-                pollution += Random.Range(0, 10);
-        }
-        cash.baseValue += newRevenue;
-        lastMonthRevenue += newRevenue;
-        annualRevenue += newRevenue;
-        lifetimeRevenue += newRevenue;
-    }
-
-    public void CompletedProduct(Product p) {
-        UpdateProductSynergies();
-
-        // Apply relevant effects to the product
-        foreach (EffectSet es in activeEffects) {
-            es.Apply(p);
-        }
-
-        developingProduct = null;
-        launchedProducts++;
-
-        // The product's effects are applied by the GameManager.
+        return false;
     }
 
     static public event System.Action Synergy;
     private void UpdateProductSynergies() {
-        List<ProductRecipe> activeRecipes = activeProducts.Select(p => p.Recipe).ToList();
-        foreach (Product p in activeProducts) {
-            p.synergy = true;
-            if (p.synergies.Count == 0) {
-                p.synergy = false;
-            } else {
-                for (int i=0; i<p.synergies.Count; i++) {
-                    if (!activeRecipes.Contains(p.synergies[i])) {
-                        p.synergy = false;
-                        break;
-                    }
-                }
-            }
-            if (p.synergy && Synergy != null)
-                Synergy();
-        }
+        // TODO update
+        //List<ProductRecipe> activeRecipes = activeProducts.Select(p => p.Recipe).ToList();
+        //foreach (Product p in activeProducts) {
+            //p.synergy = true;
+            //if (p.synergies.Count == 0) {
+                //p.synergy = false;
+            //} else {
+                //for (int i=0; i<p.synergies.Count; i++) {
+                    //if (!activeRecipes.Contains(p.synergies[i])) {
+                        //p.synergy = false;
+                        //break;
+                    //}
+                //}
+            //}
+            //if (p.synergy && Synergy != null)
+                //Synergy();
+        //}
     }
-
-    public void ShutdownProduct(Product product) {
-        // Remove relevant effects from the product
-        foreach (EffectSet es in activeEffects) {
-            es.Remove(product);
-        }
-
-        product.Shutdown();
-
-        // Remove product from the company.
-        // Otherwise we will be serializing way too much stuff.
-        products.Remove(product);
-    }
-
-    // Given an item, find the list of currently active products that
-    // match at least one of the item's product types.
-    public List<Product> FindMatchingProducts(List<ProductType> productTypes) {
-        // Items which have no product specifications apply to all products.
-        if (productTypes.Count == 0) {
-            return products;
-
-        } else {
-            return products.FindAll(p =>
-                productTypes.Exists(pType => p.productTypes.Contains(pType)));
-        }
-    }
-
-
 
     // ===============================================
     // Other Management ==============================
@@ -389,7 +411,6 @@ public class Company : HasStats {
 
     public void StartPromo(Promo promo) {
         promo.Develop();
-        UIManager.Instance.LaunchHypeMinigame(promo);
     }
 
     public List<int> promos;
@@ -406,10 +427,10 @@ public class Company : HasStats {
     // Financial Management ==========================
     // ===============================================
 
-    // Keep track of each month's costs.
-    public float lastMonthRevenue;
     public float annualRevenue;
     public float annualCosts;
+    public float lastAnnualRevenue;
+    public float lastAnnualCosts;
     public float lifetimeRevenue;
     public float taxesAvoided;
     public int deathToll;
@@ -418,37 +439,31 @@ public class Company : HasStats {
     public float annualProfit {
         get { return annualRevenue - annualCosts; }
     }
+    public float salaries {
+        get { return workers.Slinq().Select(w => w.salary).Sum() * GameManager.Instance.wageMultiplier; }
+    }
+    public float rent {
+        // Skip the first location's rent since it is our HQ and considered free.
+        get { return locations.Skip(1).Slinq().Select(l => l.cost).Sum()/1000 * GameManager.Instance.costMultiplier * 12; }
+    }
+    public float taxes {
+        get { return annualRevenue * GameManager.Instance.taxRate; }
+    }
+    public float toPay {
+        get { return salaries + rent + taxes; }
+    }
 
     static public event System.Action<float, string> Paid;
-    public void PayMonthly() {
-        float toPay = 0;
-
-        // Skip the first location's rent since it is our HQ and considered free.
-        float salaries = workers.Slinq().Select(w => w.monthlyPay).Sum() * GameManager.Instance.wageMultiplier;
-        float rent = locations.Skip(1).Slinq().Select(l => l.cost).Sum()/1000 * GameManager.Instance.costMultiplier;
-        toPay += salaries + rent;
-
-        // Taxes
-        float taxes = lastMonthRevenue * GameManager.Instance.taxRate;
-        toPay += taxes;
-
+    public void PayAnnual() {
         // The base tax rate is 0.3f.
-        float expectedTaxes = lastMonthRevenue * 0.3f;
+        float expectedTaxes = annualRevenue * 0.3f;
         taxesAvoided += expectedTaxes - taxes;
 
         cash.baseValue -= toPay;
+        annualCosts = toPay;
 
-        // Add to annual costs.
-        annualCosts += toPay;
-
-        // Also reset month's revenues.
-        lastMonthRevenue = 0;
-
-        if (Paid != null) {
-            Paid(salaries, "for salaries");
-            Paid(rent, "for rent");
-            Paid(taxes, "for taxes");
-        }
+        // Also reset annual revenue.
+        annualRevenue = 0;
     }
 
     public bool Pay(float cost) {
@@ -485,7 +500,6 @@ public class Company : HasStats {
             newRevenue += companies[i].revenue;
         }
         cash.baseValue += newRevenue;
-        lastMonthRevenue += newRevenue;
         annualRevenue += newRevenue;
         lifetimeRevenue += newRevenue;
     }
@@ -540,6 +554,7 @@ public class Company : HasStats {
     // ===============================================
     public Stat opinion;
     public Stat publicity;
+    public int goodwill;
 
     [SerializeField]
     private List<OpinionEvent> opinionEvents;
@@ -573,50 +588,16 @@ public class Company : HasStats {
     // Performance Data ==============================
     // ===============================================
 
-    // Keep track of company performance history as well to try and make decisions.
-    [SerializeField]
-    protected PerformanceHistory AnnualPerfHistory;
-    public PerformanceDict lastAnnualPerformance {
-        get {
-            return AnnualPerfHistory.Count > 0 ? AnnualPerfHistory.Last() : null;
-        }
-    }
-
-    // Collect aggregate data for the past year.
-    public List<PerformanceDict> CollectAnnualPerformanceData() {
-        PerformanceDict results = new PerformanceDict();
-        results["Annual Revenue"] = annualRevenue;
-        results["Annual Costs"] = annualCosts;
-        results["Annual Profit"] = annualRevenue - annualCosts;
-
-        AnnualPerfHistory.Enqueue(results);
-
-        // Compare this annual's performance to last annual's (if available).
-        PerformanceDict deltas = new PerformanceDict();
-        if (AnnualPerfHistory.Count > 1) {
-            // Last annual is the second to last element.
-            PerformanceDict lastAnnual = AnnualPerfHistory.Skip(AnnualPerfHistory.Count - 2).Take(1).First();
-
-            foreach (string key in results.Keys) {
-                if (lastAnnual[key] == 0) {
-                    deltas[key] = 0f;
-                } else {
-                    deltas[key] = results[key]/lastAnnual[key] - 1f;
-                }
-            }
-
-        // Otherwise, everything improved by 100%!!!
-        } else {
-            foreach (string key in results.Keys) {
-                deltas[key] = 1f;
-            }
-        }
+    public StatusReport CollectAnnualPerformanceData() {
+        StatusReport report = new StatusReport(annualRevenue, lastAnnualRevenue, annualCosts, lastAnnualCosts, rent, salaries, taxes);
 
         // Reset values.
+        lastAnnualRevenue = annualRevenue;
+        lastAnnualCosts = annualCosts;
         annualRevenue = 0;
         annualCosts = 0;
 
-        return new List<PerformanceDict> { results, deltas };
+        return report;
     }
 
     // ===============================================

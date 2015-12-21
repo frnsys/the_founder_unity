@@ -16,10 +16,8 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     public bool officeUpgradeTriggered;
 
     public GameObject officeArea;
-    public GameObject employeeHUDs;
     public GameObject employeeGroup;
     public GameObject employeePrefab;
-    public GameObject employeeHUDPrefab;
 
     public Material[] employeePathColors;
 
@@ -44,12 +42,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     void OnDisable() {
         Company.WorkerHired -= OnHired;
         Company.WorkerFired -= OnFired;
-    }
-
-    public void SetupFollowTarget(UIEmployee uie, UIFollowTarget uift) {
-        uift.target = uie.HUDtarget;
-        uift.gameCamera = OfficeCamera;
-        uift.uiCamera = UICamera;
     }
 
     public Color dayColor;
@@ -81,7 +73,8 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
                 officeUpgradeTriggered = true;
 
                 // TESTING, the production delay should be longer
-                GameManager.Instance.eventManager.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f);
+                // TODO this option should always be available
+                //GameManager.Instance.eventManager.DelayTrigger(GameEvent.LoadNoticeEvent("Upgrade the office"), 5f);
 
                 // TO DO this needs to be properly loaded based on a save game
                 UIManager.Instance.menu.Activate("Upgrade Office");
@@ -106,15 +99,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
         w.avatar = obj;
         if (w.material != null)
             uie.GetComponent<MeshRenderer>().material = w.material;
-
-        GameObject hud = NGUITools.AddChild(employeeHUDs, employeeHUDPrefab);
-
-        Transform labor = hud.transform.Find("Labor");
-        UIFollowTarget uift = labor.GetComponent<UIFollowTarget>();
-        SetupFollowTarget(uie, uift);
-        uie.laborObj = labor.GetComponent<UILabor>();
-
-        uie.HUDgroup = hud;
     }
 
     void OnFired(AWorker w, Company c) {

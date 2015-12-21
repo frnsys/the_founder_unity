@@ -27,19 +27,21 @@ public class ProductEffect {
     }
 
     public void Apply(Company company) {
-        List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
-        foreach (Product product in matchingProducts) {
-            if (!product.developing)
-                product.ApplyBuff(buff);
-        }
+        // TODO update
+        //List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
+        //foreach (Product product in matchingProducts) {
+            //if (!product.developing)
+                //product.ApplyBuff(buff);
+        //}
     }
 
     public void Remove(Company company) {
-        List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
-        foreach (Product product in matchingProducts) {
-            if (!product.developing)
-                product.RemoveBuff(buff);
-        }
+        // TODO update
+        //List<Product> matchingProducts = company.FindMatchingProducts(productTypes);
+        //foreach (Product product in matchingProducts) {
+            //if (!product.developing)
+                //product.RemoveBuff(buff);
+        //}
     }
 
     public void Apply(Product product) {

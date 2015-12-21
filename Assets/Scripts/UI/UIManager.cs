@@ -12,100 +12,62 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager> {
-    public ProductMinigame pm;
-    public void LaunchProductMinigame(Product p, Company c) {
-        pm.gameObject.SetActive(true);
-        pm.Setup(p, c);
-    }
-
     private GameManager gm;
 
     public Camera uiCamera;
     public TheMarket theMarket;
     public GameObject windowsPanel;
     public GameObject alertsPanel;
-    public GameObject pingsPanel;
+    public GameObject interlude;
 
     public GameObject eventPersonalPrefab;
     public GameObject eventEmailPrefab;
     public GameObject eventNewsPrefab;
-    public GameObject pingPrefab;
-    private Queue<Ping> pendingPings;
 
     public GameObject alertPrefab;
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
     public GameObject annualReportPrefab;
-    public GameObject productCompletedAlertPrefab;
+    public GameObject productDiscoveredAlertPrefab;
     public GameObject specialProjectCompletedAlertPrefab;
-    public GameObject competitorProductCompletedAlertPrefab;
     public GameObject hiringPrefab;
 
     public UIMenu menu;
-    public GameObject menuButton;
     public void OpenMenu() {
         menu.gameObject.SetActive(true);
     }
     public void CloseMenu() {
         menu.gameObject.SetActive(false);
     }
-    public UIStatusBar statusBar;
-
-    private struct Ping {
-        public string note;
-        public Color color;
-        public Ping(string n, Color c) {
-            note = n;
-            color = c;
-        }
-    }
-
-    public void SendPing(string note, Color color) {
-        pendingPings.Enqueue(new Ping(note, color));
-    }
-
-    IEnumerator ShowPings() {
-        while(true) {
-            while (pendingPings.Count > 0) {
-                Ping p = pendingPings.Dequeue();
-                UIPing ping = NGUITools.AddChild(pingsPanel, pingPrefab).GetComponent<UIPing>();
-                ping.Set(p.note);
-                yield return StartCoroutine(GameTimer.Wait(2f));
-                NGUITools.Destroy(ping.gameObject);
-            }
-            yield return StartCoroutine(GameTimer.Wait(0.5f));
-        }
-    }
 
     void OnEnable() {
         gm = GameManager.Instance;
         GameEvent.EventTriggered += OnEvent;
-        Product.Completed += OnProductCompleted;
-        TheMarket.Done += OnMarketDone;
         SpecialProject.Completed += OnSpecialProjectCompleted;
         Recruitment.Completed += OnRecruitmentCompleted;
         GameManager.YearEnded += OnYearEnded;
         GameManager.PerformanceReport += OnPerformanceReport;
-        Company.Paid += OnPaid;
-        Company.BeganProduct += OnBeganProduct;
-
-        pendingPings = new Queue<Ping>();
-        StartCoroutine(ShowPings());
+        MainGame.Done += OnGridGameDone;
+        Company.DiscoveredProduct += OnDiscoveredProduct;
+        //Company.Paid += OnPaid;
     }
 
     void OnDisable() {
         GameEvent.EventTriggered -= OnEvent;
-        Product.Completed -= OnProductCompleted;
         SpecialProject.Completed -= OnSpecialProjectCompleted;
         Recruitment.Completed -= OnRecruitmentCompleted;
         GameManager.YearEnded -= OnYearEnded;
         GameManager.PerformanceReport -= OnPerformanceReport;
-        Company.Paid -= OnPaid;
-        Company.BeganProduct -= OnBeganProduct;
+        MainGame.Done -= OnGridGameDone;
+        Company.DiscoveredProduct -= OnDiscoveredProduct;
+        //Company.Paid -= OnPaid;
     }
 
-    void OnPaid(float amount, string name) {
-        SendPing(string.Format("-{0:C0} {1}", amount, name), Color.red);
+    void OnDiscoveredProduct(Company c, Product p) {
+        if (c == gm.playerCompany) {
+            GameObject popup = NGUITools.AddChild(alertsPanel, productDiscoveredAlertPrefab);
+            popup.GetComponent<UIProductDiscoveredAlert>().product = p;
+        }
     }
 
     // Show an event notification.
@@ -129,68 +91,30 @@ public class UIManager : Singleton<UIManager> {
         gameEventNotification.gameEvent = e;
     }
 
-    void OnBeganProduct(Product p, Company c) {
-        // TODO: SWITCHING OVER TO NEW PRODUCT SYSTEM
-        //if (c == gm.playerCompany) {
-            //productHud.SetActive(true);
-            //hud.SetActive(false);
-            //LaunchProductMinigame(p, c);
-        //}
-    }
-
-    // Show a "product completed" alert.
-    void OnProductCompleted(Product p, Company c) {
-        // For the player's products, show the product completed alert.
-        if (c == gm.playerCompany) {
-            GameObject popup = NGUITools.AddChild(alertsPanel, productCompletedAlertPrefab);
-            popup.GetComponent<UIProductCompletedAlert>().product = p;
-
-            // Clear/hide the product HUD.
-            productHud.SetActive(false);
-
-            // Notify the player that they were missing a tech.
-            if (p.techPenalty)
-                GameManager.Instance.eventManager.DelayTrigger(GameEvent.LoadNoticeEvent("Missing Technology"), 25f);
-
-            // Hack to show The Market after the player has hit OK on the product completed alert.
-            StartCoroutine(Delay(delegate {
-                hud.SetActive(false);
-                theMarket.Setup(p);
-            }, 0.6f));
-        }
-    }
-
     // Show a "special project completed" alert.
     void OnSpecialProjectCompleted(SpecialProject p) {
         GameObject popup = NGUITools.AddChild(alertsPanel, specialProjectCompletedAlertPrefab);
         popup.GetComponent<UISpecialProjectCompletedAlert>().specialProject = p;
     }
 
-
     void OnRecruitmentCompleted(Recruitment r) {
-        List<AWorker> workers = GameManager.Instance.workerManager.WorkersForRecruitment(r);
+        List<AWorker> workers = gm.workerManager.WorkersForRecruitment(r);
         Alert(string.Format("Our recruiting has finished. We had {0} applicants. Here is the info we have on them.", workers.Count));
         GameObject window = NGUITools.AddChild(windowsPanel, hiringPrefab);
         window.GetComponent<UIWidget>().SetAnchor(windowsPanel.gameObject, 0, 0, 0, 0);
         window.GetComponent<UIHireWorkers>().LoadWorkers(workers);
     }
 
-    void OnMarketDone() {
-        hud.SetActive(true);
-    }
-
-    void OnPerformanceReport(int year, PerformanceDict results, PerformanceDict deltas, TheBoard board) {
-        PerformanceReport(results, deltas, board);
+    void OnPerformanceReport(int year, Company.StatusReport report, TheBoard board) {
+        PerformanceReport(report, board);
     }
 
     void OnYearEnded(int year) {
-        // Anniversary/birthday alert!
-        int age = 25 + year;
         // Only show every 10th birthday.
-        if (age % 10 == 0) {
+        if (gm.age % 10 == 0) {
             // TO DO this should be a notice event.
             UIManager.Instance.Alert(
-                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {1}-{2} years. Can you believe that we founded this company {3} years ago?", age, 40-age, 60-age, age-25)
+                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {1}-{2} years. Can you believe that we founded this company {3} years ago?", gm.age, 40-gm.age, 60-gm.age, gm.age-25)
             );
         }
     }
@@ -257,9 +181,9 @@ public class UIManager : Singleton<UIManager> {
     }
 
     // Create an annual report.
-    public UIPerformanceReport PerformanceReport(PerformanceDict results, PerformanceDict deltas, TheBoard board) {
+    public UIPerformanceReport PerformanceReport(Company.StatusReport statusReport, TheBoard board) {
         UIPerformanceReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIPerformanceReport>();
-        report.BuildReport(results, deltas, board);
+        report.BuildReport(statusReport, board);
         return report;
     }
 
@@ -268,27 +192,39 @@ public class UIManager : Singleton<UIManager> {
         OpenPopup(promoWindow);
     }
 
-    public GameObject hypeMinigame;
-    public void LaunchHypeMinigame(Promo promo) {
-        ClosePopup(); // Close promo window
-        GameObject hmg = NGUITools.AddChild(gameObject, hypeMinigame);
-        hmg.GetComponent<HypeMinigame>().Setup(promo);
-
-        foreach (UIFollowTarget uift in hmg.GetComponentsInChildren<UIFollowTarget>()) {
-            uift.gameCamera = uiCamera;
-            uift.uiCamera = uiCamera;
-        }
-    }
-
-    public GameObject productHud;
-    public GameObject hud;
-    public void AddPointsToDevelopingProduct(string feature, float value) {
-        //productHud.Add(feature, (int)value);
-    }
-
     private IEnumerator Delay(UIEventListener.VoidDelegate callback, float delay = 12f) {
         yield return StartCoroutine(GameTimer.Wait(delay));
         callback(null);
+    }
+
+    public MainGame gridGame;
+    public Camera officeCamera;
+    public Camera mainCamera;
+    public GameObject selectProductTypesWindow;
+    public void SetupGridGame(GameObject obj) {
+        officeCamera.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(false);
+        interlude.SetActive(false);
+
+        List<ProductType> productTypes = gm.playerCompany.productTypes;
+        // Player must choose 5 product types to use
+        if (productTypes.Count() > 5) {
+            OpenPopup(selectProductTypesWindow);
+        } else {
+            StartGridGame(productTypes);
+        }
+    }
+
+    public void StartGridGame(List<ProductType> productTypes) {
+        gridGame.gameObject.SetActive(true);
+        gridGame.Setup(productTypes);
+    }
+
+    void OnGridGameDone() {
+        officeCamera.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(true);
+        gridGame.gameObject.SetActive(false);
+        interlude.SetActive(true);
     }
 }
 

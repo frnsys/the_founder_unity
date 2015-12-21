@@ -8,6 +8,7 @@ public class ProductType : SharedResource<ProductType> {
     // For the physical representation of the product.
     public Mesh mesh;
     public float difficulty;
+    public float cost;
 
     public override string ToString() {
         return name;

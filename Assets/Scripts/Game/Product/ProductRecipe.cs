@@ -29,16 +29,8 @@ public class ProductRecipe : SharedResource<ProductRecipe> {
     // Ideals: some minimum value a feature must achieve for good performance.
     public float featureIdeal = 10;
 
-    // How long this product will be profitable on the market.
-    // This is used to modify the revenue model curve such that
-    // it is from 0 to maxLongevity along the time (x) axis.
-    public float maxLongevity = 1000;
-
     // The maximum amount of revenue this product can generate.
-    // This is used to modify the revenue model curve such that
-    // it's peak (y=1.0) along the y axis is at maxRevenue.
     public float maxRevenue = 1000;
-    public AnimationCurve revenueModel;
 
     public ProductType[] productTypes;
 

@@ -75,7 +75,7 @@ public class EventManager : MonoBehaviour {
             // Any events we didn't get to, up their countdown so
             // we can try again later.
             for (int i=0; i < toResolve.Count; i++) {
-                toResolve[i].countdown = Random.Range(4, 20);
+                toResolve[i].countdown = Random.Range(1, 5);
             }
         }
     }
@@ -89,8 +89,8 @@ public class EventManager : MonoBehaviour {
                 // We trigger the event by adding it to the regular event pool.
                 ev.probability = 1f;
 
-                // This is in number of weeks.
-                DelayTrigger(ev, 5f);
+                // This is in number of years.
+                DelayTrigger(ev, 1);
 
                 // Remove it now though so that it doesn't re-trigger.
                 if (!ev.gameEvent.repeatable)
@@ -101,7 +101,7 @@ public class EventManager : MonoBehaviour {
     }
 
     // It's expected that the event passed in is a clone.
-    public void DelayTrigger(AGameEvent ge, float ticks) {
+    public void DelayTrigger(AGameEvent ge, int ticks) {
         ge.countdown = ticks;
         Add(ge);
     }

@@ -22,9 +22,6 @@ public class AWorker : ScriptableObject {
             return worker.robot ? worker.baseMinSalary : salary * 0.1f;
         }
     }
-    public float monthlyPay {
-        get { return salary/12; }
-    }
     public float score {
         get {
             return cleverness +
@@ -156,59 +153,6 @@ public class AWorker : ScriptableObject {
             default:
                 return 0;
         }
-    }
-
-    private string RollStat() {
-        // Selects one stat at random, weighted by value
-        float total = charisma + creativity + cleverness;
-        float rand = Random.Range(0f, total);
-        string[] stats = new string[] {"Charisma", "Creativity", "Cleverness"};
-
-        float acc = 0;
-        string selected = null;
-        foreach (string stat in stats) {
-            acc += StatByName(stat);
-            if (acc >= rand) {
-                selected = stat;
-                break;
-            }
-        }
-        return selected;
-    }
-
-    private bool RollBreakthrough() {
-        // Rolls to see if employee has a breakthrough or not
-        // Need to ensure that happiness can't go over 100
-        float breakthrough_prob = happiness / 200;
-        return Random.value < breakthrough_prob;
-    }
-
-    public Stat Work(Product p) {
-        Stat stat;
-        if (RollBreakthrough()) {
-            stat = new Stat("Breakthrough", Randomize(
-                Mathf.Max(creativity, cleverness, charisma)
-            ));
-        } else {
-            string statName = RollStat();
-            float val = StatByName(statName);
-
-            // worst this can be is 0.5
-            // only applys to human workers
-            float messUpProb = (1 - Mathf.Min(1f, val/p.difficulty)) * 0.5f;
-            if (!worker.robot && Random.value < messUpProb) {
-                // at minimum, this is 1
-                stat = new Stat(statName, -Mathf.Max(1f, Randomize(val) * 0.75f));
-            } else {
-                stat = new Stat(statName, Randomize(val));
-            }
-        }
-        p.Develop(stat);
-        return stat;
-    }
-
-    private float Randomize(float value) {
-        return Mathf.Max(1, (0.5f + Random.value) * value);
     }
 
     public void ApplyBuffs(List<StatBuff> buffs) {

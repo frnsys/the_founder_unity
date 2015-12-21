@@ -34,7 +34,7 @@ public class EffectSet {
     public OpinionEvent opinionEvent = new OpinionEvent(0, 0);
 
     public GameEvent gameEvent;
-    public float eventDelay = 0;
+    public int eventDelay = 0;
     public float eventProbability = 0;
 
     public float forgettingRate = 0;

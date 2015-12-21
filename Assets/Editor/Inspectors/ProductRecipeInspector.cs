@@ -32,13 +32,8 @@ internal class ProductRecipeInspector : Editor {
         p.featureIdeal = EditorGUILayout.FloatField("Ideal Feature Value", p.featureIdeal);
         EditorGUILayout.Space();
 
-        p.maxLongevity = EditorGUILayout.FloatField("Max Longevity (14/week)", p.maxLongevity);
         p.maxRevenue = EditorGUILayout.FloatField("Max Revenue", p.maxRevenue);
         EditorGUILayout.Space();
-
-        if (p.revenueModel == null)
-            p.revenueModel = new AnimationCurve();
-        p.revenueModel = EditorGUILayout.CurveField("Revenue Model", p.revenueModel, GUILayout.Height(50));
 
         EditorGUILayout.LabelField("Required Techs");
         for (int i=0; i < p.requiredTechnologies.Count; i++) {

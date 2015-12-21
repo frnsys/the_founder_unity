@@ -65,13 +65,11 @@ namespace UnityTest
             GameEvent ev  = ScriptableObject.CreateInstance<GameEvent>();
             ev.name       = "TESTEVENT";
             e.gameEvent   = ev;
-            e.eventDelay  = 2000;
             e.eventProbability = 0.5f;
 
             e.Apply(c);
             AGameEvent ev_ = gd.eventsPool.Where(evn => evn.name == ev.name).First();
             Assert.AreEqual(ev_.name, ev.name);
-            Assert.AreEqual(ev_.delay, e.eventDelay);
             Assert.AreEqual(ev_.probability, e.eventProbability);
         }
 
@@ -104,47 +102,48 @@ namespace UnityTest
             Assert.AreEqual(w.happiness, start + e.workerEffects[0].value);
         }
 
-        [Test]
-        public void Product() {
-            ProductEffect pe = new ProductEffect("Design");
-            pe.buff = new StatBuff("Design", 100);
+        // TODO update
+        //[Test]
+        //public void Product() {
+            //ProductEffect pe = new ProductEffect("Design");
+            //pe.buff = new StatBuff("Design", 100);
 
-            e.productEffects = new List<ProductEffect>();
-            e.productEffects.Add(pe);
+            //e.productEffects = new List<ProductEffect>();
+            //e.productEffects.Add(pe);
 
-            ProductType pt = ScriptableObject.CreateInstance<ProductType>();
-            pt.requiredVerticals = new List<Vertical>();
-            ProductType pt_ = ScriptableObject.CreateInstance<ProductType>();
-            pt_.requiredVerticals = new List<Vertical>();
-            List<ProductType> pts = new List<ProductType>() { pt, pt_ };
+            //ProductType pt = ScriptableObject.CreateInstance<ProductType>();
+            //pt.requiredVerticals = new List<Vertical>();
+            //ProductType pt_ = ScriptableObject.CreateInstance<ProductType>();
+            //pt_.requiredVerticals = new List<Vertical>();
+            //List<ProductType> pts = new List<ProductType>() { pt, pt_ };
 
-            c.StartNewProduct(pts, 0, 0, 0);
-            Product p = c.products[0];
-            p.requiredProgress = 0;
+            //c.StartNewProduct(pts, 0, 0, 0);
+            //Product p = c.products[0];
+            //p.requiredProgress = 0;
 
-            float start = p.design.value;
+            //float start = p.design.value;
 
-            e.Apply(c);
+            //e.Apply(c);
 
-            // The effect should not apply until the product is launched.
-            Assert.IsTrue(p.developing);
-            Assert.AreEqual(start, p.design.value);
+            //// The effect should not apply until the product is launched.
+            //Assert.IsTrue(p.developing);
+            //Assert.AreEqual(start, p.design.value);
 
-            p.Complete(c);
+            //p.Complete(c);
 
-            // The effect should after the product is launched.
-            Assert.IsTrue(p.launched);
-            Assert.AreEqual(p.design.value, start + pe.buff.value);
+            //// The effect should after the product is launched.
+            //Assert.IsTrue(p.launched);
+            //Assert.AreEqual(p.design.value, start + pe.buff.value);
 
-            // Test applying the effect to an already launched product.
-            pe = new ProductEffect("Engineering");
-            pe.buff.value = 100;
-            e.productEffects[0] = pe;
+            //// Test applying the effect to an already launched product.
+            //pe = new ProductEffect("Engineering");
+            //pe.buff.value = 100;
+            //e.productEffects[0] = pe;
 
-            start = p.engineering.value;
+            //start = p.engineering.value;
 
-            e.Apply(c);
-            Assert.AreEqual(p.engineering.value, start + pe.buff.value);
-        }
+            //e.Apply(c);
+            //Assert.AreEqual(p.engineering.value, start + pe.buff.value);
+        //}
     }
 }

@@ -81,8 +81,8 @@ public class GameEvent : SharedResource<GameEvent> {
             case Condition.Type.AnnualRevenue:
                 comparison = c.annualRevenue;
                 break;
-            case Condition.Type.Date:
-                comparison = GameManager.Instance.date;
+            case Condition.Type.Year:
+                comparison = GameManager.Instance.year;
                 break;
             case Condition.Type.ProductsLaunched:
                 comparison = c.launchedProducts;
@@ -136,7 +136,7 @@ public class GameEvent : SharedResource<GameEvent> {
             Opinion,
             Cash,
             AnnualRevenue,
-            Date,
+            Year,
             ProductsLaunched,
             Locations,
             Employees,

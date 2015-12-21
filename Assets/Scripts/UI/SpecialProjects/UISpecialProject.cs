@@ -46,11 +46,12 @@ public class UISpecialProject : UIEffectItem {
     void RenderRequiredProducts() {
         foreach (ProductRecipe r in _specialProject.requiredProducts) {
             GameObject pObj = NGUITools.AddChild(requiredProductsGrid.gameObject, requiredProductPrefab);
-            if (company.HasProduct(r)) {
-                pObj.transform.Find("Label").GetComponent<UILabel>().text = string.Format("[c][56FB92]{0}[-][/c]", r.genericName);
-            } else {
-                pObj.transform.Find("Label").GetComponent<UILabel>().text = string.Format("{0}", r.genericName);
-            }
+            // TODO should this be kept?
+            //if (company.HasProduct(r)) {
+                //pObj.transform.Find("Label").GetComponent<UILabel>().text = string.Format("[c][56FB92]{0}[-][/c]", r.genericName);
+            //} else {
+                //pObj.transform.Find("Label").GetComponent<UILabel>().text = string.Format("{0}", r.genericName);
+            //}
             prereqWidgets.Add(pObj.GetComponent<UIWidget>());
         }
         requiredProductsGrid.Reposition();

@@ -124,7 +124,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         START,
         GAME_INTRO,
         OPENED_NEW_PRODUCT,
-        STARTED_PRODUCT,
+        LAUNCHED_PRODUCT,
         OPENED_HYPE,
         THE_MARKET,
         THE_MARKET_DONE,
@@ -194,8 +194,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             TheMarket.Started += OnMarketStarted;
         }
 
-        if (data.obs < OBS.STARTED_PRODUCT) {
-            Company.BeganProduct += BeganProduct;
+        if (data.obs < OBS.LAUNCHED_PRODUCT) {
+            Company.LaunchedProduct += LaunchedProduct;
         }
 
         if (data.obs < OBS.GAME_INTRO) {
@@ -356,9 +356,9 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    void BeganProduct(Product p, Company c) {
+    void LaunchedProduct(Company c) {
         if (c == data.company) {
-            if (Stage(OBS.STARTED_PRODUCT)) {
+            if (Stage(OBS.LAUNCHED_PRODUCT)) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     MentorMessages(new string[] {
                         "Great! You've started developing your first product.",
@@ -372,7 +372,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                 }, 1f));
             }
-            Company.BeganProduct -= BeganProduct;
+            Company.LaunchedProduct -= LaunchedProduct;
         }
     }
 
@@ -401,16 +401,17 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     });
                     UIManager.Instance.menu.Activate("Research");
                 }, 6f));
-            } else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
-                MentorMessages(new string[] {
-                    "It's time to start thinking about expanding to new locations.",
-                    string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
-                    "The more locations you have for a market, the more money you will make!",
-                    "Some locations have special bonuses too.",
-                    string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
-                });
-                UIManager.Instance.menu.Activate("Locations");
-                data.ob.LOCATIONS_UNLOCKED = true;
+            // TODO update
+            //} else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
+                //MentorMessages(new string[] {
+                    //"It's time to start thinking about expanding to new locations.",
+                    //string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
+                    //"The more locations you have for a market, the more money you will make!",
+                    //"Some locations have special bonuses too.",
+                    //string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
+                //});
+                //UIManager.Instance.menu.Activate("Locations");
+                //data.ob.LOCATIONS_UNLOCKED = true;
             }
         }
     }
