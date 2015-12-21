@@ -9,6 +9,7 @@ public class TheBoard {
     public float happiness = 10;
     public float profitTarget = 20000;
     public float lastProfit = 20000;
+    public float lastProfitTarget = 0;
     public float desiredGrowth = 0.12f;
 
     public enum Status {
@@ -56,6 +57,7 @@ public class TheBoard {
         }
 
         // Set the new target.
+        lastProfitTarget = profitTarget;
         profitTarget *= 1 + desiredGrowth;
         lastProfit = profit;
 

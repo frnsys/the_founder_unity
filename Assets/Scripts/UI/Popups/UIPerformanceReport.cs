@@ -17,6 +17,10 @@ public class UIPerformanceReport : UIAlert {
     public UILabel rentLabel;
     public UILabel otherCostsLabel;
     public UILabel boardLabel;
+    public UILabel profitTargetLabel;
+    public UILabel profitDifferenceLabel;
+    public Color posColor;
+    public Color negColor;
 
     public void BuildReport(Company.StatusReport report, TheBoard board) {
         taxesTitleLabel.text = string.Format("Taxes ({0:F0}%)", GameManager.Instance.taxRate * 100);
@@ -35,6 +39,9 @@ public class UIPerformanceReport : UIAlert {
         profitDeltaLabel.text = string.Format("{0}%", report.profitDelta * 100);
 
         boardLabel.text = board.BoardStatus();
+
+        profitTargetLabel.text = string.Format("{0:C0}", board.lastProfitTarget);
+        profitDifferenceLabel.text = string.Format("{0:C0}", board.lastProfit - board.lastProfitTarget);
     }
 
     public void ShowNext() {
