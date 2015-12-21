@@ -172,6 +172,9 @@ public class Company : HasStats {
     public float productivity {
         get { return AggregateWorkerStat("Productivity"); }
     }
+    public float happiness {
+        get { return AggregateWorkerStat("Happiness"); }
+    }
     public float creativity {
         get { return AggregateWorkerStat("Creativity"); }
     }

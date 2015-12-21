@@ -68,6 +68,10 @@ public class GameManager : Singleton<GameManager> {
         get { return data.board.profitTarget; }
     }
 
+    public TheBoard.Status boardStatus {
+        get { return data.board.status; }
+    }
+
     public bool workerInsight {
         get { return data.workerInsight; }
     }
@@ -261,6 +265,12 @@ public class GameManager : Singleton<GameManager> {
 
     public int year {
         get { return 2000 + data.year; }
+    }
+    public int age {
+        get { return 25 + data.year; }
+    }
+    public int companyAge {
+        get { return data.year; }
     }
 
     public void Pause() {

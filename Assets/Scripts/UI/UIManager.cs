@@ -110,13 +110,11 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnYearEnded(int year) {
-        // Anniversary/birthday alert!
-        int age = 25 + year;
         // Only show every 10th birthday.
-        if (age % 10 == 0) {
+        if (gm.age % 10 == 0) {
             // TO DO this should be a notice event.
             UIManager.Instance.Alert(
-                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {1}-{2} years. Can you believe that we founded this company {3} years ago?", age, 40-age, 60-age, age-25)
+                string.Format("Happy {0}th birthday! I called the doctor today - she estimates you'll live another {1}-{2} years. Can you believe that we founded this company {3} years ago?", gm.age, 40-gm.age, 60-gm.age, gm.age-25)
             );
         }
     }

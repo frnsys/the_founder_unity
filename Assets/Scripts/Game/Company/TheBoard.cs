@@ -11,6 +11,30 @@ public class TheBoard {
     public float lastProfit = 20000;
     public float desiredGrowth = 0.12f;
 
+    public enum Status {
+        ECSTATIC,
+        PLEASED,
+        CONTENT,
+        UNHAPPY,
+        RAGING
+    }
+
+    public Status status {
+        get {
+            if (happiness >= 50) {
+                return Status.ECSTATIC;
+            } else if (happiness >= 35) {
+                return Status.PLEASED;
+            } else if (happiness >= 10) {
+                return Status.CONTENT;
+            } else if (happiness > 0) {
+                return Status.UNHAPPY;
+            } else {
+                return Status.RAGING;
+            }
+        }
+    }
+
     public float EvaluatePerformance(float profit) {
         float growth = profit/lastProfit - 1;
 
@@ -40,12 +64,19 @@ public class TheBoard {
 
     // TO DO these should become emoji!
     public string BoardStatus() {
-        if (happiness >= 50) {
-            return "The Board is ecstatic!";
-        } else if (happiness > 10){
-            return "The Board is content.";
-        } else {
-            return "Watch your back. The board is NOT happy.";
+        switch (status) {
+            case Status.ECSTATIC:
+                return "The Board is ecstatic!";
+            case Status.PLEASED:
+                return "The Board is pleased.";
+            case Status.CONTENT:
+                return "The Board is content.";
+            case Status.UNHAPPY:
+                return "Take care. The board is NOT happy.";
+            case Status.RAGING:
+                return "Watch your back - the board is furious!";
+            default:
+                return "The Board is indifferent.";
         }
     }
 }
