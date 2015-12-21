@@ -175,6 +175,12 @@ public class Product : HasStats {
         // Marketing is considered separately to be the "hype" around the product
         float U_ = Mathf.Min((U/i) * u_w, 1f);
 
+        float success_chance = (A_ + P_ + U_)/(a_w + p_w + u_w);
+        if (Random.value > success_chance) {
+            // Failure
+            return 0;
+        }
+
         // Negative hype bonus causes a fractional effect to hype
         if (hypeBonus < 0) {
             hypeBonus = 1/(-1 * hypeBonus + 1);
@@ -212,6 +218,8 @@ public class Product : HasStats {
         Debug.Log(string.Format("Marketing Value {0}", U));
         Debug.Log(string.Format("Engineering Value {0}", P));
         Debug.Log(string.Format("Max Revenue {0}", maxRevenue));
+
+
 
         // Trigger completed event.
         if (Completed != null) {

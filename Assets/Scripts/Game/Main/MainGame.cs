@@ -395,15 +395,22 @@ public class MainGame : MonoBehaviour {
             ProductType pt1 = ProductType.Load(p1.name);
             ProductType pt2 = ProductType.Load(p2.name);
             Product product = company.LaunchProduct(new List<ProductType> {pt1, pt2}, 1+bonusGrid[p1.row, p1.col]);
-            float revenue = product.revenue;
 
-            ui.ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
-                    string.Format("{0:C0}", revenue));
-            ui.ShowProductInfo(product);
+            if (product == null) {
+                // Failure - bug
+                GameObject piece = CreatePiece(bugPrefab);
+                PlacePiece(piece, p1.row, p1.col);
+                ui.ShowResultAt(g1.transform.localPosition, "[c][FC3941]FAILURE[-][/c]");
+            } else {
+                float revenue = product.revenue;
+                ui.ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
+                        string.Format("{0:C0}", revenue));
+                ui.ShowProductInfo(product);
+                GameObject e1 = CreatePiece(emptyPrefab);
+                PlacePiece(e1, p1.row, p1.col);
+            }
 
-            GameObject e1 = CreatePiece(emptyPrefab);
             GameObject e2 = CreatePiece(emptyPrefab);
-            PlacePiece(e1, p1.row, p1.col);
             PlacePiece(e2, p2.row, p2.col);
 
             TakeTurn();

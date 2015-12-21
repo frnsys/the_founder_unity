@@ -242,6 +242,11 @@ public class Company : HasStats {
     public Product LaunchProduct(List<ProductType> pts, float multiplier) {
         Product product = ScriptableObject.CreateInstance<Product>();
         float revenue = product.Create(pts, creativity, charisma, cleverness, this);
+        if (revenue == 0) {
+            // Failure
+            return null;
+        }
+
         revenue *= multiplier;
 
         if (product.killsPeople)

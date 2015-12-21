@@ -87,6 +87,6 @@ public class MainGameUI : MonoBehaviour {
         go.GetComponent<UILabel>().text = text;
         go.transform.localPosition = screenPos;
         go.transform.localPositionTo(MainGame.animationDuration, screenPos + new Vector3(0, 32f, 0));
-        TweenAlpha.Begin(go, MainGame.animationDuration, 0f);
+        TweenAlpha.Begin(go, 3f, 0f);
     }
 }
