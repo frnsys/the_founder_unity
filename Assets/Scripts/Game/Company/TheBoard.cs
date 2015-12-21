@@ -8,11 +8,11 @@ using UnityEngine;
 public class TheBoard {
     public float happiness = 10;
     public float profitTarget = 20000;
-    public float lastQuarterProfit = 20000;
+    public float lastProfit = 20000;
     public float desiredGrowth = 0.12f;
 
     public float EvaluatePerformance(float profit) {
-        float growth = profit/lastQuarterProfit - 1;
+        float growth = profit/lastProfit - 1;
 
         // If the target is exceeded, the board is really happy.
         if (growth >= desiredGrowth * 2)
@@ -33,7 +33,7 @@ public class TheBoard {
 
         // Set the new target.
         profitTarget *= 1 + desiredGrowth;
-        lastQuarterProfit = profit;
+        lastProfit = profit;
 
         return growth;
     }

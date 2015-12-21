@@ -18,6 +18,57 @@ public class Company : HasStats {
         name = name_;
     }
 
+    public struct StatusReport {
+        public float rent;
+        public float salaries;
+        public float taxes;
+        public float costs;
+        public float costsDelta;
+        public float otherCosts;
+        public float profit;
+        public float profitDelta;
+        public float revenue;
+        public float revenueDelta;
+
+        public StatusReport(float annualRevenue, float lastAnnualRevenue, float annualCosts, float lastAnnualCosts, float rentCost, float salaryCost, float taxesCost) {
+            revenue = annualRevenue;
+            profit = annualRevenue - annualCosts;
+            costs = annualCosts;
+            taxes = taxesCost;
+            salaries = salaryCost;
+            rent = rentCost;
+            otherCosts = annualCosts - taxes - salaries - rent;
+
+            // Compare this annual's performance to last annual's (if available).
+            if (lastAnnualRevenue != 0 && lastAnnualCosts != 0) {
+                if (lastAnnualRevenue == 0) {
+                    revenueDelta = 0f;
+                } else {
+                    revenueDelta = revenue/lastAnnualRevenue;
+                }
+
+                if (lastAnnualCosts == 0) {
+                    costsDelta = 0f;
+                } else {
+                    costsDelta = costs/lastAnnualCosts;
+                }
+
+                float lastAnnualProfit = lastAnnualRevenue - lastAnnualCosts;
+                if (lastAnnualProfit == 0) {
+                    profitDelta = 0f;
+                } else {
+                    profitDelta = profit/lastAnnualProfit;
+                }
+
+            // Otherwise, everything improved by 100%!!!
+            } else {
+                revenueDelta = 1f;
+                costsDelta = 1f;
+                profitDelta = 1f;
+            }
+        }
+    }
+
     public Company Init() {
         // Default values.
         cash = new Stat("Cash", 100000);
@@ -385,19 +436,20 @@ public class Company : HasStats {
     public float annualProfit {
         get { return annualRevenue - annualCosts; }
     }
+    public float salaries {
+        get { return workers.Slinq().Select(w => w.salary).Sum() * GameManager.Instance.wageMultiplier; }
+    }
+    public float rent {
+        // Skip the first location's rent since it is our HQ and considered free.
+        get { return locations.Skip(1).Slinq().Select(l => l.cost).Sum()/1000 * GameManager.Instance.costMultiplier * 12; }
+    }
+    public float taxes {
+        get { return annualRevenue * GameManager.Instance.taxRate; }
+    }
 
     static public event System.Action<float, string> Paid;
     public void PayAnnual() {
-        float toPay = 0;
-
-        // Skip the first location's rent since it is our HQ and considered free.
-        float salaries = workers.Slinq().Select(w => w.salary).Sum() * GameManager.Instance.wageMultiplier;
-        float rent = locations.Skip(1).Slinq().Select(l => l.cost).Sum()/1000 * GameManager.Instance.costMultiplier * 12;
-        toPay += salaries + rent;
-
-        // Taxes
-        float taxes = annualRevenue * GameManager.Instance.taxRate;
-        toPay += taxes;
+        float toPay = salaries + rent + taxes;
 
         // The base tax rate is 0.3f.
         float expectedTaxes = annualRevenue * 0.3f;
@@ -408,13 +460,6 @@ public class Company : HasStats {
 
         // Also reset annual revenue.
         annualRevenue = 0;
-
-        // TODO move this separately?
-        if (Paid != null) {
-            Paid(salaries, "for salaries");
-            Paid(rent, "for rent");
-            Paid(taxes, "for taxes");
-        }
     }
 
     public bool Pay(float cost) {
@@ -539,39 +584,8 @@ public class Company : HasStats {
     // Performance Data ==============================
     // ===============================================
 
-    public Dictionary<string, float> CollectAnnualPerformanceData() {
-        Dictionary<string, float> results = new Dictionary<string, float>();
-        // Compare this annual's performance to last annual's (if available).
-        if (lastAnnualRevenue != 0 && lastAnnualCosts != 0) {
-            if (lastAnnualRevenue == 0) {
-                results["Annual Revenue Delta"] = 0f;
-            } else {
-                results["Annual Revenue Delta"] = annualRevenue/lastAnnualRevenue;
-            }
-
-            if (lastAnnualCosts == 0) {
-                results["Annual Costs Delta"] = 0f;
-            } else {
-                results["Annual Costs Delta"] = annualCosts/lastAnnualCosts;
-            }
-
-            float lastAnnualProfit = lastAnnualRevenue - lastAnnualCosts;
-            if (lastAnnualProfit == 0) {
-                results["Annual Profit Delta"] = 0f;
-            } else {
-                results["Annual Profit Delta"] = annualProfit/lastAnnualProfit;
-            }
-
-        // Otherwise, everything improved by 100%!!!
-        } else {
-            results["Annual Revenue Delta"] = 1f;
-            results["Annual Costs Delta"] = 1f;
-            results["Annual Profit Delta"] = 1f;
-        }
-
-        results["Annual Revenue"] = annualRevenue;
-        results["Annual Costs"] = annualCosts;
-        results["Annual Profit"] = annualProfit;
+    public StatusReport CollectAnnualPerformanceData() {
+        StatusReport report = new StatusReport(annualRevenue, lastAnnualRevenue, annualCosts, lastAnnualCosts, rent, salaries, taxes);
 
         // Reset values.
         lastAnnualRevenue = annualRevenue;
@@ -579,7 +593,7 @@ public class Company : HasStats {
         annualRevenue = 0;
         annualCosts = 0;
 
-        return results;
+        return report;
     }
 
     // ===============================================

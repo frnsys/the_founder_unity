@@ -271,7 +271,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     static public event System.Action<int> YearEnded;
-    static public event System.Action<int, Dictionary<string, float>, TheBoard> PerformanceReport;
+    static public event System.Action<int, Company.StatusReport, TheBoard> PerformanceReport;
     //IEnumerator PerformanceNews(float growth) {
         //yield return StartCoroutine(GameTimer.Wait(weekTime));
         //AGameEvent ev = null;
@@ -303,12 +303,12 @@ public class GameManager : Singleton<GameManager> {
         playerCompany.HarvestCompanies();
 
         // Check performance and update profit target
-        Dictionary<string, float> results = playerCompany.CollectAnnualPerformanceData();
-        float growth = data.board.EvaluatePerformance(results["Annual Profit"]);
+        Company.StatusReport report = playerCompany.CollectAnnualPerformanceData();
+        float growth = data.board.EvaluatePerformance(report.profit);
 
         // Show performance report
         if (PerformanceReport != null)
-            PerformanceReport(data.year, results, data.board);
+            PerformanceReport(data.year, report, data.board);
 
         if (YearEnded != null)
             YearEnded(data.year);

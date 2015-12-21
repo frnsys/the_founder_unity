@@ -105,8 +105,8 @@ public class UIManager : Singleton<UIManager> {
         window.GetComponent<UIHireWorkers>().LoadWorkers(workers);
     }
 
-    void OnPerformanceReport(int year, Dictionary<string, float> results, TheBoard board) {
-        PerformanceReport(results, board);
+    void OnPerformanceReport(int year, Company.StatusReport report, TheBoard board) {
+        PerformanceReport(report, board);
     }
 
     void OnYearEnded(int year) {
@@ -183,9 +183,9 @@ public class UIManager : Singleton<UIManager> {
     }
 
     // Create an annual report.
-    public UIPerformanceReport PerformanceReport(Dictionary<string, float> results, TheBoard board) {
+    public UIPerformanceReport PerformanceReport(Company.StatusReport statusReport, TheBoard board) {
         UIPerformanceReport report = NGUITools.AddChild(alertsPanel, annualReportPrefab).GetComponent<UIPerformanceReport>();
-        report.BuildReport(results, board);
+        report.BuildReport(statusReport, board);
         return report;
     }
 

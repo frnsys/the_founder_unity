@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MainGameUI : MonoBehaviour {
+public class UIMainGame : MonoBehaviour {
     public GameObject resultPrefab;
     public UIProgressBar turnsBar;
     public UILabel goodwillLabel;

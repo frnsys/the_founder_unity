@@ -47,7 +47,7 @@ public class MainGame : MonoBehaviour {
     public Sprite minusIcon;
 
     public Camera camera;
-    public MainGameUI ui;
+    public UIMainGame ui;
 
     private GameObject hitGo;
     private Vector2 startPos;
