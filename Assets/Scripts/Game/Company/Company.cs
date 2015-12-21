@@ -449,11 +449,12 @@ public class Company : HasStats {
     public float taxes {
         get { return annualRevenue * GameManager.Instance.taxRate; }
     }
+    public float toPay {
+        get { return salaries + rent + taxes; }
+    }
 
     static public event System.Action<float, string> Paid;
     public void PayAnnual() {
-        float toPay = salaries + rent + taxes;
-
         // The base tax rate is 0.3f.
         float expectedTaxes = annualRevenue * 0.3f;
         taxesAvoided += expectedTaxes - taxes;

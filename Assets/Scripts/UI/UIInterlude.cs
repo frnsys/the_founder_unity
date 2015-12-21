@@ -29,6 +29,7 @@ public class UIInterlude : MonoBehaviour {
     }
 
     void Update() {
+        cashLabel.text = string.Format("{0:C0}", company.cash.value);
         marketingLabel.text = string.Format(":MARKETING: {0:F0}", company.charisma);
         designLabel.text = string.Format(":DESIGN: {0:F0}", company.creativity);
         engineeringLabel.text = string.Format(":ENGINEERING: {0:F0}", company.cleverness);

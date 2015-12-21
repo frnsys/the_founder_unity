@@ -6,10 +6,10 @@ using System.Collections.Generic;
 public class UIMainGame : MonoBehaviour {
     public GameObject resultPrefab;
     public UIProgressBar turnsBar;
-    public UILabel goodwillLabel;
     public UILabel statsLabel;
     public UILabel cashLabel;
     public UILabel yearLabel;
+    public UILabel profitLabel;
 
     public Color posCashColor;
     public Color posCashShadow;
@@ -28,7 +28,6 @@ public class UIMainGame : MonoBehaviour {
     public void Setup(Company c, Camera cam, int turns) {
         company = c;
         camera = cam;
-        statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}", c.charisma, c.cleverness, c.creativity);
         yearLabel.text = GameManager.Instance.year.ToString();
         UpdateUI(turns, turns);
     }
@@ -56,7 +55,7 @@ public class UIMainGame : MonoBehaviour {
 
     public void UpdateUI(int turnsLeft, int totalTurns) {
         turnsBar.value = (float)turnsLeft/totalTurns;
-        goodwillLabel.text = string.Format(":GOODWILL: {0} goodwill", company.goodwill);
+        statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}     :GOODWILL: {3:0}", company.charisma, company.cleverness, company.creativity, company.goodwill);
 
         float cash = company.cash.value;
         if (cash <= 0) {
@@ -67,6 +66,8 @@ public class UIMainGame : MonoBehaviour {
             cashLabel.effectColor = posCashShadow;
         }
         cashLabel.text = string.Format("{0:C0}", cash);
+
+        profitLabel.text = string.Format("Profit: {0:C0}/{1:C0}", company.annualRevenue - company.annualCosts - company.toPay, GameManager.Instance.profitTarget);
     }
 
     public void ShowNextPiece(GameObject nextPiece) {
