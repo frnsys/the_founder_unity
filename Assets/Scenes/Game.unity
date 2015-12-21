@@ -2927,7 +2927,7 @@ MonoBehaviour:
   mClipping: 4
   mClipRange: {x: .625, y: 449.999969, z: 499.452393, w: 60}
   mClipSoftness: {x: 0, y: 0}
-  mDepth: 2000
+  mDepth: 1
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!54 &127671521
@@ -9547,7 +9547,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.04583335
+  aspectRatio: 5.13333321
 --- !u!1 &476369521
 GameObject:
   m_ObjectHideFlags: 0
@@ -19026,7 +19026,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 11.1999998
 --- !u!65 &965194604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25019,6 +25019,8 @@ MonoBehaviour:
   gridGame: {fileID: 231527871}
   officeCamera: {fileID: 428045958}
   mainCamera: {fileID: 1947553732}
+  selectProductTypesWindow: {fileID: 166248, guid: 812e2565033fd486db41908647f5ddf0,
+    type: 2}
 --- !u!81 &1278708171
 AudioListener:
   m_ObjectHideFlags: 0
@@ -39355,7 +39357,7 @@ MonoBehaviour:
   pixelSnap: 0
   onClick:
   - mTarget: {fileID: 1278708170}
-    mMethodName: StartGridGame
+    mMethodName: SetupGridGame
     mParameters:
     - obj: {fileID: 0}
       field: 

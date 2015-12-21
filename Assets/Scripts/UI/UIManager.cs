@@ -64,7 +64,7 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnDiscoveredProduct(Company c, Product p) {
-        if (c == GameManager.Instance.playerCompany) {
+        if (c == gm.playerCompany) {
             GameObject popup = NGUITools.AddChild(alertsPanel, productDiscoveredAlertPrefab);
             popup.GetComponent<UIProductDiscoveredAlert>().product = p;
         }
@@ -98,7 +98,7 @@ public class UIManager : Singleton<UIManager> {
     }
 
     void OnRecruitmentCompleted(Recruitment r) {
-        List<AWorker> workers = GameManager.Instance.workerManager.WorkersForRecruitment(r);
+        List<AWorker> workers = gm.workerManager.WorkersForRecruitment(r);
         Alert(string.Format("Our recruiting has finished. We had {0} applicants. Here is the info we have on them.", workers.Count));
         GameObject window = NGUITools.AddChild(windowsPanel, hiringPrefab);
         window.GetComponent<UIWidget>().SetAnchor(windowsPanel.gameObject, 0, 0, 0, 0);
@@ -200,11 +200,24 @@ public class UIManager : Singleton<UIManager> {
     public MainGame gridGame;
     public Camera officeCamera;
     public Camera mainCamera;
-    public void StartGridGame(GameObject obj) {
+    public GameObject selectProductTypesWindow;
+    public void SetupGridGame(GameObject obj) {
         officeCamera.gameObject.SetActive(false);
         mainCamera.gameObject.SetActive(false);
-        gridGame.gameObject.SetActive(true);
         interlude.SetActive(false);
+
+        List<ProductType> productTypes = gm.playerCompany.productTypes;
+        // Player must choose 5 product types to use
+        if (productTypes.Count() > 5) {
+            OpenPopup(selectProductTypesWindow);
+        } else {
+            StartGridGame(productTypes);
+        }
+    }
+
+    public void StartGridGame(List<ProductType> productTypes) {
+        gridGame.gameObject.SetActive(true);
+        gridGame.Setup(productTypes);
     }
 
     void OnGridGameDone() {

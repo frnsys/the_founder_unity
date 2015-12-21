@@ -35,6 +35,7 @@ public class MainGame : MonoBehaviour {
     public GameObject emptyPrefab;
     public GameObject[,] grid;
     public float[,] bonusGrid;
+    private List<GameObject> validProductTypePrefabs;
 
     public Color productTypeColor;
     public Color influencerColor;
@@ -60,7 +61,13 @@ public class MainGame : MonoBehaviour {
     }
     private GameState state;
 
-    void OnEnable() {
+    public void Setup(List<ProductType> productTypes) {
+        validProductTypePrefabs = new List<GameObject>();
+        foreach (ProductType pt in productTypes) {
+            GameObject prefab = productTypePrefabs.Where(p => p.name == pt.name).First();
+            validProductTypePrefabs.Add(prefab);
+        }
+
         company = GameManager.Instance.playerCompany;
         state = GameState.None;
 
@@ -75,13 +82,14 @@ public class MainGame : MonoBehaviour {
         if (nextPiece != null)
             Destroy(nextPiece.gameObject);
 
-        CreateNextPiece();
         InitGrid();
         UpdateUI();
+        CreateNextPiece();
     }
 
     void OnDisable() {
-        ui.gameObject.SetActive(false);
+        if (ui != null)
+            ui.gameObject.SetActive(false);
         camera.gameObject.SetActive(false);
     }
 
@@ -225,8 +233,7 @@ public class MainGame : MonoBehaviour {
             else
                 return influencerPrefabs[2];
         } else {
-            //return productTypePrefabs[UnityEngine.Random.Range(0, productTypePrefabs.Length)];
-            return productTypePrefabs[UnityEngine.Random.Range(0, 3)];
+            return validProductTypePrefabs[UnityEngine.Random.Range(0, validProductTypePrefabs.Count)];
         }
     }
 
