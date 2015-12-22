@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MainGame : MonoBehaviour {
-    // Much credit due to github.com/dgkanatsios/matchthreegame for guidance
     static public event System.Action Done;
 
     private int totalTurns;
@@ -16,7 +15,7 @@ public class MainGame : MonoBehaviour {
 
     private int workUnit = 10; // TODO balance this
     private int outrageCost = 50;
-    private int minMatches = 3;
+    private int minMatches = 2;
     private float outragePenalty = -0.25f;
     private float happyBonus = 0.1f;
     private int locationsPerRow = 5;
@@ -120,7 +119,7 @@ public class MainGame : MonoBehaviour {
              Destroy(child.gameObject);
         }
 
-        rows = 5 + (int)Math.Floor((float)company.locations.Count/locationsPerRow);
+        rows = 3 + (int)Math.Floor((float)company.locations.Count/locationsPerRow);
         cols = 5;
         grid = new GameObject[rows, cols];
         bonusGrid = new float[rows, cols];
