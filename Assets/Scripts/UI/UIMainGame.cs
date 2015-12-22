@@ -34,23 +34,34 @@ public class UIMainGame : MonoBehaviour {
 
     // Show product info, fade out after a few secs
     public void ShowProductInfo(Product product) {
-        StartCoroutine(_ShowProductInfo(product));
+        StartCoroutine(_ShowInfo(product.name, product.description, product.meshes));
     }
 
-    private IEnumerator _ShowProductInfo(Product product) {
+    public void ShowInfo(string name, string desc) {
+        StartCoroutine(_ShowInfo(name, desc));
+    }
+
+    private IEnumerator _ShowInfo(string name, string desc, Mesh[] meshes=null) {
         productInfo.alpha = 1f;
         productInfo.gameObject.SetActive(true);
 
-        productDescLabel.text = product.description;
-        productNameLabel.text = product.name;
-        for (int i=0; i<product.meshes.Length; i++) {
-            productObjects[i].GetComponent<MeshFilter>().mesh = product.meshes[i];
+        productNameLabel.text = name;
+        productDescLabel.text = desc;
+
+        if (meshes != null) {
+            for (int i=0; i<meshes.Length; i++) {
+                productObjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
+                productObjects[i].SetActive(true);
+            }
+        } else {
+            foreach (GameObject go in productObjects) {
+                go.SetActive(false);
+            }
         }
 
         yield return new WaitForSeconds(3f);
         TweenAlpha.Begin(productInfo.gameObject, MainGame.animationDuration, 0f);
         yield return new WaitForSeconds(MainGame.animationDuration);
-        productInfo.gameObject.SetActive(false);
     }
 
     public void UpdateUI(int turnsLeft, int totalTurns) {

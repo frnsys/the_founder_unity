@@ -271,16 +271,21 @@ public class MainGame : MonoBehaviour {
                                 company.goodwill -= outrageCost;
                                 SetBonusAround(p.row, p.col, -outragePenalty);
                                 PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
+                                ui.ShowInfo("Defused outrage", string.Format("-{0} goodwill", outrageCost));
                                 TakeTurn();
+                            } else {
+                                ui.ShowInfo("Not enough goodwill", string.Format("Needs {0} goodwill", outrageCost));
                             }
                             break;
                         case Piece.Type.Bug:
                             PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
+                            ui.ShowInfo("Debugged", "");
                             TakeTurn();
                             break;
                         case Piece.Type.Influencer:
-                            PopInfluencer(p.name, p.gameObject.transform.position);
+                            int amount = PopInfluencer(p.name, p.gameObject.transform.position);
                             PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
+                            ui.ShowInfo(string.Format("Influenced {0}", p.name), string.Format("+{0} goodwill", amount));
                             TakeTurn();
                             break;
                     }
@@ -318,7 +323,7 @@ public class MainGame : MonoBehaviour {
         UpdateUI();
     }
 
-    private void PopInfluencer(string name, Vector2 pos) {
+    private int PopInfluencer(string name, Vector2 pos) {
         int amount = 0;
         switch (name) {
             case "Friend":
@@ -333,6 +338,7 @@ public class MainGame : MonoBehaviour {
         }
         company.goodwill += amount;
         ui.ShowResultAt(pos, string.Format("+{0}", amount));
+        return amount;
     }
 
     private void ProcessMatchesAround(GameObject piece) {
