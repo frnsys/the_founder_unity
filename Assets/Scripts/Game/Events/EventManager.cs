@@ -89,7 +89,7 @@ public class EventManager : MonoBehaviour {
                 // We trigger the event by adding it to the regular event pool.
                 ev.probability = 1f;
 
-                // This is in number of years.
+                // This is in number of turns.
                 DelayTrigger(ev, 1);
 
                 // Remove it now though so that it doesn't re-trigger.

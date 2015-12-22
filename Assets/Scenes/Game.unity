@@ -17682,7 +17682,7 @@ MonoBehaviour:
   topAnchor:
     target: {fileID: 557697477}
     relative: 1
-    absolute: 0
+    absolute: -52
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
@@ -17712,7 +17712,7 @@ MonoBehaviour:
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
-  mSpacingY: 0
+  mSpacingY: 10
   mUseFloatSpacing: 0
   mFloatSpacingX: 0
   mFloatSpacingY: 0
@@ -19027,7 +19027,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 11.1999998
+  aspectRatio: 4.4636364
 --- !u!65 &965194604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19441,11 +19441,11 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 916032053}
     relative: 0
-    absolute: 0
+    absolute: -26
   topAnchor:
     target: {fileID: 916032053}
     relative: 0
-    absolute: 70
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
@@ -39400,7 +39400,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 11.1999998
+  aspectRatio: 4.4636364
 --- !u!65 &2034827762
 BoxCollider:
   m_ObjectHideFlags: 0

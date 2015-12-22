@@ -114,6 +114,7 @@ public class EffectSet {
     public void Apply(Company company) {
         company.activeEffects.Add(this);
 
+        Debug.Log("applying effects");
         company.cash.baseValue += cash;
         company.opinion += opinion;
         company.hype += hype;

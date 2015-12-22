@@ -24,12 +24,19 @@ public class UIMainGame : MonoBehaviour {
 
     private Company company;
     private Camera camera;
+    private int totalTurns;
+    private int turnsLeft;
 
     public void Setup(Company c, Camera cam, int turns) {
         company = c;
         camera = cam;
         yearLabel.text = GameManager.Instance.year.ToString();
-        UpdateUI(turns, turns);
+        totalTurns = turns;
+        turnsLeft = turns;
+    }
+
+    public void TakeTurn() {
+        turnsLeft--;
     }
 
     // Show product info, fade out after a few secs
@@ -64,14 +71,14 @@ public class UIMainGame : MonoBehaviour {
         yield return new WaitForSeconds(MainGame.animationDuration);
     }
 
-    public void UpdateUI(int turnsLeft, int totalTurns) {
+    void Update() {
         turnsBar.value = (float)turnsLeft/totalTurns;
 
         string emo = "OUTRAGE";
         if (company.opinion >= 0) {
             emo = "GOODWILL";
         }
-        statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}     :HYPE: {3}     :{4}: {5:0}", company.charisma, company.cleverness, company.creativity, company.hype, emo, company.opinion);
+        statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}\n:HYPE: {3}     :{4}: {5:0}", company.charisma, company.cleverness, company.creativity, company.hype, emo, company.opinion);
 
         float cash = company.cash.value;
         if (cash <= 0) {

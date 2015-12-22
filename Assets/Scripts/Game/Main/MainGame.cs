@@ -12,6 +12,8 @@ public class MainGame : MonoBehaviour {
     private int turnsLeft;
 
     private Company company;
+    private EventManager em;
+
     private int workUnit = 10; // TODO balance this
     private int outrageCost = 50;
     private int minMatches = 3;
@@ -71,6 +73,7 @@ public class MainGame : MonoBehaviour {
         }
 
         company = GameManager.Instance.playerCompany;
+        em = GameManager.Instance.eventManager;
         state = GameState.None;
 
         // At minimum, 20 turns
@@ -85,7 +88,6 @@ public class MainGame : MonoBehaviour {
             Destroy(nextPiece.gameObject);
 
         InitGrid();
-        UpdateUI();
         CreateNextPiece();
     }
 
@@ -333,22 +335,21 @@ public class MainGame : MonoBehaviour {
         }
     }
 
-    private void UpdateUI() {
-        ui.UpdateUI(turnsLeft, totalTurns);
-    }
-
     private void TakeTurn() {
         selectedPiece = null;
         turnsLeft--;
+        ui.TakeTurn();
 
         if (turnsLeft <= 0 && Done != null) {
             Done();
+        } else {
+            // Resolve events
+            em.Tick();
+            em.EvaluateSpecialEvents();
         }
 
         // Public forgetting
         company.Forget();
-
-        UpdateUI();
     }
 
     private int PopInfluencer(string name, Vector2 pos) {

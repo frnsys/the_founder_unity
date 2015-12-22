@@ -188,8 +188,13 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void InitializeGame(Worker cofounder, Location location, Vertical vertical) {
+        // TESTING
         Vertical vertical2 = Vertical.Load("Information");
         data.company.verticals = new List<Vertical> { vertical, vertical2 };
+        //AGameEvent ge = GameEvent.LoadNoticeEvent("testevent");
+        //ge.countdown = 2;
+        //ge.probability = 1f;
+        //eventManager.Add(ge);
 
 
         foreach (ProductType pt in ProductType.LoadAll().Where(p => p.isAvailable(data.company))) {
@@ -303,10 +308,6 @@ public class GameManager : Singleton<GameManager> {
 
     public void OnGameDone() {
         data.year++;
-
-        // Resolve events
-        eventManager.Tick();
-        eventManager.EvaluateSpecialEvents();
 
         // Harvest minicompanies (acquisitions)
         playerCompany.HarvestCompanies();
