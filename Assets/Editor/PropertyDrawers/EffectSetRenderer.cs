@@ -24,25 +24,8 @@ public class EffectSetRenderer {
 
     public static EffectSet RenderEffectSet(UnityEngine.Object target, EffectSet es) {
         es.cash =  EditorGUILayout.FloatField("Cash Effect", es.cash);
-
-        EditorGUILayout.LabelField("Opinion Effect");
-        if (es.opinionEvent == null) {
-            if (GUILayout.Button("Add Opinion Effect")) {
-                es.opinionEvent = new OpinionEvent();
-                EditorUtility.SetDirty(target);
-            }
-        } else {
-            es.opinionEvent.name = EditorGUILayout.TextField("Name", es.opinionEvent.name);
-            EditorGUILayout.BeginHorizontal();
-            es.opinionEvent.opinion.value = EditorGUILayout.FloatField("Opinion", es.opinionEvent.opinion.value);
-            es.opinionEvent.publicity.value = EditorGUILayout.FloatField("Publicity", es.opinionEvent.publicity.value);
-            EditorGUILayout.EndHorizontal();
-            if (GUILayout.Button("Clear Opinion Effect")) {
-                es.opinionEvent = null;
-                EditorUtility.SetDirty(target);
-            }
-        }
-
+        es.opinion =  EditorGUILayout.FloatField("Opinion Effect", es.opinion);
+        es.hype =  EditorGUILayout.IntField("Hype Effect", es.hype);
         es.forgettingRate = EditorGUILayout.FloatField("Forgetting Rate (+/-)", es.forgettingRate);
         es.spendingMultiplier = EditorGUILayout.FloatField("Spending Multiplier (+/-)", es.spendingMultiplier);
         es.wageMultiplier = EditorGUILayout.FloatField("Wage Multiplier (+/-)", es.wageMultiplier);

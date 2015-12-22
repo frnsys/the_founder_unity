@@ -196,7 +196,7 @@ public class Product : HasStats {
         marketShare *= 1 + hype;
 
         // Public opinion's impact.
-        marketShare *= 1 + company.opinion.value/100f;
+        marketShare *= 1 + company.opinion/100f;
 
         marketShare = Mathf.Min(marketShare, 1f);
 

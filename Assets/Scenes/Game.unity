@@ -4623,6 +4623,7 @@ MonoBehaviour:
   happyPrefab: {fileID: 179326, guid: 21ab3ffde3cbc48a9a89085a438d6de1, type: 2}
   bugPrefab: {fileID: 179326, guid: 6fe7ceb2a350841a992a059be52efd09, type: 2}
   blockPrefab: {fileID: 179326, guid: 10353c7d5e3284638aeda3729c51b6d8, type: 2}
+  hypePrefab: {fileID: 179326, guid: 4d43fb7b4f4244c8c9842986c843cb0f, type: 2}
   emptyPrefab: {fileID: 179326, guid: cb187147a6b3f4bdab8253c7ec65df1b, type: 2}
   productTypeColor: {r: .417874128, g: .78270185, b: .963235319, a: 1}
   influencerColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
@@ -8683,13 +8684,13 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 433541986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -120, z: 0}
+  m_LocalPosition: {x: 170, y: -120, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children:
   - {fileID: 1225001450}
   - {fileID: 1074752120}
   m_Father: {fileID: 1578905546}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!114 &433541988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9062,7 +9063,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
-  mText: ':HAPPINESS: 00'
+  mText: ':HYPE: 00'
   mFontSize: 32
   mFontStyle: 0
   mAlignment: 1
@@ -14148,7 +14149,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
-  mText: Emp. Happiness
+  mText: Hype
   mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
@@ -28934,9 +28935,9 @@ MonoBehaviour:
   marketingLabel: {fileID: 290053507}
   designLabel: {fileID: 1303735444}
   engineeringLabel: {fileID: 605516474}
-  goodwillLabel: {fileID: 370933295}
+  opinionLabel: {fileID: 370933295}
   productivityLabel: {fileID: 1074752121}
-  happinessLabel: {fileID: 445129025}
+  hypeLabel: {fileID: 445129025}
 --- !u!1 &1486476882
 GameObject:
   m_ObjectHideFlags: 0
@@ -30961,8 +30962,8 @@ Transform:
   - {fileID: 763127080}
   - {fileID: 1873928379}
   - {fileID: 159833317}
-  - {fileID: 433541987}
   - {fileID: 1777526669}
+  - {fileID: 433541987}
   m_Father: {fileID: 1634441502}
   m_RootOrder: 0
 --- !u!114 &1578905547
@@ -32396,7 +32397,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
-  mText: Goodwill
+  mText: Public Opinion
   mFontSize: 24
   mFontStyle: 0
   mAlignment: 1
@@ -34475,13 +34476,13 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1777526668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 170, y: -120, z: 0}
+  m_LocalPosition: {x: 0, y: -120, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children:
   - {fileID: 720192511}
   - {fileID: 445129024}
   m_Father: {fileID: 1578905546}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!114 &1777526670
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,10 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45c822bb302384127bfc904445600049, type: 3}
+  m_Script: {fileID: 11500000, guid: 3124d83d9435847269f953cfc54d7d86, type: 3}
   m_Name: Press Release
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: d82632e9a104d4b7ba1d0917d9129d57, type: 3}
-  description: E-mail a few target publications with our messaging.
+  description: E-mail a few publications
   cost: 10000
-  pucks: 1
+  id: 0

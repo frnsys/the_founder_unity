@@ -38,12 +38,12 @@ namespace UnityTest
             data.company  = new Company("TESTINGCORP").Init();
                 data.company.founders.Add(CreateFounder("STEVE", 100));
                 data.company.baseSizeLimit       = 17;
-                data.company.lastAnnualRevenue    = 28517;
-                data.company.annualRevenue      = 12489;
-                data.company.annualCosts        = 184787;
+                data.company.lastAnnualRevenue   = 28517;
+                data.company.annualRevenue       = 12489;
+                data.company.annualCosts         = 184787;
                 data.company.cash.baseValue      = 100000000;
-                data.company.opinion.baseValue   = 200;
-                data.company.publicity.baseValue = 300;
+                data.company.opinion             = 200;
+                data.company.hype                = 300;
                 data.company.office              = Office.Type.Office;
 
                 data.company.perks               = new List<APerk>() {
@@ -66,7 +66,6 @@ namespace UnityTest
                 data.company.promos              = new List<int>() { 0,2,5 };
 
                 EffectSet es = new EffectSet();
-                es.opinionEvent = new OpinionEvent(100, 400);
                 es.Apply(data.company);
 
                 for (int i=0;i<5;i++) {
@@ -169,8 +168,8 @@ namespace UnityTest
             Assert.AreEqual(gd.company.lastAnnualRevenue,  data.company.lastAnnualRevenue);
             Assert.AreEqual(gd.company.annualRevenue,      data.company.annualRevenue);
             Assert.AreEqual(gd.company.annualCosts,        data.company.annualCosts);
-            Assert.AreEqual(gd.company.opinion.value,      data.company.opinion.value);
-            Assert.AreEqual(gd.company.publicity.value,    data.company.publicity.value);
+            Assert.AreEqual(gd.company.opinion,            data.company.opinion);
+            Assert.AreEqual(gd.company.hype,               data.company.hype);
             Assert.AreEqual(gd.company.markets,            data.company.markets);
 
             for (int i=0; i<gd.company.perks.Count; i++) {
@@ -192,10 +191,6 @@ namespace UnityTest
 
             Assert.AreEqual(gd.eventsPool[0].name,         data.eventsPool[0].name);
             Assert.AreEqual(gd.specialEventsPool[0].name,  data.specialEventsPool[0].name);
-
-            for (int i=0;i<gd.company.OpinionEvents.Count;i++) {
-                CompareOpinionEvent(data.company.OpinionEvents[i], gd.company.OpinionEvents[i]);
-            }
 
             Assert.AreEqual(gd.company.workers.Count,      data.company.workers.Count);
             for (int i=0;i<gd.company.workers.Count;i++) {
@@ -226,11 +221,6 @@ namespace UnityTest
             Assert.AreEqual(gd.company.recruitments, data.company.recruitments);
             Assert.AreEqual(gd.company.promos, data.company.promos);
 		}
-
-        private void CompareOpinionEvent(OpinionEvent oe, OpinionEvent oe_) {
-            Assert.AreEqual(oe.opinion.value, oe_.opinion.value);
-            Assert.AreEqual(oe.publicity.value, oe_.publicity.value);
-        }
 
         private void CompareEffectSets(EffectSet es, EffectSet es_) {
             List<StatBuff> wes = es.workerEffects;

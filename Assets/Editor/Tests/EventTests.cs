@@ -79,24 +79,24 @@ namespace UnityTest
             GameEvent.Condition pc = new GameEvent.Condition();
             pc.value = 20;
             pc.greater = true;
-            pc.type = GameEvent.Condition.Type.Publicity;
+            pc.type = GameEvent.Condition.Type.Hype;
 
             GameEvent.Condition pc_ = new GameEvent.Condition();
             pc_.value = 40;
             pc_.greater = true;
-            pc_.type = GameEvent.Condition.Type.Publicity;
+            pc_.type = GameEvent.Condition.Type.Hype;
 
             gE.conditions = new List<GameEvent.Condition>() { pc, pc_ };
 
             Company c = new Company("Foo Inc").Init();
-            c.publicity.baseValue = 0;
+            c.hype = 0;
 
             Assert.IsFalse(gE.ConditionsSatisfied(c));
 
-            c.publicity.baseValue = 30;
+            c.hype = 30;
             Assert.IsFalse(gE.ConditionsSatisfied(c));
 
-            c.publicity.baseValue = 50;
+            c.hype = 50;
             Assert.IsTrue(gE.ConditionsSatisfied(c));
         }
 

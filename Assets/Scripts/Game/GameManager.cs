@@ -308,9 +308,6 @@ public class GameManager : Singleton<GameManager> {
         eventManager.Tick();
         eventManager.EvaluateSpecialEvents();
 
-        // Public forgetting
-        playerCompany.ForgetOpinionEvents();
-
         // Harvest minicompanies (acquisitions)
         playerCompany.HarvestCompanies();
 

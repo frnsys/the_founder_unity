@@ -205,25 +205,6 @@ namespace UnityTest
         }
 
         [Test]
-        public void OpinionEvents() {
-            c.opinion.baseValue   = 200;
-            c.publicity.baseValue = 100;
-            gd.forgettingRate     = 10;
-
-            EffectSet es = new EffectSet();
-            es.opinionEvent = new OpinionEvent(100, 400);
-            es.Apply(c);
-
-            Assert.AreEqual(c.opinion.value, 300);
-            Assert.AreEqual(c.publicity.value, 500);
-
-            c.ForgetOpinionEvents();
-
-            Assert.AreEqual(c.opinion.value, 290);
-            Assert.AreEqual(c.publicity.value, 500);
-        }
-
-        [Test]
         public void MiniCompanyAcquisition() {
             AICompany a = (AICompany)GameObject.Instantiate(AssetDatabase.LoadAssetAtPath("Assets/Editor/Tests/Resources/TestAICompany.asset", typeof(AICompany)));
             AAICompany aic = new AAICompany(a);

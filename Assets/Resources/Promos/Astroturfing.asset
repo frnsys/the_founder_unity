@@ -8,12 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45c822bb302384127bfc904445600049, type: 3}
+  m_Script: {fileID: 11500000, guid: 3124d83d9435847269f953cfc54d7d86, type: 3}
   m_Name: Astroturfing
   m_EditorClassIdentifier: 
   icon: {fileID: 2800000, guid: 2e98505adc1b547c9a6134bba08b1671, type: 3}
-  description: Hire a large group of folks to simulate popularity of our products
-    on social media.
+  description: Hire a large group to simulate our popularity
   cost: 45000
-  pucks: 2
   id: 3

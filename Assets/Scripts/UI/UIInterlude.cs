@@ -12,9 +12,9 @@ public class UIInterlude : MonoBehaviour {
     public UILabel marketingLabel;
     public UILabel designLabel;
     public UILabel engineeringLabel;
-    public UILabel goodwillLabel;
+    public UILabel opinionLabel;
     public UILabel productivityLabel;
-    public UILabel happinessLabel;
+    public UILabel hypeLabel;
 
     private Company company;
 
@@ -34,7 +34,12 @@ public class UIInterlude : MonoBehaviour {
         designLabel.text = string.Format(":DESIGN: {0:F0}", company.creativity);
         engineeringLabel.text = string.Format(":ENGINEERING: {0:F0}", company.cleverness);
         productivityLabel.text = string.Format(":PRODUCTIVITY: {0:F0}", company.productivity);
-        happinessLabel.text = string.Format(":HAPPINESS: {0:F0}", company.happiness);
-        goodwillLabel.text = string.Format(":GOODWILL: {0:F0}", company.goodwill);
+        hypeLabel.text = string.Format(":HYPE: {0:F0}", company.hype);
+
+        string emo = "OUTRAGE";
+        if (company.opinion >= 0) {
+            emo = "GOODWILL";
+        }
+        opinionLabel.text = string.Format(":{0}: {1:F0}", emo, company.opinion);
     }
 }

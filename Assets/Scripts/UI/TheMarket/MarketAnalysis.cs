@@ -16,7 +16,7 @@ public class MarketAnalysis : UIAlert {
         Company c = GameManager.Instance.playerCompany;
 
         hype.text = string.Format("x{0:0.#}", 1 + p.hype);
-        opinion.text = string.Format("x{0:0.#}", 1 + c.opinion.value/100f);
+        opinion.text = string.Format("x{0:0.#}", 1 + c.opinion/100f);
         reach.text = string.Format("x{0:0.##}", Math.Round(c.marketSharePercent, 2));
         share.text = string.Format("{0:0.#}%", Math.Round(p.marketShare * 100, 2));
 

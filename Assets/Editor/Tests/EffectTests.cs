@@ -49,15 +49,14 @@ namespace UnityTest
 
         [Test]
         public void Opinion() {
-            e.opinionEvent = new OpinionEvent();
-            e.opinionEvent.opinion.value   = 2000;
-            e.opinionEvent.publicity.value = 4000;
+            e.opinion = 2000;
+            e.hype = 4000;
 
-            float start_o = c.opinion.value;
-            float start_p = c.publicity.value;
+            float start_o = c.opinion;
+            float start_h = c.hype;
             e.Apply(c);
-            Assert.AreEqual(c.opinion.value,   start_o + e.opinionEvent.opinion.value);
-            Assert.AreEqual(c.publicity.value, start_p + e.opinionEvent.publicity.value);
+            Assert.AreEqual(c.opinion,   start_o + e.opinion);
+            Assert.AreEqual(c.hype, start_h + e.hype);
         }
 
         [Test]

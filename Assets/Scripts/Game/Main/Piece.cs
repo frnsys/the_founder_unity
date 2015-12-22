@@ -14,7 +14,8 @@ public class Piece : MonoBehaviour {
         Bug,
         Outrage,
         Happy,
-        Empty
+        Empty,
+        Hype
     }
     public Type type;
 

@@ -66,7 +66,12 @@ public class UIMainGame : MonoBehaviour {
 
     public void UpdateUI(int turnsLeft, int totalTurns) {
         turnsBar.value = (float)turnsLeft/totalTurns;
-        statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}     :GOODWILL: {3:0}", company.charisma, company.cleverness, company.creativity, company.goodwill);
+
+        string emo = "OUTRAGE";
+        if (company.opinion >= 0) {
+            emo = "GOODWILL";
+        }
+        statsLabel.text = string.Format(":MARKETING: {0:0}     :ENGINEERING: {1:0}     :DESIGN: {2:0}     :HYPE: {3}     :{4}: {5:0}", company.charisma, company.cleverness, company.creativity, company.hype, emo, company.opinion);
 
         float cash = company.cash.value;
         if (cash <= 0) {

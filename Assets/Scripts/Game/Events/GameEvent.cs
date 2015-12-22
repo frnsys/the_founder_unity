@@ -69,11 +69,11 @@ public class GameEvent : SharedResource<GameEvent> {
     private bool EvaluateCondition(Company c, Condition cond) {
         float comparison = 0;
         switch (cond.type) {
-            case Condition.Type.Publicity:
-                comparison = c.publicity.value;
+            case Condition.Type.Hype:
+                comparison = c.hype;
                 break;
             case Condition.Type.Opinion:
-                comparison = c.opinion.value;
+                comparison = c.opinion;
                 break;
             case Condition.Type.Cash:
                 comparison = c.cash.value;
@@ -132,7 +132,7 @@ public class GameEvent : SharedResource<GameEvent> {
         public Type type;
 
         public enum Type {
-            Publicity,
+            Hype,
             Opinion,
             Cash,
             AnnualRevenue,

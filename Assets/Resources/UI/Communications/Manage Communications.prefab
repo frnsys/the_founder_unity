@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 230.5, y: 0, z: 0}
+  m_LocalPosition: {x: 228.5, y: 0, z: 0}
   m_LocalScale: {x: .999839962, y: .999839962, z: .999839962}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -469,17 +469,17 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 518
+  mWidth: 514
   mHeight: 80
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.4749999
+  aspectRatio: 6.42500019
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 490954cc05ebe4fcc9fd3c3f421ac7cc, type: 3}
   mFont: {fileID: 0}
-  mText: Marcomm
+  mText: Promos
   mFontSize: 28
   mFontStyle: 1
   mAlignment: 1
@@ -534,13 +534,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   mPivot: 4
-  mWidth: 543
+  mWidth: 539
   mHeight: 80
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 16
+  aspectRatio: 6.7874999
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -598,7 +598,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3101
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3101
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -791,7 +791,8 @@ MonoBehaviour:
   promoPrefab: {fileID: 100008, guid: 72b4d408ad44b4294b963474493d217f, type: 2}
   grid: {fileID: 11400060}
   scrollView: {fileID: 11400028}
-  historyPrefab: {fileID: 100020, guid: 4478d80e229454b8984ee8148c1b113e, type: 2}
+  promos: []
+  historyPrefab: {fileID: 0}
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1

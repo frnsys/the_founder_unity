@@ -7,13 +7,16 @@ public class Promo : SharedResource<Promo> {
     public Texture icon;
     public string description;
     public float cost;
-    public int pucks;
     public int id;
 
     static public event System.Action<Promo> Completed;
-    public void Develop() {
+    public void Complete() {
         if (Completed != null)
             Completed(this);
+    }
+
+    public int hype {
+        get { return (int)(UnityEngine.Random.value * (cost/2000) + (cost/2000)); }
     }
 
     public static Promo[] LoadAll() {

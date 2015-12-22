@@ -32,6 +32,7 @@ public class MainGame : MonoBehaviour {
     public GameObject happyPrefab;
     public GameObject bugPrefab;
     public GameObject blockPrefab;
+    public GameObject hypePrefab;
     public GameObject emptyPrefab;
     public GameObject[,] grid;
     public float[,] bonusGrid;
@@ -53,6 +54,7 @@ public class MainGame : MonoBehaviour {
     private GameObject hitGo;
     private Vector2 startPos;
     private GameObject nextPiece;
+    private Piece selectedPiece;
 
     private enum GameState {
         None,
@@ -87,10 +89,26 @@ public class MainGame : MonoBehaviour {
         CreateNextPiece();
     }
 
+    void OnEnable() {
+        Promo.Completed += OnPromoCompleted;
+    }
+
     void OnDisable() {
         if (ui != null)
             ui.gameObject.SetActive(false);
         camera.gameObject.SetActive(false);
+        Promo.Completed -= OnPromoCompleted;
+    }
+
+
+    void OnPromoCompleted(Promo p) {
+        int hype = p.hype;
+        company.hype += hype;
+        ui.ShowInfo(string.Format("Ran {0} promo", p.name),
+                string.Format("+{0} hype", hype));
+
+        PlacePiece(CreatePiece(emptyPrefab), selectedPiece.row, selectedPiece.col);
+        TakeTurn();
     }
 
 
@@ -220,11 +238,11 @@ public class MainGame : MonoBehaviour {
 
     private GameObject RandomPiecePrefab() {
         // TODO balance this
-        if (UnityEngine.Random.value <= Mathf.Max(0.02f, -company.opinion.value/100)) {
+        if (UnityEngine.Random.value <= Mathf.Max(0.02f, -company.opinion/100)) {
             return outragePrefab;
 
         // TODO balance this
-        } else if (UnityEngine.Random.value < Mathf.Min(0.15f, company.charisma/200)) {
+        } else if (UnityEngine.Random.value < Mathf.Min(0.15f, company.hype/100)) {
             float roll = UnityEngine.Random.value;
             if (roll <= 0.55f)
                 return influencerPrefabs[0];
@@ -232,6 +250,8 @@ public class MainGame : MonoBehaviour {
                 return influencerPrefabs[1];
             else
                 return influencerPrefabs[2];
+        } else if (UnityEngine.Random.value < 0.1f) {
+            return hypePrefab;
         } else {
             return validProductTypePrefabs[UnityEngine.Random.Range(0, validProductTypePrefabs.Count)];
         }
@@ -267,14 +287,14 @@ public class MainGame : MonoBehaviour {
                             TakeTurn();
                             break;
                         case Piece.Type.Outrage:
-                            if (company.goodwill - outrageCost >= 0) {
-                                company.goodwill -= outrageCost;
+                            if (company.hype - outrageCost >= 0) {
+                                company.hype -= outrageCost;
                                 SetBonusAround(p.row, p.col, -outragePenalty);
                                 PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
-                                ui.ShowInfo("Defused outrage", string.Format("-{0} goodwill", outrageCost));
+                                ui.ShowInfo("Defused outrage", string.Format("-{0} hype", outrageCost));
                                 TakeTurn();
                             } else {
-                                ui.ShowInfo("Not enough goodwill", string.Format("Needs {0} goodwill", outrageCost));
+                                ui.ShowInfo("Not enough hype", string.Format("Needs {0} hype", outrageCost));
                             }
                             break;
                         case Piece.Type.Bug:
@@ -285,8 +305,12 @@ public class MainGame : MonoBehaviour {
                         case Piece.Type.Influencer:
                             int amount = PopInfluencer(p.name, p.gameObject.transform.position);
                             PlacePiece(CreatePiece(emptyPrefab), p.row, p.col);
-                            ui.ShowInfo(string.Format("Influenced {0}", p.name), string.Format("+{0} goodwill", amount));
+                            ui.ShowInfo(string.Format("Influenced {0}", p.name), string.Format("+{0} hype", amount));
                             TakeTurn();
+                            break;
+                        case Piece.Type.Hype:
+                            selectedPiece = p;
+                            UIManager.Instance.ShowPromos();
                             break;
                     }
                     state = GameState.None;
@@ -314,11 +338,15 @@ public class MainGame : MonoBehaviour {
     }
 
     private void TakeTurn() {
+        selectedPiece = null;
         turnsLeft--;
 
         if (turnsLeft <= 0 && Done != null) {
             Done();
         }
+
+        // Public forgetting
+        company.Forget();
 
         UpdateUI();
     }
@@ -336,14 +364,20 @@ public class MainGame : MonoBehaviour {
                 amount = 70;
                 break;
         }
-        company.goodwill += amount;
+        company.hype += amount;
+        company.opinion += amount/2;
         ui.ShowResultAt(pos, string.Format("+{0}", amount));
         return amount;
     }
 
     private void ProcessMatchesAround(GameObject piece) {
+        Piece.Type t = piece.GetComponent<Piece>().type;
+        if (t != Piece.Type.Influencer && t != Piece.Type.ProductType)
+            return;
+
         List<GameObject> hMatches = HorizontalMatches(piece).ToList();
         List<GameObject> vMatches = VerticalMatches(piece).ToList();
+
 
         // TODO animate the merging
 

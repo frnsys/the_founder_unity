@@ -109,12 +109,12 @@ public class UIEffectAlert : UIAlert {
                             es.expansionCostMultiplier > 0 ? "more expensive" : "cheaper"));
         }
 
-        if (es.opinionEvent.opinion.value != 0) {
-            RenderBuffEffect(es.opinionEvent.opinion, null);
+        if (es.opinion != 0) {
+            RenderEffect(string.Format("{0} to public opinion", es.opinion));
         }
 
-        if (es.opinionEvent.publicity.value != 0) {
-            RenderBuffEffect(es.opinionEvent.publicity, null);
+        if (es.hype != 0) {
+            RenderEffect(string.Format("{0} hype", es.hype));
         }
 
         if (es.costMultiplier != 0) {

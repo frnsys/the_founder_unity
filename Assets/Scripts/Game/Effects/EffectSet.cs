@@ -28,10 +28,8 @@ public class EffectSet {
     public UnlockSet unlocks = new UnlockSet();
 
     public float cash = 0;
-
-    // To keep things consistent with Unity's serialization,
-    // these values are initialized as non-null.
-    public OpinionEvent opinionEvent = new OpinionEvent(0, 0);
+    public int hype = 0;
+    public float opinion = 0;
 
     public GameEvent gameEvent;
     public int eventDelay = 0;
@@ -66,7 +64,8 @@ public class EffectSet {
         EffectSet es = new EffectSet();
         es.cash = cash;
         es.unlocks = unlocks;
-        es.opinionEvent = opinionEvent;
+        es.hype = hype;
+        es.opinion = opinion;
         es.gameEvent = gameEvent;
         es.eventDelay = eventDelay;
         es.eventProbability = eventProbability;
@@ -116,9 +115,8 @@ public class EffectSet {
         company.activeEffects.Add(this);
 
         company.cash.baseValue += cash;
-
-        if (opinionEvent.opinion.value != 0 && opinionEvent.publicity.value != 0)
-            company.ApplyOpinionEvent(opinionEvent);
+        company.opinion += opinion;
+        company.hype += hype;
 
         if (gameEvent != null) {
             AGameEvent ge = new AGameEvent(gameEvent);
@@ -213,7 +211,10 @@ public class EffectSet {
         if (cash != es.cash)
             return false;
 
-        if (!opinionEvent.Equals(es.opinionEvent))
+        if (hype != es.hype)
+            return false;
+
+        if (opinion != es.opinion)
             return false;
 
         if (gameEvent != es.gameEvent)

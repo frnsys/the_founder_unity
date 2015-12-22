@@ -21,7 +21,8 @@ public class UIPromo : MonoBehaviour {
     void OnClick() {
         if (!locked) {
             UIManager.Instance.Confirm(string.Format("Are you sure want to run this campaign?"), delegate() {
-                GameManager.Instance.playerCompany.StartPromo(promo_);
+                    promo_.Complete();
+                    SendMessageUpwards("Close");
             }, null);
         } else {
             UIManager.Instance.Confirm(string.Format("Are you sure buy this promotional strategy? It will cost you {0:C0}", promo_.cost), delegate() {

@@ -97,10 +97,7 @@ public class Company : HasStats {
         marketShare = 0;
         marketSharePercent = 0;
 
-        opinion = new Stat("Outrage", 1);
-        opinionEvents = new List<OpinionEvent>();
-        publicity = new Stat("Hype", 0);
-        goodwill = 100;
+        hype = 0;
 
         activeEffects = new List<EffectSet>();
         companies = new List<MiniCompany>();
@@ -402,17 +399,6 @@ public class Company : HasStats {
     // ===============================================
     // Hype Management ===============================
     // ===============================================
-
-    public void ApplyOpinionEvent(OpinionEvent oe) {
-        opinion.ApplyBuff(oe.opinion);
-        publicity.baseValue += oe.publicity.value;
-        opinionEvents.Add(oe);
-    }
-
-    public void StartPromo(Promo promo) {
-        promo.Develop();
-    }
-
     public List<int> promos;
     public bool BuyPromo(Promo p) {
         if (Pay(p.cost)) {
@@ -552,19 +538,27 @@ public class Company : HasStats {
     // ===============================================
     // Public Opinion ================================
     // ===============================================
-    public Stat opinion;
-    public Stat publicity;
-    public int goodwill;
+    public int hype;
+    public float opinion;
 
-    [SerializeField]
-    private List<OpinionEvent> opinionEvents;
-    public ReadOnlyCollection<OpinionEvent> OpinionEvents {
-        get { return opinionEvents.AsReadOnly(); }
-    }
-    public void ForgetOpinionEvents() {
-        foreach (OpinionEvent oe in opinionEvents) {
-            oe.Forget(GameManager.Instance.forgettingRate);
+    public void Forget() {
+        float rate = GameManager.Instance.forgettingRate;
+        if (opinion > 0) {
+            opinion -= rate;
+
+            // If overshot, just set to 0.
+            if (opinion < 0)
+                opinion = 0;
+        } else if (opinion < 0) {
+            opinion += rate;
+
+            // If overshot, just set to 0.
+            if (opinion > 0)
+                opinion = 0;
         }
+
+        hype -= (int)GameManager.Instance.forgettingRate;
+        hype = hype < 0 ? 0 : hype;
     }
 
 
