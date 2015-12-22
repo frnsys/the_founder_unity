@@ -9547,7 +9547,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.04999995
+  aspectRatio: 2.04583335
 --- !u!1 &476369521
 GameObject:
   m_ObjectHideFlags: 0
@@ -19026,7 +19026,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 11.1999998
 --- !u!65 &965194604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24800,8 +24800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 1435893506}
-  menuButton: {fileID: 0}
-  newProductButton: {fileID: 0}
+  menuButton: {fileID: 965194602}
+  startYearButton: {fileID: 0}
   lockedMat: {fileID: 2100000, guid: 7ff6de4b2b0464922849210c026c39d6, type: 2}
 --- !u!1 &1277323834
 GameObject:
@@ -39310,6 +39310,7 @@ GameObject:
   - 65: {fileID: 2034827762}
   - 114: {fileID: 2034827761}
   - 114: {fileID: 2034827760}
+  - 114: {fileID: 2034827763}
   m_Layer: 8
   m_Name: Start Game
   m_TagString: Untagged
@@ -39398,7 +39399,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4727273
+  aspectRatio: 11.1999998
 --- !u!65 &2034827762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39412,6 +39413,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 491, y: 110, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2034827763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2034827758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511c7511412ff45ada2e85b946c4ba03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2047929656
 GameObject:
   m_ObjectHideFlags: 0
@@ -40250,8 +40262,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ddd5056b42e5b4e859817f4e8c9d6838, type: 2}
   - {fileID: 2100000, guid: e016263659da545728cf3e6c9d3843da, type: 2}
   - {fileID: 2100000, guid: 8e92be578a8874947b40e121e22875bf, type: 2}
-  dayColor: {r: .658682942, g: .963235319, b: .923938215, a: 1}
-  nightColor: {r: .143382341, g: .197768748, b: .286764681, a: 1}
 --- !u!1 &2089191075
 GameObject:
   m_ObjectHideFlags: 0

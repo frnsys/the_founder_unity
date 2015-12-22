@@ -4,7 +4,7 @@ using System.Collections;
 public class UIMenu : MonoBehaviour {
     public UISimpleGrid grid;
     public UIMenuButton menuButton;
-    public UIMenuItem newProductButton;
+    public UIMenuButton startYearButton;
     public Material lockedMat;
 
     void OnEnable() {
@@ -15,8 +15,8 @@ public class UIMenu : MonoBehaviour {
         UIMenuItem menuItem = GetItem(item);
         menuItem.wiggle = true;
         menuItem.locked = false;
-        if (item == "New Product") {
-            Show(item);
+        if (item == "Start Year") {
+            startYearButton.gameObject.SetActive(true);
         } else {
             Transform lockItem = menuItem.transform.Find("Locked");
             if (lockItem != null) {
@@ -32,8 +32,8 @@ public class UIMenu : MonoBehaviour {
     }
 
     public void Deactivate(string item) {
-        if (item == "New Product") {
-            Hide(item);
+        if (item == "Start Year") {
+            startYearButton.gameObject.SetActive(false);
         } else {
             UIMenuItem menuItem = GetItem(item);
             menuItem.locked = true;
@@ -63,11 +63,6 @@ public class UIMenu : MonoBehaviour {
     }
 
     private UIMenuItem GetItem(string item) {
-        switch (item) {
-            case "New Product":
-                return newProductButton;
-            default:
-                return grid.transform.Find(item).gameObject.GetComponent<UIMenuItem>();
-        }
+        return grid.transform.Find(item).gameObject.GetComponent<UIMenuItem>();
     }
 }

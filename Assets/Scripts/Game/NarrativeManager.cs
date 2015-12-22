@@ -13,7 +13,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     [System.Serializable]
     public struct OnboardingState {
-        public bool PRODUCTS_OPENED;
         public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
         public bool LOCATIONS_UNLOCKED;
@@ -21,7 +20,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         public bool ACQUISITIONS_UNLOCKED;
         public bool SPECIALPROJECTS_UNLOCKED;
         public bool RESEARCH_OPENED;
-        public bool HYPE_MINIGAME;
         public bool HIRED_EMPLOYEE;
         public bool SYNERGY;
     }
@@ -125,7 +123,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         GAME_INTRO,
         OPENED_NEW_PRODUCT,
         LAUNCHED_PRODUCT,
-        OPENED_HYPE,
         THE_MARKET,
         THE_MARKET_DONE,
         OPENED_RECRUITING,
@@ -171,10 +168,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
         if (!data.ob.SYNERGY) {
             Company.Synergy += Synergy;
-        }
-
-        if (!data.ob.HYPE_MINIGAME) {
-            Promo.Completed += PromoCompleted;
         }
 
         if (data.obs < OBS.RESEARCH) {
@@ -292,15 +285,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     // Triggered whenever a window or tab is opened.
     public void OnScreenOpened(string name) {
         switch(name) {
-            case "Manage Communications":
-                if (Stage(OBS.OPENED_HYPE)) {
-                    MentorMessages(new string[] {
-                        "Now that your product has finished developing, we need to launch and promote it.",
-                        "Here you can choose from a few different kinds of promos to run.",
-                    });
-                }
-                break;
-
             case "New Product":
                 if (Stage(OBS.OPENED_NEW_PRODUCT)) {
                     MentorMessages(new string[] {
@@ -441,17 +425,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                     Company.WorkerHired -= WorkerHired;
                 }, 6f));
             }
-        }
-    }
-
-    void PromoCompleted(Promo p) {
-        if (!data.ob.HYPE_MINIGAME) {
-            MentorMessages(new string[] {
-                "Completing promotional campaigns gives you the opportunity to garner some allies in the media and hype up your product.",
-                string.Format("{0} the puck and hit some {1} to get them on your side.", InteractHighlight("Flick"), ConceptHighlight("influencers")),
-                "More influential influencers can, through their influence, cause a cascade effect and bring over others to your side!"
-            });
-            data.ob.HYPE_MINIGAME = true;
         }
     }
 
