@@ -26,8 +26,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     }
 
     void Awake() {
-        StartCoroutine(DayNightCycle());
-
         if (officeUpgradeTriggered)
             UIManager.Instance.menu.Show("Upgrade Office");
         else
@@ -42,24 +40,6 @@ public class UIOfficeManager : Singleton<UIOfficeManager> {
     void OnDisable() {
         Company.WorkerHired -= OnHired;
         Company.WorkerFired -= OnFired;
-    }
-
-    public Color dayColor;
-    public Color nightColor;
-    private IEnumerator DayNightCycle() {
-        float step = 0.00006f;
-
-        while(true) {
-            for (float f = 0f; f <= 1f + step; f += step) {
-                OfficeCamera.backgroundColor = Color.Lerp(dayColor, nightColor, Mathf.SmoothStep(0f, 1f, f));
-                yield return null;
-            }
-
-            for (float f = 0f; f <= 1f + step; f += step) {
-                OfficeCamera.backgroundColor = Color.Lerp(nightColor, dayColor, Mathf.SmoothStep(0f, 1f, f));
-                yield return null;
-            }
-        }
     }
 
     void OnHired(AWorker w, Company c) {
