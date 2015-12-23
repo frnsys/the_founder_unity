@@ -23,14 +23,8 @@ MonoBehaviour:
       companies: []
       specialProjects: []
     cash: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-      publicity:
-        name: Hype
-        value: 0
+    hype: 0
+    opinion: 0
     gameEvent: {fileID: 0}
     eventDelay: 0
     eventProbability: 0

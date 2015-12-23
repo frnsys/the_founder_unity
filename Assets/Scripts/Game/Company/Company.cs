@@ -238,11 +238,18 @@ public class Company : HasStats {
         UpdateMarketShare();
     }
 
-    private void UpdateMarketShare() {
+    public void UpdateMarketShare() {
+        float totalMarketSize = MarketManager.totalMarketSize;
+
+        if (!GameManager.Instance.extraTerra)
+            totalMarketSize -= MarketManager.SizeForMarket(MarketManager.Market.ExtraTerra);
+        if (!GameManager.Instance.alien)
+            totalMarketSize -= MarketManager.SizeForMarket(MarketManager.Market.Alien);
+
         foreach (MarketManager.Market m in MarketManager.Markets) {
             marketShare += LocationsForMarket(m)/MarketManager.marketLocations[m] * MarketManager.SizeForMarket(m);
         }
-        marketSharePercent = marketShare/MarketManager.totalMarketSize;
+        marketSharePercent = marketShare/totalMarketSize;
     }
 
     public bool ExpandToLocation(Location l) {

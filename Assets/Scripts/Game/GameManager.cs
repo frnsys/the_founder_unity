@@ -84,6 +84,12 @@ public class GameManager : Singleton<GameManager> {
     public bool automation {
         get { return data.automation; }
     }
+    public bool extraTerra {
+        get { return data.unlocked.specialProjects.Contains(SpecialProject.Load("Mars Colony")); }
+    }
+    public bool alien {
+        get { return data.unlocked.specialProjects.Contains(SpecialProject.Load("Interstellar Ship")); }
+    }
 
     public List<AAICompany> activeAICompanies {
         get { return data.otherCompanies.FindAll(a => !a.disabled); }
@@ -188,8 +194,9 @@ public class GameManager : Singleton<GameManager> {
 
     public void InitializeGame(Worker cofounder, Location location, Vertical vertical) {
         // TESTING
-        Vertical vertical2 = Vertical.Load("Information");
-        data.company.verticals = new List<Vertical> { vertical, vertical2 };
+        //Vertical vertical2 = Vertical.Load("Information");
+        //data.company.verticals = new List<Vertical> { vertical, vertical2 };
+        data.company.verticals = new List<Vertical> { vertical };
         //AGameEvent ge = GameEvent.LoadNoticeEvent("testevent");
         //ge.countdown = 2;
         //ge.probability = 1f;
@@ -310,6 +317,7 @@ public class GameManager : Singleton<GameManager> {
 
         // Harvest minicompanies (acquisitions)
         playerCompany.HarvestCompanies();
+        playerCompany.UpdateMarketShare();
 
         // Check performance and update profit target
         Company.StatusReport report = playerCompany.CollectAnnualPerformanceData();

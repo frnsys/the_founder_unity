@@ -16,6 +16,8 @@ public class UIInterlude : MonoBehaviour {
     public UILabel opinionLabel;
     public UILabel productivityLabel;
     public UILabel hypeLabel;
+    public UILabel marketShareLabel;
+    public UIProgressBar marketShare;
 
     private Company company;
 
@@ -36,6 +38,10 @@ public class UIInterlude : MonoBehaviour {
         engineeringLabel.text = string.Format(":ENGINEERING: {0:F0}", company.cleverness);
         productivityLabel.text = string.Format(":PRODUCTIVITY: {0:F0}", company.productivity);
         hypeLabel.text = string.Format(":HYPE: {0:F0}", company.hype);
+
+        float marketSharePercent = company.marketSharePercent;
+        marketShare.value = marketSharePercent;
+        marketShareLabel.text = string.Format("Market share ({0:F0}%)", marketSharePercent * 100);
 
         string emo = "OUTRAGE";
         if (company.opinion >= 0) {

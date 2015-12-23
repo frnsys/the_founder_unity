@@ -23,14 +23,8 @@ MonoBehaviour:
       companies: []
       specialProjects: []
     cash: 0
-    opinionEvent:
-      name: 
-      opinion:
-        name: Opinion
-        value: 0
-      publicity:
-        name: Hype
-        value: 0
+    hype: 0
+    opinion: 0
     gameEvent: {fileID: 11400000, guid: a26743fc84f10421584ada7352bf4b73, type: 2}
     eventDelay: 14
     eventProbability: 1

@@ -204,7 +204,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 StartCoroutine(Delay(delegate(GameObject obj) {
                     mentor.Messages(new string[] {
                         "It's time to start thinking about expanding to new locations.",
-                        string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
+                        string.Format("{0} increase your access to {1}, increasing your {2}.", ConceptHighlight("Locations"), ConceptHighlight("markets"), ConceptHighlight("market share")),
+                        "Your market share greatly impacts your the revenue your products generate, so keep expanding!",
                         "Locations also expand the game board size - every five new locations adds a row (up to a maximum).",
                         "Some locations have special bonuses too.",
                         string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
@@ -330,11 +331,12 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 mentor.Messages(new string[] {
                     "Great! You've launched your first product.",
                     "When you launch a product, you earn some money depending on the quality of the product.",
-                    "The quality of the product depends on your employee's skills.",
+                    "The quality of the product greatly depends on your employee's skills.",
                     string.Format("Employees contribute \n:DESIGN: {0},\n:ENGINEERING: {1}, or\n:MARKETING: {2}\nskills.",
                         ConceptHighlight("design"),
                         ConceptHighlight("engineering"),
                         ConceptHighlight("marketing")),
+                    string.Format("But it also depends on other factors such as your {0}.", ConceptHighlight("market share")),
                     "Some product type combinations do much better than others,",
                     "and some will even give permanent bonuses.",
                     string.Format("You'll have to {0} to discover them!", SpecialHighlight("innovate"))

@@ -10,6 +10,8 @@ public class UIMainGame : MonoBehaviour {
     public UILabel cashLabel;
     public UILabel yearLabel;
     public UILabel profitLabel;
+    public UIProgressBar profitProgress;
+    public UIProgressBar profitNegativeProgress;
 
     public Color posCashColor;
     public Color posCashShadow;
@@ -90,7 +92,17 @@ public class UIMainGame : MonoBehaviour {
         }
         cashLabel.text = string.Format("{0:C0}", cash);
 
-        profitLabel.text = string.Format("Profit: {0:C0}/{1:C0}", company.annualRevenue - company.annualCosts - company.toPay, GameManager.Instance.profitTarget);
+        float profit = company.annualRevenue - company.annualCosts - company.toPay;
+        float profitPercent = profit/GameManager.Instance.profitTarget;
+
+        if (profitPercent < 0) {
+            profitProgress.value = 0;
+            profitNegativeProgress.value = Mathf.Min(1f, -profitPercent);
+        } else {
+            profitProgress.value = profitPercent;
+            profitNegativeProgress.value = 0;
+        }
+        profitLabel.text = string.Format("{0:C0}/{1:C0}", profit, GameManager.Instance.profitTarget);
     }
 
     public void ShowNextPiece(GameObject nextPiece) {

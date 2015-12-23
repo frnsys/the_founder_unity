@@ -117,6 +117,9 @@ public class GameEvent : SharedResource<GameEvent> {
             case Condition.Type.Spending:
                 comparison = GameManager.Instance.spendingMultiplier;
                 break;
+            case Condition.Type.MarketShare:
+                comparison = c.marketSharePercent;
+                break;
         }
 
         if (cond.greater)
@@ -147,7 +150,8 @@ public class GameEvent : SharedResource<GameEvent> {
             Debt,
             Distractedness,
             Wages,
-            Spending
+            Spending,
+            MarketShare
         }
 
         public Condition() {}
