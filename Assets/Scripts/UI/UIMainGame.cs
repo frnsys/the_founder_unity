@@ -43,14 +43,10 @@ public class UIMainGame : MonoBehaviour {
 
     // Show product info, fade out after a few secs
     public void ShowProductInfo(Product product) {
-        StartCoroutine(_ShowInfo(product.name, product.description, product.meshes));
+        ShowInfo(product.name, product.description, product.meshes);
     }
 
-    public void ShowInfo(string name, string desc) {
-        StartCoroutine(_ShowInfo(name, desc));
-    }
-
-    private IEnumerator _ShowInfo(string name, string desc, Mesh[] meshes=null) {
+    public void ShowInfo(string name, string desc, Mesh[] meshes=null) {
         productInfo.alpha = 1f;
         productInfo.gameObject.SetActive(true);
 
@@ -67,10 +63,6 @@ public class UIMainGame : MonoBehaviour {
                 go.SetActive(false);
             }
         }
-
-        yield return new WaitForSeconds(3f);
-        TweenAlpha.Begin(productInfo.gameObject, MainGame.animationDuration, 0f);
-        yield return new WaitForSeconds(MainGame.animationDuration);
     }
 
     void Update() {

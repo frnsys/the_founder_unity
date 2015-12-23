@@ -302,6 +302,8 @@ public class MainGame : MonoBehaviour {
 
                             PlacePiece(nextPiece, p.row, p.col);
                             ProcessMatchesAround(nextPiece);
+                            ui.ShowInfo(string.Format("Placed {0}", nextPiece.name), "");
+
                             CreateNextPiece();
                             break;
                         case Piece.Type.Outrage:
@@ -572,9 +574,10 @@ public class MainGame : MonoBehaviour {
 
 
     // Check if two pieces are valid neighbors,
-    // i.e. not diagonal neighbors
+    // i.e. not diagonal neighbors, and the moving piece is not empty
     private bool ValidNeighbors(Piece p1, Piece p2) {
-        return (p1.row == p2.row || p1.col == p2.col)
+        return p2.type != Piece.Type.Empty
+            && (p1.row == p2.row || p1.col == p2.col)
             && Math.Abs(p1.row - p2.row) <= 1 && Math.Abs(p1.col - p2.col) <= 1;
     }
 }

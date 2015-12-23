@@ -331,7 +331,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 mentor.Messages(new string[] {
                     "Great! You've launched your first product.",
                     "When you launch a product, you earn some money depending on the quality of the product.",
-                    "The quality of the product greatly depends on your employee's skills.",
+                    "The quality of the product greatly depends on your employees' skills.",
                     string.Format("Employees contribute \n:DESIGN: {0},\n:ENGINEERING: {1}, or\n:MARKETING: {2}\nskills.",
                         ConceptHighlight("design"),
                         ConceptHighlight("engineering"),

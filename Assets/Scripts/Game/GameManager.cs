@@ -330,7 +330,8 @@ public class GameManager : Singleton<GameManager> {
         if (YearEnded != null)
             YearEnded(data.year);
 
-        SaveGame();
+        // Saving seems to be broken on iOS?
+        //SaveGame();
     }
 
 }
