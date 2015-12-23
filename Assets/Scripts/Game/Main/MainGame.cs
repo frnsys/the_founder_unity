@@ -82,8 +82,8 @@ public class MainGame : MonoBehaviour {
         em = GameManager.Instance.eventManager;
         state = GameState.None;
 
-        // At minimum, 20 turns
-        totalTurns = Math.Max(20, (int)Math.Floor(company.productivity/workUnit));
+        // At minimum, 10 turns
+        totalTurns = Math.Max(10, (int)Math.Floor(company.productivity/workUnit));
         turnsLeft = totalTurns;
 
         ui.gameObject.SetActive(true);
@@ -294,6 +294,7 @@ public class MainGame : MonoBehaviour {
                 if (hit.collider != null && hitGo == hit.collider.gameObject) {
                     Piece p = hitGo.GetComponent<Piece>();
                     switch (p.type) {
+                        // Placing a piece doesn't take a turn
                         case Piece.Type.Empty:
                             // For narrative
                             if (PiecePlaced != null)
@@ -302,7 +303,6 @@ public class MainGame : MonoBehaviour {
                             PlacePiece(nextPiece, p.row, p.col);
                             ProcessMatchesAround(nextPiece);
                             CreateNextPiece();
-                            TakeTurn();
                             break;
                         case Piece.Type.Outrage:
                             if (company.hype - outrageCost >= 0) {
@@ -443,18 +443,15 @@ public class MainGame : MonoBehaviour {
 
 
     private IEnumerator MergeProductTypes(GameObject g1, GameObject g2) {
-        Piece p1 = g1.GetComponent<Piece>();
-        Piece p2 = g2.GetComponent<Piece>();
+        Piece p1 = g1.GetComponent<Piece>(); // to piece
+        Piece p2 = g2.GetComponent<Piece>(); // from piece
 
         // Animate
         Vector2 oldPos = g2.transform.position;
         g2.transform.positionTo(animationDuration, g1.transform.position);
         yield return new WaitForSeconds(animationDuration);
 
-        if (!p1.stacked || !p2.stacked) {
-            // Undo
-            g2.transform.positionTo(animationDuration, oldPos);
-        } else {
+        if (p1.stacked && p2.stacked) {
             // TODO a nice little flash of light or something
             ProductType pt1 = ProductType.Load(p1.name);
             ProductType pt2 = ProductType.Load(p2.name);
@@ -486,6 +483,17 @@ public class MainGame : MonoBehaviour {
             PlacePiece(e2, p2.row, p2.col);
 
             TakeTurn();
+
+        } else if (p2.stacked && p1.type == Piece.Type.Empty) {
+            grid[p2.row, p2.col] = null;
+            GameObject e2 = CreatePiece(emptyPrefab);
+            PlacePiece(e2, p2.row, p2.col);
+            PlacePiece(g2, p1.row, p1.col);
+            TakeTurn();
+
+        } else {
+            // Undo
+            g2.transform.positionTo(animationDuration, oldPos);
         }
 
         state = GameState.None;
@@ -564,10 +572,9 @@ public class MainGame : MonoBehaviour {
 
 
     // Check if two pieces are valid neighbors,
-    // i.e. not diagonal neighbors and neither is empty
+    // i.e. not diagonal neighbors
     private bool ValidNeighbors(Piece p1, Piece p2) {
-        return p1.type != Piece.Type.Empty && p2.type != Piece.Type.Empty
-            && (p1.row == p2.row || p1.col == p2.col)
+        return (p1.row == p2.row || p1.col == p2.col)
             && Math.Abs(p1.row - p2.row) <= 1 && Math.Abs(p1.col - p2.col) <= 1;
     }
 }
