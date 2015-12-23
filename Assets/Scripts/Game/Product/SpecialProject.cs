@@ -25,9 +25,7 @@ public class SpecialProject : SharedResource<SpecialProject> {
         if (!(company.cash.value >= cost))
             return false;
 
-        // TODO we either need to keep track of the product recipes the company has created or check this in some other way
-        //return requiredProducts.Count == company.products.Where(p => requiredProducts.Contains(p.Recipe)).Distinct().Count();
-        return true;
+        return requiredProducts.Count == company.discoveredProducts.Where(r => requiredProducts.Contains(r)).Distinct().Count();
     }
 
     public static new SpecialProject Load(string name) {

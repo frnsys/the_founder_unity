@@ -219,12 +219,6 @@ public class Product : HasStats {
         Debug.Log(string.Format("Engineering Value {0}", P));
         Debug.Log(string.Format("Max Revenue {0}", maxRevenue));
 
-
-
-        // Trigger completed event.
-        if (Completed != null) {
-            Completed(this, company);
-        }
         return Revenue(score);
     }
 

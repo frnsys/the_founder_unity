@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UIInterlude : MonoBehaviour {
+    public UIGrid grid;
     public UILabel yearLabel;
     public UILabel ageLabel;
     public UILabel companyAgeLabel;
@@ -41,5 +42,33 @@ public class UIInterlude : MonoBehaviour {
             emo = "GOODWILL";
         }
         opinionLabel.text = string.Format(":{0}: {1:F0}", emo, company.opinion);
+    }
+
+    public void Hide(string item) {
+        GetItem(item).transform.parent.gameObject.SetActive(false);
+        grid.Reposition();
+    }
+
+    public void Show(string item) {
+        GetItem(item).transform.parent.gameObject.SetActive(true);
+        grid.Reposition();
+    }
+
+    private UILabel GetItem(string item) {
+        switch (item) {
+            case "Hype":
+                return hypeLabel;
+                break;
+            case "Opinion":
+                return opinionLabel;
+                break;
+            case "Board":
+                return boardLabel;
+                break;
+            case "Profit":
+                return profitLabel;
+                break;
+        }
+        return null;
     }
 }

@@ -10,27 +10,45 @@ using System.Collections.Generic;
 
 public class NarrativeManager : Singleton<NarrativeManager> {
     private GameData data;
+    private Mentor mentor;
 
     [System.Serializable]
     public struct OnboardingState {
+        public bool INTRO;
+        public bool PRODUCT_FAILED;
+        public bool PRODUCT_CREATED_1;
+        public bool PRODUCT_CREATED_2;
+        public bool EMPLOYEE_HIRED;
+        public bool QUEUED_HYPE;
+        public bool QUEUED_OUTRAGE;
+        public bool QUEUED_INFLUENCER;
+        public bool QUEUED_PRODUCTTYPE;
+        public bool PLACED_HYPE;
+        public bool PLACED_OUTRAGE;
+        public bool PLACED_INFLUENCER;
+        public bool PLACED_PRODUCTTYPE;
+        public bool HYPE_OPINION_UNLOCKED;
+        public bool THE_BOARD_UNLOCKED;
         public bool PERKS_UNLOCKED;
         public bool VERTICALS_UNLOCKED;
         public bool LOCATIONS_UNLOCKED;
+        public bool RESEARCH_UNLOCKED;
         public bool LOBBYING_UNLOCKED;
+        public bool PRODUCTTYPES_UNLOCKED;
         public bool ACQUISITIONS_UNLOCKED;
         public bool SPECIALPROJECTS_UNLOCKED;
+        public bool HIRING_OPENED;
+        public bool RECRUITING_OPENED;
+        public bool PROMOS_OPENED;
         public bool RESEARCH_OPENED;
-        public bool HIRED_EMPLOYEE;
-        public bool SYNERGY;
+        public bool SELECT_PRODUCTTYPES_OPENED;
     }
 
     // Disable the constructor.
     protected NarrativeManager() {}
 
-    private GameObject mentorMessagePrefab;
-
     void Awake() {
-        mentorMessagePrefab = Resources.Load("UI/Narrative/Mentor Message") as GameObject;
+        mentor = new Mentor();
     }
 
     void OnEnable() {
@@ -43,92 +61,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     public void Load(GameData d) {
         data = d;
-    }
-
-    // A message from your mentor.
-    public UIMentor MentorMessage(string message) {
-        UIEventListener.VoidDelegate callback = delegate(GameObject obj) {
-            obj.GetComponent<UIMentor>().Hide();
-        };
-        return MentorMessage(message, callback);
-    }
-
-    // A message from your mentor with a callback after tap.
-    public UIMentor MentorMessage(string message, UIEventListener.VoidDelegate callback) {
-        GameObject alerts = UIRoot.list[0].transform.Find("Alerts").gameObject;
-
-        GameObject msg = NGUITools.AddChild(alerts, mentorMessagePrefab);
-        UIMentor mentor = msg.GetComponent<UIMentor>();
-        mentor.message = message;
-
-        UIEventListener.Get(mentor.box).onClick += delegate(GameObject obj) {
-            callback(msg);
-        };
-
-        return mentor;
-    }
-
-    // A list of messages to be shown in sequence (on tap).
-    public void MentorMessages(string[] messages) {
-        UIEventListener.VoidDelegate callback = delegate(GameObject obj) {};
-        MentorMessages(messages, callback);
-    }
-
-    public void MentorMessages(string[] messages, UIEventListener.VoidDelegate callback) {
-        int i = 0;
-
-        // Back button action.
-        UIEventListener.VoidDelegate back = delegate(GameObject obj) {
-            if (i > 0) {
-                i--;
-                obj.transform.parent.GetComponent<UIMentor>().message = messages[i];
-                if (i == 0)
-                    obj.SetActive(false);
-            }
-        };
-
-        UIEventListener.VoidDelegate afterEach = delegate(GameObject obj) {
-            if (i < messages.Length - 1) {
-                i++;
-                obj.GetComponent<UIMentor>().message = messages[i];
-            } else {
-                obj.GetComponent<UIMentor>().Hide();
-                callback(obj);
-            }
-
-            // Show & setup back button if necessary.
-            GameObject backButton = obj.transform.Find("Back").gameObject;
-            if (i > 0) {
-                backButton.SetActive(true);
-                if (UIEventListener.Get(backButton).onClick == null) {
-                    UIEventListener.Get(backButton).onClick += back;
-                }
-            } else {
-                backButton.SetActive(false);
-            }
-        };
-
-        MentorMessage(messages[0], afterEach);
-    }
-
-
-    /*
-     * ==========================================
-     * Onboarding ===============================
-     * ==========================================
-     */
-
-    public enum OBS {
-        START,
-        GAME_INTRO,
-        OPENED_NEW_PRODUCT,
-        LAUNCHED_PRODUCT,
-        THE_MARKET,
-        THE_MARKET_DONE,
-        OPENED_RECRUITING,
-        OPENED_HIRING,
-        GAME_GOALS,
-        RESEARCH
     }
 
     // Setup the starting game state for onboarding.
@@ -153,7 +85,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             uim.menu.Deactivate("Verticals");
         }
 
-        if (!data.ob.HIRED_EMPLOYEE) {
+        if (!data.ob.EMPLOYEE_HIRED) {
             uim.menu.Deactivate("Employees");
         }
 
@@ -166,91 +98,153 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             uim.menu.Deactivate("Acquisitions");
         }
 
-        if (!data.ob.SYNERGY) {
-            Company.Synergy += Synergy;
-        }
-
-        if (data.obs < OBS.RESEARCH) {
+        if (!data.ob.RESEARCH_UNLOCKED) {
             uim.menu.Deactivate("Research");
         }
 
-        if (data.obs < OBS.GAME_GOALS) {
+        if (!data.ob.THE_BOARD_UNLOCKED) {
             uim.menu.Deactivate("Accounting");
         }
 
-        if (data.obs < OBS.THE_MARKET_DONE) {
-            uim.menu.Deactivate("Recruiting");
-            TheMarket.Done += OnMarketDone;
+        if (!data.ob.PRODUCTTYPES_UNLOCKED) {
+            uim.menu.Deactivate("Product Types");
         }
 
-        if (data.obs < OBS.THE_MARKET) {
-            TheMarket.Started += OnMarketStarted;
+        if (!data.ob.PRODUCT_CREATED_1 || !data.ob.PRODUCT_CREATED_2) {
+            MainGame.ProductCreated += OnProductCreated;
         }
 
-        if (data.obs < OBS.LAUNCHED_PRODUCT) {
-            Company.LaunchedProduct += LaunchedProduct;
-        }
-
-        if (data.obs < OBS.GAME_INTRO) {
-            // Show the game intro.
-            uim.menu.Deactivate("New Product");
+        if (!data.ob.INTRO) {
             Intro();
+            UIManager.Instance.menu.Deactivate("Recruiting");
         }
 
-        Product.Completed += CompletedProduct;
+        if (!data.ob.PRODUCT_FAILED) {
+            MainGame.ProductFailed += OnProductFailed;
+        }
+
+        if (!data.ob.QUEUED_INFLUENCER || !data.ob.QUEUED_OUTRAGE || !data.ob.QUEUED_PRODUCTTYPE || !data.ob.QUEUED_HYPE) {
+            MainGame.PieceQueued += OnPieceQueued;
+        }
+
+        if (!data.ob.PLACED_INFLUENCER || !data.ob.PLACED_OUTRAGE || !data.ob.PLACED_PRODUCTTYPE || !data.ob.PLACED_HYPE) {
+            MainGame.PiecePlaced += OnPiecePlaced;
+        }
+
+        if (!data.ob.HYPE_OPINION_UNLOCKED) {
+            uim.Interlude.Hide("Hype");
+            uim.Interlude.Hide("Opinion");
+        }
+        if (!data.ob.THE_BOARD_UNLOCKED) {
+            uim.Interlude.Hide("Board");
+            uim.Interlude.Hide("Profit");
+        }
+
+        MainGame.Done += OnYearEnded;
         GameEvent.EventTriggered += OnEvent;
         UnlockSet.Unlocked += OnUnlocked;
     }
 
-    void OnMarketStarted() {
-        if (Stage(OBS.THE_MARKET)) {
-            MentorMessages(new string[] {
-                string.Format("Now that your product is completed, it is released into {0}.", ConceptHighlight("The Market")),
-                string.Format("{0} will release products like the ones you create to edge out your profits.", ConceptHighlight("Competitors")),
-                "Consumers will flock to the products they think are the best.",
-                "Naturally, if your products are better (or better hyped), you'll have the upper hand.",
-                "Let's see how they respond."
-            });
-            TheMarket.Started -= OnMarketStarted;
-        }
+    public void Intro() {
+        mentor.Messages(new string[] {
+            "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
+            "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
+            string.Format("Let's start out the year and make some {0}.", ConceptHighlight("products")),
+            string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("Start the Year"))
+        });
+        UIManager.Instance.menu.Activate("Start Year");
+        data.ob.INTRO = true;
     }
-    void OnMarketDone() {
-        if (Stage(OBS.THE_MARKET_DONE)) {
-            MentorMessages(new string[] {
-                string.Format("Hmph. Consumers aren't really into it. That percentage you saw was the {0} of your product.", ConceptHighlight("market share")),
-                "Market share determines how much revenue your product will generate.",
-                "This one will generate some revenue, but not nearly as much as it could have.",
-                "Your product could be better.",
-                "To make better products you need to assemble a talented team.",
-                string.Format("Search for candidates by opening {0} in the menu.", MenuHighlight("Recruiting"))
-            });
-            UIManager.Instance.menu.Activate("Recruiting");
-            TheMarket.Done -= OnMarketDone;
+
+    void OnYearEnded() {
+        switch (data.year) {
+            case 1:
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    mentor.Messages(new string[] {
+                        "That's the end of the year!",
+                        string.Format("The {0} shows you your performance for the year.", ConceptHighlight("annual report")),
+                        "Between years you can manage your company.",
+                        "You can hire new employees, purchase office perks, expand to new locations, and more.",
+                        "These will improve your company's competitiveness.",
+                        "Try hiring some new employees."
+                    });
+                    UIManager.Instance.menu.Activate("Recruiting");
+                }, 2f));
+                break;
+            case 2:
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    mentor.Messages(new string[] {
+                        string.Format("In order to {0}, you need access to more product types.", SpecialHighlight("innovate")),
+                        string.Format("You can purchase more product types in the {0} menu item.", MenuHighlight("Product Types")),
+                        "Some product types have prerequisites before they are available for purchase."
+                    });
+                    UIManager.Instance.menu.Activate("Product Types");
+                    data.ob.PRODUCTTYPES_UNLOCKED = true;
+                }, 3f));
+                break;
+            case 3:
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    mentor.Messages(new string[] {
+                        string.Format("Now that you've got some experience with building products, it's time to introduce you to {0}.", ConceptHighlight("The Board")),
+                        string.Format("The Board sets {0} for each year, which you are expected to meet.", ConceptHighlight("profit targets")),
+                        "These profit targets grow by 12% each successive year.",
+                        "If The Board is unsatisfied with your performance, you will be dismissed.",
+                        string.Format("You can keep more detailed track of your performance and other accounting in the {0} menu item.", MenuHighlight("Accounting"))
+                    });
+                    UIManager.Instance.menu.Activate("Accounting");
+                    UIManager.Instance.Interlude.Show("Profit");
+                    UIManager.Instance.Interlude.Show("Board");
+                    data.ob.THE_BOARD_UNLOCKED = true;
+                }, 3f));
+                break;
+            case 4:
+                UIManager.Instance.menu.Activate("Research");
+                data.ob.RESEARCH_UNLOCKED = true;
+
+                StartCoroutine(Delay(delegate(GameObject obj) {
+                    mentor.Messages(new string[] {
+                        "It's time to start thinking about expanding to new locations.",
+                        string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
+                        "Locations also expand the game board size - every five new locations adds a row (up to a maximum).",
+                        "Some locations have special bonuses too.",
+                        string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
+                    });
+                    UIManager.Instance.menu.Activate("Locations");
+                    data.ob.LOCATIONS_UNLOCKED = true;
+                }, 3f));
+                break;
         }
     }
 
     void OnEvent(GameEvent ev) {
         if (ev.name == "New Company on the Scene") {
             StartCoroutine(Delay(delegate(GameObject obj) {
-                MentorMessages(new string[] {
+                mentor.Messages(new string[] {
                     "Congratulations! This is your first write-up in a major publication.",
-                    string.Format("This kind of mention has driven up the {0} for your company.", ConceptHighlight("hype")),
-                    string.Format("But note that some press can be negative. Bad publicity causes {0} against your company.", ConceptHighlight("outrage")),
-                    "Consumers aren't going to buy your products if they disagree with your decisions.",
-                    "Fortunately, consumers forget things over time, and hype can overwhelm outrage."
+                    string.Format("This kind of mention has driven up the :HYPE: {0} for your company.", ConceptHighlight("hype")),
+                    string.Format("But note that some press can be negative. Bad publicity causes negative {0} towards your company.", ConceptHighlight("opinion")),
+                    string.Format("Negative public opinion makes :OUTRAGE: {0} more likely.", ConceptHighlight("outrage")),
+                    string.Format("But it's ok - the public {0} things over time.", ConceptHighlight("forgets")),
+                    "And some products help them forget faster."
                 });
+                    UIManager.Instance.Interlude.Show("Hype");
+                    UIManager.Instance.Interlude.Show("Opinion");
+                data.ob.HYPE_OPINION_UNLOCKED = true;
             }, 2f));
 
         } else if (ev.name == "RIVALCORP Founded") {
             StartCoroutine(Delay(delegate(GameObject obj) {
-                MentorMessages(new string[] {
+                mentor.Messages(new string[] {
                     "Uh oh. Looks like you have some enemies.",
-                    "Competitors will also poach your employees. This kind of activity can drive wages up. This is a lose-lose for everyone - other companies can be cooperative when it comes to dealing with this."
+                    string.Format("Competitors will steal precious {0} from you,", ConceptHighlight("market share")),
+                    "and they will also poach your employees.",
+                    "This kind of activity can drive wages up.",
+                    "This is a lose-lose for everyone, but other companies can be cooperative when it comes to dealing with this."
                 });
             }));
         } else if (ev.name == "Data access") {
             StartCoroutine(Delay(delegate(GameObject obj) {
-                MentorMessages(new string[] {
+                mentor.Messages(new string[] {
                     "It looks like you're on the government's radar now.",
                     "This presents a great opportunity.",
                     string.Format("With some contacts in government, you can start {0} them.", ConceptHighlight("lobbying")),
@@ -262,55 +256,24 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    public void Intro() {
-        data.obs = OBS.GAME_INTRO;
-        MentorMessages(new string[] {
-            "Welcome to your office! You're just starting out, so you'll work from your apartment for now.",
-            "Right now it's just your cofounder in the office, but eventually you'll have a buzzing hive of talented employees.",
-            string.Format("You're not much of a business if you haven't got anything to sell. Let's create a {0}.", ConceptHighlight("product")),
-            string.Format("To start creating a product, tap the {0} button below.", MenuHighlight("New Product"))
-        });
-        UIManager.Instance.menu.Activate("New Product");
-    }
-
-    // Checks if it is appropriate to execute the specified stage,
-    private bool Stage(OBS stage) {
-        if (data.obs == stage - 1) {
-            data.obs = stage;
-            return true;
-        }
-        return false;
-    }
-
     // Triggered whenever a window or tab is opened.
     public void OnScreenOpened(string name) {
         switch(name) {
-            case "New Product":
-                if (Stage(OBS.OPENED_NEW_PRODUCT)) {
-                    MentorMessages(new string[] {
-                        string.Format("Products are created by combining two {0}.", ConceptHighlight("product types")),
-                        string.Format("Some combinations work well and give {0}. Some don't.", ConceptHighlight("bonuses")),
-                        string.Format("You will have to {0} and experiment with different combinations.", SpecialHighlight("innovate")),
-                        "Right now you only have a few types available, but that will change over time.",
-                        "Pick two product types and hit the button below to start developing the product."
-                    });
-                }
-                break;
-
             case "Recruiting":
-                if (Stage(OBS.OPENED_RECRUITING)) {
-                    MentorMessages(new string[] {
+                if (!data.ob.RECRUITING_OPENED) {
+                    mentor.Messages(new string[] {
                         "Here is where you can recruit some new candidates to hire.",
                         "The more employees you have, the more opportunities you have when developing new products.",
                         "There are a few different recruiting methods which vary in cost and quality of candidate.",
                         "Give it a try!"
                     });
+                    data.ob.RECRUITING_OPENED = true;
                 }
                 break;
 
             case "Hiring":
-                if (Stage(OBS.OPENED_HIRING)) {
-                    MentorMessages(new string[] {
+                if (!data.ob.HIRING_OPENED) {
+                    mentor.Messages(new string[] {
                         "Here are the candidates from your recruiting effort.",
                         "To hire an candidate, you must give them an offer they find acceptable.",
                         string.Format("You can {0} with candidates to get a good deal.", ConceptHighlight("negotiate")),
@@ -319,12 +282,13 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                         "They'll take a lower salary if you can convince them.",
                         "If negotiations drag on or don't look good for them, they may leave the table."
                     });
+                    data.ob.HIRING_OPENED = true;
                 }
                 break;
 
             case "Research":
                 if (!data.ob.RESEARCH_OPENED) {
-                    MentorMessages(new string[] {
+                    mentor.Messages(new string[] {
                         string.Format("Welcome to your {0}!", SpecialHighlight("Innovation Lab")),
                         string.Format("Here you can purchase new {0}.", ConceptHighlight("technologies")),
                         string.Format("New technologies can unlock new {0}, {1}, and provide other bonuses.", ConceptHighlight("product types"), ConceptHighlight("special projects")),
@@ -335,87 +299,180 @@ public class NarrativeManager : Singleton<NarrativeManager> {
                 }
                 break;
 
+            case "Promos":
+                if (!data.ob.PROMOS_OPENED) {
+                    mentor.Messages(new string[] {
+                        "Here is where you can select a particular promotion to run.",
+                        "You can also purchase new promotions here."
+                    });
+                    data.ob.PROMOS_OPENED = true;
+                }
+                break;
+
+            case "Select Product Types":
+                if (!data.ob.SELECT_PRODUCTTYPES_OPENED) {
+                    mentor.Messages(new string[] {
+                        "We have a lot of product types available to us, but we need to focus during the year.",
+                        "Choose five product types to concentrate on this coming year."
+                    });
+                    data.ob.SELECT_PRODUCTTYPES_OPENED = true;
+                }
+                break;
+
             default:
                 break;
         }
     }
 
-    void LaunchedProduct(Company c) {
-        if (c == data.company) {
-            if (Stage(OBS.LAUNCHED_PRODUCT)) {
-                StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
-                        "Great! You've started developing your first product.",
-                        "Employees contribute quality points to the developing product.",
-                        "There are \n:DESIGN: [c][0078E1]design[-][/c],\n:ENGINEERING: [c][0078E1]engineering[-][/c], or\n:MARKETING: [c][0078E1]marketing[-][/c]\nproduct points available.",
-                        "Some products are harder to develop than others.",
-                        string.Format("They take longer to develop, but you can hire employees to increase {0} and develop them faster.", ConceptHighlight("productivity")),
-                        "Less skilled employees may mess up on hard products,",
-                        "causing \n:BLOCK: [c][0078E1]creative blocks[-][/c],\n:BUG: [c][0078E1]bugs[-][/c], or\n:OUTRAGE: [c][0078E1]outrage[-][/c].",
-                        string.Format("When the product is finished, your product will be released to\n{0}!", SpecialHighlight("The Market"))
-                    });
-                }, 1f));
-            }
-            Company.LaunchedProduct -= LaunchedProduct;
+    void OnProductCreated() {
+        if (!data.ob.PRODUCT_CREATED_1) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    "Great! You've launched your first product.",
+                    "When you launch a product, you earn some money depending on the quality of the product.",
+                    "The quality of the product depends on your employee's skills.",
+                    string.Format("Employees contribute \n:DESIGN: {0},\n:ENGINEERING: {1}, or\n:MARKETING: {2}\nskills.",
+                        ConceptHighlight("design"),
+                        ConceptHighlight("engineering"),
+                        ConceptHighlight("marketing")),
+                    "Some product type combinations do much better than others,",
+                    "and some will even give permanent bonuses.",
+                    string.Format("You'll have to {0} to discover them!", SpecialHighlight("innovate"))
+                });
+                data.ob.PRODUCT_CREATED_1 = true;
+            }, 1f));
+        } else if (!data.ob.PRODUCT_CREATED_2) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    "Note the bar at the bottom of the screen.",
+                    "This tells you how many turns you have remaining this year.",
+                    "When you create a product, you use a turn.",
+                    "Some other actions also cost turns.",
+                    string.Format("The number of turns available depends on your employee :PRODUCTIVITY: {0}.", ConceptHighlight("productivity"))
+                });
+                data.ob.PRODUCT_CREATED_2 = true;
+            }, 1f));
+            MainGame.ProductCreated -= OnProductCreated;
         }
     }
 
-    void CompletedProduct(Product p, Company c) {
-        if (c == data.company) {
-            if (Stage(OBS.GAME_GOALS)) {
-                StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
-                        "Now that you've got some experience with building products, [c][FC5656]The Board[-][/c] has asked me to explain their expectations for your company.",
-                        string.Format("[c][FC5656]The Board[-][/c] sets {0} for you and requires that you [c][1A9EF2]expand your profits by 12% every year[-][/c].", ConceptHighlight("annual profit targets")),
-                        "You [i]must[/i] hit these targets.",
-                        "If [c][FC5656]The Board[-][/c] is unsatisfied your performance, they will [c][1A9EF2]dismiss you from the company[-][/c].",
-                        "Making money is simple -  hype up your company and make more and better products!",
-                        string.Format("Your {0} and {1} are shown in the bar below.", ConceptHighlight("current profit"), ConceptHighlight("target profit")),
-                        string.Format("You can keep more detailed track of your profit and other accounting in the {0} menu item.", MenuHighlight("Accounting"))
-                    });
-                    UIManager.Instance.menu.Activate("Accounting");
-                }, 3f));
-            } else if (Stage(OBS.RESEARCH)) {
-                StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
-                        string.Format("You've built a few products but that won't be enough to sustain long-term growth. You need to invest in cutting-edge {0}.", ConceptHighlight("research")),
-                        string.Format("You can manage your Innovation Labs in the {0} menu item.", MenuHighlight("Research")),
-                        "There you can assign workers to conduct research.",
-                        string.Format("They won't be available for product development, but over time they will generate {0}!", ConceptHighlight("research points"))
-                    });
-                    UIManager.Instance.menu.Activate("Research");
-                }, 6f));
-            // TODO update
-            //} else if (c.products.Count > 2 && !data.ob.LOCATIONS_UNLOCKED) {
-                //MentorMessages(new string[] {
-                    //"It's time to start thinking about expanding to new locations.",
-                    //string.Format("{0} increase your access to {1}, making it easier to capture a larger market share.", ConceptHighlight("Locations"), ConceptHighlight("markets")),
-                    //"The more locations you have for a market, the more money you will make!",
-                    //"Some locations have special bonuses too.",
-                    //string.Format("Manage your locations in the {0} menu item.", MenuHighlight("Locations"))
-                //});
-                //UIManager.Instance.menu.Activate("Locations");
-                //data.ob.LOCATIONS_UNLOCKED = true;
-            }
+    void OnProductFailed() {
+        StartCoroutine(Delay(delegate(GameObject obj) {
+            mentor.Messages(new string[] {
+                "You just failed to launch a product.",
+                "Some combinations of products are harder to create, so sometimes your employees mess up.",
+                "They require higher levels of design, engineering, or marketing.",
+                string.Format("A failed product leaves a :BUG: {0} behind, which takes up precious space.", ConceptHighlight("bug")),
+                string.Format("You can debug it by {0} it, at the expense of a turn.", InteractHighlight("double-tap"))
+            });
+        }, 1f));
+        MainGame.ProductFailed -= OnProductFailed;
+    }
+
+    void OnPieceQueued(Piece p) {
+        if (!data.ob.QUEUED_INFLUENCER && p.type == Piece.Type.Influencer) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    string.Format("An {0} has appeared!", ConceptHighlight("influencer")),
+                    string.Format("Influencers generate :HYPE: {0} and positive :GOODWILL: {1} for your company.", ConceptHighlight("hype"), ConceptHighlight("public opinion")),
+                    "Influencers come in different levels - friend, journalist, and thought leader.",
+                    "The more hyped your company is, the more likely they are to appear."
+                });
+                UIManager.Instance.Interlude.Show("Hype");
+                UIManager.Instance.Interlude.Show("Opinion");
+                data.ob.HYPE_OPINION_UNLOCKED = true;
+                data.ob.QUEUED_INFLUENCER = true;
+            }, 1f));
+
+        } else if (!data.ob.QUEUED_HYPE && p.type == Piece.Type.Hype) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    string.Format("A :HYPE: {0} piece is queued!", ConceptHighlight("hype")),
+                    string.Format(":HYPE: hype pieces provide an opportunity to run a {0}, which will hype up the company.", ConceptHighlight("promotion"))
+                });
+                UIManager.Instance.Interlude.Show("Hype");
+                UIManager.Instance.Interlude.Show("Opinion");
+                data.ob.HYPE_OPINION_UNLOCKED = true;
+                data.ob.QUEUED_HYPE = true;
+            }, 1f));
+        }
+
+        else if (!data.ob.QUEUED_OUTRAGE && p.type == Piece.Type.Outrage) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    string.Format("An :OUTRAGE: {0} piece is queued - looks like you pissed somebody off!", ConceptHighlight("outrage")),
+                    ":OUTRAGE: outrage pieces are more likely to appear the more negative your public opinion is."
+                });
+                data.ob.QUEUED_OUTRAGE = true;
+            }, 1f));
+
+        } else if (!data.ob.QUEUED_PRODUCTTYPE && p.type == Piece.Type.ProductType) {
+            mentor.Messages(new string[] {
+                "This is where your company will carry out its work through the year.",
+                string.Format("On this grid you'll arrange and combine different {0} - the raw components you combine to create products.", ConceptHighlight("product type")),
+                string.Format("A product type is queued up now - {0} on an empty square to place the product type.", InteractHighlight("double-tap"))
+            });
+            data.ob.QUEUED_PRODUCTTYPE = true;
+        }
+    }
+
+    void OnPiecePlaced(Piece p) {
+        if (!data.ob.PLACED_INFLUENCER && p.type == Piece.Type.Influencer) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    string.Format("You can {0} an influencer to use them.", InteractHighlight("double-tap")),
+                    "or you can align two of the same level to merge them into a higher-level influencer.",
+                    string.Format("when you merge two thought leaders you get a :GOODWILL: {0} piece in their place!", ConceptHighlight("goodwill")),
+                    "A :GOODWILL: goodwill piece provides bonuses to products created around it."
+                });
+                data.ob.PLACED_INFLUENCER = true;
+            }, 2f));
+
+
+        } else if (!data.ob.PLACED_HYPE && p.type == Piece.Type.Hype) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    string.Format("{0} on the :HYPE: hype piece to activate it.", InteractHighlight("double-tap"))
+                });
+                data.ob.PLACED_HYPE = true;
+            }, 2f));
+
+        } else if (!data.ob.PLACED_OUTRAGE && p.type == Piece.Type.Influencer) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    "An :OUTRAGE: outrage piece negatively affects products created around it.",
+                    string.Format("You can {0} an :OUTRAGE: outrage to defuse it at the cost of some hype and a turn.", InteractHighlight("double-tap"))
+                });
+                data.ob.PLACED_OUTRAGE = true;
+            }, 2f));
+
+        } else if (!data.ob.PLACED_PRODUCTTYPE && p.type == Piece.Type.ProductType) {
+            StartCoroutine(Delay(delegate(GameObject obj) {
+                mentor.Messages(new string[] {
+                    string.Format("Place two of the same product type next to each other to merge and {0} them.", ConceptHighlight("activate")),
+                    "Then you can merge two activated product types to launch a product from them."
+                });
+                data.ob.PLACED_PRODUCTTYPE = true;
+            }, 2f));
         }
     }
 
     void WorkerHired(AWorker w, Company c) {
         if (c == data.company) {
-            if (!data.ob.HIRED_EMPLOYEE) {
+            if (!data.ob.EMPLOYEE_HIRED) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
+                    mentor.Messages(new string[] {
                         "Great, you have an employee now. See if you can build a new, better product."
                     });
                     UIManager uim = UIManager.Instance;
-                    uim.menu.Deactivate("New Product");
-                    uim.menu.Activate("New Product");
+                    uim.menu.Deactivate("Start Year");
+                    uim.menu.Activate("Start Year");
                     uim.menu.Activate("Employees");
-                    data.ob.HIRED_EMPLOYEE = true;
+                    data.ob.EMPLOYEE_HIRED = true;
                 }, 1f));
             } else if (!data.ob.PERKS_UNLOCKED && c.workers.Count >= 3) {
                 StartCoroutine(Delay(delegate(GameObject obj) {
-                    MentorMessages(new string[] {
+                    mentor.Messages(new string[] {
                         string.Format("Now that you have a few employees, you want to maximize their {0} and {1}.", ConceptHighlight("productivity"), ConceptHighlight("happiness")),
                         "Productive employees are easier to manage and happy employees can have valuable breakthroughs during product development and attract better talent.",
                         string.Format("A great way to accomplish this is through {0}. You can purchase and upgrade perks for your company through the {0} menu item.", ConceptHighlight("perks"), MenuHighlight("Perks"))
@@ -432,25 +489,25 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         if (us.verticals.Count > 0) {
             switch (us.verticals[0].name) {
                 case "Finance":
-                    MentorMessages(new string[] {
+                    mentor.Messages(new string[] {
                         "Financial products can be extremely useful in your growth strategy.",
                         string.Format("Through credit cards and other financial schemes, you can fund consumption well beyond consumers' means. Financial products will typically increase {0}, thus making all your products more profitable!", ConceptHighlight("consumer spending")),
                     });
                     break;
                 case "Defense":
-                    MentorMessages(new string[] {
+                    mentor.Messages(new string[] {
                         string.Format("Building defense products may seem unethical, but they generally lead to lucrative government contract {0} which are invaluable for funding your continued expansion.", ConceptHighlight("cash bonuses"))
                     });
                     break;
                 case "Entertainment":
-                    MentorMessages(new string[] {
+                    mentor.Messages(new string[] {
                         "Promotional campaigns are great, but the most efficient way to manage public perception is through entertainment and media companies.",
                         string.Format("Entertainment products help consumers forget the dreariness or difficulty of their lives. Fortunately, these distractions also help them {0} about your company's transgressions more quickly.", ConceptHighlight("forget"))
                     });
                     break;
                 default:
                     if (!data.ob.VERTICALS_UNLOCKED) {
-                        MentorMessages(new string[] {
+                        mentor.Messages(new string[] {
                             "Now that you've unlocked another vertical, you should consider saving up some capital to expand into it.",
                             string.Format("{0} provide access to new product types and technologies so you can {1} even further. Manage your verticals in the {2} menu item.", ConceptHighlight("Verticals"), SpecialHighlight("innovate"), MenuHighlight("Verticals"))
                         });
@@ -461,7 +518,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             }
 
         } else if (us.specialProjects.Count > 0 && !data.ob.SPECIALPROJECTS_UNLOCKED) {
-            MentorMessages(new string[] {
+            mentor.Messages(new string[] {
                 string.Format("Your first special project is available. {0} are one-off products which can have world-changing effects. In order to build one, you need to have built some prerequisite products beforehand.", ConceptHighlight("Special projects")),
                 string.Format("Manage special projects in the {0} menu item.", MenuHighlight("Special Projects"))
             });
@@ -472,7 +529,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
     void OfficeUpgraded(Office o) {
         if (o.type == Office.Type.Campus) {
-            MentorMessages(new string[] {
+            mentor.Messages(new string[] {
                 "Your company is impressively large now! But it could still be larger.",
                 string.Format("It's harder to {0} on your own, but with all of your capital you can {1} other companies now. Manage these purchases through the {2}", SpecialHighlight("innovate"), ConceptHighlight("aquire"), MenuHighlight("Acquisitions"))
             });
@@ -482,22 +539,8 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         }
     }
 
-    void Synergy() {
-        if (!data.ob.SYNERGY) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                MentorMessages(new string[] {
-                    string.Format("Wow! That product you just released is {0} with another one in The Market.", SpecialHighlight("synergetic")),
-                    string.Format("Products with {0} make a lot more money when they're in The Market together.", SpecialHighlight("synergy")),
-                    "Use your Entrepeneurial Sense and try to figure out what combinations work best!"
-                });
-            }, 6f));
-            data.ob.SYNERGY = true;
-            Company.Synergy -= Synergy;
-        }
-    }
-
     public void GameLost() {
-        MentorMessages(new string[] {
+        mentor.Messages(new string[] {
             "Appalled by your inability to maintain the growth they are legally entitled to, the board has forced your resignation. You lose.",
             "But you don't really lose. You have secured your place in a class shielded from any real consequence or harm. You'll be fine. You could always found another company.",
             "GAME OVER."
@@ -507,7 +550,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
     }
 
     public void GameWon() {
-        MentorMessages(new string[] {
+        mentor.Messages(new string[] {
             "Slowly, over the years, the vast network of sensors and extremities of some unknown project were constructed and distributed, the public clamoring desperately for each shiny piece.",
             "Each piece - each gadget and every app - was always quietly listening and watching and collecting data in their pockets and on their bodies and in their heads.",
             "It only took the brilliant innovation of The Founder to unify this fabric of disparate technology into its grand, unified destiny, dubbed \"The Founder AI\".",
@@ -516,7 +559,7 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             "Profit could be indisputably maximized by the complex interactions of intricate mathematical models capturing even the smallest aspects of life and market society.",
             "On the inaugural day of The Founder AI, you receive an email.",
             "You are being let go.",
-            "Yes, you, The Founder, are an obstruction to the company's continued expansion.",
+            "You, The Founder, are an obstruction to the company's continued expansion.",
             "And so you melt into the impoverished population, finally betrayed by the oppressive logic, forever left to wander the terrible world it has shaped.",
             "GAME OVER."
         }, delegate(GameObject obj) {

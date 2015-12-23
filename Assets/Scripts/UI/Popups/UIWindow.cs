@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 
 public class UIWindow : UIPopup {
-    // An event that fires when a window is opened.
+    // Events that fire when a window is opened.
     static public event System.Action<string> WindowOpened;
 
     void OnEnable() {

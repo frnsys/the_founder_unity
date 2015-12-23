@@ -13,6 +13,7 @@ public class UIOnboarding : MonoBehaviour {
 
     private GameManager gm;
     private List<Worker> cofounders;
+    private Mentor mentor;
 
     public GameObject verticalPrefab;
     public GameObject locationPrefab;
@@ -40,6 +41,7 @@ public class UIOnboarding : MonoBehaviour {
 
     void OnEnable() {
         gm = GameManager.Instance;
+        mentor = new Mentor();
         cofounders = new List<Worker>(Resources.LoadAll<Worker>("Founders/Cofounders"));
 
         Intro();
@@ -58,7 +60,7 @@ public class UIOnboarding : MonoBehaviour {
             string.Format("But their weakened state and the void left by mass bankruptcy means the business world is ripe for {0}.", gm.narrativeManager.SpecialHighlight("disruption")),
             "I have a good feeling about you - so I've given you some starting funds to take advantage of this time and build a powerful company yourself."
         };
-        gm.narrativeManager.MentorMessages(messages, delegate(GameObject obj) {
+        mentor.Messages(messages, delegate(GameObject obj) {
             continueButton.SetActive(true);
             backButton.SetActive(true);
             VerticalSelection(null);
@@ -103,7 +105,7 @@ public class UIOnboarding : MonoBehaviour {
                 "First you have to choose the kind of business you want to create.",
                 "Remember that a lot of companies start doing one thing and grow to do many."
             };
-            gm.narrativeManager.MentorMessages(messages);
+            mentor.Messages(messages);
             didShowVerticals = true;
         }
     }
@@ -157,7 +159,7 @@ public class UIOnboarding : MonoBehaviour {
                 "Next, where do you want to base your company?",
                 "Locations can have different bonuses and access to different markets."
             };
-            gm.narrativeManager.MentorMessages(messages);
+            mentor.Messages(messages);
             didShowLocations = true;
         }
     }
@@ -214,7 +216,7 @@ public class UIOnboarding : MonoBehaviour {
                 "Picking the cofounder is one of the most important decisions for a business.",
                 "They vary in what they can bring to the table. You want to pick one that reflects your own style and skillset."
             };
-            gm.narrativeManager.MentorMessages(messages);
+            mentor.Messages(messages);
             didShowCofounders = true;
         }
     }

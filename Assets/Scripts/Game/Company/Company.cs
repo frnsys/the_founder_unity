@@ -288,7 +288,6 @@ public class Company : HasStats {
     public int launchedProducts;
     public List<ProductRecipe> discoveredProducts;
     public List<ProductType> productTypes;
-    static public event System.Action<Company> LaunchedProduct;
     static public event System.Action<Company, Product> DiscoveredProduct;
     public Product LaunchProduct(List<ProductType> pts, float multiplier) {
         Product product = ScriptableObject.CreateInstance<Product>();
@@ -314,15 +313,10 @@ public class Company : HasStats {
         lifetimeRevenue += revenue;
         product.revenue = revenue;
 
-        UpdateProductSynergies();
-
         if (!discoveredProducts.Contains(product.Recipe)) {
             discoveredProducts.Add(product.Recipe);
             DiscoveredProduct(this, product);
         }
-
-        if (LaunchedProduct != null)
-            LaunchedProduct(this);
 
         launchedProducts++;
         return product;
@@ -334,27 +328,6 @@ public class Company : HasStats {
             return true;
         }
         return false;
-    }
-
-    static public event System.Action Synergy;
-    private void UpdateProductSynergies() {
-        // TODO update
-        //List<ProductRecipe> activeRecipes = activeProducts.Select(p => p.Recipe).ToList();
-        //foreach (Product p in activeProducts) {
-            //p.synergy = true;
-            //if (p.synergies.Count == 0) {
-                //p.synergy = false;
-            //} else {
-                //for (int i=0; i<p.synergies.Count; i++) {
-                    //if (!activeRecipes.Contains(p.synergies[i])) {
-                        //p.synergy = false;
-                        //break;
-                    //}
-                //}
-            //}
-            //if (p.synergy && Synergy != null)
-                //Synergy();
-        //}
     }
 
     // ===============================================

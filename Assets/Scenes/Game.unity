@@ -24802,7 +24802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 1435893506}
   menuButton: {fileID: 965194602}
-  startYearButton: {fileID: 0}
+  startYearButton: {fileID: 2034827763}
   lockedMat: {fileID: 2100000, guid: 7ff6de4b2b0464922849210c026c39d6, type: 2}
 --- !u!1 &1277323834
 GameObject:
@@ -28926,6 +28926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119d99dea0efa4845aa4cd0cd0535e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 1578905547}
   yearLabel: {fileID: 525568622}
   ageLabel: {fileID: 1730612950}
   companyAgeLabel: {fileID: 395710291}

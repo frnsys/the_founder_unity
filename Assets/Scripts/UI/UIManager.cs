@@ -19,6 +19,9 @@ public class UIManager : Singleton<UIManager> {
     public GameObject windowsPanel;
     public GameObject alertsPanel;
     public GameObject interlude;
+    public UIInterlude Interlude {
+        get { return interlude.GetComponent<UIInterlude>(); }
+    }
 
     public GameObject eventPersonalPrefab;
     public GameObject eventEmailPrefab;
@@ -139,6 +142,12 @@ public class UIManager : Singleton<UIManager> {
     public void CloseAndOpenPopup(GameObject popupPrefab) {
         ClosePopup();
         OpenPopup(popupPrefab);
+    }
+
+    public bool isDisplaying {
+        get {
+            return currentPopup != null || alertsPanel.transform.childCount > 0;
+        }
     }
 
     // Create a simple alert.

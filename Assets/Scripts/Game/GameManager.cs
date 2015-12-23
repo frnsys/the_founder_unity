@@ -158,7 +158,6 @@ public class GameManager : Singleton<GameManager> {
         // See Build Settings to get the number for levels/scenes.
         if (Application.loadedLevelName == "Game") {
             StartGame();
-            Debug.Log(data.obs);
             narrativeManager.InitializeOnboarding();
         }
     }

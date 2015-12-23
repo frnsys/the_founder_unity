@@ -7,6 +7,12 @@ using System.Collections.Generic;
 public class MainGame : MonoBehaviour {
     static public event System.Action Done;
 
+    // For the narrative manager
+    static public event System.Action ProductCreated;
+    static public event System.Action ProductFailed;
+    static public event System.Action<Piece> PiecePlaced;
+    static public event System.Action<Piece> PieceQueued;
+
     private int totalTurns;
     private int turnsLeft;
 
@@ -57,6 +63,7 @@ public class MainGame : MonoBehaviour {
     private GameObject nextPiece;
     private Piece selectedPiece;
 
+
     private enum GameState {
         None,
         Selecting,
@@ -97,7 +104,8 @@ public class MainGame : MonoBehaviour {
     void OnDisable() {
         if (ui != null)
             ui.gameObject.SetActive(false);
-        camera.gameObject.SetActive(false);
+        if (camera != null)
+            camera.gameObject.SetActive(false);
         Promo.Completed -= OnPromoCompleted;
     }
 
@@ -261,11 +269,16 @@ public class MainGame : MonoBehaviour {
     private void CreateNextPiece() {
         nextPiece = CreatePiece(RandomPiecePrefab());
         nextPiece.SetActive(true);
+
+        // For narrative
+        if (PieceQueued != null)
+            PieceQueued(nextPiece.GetComponent<Piece>());
+
         ui.ShowNextPiece(nextPiece);
     }
 
     void Update() {
-        if (state == GameState.None) {
+        if (state == GameState.None && !UIManager.Instance.isDisplaying) {
             // Click/tap
             if (Input.GetMouseButtonDown(0)) {
                 var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -282,6 +295,10 @@ public class MainGame : MonoBehaviour {
                     Piece p = hitGo.GetComponent<Piece>();
                     switch (p.type) {
                         case Piece.Type.Empty:
+                            // For narrative
+                            if (PiecePlaced != null)
+                                PiecePlaced(nextPiece.GetComponent<Piece>());
+
                             PlacePiece(nextPiece, p.row, p.col);
                             ProcessMatchesAround(nextPiece);
                             CreateNextPiece();
@@ -448,6 +465,10 @@ public class MainGame : MonoBehaviour {
                 GameObject piece = CreatePiece(bugPrefab);
                 PlacePiece(piece, p1.row, p1.col);
                 ui.ShowResultAt(g1.transform.localPosition, "[c][FC3941]FAILURE[-][/c]");
+
+                // For narrative
+                if (ProductFailed != null)
+                    ProductFailed();
             } else {
                 float revenue = product.revenue;
                 ui.ShowResultAt((g1.transform.localPosition + g2.transform.localPosition)/2,
@@ -455,6 +476,10 @@ public class MainGame : MonoBehaviour {
                 ui.ShowProductInfo(product);
                 GameObject e1 = CreatePiece(emptyPrefab);
                 PlacePiece(e1, p1.row, p1.col);
+
+                // For narrative
+                if (ProductCreated != null)
+                    ProductCreated();
             }
 
             GameObject e2 = CreatePiece(emptyPrefab);

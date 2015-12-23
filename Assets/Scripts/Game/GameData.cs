@@ -52,7 +52,6 @@ public class GameData : ScriptableObject {
 
     // Onboarding progress.
     public NarrativeManager.OnboardingState ob;
-    public NarrativeManager.OBS obs;
 
     // Other companies in the world.
     public List<AAICompany> otherCompanies;
@@ -131,8 +130,6 @@ public class GameData : ScriptableObject {
         data.automation = false;
         data.workerInsight = false;
         data.workerQuant = false;
-
-        data.obs = NarrativeManager.OBS.START;
 
         // You start your business at 25,
         // so the amount of time you have really ranges from 40-60.

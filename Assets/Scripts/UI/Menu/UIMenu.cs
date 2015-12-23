@@ -12,12 +12,13 @@ public class UIMenu : MonoBehaviour {
     }
 
     public void Activate(string item) {
-        UIMenuItem menuItem = GetItem(item);
-        menuItem.wiggle = true;
-        menuItem.locked = false;
         if (item == "Start Year") {
             startYearButton.gameObject.SetActive(true);
+            startYearButton.Wiggle();
         } else {
+            UIMenuItem menuItem = GetItem(item);
+            menuItem.wiggle = true;
+            menuItem.locked = false;
             Transform lockItem = menuItem.transform.Find("Locked");
             if (lockItem != null) {
                 menuItem.display.renderer.material = menuItem.mat;
@@ -63,6 +64,7 @@ public class UIMenu : MonoBehaviour {
     }
 
     private UIMenuItem GetItem(string item) {
+        Debug.Log(item);
         return grid.transform.Find(item).gameObject.GetComponent<UIMenuItem>();
     }
 }
