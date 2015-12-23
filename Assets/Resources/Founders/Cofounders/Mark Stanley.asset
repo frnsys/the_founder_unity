@@ -10,16 +10,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Mark Stanley
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   avatar: {fileID: 0}
   material: {fileID: 2100000, guid: a66eeff7dc96c4e2fb43674a283c32e2, type: 2}
   robot: 0
-  bio:
   description: Comes from money, but can't do much. Will throw in some cash.
-  title:
+  title: 
+  bio: is quite dim|is alienating|is a diligent worker|is a real pleasure to work
+    with|is not very imaginative
+  personalInfo: 01000000020000000500000006000000
   happiness: 10
   productivity: 5
-  charisma: 1
-  creativity: 1
-  cleverness: 1
+  charisma: 3
+  creativity: 3
+  cleverness: 3
   baseMinSalary: 0

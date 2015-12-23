@@ -10,16 +10,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Jeffrey Zhou
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   avatar: {fileID: 0}
   material: {fileID: 2100000, guid: a87dbb592c37e44f79ec0e3c2ab11d2b, type: 2}
   robot: 0
-  bio:
   description: A brilliant product engineer.
-  title:
+  title: 
+  bio: solves problems well|is not very imaginative|multitasks very effectively|has
+    a weird smell|would be a great cultural fit
+  personalInfo: 
   happiness: 10
   productivity: 10
-  charisma: 1
-  creativity: 3
-  cleverness: 3
+  charisma: 4
+  creativity: 4
+  cleverness: 6
   baseMinSalary: 0

@@ -168,14 +168,22 @@ public class Product : HasStats {
         // The maximum score is 1.0. We cap each value individually so that
         // they don't "bleed over" into others.
         // We consider engineering and design together to be the "quality" of the product
-        float A_ = Mathf.Min((A/i) * a_w, 1f);
-        float P_ = Mathf.Min((P/i) * p_w, 1f);
+        float A_ = Mathf.Min((A/i) * a_w, a_w);
+        float P_ = Mathf.Min((P/i) * p_w, p_w);
         quality = (A_ + P_)/(a_w + p_w);
 
         // Marketing is considered separately to be the "hype" around the product
-        float U_ = Mathf.Min((U/i) * u_w, 1f);
+        float U_ = Mathf.Min((U/i) * u_w, u_w);
 
         float success_chance = (A_ + P_ + U_)/(a_w + p_w + u_w);
+
+        Debug.Log(string.Format("A: {0}", A_));
+        Debug.Log(string.Format("P: {0}", P_));
+        Debug.Log(string.Format("U: {0}", U_));
+        Debug.Log(string.Format("Primary Feature: {0}", recipe.primaryFeature));
+        Debug.Log(string.Format("Ideal: {0}", i));
+        Debug.Log(string.Format("Success Chance: {0}", success_chance));
+
         if (Random.value > success_chance) {
             // Failure
             return 0;

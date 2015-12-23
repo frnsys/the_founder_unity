@@ -10,16 +10,18 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f69fde93219464b997acb85456c603, type: 3}
   m_Name: Beth Poush
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   avatar: {fileID: 0}
   material: {fileID: 2100000, guid: 9514ed5fc92aa452ea60783191cec984, type: 2}
   robot: 0
-  bio:
   description: Exceedingly charismatic. Could sell you anything.
-  title:
+  title: 
+  bio: isn't the sharpest tool in the shed|is not very imaginative|is really 'heads-down'|is
+    fun to be around|is a real pleasure to work with
+  personalInfo: 020000000400000006000000
   happiness: 10
   productivity: 10
-  charisma: 4
-  creativity: 2
-  cleverness: 1
+  charisma: 6
+  creativity: 4
+  cleverness: 4
   baseMinSalary: 0
