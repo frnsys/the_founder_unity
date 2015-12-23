@@ -27,6 +27,26 @@ public class UIProductDiscoveredAlert : UIEffectAlert {
         }
     }
 
+    public ProductRecipe recipe {
+        set {
+            nameLabel.text = value.name;
+            bodyLabel.text = value.description;
+
+            if (value.productTypes.Count() >= 2) {
+                productObjects[0].GetComponent<MeshFilter>().mesh = value.productTypes[0].mesh;
+                productObjects[1].GetComponent<MeshFilter>().mesh = value.productTypes[1].mesh;
+                aspectsLabel.text = string.Join(" + ", value.productTypes.Select(pt => pt.name).ToArray());
+            } else {
+                aspectsLabel.text = "";
+            }
+            Extend(bodyLabel.height);
+
+            RenderEffects(value.effects);
+
+            // -1 because by default there is space for about 1 effect.
+            Extend((int)((effectGrid.GetChildList().Count - 1) * effectGrid.cellHeight));
+        }
+    }
 
     void Update() {
         // Rotate the product, fancy.

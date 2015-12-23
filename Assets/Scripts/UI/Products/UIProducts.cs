@@ -16,7 +16,8 @@ public class UIProducts : MonoBehaviour {
 
     private void LoadProducts() {
         foreach (ProductRecipe pr in ProductRecipe.LoadAll()) {
-            ShowProduct(pr);
+            if (pr.name != "Default")
+                ShowProduct(pr);
         }
         grid.Reposition();
     }

@@ -40,7 +40,7 @@ public class UIProduct : MonoBehaviour {
 
     void OnClick() {
         if (discovered) {
-            UIManager.Instance.Alert(recipe_.description);
+            UIManager.Instance.ShowProductInfo(recipe_);
         }
     }
 

@@ -9548,7 +9548,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.04583335
+  aspectRatio: 5.13333321
 --- !u!1 &476369521
 GameObject:
   m_ObjectHideFlags: 0
@@ -19027,7 +19027,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 11.1999998
 --- !u!65 &965194604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25009,6 +25009,8 @@ MonoBehaviour:
   confirmPrefab: {fileID: 100018, guid: b55794495b527438681764bbd55f3b19, type: 2}
   effectAlertPrefab: {fileID: 100020, guid: cec3234e520374deb96a9fd8ebac2e06, type: 2}
   annualReportPrefab: {fileID: 100020, guid: a93de7468f6494d90bbcd18e7abb5fcb, type: 2}
+  productInfoAlertPrefab: {fileID: 100024, guid: ce6fe620bcea742019e0a17dabb4717c,
+    type: 2}
   productDiscoveredAlertPrefab: {fileID: 100024, guid: 343febb2db1ff41be9dc9c557cf8e7cc,
     type: 2}
   specialProjectCompletedAlertPrefab: {fileID: 100024, guid: f2b23ea7a772949e38e00d27e3b78bfe,

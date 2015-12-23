@@ -31,6 +31,7 @@ public class UIManager : Singleton<UIManager> {
     public GameObject confirmPrefab;
     public GameObject effectAlertPrefab;
     public GameObject annualReportPrefab;
+    public GameObject productInfoAlertPrefab;
     public GameObject productDiscoveredAlertPrefab;
     public GameObject specialProjectCompletedAlertPrefab;
     public GameObject hiringPrefab;
@@ -52,7 +53,6 @@ public class UIManager : Singleton<UIManager> {
         GameManager.PerformanceReport += OnPerformanceReport;
         MainGame.Done += OnGridGameDone;
         Company.DiscoveredProduct += OnDiscoveredProduct;
-        //Company.Paid += OnPaid;
     }
 
     void OnDisable() {
@@ -63,7 +63,6 @@ public class UIManager : Singleton<UIManager> {
         GameManager.PerformanceReport -= OnPerformanceReport;
         MainGame.Done -= OnGridGameDone;
         Company.DiscoveredProduct -= OnDiscoveredProduct;
-        //Company.Paid -= OnPaid;
     }
 
     void OnDiscoveredProduct(Company c, Product p) {
@@ -72,6 +71,12 @@ public class UIManager : Singleton<UIManager> {
             popup.GetComponent<UIProductDiscoveredAlert>().product = p;
         }
     }
+
+    public void ShowProductInfo(ProductRecipe r) {
+        GameObject popup = NGUITools.AddChild(alertsPanel, productInfoAlertPrefab);
+        popup.GetComponent<UIProductDiscoveredAlert>().recipe = r;
+    }
+
 
     // Show an event notification.
     void OnEvent(GameEvent e) {
