@@ -97,12 +97,13 @@ public class UIMainGame : MonoBehaviour {
         profitLabel.text = string.Format("{0:C0}/{1:C0}", profit, GameManager.Instance.profitTarget);
     }
 
-    public void ShowNextPiece(GameObject nextPiece) {
-        // Get top-left coordinate of the next piece anchor
-        Vector3 pos = UICamera.mainCamera.WorldToViewportPoint(nextAnchor.GetComponent<UIWidget>().worldCorners[1]);
-        pos = camera.ViewportToWorldPoint(pos);
-        nextPiece.transform.position = pos + new Vector3(MainGame.gridItemSize/2,-MainGame.gridItemSize/2,1);
-    }
+    // TO DO should this be adapted for in-progress pieces?
+    //public void ShowNextPiece(GameObject nextPiece) {
+        //// Get top-left coordinate of the next piece anchor
+        //Vector3 pos = UICamera.mainCamera.WorldToViewportPoint(nextAnchor.GetComponent<UIWidget>().worldCorners[1]);
+        //pos = camera.ViewportToWorldPoint(pos);
+        //nextPiece.transform.position = pos + new Vector3(MainGame.gridItemSize/2,-MainGame.gridItemSize/2,1);
+    //}
 
     // Show a float-up text bit at the specified position
     public void ShowResultAt(Vector2 pos, string text) {

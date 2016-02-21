@@ -19,14 +19,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
         public bool PRODUCT_CREATED_1;
         public bool PRODUCT_CREATED_2;
         public bool EMPLOYEE_HIRED;
-        public bool QUEUED_HYPE;
-        public bool QUEUED_OUTRAGE;
-        public bool QUEUED_INFLUENCER;
-        public bool QUEUED_PRODUCTTYPE;
-        public bool PLACED_HYPE;
-        public bool PLACED_OUTRAGE;
-        public bool PLACED_INFLUENCER;
-        public bool PLACED_PRODUCTTYPE;
         public bool HYPE_OPINION_UNLOCKED;
         public bool THE_BOARD_UNLOCKED;
         public bool PERKS_UNLOCKED;
@@ -121,14 +113,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
 
         if (!data.ob.PRODUCT_FAILED) {
             MainGame.ProductFailed += OnProductFailed;
-        }
-
-        if (!data.ob.QUEUED_INFLUENCER || !data.ob.QUEUED_OUTRAGE || !data.ob.QUEUED_PRODUCTTYPE || !data.ob.QUEUED_HYPE) {
-            MainGame.PieceQueued += OnPieceQueued;
-        }
-
-        if (!data.ob.PLACED_INFLUENCER || !data.ob.PLACED_OUTRAGE || !data.ob.PLACED_PRODUCTTYPE || !data.ob.PLACED_HYPE) {
-            MainGame.PiecePlaced += OnPiecePlaced;
         }
 
         if (!data.ob.HYPE_OPINION_UNLOCKED) {
@@ -369,94 +353,6 @@ public class NarrativeManager : Singleton<NarrativeManager> {
             });
         }, 1f));
         MainGame.ProductFailed -= OnProductFailed;
-    }
-
-    void OnPieceQueued(Piece p) {
-        if (!data.ob.QUEUED_INFLUENCER && p.type == Piece.Type.Influencer) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                mentor.Messages(new string[] {
-                    string.Format("An {0} has appeared!", ConceptHighlight("influencer")),
-                    string.Format("Influencers generate :HYPE: {0} and positive :GOODWILL: {1} for your company.", ConceptHighlight("hype"), ConceptHighlight("public opinion")),
-                    "Influencers come in different levels - friend, journalist, and thought leader.",
-                    "The more hyped your company is, the more likely they are to appear."
-                });
-                UIManager.Instance.Interlude.Show("Hype");
-                UIManager.Instance.Interlude.Show("Opinion");
-                data.ob.HYPE_OPINION_UNLOCKED = true;
-                data.ob.QUEUED_INFLUENCER = true;
-            }, 1f));
-
-        } else if (!data.ob.QUEUED_HYPE && p.type == Piece.Type.Hype) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                mentor.Messages(new string[] {
-                    string.Format("A :HYPE: {0} piece is queued!", ConceptHighlight("hype")),
-                    string.Format(":HYPE: hype pieces provide an opportunity to run a {0}, which will hype up the company.", ConceptHighlight("promotion"))
-                });
-                UIManager.Instance.Interlude.Show("Hype");
-                UIManager.Instance.Interlude.Show("Opinion");
-                data.ob.HYPE_OPINION_UNLOCKED = true;
-                data.ob.QUEUED_HYPE = true;
-            }, 1f));
-        }
-
-        else if (!data.ob.QUEUED_OUTRAGE && p.type == Piece.Type.Outrage) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                mentor.Messages(new string[] {
-                    string.Format("An :OUTRAGE: {0} piece is queued - looks like you pissed somebody off!", ConceptHighlight("outrage")),
-                    ":OUTRAGE: outrage pieces are more likely to appear the more negative your public opinion is."
-                });
-                data.ob.QUEUED_OUTRAGE = true;
-            }, 1f));
-
-        } else if (!data.ob.QUEUED_PRODUCTTYPE && p.type == Piece.Type.ProductType) {
-            mentor.Messages(new string[] {
-                "This is where your company will carry out its work through the year.",
-                string.Format("On this grid you'll arrange and combine different {0} - the raw components you combine to create products.", ConceptHighlight("product type")),
-                string.Format("A product type is queued up now - {0} on an empty square to place the product type.", InteractHighlight("double-tap"))
-            });
-            data.ob.QUEUED_PRODUCTTYPE = true;
-        }
-    }
-
-    void OnPiecePlaced(Piece p) {
-        if (!data.ob.PLACED_INFLUENCER && p.type == Piece.Type.Influencer) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                mentor.Messages(new string[] {
-                    string.Format("You can {0} an influencer to use them.", InteractHighlight("double-tap")),
-                    "or you can align two of the same level to merge them into a higher-level influencer.",
-                    string.Format("when you merge two thought leaders you get a :GOODWILL: {0} piece in their place!", ConceptHighlight("goodwill")),
-                    "A :GOODWILL: goodwill piece provides bonuses to products created around it."
-                });
-                data.ob.PLACED_INFLUENCER = true;
-            }, 2f));
-
-
-        } else if (!data.ob.PLACED_HYPE && p.type == Piece.Type.Hype) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                mentor.Messages(new string[] {
-                    string.Format("{0} on the :HYPE: hype piece to activate it.", InteractHighlight("double-tap"))
-                });
-                data.ob.PLACED_HYPE = true;
-            }, 2f));
-
-        } else if (!data.ob.PLACED_OUTRAGE && p.type == Piece.Type.Influencer) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                mentor.Messages(new string[] {
-                    "An :OUTRAGE: outrage piece negatively affects products created around it.",
-                    string.Format("You can {0} an :OUTRAGE: outrage to defuse it at the cost of some hype and a turn.", InteractHighlight("double-tap"))
-                });
-                data.ob.PLACED_OUTRAGE = true;
-            }, 2f));
-
-        } else if (!data.ob.PLACED_PRODUCTTYPE && p.type == Piece.Type.ProductType) {
-            StartCoroutine(Delay(delegate(GameObject obj) {
-                mentor.Messages(new string[] {
-                    string.Format("Place two of the same product type next to each other to merge and {0} them.", ConceptHighlight("activate")),
-                    "Then you can merge two activated product types to launch a product from them."
-                });
-                data.ob.PLACED_PRODUCTTYPE = true;
-            }, 2f));
-        }
     }
 
     void WorkerHired(AWorker w, Company c) {

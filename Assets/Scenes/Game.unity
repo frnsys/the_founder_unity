@@ -2679,13 +2679,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 110
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 4.13636351
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -4641,6 +4641,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 231527872}
   - 114: {fileID: 231527871}
+  - 114: {fileID: 231527873}
   m_Layer: 0
   m_Name: GridGame
   m_TagString: Untagged
@@ -4656,51 +4657,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 231527870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcb24a4c7de2443daaa961778c4bf3cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c82fef984992442b8aea3e283bbc2a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 231527870}
-  productTypePrefabs:
-  - {fileID: 179326, guid: e7cc751ef730246b0ab7087c7e55b774, type: 2}
-  - {fileID: 179326, guid: f6c77567bd9c741d392b4e1272447425, type: 2}
-  - {fileID: 179326, guid: 9c08f596565664051bbfe5705799b8fd, type: 2}
-  - {fileID: 179326, guid: 8d3b7cc3cc90b4d19a47594df2e72c97, type: 2}
-  - {fileID: 179326, guid: bc7621f30363d4bfdac9e38926ebe95d, type: 2}
-  - {fileID: 179326, guid: 8502ee318bbfe43db8b1ead3e8e12a58, type: 2}
-  - {fileID: 179326, guid: 2fe63c3984af444c489ea3787f5d029f, type: 2}
-  - {fileID: 179326, guid: e929c0aaaa76645ffbb098b8a259fca2, type: 2}
-  - {fileID: 179326, guid: 6ef13bc9a901d4b0bad67436644bd8e9, type: 2}
-  - {fileID: 179326, guid: 411ef37d9c68a4be3adfca4b6eba8439, type: 2}
-  - {fileID: 179326, guid: 1f5d17b2dccf445a7960309ec0a72010, type: 2}
-  - {fileID: 179326, guid: 103fe622959364bc4aeb017c42ba9561, type: 2}
-  - {fileID: 179326, guid: e64a098df3f794e40a70da0e2d6e7086, type: 2}
-  - {fileID: 179326, guid: fb19e0c3e6b064a4bb735d714ce1b8c2, type: 2}
-  - {fileID: 179326, guid: d74a4ec86cb234468b40c5c99de588d2, type: 2}
-  - {fileID: 179326, guid: a12ebc22d558846ed911f016985c76cc, type: 2}
-  - {fileID: 179326, guid: 08aed7a3a362e487b96cc0f4dabeb3ef, type: 2}
-  - {fileID: 179326, guid: f66cd865cb4f04513a7b25cdc0b13850, type: 2}
-  - {fileID: 179326, guid: 32220225252b04bcfb8b076cf6a6e743, type: 2}
-  - {fileID: 179326, guid: 46e6e959650ec46adb8589fcdd167fdc, type: 2}
-  - {fileID: 179326, guid: 82d5fd18dd5144af8bb5d5c0c13c96b2, type: 2}
-  influencerPrefabs:
-  - {fileID: 179326, guid: b29034fb3f00047aebbfb1d7848b1197, type: 2}
-  - {fileID: 179326, guid: 46aff48c109d14a62a4c7ca1c03ded03, type: 2}
-  - {fileID: 179326, guid: df09de94de2344bd29205f7b783821a9, type: 2}
-  outragePrefab: {fileID: 179326, guid: 94d5b30d567f24055b7a58f5be5276b6, type: 2}
-  happyPrefab: {fileID: 179326, guid: 21ab3ffde3cbc48a9a89085a438d6de1, type: 2}
-  bugPrefab: {fileID: 179326, guid: 6fe7ceb2a350841a992a059be52efd09, type: 2}
-  blockPrefab: {fileID: 179326, guid: 10353c7d5e3284638aeda3729c51b6d8, type: 2}
-  hypePrefab: {fileID: 179326, guid: 4d43fb7b4f4244c8c9842986c843cb0f, type: 2}
-  emptyPrefab: {fileID: 179326, guid: cb187147a6b3f4bdab8253c7ec65df1b, type: 2}
-  productTypeColor: {r: .417874128, g: .78270185, b: .963235319, a: 1}
-  influencerColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
-  hazardColor: {r: .937254906, g: .270588249, b: .258823544, a: 1}
-  emptyColor: {r: 1, g: .960784316, b: .854901969, a: 1}
-  activeColor: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
-  tilePrefab: {fileID: 162278, guid: b1f16316d2b2c4f68883676a2709bab8, type: 2}
-  iconPrefab: {fileID: 137256, guid: 41d750d76c7d74a0d82b31f988125002, type: 2}
-  plusIcon: {fileID: 21300000, guid: 89ac6d1e3f6c7414db33ca31ed78600d, type: 3}
-  minusIcon: {fileID: 21300000, guid: aedbcaafde3c94774a82a3fc808afa45, type: 3}
+  board: {fileID: 231527873}
+  productTypePrefabs: []
   camera: {fileID: 1727583654}
   ui: {fileID: 1974290797}
 --- !u!4 &231527872
@@ -4715,6 +4676,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &231527873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 231527870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc2bbd70590f447e8ee5e402a88a147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileWidth: .720000029
+  tileHeight: .620000005
+  tilePrefab: {fileID: 162278, guid: b1f16316d2b2c4f68883676a2709bab8, type: 2}
+  tileSprites:
+  - {fileID: 21300000, guid: 560bf7c5b7cb24c75a422ce44f718f0a, type: 3}
+  - {fileID: 21300000, guid: 740608923368d422a9576dd8f0c646d3, type: 3}
+  - {fileID: 21300000, guid: 5c70e8de1fad6439cb26ec222c9b26c6, type: 3}
+  - {fileID: 21300000, guid: a5f8fe41e47c1427682607c67a747a06, type: 3}
+  - {fileID: 21300000, guid: e48d0bd3dcd6644c8b25a399864c6d50, type: 3}
+  - {fileID: 21300000, guid: 55346b4bff785456baaffedb07bd73f0, type: 3}
+  - {fileID: 21300000, guid: ff4bc70bfe56f403db74ccca000a8b86, type: 3}
+  - {fileID: 21300000, guid: f51ce0e4b777b484cb9d291974d6aaed, type: 3}
+  - {fileID: 21300000, guid: 1462eefcc89c4481f871fa0a7ab6078e, type: 3}
+  - {fileID: 21300000, guid: cc3fd853a39c345f3b7e5875d79c2abb, type: 3}
 --- !u!1 &234041205
 GameObject:
   m_ObjectHideFlags: 0
@@ -5737,13 +5723,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .898039222, b: .529411793, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 110
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 4.13636351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 983db26cffafb47b1a272fb887a9aa38, type: 3}
   mFont: {fileID: 0}
@@ -9609,13 +9595,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 240
   mDepth: 3
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.04583335
+  aspectRatio: 1.89583337
 --- !u!1 &476369521
 GameObject:
   m_ObjectHideFlags: 0
@@ -13077,13 +13063,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 479
+  mWidth: 443
   mHeight: 40
   mDepth: 8
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 11.9750004
+  aspectRatio: 11.0749998
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: fc5b0574efa36410aa8f37b0ee370c68, type: 2}
@@ -18698,13 +18684,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .0705882311, g: .621879816, b: .949019611, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 110
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 4.13636351
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -19355,13 +19341,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 110
   mDepth: 1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 4.13636351
 --- !u!65 &965194604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19373,7 +19359,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 491, y: 110, z: 0}
+  m_Size: {x: 455, y: 110, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &965194605
 MonoBehaviour:
@@ -22087,7 +22073,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 539, y: 960, z: 0}
+  m_Size: {x: 503, y: 960, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1105655471
 MonoBehaviour:
@@ -22119,13 +22105,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 539
+  mWidth: 503
   mHeight: 960
   mDepth: 0
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .561458349
+  aspectRatio: .523958325
 --- !u!1 &1105678051
 GameObject:
   m_ObjectHideFlags: 0
@@ -23770,13 +23756,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 40
   mDepth: 6
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12.2749996
+  aspectRatio: 11.375
 --- !u!1 &1193053648
 GameObject:
   m_ObjectHideFlags: 0
@@ -24068,13 +24054,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .417026132, g: .328287214, b: .970588207, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 40
   mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12.2749996
+  aspectRatio: 11.375
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -25615,8 +25601,6 @@ MonoBehaviour:
   gridGame: {fileID: 231527871}
   officeCamera: {fileID: 428045958}
   mainCamera: {fileID: 1947553732}
-  selectProductTypesWindow: {fileID: 166248, guid: 812e2565033fd486db41908647f5ddf0,
-    type: 2}
 --- !u!81 &1278708171
 AudioListener:
   m_ObjectHideFlags: 0
@@ -27650,13 +27634,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .633434236, g: .716695487, b: .852941155, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 40
   mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 12.2749996
+  aspectRatio: 11.375
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -32733,13 +32717,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 150
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.27333331
+  aspectRatio: 3.0333333
 --- !u!1 &1643168079
 GameObject:
   m_ObjectHideFlags: 0
@@ -37591,13 +37575,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: .898039222, b: .529411793, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 110
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 4.13636351
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: 983db26cffafb47b1a272fb887a9aa38, type: 3}
   mFont: {fileID: 0}
@@ -40311,9 +40295,7 @@ MonoBehaviour:
   onClick:
   - mTarget: {fileID: 1278708170}
     mMethodName: SetupGridGame
-    mParameters:
-    - obj: {fileID: 0}
-      field: 
+    mParameters: []
     oneShot: 0
 --- !u!114 &2034827761
 MonoBehaviour:
@@ -40345,13 +40327,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 491
+  mWidth: 455
   mHeight: 110
   mDepth: 1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.4636364
+  aspectRatio: 4.13636351
 --- !u!65 &2034827762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40363,7 +40345,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 491, y: 110, z: 0}
+  m_Size: {x: 455, y: 110, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2034827763
 MonoBehaviour:

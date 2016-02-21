@@ -1,3 +1,5 @@
+// TODO update this for office production selection
+
 using UnityEngine;
 using System.Linq;
 using System.Collections;
@@ -93,7 +95,7 @@ public class UISelectProductTypes : MonoBehaviour {
     }
 
     public void StartGame() {
-        UIManager.Instance.StartGridGame(productTypes);
+        //UIManager.Instance.StartGridGame(productTypes);
         SendMessageUpwards("Close");
     }
 }

@@ -214,24 +214,20 @@ public class UIManager : Singleton<UIManager> {
     public MainGame gridGame;
     public Camera officeCamera;
     public Camera mainCamera;
-    public GameObject selectProductTypesWindow;
-    public void SetupGridGame(GameObject obj) {
+    //public GameObject selectProductTypesWindow; // TODO adapt this window to office production selection
+    public void SetupGridGame() {
         officeCamera.gameObject.SetActive(false);
         mainCamera.gameObject.SetActive(false);
         interlude.SetActive(false);
 
         List<ProductType> productTypes = gm.playerCompany.productTypes;
-        // Player must choose 5 product types to use
-        if (productTypes.Count() > 5) {
-            OpenPopup(selectProductTypesWindow);
-        } else {
-            StartGridGame(productTypes);
-        }
+        AAICompany opponent = gm.otherCompanies[UnityEngine.Random.Range(0, gm.otherCompanies.Count - 1)];
+        StartGridGame(productTypes, opponent);
     }
 
-    public void StartGridGame(List<ProductType> productTypes) {
+    public void StartGridGame(List<ProductType> productTypes, AAICompany opponent) {
         gridGame.gameObject.SetActive(true);
-        gridGame.Setup(productTypes);
+        gridGame.Setup(productTypes, opponent);
     }
 
     void OnGridGameDone() {
